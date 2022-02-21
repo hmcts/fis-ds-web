@@ -64,7 +64,7 @@
     "@types/jest": "^27.4.0",
     "@types/supertest": "^2.0.8",
     "@typescript-eslint/eslint-plugin": "^5.10.0",
-    "@typescript-eslint/parser": "^5.10.0",
+    "@typescript-eslint/parser": "^5.12.1",
     "axios-debug-log": "^0.8.4",
     "babel-loader": "^8.0.6",
     "chai": "^4.2.0",
