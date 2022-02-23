@@ -1,0 +1,11 @@
+nodejs:
+  applicationPort: 4000
+  aadIdentityName: ds
+  ingressHost: ds-ui.{{ .Values.global.environment }}.platform.hmcts.net
+  image: 'hmctspublic.azurecr.io/ds/ui:latest'
+  #  Uncomment once the vault containing the app insights key has been set up
+  #  keyVaults:
+  #    ds:
+  #      secrets:
+  #        - AppInsightsInstrumentationKey
+  environment:
