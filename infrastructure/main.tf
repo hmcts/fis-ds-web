@@ -12,7 +12,7 @@ data "azurerm_subnet" "core_infra_redis_subnet" {
   resource_group_name = "core-infra-${var.env}"
 }
 
-module "adoption-web-session-storage" {
+module "ds-ui-session-storage" {
   source   = "git@github.com:hmcts/cnp-module-redis?ref=master"
   product  = "${var.product}-${var.component}-session-storage"
   location = var.location
