@@ -6,13 +6,78 @@ def type = "nodejs"
 def product = "ds"
 def component = "ui"
 
+static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
+  [ $class: 'AzureKeyVaultSecret',
+    secretType: 'Secret',
+    name: secretName,
+    version: '',
+    envVariable: envVar
+  ]
+}
+
+def secrets = [
+  'ds-${env}': [
+    secret('idam-secret', 'IDAM_SECRET'),
+    secret('citizen-user', 'CITIZEN_USERNAME'),
+    secret('citizen-password', 'CITIZEN_PASSWORD')
+  ],
+  's2s-${env}': [
+    secret('microservicekey-ds-ui', 'SERVICE_AUTH_SECRET')
+  ]
+]
+
 def yarnBuilder = new uk.gov.hmcts.contino.YarnBuilder(this)
+def branchesToSync = ['demo']
+
+def pipelineConf = new AppPipelineConfig()
+pipelineConf.vaultSecrets = secrets
+
 
 withPipeline(type, product, component) {
   disableLegacyDeployment()
+  enableAksStagingDeployment()
 
   after('build') {
     yarnBuilder.yarn('build')
   }
   
+  after('test') {
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'coverage/**/*'
+  }
+
+  before('functionalTest:preview') {
+    env.DS_UI_URL = "https://ds-ui-pr-${CHANGE_ID}.service.core-compute-preview.internal/"
+  }
+
+  after('functionalTest:preview') {
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
+
+    yarnBuilder.yarn('test:functional')
+  }
+
+  before('smoketest:preview') {
+    env.DS_UI_URL = "https://ds-ui-pr-${CHANGE_ID}.service.core-compute-preview.internal/"
+
+  }
+
+  before('smoketest:aat') {
+    env.DS_UI_URL = "https://ds-ui-staging.service.core-compute-aat.internal/"
+
+  }
+
+  after('smoketest:aat') {
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
+
+  }
+
+  before('functionalTest:aat') {
+    yarnBuilder.yarn('test:functional:skip')
+
+  }
+
+  after('functionalTest:aat') {
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
+
+  }
+
 }
