@@ -37,47 +37,23 @@ withPipeline(type, product, component) {
   disableLegacyDeployment()
   enableAksStagingDeployment()
 
-  after('build') {
+   after('build') {
     yarnBuilder.yarn('build')
   }
-  
-  after('test') {
-    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'coverage/**/*'
-  }
 
-  before('functionalTest:preview') {
-    env.DS_UI_URL = "https://ds-ui-pr-${CHANGE_ID}.service.core-compute-preview.internal/"
-  }
-
-  after('functionalTest:preview') {
-    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
-
-    yarnBuilder.yarn('test:functional')
-  }
-
-  before('smoketest:preview') {
-    env.DS_UI_URL = "https://ds-ui-pr-${CHANGE_ID}.service.core-compute-preview.internal/"
-
-  }
-
-  before('smoketest:aat') {
-    env.DS_UI_URL = "https://ds-ui-staging.service.core-compute-aat.internal/"
-
+  after('smoketest:preview') {
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'smoke-output/**/*'
   }
 
   after('smoketest:aat') {
-    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
-
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'smoke-output/**/*'
   }
 
-  before('functionalTest:aat') {
-    yarnBuilder.yarn('test:functional:skip')
-
+  after('functionalTest:preview') {
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'functional-output/**/*'
   }
 
   after('functionalTest:aat') {
-    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
-
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'functional-output/**/*'
   }
-
 }

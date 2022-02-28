@@ -11,6 +11,43 @@ def type = "nodejs"
 def product = "ds"
 def component = "ui"
 
+// SAUCELABS config - configured on Jenkins
+env.SAUCE_USERNAME = 'username'
+env.SAUCE_ACCESS_KEY = 'privatekey'
+env.SAUCE_TUNNEL_IDENTIFIER = 'reformtunnel'
+
+def yarnBuilder = new uk.gov.hmcts.contino.YarnBuilder(this)
+
+static Map<String, Object> secret(String secretName, String envVariable) {
+  [$class     : 'AzureKeyVaultSecret',
+   secretType : 'Secret',
+   name       : secretName,
+   envVariable: envVariable
+  ]
+}
+
+def secrets = [
+  'ds-${env}'    :[
+    secret('idam-secret', 'IDAM_SECRET'),
+    secret('idam-system-user-password', 'TEST_PASSWORD'),
+    secret('citizen-user', 'CITIZEN_USERNAME'),
+    secret('citizen-password', 'CITIZEN_PASSWORD'),
+    secret('ds-pcq-token', 'PCQ_TOKEN')
+  ],
+  's2s-${env}': [
+    secret('microservicekey-ds-ui', 'SERVICE_AUTH_SECRET')
+  ]
+]
+
+def pipelineConf = new AppPipelineConfig()
+pipelineConf.vaultSecrets = secrets
+
+
 withNightlyPipeline(type, product, component) {
 
+  //enableCrossBrowserTest()
+
+  //after('crossBrowserTest') {
+  //  steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'functional-output/crossbrowser/reports/**/*'
+  //} 
 }
