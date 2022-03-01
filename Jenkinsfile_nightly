@@ -31,8 +31,7 @@ def secrets = [
     secret('idam-secret', 'IDAM_SECRET'),
     secret('idam-system-user-password', 'TEST_PASSWORD'),
     secret('citizen-user', 'CITIZEN_USERNAME'),
-    secret('citizen-password', 'CITIZEN_PASSWORD'),
-    secret('ds-pcq-token', 'PCQ_TOKEN')
+    secret('citizen-password', 'CITIZEN_PASSWORD')
   ],
   's2s-${env}': [
     secret('microservicekey-ds-ui', 'SERVICE_AUTH_SECRET')
@@ -45,8 +44,12 @@ pipelineConf.vaultSecrets = secrets
 
 withNightlyPipeline(type, product, component) {
 
+  env.ADOP_WEB_URL = params.FRONTEND_URL
+  enableCrossBrowserTest(['firefox', 'chrome'])
+  enableFullFunctionalTest(120)
+  loadVaultSecrets(secrets)
+  
   //enableCrossBrowserTest()
-
   //after('crossBrowserTest') {
   //  steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'functional-output/crossbrowser/reports/**/*'
   //} 
