@@ -5,7 +5,7 @@ timeout: 30000
 services:
   authProvider:
     url: 'http://rpe-service-auth-provider-aat.service.core-compute-aat.internal'
-    microservice: 'adoption_web'
+    microservice: 'ds_ui'
     secret: 'NEED TO INSERT SECRET'
   # idam:
   #   authorizationURL: 'http://localhost:3501/login'
