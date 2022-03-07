@@ -110,7 +110,7 @@ describe('common > components > address-international > content', () => {
     expect(addressCountryField.type).toBe('text');
     expect(addressCountryField.classes).toBe('govuk-label');
     expect(addressCountryField.labelSize).toBe(null);
-  //  expect(addressCountryField.validator).toBe(isFieldFilledIn);
+    //  expect(addressCountryField.validator).toBe(isFieldFilledIn);
     expect((addressCountryField.label as Function)(generatedContent)).toBe(enContent.country);
   });
 

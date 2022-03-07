@@ -20,9 +20,7 @@ export class PostController<T extends AnyObject> {
   public async post(req: AppRequest<T>, res: Response): Promise<void> {
     // const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase) : this.fields;
     // const form = new Form(fields);
-
     // const { saveAndSignOut, saveBeforeSessionTimeout, _csrf, ...formData } = form.getParsedBody(req.body);
-
     // if (req.body.saveAndSignOut) {
     //   await this.saveAndSignOut(req, res, formData);
     // } else if (req.body.saveBeforeSessionTimeout) {
@@ -30,6 +28,7 @@ export class PostController<T extends AnyObject> {
     // } else {
     //   await this.saveAndContinue(req, res, form, formData);
     // }
+    console.log(req, res);
   }
 
   // private async saveAndSignOut(req: AppRequest<T>, res: Response, formData: Partial<Case>): Promise<void> {

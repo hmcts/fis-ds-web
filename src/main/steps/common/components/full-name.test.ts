@@ -54,7 +54,7 @@ describe('common > components > full-name', () => {
     expect((firstNamesField.label as Function)(generatedContent)).toBe(enContent.firstNames);
     expect(((firstNamesField as FormInput).hint as Function)(generatedContent)).toBe(enContent.firstNamesHint);
     expect(firstNamesField.labelSize).toBe(null);
- //   expect(firstNamesField.validator).toBe(isFieldFilledIn);
+    //   expect(firstNamesField.validator).toBe(isFieldFilledIn);
   });
 
   test('should contain lastNames field', () => {
@@ -64,7 +64,7 @@ describe('common > components > full-name', () => {
     expect((lastNamesField.label as Function)(generatedContent)).toBe(enContent.lastNames);
     expect(((lastNamesField as FormInput).hint as Function)(generatedContent)).toBe(enContent.lastNamesHint);
     expect(lastNamesField.labelSize).toBe(null);
-   // expect(lastNamesField.validator).toBe(isFieldFilledIn);
+    // expect(lastNamesField.validator).toBe(isFieldFilledIn);
   });
 
   test('should contain submit button', () => {

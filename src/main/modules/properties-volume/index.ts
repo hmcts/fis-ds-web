@@ -50,5 +50,4 @@ export class PropertiesVolume {
   //   const result = execSync(`az keyvault secret show --vault-name adoption-aat -o tsv --query value --name ${secret}`);
   //   set(config, toPath, result.toString().replace('\n', ''));
   // }
-
 }

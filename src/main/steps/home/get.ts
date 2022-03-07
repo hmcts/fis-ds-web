@@ -26,16 +26,12 @@ export class HomeGetController {
     // const firstQuestionForm = getApplicantFirstQuestionForm();
     const isFirstQuestionComplete = true;
 
-    res.redirect(
-      applicant1RedirectPageSwitch(isFirstQuestionComplete)
-    );
+    res.redirect(applicant1RedirectPageSwitch(isFirstQuestionComplete));
   }
 }
 
 const applicant1RedirectPageSwitch = (isFirstQuestionComplete: boolean) => {
-  
-      return isFirstQuestionComplete ? CITIZEN_HOME_URL : CITIZEN_HOME_URL;
-  
+  return isFirstQuestionComplete ? CITIZEN_HOME_URL : CITIZEN_HOME_URL;
 };
 
 // const getApplicantFirstQuestionForm = () => {
