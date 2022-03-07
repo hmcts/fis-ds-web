@@ -14,7 +14,7 @@ const token =
 describe('getRedirectUrl', () => {
   test('should create a valid URL to redirect to the login screen', () => {
     expect(getRedirectUrl('http://localhost', CALLBACK_URL)).toBe(
-      'https://idam-web-public.aat.platform.hmcts.net/login?client_id=adoption-web&response_type=code&redirect_uri=http://localhost/receiver'
+      'https://idam-web-public.aat.platform.hmcts.net/login?client_id=ds-ui&response_type=code&redirect_uri=http://localhost/receiver'
     );
   });
 });
