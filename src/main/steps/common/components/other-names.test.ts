@@ -97,7 +97,7 @@ describe('other names content', () => {
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
 
-    const { type, classes, label, hint, section, values} = fields.applicant1HasOtherNames as FormOptions;
+    const { type, classes, label, hint, section, values } = fields.applicant1HasOtherNames as FormOptions;
 
     expect(type).toBe('radios');
     expect(classes).toBe('govuk-radios');
@@ -109,7 +109,7 @@ describe('other names content', () => {
     expect(values[0].value).toBe(YesOrNo.YES);
     expect((values[1].label as Function)(generatedContent)).toBe(enContent.no);
     expect(values[1].value).toBe(YesOrNo.NO);
-  //  expect(validator).toBe(isFieldFilledIn);
+    //  expect(validator).toBe(isFieldFilledIn);
   });
 
   it("should display correct content under the 'yes' radio when names array is empty", () => {
@@ -130,13 +130,13 @@ describe('other names content', () => {
     expect(applicant1OtherFirstNames?.classes).toBe('govuk-!-width-two-thirds');
     expect((applicant1OtherFirstNames?.label as Function)(generatedContent)).toBe(enContent.applicant1OtherFirstNames);
     expect(applicant1OtherFirstNames?.labelSize).toBe(null);
-  //  expect(applicant1OtherFirstNames?.validator).toBe(isFieldFilledIn);
+    //  expect(applicant1OtherFirstNames?.validator).toBe(isFieldFilledIn);
 
     expect(applicant1OtherLastNames?.type).toBe('input');
     expect(applicant1OtherLastNames?.classes).toBe('govuk-!-width-two-thirds');
     expect((applicant1OtherLastNames?.label as Function)(generatedContent)).toBe(enContent.applicant1OtherLastNames);
     expect(applicant1OtherLastNames?.labelSize).toBe(null);
-  //  expect(applicant1OtherLastNames?.validator).toBe(isFieldFilledIn);
+    //  expect(applicant1OtherLastNames?.validator).toBe(isFieldFilledIn);
 
     expect(addButton?.type).toBe('button');
     expect((addButton?.label as Function)(generatedContent)).toBe(enContent.add);
@@ -155,7 +155,7 @@ describe('other names content', () => {
     const applicant1HasOtherNames = fields.applicant1HasOtherNames as FormOptions;
     const yesRadioSubFields = applicant1HasOtherNames.values[0].subFields;
     const applicant1AdditionalNames = yesRadioSubFields?.applicant1AdditionalNames as FormOptions;
- //   const rows = applicant1AdditionalNames?.rows?.rows;
+    //   const rows = applicant1AdditionalNames?.rows?.rows;
     const addAnotherName = yesRadioSubFields?.addAnotherName as FormInput;
     const applicant1OtherFirstNames = addAnotherName?.subFields?.applicant1OtherFirstNames;
     const applicant1OtherLastNames = addAnotherName?.subFields?.applicant1OtherLastNames;
@@ -171,8 +171,8 @@ describe('other names content', () => {
 
     expect(addAnotherName.type).toBe('details');
     expect((addAnotherName.label as Function)(generatedContent)).toBe(enContent.another);
-   // (addAnotherName.validator as Function)();
-  //  expect(doesArrayHaveValues).toHaveBeenCalled();
+    // (addAnotherName.validator as Function)();
+    //  expect(doesArrayHaveValues).toHaveBeenCalled();
 
     expect(applicant1OtherFirstNames?.type).toBe('input');
     expect(applicant1OtherFirstNames?.classes).toBe('govuk-!-width-two-thirds');

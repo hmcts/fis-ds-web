@@ -6,12 +6,12 @@ import { TranslationFn } from '../app/controller/GetController';
 import { Form, FormContent } from '../app/form/Form';
 
 // import { applicant1Sequence } from './applicant1/applicant1Sequence';
+import { Step } from './constants';
 import { edgecaseSequence } from './edge-case/edgecaseSequence';
 // import { applicant2Sequence } from './applicant2/applicant2Sequence';
 // import { birthFatherSequence } from './birth-father/birthFatherSequence';
 // import { birthMotherSequence } from './birth-mother/birthMotherSequence';
 // import { childrenSequence } from './children/childrenSequence';
-import { Step } from './constants';
 // import { Step as EligibilityStep, eligibilitySequence } from './eligibility/eligibilitySequence';
 // import { otherParentSequence } from './other-parent/otherParentSequence';
 // import { reviewPaySubmitSequence } from './review-pay-submit/reviewPaySubmitSequence';
@@ -52,28 +52,28 @@ const stepForms: Record<string, Form> = {};
 //   removeExcluded = false,
 //   checkedSteps: Step[] = []
 // ): string => {
-  // const stepForm = stepForms[step.url];
-  // if this step has a form
-  // if (stepForm !== undefined) {
-    // and that form has errors
-    // if (!stepForm.isComplete(data) || stepForm.getErrors(data).length > 0) {
-    //   // go to that step
-    //   return removeExcluded && checkedSteps.length && step.excludeFromContinueApplication
-    //     ? checkedSteps[checkedSteps.length - 1].url
-    //     : step.url;
-    // } else {
-    //   // if there are no errors go to the next page and work out what to do
-    //   const nextStepUrl = step.getNextStep(data);
-    //   const nextStep = sequence.find(s => s.url === nextStepUrl);
+// const stepForm = stepForms[step.url];
+// if this step has a form
+// if (stepForm !== undefined) {
+// and that form has errors
+// if (!stepForm.isComplete(data) || stepForm.getErrors(data).length > 0) {
+//   // go to that step
+//   return removeExcluded && checkedSteps.length && step.excludeFromContinueApplication
+//     ? checkedSteps[checkedSteps.length - 1].url
+//     : step.url;
+// } else {
+//   // if there are no errors go to the next page and work out what to do
+//   const nextStepUrl = step.getNextStep(data);
+//   const nextStep = sequence.find(s => s.url === nextStepUrl);
 
-    //   return nextStep
-    //     ? getNextIncompleteStep(data, nextStep, sequence, removeExcluded, checkedSteps.concat(step))
-    //     : CHECK_ANSWERS_URL;
-    // }
-  // }
+//   return nextStep
+//     ? getNextIncompleteStep(data, nextStep, sequence, removeExcluded, checkedSteps.concat(step))
+//     : CHECK_ANSWERS_URL;
+// }
+// }
 
-  // if the page has no form then ask it where to go
-  // return step.getNextStep(data);
+// if the page has no form then ask it where to go
+// return step.getNextStep(data);
 // };
 
 // export const getNextIncompleteStepUrl = (req: AppRequest): string => {
@@ -84,7 +84,9 @@ const stepForms: Record<string, Form> = {};
 //   return `${url}${queryString}`;
 // };
 
-export const getNextStepUrl = (): string => {return "test"}
+export const getNextStepUrl = (): string => {
+  return 'test';
+};
 // export const getNextStepUrl = (req: AppRequest, data: Partial<Case>): string => {
 //   //eslint-disable-next-line @typescript-eslint/no-explicit-any
 //   if ((req.body as any).saveAsDraft) {
@@ -141,7 +143,7 @@ export type StepWithContent = Step & {
   view: string;
 };
 
-const getStepsWithContent = (sequence: Step[] , subDir = ''): StepWithContent[] => {
+const getStepsWithContent = (sequence: Step[], subDir = ''): StepWithContent[] => {
   const dir = __dirname;
 
   const results: StepWithContent[] = [];

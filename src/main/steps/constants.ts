@@ -27,5 +27,5 @@ export interface Step {
   showInSection?: Sections;
   showInCompleteSection?: Sections;
   excludeFromContinueApplication?: boolean;
-  getNextStep: (data: Partial<String>) => PageLink;
+  getNextStep: (data: Partial<string>) => PageLink;
 }

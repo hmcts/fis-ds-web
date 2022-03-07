@@ -2,7 +2,6 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 // import { isEmailValid, isFieldFilledIn} from '../../../app/form/validation';
 
-
 export const en = (): Record<string, unknown> => ({
   // section: 'Submit to HMCSTS',
   // title: "What's your full name?",
@@ -59,12 +58,12 @@ export const form: FormContent = {
       // validator: input => isFieldFilledIn(input),
     },
     adopAgencyOrLaContactEmail: {
-        type: 'text',
-        classes: 'govuk-label govuk-!-width-two-thirds',
-        label: l => l.adopAgencyContactEmail,
-        labelSize: null,
-        // validator: value => isFieldFilledIn(value) || isEmailValid(value) ,
-      },
+      type: 'text',
+      classes: 'govuk-label govuk-!-width-two-thirds',
+      label: l => l.adopAgencyContactEmail,
+      labelSize: null,
+      // validator: value => isFieldFilledIn(value) || isEmailValid(value) ,
+    },
     applicant2Address: {
       type: 'input',
       label: l => l.address,
