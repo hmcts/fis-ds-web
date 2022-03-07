@@ -1,5 +1,5 @@
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
-import { isFieldFilledIn } from '../../../app/form/validation';
+//import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
 import { generateContent } from './address-international';
@@ -110,7 +110,7 @@ describe('common > components > address-international > content', () => {
     expect(addressCountryField.type).toBe('text');
     expect(addressCountryField.classes).toBe('govuk-label');
     expect(addressCountryField.labelSize).toBe(null);
-    expect(addressCountryField.validator).toBe(isFieldFilledIn);
+  //  expect(addressCountryField.validator).toBe(isFieldFilledIn);
     expect((addressCountryField.label as Function)(generatedContent)).toBe(enContent.country);
   });
 

@@ -1,5 +1,5 @@
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
-import { isAddressSelected } from '../../../app/form/validation';
+//import { isAddressSelected } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
 import { generateContent } from './address-select';
@@ -130,7 +130,7 @@ describe('common > components > address-select', () => {
     expect(selectAddressField.type).toBe('select');
     expect((selectAddressField.label as Function)(generatedContent)).toBe('Select an address');
     expect(selectAddressField.labelSize).toBe('m');
-    expect(selectAddressField.validator).toBe(isAddressSelected);
+ //   expect(selectAddressField.validator).toBe(isAddressSelected);
   });
 
   test('should contain submit button', () => {
