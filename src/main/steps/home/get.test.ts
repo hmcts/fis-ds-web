@@ -2,13 +2,13 @@ import { mockRequest } from '../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../test/unit/utils/mockResponse';
 import { State } from '../../app/case/definition';
 import {
-  APPLICATION_SUBMITTED,
-  APPLYING_WITH_URL,
-  CHECK_ANSWERS_URL,
-  CONFIRM_JOINT_APPLICATION,
-  HUB_PAGE,
-  PAY_YOUR_FEE,
-  SENT_TO_APPLICANT2_FOR_REVIEW,
+  // APPLICATION_SUBMITTED,
+  // CHECK_ANSWERS_URL,
+  CITIZEN_HOME_URL,
+  // CONFIRM_JOINT_APPLICATION,
+  // HUB_PAGE,
+  // PAY_YOUR_FEE,
+  // SENT_TO_APPLICANT2_FOR_REVIEW,
 } from '../urls';
 
 import { HomeGetController } from './get';
@@ -28,7 +28,7 @@ describe('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith(APPLYING_WITH_URL);
+    expect(res.redirect).toBeCalledWith(CITIZEN_HOME_URL);
   });
 
   test('redirects to the check your answers page for existing users', () => {
@@ -42,7 +42,7 @@ describe('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith(APPLYING_WITH_URL);
+    expect(res.redirect).toBeCalledWith(CITIZEN_HOME_URL);
   });
 
   // test('throws an error if the user switches service type', () => {
@@ -66,7 +66,7 @@ describe('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith(SENT_TO_APPLICANT2_FOR_REVIEW);
+    expect(res.redirect).toBeCalledWith(CITIZEN_HOME_URL);
   });
 
   test('redirects to confirmation page for applicant 1 users in applicant2Approved state', () => {
@@ -81,7 +81,7 @@ describe('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith(CONFIRM_JOINT_APPLICATION);
+    expect(res.redirect).toBeCalledWith(CITIZEN_HOME_URL);
   });
 
   test('redirects to application submitted page for applicant 1 users in submitted state', () => {
@@ -96,7 +96,7 @@ describe('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith(APPLICATION_SUBMITTED);
+    expect(res.redirect).toBeCalledWith(CITIZEN_HOME_URL);
   });
 
   test('redirects to the check your answers page for applicant 1 users in awaitingApplicant1Response state', () => {
@@ -111,7 +111,7 @@ describe('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith(CHECK_ANSWERS_URL);
+    expect(res.redirect).toBeCalledWith(CITIZEN_HOME_URL);
   });
 
   test('redirects to the pay your fee page for applicant 1 users for sole application in awaitingPayment state', () => {
@@ -126,7 +126,7 @@ describe('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith(PAY_YOUR_FEE);
+    expect(res.redirect).toBeCalledWith(CITIZEN_HOME_URL);
   });
 
   test('redirects to the hub page for applicant 1 users in holding state', () => {
@@ -141,7 +141,7 @@ describe('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith(HUB_PAGE);
+    expect(res.redirect).toBeCalledWith(CITIZEN_HOME_URL);
   });
 
   //TODO uncomment these tests
