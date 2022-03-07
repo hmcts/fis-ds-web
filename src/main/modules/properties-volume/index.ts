@@ -16,8 +16,8 @@ export class PropertiesVolume {
       this.setSecret('secrets.ds.redis-access-key', 'session.redis.key');
       this.setSecret('secrets.ds.redis-access-key', 'session.secret');
       this.setSecret('secrets.ds.s2s-secret', 'services.authProvider.secret');
-      this.setSecret('secrets.ds.postcode-lookup-token', 'services.postcodeLookup.token');
-      this.setSecret('secrets.ds.adoption-pcq-token', 'services.equalityAndDiversity.tokenKey');
+      // this.setSecret('secrets.ds.postcode-lookup-token', 'services.postcodeLookup.token');
+      // this.setSecret('secrets.ds.adoption-pcq-token', 'services.equalityAndDiversity.tokenKey');
     } else {
       this.setLocalSecret('idam-secret', 'services.idam.clientSecret');
       this.setLocalSecret('s2s-secret', 'services.authProvider.secret');
