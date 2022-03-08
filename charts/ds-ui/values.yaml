@@ -36,6 +36,4 @@ nodejs:
         - idam-system-user-password
         - redis-access-key
         - s2s-secret
-        - postcode-lookup-token
         - AppInsightsInstrumentationKey
-
