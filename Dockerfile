@@ -6,17 +6,11 @@ RUN yarn install --production \
 
 # ---- Build image ----
 FROM base as build
-
-USER root
-# Remove when switched to dart-sass
-RUN apk add --update --no-cache python3
-USER hmcts
-
-RUN PUPPETEER_SKIP_DOWNLOAD=true yarn install && yarn build:prod
+RUN PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=true yarn install && yarn build:prod
 
 # ---- Runtime image ----
 FROM base as runtime
 RUN rm -rf webpack/ webpack.config.js
 COPY --from=build $WORKDIR/src/main ./src/main
-# TODO: expose the right port for your application
+
 EXPOSE 4000
