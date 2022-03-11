@@ -10,7 +10,7 @@ export class PropertiesVolume {
     if (!app.locals.developmentMode) {
       propertiesVolume.addTo(config);
       this.setSecret('secrets.ds.AppInsightsInstrumentationKey', 'appInsights.instrumentationKey');
-      this.setSecret('secrets.ds.idam-secret', 'services.idam.clientSecret');
+      this.setSecret('secrets.ds.idam-ui-secret', 'services.idam.clientSecret');
       this.setSecret('secrets.ds.idam-system-user-name', 'services.idam.systemUsername');
       this.setSecret('secrets.ds.idam-system-user-password', 'services.idam.systemPassword');
       this.setSecret('secrets.ds.redis-access-key', 'session.redis.key');
@@ -19,7 +19,7 @@ export class PropertiesVolume {
       // this.setSecret('secrets.ds.postcode-lookup-token', 'services.postcodeLookup.token');
       // this.setSecret('secrets.ds.adoption-pcq-token', 'services.equalityAndDiversity.tokenKey');
     } else {
-      this.setLocalSecret('idam-secret', 'services.idam.clientSecret');
+      this.setLocalSecret('idam-ui-secret', 'services.idam.clientSecret');
       this.setLocalSecret('s2s-secret', 'services.authProvider.secret');
       // this.setLocalSecret('postcode-lookup-token', 'services.postcodeLookup.token');
       // this.setLocalSecret('idam-systemupdate-username', 'services.idam.systemUsername');
