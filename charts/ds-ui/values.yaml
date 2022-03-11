@@ -16,7 +16,6 @@ nodejs:
   keyVaults:
     ds:
       secrets:
-        - idam-secret
         - idam-ui-secret
         - idam-system-user-name
         - idam-system-user-password

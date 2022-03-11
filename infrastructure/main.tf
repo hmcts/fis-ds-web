@@ -42,8 +42,8 @@ resource "azurerm_key_vault_secret" "s2s-secret" {
   key_vault_id = data.azurerm_key_vault.ds_key_vault.id
 }
 
-data "azurerm_key_vault_secret" "idam-secret" {
-  name = "idam-secret"
+data "azurerm_key_vault_secret" "idam-ui-secret" {
+  name = "idam-ui-secret"
   key_vault_id = "${data.azurerm_key_vault.ds_key_vault.id}"
 }
 
