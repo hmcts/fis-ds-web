@@ -15,5 +15,18 @@ withPipeline(type, product, component) {
   after('build') {
     yarnBuilder.yarn('build')
   }
+  before('functionalTest:preview') {
+    env.TEST_URL = "https://ds-ui-pr-${CHANGE_ID}.service.core-compute-preview.internal/"
+  }
 
+  after('functionalTest:preview') {
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
+
+    yarnBuilder.yarn('test:functional')
+  }
+
+  before('smoketest:preview') {
+    env.TEST_URL = "https://ds-ui-pr-${CHANGE_ID}.service.core-compute-preview.internal/"
+
+  }
 }
