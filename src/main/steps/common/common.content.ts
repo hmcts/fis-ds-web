@@ -7,8 +7,8 @@ import { PageContent, TranslationFn } from '../../app/controller/GetController';
 
 const en = {
   phase: 'Beta',
-  applyForAdoption: 'Submit to HMCTS',
-  applyForDissolution: 'Apply for adoption',
+  applyForAdoption: 'Apply for a Service',
+  applyForDissolution: 'Apply for a Service',
   feedback:
     'This is a new service – your <a class="govuk-link" aria-label="Feedback link, This will open a new tab. You’ll need to return to this tab and continue with your application within 60 mins so you don’t lose your progress." href="#" target="_blank">feedback</a> will help us to improve it.',
   languageToggle: '<a href="?lng=cy" class="govuk-link language">Cymraeg</a>',

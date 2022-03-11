@@ -6,13 +6,16 @@ import { Application, NextFunction, Response } from 'express';
 import { AppRequest } from '../../app/controller/AppRequest';
 import {
   // APPLICANT_2,
-  CITIZEN_HOME_URL,
+  //SELECT_JURISDICTION,
+  //SERVICE_TYPE,
+  //DATE_OF_BIRTH,
   // APPLICATION_SUBMITTED,
   PAYMENT_CALLBACK_URL,
   PAY_AND_SUBMIT,
   PAY_YOUR_FEE,
   PageLink,
   // TASK_LIST_URL,
+  CITIZEN_HOME_URL,
 } from '../../steps/urls';
 
 /**
