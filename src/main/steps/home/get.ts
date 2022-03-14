@@ -20,8 +20,8 @@ import {
   //SERVICE_TYPE,
   //ADOPTION_APPLICATION_TYPE,
   //DATE_OF_BIRTH,
-  //SELECT_ADDRESS,
   CITIZEN_HOME_URL,
+  //CITIZEN_HOME_URL,
 } from '../urls';
 
 export class HomeGetController {

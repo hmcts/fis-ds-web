@@ -1,32 +1,15 @@
 import * as fs from 'fs';
 
-// import { CaseWithId } from '../app/case/case';
-// import { AppRequest, Eligibility } from '../app/controller/AppRequest';
+import { Case, CaseWithId } from '../app/case/case';
+import { AppRequest } from '../app/controller/AppRequest';
 import { TranslationFn } from '../app/controller/GetController';
 import { Form, FormContent } from '../app/form/Form';
-
-// import { applicant1Sequence } from './applicant1/applicant1Sequence';
 import { Step } from './constants';
 import { edgecaseSequence } from './edge-case/edgecaseSequence';
-// import { applicant2Sequence } from './applicant2/applicant2Sequence';
-// import { birthFatherSequence } from './birth-father/birthFatherSequence';
-// import { birthMotherSequence } from './birth-mother/birthMotherSequence';
-// import { childrenSequence } from './children/childrenSequence';
-// import { Step as EligibilityStep, eligibilitySequence } from './eligibility/eligibilitySequence';
-// import { otherParentSequence } from './other-parent/otherParentSequence';
-// import { reviewPaySubmitSequence } from './review-pay-submit/reviewPaySubmitSequence';
-// import { siblingSequence } from './sibling/siblingSequence';
+
 import {
+  CITIZEN_HOME_URL,
   EDGE_CASE_URL,
-  // APPLICANT_2,
-  // BIRTH_FATHER,
-  // BIRTH_MOTHER,
-  // CHECK_ANSWERS_URL,
-  // CHILDREN,
-  // OTHER_PARENT,
-  // REVIEW_PAY_SUBMIT,
-  // SIBLING,
-  // TASK_LIST_URL,
 } from './urls';
 
 const stepForms: Record<string, Form> = {};
@@ -45,87 +28,70 @@ const stepForms: Record<string, Form> = {};
   }
 });
 
-// const getNextIncompleteStep = (
-//   data: String, //CaseWithId,
-//   step: Step,
-//   sequence: Step[],
-//   removeExcluded = false,
-//   checkedSteps: Step[] = []
-// ): string => {
-// const stepForm = stepForms[step.url];
-// if this step has a form
-// if (stepForm !== undefined) {
-// and that form has errors
-// if (!stepForm.isComplete(data) || stepForm.getErrors(data).length > 0) {
-//   // go to that step
-//   return removeExcluded && checkedSteps.length && step.excludeFromContinueApplication
-//     ? checkedSteps[checkedSteps.length - 1].url
-//     : step.url;
-// } else {
-//   // if there are no errors go to the next page and work out what to do
-//   const nextStepUrl = step.getNextStep(data);
-//   const nextStep = sequence.find(s => s.url === nextStepUrl);
+const getNextIncompleteStep = (
+  data: CaseWithId,
+  step: Step,
+  sequence: Step[],
+  removeExcluded = false,
+  checkedSteps: Step[] = []
+): string => {
+  const stepForm = stepForms[step.url];
+  // if this step has a form
+  if (stepForm !== undefined) {
+    // and that form has errors
+    // if (!stepForm.isComplete(data) || stepForm.getErrors(data).length > 0) 
+    if (!stepForm.isComplete(data)){
+      // go to that step
+      return removeExcluded && checkedSteps.length && step.excludeFromContinueApplication
+        ? checkedSteps[checkedSteps.length - 1].url
+        : step.url;
+    } else {
+      // if there are no errors go to the next page and work out what to do
+      const nextStepUrl = step.getNextStep(data);
+      const nextStep = sequence.find(s => s.url === nextStepUrl);
 
-//   return nextStep
-//     ? getNextIncompleteStep(data, nextStep, sequence, removeExcluded, checkedSteps.concat(step))
-//     : CHECK_ANSWERS_URL;
-// }
-// }
+      return nextStep
+        ? getNextIncompleteStep(data, nextStep, sequence, removeExcluded, checkedSteps.concat(step))
+        : CITIZEN_HOME_URL;
+    }
+  }
 
-// if the page has no form then ask it where to go
-// return step.getNextStep(data);
-// };
-
-// export const getNextIncompleteStepUrl = (req: AppRequest): string => {
-//   const { queryString } = getPathAndQueryString(req);
-//   const sequence = getUserSequence();
-//   const url = getNextIncompleteStep(req.session.userCase, sequence[0], sequence, true);
-
-//   return `${url}${queryString}`;
-// };
-
-export const getNextStepUrl = (): string => {
-  return 'test';
+  // if the page has no form then ask it where to go
+  return step.getNextStep(data);
 };
-// export const getNextStepUrl = (req: AppRequest, data: Partial<Case>): string => {
-//   //eslint-disable-next-line @typescript-eslint/no-explicit-any
-//   if ((req.body as any).saveAsDraft) {
-//     return TASK_LIST_URL;
-//   }
-//   const { path, queryString } = getPathAndQueryString(req);
-//   const nextStep = [
-//     ...edgecaseSequence,
-//     // ...applicant2Sequence,
-//     // ...childrenSequence,
-//     // ...birthMotherSequence,
-//     // ...birthFatherSequence,
-//     // ...otherParentSequence,
-//     // ...reviewPaySubmitSequence,
-//     // ...siblingSequence,
-//   ].find(s => s.url === path);
 
-//   const url = nextStep ? nextStep.getNextStep(data) : CHECK_ANSWERS_URL;
+export const getNextIncompleteStepUrl = (req: AppRequest): string => {
+   const { queryString } = getPathAndQueryString(req);
+  const sequence = getUserSequence();
+  const url = getNextIncompleteStep(req.session.userCase , sequence[0], sequence, true);
 
-//   return `${url}${queryString}`;
-// };
+   return `${url}${queryString}`;
+};
 
-// export const getNextEligibilityStepUrl = (req: AppRequest, data: Eligibility): string => {
-//   const { path, queryString } = getPathAndQueryString(req);
-//   const nextStep = [...eligibilitySequence].find(s => s.url === path);
-//   const url = nextStep ? nextStep.getNextStep(data) : CHECK_ANSWERS_URL;
+export const getNextStepUrl = (req: AppRequest, data: Partial<Case>): string => {
+  //eslint-disable-next-line @typescript-eslint/no-explicit-any
+  if ((req.body as any).saveAsDraft) {
+    return CITIZEN_HOME_URL;
+  }
+  const { path, queryString } = getPathAndQueryString(req);
+  const nextStep = [
+    ...edgecaseSequence,
+  ].find(s => s.url === path);
 
-//   return `${url}${queryString}`;
-// };
+  const url = nextStep ? nextStep.getNextStep(data) : CITIZEN_HOME_URL;
+  
+  return `${url}${queryString}`;
+};
 
-// const getUserSequence = () => {
-//   return edgecaseSequence;
-// };
+const getPathAndQueryString = (req: AppRequest): { path: string; queryString: string } => {
+  const [path, searchParams] = req.originalUrl.split('?');
+  const queryString = searchParams ? `?${searchParams}` : '';
+  return { path, queryString };
+};
 
-// const getPathAndQueryString = (): { path: string; queryString: string } => {
-//   const [path, searchParams] = req.originalUrl.split('?');
-//   const queryString = searchParams ? `?${searchParams}` : '';
-//   return { path, queryString };
-// };
+ const getUserSequence = () => {
+   return edgecaseSequence;
+ };
 
 const getStepFiles = (stepDir: string) => {
   const stepContentFile = `${stepDir}/content.ts`;
@@ -155,23 +121,8 @@ const getStepsWithContent = (sequence: Step[], subDir = ''): StepWithContent[] =
   return results;
 };
 
-// export const stepsWithContentEligibility = getStepsWithContent(eligibilitySequence, '/eligibility');
-export const stepsWithContentApplicant1 = getStepsWithContent(edgecaseSequence, EDGE_CASE_URL);
-// export const stepsWithContentApplicant2 = getStepsWithContent(applicant2Sequence, APPLICANT_2);
-// export const stepsWithContentChildren = getStepsWithContent(childrenSequence, CHILDREN);
-// export const stepsWithContentBirthFather = getStepsWithContent(birthFatherSequence, BIRTH_FATHER);
-// export const stepsWithContentBirthMother = getStepsWithContent(birthMotherSequence, BIRTH_MOTHER);
-// export const stepsWithContentOtherParent = getStepsWithContent(otherParentSequence, OTHER_PARENT);
-// export const stepsWithContentSibling = getStepsWithContent(siblingSequence, SIBLING);
-// export const stepsWithContentReviewPaySubmit = getStepsWithContent(reviewPaySubmitSequence, REVIEW_PAY_SUBMIT);
+export const stepsWithContentEdgecase = getStepsWithContent(edgecaseSequence, EDGE_CASE_URL);
+
 export const stepsWithContent = [
-  // ...stepsWithContentEligibility,appl
-  ...stepsWithContentApplicant1,
-  // ...stepsWithContentApplicant2,
-  // ...stepsWithContentChildren,
-  // ...stepsWithContentBirthFather,
-  // ...stepsWithContentBirthMother,
-  // ...stepsWithContentOtherParent,
-  // ...stepsWithContentReviewPaySubmit,
-  // ...stepsWithContentSibling,
+  ...stepsWithContentEdgecase,
 ];

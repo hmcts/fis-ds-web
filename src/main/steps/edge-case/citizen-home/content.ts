@@ -1,45 +1,46 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 
-// import { FormContent } from "app/form/Form";
-
-export const en = (): Record<string, unknown> => ({
-  jurisdication: 'Jurisdication',
-  appType: 'Application Type',
-  items1: [
-    { text: 'Family', value: '1' },
-    { text: 'Tribunals', value: '2' },
-  ],
-  items2: [
-    { text: 'International Aoption', value: '1' },
-    { text: 'Relinquished Adoption', value: '2' },
-    { text: 'Special Guardianship', value: '3' },
-  ],
+const en = () => ({
+  label: 'Select Jurisdiction',
+  one: "Family",
+  two: "Tribunals",
+  errors: {
+    applyingWith: {
+      required: 'Select the jurisdiction type',
+    },
+  },
 });
 
-export const cy = (): Record<string, unknown> => ({
-  jurisdication: 'Jurisdication',
-  appType: 'Application Type',
+const cy = () => ({
+  section: 'Applicant details (in welsh)',
+  label: 'Are you applying on your own, or with someone else?(in welsh)',
+  one: "I'm applying on my own (in welsh)",
+  two: "I'm applying with my spouse or civil partner (in welsh)",
+  three: "I'm applying with someone who is not my spouse or civil partner (in welsh)",
+  errors: {
+    applyingWith: {
+      required: 'Select the number of people applying to adopt (in welsh)',
+    },
+  },
 });
 
 export const form: FormContent = {
   fields: {
-    citizenJurisdication: {
-      type: 'select',
-      label: l => l.jurisdication,
-      labelSize: 'normal',
-      options: it => it.items1,
-    },
-    citizenApplicationType: {
-      type: 'select',
-      label: l => l.appType,
-      labelSize: 'normal',
-      options: it => it.items2,
+    applyingWith: {
+      type: 'radios',
+      classes: 'govuk-radios',
+      label: l => l.label,
+      section: l => l.section,
+      values: [
+        { label: l => l.one, value: 'family' },
+        { label: l => l.two, value: 'tribunals' },
+      ],
     },
   },
   submit: {
-    text: l => l.next,
-  },
+    text: l => l.continue,
+  }
 };
 
 const languages = {
@@ -47,7 +48,10 @@ const languages = {
   cy,
 };
 
-export const generateContent: TranslationFn = content => ({
-  ...languages[content.language](),
-  form,
-});
+export const generateContent: TranslationFn = content => {
+  const translations = languages[content.language]();
+  return {
+    ...translations,
+    form,
+  };
+};

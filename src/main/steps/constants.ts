@@ -1,4 +1,4 @@
-// import { CaseWithId } from '../app/case/case';
+ import { CaseWithId } from '../app/case/case';
 
 import { PageLink } from './urls';
 
@@ -11,5 +11,5 @@ export interface Step {
   showInSection?: Sections;
   showInCompleteSection?: Sections;
   excludeFromContinueApplication?: boolean;
-  getNextStep: (data: Partial<string>) => PageLink;
+  getNextStep: (data: Partial<CaseWithId>) => PageLink;
 }
