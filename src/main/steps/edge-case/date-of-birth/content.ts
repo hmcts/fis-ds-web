@@ -19,7 +19,7 @@ export const en = (): Record<string, unknown> => ({
 });
 
 export const cy = (): Record<string, unknown> => ({
-  section: 'Primary applicant (in Welsh)',
+  section: 'Applicant (in Welsh)',
   title: "What's your date of birth? (in Welsh)",
   hint: 'For example, 28 6 1997 (in Welsh)',
   errors: {
