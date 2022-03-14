@@ -2,9 +2,10 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 
 const en = () => ({
+  continue: 'Continue',
   label: 'Select Jurisdiction',
-  one: "Family",
-  two: "Tribunals",
+  one: 'Family',
+  two: 'Tribunals',
   errors: {
     applyingWith: {
       required: 'Select the jurisdiction type',
@@ -40,7 +41,7 @@ export const form: FormContent = {
   },
   submit: {
     text: l => l.continue,
-  }
+  },
 };
 
 const languages = {

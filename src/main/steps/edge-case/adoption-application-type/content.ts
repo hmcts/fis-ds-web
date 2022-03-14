@@ -2,11 +2,12 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 
 const en = () => ({
+  continue: 'Continue',
   label: 'Adoption Application Type',
-  one: "International Adoption",
-  two: "Relinquished Adoption",
-  three: "Step-parent Adoption",
-  four: "Parental Orders",
+  one: 'International Adoption',
+  two: 'Relinquished Adoption',
+  three: 'Step-parent Adoption',
+  four: 'Parental Orders',
   errors: {
     applyingWith: {
       required: 'Select the Adoption Application type',
@@ -44,7 +45,7 @@ export const form: FormContent = {
   },
   submit: {
     text: l => l.continue,
-  }
+  },
 };
 
 const languages = {

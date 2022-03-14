@@ -1,14 +1,14 @@
 import { Sections, Step } from '../constants';
 import {
   ADOPTION_APPLICATION_TYPE,
-  DATE_OF_BIRTH,
-  FULL_NAME,
-  PRIVATE_LAW_APPLICATION_TYPE, 
-  SERVICE_TYPE,
-  FIND_ADDRESS,
-  MANUAL_ADDRESS,
-  SELECT_ADDRESS,
   CITIZEN_HOME_URL,
+  DATE_OF_BIRTH,
+  FIND_ADDRESS,
+  FULL_NAME,
+  MANUAL_ADDRESS,
+  PRIVATE_LAW_APPLICATION_TYPE,
+  SELECT_ADDRESS,
+  SERVICE_TYPE,
 } from '../urls';
 
 export const edgecaseSequence: Step[] = [
@@ -35,7 +35,7 @@ export const edgecaseSequence: Step[] = [
   {
     url: FULL_NAME,
     showInSection: Sections.AboutEdgeCase,
-    getNextStep: () => DATE_OF_BIRTH,
+    getNextStep: () => CITIZEN_HOME_URL,
   },
   {
     url: DATE_OF_BIRTH,

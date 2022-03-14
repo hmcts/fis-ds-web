@@ -4,13 +4,10 @@ import { Case, CaseWithId } from '../app/case/case';
 import { AppRequest } from '../app/controller/AppRequest';
 import { TranslationFn } from '../app/controller/GetController';
 import { Form, FormContent } from '../app/form/Form';
+
 import { Step } from './constants';
 import { edgecaseSequence } from './edge-case/edgecaseSequence';
-
-import {
-  CITIZEN_HOME_URL,
-  EDGE_CASE_URL,
-} from './urls';
+import { CITIZEN_HOME_URL, EDGE_CASE_URL } from './urls';
 
 const stepForms: Record<string, Form> = {};
 
@@ -39,8 +36,8 @@ const getNextIncompleteStep = (
   // if this step has a form
   if (stepForm !== undefined) {
     // and that form has errors
-    // if (!stepForm.isComplete(data) || stepForm.getErrors(data).length > 0) 
-    if (!stepForm.isComplete(data)){
+    // if (!stepForm.isComplete(data) || stepForm.getErrors(data).length > 0)
+    if (!stepForm.isComplete(data)) {
       // go to that step
       return removeExcluded && checkedSteps.length && step.excludeFromContinueApplication
         ? checkedSteps[checkedSteps.length - 1].url
@@ -61,11 +58,11 @@ const getNextIncompleteStep = (
 };
 
 export const getNextIncompleteStepUrl = (req: AppRequest): string => {
-   const { queryString } = getPathAndQueryString(req);
+  const { queryString } = getPathAndQueryString(req);
   const sequence = getUserSequence();
-  const url = getNextIncompleteStep(req.session.userCase , sequence[0], sequence, true);
+  const url = getNextIncompleteStep(req.session.userCase, sequence[0], sequence, true);
 
-   return `${url}${queryString}`;
+  return `${url}${queryString}`;
 };
 
 export const getNextStepUrl = (req: AppRequest, data: Partial<Case>): string => {
@@ -74,12 +71,10 @@ export const getNextStepUrl = (req: AppRequest, data: Partial<Case>): string => 
     return CITIZEN_HOME_URL;
   }
   const { path, queryString } = getPathAndQueryString(req);
-  const nextStep = [
-    ...edgecaseSequence,
-  ].find(s => s.url === path);
+  const nextStep = [...edgecaseSequence].find(s => s.url === path);
 
   const url = nextStep ? nextStep.getNextStep(data) : CITIZEN_HOME_URL;
-  
+
   return `${url}${queryString}`;
 };
 
@@ -89,9 +84,9 @@ const getPathAndQueryString = (req: AppRequest): { path: string; queryString: st
   return { path, queryString };
 };
 
- const getUserSequence = () => {
-   return edgecaseSequence;
- };
+const getUserSequence = () => {
+  return edgecaseSequence;
+};
 
 const getStepFiles = (stepDir: string) => {
   const stepContentFile = `${stepDir}/content.ts`;
@@ -123,6 +118,4 @@ const getStepsWithContent = (sequence: Step[], subDir = ''): StepWithContent[] =
 
 export const stepsWithContentEdgecase = getStepsWithContent(edgecaseSequence, EDGE_CASE_URL);
 
-export const stepsWithContent = [
-  ...stepsWithContentEdgecase,
-];
+export const stepsWithContent = [...stepsWithContentEdgecase];

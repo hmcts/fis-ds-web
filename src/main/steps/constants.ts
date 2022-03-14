@@ -1,4 +1,4 @@
- import { CaseWithId } from '../app/case/case';
+import { CaseWithId } from '../app/case/case';
 
 import { PageLink } from './urls';
 

@@ -2,9 +2,10 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 
 const en = () => ({
+  continue: 'Continue',
   label: 'Service Type',
-  one: "Adoption",
-  two: "Private Law",
+  one: 'Adoption',
+  two: 'Private Law',
   errors: {
     applyingWith: {
       required: 'Select the Service type',
@@ -40,7 +41,7 @@ export const form: FormContent = {
   },
   submit: {
     text: l => l.continue,
-  }
+  },
 };
 
 const languages = {

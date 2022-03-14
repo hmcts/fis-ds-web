@@ -59,7 +59,7 @@ You should get a very basic home page (no styles, etc.).
 We use [ESLint](https://github.com/typescript-eslint/typescript-eslint)
 alongside [sass-lint](https://github.com/sasstools/sass-lint)
 
-Running the linting with auto fix:
+Running the linting with auto fix: (Prettier)
 
 ```bash
 $ yarn lint --fix

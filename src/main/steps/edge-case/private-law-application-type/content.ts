@@ -2,12 +2,13 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 
 const en = () => ({
+  continue: 'Continue',
   label: 'Private Law Application Type',
-  one: "Genital Mutliation Orders(FGM)",
-  two: "Forced Protection Marriage Order(FMPO)",
-  three: "Special Guardianship",
-  four: "Financial Applications",
-  five: "Declaration of Parentage",
+  one: 'Genital Mutliation Orders(FGM)',
+  two: 'Forced Protection Marriage Order(FMPO)',
+  three: 'Special Guardianship',
+  four: 'Financial Applications',
+  five: 'Declaration of Parentage',
   errors: {
     applyingWith: {
       required: 'Select the jurisdiction type',
@@ -46,7 +47,7 @@ export const form: FormContent = {
   },
   submit: {
     text: l => l.continue,
-  }
+  },
 };
 
 const languages = {
