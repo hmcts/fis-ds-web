@@ -78,15 +78,15 @@ export class GetController {
   }
 
   public async save(req: AppRequest, formData: Partial<Case>, eventName: string): Promise<CaseWithId> {
-     try {
-       return await req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
-     } catch (err) {
-       req.locals.logger.error('Error saving', err);
-       req.session.errors = req.session.errors || [];
-       req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+    try {
+      return await req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
+    } catch (err) {
+      req.locals.logger.error('Error saving', err);
+      req.session.errors = req.session.errors || [];
+      req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
       return req.session.userCase;
     }
- }
+  }
 
   //eslint-disable-next-line @typescript-eslint/ban-types
   public saveSessionAndRedirect(req: AppRequest, res: Response, callback?: Function): void {
