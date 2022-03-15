@@ -41,9 +41,9 @@ export const form: FormContent = {
       values: [
         { label: l => l.one, value: 'genitalMutliationOrdersFGM' },
         { label: l => l.two, value: 'forcedProtectionMarriageOrderFMPO' },
-        { label: l => l.two, value: 'specialGuardianship' },
-        { label: l => l.two, value: 'financialApplications' },
-        { label: l => l.two, value: 'declarationOfParentage' },
+        { label: l => l.three, value: 'specialGuardianship' },
+        { label: l => l.four, value: 'financialApplications' },
+        { label: l => l.five, value: 'declarationOfParentage' },
       ],
     },
   },

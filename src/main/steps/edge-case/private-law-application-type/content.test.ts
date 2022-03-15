@@ -24,9 +24,9 @@ describe('citizen-home content', () => {
     expect(generatedContent.label).toEqual('Private Law Application Type (in welsh)');
     expect(generatedContent.one).toEqual('Genital Mutliation Orders(FGM) (in welsh)');
     expect(generatedContent.two).toEqual('Forced Protection Marriage Order(FMPO) (in welsh)');
-    expect(generatedContent.three).toEqual('Special Guardianship');
-    expect(generatedContent.four).toEqual('Financial Applications');
-    expect(generatedContent.five).toEqual('Declaration of Parentage');
+    expect(generatedContent.three).toEqual('Special Guardianship (in welsh)');
+    expect(generatedContent.four).toEqual('Financial Applications (in welsh)');
+    expect(generatedContent.five).toEqual('Declaration of Parentage (in welsh)');
   });
 
   test('should contain Select Jurisdiction field', () => {
