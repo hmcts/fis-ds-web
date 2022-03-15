@@ -112,7 +112,7 @@ describe('appllicant1 > dob-content', () => {
         'applicant1DateOfBirth-year': '2018',
       })
     ).toEqual({ day: '21', month: '12', year: '2018' });
-   // expect((dobField.validator as Function)({ day: '21', month: '12', year: '2018' })).toBe(undefined);
+    // expect((dobField.validator as Function)({ day: '21', month: '12', year: '2018' })).toBe(undefined);
   });
 });
 /* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
