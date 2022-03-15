@@ -7,28 +7,27 @@ const en = () => ({
   one: 'Adoption',
   two: 'Private Law',
   errors: {
-    applyingWith: {
+    serviceType: {
       required: 'Select the Service type',
     },
   },
 });
 
 const cy = () => ({
-  section: 'Applicant details (in welsh)',
-  label: 'Are you applying on your own, or with someone else?(in welsh)',
-  one: "I'm applying on my own (in welsh)",
-  two: "I'm applying with my spouse or civil partner (in welsh)",
-  three: "I'm applying with someone who is not my spouse or civil partner (in welsh)",
+  continue: 'Continue (in welsh)',
+  label: 'Service Type (in welsh)',
+  one: 'Adoption (in welsh)',
+  two: 'Private Law (in welsh)',
   errors: {
-    applyingWith: {
-      required: 'Select the number of people applying to adopt (in welsh)',
+    serviceType: {
+      required: 'Select the Service type (in welsh)',
     },
   },
 });
 
 export const form: FormContent = {
   fields: {
-    applyingWith: {
+    serviceType: {
       type: 'radios',
       classes: 'govuk-radios',
       label: l => l.label,
