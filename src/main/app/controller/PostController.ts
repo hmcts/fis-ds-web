@@ -55,7 +55,7 @@ export class PostController<T extends AnyObject> {
     //Object.assign(req.session.userCase, formData);
     //req.session.errors = form.getErrors(formData);
 
-    this.filterErrorsForSaveAsDraft(req);
+    //this.filterErrorsForSaveAsDraft(req);
 
     //if (req.session.errors.length === 0) {
     //req.session.userCase = await this.save(req, formData, this.getEventName(req));
@@ -79,9 +79,9 @@ export class PostController<T extends AnyObject> {
       console.log(eventName);
       //req.session.userCase = await req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
     } catch (err) {
-      req.locals.logger.error('Error saving', err);
-      req.session.errors = req.session.errors || [];
-      req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+      //req.locals.logger.error('Error saving', err);
+      //req.session.errors = req.session.errors || [];
+      //req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
     }
     return req.session.userCase;
   }

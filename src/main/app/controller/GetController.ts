@@ -81,9 +81,9 @@ export class GetController {
     try {
       return await req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
     } catch (err) {
-      req.locals.logger.error('Error saving', err);
-      req.session.errors = req.session.errors || [];
-      req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+      //req.locals.logger.error('Error saving', err);
+      //req.session.errors = req.session.errors || [];
+      //req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
       return req.session.userCase;
     }
   }

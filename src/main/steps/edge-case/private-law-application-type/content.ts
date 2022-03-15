@@ -11,27 +11,29 @@ const en = () => ({
   five: 'Declaration of Parentage',
   errors: {
     applyingWith: {
-      required: 'Select the jurisdiction type',
+      required: 'Private Law Application Type',
     },
   },
 });
 
 const cy = () => ({
-  section: 'Applicant details (in welsh)',
-  label: 'Are you applying on your own, or with someone else?(in welsh)',
-  one: "I'm applying on my own (in welsh)",
-  two: "I'm applying with my spouse or civil partner (in welsh)",
-  three: "I'm applying with someone who is not my spouse or civil partner (in welsh)",
+  continue: 'Continue (in welsh)',
+  label: 'Private Law Application Type (in welsh)',
+  one: 'Genital Mutliation Orders(FGM) (in welsh)',
+  two: 'Forced Protection Marriage Order(FMPO) (in welsh)',
+  three: 'Special Guardianship (in welsh)',
+  four: 'Financial Applications (in welsh)',
+  five: 'Declaration of Parentage (in welsh)',
   errors: {
     applyingWith: {
-      required: 'Select the number of people applying to adopt (in welsh)',
+      required: 'Private Law Application Type',
     },
   },
 });
 
 export const form: FormContent = {
   fields: {
-    applyingWith: {
+    privateLawApplicationType: {
       type: 'radios',
       classes: 'govuk-radios',
       label: l => l.label,
