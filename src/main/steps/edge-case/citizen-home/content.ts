@@ -14,25 +14,23 @@ const en = () => ({
 });
 
 const cy = () => ({
-  section: 'Applicant details (in welsh)',
-  label: 'Are you applying on your own, or with someone else?(in welsh)',
-  one: "I'm applying on my own (in welsh)",
-  two: "I'm applying with my spouse or civil partner (in welsh)",
-  three: "I'm applying with someone who is not my spouse or civil partner (in welsh)",
+  continue: 'Continue',
+  label: 'Select Jurisdiction (in welsh)',
+  one: 'Family (in welsh)',
+  two: 'Tribunals (in welsh)',
   errors: {
-    applyingWith: {
-      required: 'Select the number of people applying to adopt (in welsh)',
+    selectJurisdiction: {
+      required: 'Select the jurisdiction type (in welsh)',
     },
   },
 });
 
 export const form: FormContent = {
   fields: {
-    applyingWith: {
+    selectJurisdiction: {
       type: 'radios',
       classes: 'govuk-radios',
       label: l => l.label,
-      section: l => l.section,
       values: [
         { label: l => l.one, value: 'family' },
         { label: l => l.two, value: 'tribunals' },
