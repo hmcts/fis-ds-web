@@ -11,6 +11,7 @@ describe('service-type content', () => {
   const commonContent = { language: 'en', userCase: { applyingWith: 'alone' } } as CommonContent;
   test('should return correct english content', () => {
     const generatedContent = generateContent(commonContent);
+    expect(generatedContent.continue).toEqual('Continue');
     expect(generatedContent.label).toEqual('Service Type');
     expect(generatedContent.one).toEqual('Adoption');
     expect(generatedContent.two).toEqual('Private Law');
@@ -18,6 +19,7 @@ describe('service-type content', () => {
 
   test('should return correct welsh content', () => {
     const generatedContent = generateContent({ ...commonContent, language: 'cy' });
+    expect(generatedContent.continue).toEqual('Continue (in welsh)');
     expect(generatedContent.label).toEqual('Service Type (in welsh)');
     expect(generatedContent.one).toEqual('Adoption (in welsh)');
     expect(generatedContent.two).toEqual('Private Law (in welsh)');
