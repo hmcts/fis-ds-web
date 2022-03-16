@@ -1,85 +1,60 @@
 import { Sections, Step } from '../constants';
 import {
-  // APPLICANT_1_CONTACT_DETAILS,
-  // APPLICANT_1_DOB,
-  // APPLICANT_1_FIND_ADDRESS,
-  // APPLICANT_1_FULL_NAME,
-  // APPLICANT_1_MANUAL_ADDRESS,
-  // APPLICANT_1_NATIONALITY,
-  // APPLICANT_1_OCCUPATION,
-  // APPLICANT_1_OTHER_NAMES,
-  // APPLICANT_1_SELECT_ADDRESS,
-  // APPLYING_WITH_URL,
-  // DATE_CHILD_MOVED_IN,
-  // TASK_LIST_URL,
-  CITIZEN_DETAILS_URL,
+  ADOPTION_APPLICATION_TYPE,
   CITIZEN_HOME_URL,
+  DATE_OF_BIRTH,
+  FIND_ADDRESS,
+  FULL_NAME,
+  MANUAL_ADDRESS,
+  PRIVATE_LAW_APPLICATION_TYPE,
+  SELECT_ADDRESS,
+  SERVICE_TYPE,
 } from '../urls';
 
 export const edgecaseSequence: Step[] = [
   {
     url: CITIZEN_HOME_URL,
-    showInSection: Sections.AboutApplicant1,
-    getNextStep: () => CITIZEN_DETAILS_URL,
+    showInSection: Sections.AboutEdgeCase,
+    getNextStep: () => SERVICE_TYPE,
   },
-  // {
-  //   url: APPLYING_WITH_URL,
-  //   showInSection: Sections.AboutApplicant1,
-  //   getNextStep: () => TASK_LIST_URL,
-  // },
   {
-    url: CITIZEN_DETAILS_URL,
-    showInSection: Sections.AboutApplicant1,
+    url: SERVICE_TYPE,
+    showInSection: Sections.AboutEdgeCase,
+    getNextStep: () => ADOPTION_APPLICATION_TYPE,
+  },
+  {
+    url: ADOPTION_APPLICATION_TYPE,
+    showInSection: Sections.AboutEdgeCase,
+    getNextStep: () => PRIVATE_LAW_APPLICATION_TYPE,
+  },
+  {
+    url: PRIVATE_LAW_APPLICATION_TYPE,
+    showInSection: Sections.AboutEdgeCase,
+    getNextStep: () => FULL_NAME,
+  },
+  {
+    url: FULL_NAME,
+    showInSection: Sections.AboutEdgeCase,
     getNextStep: () => CITIZEN_HOME_URL,
   },
-  // {
-  //   url: DATE_CHILD_MOVED_IN,
-  //   showInSection: Sections.AboutApplicant1,
-  //   getNextStep: () => TASK_LIST_URL,
-  // },
-  // {
-  //   url: APPLICANT_1_FULL_NAME,
-  //   showInSection: Sections.AboutApplicant1,
-  //   getNextStep: () => APPLICANT_1_OTHER_NAMES,
-  // },
-  // {
-  //   url: APPLICANT_1_OTHER_NAMES,
-  //   showInSection: Sections.AboutApplicant1,
-  //   getNextStep: () => APPLICANT_1_DOB,
-  // },
-  // {
-  //   url: APPLICANT_1_DOB,
-  //   showInSection: Sections.AboutApplicant1,
-  //   getNextStep: () => APPLICANT_1_NATIONALITY,
-  // },
-  // {
-  //   url: APPLICANT_1_NATIONALITY,
-  //   showInSection: Sections.AboutApplicant1,
-  //   getNextStep: () => APPLICANT_1_OCCUPATION,
-  // },
-  // {
-  //   url: APPLICANT_1_OCCUPATION,
-  //   showInSection: Sections.AboutApplicant1,
-  //   getNextStep: () => TASK_LIST_URL,
-  // },
-  // {
-  //   url: APPLICANT_1_CONTACT_DETAILS,
-  //   showInSection: Sections.AboutApplicant1,
-  //   getNextStep: () => TASK_LIST_URL,
-  // },
-  // {
-  //   url: APPLICANT_1_FIND_ADDRESS,
-  //   showInSection: Sections.AboutApplicant1,
-  //   getNextStep: () => APPLICANT_1_SELECT_ADDRESS,
-  // },
-  // {
-  //   url: APPLICANT_1_SELECT_ADDRESS,
-  //   showInSection: Sections.AboutApplicant1,
-  //   getNextStep: () => APPLICANT_1_CONTACT_DETAILS,
-  // },
-  // {
-  //   url: APPLICANT_1_MANUAL_ADDRESS,
-  //   showInSection: Sections.AboutApplicant1,
-  //   getNextStep: () => APPLICANT_1_CONTACT_DETAILS,
-  // },
+  {
+    url: DATE_OF_BIRTH,
+    showInSection: Sections.AboutEdgeCase,
+    getNextStep: () => FIND_ADDRESS,
+  },
+  {
+    url: FIND_ADDRESS,
+    showInSection: Sections.AboutEdgeCase,
+    getNextStep: () => SELECT_ADDRESS,
+  },
+  {
+    url: SELECT_ADDRESS,
+    showInSection: Sections.AboutEdgeCase,
+    getNextStep: () => MANUAL_ADDRESS,
+  },
+  {
+    url: MANUAL_ADDRESS,
+    showInSection: Sections.AboutEdgeCase,
+    getNextStep: () => CITIZEN_HOME_URL,
+  },
 ];

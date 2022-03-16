@@ -2,8 +2,8 @@ import { Request } from 'express';
 import { Session } from 'express-session';
 import type { LoggerInstance } from 'winston';
 
-// import { CaseApi } from '../case/CaseApi';
-import { Case } from '../case/case';
+import { CaseApi } from '../case/CaseApi';
+import { Case, CaseWithId } from '../case/case';
 import { FormError } from '../form/Form';
 
 export interface AppRequest<T = Partial<Case>> extends Request {
@@ -12,14 +12,14 @@ export interface AppRequest<T = Partial<Case>> extends Request {
     env: string;
     lang: string;
     logger: LoggerInstance;
-    // api: CaseApi;
+    api: CaseApi;
   };
   body: T;
 }
 
 export interface AppSession extends Session {
   user: UserDetails;
-  // userCase: CaseWithId;
+  userCase: CaseWithId;
   eligibility: Eligibility;
   lang: string | undefined;
   errors: FormError[] | undefined;

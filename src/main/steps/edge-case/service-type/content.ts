@@ -3,37 +3,37 @@ import { FormContent } from '../../../app/form/Form';
 
 const en = () => ({
   continue: 'Continue',
-  label: 'Select Jurisdiction',
-  one: 'Family',
-  two: 'Tribunals',
+  label: 'Service Type',
+  one: 'Adoption',
+  two: 'Private Law',
   errors: {
-    applyingWith: {
-      required: 'Select the jurisdiction type',
+    serviceType: {
+      required: 'Select the Service type',
     },
   },
 });
 
 const cy = () => ({
-  continue: 'Continue',
-  label: 'Select Jurisdiction (in welsh)',
-  one: 'Family (in welsh)',
-  two: 'Tribunals (in welsh)',
+  continue: 'Continue (in welsh)',
+  label: 'Service Type (in welsh)',
+  one: 'Adoption (in welsh)',
+  two: 'Private Law (in welsh)',
   errors: {
-    selectJurisdiction: {
-      required: 'Select the jurisdiction type (in welsh)',
+    serviceType: {
+      required: 'Select the Service type (in welsh)',
     },
   },
 });
 
 export const form: FormContent = {
   fields: {
-    selectJurisdiction: {
+    serviceType: {
       type: 'radios',
       classes: 'govuk-radios',
       label: l => l.label,
       values: [
-        { label: l => l.one, value: 'family' },
-        { label: l => l.two, value: 'tribunals' },
+        { label: l => l.one, value: 'adoption' },
+        { label: l => l.two, value: 'privateLaw' },
       ],
     },
   },

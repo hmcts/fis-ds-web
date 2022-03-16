@@ -19,6 +19,15 @@ export const DATE_CHILD_MOVED_IN: PageLink = '/date-child-moved-in';
 export const CITIZEN_DETAILS_URL: PageLink = '/citizen-details';
 export const CITIZEN_HOME_URL: PageLink = '/citizen-home';
 export const EDGE_CASE_URL: PageLink = '/edge-case';
+export const SELECT_JURISDICTION: PageLink = '/select-jurisdiction';
+export const SERVICE_TYPE: PageLink = '/service-type';
+export const ADOPTION_APPLICATION_TYPE: PageLink = '/adoption-application-type';
+export const PRIVATE_LAW_APPLICATION_TYPE: PageLink = '/private-law-application-type';
+export const FULL_NAME: PageLink = '/full-name';
+export const DATE_OF_BIRTH: PageLink = '/date-of-birth';
+export const FIND_ADDRESS: PageLink = '/address/lookup';
+export const SELECT_ADDRESS: PageLink = '/address/select';
+export const MANUAL_ADDRESS: PageLink = '/address/manual';
 
 export const APPLICANT_1: PageLink = '/applicant1';
 export const APPLICANT_1_FULL_NAME: PageLink = `${APPLICANT_1}/full-name`;

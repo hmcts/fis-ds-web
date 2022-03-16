@@ -1,6 +1,6 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
-// import { isInvalidPostcode } from '../../../app/form/validation';
+import { isInvalidPostcode } from '../../../app/form/validation';
 
 const en = () => ({
   line1: "We'll send all court papers to this address.",
@@ -40,7 +40,7 @@ export const form: FormContent = {
       attributes: {
         maxLength: 14,
       },
-      // validator: isInvalidPostcode,
+      validator: isInvalidPostcode,
     },
   },
   submit: {

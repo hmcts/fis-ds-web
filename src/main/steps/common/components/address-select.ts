@@ -1,6 +1,6 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
-// import { isAddressSelected } from '../../../app/form/validation';
+//import { isAddressSelected } from '../../../app/form/validation';
 
 const getAddressItems = addresses => addresses.map((item, index) => ({ text: item.fullAddress, value: index }));
 
@@ -22,6 +22,8 @@ const en = content => {
     postcode: 'Postcode',
     selectAddress: 'Select an address',
     cannotFindAddress: 'I cannot find the address in the list',
+    defaultPostcode: 'E14RRR',
+    enterAddressManually: 'Or enter address manually',
     errors: {
       selectAddress: {
         notSelected: 'Select an address',
