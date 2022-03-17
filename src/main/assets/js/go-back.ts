@@ -23,7 +23,7 @@ if (backLink) {
     } else if (document.location.pathname === PAY_YOUR_FEE || document.location.pathname === PAY_AND_SUBMIT) {
       document.location.href = `${PAYMENT_CALLBACK_URL}?back=true`;
     } else {
-      console.log("history", history);
+      console.log('history', history);
       history.go(-1);
     }
   };
