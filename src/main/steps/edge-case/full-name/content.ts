@@ -1,9 +1,9 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFields } from '../../../app/form/Form';
-import { CommonContent } from '../../../steps/common/common.content';
+//import { CommonContent } from '../../../steps/common/common.content';
 import { form as fullNameForm, generateContent as fullNameGenerateContent } from '../../common/components/full-name';
 
-export const en = ({ userCase }: CommonContent): Record<string, unknown> => {
+export const en = (): Record<string, unknown> => {
   const section = 'Applicant';
   return {
     section,
@@ -19,7 +19,7 @@ export const en = ({ userCase }: CommonContent): Record<string, unknown> => {
   };
 };
 
-export const cy = ({ userCase }: CommonContent): Record<string, unknown> => {
+export const cy = (): Record<string, unknown> => {
   const section = 'Applicant (in Welsh)';
   return {
     section,
@@ -37,7 +37,6 @@ export const cy = ({ userCase }: CommonContent): Record<string, unknown> => {
 
 const fullNameFormFields = fullNameForm.fields as FormFields;
 export const form: FormContent = {
- 
   fields: {
     applicant1FirstNames: fullNameFormFields.firstNames,
     applicant1LastNames: fullNameFormFields.lastNames,
@@ -56,7 +55,7 @@ export const generateContent: TranslationFn = content => {
   const fullNameContent = fullNameGenerateContent(content);
   return {
     ...fullNameContent,
-    ...languages[content.language](content),
+    ...languages[content.language](),
     form,
   };
 };
