@@ -1,4 +1,5 @@
 import autobind from 'autobind-decorator';
+import config from 'config';
 import { Response } from 'express';
 
 import { getNextStepUrl } from '../../steps';
@@ -67,7 +68,8 @@ export class PostController<T extends AnyObject> {
   }
 
   private async cancel(req: AppRequest<T>, res: Response): Promise<void> {
-    res.redirect('https://www.gov.uk/government/organisations/hm-courts-and-tribunals-service');
+    const hmctsHomePage: string = config.get('services.hmctsHomePage.url');
+    res.redirect(hmctsHomePage);
   }
 
   protected filterErrorsForSaveAsDraft(req: AppRequest<T>): void {

@@ -30,6 +30,8 @@ services:
     path: '/service-endpoint'
     port: 4000
     tokenKey: 'SERVICE_TOKEN_KEY'
+  hmctsHomePage:
+    url: 'https://www.gov.uk/government/organisations/hm-courts-and-tribunals-service'
 health:
   timeout: 5000
   deadline: 15000

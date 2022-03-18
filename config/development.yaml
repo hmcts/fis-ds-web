@@ -21,6 +21,8 @@ services:
     token: 'NEED TO INSERT SECRET'
   feeLookup:
     url: 'http://fees-register-api-aat.service.core-compute-aat.internal/fees-register/fees/lookup'
+  hmctsHomePage:
+    url: 'https://www.gov.uk/government/organisations/hm-courts-and-tribunals-service'
 health:
   timeout: 5000
   deadline: 15000
