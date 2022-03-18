@@ -25,7 +25,18 @@
             }
           }) if getContent(form.submit.text)
         }}
-
+        {{ 
+          govukButton({
+            text: getContent(form.cancel.text),
+            classes: form.cancel.classes,
+            type: "submit",
+            preventDoubleClick: true,
+            attributes: {
+              id: 'main-form-cancel'
+            }
+          }) if getContent(form.cancel.text)
+        }}
+       
         {{ 
           govukButton({
             text: getContent(form.saveAsDraft.text),

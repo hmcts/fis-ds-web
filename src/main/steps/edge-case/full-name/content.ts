@@ -44,6 +44,9 @@ export const form: FormContent = {
   submit: {
     text: l => l.continue,
   },
+  cancel: {
+    text: l => l.cancel,
+  },
 };
 
 const languages = {
