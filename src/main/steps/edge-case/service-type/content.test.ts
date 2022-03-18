@@ -12,7 +12,7 @@ describe('service-type content', () => {
   test('should return correct english content', () => {
     const generatedContent = generateContent(commonContent);
     expect(generatedContent.continue).toEqual('Continue');
-    expect(generatedContent.label).toEqual('Service Type');
+    expect(generatedContent.label).toEqual('Select type of family law you need');
     expect(generatedContent.one).toEqual('Adoption');
     expect(generatedContent.two).toEqual('Private Law');
   });
@@ -32,7 +32,7 @@ describe('service-type content', () => {
     const serviceTypeField = fields.serviceType as FormOptions;
     expect(serviceTypeField.type).toBe('radios');
     expect(serviceTypeField.classes).toBe('govuk-radios');
-    expect((serviceTypeField.label as Function)(generatedContent)).toBe('Service Type');
+    expect((serviceTypeField.label as Function)(generatedContent)).toBe('Select type of family law you need');
     expect((serviceTypeField.values[0].label as Function)(generatedContent)).toBe('Adoption');
     expect((serviceTypeField.values[1].label as Function)(generatedContent)).toBe('Private Law');
   });

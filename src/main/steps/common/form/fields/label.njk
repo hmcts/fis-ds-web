@@ -1,0 +1,4 @@
+{% from "govuk/components/label/macro.njk" import govukLabel %}
+{{ govukLabel({
+    text: getContent(field.label)
+}) }}

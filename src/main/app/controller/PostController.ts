@@ -3,9 +3,9 @@ import { Response } from 'express';
 
 import { getNextStepUrl } from '../../steps';
 import { SAVE_AND_SIGN_OUT } from '../../steps/urls';
-import { /*Case,*/ CaseWithId } from '../case/case';
+import { Case, CaseWithId } from '../case/case';
 import { CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE } from '../case/definition';
-import { /*Form,*/ FormFields, FormFieldsFn } from '../form/Form';
+import { Form, FormFields, FormFieldsFn } from '../form/Form';
 import { ValidationError } from '../form/validation';
 
 import { AppRequest } from './AppRequest';
@@ -19,17 +19,19 @@ export class PostController<T extends AnyObject> {
    */
   public async post(req: AppRequest<T>, res: Response): Promise<void> {
     //const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase) : this.fields;
-    //const fields = typeof this.fields === 'function' ? this.fields() : this.fields;
-    //const form = new Form(fields);
+    const fields = typeof this.fields === 'function' ? this.fields() : this.fields;
+    const form = new Form(fields);
 
-    //const { saveAndSignOut, saveBeforeSessionTimeout, _csrf, ...formData } = form.getParsedBody(req.body);
+    const { saveAndSignOut, saveBeforeSessionTimeout, _csrf, ...formData } = form.getParsedBody(req.body);
 
     if (req.body.saveAndSignOut) {
       await this.saveAndSignOut(req, res);
     } else if (req.body.saveBeforeSessionTimeout) {
       await this.saveBeforeSessionTimeout(req, res);
+    } else if (req.body.cancel) {
+      await this.cancel(req, res);
     } else {
-      await this.saveAndContinue(req, res);
+      await this.saveAndContinue(req, res, form, formData);
     }
   }
 
@@ -51,9 +53,9 @@ export class PostController<T extends AnyObject> {
     res.end();
   }
 
-  private async saveAndContinue(req: AppRequest<T>, res: Response): Promise<void> {
+  private async saveAndContinue(req: AppRequest<T>, res: Response, form: Form, formData: Partial<Case>): Promise<void> {
     //Object.assign(req.session.userCase, formData);
-    //req.session.errors = form.getErrors(formData);
+    req.session.errors = form.getErrors(formData);
 
     //this.filterErrorsForSaveAsDraft(req);
 
@@ -62,6 +64,10 @@ export class PostController<T extends AnyObject> {
     //}
 
     this.redirect(req, res);
+  }
+
+  private async cancel(req: AppRequest<T>, res: Response): Promise<void> {
+    res.redirect('https://www.gov.uk/government/organisations/hm-courts-and-tribunals-service');
   }
 
   protected filterErrorsForSaveAsDraft(req: AppRequest<T>): void {
