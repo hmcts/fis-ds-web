@@ -308,6 +308,7 @@ export interface PlacementOrder {
 }
 
 export interface CaseData {
+  serviceType: string;
   applyingWith: ApplyingWith;
   dateChildMovedIn?: DateAsString;
   applicant1FirstName: string;

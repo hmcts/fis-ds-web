@@ -10,11 +10,11 @@ describe('applicant1Sequence', () => {
 
     expect(edgecaseSequence[1].url).toBe('/service-type');
     expect(edgecaseSequence[1].showInSection).toBe('aboutEdgeCase');
-    expect(edgecaseSequence[1].getNextStep({})).toBe('/adoption-application-type');
+    expect(edgecaseSequence[1].getNextStep({})).toBe('/private-law-application-type');
 
     expect(edgecaseSequence[2].url).toBe('/adoption-application-type');
     expect(edgecaseSequence[2].showInSection).toBe('aboutEdgeCase');
-    expect(edgecaseSequence[2].getNextStep({})).toBe('/private-law-application-type');
+    expect(edgecaseSequence[2].getNextStep({})).toBe('/full-name');
 
     expect(edgecaseSequence[3].url).toBe('/private-law-application-type');
     expect(edgecaseSequence[3].showInSection).toBe('aboutEdgeCase');

@@ -116,7 +116,7 @@ export type ValidationCheck = (
   formData: Partial<Case>
 ) => void | string;
 export type FormFields = Record<string, FormField>;
-export type FormFieldsFn = () => FormFields;
+export type FormFieldsFn = (userCase: Partial<Case>) => FormFields;
 
 export interface FormContent {
   submit: {

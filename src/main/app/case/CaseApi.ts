@@ -8,12 +8,12 @@ import { UserDetails } from '../controller/AppRequest';
 import { Case, CaseWithId } from './case';
 import { CaseAssignedUserRoles } from './case-roles';
 import {
-  Adoption,
-  CASE_TYPE,
+  //Adoption,
+  //CASE_TYPE,
   CITIZEN_ADD_PAYMENT,
-  CITIZEN_CREATE,
+  //CITIZEN_CREATE,
   CaseData,
-  JURISDICTION,
+  //JURISDICTION,
   ListValue,
   Payment,
   State,
@@ -24,16 +24,17 @@ import { toApiFormat } from './to-api-format';
 export class CaseApi {
   constructor(
     private readonly axios: AxiosInstance,
-    private readonly userDetails: UserDetails,
+    //private readonly userDetails: UserDetails,
     private readonly logger: LoggerInstance
   ) {}
 
-  public async getOrCreateCase(serviceType: Adoption, userDetails: UserDetails): Promise<CaseWithId> {
-    const userCase = await this.getCase();
-    return userCase || this.createCase(serviceType, userDetails);
+  public async getOrCreateCase(/*serviceType: Adoption, userDetails: UserDetails*/): Promise<CaseWithId> {
+    //const userCase = await this.getCase();
+    //return userCase || this.createCase(serviceType, userDetails);
+    return this.createCase();
   }
 
-  private async getCase(): Promise<CaseWithId | false> {
+  /* private async getCase(): Promise<CaseWithId | false> {
     const cases = await this.getCases();
 
     switch (cases.length) {
@@ -48,9 +49,9 @@ export class CaseApi {
         throw new Error('Too many cases assigned to user.');
       }
     }
-  }
+  } */
 
-  private async getCases(): Promise<CcdV1Response[]> {
+  /* private async getCases(): Promise<CcdV1Response[]> {
     try {
       const response = await this.axios.get<CcdV1Response[]>(
         `/citizens/${this.userDetails.id}/jurisdictions/${JURISDICTION}/case-types/${CASE_TYPE}/cases`
@@ -60,7 +61,7 @@ export class CaseApi {
       this.logError(err);
       throw new Error('Case could not be retrieved.');
     }
-  }
+  } */
 
   public async getCaseById(caseId: string): Promise<CaseWithId> {
     try {
@@ -73,27 +74,31 @@ export class CaseApi {
     }
   }
 
-  private async createCase(serviceType: Adoption, userDetails: UserDetails): Promise<CaseWithId> {
+  private async createCase(/* serviceType: Adoption, userDetails: UserDetails) */): Promise<CaseWithId> {
+    /*
     const tokenResponse: AxiosResponse<CcdTokenResponse> = await this.axios.get(
-      `/case-types/${CASE_TYPE}/event-triggers/${CITIZEN_CREATE}`
-    );
-    console.log('caseapi.ts ' + serviceType);
-    const token = tokenResponse.data.token;
-    const event = { id: CITIZEN_CREATE };
-    const data = {
-      //adoption: serviceType,
-      applicant1FirstName: userDetails.givenName,
-      applicant1LastName: userDetails.familyName,
-      applicant1Email: userDetails.email,
-    };
-
+          `/case-types/${CASE_TYPE}/event-triggers/${CITIZEN_CREATE}`
+        );
+        console.log('caseapi.ts ' + serviceType);
+        const token = tokenResponse.data.token;
+        const event = { id: CITIZEN_CREATE };
+        const data = {
+          //adoption: serviceType,
+          applicant1FirstName: userDetails.givenName,
+          applicant1LastName: userDetails.familyName,
+          applicant1Email: userDetails.email,
+        };
+    */
     try {
-      const response = await this.axios.post<CcdV2Response>(`/case-types/${CASE_TYPE}/cases`, {
-        data,
-        event,
-        event_token: token,
-      });
-      return { id: response.data.id, state: response.data.state, ...fromApiFormat(response.data.data) };
+      /*
+    const response = await this.axios.post<CcdV2Response>(`/case-types/${CASE_TYPE}/cases`, {
+            data,
+            event,
+            event_token: token,
+          });
+    */
+      //return { id: response.data.id, state: response.data.state, ...fromApiFormat(response.data.data) };
+      return { id: '1234567890', state: State.Holding };
     } catch (err) {
       this.logError(err);
       throw new Error('Case could not be created.');
@@ -161,16 +166,16 @@ export const getCaseApi = (userDetails: UserDetails, logger: LoggerInstance): Ca
         'Content-Type': 'application/json',
       },
     }),
-    userDetails,
+    //userDetails,
     logger
   );
 };
 
-interface CcdV1Response {
+/* interface CcdV1Response {
   id: string;
   state: State;
   case_data: CaseData;
-}
+} */
 
 interface CcdV2Response {
   id: string;
