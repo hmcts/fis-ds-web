@@ -1,6 +1,6 @@
-import { isFieldFilledIn } from '../../../app/form/validation';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
+import { isFieldFilledIn } from '../../../app/form/validation';
 
 const en = () => ({
   continue: 'Continue',
@@ -13,7 +13,7 @@ const en = () => ({
   three: 'Special Guardianship',
   threeHint: 'A court order placing a child to live with someone other than their parents',
   four: 'Financial applications',
-  fourHint:'If you are applying for financial order under Schedule 1 of the Children Act 1989',
+  fourHint: 'If you are applying for financial order under Schedule 1 of the Children Act 1989',
   five: 'Declaration of parentage',
   fiveHint: 'Ask the court to declare whether or not someone is parent of another named person',
   errors: {
@@ -34,7 +34,7 @@ const cy = () => ({
   three: 'Special Guardianship (in welsh)',
   threeHint: 'A court order placing a child to live with someone other than their parents (in welsh)',
   four: 'Financial applications (in welsh)',
-  fourHint:'If you are applying for financial order under Schedule 1 of the Children Act 1989 (in welsh)',
+  fourHint: 'If you are applying for financial order under Schedule 1 of the Children Act 1989 (in welsh)',
   five: 'Declaration of parentage (in welsh)',
   fiveHint: 'Ask the court to declare whether or not someone is parent of another named person (in welsh)',
   errors: {
@@ -51,16 +51,11 @@ export const form: FormContent = {
       classes: 'govuk-radios',
       label: l => l.label,
       values: [
-        { label: l => l.one, value: 'genitalMutliationOrdersFGM',
-           hint: l => l.oneHint },
-        { label: l => l.two, value: 'forcedProtectionMarriageOrderFMPO',
-           hint: l => l.twoHint },
-        { label: l => l.three, value: 'specialGuardianship',
-           hint: l => l.threeHint },
-        { label: l => l.four, value: 'financialApplications',
-           hint: l => l.fourHint },
-        { label: l => l.five, value: 'declarationOfParentage',
-           hint: l => l.fiveHint },
+        { label: l => l.one, value: 'genitalMutliationOrdersFGM', hint: l => l.oneHint },
+        { label: l => l.two, value: 'forcedProtectionMarriageOrderFMPO', hint: l => l.twoHint },
+        { label: l => l.three, value: 'specialGuardianship', hint: l => l.threeHint },
+        { label: l => l.four, value: 'financialApplications', hint: l => l.fourHint },
+        { label: l => l.five, value: 'declarationOfParentage', hint: l => l.fiveHint },
       ],
       validator: isFieldFilledIn,
     },
