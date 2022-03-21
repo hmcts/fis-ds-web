@@ -29,4 +29,14 @@ withPipeline(type, product, component) {
     env.TEST_URL = "https://ds-ui-pr-${CHANGE_ID}.service.core-compute-preview.internal/"
 
   }
+
+    before('smoketest:aat') {
+    env.DS_UI_URL = "https://ds-ui.aat.platform.hmcts.net/"
+
+  
+
+  after('smoketest:aat') {
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
+
+  }
 }
