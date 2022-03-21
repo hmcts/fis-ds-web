@@ -120,7 +120,7 @@ describe('CaseApi', () => {
     });
   });
 
-/*   test('Should update case', async () => {
+  /*   test('Should update case', async () => {
     mockedAxios.get.mockResolvedValue({ data: { token: '123' } });
     mockedAxios.post.mockResolvedValue({
       data: { data: { id: '1234' } },
