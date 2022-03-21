@@ -1,3 +1,4 @@
+import { YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
@@ -19,12 +20,11 @@ const en = () => ({
 
 const cy = () => ({
   continue: 'Continue (in welsh)',
-  label: 'Service Type (in welsh)',
+  cancel: 'Cancel (in welsh)',
+  label: 'Select type of family law you need (in welsh)',
   one: 'Adoption (in welsh)',
   two: 'Private Law (in welsh)',
   hint: 'Select either adoption or private law. There are specific examples under each section (in welsh)',
-  applyForDissolution: 'Family (in welsh)',
-  applyForAdoption: 'Family (in welsh)',
   serviceName: 'Family (in welsh)',
   errors: {
     serviceType: {
@@ -43,7 +43,7 @@ export const form: FormContent = {
       values: [
         {
           label: l => l.one,
-          value: 'adoption',
+          value: YesOrNo.YES,
           subFields: {
             internationalAdoption: {
               type: 'label',
@@ -65,7 +65,7 @@ export const form: FormContent = {
         },
         {
           label: l => l.two,
-          value: 'privateLaw',
+          value: YesOrNo.NO,
           subFields: {
             femaleGenitalMutilationOrdersFGM: {
               type: 'label',
