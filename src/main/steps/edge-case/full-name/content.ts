@@ -1,32 +1,42 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFields } from '../../../app/form/Form';
+//import { CommonContent } from '../../../steps/common/common.content';
+import { ErrorMessages, ErrorMessagesWelsh } from '../../../steps/errorMesages';
 import { form as fullNameForm, generateContent as fullNameGenerateContent } from '../../common/components/full-name';
 
-export const en = (): Record<string, unknown> => ({
-  section: 'Applicant',
-  title: "What's your full name?",
-  errors: {
-    applicant1FirstNames: {
-      required: 'Enter your first names',
+export const en = (): Record<string, unknown> => {
+  const section = 'Applicant';
+  return {
+    section,
+    serviceName: 'Apply to Applicant',
+    title: "What's your full name?",
+    errors: {
+      applicant1FirstNames: {
+        required: ErrorMessages.ENTER_FIRST_NAME,
+      },
+      applicant1LastNames: {
+        required: ErrorMessages.ENTER_LAST_NAME,
+      },
     },
-    applicant1LastNames: {
-      required: 'Enter your last names',
-    },
-  },
-});
+  };
+};
 
-export const cy = (): Record<string, unknown> => ({
-  section: 'Applicant (in Welsh)',
-  title: "What's your full name? (in Welsh)",
-  errors: {
-    applicant1FirstNames: {
-      required: 'Enter your first names (in Welsh)',
+export const cy = (): Record<string, unknown> => {
+  const section = 'Applicant (in Welsh)';
+  return {
+    section,
+    serviceName: 'Apply to Applicant',
+    title: "What's your full name? (in Welsh)",
+    errors: {
+      applicant1FirstNames: {
+        required: ErrorMessagesWelsh.ENTER_FIRST_NAME,
+      },
+      applicant1LastNames: {
+        required: ErrorMessagesWelsh.ENTER_LAST_NAME,
+      },
     },
-    applicant1LastNames: {
-      required: 'Enter your last names (in Welsh)',
-    },
-  },
-});
+  };
+};
 
 const fullNameFormFields = fullNameForm.fields as FormFields;
 export const form: FormContent = {
@@ -36,6 +46,9 @@ export const form: FormContent = {
   },
   submit: {
     text: l => l.continue,
+  },
+  cancel: {
+    text: l => l.cancel,
   },
 };
 

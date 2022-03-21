@@ -70,5 +70,9 @@ describe('Applicant > full-name', () => {
   test('should contain submit button', () => {
     expect((form.submit.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save and continue');
   });
+
+  test('should contain cancel button', () => {
+    expect((form.cancel.text as Function)(generatePageContent({ language: 'en' }))).toBe('Cancel');
+  });
 });
 /* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
