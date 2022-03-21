@@ -2,7 +2,7 @@ import config from 'config';
 import { Application, NextFunction, Response } from 'express';
 
 import { getRedirectUrl, getUserDetails } from '../../app/auth/user/oidc';
-// import { getCaseApi } from '../../app/case/CaseApi';
+import { getCaseApi } from '../../app/case/CaseApi';
 import { AppRequest } from '../../app/controller/AppRequest';
 import { CALLBACK_URL, ELIGIBILITY_URL, SIGN_IN_URL, SIGN_OUT_URL } from '../../steps/urls';
 
@@ -41,9 +41,8 @@ export class OidcMiddleware {
         }
         if (req.session?.user) {
           res.locals.isLoggedIn = true;
-          // req.locals.api = getCaseApi(req.session.user, req.locals.logger);
-          // req.session.userCase =
-          //   req.session.userCase || (await req.locals.api.getOrCreateCase(res.locals.serviceType, req.session.user));
+          req.locals.api = getCaseApi(req.session.user, req.locals.logger);
+          req.session.userCase = req.session.userCase || (await req.locals.api.getOrCreateCase());
           return next();
         }
         res.redirect(SIGN_IN_URL);

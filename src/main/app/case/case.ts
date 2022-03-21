@@ -25,6 +25,7 @@ import {
 } from './definition';
 
 export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>> = {
+  serviceType: 'serviceType',
   applicationType: 'applicationType',
   dateChildMovedIn: 'dateChildMovedIn',
   applyingWith: 'applyingWith',
@@ -183,6 +184,7 @@ export type FieldFormats = Record<string, string | ((AnyObject) => AnyObject)>;
 export interface Case {
   applyingWith?: ApplyingWith;
   dateChildMovedIn?: CaseDate;
+  serviceType?: string;
 
   /***** Applicant1 *****/
   applicant1FirstNames?: string;
@@ -337,12 +339,12 @@ export interface Case {
   applicant1AlreadyAppliedForHelpPaying?: YesOrNo;
   applicant1HelpWithFeesRefNo?: string;
   jurisdictionResidualEligible?: Checkbox;
-  connections: JurisdictionConnections[];
+  connections?: JurisdictionConnections[];
 
   applyForFinancialOrder?: YesOrNo;
   applicant1UploadedFiles?: UploadedFile[];
   applicant2UploadedFiles?: UploadedFile[];
-  documentsGenerated: ListValue<DivorceDocument>[];
+  documentsGenerated?: ListValue<DivorceDocument>[];
   applicant1DocumentsUploaded?: ListValue<Partial<DivorceDocument> | null>[];
   applicant2DocumentsUploaded?: ListValue<Partial<DivorceDocument> | null>[];
   applicant1CannotUpload?: Checkbox;
@@ -352,7 +354,7 @@ export interface Case {
   dueDate?: DateAsString;
   caseReference?: string;
   dateSubmitted?: Date;
-  applicationFeeOrderSummary: OrderSummary;
+  applicationFeeOrderSummary?: OrderSummary;
 }
 
 export interface CaseWithId extends Case {

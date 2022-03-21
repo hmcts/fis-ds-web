@@ -17,7 +17,7 @@ export class SessionStorage {
 
     app.use(
       session({
-        name: 'adoption-web-session',
+        name: 'ds-ui-session',
         resave: false,
         saveUninitialized: false,
         secret: config.get('session.secret'),

@@ -61,7 +61,7 @@ describe('session', () => {
 
   test('should use session middleware with FileStore', () => {
     expect(mockSession).toHaveBeenCalledWith({
-      name: 'adoption-web-session',
+      name: 'ds-ui-session',
       resave: false,
       saveUninitialized: false,
       secret: 'MOCK_SECRET',
