@@ -1,7 +1,6 @@
 require('./src/test/e2e/helpers/event_listener');
 const lodash = require('lodash');
 
-const testConfig = require('./src/test/config.js').config;
 exports.config = {
   output: './output',
   multiple: {
@@ -73,7 +72,6 @@ exports.config = {
     landingPage: './src/test/e2e/pages/LandingPage.js'
   },
   plugins: {
-    autoLogin: testConfig.AutoLogin,
     retryFailedStep: {
       enabled: true,
     },
@@ -84,7 +82,6 @@ exports.config = {
   },
   tests: './src/test/e2e/tests/*_test.js',
   teardownAll: require('./src/test/e2e/hooks/aggregate-metrics'),
-  teardown: testConfig.teardown,
   mocha: {
     reporterOptions: {
       'codeceptjs-cli-reporter': {

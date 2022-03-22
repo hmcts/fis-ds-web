@@ -21,8 +21,6 @@ withPipeline(type, product, component) {
 
   after('functionalTest:preview') {
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
-
-    yarnBuilder.yarn('test:functional')
   }
 
   before('smoketest:preview') {

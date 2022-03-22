@@ -2,11 +2,11 @@ const { I } = inject();
 
 module.exports = {
   fields: {
-    Jurisdication: 'input[id$="citizenJurisdication"]',
-    ApplicationType: 'input[id$="citizenApplicationType"]',
+    familyJurisdication: 'input[id$="selectJurisdiction"]',
   },
   async seeTheLandingPage() {
     I.wait('2');
-    await I.seeElement(this.fields.Jurisdication);
+    await I.see('Select Jurisdiction');
+    await I.seeElement(this.fields.familyJurisdication);
   },
 };

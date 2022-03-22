@@ -3,7 +3,6 @@ const lodash = require('lodash');
 const config = require('../config');
 const loginPage = require('../pages/login.page');
 const openApplicationEventPage = require('../pages/events/openApplicationEvent.page');
-const eventSummaryPage = require('../pages/eventSummary.page');
 
 const normalizeCaseId = caseId => caseId.toString().replace(/\D/g, '');
 
