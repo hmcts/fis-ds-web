@@ -35,7 +35,7 @@ export const edgecaseSequence: Step[] = [
   {
     url: FULL_NAME,
     showInSection: Sections.AboutEdgeCase,
-    getNextStep: () => CITIZEN_HOME_URL,
+    getNextStep: () => DATE_OF_BIRTH,
   },
   {
     url: DATE_OF_BIRTH,

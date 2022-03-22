@@ -1,9 +1,12 @@
+import { CaseDate } from '../../../app/case/case';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { covertToDateObject } from '../../../app/form/parser';
+import { isDateInputInvalid } from '../../../app/form/validation';
 
 export const en = (): Record<string, unknown> => ({
   section: 'Applicant',
+  line1: 'If you are under 18',
   title: "What's your date of birth?",
   hint: 'For example, 27 3 2007',
   errors: {
@@ -20,6 +23,7 @@ export const en = (): Record<string, unknown> => ({
 
 export const cy = (): Record<string, unknown> => ({
   section: 'Applicant (in Welsh)',
+  line1: 'If you are under 18 (in Welsh)',
   title: "What's your date of birth? (in Welsh)",
   hint: 'For example, 28 6 1997 (in Welsh)',
   errors: {
@@ -63,6 +67,7 @@ export const form: FormContent = {
         },
       ],
       parser: body => covertToDateObject('applicant1DateOfBirth', body as Record<string, unknown>),
+      validator: value => isDateInputInvalid(value as CaseDate),
     },
   },
   submit: {

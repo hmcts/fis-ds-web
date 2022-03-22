@@ -22,7 +22,7 @@ describe('applicant1Sequence', () => {
 
     expect(edgecaseSequence[4].url).toBe('/full-name');
     expect(edgecaseSequence[4].showInSection).toBe('aboutEdgeCase');
-    expect(edgecaseSequence[4].getNextStep({})).toBe('/citizen-home');
+    expect(edgecaseSequence[4].getNextStep({})).toBe('/date-of-birth');
 
     expect(edgecaseSequence[5].url).toBe('/date-of-birth');
     expect(edgecaseSequence[5].showInSection).toBe('aboutEdgeCase');

@@ -64,21 +64,42 @@ export const doesArrayHaveValues: Validator = value => {
   }
 };
 
+// export const isDateInputInvalid: DateValidator = date => {
+//   const invalid = 'invalidDate';
+//   if (!date) {
+//     return invalid;
+//   }
+
+//   for (const value in date) {
+//     if (isNaN(+date[value])) {
+//       return invalid;
+//     }
+//   }
+
+//   const year = parseInt(date.year, 10) || 0;
+//   const month = parseInt(date.month, 10) || 0;
+//   const day = parseInt(date.day, 10) || 0;
+//   if (!dayjs(`${year}-${month}-${day}`, 'YYYY-M-D', true).isValid()) {
+//     return invalid;
+//   }
+// };
+
 export const isDateInputInvalid: DateValidator = date => {
   const invalid = 'invalidDate';
   if (!date) {
     return invalid;
   }
-
   for (const value in date) {
     if (isNaN(+date[value])) {
       return invalid;
     }
   }
-
   const year = parseInt(date.year, 10) || 0;
   const month = parseInt(date.month, 10) || 0;
   const day = parseInt(date.day, 10) || 0;
+  if (year === 0 && month === 0 && day === 0) {
+    return;
+  }
   if (!dayjs(`${year}-${month}-${day}`, 'YYYY-M-D', true).isValid()) {
     return invalid;
   }
