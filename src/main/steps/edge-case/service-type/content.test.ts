@@ -78,7 +78,7 @@ describe('service-type content', () => {
     expect(adoptionSubFields.internationalAdoption.type).toBe('label');
     expect(adoptionSubFields.internationalAdoption.label).toBe('International Adoption');
     expect(adoptionSubFields.relinquishedAdoption.type).toBe('label');
-    expect(adoptionSubFields.relinquishedAdoption.label).toBe('Relinquished adoption');
+    expect(adoptionSubFields.relinquishedAdoption.label).toBe('Relinquished Adoption');
     expect(adoptionSubFields.stepparentAdoption.type).toBe('label');
     expect(adoptionSubFields.stepparentAdoption.label).toBe('Stepparent Adoption');
     expect(adoptionSubFields.parentalOrders.type).toBe('label');
