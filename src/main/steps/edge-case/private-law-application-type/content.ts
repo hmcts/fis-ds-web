@@ -1,50 +1,63 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
+import { isFieldFilledIn } from '../../../app/form/validation';
 
 const en = () => ({
   continue: 'Continue',
-  label: 'Private Law Application Type',
-  one: 'Genital Mutliation Orders(FGM)',
-  two: 'Forced Protection Marriage Order(FMPO)',
+  serviceName: 'Private law',
+  label: 'Select the type of private law you want to apply for',
+  one: 'Female Genital Mutilation Orders(FGM)',
+  oneHint: 'A court order to protect a female at risk of FGM',
+  two: 'Forced Marriage Protection Order(FMPO)',
+  twoHint: 'A court order to protect you or someone else from the consequences of a forced marriage',
   three: 'Special Guardianship',
-  four: 'Financial Applications',
-  five: 'Declaration of Parentage',
+  threeHint: 'A court order placing a child to live with someone other than their parents',
+  four: 'Financial applications',
+  fourHint: 'If you are applying for financial order under Schedule 1 of the Children Act 1989',
+  five: 'Declaration of parentage',
+  fiveHint: 'Ask the court to declare whether or not someone is parent of another named person',
   errors: {
     applyingWith: {
-      required: 'Private Law Application Type',
+      required: 'Select if any of the type of private law you want to apply for',
     },
   },
 });
 
 const cy = () => ({
   continue: 'Continue (in welsh)',
-  label: 'Private Law Application Type (in welsh)',
-  one: 'Genital Mutliation Orders(FGM) (in welsh)',
-  two: 'Forced Protection Marriage Order(FMPO) (in welsh)',
+  serviceName: 'Private law (in welsh)',
+  label: 'Select the type of private law you want to apply for (in welsh)',
+  one: 'Female Genital Mutilation Orders(FGM) (in welsh)',
+  oneHint: 'A court order to protect a female at risk of FGM',
+  two: 'Forced Marriage Protection Order(FMPO) (in welsh)',
+  twoHint: 'A court order to protect you or someone else from the consequences of a forced marriage (in welsh)',
   three: 'Special Guardianship (in welsh)',
-  four: 'Financial Applications (in welsh)',
-  five: 'Declaration of Parentage (in welsh)',
+  threeHint: 'A court order placing a child to live with someone other than their parents (in welsh)',
+  four: 'Financial applications (in welsh)',
+  fourHint: 'If you are applying for financial order under Schedule 1 of the Children Act 1989 (in welsh)',
+  five: 'Declaration of parentage (in welsh)',
+  fiveHint: 'Ask the court to declare whether or not someone is parent of another named person (in welsh)',
   errors: {
     applyingWith: {
-      required: 'Private Law Application Type',
+      required: 'Select if any of the type of private law you want to apply for (in welsh)',
     },
   },
 });
 
 export const form: FormContent = {
   fields: {
-    privateLawApplicationType: {
+    applyingWith: {
       type: 'radios',
       classes: 'govuk-radios',
       label: l => l.label,
-      section: l => l.section,
       values: [
-        { label: l => l.one, value: 'genitalMutliationOrdersFGM' },
-        { label: l => l.two, value: 'forcedProtectionMarriageOrderFMPO' },
-        { label: l => l.three, value: 'specialGuardianship' },
-        { label: l => l.four, value: 'financialApplications' },
-        { label: l => l.five, value: 'declarationOfParentage' },
+        { label: l => l.one, value: 'genitalMutliationOrdersFGM', hint: l => l.oneHint },
+        { label: l => l.two, value: 'forcedProtectionMarriageOrderFMPO', hint: l => l.twoHint },
+        { label: l => l.three, value: 'specialGuardianship', hint: l => l.threeHint },
+        { label: l => l.four, value: 'financialApplications', hint: l => l.fourHint },
+        { label: l => l.five, value: 'declarationOfParentage', hint: l => l.fiveHint },
       ],
+      validator: isFieldFilledIn,
     },
   },
   submit: {
