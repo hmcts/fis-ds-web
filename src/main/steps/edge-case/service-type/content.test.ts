@@ -82,7 +82,7 @@ describe('service-type content', () => {
     expect(adoptionSubFields.stepparentAdoption.type).toBe('label');
     expect(adoptionSubFields.stepparentAdoption.label).toBe('Stepparent Adoption');
     expect(adoptionSubFields.parentalOrders.type).toBe('label');
-    expect(adoptionSubFields.parentalOrders.label).toBe('Parental orders');
+    expect(adoptionSubFields.parentalOrders.label).toBe('Parental Orders');
 
     expect(privateLawSubFields.femaleGenitalMutilationOrdersFGM.type).toBe('label');
     expect(privateLawSubFields.femaleGenitalMutilationOrdersFGM.label).toBe('Female Genital Mutilation Orders(FGM)');
@@ -93,7 +93,7 @@ describe('service-type content', () => {
     expect(privateLawSubFields.financialApplications.type).toBe('label');
     expect(privateLawSubFields.financialApplications.label).toBe('Financial Applications');
     expect(privateLawSubFields.declarationOfParentage.type).toBe('label');
-    expect(privateLawSubFields.declarationOfParentage.label).toBe('Declaration of parentage');
+    expect(privateLawSubFields.declarationOfParentage.label).toBe('Declaration Of Parentage');
   });
 
   test('should contain submit button', () => {
