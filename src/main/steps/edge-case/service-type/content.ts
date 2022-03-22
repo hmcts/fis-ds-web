@@ -51,7 +51,7 @@ export const form: FormContent = {
             },
             relinquishedAdoption: {
               type: 'label',
-              label: 'Relinquished adoption',
+              label: 'Relinquished Adoption',
             },
             stepparentAdoption: {
               type: 'label',
@@ -59,7 +59,7 @@ export const form: FormContent = {
             },
             parentalOrders: {
               type: 'label',
-              label: 'Parental orders',
+              label: 'Parental Orders',
             },
           },
         },
@@ -85,7 +85,7 @@ export const form: FormContent = {
             },
             declarationOfParentage: {
               type: 'label',
-              label: 'Declaration of parentage',
+              label: 'Declaration Of Parentage',
             },
           },
         },
