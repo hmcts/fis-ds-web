@@ -1,4 +1,5 @@
 import autobind from 'autobind-decorator';
+import config from 'config';
 import { Response } from 'express';
 
 import { getNextStepUrl } from '../../steps';
@@ -19,32 +20,34 @@ export class PostController<T extends AnyObject> {
    */
   public async post(req: AppRequest<T>, res: Response): Promise<void> {
     //const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase) : this.fields;
-    const fields = typeof this.fields === 'function' ? this.fields() : this.fields;
+    const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase) : this.fields;
     const form = new Form(fields);
 
     const { saveAndSignOut, saveBeforeSessionTimeout, _csrf, ...formData } = form.getParsedBody(req.body);
 
     if (req.body.saveAndSignOut) {
-      await this.saveAndSignOut(req, res);
+      await this.saveAndSignOut(req, res, formData);
     } else if (req.body.saveBeforeSessionTimeout) {
-      await this.saveBeforeSessionTimeout(req, res);
+      await this.saveBeforeSessionTimeout(req, res, formData);
+    } else if (req.body.cancel) {
+      await this.cancel(req, res);
     } else {
       await this.saveAndContinue(req, res, form, formData);
     }
   }
 
-  private async saveAndSignOut(req: AppRequest<T>, res: Response): Promise<void> {
+  private async saveAndSignOut(req: AppRequest<T>, res: Response, formData: Partial<Case>): Promise<void> {
     try {
-      await this.save(req, CITIZEN_SAVE_AND_CLOSE);
+      await this.save(req, formData, CITIZEN_SAVE_AND_CLOSE);
     } catch {
       // ignore
     }
     res.redirect(SAVE_AND_SIGN_OUT);
   }
 
-  private async saveBeforeSessionTimeout(req: AppRequest<T>, res: Response): Promise<void> {
+  private async saveBeforeSessionTimeout(req: AppRequest<T>, res: Response, formData: Partial<Case>): Promise<void> {
     try {
-      await this.save(req, this.getEventName(req));
+      await this.save(req, formData, this.getEventName(req));
     } catch {
       // ignore
     }
@@ -52,16 +55,21 @@ export class PostController<T extends AnyObject> {
   }
 
   private async saveAndContinue(req: AppRequest<T>, res: Response, form: Form, formData: Partial<Case>): Promise<void> {
-    //Object.assign(req.session.userCase, formData);
+    Object.assign(req.session.userCase, formData);
     req.session.errors = form.getErrors(formData);
 
-    //this.filterErrorsForSaveAsDraft(req);
+    this.filterErrorsForSaveAsDraft(req);
 
     //if (req.session.errors.length === 0) {
     //req.session.userCase = await this.save(req, formData, this.getEventName(req));
     //}
 
     this.redirect(req, res);
+  }
+
+  private async cancel(req: AppRequest<T>, res: Response): Promise<void> {
+    const hmctsHomePage: string = config.get('services.hmctsHomePage.url');
+    res.redirect(hmctsHomePage);
   }
 
   protected filterErrorsForSaveAsDraft(req: AppRequest<T>): void {
@@ -74,14 +82,13 @@ export class PostController<T extends AnyObject> {
     }
   }
 
-  protected async save(req: AppRequest<T>, eventName: string): Promise<CaseWithId> {
+  protected async save(req: AppRequest<T>, formData: Partial<Case>, eventName: string): Promise<CaseWithId> {
     try {
-      console.log(eventName);
-      //req.session.userCase = await req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
+      req.session.userCase = await req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
     } catch (err) {
-      //req.locals.logger.error('Error saving', err);
-      //req.session.errors = req.session.errors || [];
-      //req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+      req.locals.logger.error('Error saving', err);
+      req.session.errors = req.session.errors || [];
+      req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
     }
     return req.session.userCase;
   }

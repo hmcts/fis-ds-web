@@ -24,3 +24,5 @@ npm-debug.log.*
 .settings/
 dist/
 public/
+
+coverage

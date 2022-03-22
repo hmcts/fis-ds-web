@@ -1,3 +1,4 @@
+import { YesOrNo } from '../../app/case/definition';
 import { Sections, Step } from '../constants';
 import {
   ADOPTION_APPLICATION_TYPE,
@@ -20,12 +21,12 @@ export const edgecaseSequence: Step[] = [
   {
     url: SERVICE_TYPE,
     showInSection: Sections.AboutEdgeCase,
-    getNextStep: () => ADOPTION_APPLICATION_TYPE,
+    getNextStep: data => (data.serviceType === YesOrNo.YES ? ADOPTION_APPLICATION_TYPE : PRIVATE_LAW_APPLICATION_TYPE),
   },
   {
     url: ADOPTION_APPLICATION_TYPE,
     showInSection: Sections.AboutEdgeCase,
-    getNextStep: () => PRIVATE_LAW_APPLICATION_TYPE,
+    getNextStep: () => FULL_NAME,
   },
   {
     url: PRIVATE_LAW_APPLICATION_TYPE,

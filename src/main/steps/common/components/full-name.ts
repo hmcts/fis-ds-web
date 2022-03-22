@@ -1,6 +1,6 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
-// import { isFieldFilledIn } from '../../../app/form/validation';
+import { isFieldFilledIn } from '../../../app/form/validation';
 
 export const en = (): Record<string, unknown> => ({
   firstNames: 'First names',
@@ -24,7 +24,7 @@ export const form: FormContent = {
       label: l => l.firstNames,
       hint: l => l.firstNamesHint,
       labelSize: null,
-      // validator: isFieldFilledIn,
+      validator: isFieldFilledIn,
     },
     lastNames: {
       type: 'input',
@@ -32,7 +32,7 @@ export const form: FormContent = {
       label: l => l.lastNames,
       hint: l => l.lastNamesHint,
       labelSize: null,
-      // validator: isFieldFilledIn,
+      validator: isFieldFilledIn,
     },
   },
   submit: {
