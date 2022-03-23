@@ -102,5 +102,11 @@ describe('private-law-application-type content', () => {
     const form = generatedContent.form as FormContent;
     expect((form.submit.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save and continue');
   });
+
+  test('should contain cancel button', () => {
+    const generatedContent = generateContent(commonContent);
+    const form = generatedContent.form as FormContent;
+    expect((form.cancel?.text as Function)(generatePageContent({ language: 'en' }))).toBe('Cancel');
+  });
 });
 /* eslint-enable @typescript-eslint/ban-types */
