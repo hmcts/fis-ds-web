@@ -4,35 +4,39 @@ import {
   form as selectAddressForm,
   generateContent as selectAddressGenerateContent,
 } from '../../../common/components/address-select';
-import { FIND_ADDRESS, MANUAL_ADDRESS } from '../../../urls';
+import {FIND_ADDRESS, MANUAL_ADDRESS } from '../../../urls';
 
-const en = selectAddressContent => ({
-  section: 'Applicant',
-  title: "What's your home address?",
-  errors: {
-    applicant1SelectAddress: selectAddressContent.errors.selectAddress,
-  },
-  changePostCodeUrl: FIND_ADDRESS,
-  cantFindAddressUrl: MANUAL_ADDRESS,
-});
+const en = ({ selectAddressContent, userCase }): Record<string, unknown> => {
+  const section = 'Applicant';
+  return {
+    section,
+    title: "What's your home address?",
+    errors: {
+      applicant1SelectAddress: selectAddressContent.errors.selectAddress,
+    },
+    changePostCodeUrl: FIND_ADDRESS,
+    cantFindAddressUrl: MANUAL_ADDRESS,
+  };
+};
 
-const cy = selectAddressContent => ({
-  section: 'Applicant (in welsh)',
-  title: "What's your home address? (in welsh)",
-  errors: {
-    applicant1SelectAddress: selectAddressContent.errors.selectAddress,
-  },
-  changePostCodeUrl: FIND_ADDRESS,
-  cantFindAddressUrl: MANUAL_ADDRESS,
-});
+const cy = ({ selectAddressContent, userCase }): Record<string, unknown> => {
+  const section = 'Applicant (in Welsh)';
+  return {
+    section,
+    title: "What's your home address? (in Welsh)",
+    errors: {
+      applicant1SelectAddress: selectAddressContent.errors.selectAddress,
+    },
+    changePostCodeUrl: FIND_ADDRESS,
+    cantFindAddressUrl: MANUAL_ADDRESS,
+  };
+};
 
 const selectAddressFormFields = selectAddressForm.fields as FormFields;
 export const form: FormContent = {
+  ...selectAddressForm,
   fields: {
     applicant1SelectAddress: selectAddressFormFields.selectAddress,
-  },
-  submit: {
-    text: l => l.continue,
   },
 };
 
@@ -42,8 +46,10 @@ const languages = {
 };
 
 export const generateContent: TranslationFn = content => {
+  console.log("Conent-->", content.userCase);
   const selectAddressContent = selectAddressGenerateContent(content);
-  const translations = languages[content.language](selectAddressContent);
+  const translations = languages[content.language]({ selectAddressContent, userCase: content.userCase });
+
   return {
     ...selectAddressContent,
     ...translations,

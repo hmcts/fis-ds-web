@@ -13,8 +13,8 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Applicant (in welsh)',
-  title: "What's your home address? (in welsh)",
+  section: 'Applicant (in Welsh)',
+  title: "What's your home address? (in Welsh)",
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
@@ -55,9 +55,28 @@ describe('applicant1 > address > select > content', () => {
     expect(fields.applicant1SelectAddress).toEqual(selectAddressFormFields.selectAddress);
   });
 
+  it('should have applicant1SelectAddress label when language: en and  applyingWith: alone', () => {
+    const commonContent1 = { language: 'en', userCase: { applyingWith: 'alone' } } as CommonContent;
+
+    const generatedContent1 = generateContent(commonContent1);
+    expect(generatedContent1.section).toBe('Applicant');
+  });
+
+  it('should have applicant1SelectAddress label when language: cy and  applyingWith: alone', () => {
+    const commonContent1 = { language: 'cy', userCase: { applyingWith: 'alone' } } as CommonContent;
+
+    const generatedContent1 = generateContent(commonContent1);
+    expect(generatedContent1.section).toBe('Applicant (in Welsh)');
+  });
+
   test('should contain submit button', () => {
     const form = generatedContent.form as FormContent;
     expect((form.submit.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save and continue');
+  });
+
+  test('should contain saveAsDraft button', () => {
+    const form = generatedContent.form as FormContent;
+    expect((form.saveAsDraft?.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save as draft');
   });
 });
 /* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */

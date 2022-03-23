@@ -4,25 +4,31 @@ import {
   form as addressLookupForm,
   generateContent as addressLookupGenerateContent,
 } from '../../../common/components/address-lookup';
-import { MANUAL_ADDRESS } from '../../../urls';
+import { APPLICANT_1_MANUAL_ADDRESS } from '../../../urls';
 
-const en = addressLookupContent => ({
-  section: 'Applicant',
-  title: "What's your home address?",
-  errors: {
-    applicant1AddressPostcode: addressLookupContent.errors.addressPostcode,
-  },
-  manualAddressUrl: MANUAL_ADDRESS,
-});
+const en = ({ addressLookupContent, userCase }): Record<string, unknown> => {
+  const section = 'Applicant';
+  return {
+    section,
+    title: "What's your home address?",
+    errors: {
+      applicant1AddressPostcode: addressLookupContent.errors.addressPostcode,
+    },
+    manualAddressUrl: APPLICANT_1_MANUAL_ADDRESS,
+  };
+};
 
-const cy = addressLookupContent => ({
-  section: 'Applicant (in welsh)',
-  title: "What's your home address? (in welsh)",
-  errors: {
-    applicant1AddressPostcode: addressLookupContent.errors.addressPostcode,
-  },
-  manualAddressUrl: MANUAL_ADDRESS,
-});
+const cy = ({ addressLookupContent, userCase }): Record<string, unknown> => {
+  const section = 'Applicant (in welsh)';
+  return {
+    section,
+    title: "What's your home address? (in welsh)",
+    errors: {
+      applicant1AddressPostcode: addressLookupContent.errors.addressPostcode,
+    },
+    manualAddressUrl: APPLICANT_1_MANUAL_ADDRESS,
+  };
+};
 
 const addressLookupFormFields = addressLookupForm.fields as FormFields;
 export const form: FormContent = {
@@ -39,7 +45,7 @@ const languages = {
 
 export const generateContent: TranslationFn = content => {
   const addressLookupContent = addressLookupGenerateContent(content);
-  const translations = languages[content.language](addressLookupContent);
+  const translations = languages[content.language]({ addressLookupContent, userCase: content.userCase });
   return {
     ...addressLookupContent,
     ...translations,
