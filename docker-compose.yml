@@ -1,7 +1,7 @@
 version: '2'
 
 services:
-  ds-ui:
+  fis-ds-web:
     build:
       context: .
       args:
