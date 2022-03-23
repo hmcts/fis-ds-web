@@ -3,11 +3,11 @@ variable "product" {}
 variable "component" {}
 
 variable "raw_product" {
-  default = "ds"
+  default = "fis"
 }
 
 variable "microservice" {
-  default = "ds-ui"
+  default = "fis-ds-web"
 }
 
 variable "location" {

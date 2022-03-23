@@ -4,7 +4,7 @@ module.exports = {
     password: process.env.CITIZEN_PASSWORD,
   },
 
-  baseUrl: process.env.DS_UI_URL || 'https://ds-ui.aat.platform.hmcts.net/',
+  baseUrl: process.env.DS_UI_URL || 'https://fis-ds-web.aat.platform.hmcts.net/',
 
   definition: {
     jurisdiction: 'PUBLICLAW',

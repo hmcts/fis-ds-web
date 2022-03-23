@@ -1,8 +1,8 @@
 apiVersion: v2
 appVersion: '1.0'
-description: A Helm chart for ds-ui App
-name: ds-ui
-home: https://github.com/hmcts/ds-ui
+description: A Helm chart for fis-ds-web App
+name: fis-ds-web
+home: https://github.com/hmcts/fis-ds-web
 version: 0.0.4
 dependencies:
   - name: nodejs
