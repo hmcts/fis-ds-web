@@ -34,8 +34,12 @@ export class CaseApi {
     return this.createCase();
   }
 
-  public async getOrCreateCaseNew(req: AppRequest, userDetails: UserDetails, formData: Partial<Case>): Promise<CaseWithId> {
-    return this.createCaseNew(req, userDetails,formData);
+  public async getOrCreateCaseNew(
+    req: AppRequest,
+    userDetails: UserDetails,
+    formData: Partial<Case>
+  ): Promise<CaseWithId> {
+    return this.createCaseNew(req, userDetails, formData);
   }
 
   /* private async getCase(): Promise<CaseWithId | false> {
@@ -78,7 +82,7 @@ export class CaseApi {
     }
   }
 
-  public async createCaseNew(req: AppRequest , userDetails: UserDetails, formData: Partial<Case>): Promise<CaseWithId> {
+  public async createCaseNew(req: AppRequest, userDetails: UserDetails, formData: Partial<Case>): Promise<CaseWithId> {
     const tokenResponse: AxiosResponse<CcdTokenResponse> = await this.axios.get(
       `/case-types/${CASE_TYPE}/event-triggers/${CITIZEN_CREATE}`
     );
@@ -96,12 +100,12 @@ export class CaseApi {
     };
     //console.log("token => "+token+", event => "+event+", data => "+data);
     try {
-           const response = await this.axios.post<CcdV2Response>(`/case-types/${CASE_TYPE}/cases`, {
-           data,
-           event,
-           event_token: token,
-        });
-      
+      const response = await this.axios.post<CcdV2Response>(`/case-types/${CASE_TYPE}/cases`, {
+        data,
+        event,
+        event_token: token,
+      });
+
       //console.log("response =======> "+JSON.stringify(response.data));
       return { id: response.data.id, state: response.data.state, ...fromApiFormat(response.data.data) };
     } catch (err) {

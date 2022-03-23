@@ -42,8 +42,7 @@ export class OidcMiddleware {
         if (req.session?.user) {
           res.locals.isLoggedIn = true;
           req.locals.api = getCaseApi(req.session.user, req.locals.logger);
-          //req.session.userCase = req.session.userCase || (await req.locals.api.getOrCreateCase());
-          req.session.userCase = req.session.userCase;
+          req.session.userCase = req.session.userCase || (await req.locals.api.getOrCreateCase());
           return next();
         }
         res.redirect(SIGN_IN_URL);
