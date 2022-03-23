@@ -1,22 +1,25 @@
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
+import { ErrorMessages,ErrorMessagesWelsh } from '../../../steps/errorMesages';
+import { LabelMessages,LabelMessagesWelsh,HintMessages,HintMessagesWelsh } from '../../../steps/labelMessages';
+
 
 const en = () => ({
   continue: 'Continue',
   serviceName:'Adoption',
-  label: 'Select the type of adoption you want to apply for',
-  one: 'International adoption',
-  oneHint:'Application for an Adoption Order where the child ia habitually resident outside the British Islands and is brought into the United Kingdom for the purpose of adoption',
-  two: 'Relinquished adoption',
-  twoHint:'Application for an Adoption Order where the child is under 6 weeks old',
-  three: 'Stepparent adoption',
-  threeHint:"Application for an Adoption Order where you are applying to adopt alone and you are the partner (including spouse or civil partner) of the child's father or mother or other parent",
-  four: 'Parental order',
-  fourHint: 'Application to apply to become legal parents under Section 54 or 54A of the Human Fertilisation & Embryology Act 2008',
+  label: LabelMessages.ADOPTION_LABEL,
+  one: LabelMessages.ADOPTION_ONE,
+  oneHint: HintMessages.ADOPTION_ONE_HINT,
+  two: LabelMessages.ADOPTION_TWO,
+  twoHint:HintMessages.ADOPTION_TWO_HINT,
+  three: LabelMessages.ADOPTION_THREE,
+  threeHint:HintMessages.ADOPTION_THREE_HINT,
+  four: LabelMessages.ADOPTION_FOUR,
+  fourHint:HintMessages.ADOPTION_FOUR_HINT,
   errors: {
     applyingWith: {
-      required: 'Select if any of the type of adoption you want to apply for',
+      required: ErrorMessages.ADOPTION_ERROR_MESSAGE,
     },
   },
 });
@@ -24,18 +27,18 @@ const en = () => ({
 const cy = () => ({
   continue: 'Continue (in welsh)',
   serviceName:'Adoption (in welsh)',
-  label: 'Select the type of adoption you want to apply for (in welsh)',
-  one: 'International adoption (in welsh)',
-  oneHint: 'Application for an Adoption Order where the child ia habitually resident outside the British Islands and is brought into the United Kingdom for the purpose of adoption (in welsh)',
-  two: 'Relinquished adoption (in welsh)',
-  twoHint:'Application for an Adoption Order where the child is under 6 weeks old (in welsh)',
-  three: 'Stepparent adoption (in welsh)',
-  threeHint:"Application for an Adoption Order where you are applying to adopt alone and you are the partner (including spouse or civil partner) of the child's father or mother or other parent (in welsh)",
-  four: 'Parental order (in welsh)',
-  fourHint:'Application to apply to become legal parents under Section 54 or 54A of the Human Fertilisation & Embryology Act 2008 (in welsh)',
+  label: LabelMessagesWelsh.ADOPTION_LABEL,
+  one: LabelMessagesWelsh.ADOPTION_ONE,
+  oneHint: HintMessagesWelsh.ADOPTION_ONE_HINT,
+  two: LabelMessagesWelsh.ADOPTION_TWO,
+  twoHint:HintMessagesWelsh.ADOPTION_TWO_HINT,
+  three: LabelMessagesWelsh.ADOPTION_THREE,
+  threeHint:HintMessagesWelsh.ADOPTION_THREE_HINT,
+  four: LabelMessagesWelsh.ADOPTION_FOUR,
+  fourHint:HintMessagesWelsh.ADOPTION_FOUR_HINT,
   errors: {
     applyingWith: {
-      required: 'Select if any of the type of adoption you want to apply for (in welsh)',
+      required: ErrorMessagesWelsh.ADOPTION_ERROR_MESSAGE,
     },
   },
 });
@@ -75,4 +78,5 @@ export const generateContent: TranslationFn = content => {
     ...translations,
     form,
   };
+  
 };

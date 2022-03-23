@@ -1,6 +1,7 @@
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 //import { isFieldFilledIn } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
+import { LabelMessages,LabelMessagesWelsh,HintMessages,HintMessagesWelsh } from '../../../steps/labelMessages';   
 
 import { generateContent } from './content';
 
@@ -12,29 +13,29 @@ describe('adoption-application-type content', () => {
   test('should return correct english content', () => {
     const generatedContent = generateContent(commonContent);
     expect(generatedContent.continue).toEqual('Continue');
-    expect(generatedContent.label).toEqual('Select the type of adoption you want to apply for');
-    expect(generatedContent.one).toEqual('International adoption');
-    expect(generatedContent.oneHint).toEqual('Application for an Adoption Order where the child ia habitually resident outside the British Islands and is brought into the United Kingdom for the purpose of adoption');
-    expect(generatedContent.two).toEqual('Relinquished adoption');
-    expect(generatedContent.twoHint).toEqual('Application for an Adoption Order where the child is under 6 weeks old');
-    expect(generatedContent.three).toEqual('Stepparent adoption');
-    expect(generatedContent.threeHint).toEqual("Application for an Adoption Order where you are applying to adopt alone and you are the partner (including spouse or civil partner) of the child's father or mother or other parent");
-    expect(generatedContent.four).toEqual('Parental order');
-    expect(generatedContent.fourHint).toEqual('Application to apply to become legal parents under Section 54 or 54A of the Human Fertilisation & Embryology Act 2008');
+    expect(generatedContent.label).toEqual(LabelMessages.ADOPTION_LABEL);
+    expect(generatedContent.one).toEqual(LabelMessages.ADOPTION_ONE);
+    expect(generatedContent.oneHint).toEqual(HintMessages.ADOPTION_ONE_HINT);
+    expect(generatedContent.two).toEqual(LabelMessages.ADOPTION_TWO);
+    expect(generatedContent.twoHint).toEqual(HintMessages.ADOPTION_TWO_HINT);
+    expect(generatedContent.three).toEqual(LabelMessages.ADOPTION_THREE);
+    expect(generatedContent.threeHint).toEqual(HintMessages.ADOPTION_THREE_HINT);
+    expect(generatedContent.four).toEqual(LabelMessages.ADOPTION_FOUR);
+    expect(generatedContent.fourHint).toEqual(HintMessages.ADOPTION_FOUR_HINT);
   });
 
   test('should return correct welsh content', () => {
     const generatedContent = generateContent({ ...commonContent, language: 'cy' });
     expect(generatedContent.continue).toEqual('Continue (in welsh)');
-    expect(generatedContent.label).toEqual('Select the type of adoption you want to apply for (in welsh)');
-    expect(generatedContent.one).toEqual('International adoption (in welsh)');
-    expect(generatedContent.oneHint).toEqual('Application for an Adoption Order where the child ia habitually resident outside the British Islands and is brought into the United Kingdom for the purpose of adoption (in welsh)');
-    expect(generatedContent.two).toEqual('Relinquished adoption (in welsh)');
-    expect(generatedContent.twoHint).toEqual('Application for an Adoption Order where the child is under 6 weeks old (in welsh)');
-    expect(generatedContent.three).toEqual('Stepparent adoption (in welsh)');
-    expect(generatedContent.threeHint).toEqual("Application for an Adoption Order where you are applying to adopt alone and you are the partner (including spouse or civil partner) of the child's father or mother or other parent (in welsh)");
-    expect(generatedContent.four).toEqual('Parental order (in welsh)');
-    expect(generatedContent.fourHint).toEqual('Application to apply to become legal parents under Section 54 or 54A of the Human Fertilisation & Embryology Act 2008 (in welsh)');
+    expect(generatedContent.label).toEqual(LabelMessagesWelsh.ADOPTION_LABEL);
+    expect(generatedContent.one).toEqual(LabelMessagesWelsh.ADOPTION_ONE);
+    expect(generatedContent.oneHint).toEqual(HintMessagesWelsh.ADOPTION_ONE_HINT);
+    expect(generatedContent.two).toEqual(LabelMessagesWelsh.ADOPTION_TWO);
+    expect(generatedContent.twoHint).toEqual(HintMessagesWelsh.ADOPTION_TWO_HINT);
+    expect(generatedContent.three).toEqual(LabelMessagesWelsh.ADOPTION_THREE);
+    expect(generatedContent.threeHint).toEqual(HintMessagesWelsh.ADOPTION_THREE_HINT);
+    expect(generatedContent.four).toEqual(LabelMessagesWelsh.ADOPTION_FOUR);
+    expect(generatedContent.fourHint).toEqual(HintMessagesWelsh.ADOPTION_FOUR_HINT);
   });
 
   test('should contain adoption application type field', () => {
@@ -44,15 +45,15 @@ describe('adoption-application-type content', () => {
     const adoptionApplicationTypeField = fields.applyingWith as FormOptions;
     expect(adoptionApplicationTypeField.type).toBe('radios');
     expect(adoptionApplicationTypeField.classes).toBe('govuk-radios');
-    expect((adoptionApplicationTypeField.label as Function)(generatedContent)).toBe('Select the type of adoption you want to apply for');
-    expect((adoptionApplicationTypeField.values[0].label as Function)(generatedContent)).toBe('International adoption');
-    expect((adoptionApplicationTypeField.values[0].hint as Function)(generatedContent)).toBe('Application for an Adoption Order where the child ia habitually resident outside the British Islands and is brought into the United Kingdom for the purpose of adoption');
-    expect((adoptionApplicationTypeField.values[1].label as Function)(generatedContent)).toBe('Relinquished adoption');
-    expect((adoptionApplicationTypeField.values[1].hint as Function)(generatedContent)).toBe('Application for an Adoption Order where the child is under 6 weeks old');
-    expect((adoptionApplicationTypeField.values[2].label as Function)(generatedContent)).toBe('Stepparent adoption');
-    expect((adoptionApplicationTypeField.values[2].hint as Function)(generatedContent)).toBe("Application for an Adoption Order where you are applying to adopt alone and you are the partner (including spouse or civil partner) of the child's father or mother or other parent");
-    expect((adoptionApplicationTypeField.values[3].label as Function)(generatedContent)).toBe('Parental order');
-    expect((adoptionApplicationTypeField.values[3].hint as Function)(generatedContent)).toBe('Application to apply to become legal parents under Section 54 or 54A of the Human Fertilisation & Embryology Act 2008');
+    expect((adoptionApplicationTypeField.label as Function)(generatedContent)).toBe(LabelMessages.ADOPTION_LABEL);
+    expect((adoptionApplicationTypeField.values[0].label as Function)(generatedContent)).toBe(LabelMessages.ADOPTION_ONE);
+    expect((adoptionApplicationTypeField.values[0].hint as Function)(generatedContent)).toBe(HintMessages.ADOPTION_ONE_HINT);
+    expect((adoptionApplicationTypeField.values[1].label as Function)(generatedContent)).toBe(LabelMessages.ADOPTION_TWO);
+    expect((adoptionApplicationTypeField.values[1].hint as Function)(generatedContent)).toBe(HintMessages.ADOPTION_TWO_HINT);
+    expect((adoptionApplicationTypeField.values[2].label as Function)(generatedContent)).toBe(LabelMessages.ADOPTION_THREE);
+    expect((adoptionApplicationTypeField.values[2].hint as Function)(generatedContent)).toBe(HintMessages.ADOPTION_THREE_HINT);
+    expect((adoptionApplicationTypeField.values[3].label as Function)(generatedContent)).toBe(LabelMessages.ADOPTION_FOUR);
+    expect((adoptionApplicationTypeField.values[3].hint as Function)(generatedContent)).toBe(HintMessages.ADOPTION_FOUR_HINT);
   });
 
   test('should contain submit button', () => {

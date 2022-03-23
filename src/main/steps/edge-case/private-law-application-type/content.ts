@@ -1,24 +1,27 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
+import { ErrorMessages,ErrorMessagesWelsh } from '../../../steps/errorMesages';
+import { LabelMessages,LabelMessagesWelsh,HintMessages,HintMessagesWelsh } from '../../../steps/labelMessages';
+
 
 const en = () => ({
   continue: 'Continue',
   serviceName: 'Private law',
-  label: 'Select the type of private law you want to apply for',
-  one: 'Female Genital Mutilation Orders(FGM)',
-  oneHint: 'A court order to protect a female at risk of FGM',
-  two: 'Forced Marriage Protection Order(FMPO)',
-  twoHint: 'A court order to protect you or someone else from the consequences of a forced marriage',
-  three: 'Special Guardianship',
-  threeHint: 'A court order placing a child to live with someone other than their parents',
-  four: 'Financial applications',
-  fourHint: 'If you are applying for financial order under Schedule 1 of the Children Act 1989',
-  five: 'Declaration of parentage',
-  fiveHint: 'Ask the court to declare whether or not someone is parent of another named person',
+  label: LabelMessages.PRL_LABEL,
+  one: LabelMessages.PRL_ONE,
+  oneHint: HintMessages.PRL_ONE_HINT,
+  two: LabelMessages.PRL_TWO,
+  twoHint: HintMessages.PRL_TWO_HINT,
+  three: LabelMessages.PRL_THREE,
+  threeHint: HintMessages.PRL_THREE_HINT,
+  four: LabelMessages.PRL_FOUR,
+  fourHint: HintMessages.PRL_FOUR_HINT,
+  five: LabelMessages.PRL_FIVE,
+  fiveHint: HintMessages.PRL_FIVE_HINT,
   errors: {
     applyingWith: {
-      required: 'Select if any of the type of private law you want to apply for',
+      required: ErrorMessages.PRL_ERROR_MESSAGE,
     },
   },
 });
@@ -26,20 +29,20 @@ const en = () => ({
 const cy = () => ({
   continue: 'Continue (in welsh)',
   serviceName: 'Private law (in welsh)',
-  label: 'Select the type of private law you want to apply for (in welsh)',
-  one: 'Female Genital Mutilation Orders(FGM) (in welsh)',
-  oneHint: 'A court order to protect a female at risk of FGM',
-  two: 'Forced Marriage Protection Order(FMPO) (in welsh)',
-  twoHint: 'A court order to protect you or someone else from the consequences of a forced marriage (in welsh)',
-  three: 'Special Guardianship (in welsh)',
-  threeHint: 'A court order placing a child to live with someone other than their parents (in welsh)',
-  four: 'Financial applications (in welsh)',
-  fourHint: 'If you are applying for financial order under Schedule 1 of the Children Act 1989 (in welsh)',
-  five: 'Declaration of parentage (in welsh)',
-  fiveHint: 'Ask the court to declare whether or not someone is parent of another named person (in welsh)',
+  label: LabelMessagesWelsh.PRL_LABEL,
+  one: LabelMessagesWelsh.PRL_ONE,
+  oneHint:HintMessagesWelsh.PRL_ONE_HINT,
+  two: LabelMessagesWelsh.PRL_TWO,
+  twoHint:HintMessagesWelsh.PRL_TWO_HINT,
+  three:LabelMessagesWelsh.PRL_THREE,
+  threeHint:HintMessagesWelsh.PRL_THREE_HINT,
+  four: LabelMessagesWelsh.PRL_FOUR,
+  fourHint:HintMessagesWelsh.PRL_FOUR_HINT ,
+  five: LabelMessagesWelsh.PRL_FIVE,
+  fiveHint:HintMessagesWelsh.PRL_FIVE_HINT,
   errors: {
     applyingWith: {
-      required: 'Select if any of the type of private law you want to apply for (in welsh)',
+      required: ErrorMessagesWelsh.PRL_ERROR_MESSAGE,
     },
   },
 });
