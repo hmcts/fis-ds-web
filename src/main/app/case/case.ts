@@ -185,6 +185,7 @@ export interface Case {
   applyingWith?: ApplyingWith;
   dateChildMovedIn?: CaseDate;
   serviceType?: string;
+  adoptionApplicationType?: string;
 
   /***** Applicant1 *****/
   applicant1FirstNames?: string;
