@@ -22,7 +22,7 @@ const enContent = {
   title: "What's your date of birth?",
   hint: 'For example, 27 3 2007',
   errors: {
-    applicant1DateOfBirth: {
+    applicantDateOfBirth: {
       required: 'Enter your date of birth',
       invalidDate: 'Date of birth must be a real date',
       incompleteDay: 'Your date of birth must include a day',
@@ -38,7 +38,7 @@ const cyContent = {
   title: "What's your date of birth? (in Welsh)",
   hint: 'For example, 28 6 1997 (in Welsh)',
   errors: {
-    applicant1DateOfBirth: {
+    applicantDateOfBirth: {
       required: 'Enter your date of birth (in Welsh)',
       invalidDate: 'Date of birth must be a real date (in Welsh)',
       incompleteDay: 'Your date of birth must include a day (in Welsh)',
@@ -78,11 +78,18 @@ describe('appllicant1 > dob-content', () => {
     expect((form.submit.text as Function)(generatePageContent({ language: EN }))).toBe('Save and continue');
   });
 
+  test('should contain cancel button', () => {
+    const generatedContent = generateContent(commonContent);
+    const form = generatedContent.form as FormContent;
+
+    expect((form.cancel!.text as Function)(generatePageContent({ language: EN }))).toBe('Cancel');
+  });
+
   test('should contain dateOfBirth field', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const dobField = fields.applicant1DateOfBirth as FormOptions;
+    const dobField = fields.applicantDateOfBirth as FormOptions;
 
     expect(dobField.type).toBe('date');
     expect(dobField.classes).toBe('govuk-date-input');
@@ -107,9 +114,9 @@ describe('appllicant1 > dob-content', () => {
 
     expect(
       (dobField.parser as Function)({
-        'applicant1DateOfBirth-day': '21',
-        'applicant1DateOfBirth-month': '12',
-        'applicant1DateOfBirth-year': '2018',
+        'applicantDateOfBirth-day': '21',
+        'applicantDateOfBirth-month': '12',
+        'applicantDateOfBirth-year': '2018',
       })
     ).toEqual({ day: '21', month: '12', year: '2018' });
     // expect((dobField.validator as Function)({ day: '21', month: '12', year: '2018' })).toBe(undefined);
