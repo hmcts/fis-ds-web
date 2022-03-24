@@ -1,6 +1,7 @@
 require('./src/test/e2e/helpers/event_listener');
 const lodash = require('lodash');
 
+const testConfig = require('./src/test/config.js').config;
 exports.config = {
   output: './output',
   multiple: {
@@ -69,7 +70,8 @@ exports.config = {
     config: './src/test/e2e/config.js',
     I: './src/test/e2e/actors/main.js',
     loginPage: './src/test/e2e/pages/login.page.js',
-    landingPage: './src/test/e2e/pages/LandingPage.js'
+    landingPage: './src/test/e2e/pages/LandingPage.js',
+    familypage: './src/test/e2e/pages/Family.page.js',
   },
   plugins: {
     retryFailedStep: {
