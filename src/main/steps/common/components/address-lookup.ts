@@ -3,7 +3,8 @@ import { FormContent } from '../../../app/form/Form';
 import { isInvalidPostcode } from '../../../app/form/validation';
 
 const en = () => ({
-  line1: "We'll send all court papers to this address unless you advise us that you are happy to be served court orders by email.",
+  line1:
+    "We'll send all court papers to this address unless you advise us that you are happy to be served court orders by email.",
   postcode: 'Postcode',
   findAddress: 'Find address',
   enterAddressManually: 'Or enter address manually',
@@ -17,7 +18,8 @@ const en = () => ({
 });
 
 const cy = () => ({
-  line1: "We'll send all court papers to this address unless you advise us that you are happy to be served court orders by email.",
+  line1:
+    "We'll send all court papers to this address unless you advise us that you are happy to be served court orders by email.",
   postcode: 'Postcode (in welsh)',
   findAddress: 'Find address (in welsh)',
   enterAddressManually: 'Or enter address manually (in welsh)',

@@ -1,9 +1,9 @@
-import { State } from 'app/case/definition';
 import config from 'config';
 import { Application, NextFunction, Response } from 'express';
 
 import { getRedirectUrl, getUserDetails } from '../../app/auth/user/oidc';
 import { getCaseApi } from '../../app/case/CaseApi';
+import { State } from '../../app/case/definition';
 import { AppRequest } from '../../app/controller/AppRequest';
 import { CALLBACK_URL, SIGN_IN_URL, SIGN_OUT_URL } from '../../steps/urls';
 

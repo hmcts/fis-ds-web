@@ -20,7 +20,7 @@ export class PostController<T extends AnyObject> {
    */
   public async post(req: AppRequest<T>, res: Response): Promise<void> {
     //const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase) : this.fields;
-    const fields = typeof this.fields === 'function' ? this.fields(req.session. userCase) : this.fields;
+    const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase) : this.fields;
     const form = new Form(fields);
 
     const { saveAndSignOut, saveBeforeSessionTimeout, _csrf, ...formData } = form.getParsedBody(req.body);
@@ -61,7 +61,7 @@ export class PostController<T extends AnyObject> {
     this.filterErrorsForSaveAsDraft(req);
 
     //if (req.session.errors.length === 0) {
-      //req.session.userCase = await this.save(req, formData, this.getEventName(req));
+    //req.session.userCase = await this.save(req, formData, this.getEventName(req));
     //}
 
     this.redirect(req, res);
@@ -76,10 +76,8 @@ export class PostController<T extends AnyObject> {
     if (req.body.saveAsDraft) {
       // skip empty field errors in case of save as draft
       req.session.errors = req.session.errors!.filter(
-        item =>
-          item.errorType !== ValidationError.REQUIRED &&
-          item.errorType !== ValidationError.NOT_SELECTED // &&
-          //item.errorType !== ValidationError.NOT_UPLOADED
+        item => item.errorType !== ValidationError.REQUIRED && item.errorType !== ValidationError.NOT_SELECTED // &&
+        //item.errorType !== ValidationError.NOT_UPLOADED
       );
     }
   }

@@ -16,7 +16,7 @@ export default class AddressLookupPostControllerBase extends PostController<AnyO
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
     const postcode = req.body[`${this.fieldPrefix}AddressPostcode`] as string;
 
-    let addresses;  
+    let addresses;
 
     const form = new Form(<FormFields>this.fields);
     const { saveAndSignOut, saveBeforeSessionTimeout, _csrf, ...formData } = form.getParsedBody(req.body);

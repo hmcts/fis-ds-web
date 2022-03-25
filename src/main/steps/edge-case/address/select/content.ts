@@ -4,9 +4,9 @@ import {
   form as selectAddressForm,
   generateContent as selectAddressGenerateContent,
 } from '../../../common/components/address-select';
-import {FIND_ADDRESS, MANUAL_ADDRESS } from '../../../urls';
+import { FIND_ADDRESS, MANUAL_ADDRESS } from '../../../urls';
 
-const en = ({ selectAddressContent, userCase }): Record<string, unknown> => {
+const en = ({ selectAddressContent }): Record<string, unknown> => {
   const section = 'Applicant';
   return {
     section,
@@ -19,7 +19,7 @@ const en = ({ selectAddressContent, userCase }): Record<string, unknown> => {
   };
 };
 
-const cy = ({ selectAddressContent, userCase }): Record<string, unknown> => {
+const cy = ({ selectAddressContent }): Record<string, unknown> => {
   const section = 'Applicant (in Welsh)';
   return {
     section,
@@ -46,9 +46,9 @@ const languages = {
 };
 
 export const generateContent: TranslationFn = content => {
-  console.log("Conent-->", content.userCase);
+  console.log('Conent-->', content.userCase);
   const selectAddressContent = selectAddressGenerateContent(content);
-  const translations = languages[content.language]({ selectAddressContent, userCase: content.userCase });
+  const translations = languages[content.language]({ selectAddressContent });
 
   return {
     ...selectAddressContent,

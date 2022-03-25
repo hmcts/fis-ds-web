@@ -4,9 +4,9 @@ import {
   form as addressLookupForm,
   generateContent as addressLookupGenerateContent,
 } from '../../../common/components/address-lookup';
-import { APPLICANT_1_MANUAL_ADDRESS } from '../../../urls';
+import { MANUAL_ADDRESS } from '../../../urls';
 
-const en = ({ addressLookupContent, userCase }): Record<string, unknown> => {
+const en = ({ addressLookupContent }): Record<string, unknown> => {
   const section = 'Applicant';
   return {
     section,
@@ -14,11 +14,11 @@ const en = ({ addressLookupContent, userCase }): Record<string, unknown> => {
     errors: {
       applicant1AddressPostcode: addressLookupContent.errors.addressPostcode,
     },
-    manualAddressUrl: APPLICANT_1_MANUAL_ADDRESS,
+    manualAddressUrl: MANUAL_ADDRESS,
   };
 };
 
-const cy = ({ addressLookupContent, userCase }): Record<string, unknown> => {
+const cy = ({ addressLookupContent }): Record<string, unknown> => {
   const section = 'Applicant (in welsh)';
   return {
     section,
@@ -26,7 +26,7 @@ const cy = ({ addressLookupContent, userCase }): Record<string, unknown> => {
     errors: {
       applicant1AddressPostcode: addressLookupContent.errors.addressPostcode,
     },
-    manualAddressUrl: APPLICANT_1_MANUAL_ADDRESS,
+    manualAddressUrl: MANUAL_ADDRESS,
   };
 };
 
@@ -45,7 +45,7 @@ const languages = {
 
 export const generateContent: TranslationFn = content => {
   const addressLookupContent = addressLookupGenerateContent(content);
-  const translations = languages[content.language]({ addressLookupContent, userCase: content.userCase });
+  const translations = languages[content.language]({ addressLookupContent });
   return {
     ...addressLookupContent,
     ...translations,

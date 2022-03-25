@@ -1,4 +1,5 @@
 import { DATE_OF_BIRTH, FIND_ADDRESS, SELECT_ADDRESS } from '../urls';
+
 import { edgecaseSequence } from './edgecaseSequence';
 
 describe('applicant1Sequence', () => {

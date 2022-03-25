@@ -4,6 +4,7 @@ import {
   form as addressLookupForm,
   generateContent as generateAddressLookupContent,
 } from '../../../common/components/address-lookup';
+import { MANUAL_ADDRESS } from '../../../urls';
 
 import { generateContent } from './content';
 
@@ -33,7 +34,7 @@ describe('applicant1 > address > lookup > content', () => {
     expect(generatedContent.errors).toEqual({
       applicant1AddressPostcode: (addressLookupContent.errors as any).addressPostcode,
     });
-    expect(generatedContent.manualAddressUrl).toEqual('/applicant1/address/manual');
+    expect(generatedContent.manualAddressUrl).toEqual(MANUAL_ADDRESS);
   });
 
   test('should return correct welsh content', () => {
@@ -44,7 +45,7 @@ describe('applicant1 > address > lookup > content', () => {
     expect(generatedContent.errors).toEqual({
       applicant1AddressPostcode: (addressLookupContent.errors as any).addressPostcode,
     });
-    expect(generatedContent.manualAddressUrl).toEqual('/applicant1/address/manual');
+    expect(generatedContent.manualAddressUrl).toEqual(MANUAL_ADDRESS);
   });
 
   it('should have applicant1AddressPostcode label when language: en and  applyingWith: alone', () => {
