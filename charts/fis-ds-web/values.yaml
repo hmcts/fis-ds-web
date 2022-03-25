@@ -1,21 +1,21 @@
 nodejs:
   applicationPort: 4000
-  aadIdentityName: ds
-  ingressHost: ds-ui.{{ .Values.global.environment }}.platform.hmcts.net
-  image: 'hmctspublic.azurecr.io/ds/ui:latest'
+  aadIdentityName: fis
+  ingressHost: fis-ds-web.{{ .Values.global.environment }}.platform.hmcts.net
+  image: 'hmctspublic.azurecr.io/fis/ds-web:latest'
 
   environment:
     NODE_ENV: production
-    REFORM_TEAM: ds
-    REFORM_SERVICE_NAME: ds-ui
+    REFORM_TEAM: fis
+    REFORM_SERVICE_NAME: fis-ds-web
 
     SERVICE_AUTH_PROVIDER_URL: 'http://rpe-service-auth-provider-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal'
     IDAM_WEB_URL: 'https://idam-web-public.{{ .Values.global.environment }}.platform.hmcts.net/login'
     IDAM_API_URL: 'https://idam-api.{{ .Values.global.environment }}.platform.hmcts.net/o/token'
-    REDIS_HOST: 'ds-ui-session-storage-{{ .Values.global.environment }}.redis.cache.windows.net'
+    REDIS_HOST: 'fis-ds-web-session-storage-{{ .Values.global.environment }}.redis.cache.windows.net'
 
   keyVaults:
-    ds:
+    fis:
       secrets:
         - idam-ui-secret
         - idam-system-user-name

@@ -1,4 +1,4 @@
-# ds-ui
+# fis-ds-web
 
 ## Getting Started
 
