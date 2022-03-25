@@ -1,9 +1,8 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
-import { ErrorMessages,ErrorMessagesWelsh } from '../../../steps/errorMesages';
-import { LabelMessages,LabelMessagesWelsh,HintMessages,HintMessagesWelsh } from '../../../steps/labelMessages';
-
+import { ErrorMessages, ErrorMessagesWelsh } from '../../../steps/errorMesages';
+import { HintMessages, HintMessagesWelsh, LabelMessages, LabelMessagesWelsh } from '../../../steps/labelMessages';
 
 const en = () => ({
   continue: 'Continue',
@@ -31,15 +30,15 @@ const cy = () => ({
   serviceName: 'Private law (in welsh)',
   label: LabelMessagesWelsh.PRL_LABEL,
   one: LabelMessagesWelsh.PRL_ONE,
-  oneHint:HintMessagesWelsh.PRL_ONE_HINT,
+  oneHint: HintMessagesWelsh.PRL_ONE_HINT,
   two: LabelMessagesWelsh.PRL_TWO,
-  twoHint:HintMessagesWelsh.PRL_TWO_HINT,
-  three:LabelMessagesWelsh.PRL_THREE,
-  threeHint:HintMessagesWelsh.PRL_THREE_HINT,
+  twoHint: HintMessagesWelsh.PRL_TWO_HINT,
+  three: LabelMessagesWelsh.PRL_THREE,
+  threeHint: HintMessagesWelsh.PRL_THREE_HINT,
   four: LabelMessagesWelsh.PRL_FOUR,
-  fourHint:HintMessagesWelsh.PRL_FOUR_HINT ,
+  fourHint: HintMessagesWelsh.PRL_FOUR_HINT,
   five: LabelMessagesWelsh.PRL_FIVE,
-  fiveHint:HintMessagesWelsh.PRL_FIVE_HINT,
+  fiveHint: HintMessagesWelsh.PRL_FIVE_HINT,
   errors: {
     applyingWith: {
       required: ErrorMessagesWelsh.PRL_ERROR_MESSAGE,

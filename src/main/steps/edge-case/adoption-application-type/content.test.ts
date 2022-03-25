@@ -1,7 +1,7 @@
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 //import { isFieldFilledIn } from '../../../app/form/validation';
+import { HintMessages, HintMessagesWelsh, LabelMessages, LabelMessagesWelsh } from '../../../steps/labelMessages';
 import { CommonContent, generatePageContent } from '../../common/common.content';
-import { LabelMessages,LabelMessagesWelsh,HintMessages,HintMessagesWelsh } from '../../../steps/labelMessages';   
 
 import { generateContent } from './content';
 
@@ -46,14 +46,30 @@ describe('adoption-application-type content', () => {
     expect(adoptionApplicationTypeField.type).toBe('radios');
     expect(adoptionApplicationTypeField.classes).toBe('govuk-radios');
     expect((adoptionApplicationTypeField.label as Function)(generatedContent)).toBe(LabelMessages.ADOPTION_LABEL);
-    expect((adoptionApplicationTypeField.values[0].label as Function)(generatedContent)).toBe(LabelMessages.ADOPTION_ONE);
-    expect((adoptionApplicationTypeField.values[0].hint as Function)(generatedContent)).toBe(HintMessages.ADOPTION_ONE_HINT);
-    expect((adoptionApplicationTypeField.values[1].label as Function)(generatedContent)).toBe(LabelMessages.ADOPTION_TWO);
-    expect((adoptionApplicationTypeField.values[1].hint as Function)(generatedContent)).toBe(HintMessages.ADOPTION_TWO_HINT);
-    expect((adoptionApplicationTypeField.values[2].label as Function)(generatedContent)).toBe(LabelMessages.ADOPTION_THREE);
-    expect((adoptionApplicationTypeField.values[2].hint as Function)(generatedContent)).toBe(HintMessages.ADOPTION_THREE_HINT);
-    expect((adoptionApplicationTypeField.values[3].label as Function)(generatedContent)).toBe(LabelMessages.ADOPTION_FOUR);
-    expect((adoptionApplicationTypeField.values[3].hint as Function)(generatedContent)).toBe(HintMessages.ADOPTION_FOUR_HINT);
+    expect((adoptionApplicationTypeField.values[0].label as Function)(generatedContent)).toBe(
+      LabelMessages.ADOPTION_ONE
+    );
+    expect((adoptionApplicationTypeField.values[0].hint as Function)(generatedContent)).toBe(
+      HintMessages.ADOPTION_ONE_HINT
+    );
+    expect((adoptionApplicationTypeField.values[1].label as Function)(generatedContent)).toBe(
+      LabelMessages.ADOPTION_TWO
+    );
+    expect((adoptionApplicationTypeField.values[1].hint as Function)(generatedContent)).toBe(
+      HintMessages.ADOPTION_TWO_HINT
+    );
+    expect((adoptionApplicationTypeField.values[2].label as Function)(generatedContent)).toBe(
+      LabelMessages.ADOPTION_THREE
+    );
+    expect((adoptionApplicationTypeField.values[2].hint as Function)(generatedContent)).toBe(
+      HintMessages.ADOPTION_THREE_HINT
+    );
+    expect((adoptionApplicationTypeField.values[3].label as Function)(generatedContent)).toBe(
+      LabelMessages.ADOPTION_FOUR
+    );
+    expect((adoptionApplicationTypeField.values[3].hint as Function)(generatedContent)).toBe(
+      HintMessages.ADOPTION_FOUR_HINT
+    );
   });
 
   test('should contain submit button', () => {
@@ -67,6 +83,5 @@ describe('adoption-application-type content', () => {
     const form = generatedContent.form as FormContent;
     expect((form.cancel?.text as Function)(generatePageContent({ language: 'en' }))).toBe('Cancel');
   });
-
 });
 /* eslint-enable @typescript-eslint/ban-types */

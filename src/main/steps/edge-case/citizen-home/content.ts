@@ -1,7 +1,7 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
-import { ErrorMessages,ErrorMessagesWelsh } from '../../../steps/errorMesages';
+import { ErrorMessages, ErrorMessagesWelsh } from '../../../steps/errorMesages';
 
 const en = () => ({
   continue: 'Continue',
@@ -35,7 +35,7 @@ export const form: FormContent = {
       label: l => l.label,
       values: [
         { label: l => l.one, value: 'family' },
-        { label: l => l.two, value: "tribunals",disabled:true},
+        { label: l => l.two, value: 'tribunals', disabled: true },
       ],
       validator: isFieldFilledIn,
     },

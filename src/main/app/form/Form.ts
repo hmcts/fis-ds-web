@@ -150,8 +150,8 @@ export interface FormOptions {
   attributes?: Partial<HTMLInputElement | HTMLTextAreaElement>;
   validator?: ValidationCheck;
   parser?: Parser;
-  disabled?:boolean;
-  
+  disabled?: boolean;
+
   // rows?: SummaryListContent;
 }
 
@@ -177,7 +177,7 @@ export interface FormInput {
   divider?: Label; //Required for divider between checkbox options
   open?: boolean;
   options?: DropdownOptionsLookup;
-  disabled?:boolean;
+  disabled?: boolean;
 }
 
 function isFormOptions(field: FormField): field is FormOptions {

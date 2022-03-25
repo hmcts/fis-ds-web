@@ -51,15 +51,27 @@ describe('private-law-application-type content', () => {
     expect(privateLawApplicationTypeField.classes).toEqual('govuk-radios');
     expect((privateLawApplicationTypeField.label as Function)(generatedContent)).toBe(LabelMessages.PRL_LABEL);
     expect((privateLawApplicationTypeField.values[0].label as Function)(generatedContent)).toBe(LabelMessages.PRL_ONE);
-    expect((privateLawApplicationTypeField.values[0].hint as Function)(generatedContent)).toBe(HintMessages.PRL_ONE_HINT);
+    expect((privateLawApplicationTypeField.values[0].hint as Function)(generatedContent)).toBe(
+      HintMessages.PRL_ONE_HINT
+    );
     expect((privateLawApplicationTypeField.values[1].label as Function)(generatedContent)).toBe(LabelMessages.PRL_TWO);
-    expect((privateLawApplicationTypeField.values[1].hint as Function)(generatedContent)).toBe(HintMessages.PRL_TWO_HINT);
-    expect((privateLawApplicationTypeField.values[2].label as Function)(generatedContent)).toBe(LabelMessages.PRL_THREE);
-    expect((privateLawApplicationTypeField.values[2].hint as Function)(generatedContent)).toBe(HintMessages.PRL_THREE_HINT);
+    expect((privateLawApplicationTypeField.values[1].hint as Function)(generatedContent)).toBe(
+      HintMessages.PRL_TWO_HINT
+    );
+    expect((privateLawApplicationTypeField.values[2].label as Function)(generatedContent)).toBe(
+      LabelMessages.PRL_THREE
+    );
+    expect((privateLawApplicationTypeField.values[2].hint as Function)(generatedContent)).toBe(
+      HintMessages.PRL_THREE_HINT
+    );
     expect((privateLawApplicationTypeField.values[3].label as Function)(generatedContent)).toBe(LabelMessages.PRL_FOUR);
-    expect((privateLawApplicationTypeField.values[3].hint as Function)(generatedContent)).toBe(HintMessages.PRL_FOUR_HINT);
+    expect((privateLawApplicationTypeField.values[3].hint as Function)(generatedContent)).toBe(
+      HintMessages.PRL_FOUR_HINT
+    );
     expect((privateLawApplicationTypeField.values[4].label as Function)(generatedContent)).toBe(LabelMessages.PRL_FIVE);
-    expect((privateLawApplicationTypeField.values[4].hint as Function)(generatedContent)).toBe(HintMessages.PRL_FIVE_HINT);
+    expect((privateLawApplicationTypeField.values[4].hint as Function)(generatedContent)).toBe(
+      HintMessages.PRL_FIVE_HINT
+    );
   });
 
   test('should contain submit button', () => {
