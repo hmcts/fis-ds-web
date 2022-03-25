@@ -6,6 +6,7 @@ Scenario(
     loginPage,
     landingPage,
     familypage,
+    applytoapplicantpage,
   }) => {
     await loginPage.SignInUser();
     await landingPage.seeTheLandingPage();
@@ -13,5 +14,7 @@ Scenario(
 
     await familypage.seeTheTitleOfThePage();
     await familypage.selectAdoptionService();
+
+    await applytoapplicantpage.applicantFullnames();
   }
 );
