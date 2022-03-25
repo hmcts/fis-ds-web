@@ -1,8 +1,8 @@
 nodejs:
   applicationPort: 4000
-  aadIdentityName: ds
+  aadIdentityName: fis
   ingressHost: fis-ds-web.{{ .Values.global.environment }}.platform.hmcts.net
-  image: 'hmctspublic.azurecr.io/ds/ui:latest'
+  image: 'hmctspublic.azurecr.io/fis/ds-web:latest'
 
   environment:
     NODE_ENV: production
