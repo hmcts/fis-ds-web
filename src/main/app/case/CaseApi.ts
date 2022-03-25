@@ -3,15 +3,15 @@ import config from 'config';
 import { LoggerInstance } from 'winston';
 
 import { getServiceAuthToken } from '../auth/service/get-service-auth-token';
-import { AppRequest, UserDetails } from '../controller/AppRequest';
+import { /*AppRequest,*/ UserDetails } from '../controller/AppRequest';
 
 import { Case, CaseWithId } from './case';
 import { CaseAssignedUserRoles } from './case-roles';
 import {
   //Adoption,
-  CASE_TYPE,
+  //CASE_TYPE,
   CITIZEN_ADD_PAYMENT,
-  CITIZEN_CREATE,
+  //CITIZEN_CREATE,
   CaseData,
   //JURISDICTION,
   ListValue,
@@ -34,13 +34,13 @@ export class CaseApi {
     return this.createCase();
   }
 
-  public async getOrCreateCaseNew(
-    req: AppRequest,
-    userDetails: UserDetails,
-    formData: Partial<Case>
-  ): Promise<CaseWithId> {
-    return this.createCaseNew(req, userDetails, formData);
-  }
+  // public async getOrCreateCaseNew(
+  //   req: AppRequest,
+  //   userDetails: UserDetails,
+  //   formData: Partial<Case>
+  // ): Promise<CaseWithId> {
+  //   return this.createCaseNew(req, userDetails, formData);
+  // }
 
   /* private async getCase(): Promise<CaseWithId | false> {
     const cases = await this.getCases();
@@ -82,37 +82,37 @@ export class CaseApi {
     }
   }
 
-  public async createCaseNew(req: AppRequest, userDetails: UserDetails, formData: Partial<Case>): Promise<CaseWithId> {
-    const tokenResponse: AxiosResponse<CcdTokenResponse> = await this.axios.get(
-      `/case-types/${CASE_TYPE}/event-triggers/${CITIZEN_CREATE}`
-    );
-    //console.log('caseapi.ts ' + serviceType);
-    const token = tokenResponse.data.token;
-    const event = { id: CITIZEN_CREATE };
-    const data = {
-      //adoption: serviceType,
-      // applicant1FirstName: userDetails.givenName,
-      // applicant1LastName: userDetails.familyName,
-      // applicant1Email: userDetails.email,
-      applicant1FirstName: formData.applicant1FirstNames,
-      applicant1LastName: formData.applicant1LastNames,
-      applicant1Email: userDetails.email,
-    };
-    //console.log("token => "+token+", event => "+event+", data => "+data);
-    try {
-      const response = await this.axios.post<CcdV2Response>(`/case-types/${CASE_TYPE}/cases`, {
-        data,
-        event,
-        event_token: token,
-      });
+  // public async createCaseNew(req: AppRequest, userDetails: UserDetails, formData: Partial<Case>): Promise<CaseWithId> {
+  //   const tokenResponse: AxiosResponse<CcdTokenResponse> = await this.axios.get(
+  //     `/case-types/${CASE_TYPE}/event-triggers/${CITIZEN_CREATE}`
+  //   );
+  //   //console.log('caseapi.ts ' + serviceType);
+  //   const token = tokenResponse.data.token;
+  //   const event = { id: CITIZEN_CREATE };
+  //   const data = {
+  //     //adoption: serviceType,
+  //     // applicant1FirstName: userDetails.givenName,
+  //     // applicant1LastName: userDetails.familyName,
+  //     // applicant1Email: userDetails.email,
+  //     applicant1FirstName: formData.applicant1FirstNames,
+  //     applicant1LastName: formData.applicant1LastNames,
+  //     applicant1Email: userDetails.email,
+  //   };
+  //   //console.log("token => "+token+", event => "+event+", data => "+data);
+  //   try {
+  //     const response = await this.axios.post<CcdV2Response>(`/case-types/${CASE_TYPE}/cases`, {
+  //       data,
+  //       event,
+  //       event_token: token,
+  //     });
 
-      //console.log("response =======> "+JSON.stringify(response.data));
-      return { id: response.data.id, state: response.data.state, ...fromApiFormat(response.data.data) };
-    } catch (err) {
-      this.logError(err);
-      throw new Error('Case could not be created.');
-    }
-  }
+  //     //console.log("response =======> "+JSON.stringify(response.data));
+  //     return { id: response.data.id, state: response.data.state, ...fromApiFormat(response.data.data) };
+  //   } catch (err) {
+  //     this.logError(err);
+  //     throw new Error('Case could not be created.');
+  //   }
+  // }
 
   private async createCase(/* serviceType: Adoption, userDetails: UserDetails) */): Promise<CaseWithId> {
     /*

@@ -59,28 +59,28 @@ export class PostController<T extends AnyObject> {
     req.session.errors = form.getErrors(formData);
 
     this.filterErrorsForSaveAsDraft(req);
-    const eventName = this.getEventName(req);
+    //const eventName = this.getEventName(req);
 
-    if (req.session.errors.length === 0) {
-      if (eventName === CITIZEN_CREATE) {
-        req.session.userCase = await this.createCase(req, formData);
-      } else if (eventName === CITIZEN_UPDATE) {
-        //req.session.userCase = await this.save(req, formData, eventName);
-      }
-    }
+    // if (req.session.errors.length === 0) {
+    //   if (eventName === CITIZEN_CREATE) {
+    //     req.session.userCase = await this.createCase(req, formData);
+    //   } else if (eventName === CITIZEN_UPDATE) {
+    //     req.session.userCase = await this.save(req, formData, eventName);
+    //   }
+    // }
 
     this.redirect(req, res);
   }
-  async createCase(req: AppRequest<T>, formData: Partial<Case>): Promise<CaseWithId | PromiseLike<CaseWithId>> {
-    try {
-      req.session.userCase = await req.locals.api.createCaseNew(req, req.session.user, formData);
-    } catch (err) {
-      req.locals.logger.error('Error saving', err);
-      req.session.errors = req.session.errors || [];
-      req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
-    }
-    return req.session.userCase;
-  }
+  // async createCase(req: AppRequest<T>, formData: Partial<Case>): Promise<CaseWithId | PromiseLike<CaseWithId>> {
+  //   try {
+  //     req.session.userCase = await req.locals.api.createCaseNew(req, req.session.user, formData);
+  //   } catch (err) {
+  //     req.locals.logger.error('Error saving', err);
+  //     req.session.errors = req.session.errors || [];
+  //     req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+  //   }
+  //   return req.session.userCase;
+  // }
 
   private async cancel(req: AppRequest<T>, res: Response): Promise<void> {
     const hmctsHomePage: string = config.get('services.hmctsHomePage.url');
