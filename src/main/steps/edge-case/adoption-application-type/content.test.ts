@@ -9,7 +9,7 @@ jest.mock('../../../app/form/validation');
 
 /* eslint-disable @typescript-eslint/ban-types */
 describe('adoption-application-type content', () => {
-  const commonContent = { language: 'en', userCase: { applyingWith: 'alone' } } as CommonContent;
+  const commonContent = { language: 'en', userCase: { applyingWithAdoption: 'Yes',applyingWithPrivateLaw:'No' } } as CommonContent;
   test('should return correct english content', () => {
     const generatedContent = generateContent(commonContent);
     expect(generatedContent.continue).toEqual('Continue');
@@ -42,7 +42,7 @@ describe('adoption-application-type content', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const adoptionApplicationTypeField = fields.applyingWith as FormOptions;
+    const adoptionApplicationTypeField = fields.applyingWithAdoption as FormOptions;
     expect(adoptionApplicationTypeField.type).toBe('radios');
     expect(adoptionApplicationTypeField.classes).toBe('govuk-radios');
     expect((adoptionApplicationTypeField.label as Function)(generatedContent)).toBe(LabelMessages.ADOPTION_LABEL);

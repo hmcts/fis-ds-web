@@ -17,7 +17,7 @@ const en = () => ({
   four: LabelMessages.ADOPTION_FOUR,
   fourHint: HintMessages.ADOPTION_FOUR_HINT,
   errors: {
-    applyingWith: {
+    applyingWithAdoption: {
       required: ErrorMessages.ADOPTION_ERROR_MESSAGE,
     },
   },
@@ -36,7 +36,7 @@ const cy = () => ({
   four: LabelMessagesWelsh.ADOPTION_FOUR,
   fourHint: HintMessagesWelsh.ADOPTION_FOUR_HINT,
   errors: {
-    applyingWith: {
+    applyingWithAdoption: {
       required: ErrorMessagesWelsh.ADOPTION_ERROR_MESSAGE,
     },
   },
@@ -44,7 +44,7 @@ const cy = () => ({
 
 export const form: FormContent = {
   fields: {
-    applyingWith: {
+    applyingWithAdoption: {
       type: 'radios',
       classes: 'govuk-radios',
       label: l => l.label,
