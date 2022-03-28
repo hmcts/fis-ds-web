@@ -49,14 +49,14 @@ describe('applicant1 > address > lookup > content', () => {
   });
 
   it('should have applicant1AddressPostcode label when language: en and  applyingWith: alone', () => {
-    const commonContent1 = { language: 'en', userCase: { applyingWith: 'alone' } } as CommonContent;
+    const commonContent1 = { language: 'en' } as CommonContent;
 
     const generatedContent1 = generateContent(commonContent1);
     expect(generatedContent1.section).toBe('Applicant');
   });
 
   it('should have an applicant1AddressPostcode label when language: cy and  applyingWith: alone', () => {
-    const commonContent1 = { language: 'cy', userCase: { applyingWith: 'alone' } } as CommonContent;
+    const commonContent1 = { language: 'cy' } as CommonContent;
 
     const generatedContent1 = generateContent(commonContent1);
     expect(generatedContent1.section).toBe('Applicant (in welsh)');
