@@ -9,7 +9,10 @@ jest.mock('../../../app/form/validation');
 
 /* eslint-disable @typescript-eslint/ban-types */
 describe('adoption-application-type content', () => {
-  const commonContent = { language: 'en', userCase: { applyingWithAdoption: 'Yes',applyingWithPrivateLaw:'No' } } as CommonContent;
+  const commonContent = {
+    language: 'en',
+    userCase: { applyingWithAdoption: 'Yes', applyingWithPrivateLaw: 'No' },
+  } as CommonContent;
   test('should return correct english content', () => {
     const generatedContent = generateContent(commonContent);
     expect(generatedContent.continue).toEqual('Continue');

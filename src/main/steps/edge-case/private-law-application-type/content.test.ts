@@ -9,7 +9,10 @@ jest.mock('../../../app/form/validation');
 
 /* eslint-disable @typescript-eslint/ban-types */
 describe('private-law-application-type content', () => {
-  const commonContent = { language: 'en', userCase: { applyingWithPrivateLaw: 'Yes',applyingWithAdoption: 'No' } } as CommonContent;
+  const commonContent = {
+    language: 'en',
+    userCase: { applyingWithPrivateLaw: 'Yes', applyingWithAdoption: 'No' },
+  } as CommonContent;
   test('should return correct english content', () => {
     const generatedContent = generateContent(commonContent);
     expect(generatedContent.serviceName).toEqual('Private law');

@@ -183,8 +183,8 @@ export type FieldFormats = Record<string, string | ((AnyObject) => AnyObject)>;
 
 export interface Case {
   applyingWith?: ApplyingWith;
-  applyingWithAdoption?:string;
-  applyingWithPrivateLaw?:string;
+  applyingWithAdoption?: string;
+  applyingWithPrivateLaw?: string;
   dateChildMovedIn?: CaseDate;
   serviceType?: string;
   adoptionApplicationType?: string;
