@@ -84,7 +84,7 @@ describe('common > components > manual-address > content', () => {
     expect(address1Field.classes).toBe('govuk-label');
     expect((address1Field.label as Function)(generatedContent)).toBe(enContent.addressLine1);
     expect(address1Field.labelSize).toBe(null);
-     expect(address1Field.validator).toBe(isFieldFilledIn);
+    expect(address1Field.validator).toBe(isFieldFilledIn);
   });
 
   test('should contain address2 field', () => {
@@ -118,7 +118,7 @@ describe('common > components > manual-address > content', () => {
     expect(addressPostcodeField.classes).toBe('govuk-label govuk-input--width-10');
     expect((addressPostcodeField.label as Function)(generatedContent)).toBe(enContent.postcode);
     expect(addressPostcodeField.labelSize).toBe(null);
-     expect(addressPostcodeField.validator).toBe(isInvalidPostcode);
+    expect(addressPostcodeField.validator).toBe(isInvalidPostcode);
   });
 
   test('should contain submit button', () => {

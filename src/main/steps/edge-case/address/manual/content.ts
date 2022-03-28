@@ -5,7 +5,7 @@ import {
   generateContent as manualAddressGenerateContent,
 } from '../../../common/components/address-manual';
 
-const en = ({ manualAddressContent, userCase }): Record<string, unknown> => {
+const en = ({ manualAddressContent }): Record<string, unknown> => {
   const section = 'Applicant';
   return {
     section,
@@ -18,7 +18,7 @@ const en = ({ manualAddressContent, userCase }): Record<string, unknown> => {
   };
 };
 
-const cy = ({ manualAddressContent, userCase }): Record<string, unknown> => {
+const cy = ({ manualAddressContent }): Record<string, unknown> => {
   const section = 'Applicant (in welsh)';
   return {
     section,
@@ -50,7 +50,7 @@ const languages = {
 
 export const generateContent: TranslationFn = content => {
   const manualAddressContent = manualAddressGenerateContent(content);
-  const translations = languages[content.language]({ manualAddressContent, userCase: content.userCase });
+  const translations = languages[content.language]({ manualAddressContent });
 
   return {
     ...manualAddressContent,
