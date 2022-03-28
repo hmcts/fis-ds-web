@@ -234,6 +234,25 @@ describe('PostController', () => {
     expect(1).toEqual(1);
   });
 
+  it('get the event name from the request url', async () => {
+    const body = { MOCK_KEY: 'MOCK_VALUE', saveBeforeSessionTimeout: true };
+    const controller = new PostController(mockFormContent.fields);
+    const req = mockRequest({ body, session: { user: { email: 'test@example.com' } } });
+    const res = mockResponse();
+    await controller.post(req, res);
+    expect(1).toEqual(1);
+  });
+
+  it('when user clicks on cancel button response should be redirected to UK GOV Home page', async () => {
+    const body = { MOCK_KEY: 'MOCK_VALUE', cancel: true };
+    const controller = new PostController(mockFormContent.fields);
+    const req = mockRequest({ body, session: { user: { email: 'test@example.com' } } });
+    const res = mockResponse();
+    await controller.post(req, res);
+    expect(res.redirect).toHaveBeenCalledWith('https://www.gov.uk/government/organisations/hm-courts-and-tribunals-service');
+    expect(1).toEqual(1);
+  });
+
   test('triggers citizen-applicant2-update-application event if user is applicant2', async () => {
     getNextStepUrlMock.mockReturnValue('/next-step-url');
     const body = {};
