@@ -3,13 +3,21 @@ import config from 'config';
 import { Response } from 'express';
 
 import { getNextStepUrl } from '../../steps';
-import { FULL_NAME, SAVE_AND_SIGN_OUT } from '../../steps/urls';
+import {FULL_NAME, SAVE_AND_SIGN_OUT } from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
 import { CITIZEN_CREATE, CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE } from '../case/definition';
 import { Form, FormFields, FormFieldsFn } from '../form/Form';
 import { ValidationError } from '../form/validation';
 
 import { AppRequest } from './AppRequest';
+
+
+enum noHitToSaveAndContinue {
+  CITIZEN_HOME_URL = '/citizen-home',
+  SERVICE_TYPE = '/service-type',
+  ADOPTION_APPLICATION_TYPE = '/adoption-application-type',
+  PRIVATE_LAW_APPLICATION_TYPE = '/private-law-application-type',
+}
 
 @autobind
 export class PostController<T extends AnyObject> {
@@ -59,13 +67,20 @@ export class PostController<T extends AnyObject> {
     req.session.errors = form.getErrors(formData);
 
     this.filterErrorsForSaveAsDraft(req);
-    const eventName = this.getEventName(req);
+    let eventName = this.getEventName(req);
+
+    let flagNoHit = false;
+    if((Object.values(noHitToSaveAndContinue) as string[]).includes(req.originalUrl)){
+      flagNoHit = true;
+    }
 
     if (req.session.errors.length === 0) {
-      if (eventName === CITIZEN_CREATE) {
-        req.session.userCase = await this.createCase(req, formData);
-      } else if (eventName === CITIZEN_UPDATE) {
-        //req.session.userCase = await this.save(req, formData, eventName);
+      if (!flagNoHit) {
+        if (eventName === CITIZEN_CREATE) {
+          req.session.userCase = await this.createCase(req, formData);
+        } else if (eventName === CITIZEN_UPDATE) {
+          req.session.userCase = await this.save(req, formData, eventName);
+        }
       }
     }
 
@@ -136,13 +151,24 @@ export class PostController<T extends AnyObject> {
   //eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected getEventName(req: AppRequest): string {
     let eventName = CITIZEN_UPDATE;
-
-    if (req.originalUrl === FULL_NAME) {
+    if (req.originalUrl === FULL_NAME && this.isBlank(req)) {
+      console.log("creating new case event");
       eventName = CITIZEN_CREATE;
-    }
-
+    } 
+    console.log("event is => "+eventName);
     return eventName;
   }
+
+  private isBlank(req: AppRequest<Partial<Case>>) {
+    console.log("inside isBlank() case id is => "+req.session.userCase.id);
+    if (req.session.userCase.id === null || req.session.userCase.id === undefined || req.session.userCase.id === '')
+      {
+        return true;
+      }
+  }
 }
+
+
+
 
 export type AnyObject = Record<string, unknown>;
