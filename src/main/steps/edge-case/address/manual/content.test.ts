@@ -19,7 +19,7 @@ const cyContent = {
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
 describe('applicant1 > address > manual > content', () => {
-  const commonContent = { language: 'en', userCase: {} } as CommonContent;
+  const commonContent = { language: 'en' } as CommonContent;
   let generatedContent;
   let form;
   let fields;
