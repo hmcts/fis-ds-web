@@ -23,3 +23,4 @@ nodejs:
         - redis-access-key
         - s2s-secret
         - AppInsightsInstrumentationKey
+        - postcode-lookup-token
