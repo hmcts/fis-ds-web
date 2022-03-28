@@ -249,7 +249,9 @@ describe('PostController', () => {
     const req = mockRequest({ body, session: { user: { email: 'test@example.com' } } });
     const res = mockResponse();
     await controller.post(req, res);
-    expect(res.redirect).toHaveBeenCalledWith('https://www.gov.uk/government/organisations/hm-courts-and-tribunals-service');
+    expect(res.redirect).toHaveBeenCalledWith(
+      'https://www.gov.uk/government/organisations/hm-courts-and-tribunals-service'
+    );
     expect(1).toEqual(1);
   });
 
