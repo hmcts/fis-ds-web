@@ -1,5 +1,5 @@
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
-//import { isFieldFilledIn, isInvalidPostcode } from '../../../app/form/validation';
+import { isFieldFilledIn, isInvalidPostcode } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../common.content';
 
 import { generateContent } from './address-manual';
@@ -20,8 +20,8 @@ const enContent = {
       required: 'Enter the town or city',
     },
     addressPostcode: {
-      required: 'Enter a valid postcode',
-      invalid: 'Enter a valid postcode',
+      required: 'Enter a real postcode',
+      invalid: 'Enter a real postcode',
     },
   },
 };
@@ -40,8 +40,8 @@ const cyContent = {
       required: 'Enter the town or city (in welsh)',
     },
     addressPostcode: {
-      required: 'Enter a valid postcode (in welsh)',
-      invalid: 'Enter a valid postcode (in welsh)',
+      required: 'Enter a real postcode (in welsh)',
+      invalid: 'Enter a real postcode (in welsh)',
     },
   },
 };
@@ -84,7 +84,7 @@ describe('common > components > manual-address > content', () => {
     expect(address1Field.classes).toBe('govuk-label');
     expect((address1Field.label as Function)(generatedContent)).toBe(enContent.addressLine1);
     expect(address1Field.labelSize).toBe(null);
-    //  expect(address1Field.validator).toBe(isFieldFilledIn);
+     expect(address1Field.validator).toBe(isFieldFilledIn);
   });
 
   test('should contain address2 field', () => {
@@ -118,7 +118,7 @@ describe('common > components > manual-address > content', () => {
     expect(addressPostcodeField.classes).toBe('govuk-label govuk-input--width-10');
     expect((addressPostcodeField.label as Function)(generatedContent)).toBe(enContent.postcode);
     expect(addressPostcodeField.labelSize).toBe(null);
-    //  expect(addressPostcodeField.validator).toBe(isInvalidPostcode);
+     expect(addressPostcodeField.validator).toBe(isInvalidPostcode);
   });
 
   test('should contain submit button', () => {

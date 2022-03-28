@@ -1,6 +1,6 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
-// import { isFieldFilledIn, isInvalidPostcode } from '../../../app/form/validation';
+import { isFieldFilledIn, isInvalidPostcode } from '../../../app/form/validation';
 
 const en = () => ({
   addressLine1: 'Building and street',
@@ -16,8 +16,8 @@ const en = () => ({
       required: 'Enter the town or city',
     },
     addressPostcode: {
-      required: 'Enter a valid postcode',
-      invalid: 'Enter a valid postcode',
+      required: 'Enter a real postcode',
+      invalid: 'Enter a real postcode',
     },
   },
 });
@@ -36,8 +36,8 @@ const cy = () => ({
       required: 'Enter the town or city (in welsh)',
     },
     addressPostcode: {
-      required: 'Enter a valid postcode (in welsh)',
-      invalid: 'Enter a valid postcode (in welsh)',
+      required: 'Enter a real postcode (in welsh)',
+      invalid: 'Enter a real postcode (in welsh)',
     },
   },
 });
@@ -49,7 +49,7 @@ export const form: FormContent = {
       classes: 'govuk-label',
       label: l => l.addressLine1,
       labelSize: null,
-      // validator: isFieldFilledIn,
+      validator: isFieldFilledIn,
     },
     address2: {
       type: 'text',
@@ -62,7 +62,7 @@ export const form: FormContent = {
       classes: 'govuk-label govuk-!-width-two-thirds',
       label: l => l.town,
       labelSize: null,
-      // validator: isFieldFilledIn,
+      validator: isFieldFilledIn,
     },
     addressCounty: {
       type: 'text',
@@ -78,7 +78,7 @@ export const form: FormContent = {
       attributes: {
         maxLength: 14,
       },
-      // validator: isInvalidPostcode,
+      validator: isInvalidPostcode,
     },
   },
   submit: {

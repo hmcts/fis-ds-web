@@ -1,6 +1,6 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
-//import { isAddressSelected } from '../../../app/form/validation';
+import { isAddressSelected } from '../../../app/form/validation';
 
 const getAddressItems = addresses => addresses.map((item, index) => ({ text: item.fullAddress, value: index }));
 
@@ -72,15 +72,12 @@ export const form: FormContent = {
       type: 'select',
       label: l => l.selectAddress,
       labelSize: 'm',
-      // validator: isAddressSelected,
+      validator: isAddressSelected,
       options: l => l.options,
     },
   },
   submit: {
     text: l => l.continue,
-  },
-  saveAsDraft: {
-    text: l => l.saveAsDraft,
   },
 };
 

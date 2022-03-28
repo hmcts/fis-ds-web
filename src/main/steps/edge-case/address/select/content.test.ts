@@ -73,10 +73,5 @@ describe('applicant1 > address > select > content', () => {
     const form = generatedContent.form as FormContent;
     expect((form.submit.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save and continue');
   });
-
-  test('should contain saveAsDraft button', () => {
-    const form = generatedContent.form as FormContent;
-    expect((form.saveAsDraft?.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save as draft');
-  });
 });
 /* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */

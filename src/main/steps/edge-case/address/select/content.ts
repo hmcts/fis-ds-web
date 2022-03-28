@@ -46,7 +46,6 @@ const languages = {
 };
 
 export const generateContent: TranslationFn = content => {
-  console.log('Conent-->', content.userCase);
   const selectAddressContent = selectAddressGenerateContent(content);
   const translations = languages[content.language]({ selectAddressContent });
 

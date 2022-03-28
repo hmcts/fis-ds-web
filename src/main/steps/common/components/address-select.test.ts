@@ -1,5 +1,5 @@
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
-//import { isAddressSelected } from '../../../app/form/validation';
+import { isAddressSelected } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
 import { generateContent } from './address-select';
@@ -132,17 +132,12 @@ describe('common > components > address-select', () => {
     expect(selectAddressField.type).toBe('select');
     expect((selectAddressField.label as Function)(generatedContent)).toBe('Select an address');
     expect(selectAddressField.labelSize).toBe('m');
-    //   expect(selectAddressField.validator).toBe(isAddressSelected);
+      expect(selectAddressField.validator).toBe(isAddressSelected);
   });
 
   test('should contain submit button', () => {
     const form = generatedContent.form as FormContent;
     expect((form.submit.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save and continue');
-  });
-
-  test('should contain saveAsDraft button', () => {
-    const form = generatedContent.form as FormContent;
-    expect((form.saveAsDraft?.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save as draft');
   });
 });
 /* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
