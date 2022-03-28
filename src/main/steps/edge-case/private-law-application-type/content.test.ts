@@ -49,7 +49,7 @@ describe('private-law-application-type content', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const privateLawApplicationTypeField = fields.applyingWith as FormOptions;
+    const privateLawApplicationTypeField = fields.applyingWithPrivateLaw as FormOptions;
     expect(privateLawApplicationTypeField.type).toBe('radios');
     expect(privateLawApplicationTypeField.classes).toEqual('govuk-radios');
     expect((privateLawApplicationTypeField.label as Function)(generatedContent)).toBe(LabelMessages.PRL_LABEL);

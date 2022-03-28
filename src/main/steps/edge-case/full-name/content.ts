@@ -6,7 +6,7 @@ import { form as fullNameForm, generateContent as fullNameGenerateContent } from
 
 export const en = ({ userCase }: CommonContent): Record<string, unknown> => {
   const section = 'Applicant';
-  const title = userCase?.serviceType === 'Yes' ? userCase?.adoptionApplicationType : userCase?.applyingWith;
+  const title = userCase?.serviceType === 'Yes' ? userCase?.applyingWithAdoption : userCase?.applyingWithPrivateLaw;
   return {
     section,
     serviceName: 'Apply to ' + title,
@@ -24,7 +24,7 @@ export const en = ({ userCase }: CommonContent): Record<string, unknown> => {
 
 export const cy = ({ userCase }: CommonContent): Record<string, unknown> => {
   const section = 'Applicant (in Welsh)';
-  const title = userCase?.serviceType === 'Yes' ? userCase?.adoptionApplicationType : userCase?.applyingWith;
+  const title = userCase?.serviceType === 'Yes' ? userCase?.applyingWithAdoption : userCase?.applyingWithPrivateLaw;
   return {
     section,
     serviceName: 'Apply to ' + title + ' (in Welsh)',
