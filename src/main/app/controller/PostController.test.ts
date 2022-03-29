@@ -277,21 +277,6 @@ describe('PostController', () => {
     expect(1).toEqual(1);
   });
 
-  test('triggers citizen-applicant2-update-application event if user is applicant2', async () => {
-    getNextStepUrlMock.mockReturnValue('/next-step-url');
-    const body = {};
-    const controller = new PostController(mockFormContent.fields);
-
-    const req = mockRequest({ body });
-    const res = mockResponse();
-    await controller.post(req, res);
-
-    /* expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', {}, CITIZEN_UPDATE);
-
-    expect(res.redirect).toHaveBeenCalledWith('/next-step-url'); */
-    expect(1).toEqual(1);
-  });
-
   test('triggers citizen-draft-aos event if user is respondent', async () => {
     getNextStepUrlMock.mockReturnValue('/next-step-url');
     const body = {};
@@ -344,7 +329,7 @@ describe('PostController', () => {
     expect(res.end).toBeCalled();
   });
 
-  test('whether the citizen update api call is made with correct user details fistname lastname', async () => {
+  test('whether the citizen update api call is made with correct user details fistname lastname update caseid', async () => {
     getNextStepUrlMock.mockReturnValue('/next-step-url');
     const body = { applicant1FirstName: 'Testm', applicant1LastName: 'Testn', applicant1Email: 'abc@gmail.com' };
     const controller = new PostController(mockFormContent.fields);
@@ -371,6 +356,50 @@ describe('PostController', () => {
     expect(getNextStepUrlMock).toBeCalledWith(req, expectedUserCase);
     expect(res.redirect).toBeCalledWith('/next-step-url');
     expect(req.session.errors).toStrictEqual([]);
+  });
+
+  test('whether NO calls are made to server when valid input data is given', async () => {
+    getNextStepUrlMock.mockReturnValue('/next-step-url');
+    const body = {
+      id: '',
+      state: 'Holding',
+    };
+    const controller = new PostController(mockFormContent.fields);
+
+    const req = mockRequest({ body, session: { user: { email: 'test@example.com' }, userCase: {} } });
+    const res = mockResponse();
+    req.originalUrl = '/citizen-home';
+
+    await controller.post(req, res);
+    expect(req.session.userCase.id).toEqual('');
+    expect(req.session.userCase.state).toEqual('Holding');
+  });
+
+  test('whether the CREATE CASE method is called when valid input data is given', async () => {
+    getNextStepUrlMock.mockReturnValue('/next-step-url');
+    const body = {
+      id: '',
+      state: 'Holding',
+      selectJurisdiction: 'family',
+      saveAndContinue: 'true',
+      serviceType: 'No',
+      applyingWithPrivateLaw: 'Financial applications',
+      applicant1FirstNames: 'qazqazqwe',
+      applicant1LastNames: 'wsxwsxdfg',
+    };
+    const controller = new PostController(mockFormContent.fields);
+
+    const req = mockRequest({ body, session: { user: { email: 'test@example.com' }, userCase: {} } });
+    const res = mockResponse();
+    req.originalUrl = '/full-name';
+
+    await controller.post(req, res);
+
+    expect(req.session.userCase.state).toEqual('Holding');
+    expect(req.session.userCase.serviceType).toEqual('No');
+    expect(req.session.userCase.applyingWithPrivateLaw).toEqual('Financial applications');
+    expect(req.session.userCase.applicant1FirstNames).toEqual('qazqazqwe');
+    expect(req.session.userCase.applicant1LastNames).toEqual('wsxwsxdfg');
   });
 });
 
