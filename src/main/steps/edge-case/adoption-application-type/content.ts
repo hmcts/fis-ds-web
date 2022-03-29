@@ -1,50 +1,67 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
+import { isFieldFilledIn } from '../../../app/form/validation';
+import { ErrorMessages, ErrorMessagesWelsh } from '../../../steps/errorMesages';
+import { HintMessages, HintMessagesWelsh, LabelMessages, LabelMessagesWelsh } from '../../../steps/labelMessages';
 
 const en = () => ({
   continue: 'Continue',
-  label: 'Adoption Application Type',
-  one: 'International Adoption',
-  two: 'Relinquished Adoption',
-  three: 'Step-parent Adoption',
-  four: 'Parental Orders',
+  serviceName: 'Adoption',
+  label: LabelMessages.ADOPTION_LABEL,
+  one: LabelMessages.ADOPTION_ONE,
+  oneHint: HintMessages.ADOPTION_ONE_HINT,
+  two: LabelMessages.ADOPTION_TWO,
+  twoHint: HintMessages.ADOPTION_TWO_HINT,
+  three: LabelMessages.ADOPTION_THREE,
+  threeHint: HintMessages.ADOPTION_THREE_HINT,
+  four: LabelMessages.ADOPTION_FOUR,
+  fourHint: HintMessages.ADOPTION_FOUR_HINT,
   errors: {
-    applyingWith: {
-      required: 'Select the Adoption Application type',
+    applyingWithAdoption: {
+      required: ErrorMessages.ADOPTION_ERROR_MESSAGE,
     },
   },
 });
 
 const cy = () => ({
   continue: 'Continue (in welsh)',
-  label: 'Adoption Application Type (in welsh)',
-  one: 'International Adoption (in welsh)',
-  two: 'Relinquished Adoption (in welsh)',
-  three: 'Step-parent Adoption (in welsh)',
-  four: 'Parental Orders (in welsh)',
+  serviceName: 'Adoption (in welsh)',
+  label: LabelMessagesWelsh.ADOPTION_LABEL,
+  one: LabelMessagesWelsh.ADOPTION_ONE,
+  oneHint: HintMessagesWelsh.ADOPTION_ONE_HINT,
+  two: LabelMessagesWelsh.ADOPTION_TWO,
+  twoHint: HintMessagesWelsh.ADOPTION_TWO_HINT,
+  three: LabelMessagesWelsh.ADOPTION_THREE,
+  threeHint: HintMessagesWelsh.ADOPTION_THREE_HINT,
+  four: LabelMessagesWelsh.ADOPTION_FOUR,
+  fourHint: HintMessagesWelsh.ADOPTION_FOUR_HINT,
   errors: {
-    applyingWith: {
-      required: 'Select the Adoption Application type (in welsh)',
+    applyingWithAdoption: {
+      required: ErrorMessagesWelsh.ADOPTION_ERROR_MESSAGE,
     },
   },
 });
 
 export const form: FormContent = {
   fields: {
-    adoptionApplicationType: {
+    applyingWithAdoption: {
       type: 'radios',
       classes: 'govuk-radios',
       label: l => l.label,
       values: [
-        { label: l => l.one, value: 'internationalAdoption' },
-        { label: l => l.two, value: 'relinquishedAdoption' },
-        { label: l => l.three, value: 'stepParentAdoption' },
-        { label: l => l.four, value: 'parentalOrders' },
+        { label: l => l.one, value: LabelMessages.ADOPTION_ONE, hint: l => l.oneHint },
+        { label: l => l.two, value: LabelMessages.ADOPTION_TWO, hint: l => l.twoHint },
+        { label: l => l.three, value: LabelMessages.ADOPTION_THREE, hint: l => l.threeHint },
+        { label: l => l.four, value: LabelMessages.ADOPTION_FOUR, hint: l => l.fourHint },
       ],
+      validator: isFieldFilledIn,
     },
   },
   submit: {
     text: l => l.continue,
+  },
+  cancel: {
+    text: l => l.cancel,
   },
 };
 

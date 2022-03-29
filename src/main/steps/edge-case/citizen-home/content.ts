@@ -1,5 +1,7 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
+import { isFieldFilledIn } from '../../../app/form/validation';
+import { ErrorMessages, ErrorMessagesWelsh } from '../../../steps/errorMesages';
 
 const en = () => ({
   continue: 'Continue',
@@ -7,8 +9,8 @@ const en = () => ({
   one: 'Family',
   two: 'Tribunals',
   errors: {
-    applyingWith: {
-      required: 'Select the jurisdiction type',
+    selectJurisdiction: {
+      required: ErrorMessages.JURISDICTION_ERROR_MESSAGE,
     },
   },
 });
@@ -20,7 +22,7 @@ const cy = () => ({
   two: 'Tribunals (in welsh)',
   errors: {
     selectJurisdiction: {
-      required: 'Select the jurisdiction type (in welsh)',
+      required: ErrorMessagesWelsh.JURISDICTION_ERROR_MESSAGE,
     },
   },
 });
@@ -33,8 +35,9 @@ export const form: FormContent = {
       label: l => l.label,
       values: [
         { label: l => l.one, value: 'family' },
-        { label: l => l.two, value: 'tribunals' },
+        { label: l => l.two, value: 'tribunals', disabled: true },
       ],
+      validator: isFieldFilledIn,
     },
   },
   submit: {

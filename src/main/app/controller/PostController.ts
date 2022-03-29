@@ -149,12 +149,12 @@ export class PostController<T extends AnyObject> {
   }
 
   //eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected getEventName(req: AppRequest): string {
+  private getEventName(req: AppRequest): string {
     let eventName = CITIZEN_UPDATE;
     if (req.originalUrl === FULL_NAME && this.isBlank(req)) {
       console.log("creating new case event");
       eventName = CITIZEN_CREATE;
-    } 
+    }
     console.log("event is => "+eventName);
     return eventName;
   }
@@ -167,8 +167,5 @@ export class PostController<T extends AnyObject> {
       }
   }
 }
-
-
-
 
 export type AnyObject = Record<string, unknown>;

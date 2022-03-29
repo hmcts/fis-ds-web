@@ -28,7 +28,7 @@ import { toApiFormat } from './to-api-format';
 //   STEPPARENT_ADOPTION = 'stepparentAdoption',
 //   PARENTAL_ORDERS = 'parentalOrders'
 //   }
-  
+
 //   enum PrivateLawServiceType {
 //   FEMALE_GENITAL_MUTILATION_ORDERS = 'femaleGenitalMutilationOrdersFGM',
 //   FORCED_MARRIAGE_PROTECTION_ORDER = 'forcedProtectionMarriageOrderFMPO',
@@ -101,7 +101,7 @@ export class CaseApi {
   private getCaseType(req: AppRequest): String{
     let caseType = '';
     //const adoptionServiceTypeValues = Object.values(AdoptionServiceType);
-    
+
     if (req.session.userCase.serviceType === 'Yes'){
       caseType =  'A58';
     } else if(req.session.userCase.serviceType === 'No'){
@@ -148,7 +148,7 @@ export class CaseApi {
 
   // TODO: clean up below code
   /*private async createCase(serviceType: Adoption, userDetails: UserDetails) ): Promise<CaseWithId> {
-    
+
     const tokenResponse: AxiosResponse<CcdTokenResponse> = await this.axios.get(
           `/case-types/${CASE_TYPE}/event-triggers/${CITIZEN_CREATE}`
         );
@@ -161,15 +161,15 @@ export class CaseApi {
           applicant1LastName: userDetails.familyName,
           applicant1Email: userDetails.email,
         };
-    
+
     try {
-      
+
     const response = await this.axios.post<CcdV2Response>(`/case-types/${CASE_TYPE}/cases`, {
             data,
             event,
             event_token: token,
           });
-    
+
       return { id: response.data.id, state: response.data.state, ...fromApiFormat(response.data.data) };
       return { id: '', state: State.Holding };
     } catch (err) {
