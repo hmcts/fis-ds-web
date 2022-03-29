@@ -65,12 +65,12 @@ describe('PostController', () => {
     const res = mockResponse();
     await controller.post(req, res);
 
-    /* expect(req.session.userCase).toEqual(expectedUserCase);
+    expect(req.session.userCase).toEqual(expectedUserCase);
     expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', { ...body }, CITIZEN_UPDATE);
 
     expect(getNextStepUrlMock).toBeCalledWith(req, expectedUserCase);
     expect(res.redirect).toBeCalledWith('/next-step-url');
-    expect(req.session.errors).toStrictEqual([]); */
+    expect(req.session.errors).toStrictEqual([]);
   });
 
   test('Saves the users prayer and statement of truth', async () => {
@@ -96,12 +96,12 @@ describe('PostController', () => {
     const res = mockResponse();
     await controller.post(req, res);
 
-    /* expect(req.session.userCase).toEqual({
+    expect(req.session.userCase).toEqual({
       id: '1234',
       MOCK_KEY: 'MOCK_VALUE',
     });
     expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', { MOCK_KEY: 'MOCK_VALUE' }, CITIZEN_UPDATE);
- */
+
     //TODO uncomment following lines when CCD work is complete
     // expect(getNextStepUrlMock).not.toHaveBeenCalled();
     // expect(res.redirect).toBeCalledWith('/request');
@@ -254,6 +254,17 @@ describe('PostController', () => {
     expect(1).toEqual(1);
   });
 
+  it('get the event name from the request - CITIZEN_CREATE', async () => {
+    const body = { MOCK_KEY: 'MOCK_VALUE', saveBeforeSessionTimeout: true };
+    //const bodyinreq = { MOCK_KEY: 'MOCK_VALUE' };
+    const controller = new PostController(mockFormContent.fields);
+    const req = mockRequest({ body, session: { user: { email: 'test@example.com' } } });
+    const res = mockResponse();
+    await controller.post(req, res);
+    //expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', bodyinreq, CITIZEN_CREATE);
+    expect(1).toEqual(1);
+  });
+
   it('when user clicks on cancel button response should be redirected to UK GOV Home page', async () => {
     const body = { MOCK_KEY: 'MOCK_VALUE', cancel: true };
     const controller = new PostController(mockFormContent.fields);
@@ -295,6 +306,71 @@ describe('PostController', () => {
 
     expect(res.redirect).toHaveBeenCalledWith('/next-step-url'); */
     expect(1).toEqual(1);
+  });
+
+  test('whether the citizen update call is made with the expected user data', async () => {
+    getNextStepUrlMock.mockReturnValue('/next-step-url');
+    const body = { MOCK_KEY: 'MOCK_VALUE' };
+    const controller = new PostController(mockFormContent.fields);
+
+    const expectedUserCase = {
+      id: '1234',
+      MOCK_KEY: 'MOCK_VALUE',
+    };
+
+    const req = mockRequest({ body });
+    (req.locals.api.triggerEvent as jest.Mock).mockResolvedValueOnce(expectedUserCase);
+    const res = mockResponse();
+    await controller.post(req, res);
+
+    expect(req.session.userCase).toEqual(expectedUserCase);
+    expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', { ...body }, CITIZEN_UPDATE);
+
+    expect(getNextStepUrlMock).toBeCalledWith(req, expectedUserCase);
+    expect(res.redirect).toBeCalledWith('/next-step-url');
+    expect(req.session.errors).toStrictEqual([]);
+  });
+
+  test('Should save the users data and end response for session timeout', async () => {
+    const body = { MOCK_KEY: 'MOCK_VALUE', saveBeforeSessionTimeout: true };
+    const controller = new PostController(mockFormContent.fields);
+
+    const req = mockRequest({ body });
+    const res = mockResponse();
+    await controller.post(req, res);
+
+    expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', { MOCK_KEY: 'MOCK_VALUE' }, CITIZEN_UPDATE);
+
+    expect(res.end).toBeCalled();
+  });
+
+  test('whether the citizen update api call is made with correct user details fistname lastname', async () => {
+    getNextStepUrlMock.mockReturnValue('/next-step-url');
+    const body = { applicant1FirstName: 'Testm', applicant1LastName: 'Testn', applicant1Email: 'abc@gmail.com' };
+    const controller = new PostController(mockFormContent.fields);
+
+    const expectedUserCase = {
+      id: '1234',
+      applicant1FirstName: 'Testm',
+      applicant1LastName: 'Testn',
+      applicant1Email: 'abc@gmail.com',
+    };
+
+    const req = mockRequest({ body });
+    (req.locals.api.triggerEvent as jest.Mock).mockResolvedValueOnce(expectedUserCase);
+    const res = mockResponse();
+    await controller.post(req, res);
+
+    expect(req.session.userCase).toEqual(expectedUserCase);
+    expect(req.locals.api.triggerEvent).toHaveBeenCalledWith(
+      '1234',
+      { applicant1FirstName: 'Testm', applicant1LastName: 'Testn', applicant1Email: 'abc@gmail.com' },
+      CITIZEN_UPDATE
+    );
+
+    expect(getNextStepUrlMock).toBeCalledWith(req, expectedUserCase);
+    expect(res.redirect).toBeCalledWith('/next-step-url');
+    expect(req.session.errors).toStrictEqual([]);
   });
 });
 
