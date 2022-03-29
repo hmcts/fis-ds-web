@@ -71,6 +71,7 @@ exports.config = {
     loginPage: './src/test/e2e/pages/login.page.js',
     landingPage: './src/test/e2e/pages/LandingPage.js',
     familypage: './src/test/e2e/pages/Family.page.js',
+    adoptionpage: './src/test/e2e/pages/Adoption.page.js',
     applytoapplicantpage: './src/test/e2e/pages/ApplytoApplicant.page.js'
   },
   plugins: {
