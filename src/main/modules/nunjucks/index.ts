@@ -42,6 +42,7 @@ export class Nunjucks {
         text: this.env.globals.getContent.call(this, i.label),
         name: i.name,
         classes: i.classes,
+        disabled: i.disabled,
         value: i.value ?? userAnswer?.[i.name as string] ?? (userAnswer as string),
         attributes: i.attributes,
         checked: i.selected ?? userAnswer?.[i.name as string]?.includes(i.value as string) ?? i.value === userAnswer,
