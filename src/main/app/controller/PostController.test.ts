@@ -3,11 +3,7 @@ import { mockResponse } from '../../../test/unit/utils/mockResponse';
 import { FormContent } from '../../app/form/Form';
 import * as steps from '../../steps';
 //import { SAVE_AND_SIGN_OUT } from '../../steps/urls';
-import {
-  ApplicationType,
-  CITIZEN_CREATE,
-  CITIZEN_UPDATE /*, CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE*/,
-} from '../case/definition';
+import { ApplicationType, CITIZEN_UPDATE /*, CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE*/ } from '../case/definition';
 import { isPhoneNoValid } from '../form/validation';
 
 import { PostController } from './PostController';
@@ -243,18 +239,6 @@ describe('PostController', () => {
     );
 
     expect(res.redirect).toHaveBeenCalledWith(SAVE_AND_SIGN_OUT); */
-    expect(1).toEqual(1);
-  });
-
-  it('get the event name from the request url CITIZEN_CREATE', async () => {
-    const body = { MOCK_KEY: 'MOCK_VALUE', saveBeforeSessionTimeout: true };
-    const bodyinreq = { MOCK_KEY: 'MOCK_VALUE' };
-    const controller = new PostController(mockFormContent.fields);
-    const req = mockRequest({ body, session: { user: { email: 'test@example.com' } } });
-    const res = mockResponse();
-    req.originalUrl = '/full-name';
-    await controller.post(req, res);
-    expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', bodyinreq, CITIZEN_CREATE);
     expect(1).toEqual(1);
   });
 

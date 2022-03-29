@@ -47,7 +47,7 @@ export class CaseApi {
     //const userCase = await this.getCase();
     //return userCase || this.createCase(serviceType, userDetails);
     //return this.createCase();
-    return {id:'', state: State.Holding};
+    return { id: '', state: State.Holding };
   }
 
   public async getOrCreateCaseNew(
@@ -98,23 +98,22 @@ export class CaseApi {
     }
   }
 
-  private getCaseType(req: AppRequest): String{
+  private getCaseType(req: AppRequest): string {
     let caseType = '';
     //const adoptionServiceTypeValues = Object.values(AdoptionServiceType);
 
-    if (req.session.userCase.serviceType === 'Yes'){
-      caseType =  'A58';
-    } else if(req.session.userCase.serviceType === 'No'){
-
+    if (req.session.userCase.serviceType === 'Yes') {
+      caseType = 'A58';
+    } else if (req.session.userCase.serviceType === 'No') {
+      caseType = 'A58';
     }
 
     return caseType;
   }
 
-
   public async createCaseNew(req: AppRequest, userDetails: UserDetails, formData: Partial<Case>): Promise<CaseWithId> {
     const caseType = this.getCaseType(req);
-    console.log("caseType=>"+caseType);
+    console.log('caseType=>' + caseType);
     const tokenResponse: AxiosResponse<CcdTokenResponse> = await this.axios.get(
       `/case-types/${CASE_TYPE}/event-triggers/${CITIZEN_CREATE}`
     );
