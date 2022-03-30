@@ -3,9 +3,9 @@ import config from 'config';
 import { Response } from 'express';
 
 import { getNextStepUrl } from '../../steps';
-import { SAVE_AND_SIGN_OUT } from '../../steps/urls';
+import { FULL_NAME, SAVE_AND_SIGN_OUT } from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
-import { CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE } from '../case/definition';
+import { CITIZEN_CREATE, CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE } from '../case/definition';
 import { Form, FormFields, FormFieldsFn } from '../form/Form';
 import { ValidationError } from '../form/validation';
 
@@ -57,13 +57,7 @@ export class PostController<T extends AnyObject> {
   private async saveAndContinue(req: AppRequest<T>, res: Response, form: Form, formData: Partial<Case>): Promise<void> {
     Object.assign(req.session.userCase, formData);
     req.session.errors = form.getErrors(formData);
-
     this.filterErrorsForSaveAsDraft(req);
-
-    //if (req.session.errors.length === 0) {
-    //req.session.userCase = await this.save(req, formData, this.getEventName(req));
-    //}
-
     this.redirect(req, res);
   }
 
@@ -110,21 +104,15 @@ export class PostController<T extends AnyObject> {
     });
   }
 
-  // method to check if there is a returnUrl in session and
-  // it is one of the allowed redirects from current page
-  protected checkReturnUrlAndRedirect(req: AppRequest<T>, res: Response, allowedReturnUrls: string[]): void {
-    const returnUrl = req.session.returnUrl;
-    if (returnUrl && allowedReturnUrls.includes(returnUrl)) {
-      req.session.returnUrl = undefined;
-      this.redirect(req, res, returnUrl);
-    } else {
-      this.redirect(req, res);
-    }
-  }
-
   //eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected getEventName(req: AppRequest): string {
-    return CITIZEN_UPDATE;
+  private getEventName(req: AppRequest): string {
+    let eventName = CITIZEN_UPDATE;
+
+    if (req.originalUrl === FULL_NAME) {
+      eventName = CITIZEN_CREATE;
+    }
+
+    return eventName;
   }
 }
 

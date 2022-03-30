@@ -3,7 +3,11 @@ import { mockResponse } from '../../../test/unit/utils/mockResponse';
 import { FormContent } from '../../app/form/Form';
 import * as steps from '../../steps';
 //import { SAVE_AND_SIGN_OUT } from '../../steps/urls';
-import { ApplicationType /*, CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE*/ } from '../case/definition';
+import {
+  ApplicationType,
+  CITIZEN_CREATE,
+  CITIZEN_UPDATE /*, CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE*/,
+} from '../case/definition';
 import { isPhoneNoValid } from '../form/validation';
 
 import { PostController } from './PostController';
@@ -183,28 +187,36 @@ describe('PostController', () => {
     expect(1).toEqual(1);
   });
 
-  test('Should save the users data and end response for session timeout', async () => {
-    const body = { MOCK_KEY: 'MOCK_VALUE', saveBeforeSessionTimeout: true };
+  test('get the event name based on request url - create case', async () => {
+    const body = { MOCK_KEY: 'MOCK_VALUE' };
     const controller = new PostController(mockFormContent.fields);
 
     const req = mockRequest({ body });
     const res = mockResponse();
+    req.originalUrl = '/full-name';
     await controller.post(req, res);
 
-    /* expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', { MOCK_KEY: 'MOCK_VALUE' }, CITIZEN_UPDATE);
+    expect(1).toEqual(1);
+  });
 
-    expect(res.end).toBeCalled(); */
+  test('get the event name based on url - update case', async () => {
+    getNextStepUrlMock.mockReturnValue('/next-step-url');
+    const body = { MOCK_KEY: 'MOCK_VALUE' };
+    const controller = new PostController(mockFormContent.fields);
+
+    const req = mockRequest({ body });
+    const res = mockResponse();
+    req.originalUrl = '/not-full-name';
+    await controller.post(req, res);
     expect(1).toEqual(1);
   });
 
   it('saves and signs out even if there are errors', async () => {
     const body = { MOCK_KEY: 'MOCK_VALUE', saveAndSignOut: true };
     const controller = new PostController(mockFormContent.fields);
-
     const req = mockRequest({ body, session: { user: { email: 'test@example.com' } } });
     const res = mockResponse();
     await controller.post(req, res);
-
     /* expect(req.locals.api.triggerEvent).toHaveBeenCalledWith(
       '1234',
       { MOCK_KEY: 'MOCK_VALUE' },
@@ -231,6 +243,42 @@ describe('PostController', () => {
     );
 
     expect(res.redirect).toHaveBeenCalledWith(SAVE_AND_SIGN_OUT); */
+    expect(1).toEqual(1);
+  });
+
+  it('get the event name from the request url CITIZEN_CREATE', async () => {
+    const body = { MOCK_KEY: 'MOCK_VALUE', saveBeforeSessionTimeout: true };
+    const bodyinreq = { MOCK_KEY: 'MOCK_VALUE' };
+    const controller = new PostController(mockFormContent.fields);
+    const req = mockRequest({ body, session: { user: { email: 'test@example.com' } } });
+    const res = mockResponse();
+    req.originalUrl = '/full-name';
+    await controller.post(req, res);
+    expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', bodyinreq, CITIZEN_CREATE);
+    expect(1).toEqual(1);
+  });
+
+  it('get the event name from the request url CITIZEN_UPDATE', async () => {
+    const body = { MOCK_KEY: 'MOCK_VALUE', saveBeforeSessionTimeout: true };
+    const bodyinreq = { MOCK_KEY: 'MOCK_VALUE' };
+    const controller = new PostController(mockFormContent.fields);
+    const req = mockRequest({ body, session: { user: { email: 'test@example.com' } } });
+    const res = mockResponse();
+    req.originalUrl = '/full-name-dummy';
+    await controller.post(req, res);
+    expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', bodyinreq, CITIZEN_UPDATE);
+    expect(1).toEqual(1);
+  });
+
+  it('when user clicks on cancel button response should be redirected to UK GOV Home page', async () => {
+    const body = { MOCK_KEY: 'MOCK_VALUE', cancel: true };
+    const controller = new PostController(mockFormContent.fields);
+    const req = mockRequest({ body, session: { user: { email: 'test@example.com' } } });
+    const res = mockResponse();
+    await controller.post(req, res);
+    expect(res.redirect).toHaveBeenCalledWith(
+      'https://www.gov.uk/government/organisations/hm-courts-and-tribunals-service'
+    );
     expect(1).toEqual(1);
   });
 

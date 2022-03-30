@@ -31,7 +31,7 @@ export class GetController {
     const content = generatePageContent({
       language,
       pageContent: this.content,
-      userCase,
+      userCase: req.session.userCase,
       userEmail: req.session?.user?.email,
       addresses,
       // eligibility,

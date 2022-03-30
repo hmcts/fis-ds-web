@@ -29,6 +29,8 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   applicationType: 'applicationType',
   dateChildMovedIn: 'dateChildMovedIn',
   applyingWith: 'applyingWith',
+  applyingWithAdoption: 'applyingWithAdoption',
+  applyingWithPrivateLaw: 'applyingWithPrivateLaw',
   applicant1HelpPayingNeeded: 'applicant1HWFNeedHelp',
   applicant1AlreadyAppliedForHelpPaying: 'applicant1HWFAppliedForFees',
   applicant1HelpWithFeesRefNo: 'applicant1HWFReferenceNumber',
@@ -183,8 +185,11 @@ export type FieldFormats = Record<string, string | ((AnyObject) => AnyObject)>;
 
 export interface Case {
   applyingWith?: ApplyingWith;
+  applyingWithAdoption?: string;
+  applyingWithPrivateLaw?: string;
   dateChildMovedIn?: CaseDate;
   serviceType?: string;
+  adoptionApplicationType?: string;
 
   /***** Applicant1 *****/
   applicant1FirstNames?: string;
