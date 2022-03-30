@@ -8,6 +8,7 @@ Scenario(
     familypage,
     applytoapplicantpage,
     adoptionpage,
+    contactdetails,
   }) => {
     await loginPage.SignInUser();
     await landingPage.seeTheLandingPage();
@@ -19,6 +20,9 @@ Scenario(
     await adoptionpage.selectInternationalAdoption();
 
     await applytoapplicantpage.applicantFullnames();
+    
+    await contactdetails.seeTheTitleOfThePage();
+    await contactdetails.selectEmail();
 
 
   }

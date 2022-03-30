@@ -72,7 +72,8 @@ exports.config = {
     landingPage: './src/test/e2e/pages/LandingPage.js',
     familypage: './src/test/e2e/pages/Family.page.js',
     adoptionpage: './src/test/e2e/pages/Adoption.page.js',
-    applytoapplicantpage: './src/test/e2e/pages/ApplytoApplicant.page.js'
+    applytoapplicantpage: './src/test/e2e/pages/ApplytoApplicant.page.js',
+    contactdetails: './src/test/e2e/pages/Contactdetails.page.js',
   },
   plugins: {
     retryFailedStep: {
