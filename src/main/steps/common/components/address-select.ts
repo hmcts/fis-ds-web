@@ -1,6 +1,6 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
-//import { isAddressSelected } from '../../../app/form/validation';
+import { isAddressSelected } from '../../../app/form/validation';
 
 const getAddressItems = addresses => addresses.map((item, index) => ({ text: item.fullAddress, value: index }));
 
@@ -18,7 +18,8 @@ const en = content => {
   options.push(...getAddressItems(addresses));
 
   return {
-    line1: "We'll send all court papers to this address.",
+    line1:
+      "We'll send all court papers to this address unless you advise us that you are happy to be served court orders by email.",
     postcode: 'Postcode',
     selectAddress: 'Select an address',
     cannotFindAddress: 'I cannot find the address in the list',
@@ -49,7 +50,8 @@ const cy = content => {
   options.push(...getAddressItems(addresses));
 
   return {
-    line1: "We'll send all court papers to this address. (in welsh)",
+    line1:
+      "We'll send all court papers to this address unless you advise us that you are happy to be served court orders by email.",
     postcode: 'Postcode (in welsh)',
     selectAddress: 'Select an address (in welsh)',
     cannotFindAddress: 'I cannot find the address in the list (in welsh)',
@@ -70,15 +72,12 @@ export const form: FormContent = {
       type: 'select',
       label: l => l.selectAddress,
       labelSize: 'm',
-      // validator: isAddressSelected,
+      validator: isAddressSelected,
       options: l => l.options,
     },
   },
   submit: {
     text: l => l.continue,
-  },
-  saveAsDraft: {
-    text: l => l.saveAsDraft,
   },
 };
 
