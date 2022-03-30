@@ -9,7 +9,10 @@ jest.mock('../../../app/form/validation');
 
 /* eslint-disable @typescript-eslint/ban-types */
 describe('private-law-application-type content', () => {
-  const commonContent = { language: 'en', userCase: { applyingWith: 'alone' } } as CommonContent;
+  const commonContent = {
+    language: 'en',
+    userCase: { applyingWithPrivateLaw: 'Yes', applyingWithAdoption: 'No' },
+  } as CommonContent;
   test('should return correct english content', () => {
     const generatedContent = generateContent(commonContent);
     expect(generatedContent.serviceName).toEqual('Private law');
@@ -46,7 +49,7 @@ describe('private-law-application-type content', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const privateLawApplicationTypeField = fields.applyingWith as FormOptions;
+    const privateLawApplicationTypeField = fields.applyingWithPrivateLaw as FormOptions;
     expect(privateLawApplicationTypeField.type).toBe('radios');
     expect(privateLawApplicationTypeField.classes).toEqual('govuk-radios');
     expect((privateLawApplicationTypeField.label as Function)(generatedContent)).toBe(LabelMessages.PRL_LABEL);
