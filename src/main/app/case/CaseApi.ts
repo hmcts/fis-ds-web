@@ -1,17 +1,18 @@
 import Axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import config from 'config';
+//import { stat } from 'fs';
 import { LoggerInstance } from 'winston';
 
 import { getServiceAuthToken } from '../auth/service/get-service-auth-token';
-import { /*AppRequest,*/ UserDetails } from '../controller/AppRequest';
+import { AppRequest, UserDetails } from '../controller/AppRequest';
 
 import { Case, CaseWithId } from './case';
 import { CaseAssignedUserRoles } from './case-roles';
 import {
   //Adoption,
-  //CASE_TYPE,
+  CASE_TYPE,
   CITIZEN_ADD_PAYMENT,
-  //CITIZEN_CREATE,
+  CITIZEN_CREATE,
   CaseData,
   //JURISDICTION,
   ListValue,
@@ -21,6 +22,20 @@ import {
 import { fromApiFormat } from './from-api-format';
 import { toApiFormat } from './to-api-format';
 
+// enum AdoptionServiceType {
+//   INTERNATIONAL_ADOPTION = 'internationalAdoption',
+//   RELINQUISHED_ADOPTION = 'relinquishedAdoption',
+//   STEPPARENT_ADOPTION = 'stepparentAdoption',
+//   PARENTAL_ORDERS = 'parentalOrders'
+//   }
+
+//   enum PrivateLawServiceType {
+//   FEMALE_GENITAL_MUTILATION_ORDERS = 'femaleGenitalMutilationOrdersFGM',
+//   FORCED_MARRIAGE_PROTECTION_ORDER = 'forcedProtectionMarriageOrderFMPO',
+//   SPECIAL_GUARDIANSHIP = 'specialGuardianship',
+//   FINANCIAL_APPLICATIONS = 'financialApplications',
+//   DECLARATION_OF_PARENTAGE = 'declarationOfParentage'
+//   }
 export class CaseApi {
   constructor(
     private readonly axios: AxiosInstance,
@@ -31,16 +46,17 @@ export class CaseApi {
   public async getOrCreateCase(/*serviceType: Adoption, userDetails: UserDetails*/): Promise<CaseWithId> {
     //const userCase = await this.getCase();
     //return userCase || this.createCase(serviceType, userDetails);
-    return this.createCase();
+    //return this.createCase();
+    return { id: '', state: State.Holding };
   }
 
-  // public async getOrCreateCaseNew(
-  //   req: AppRequest,
-  //   userDetails: UserDetails,
-  //   formData: Partial<Case>
-  // ): Promise<CaseWithId> {
-  //   return this.createCaseNew(req, userDetails, formData);
-  // }
+  public async getOrCreateCaseNew(
+    req: AppRequest,
+    userDetails: UserDetails,
+    formData: Partial<Case>
+  ): Promise<CaseWithId> {
+    return this.createCaseNew(req, userDetails, formData);
+  }
 
   /* private async getCase(): Promise<CaseWithId | false> {
     const cases = await this.getCases();
@@ -82,40 +98,56 @@ export class CaseApi {
     }
   }
 
-  // public async createCaseNew(req: AppRequest, userDetails: UserDetails, formData: Partial<Case>): Promise<CaseWithId> {
-  //   const tokenResponse: AxiosResponse<CcdTokenResponse> = await this.axios.get(
-  //     `/case-types/${CASE_TYPE}/event-triggers/${CITIZEN_CREATE}`
-  //   );
-  //   //console.log('caseapi.ts ' + serviceType);
-  //   const token = tokenResponse.data.token;
-  //   const event = { id: CITIZEN_CREATE };
-  //   const data = {
-  //     //adoption: serviceType,
-  //     // applicant1FirstName: userDetails.givenName,
-  //     // applicant1LastName: userDetails.familyName,
-  //     // applicant1Email: userDetails.email,
-  //     applicant1FirstName: formData.applicant1FirstNames,
-  //     applicant1LastName: formData.applicant1LastNames,
-  //     applicant1Email: userDetails.email,
-  //   };
-  //   //console.log("token => "+token+", event => "+event+", data => "+data);
-  //   try {
-  //     const response = await this.axios.post<CcdV2Response>(`/case-types/${CASE_TYPE}/cases`, {
-  //       data,
-  //       event,
-  //       event_token: token,
-  //     });
+  private getCaseType(req: AppRequest): string {
+    let caseType = '';
+    //const adoptionServiceTypeValues = Object.values(AdoptionServiceType);
 
-  //     //console.log("response =======> "+JSON.stringify(response.data));
-  //     return { id: response.data.id, state: response.data.state, ...fromApiFormat(response.data.data) };
-  //   } catch (err) {
-  //     this.logError(err);
-  //     throw new Error('Case could not be created.');
-  //   }
-  // }
+    if (req.session.userCase.serviceType === 'Yes') {
+      caseType = 'A58';
+    } else if (req.session.userCase.serviceType === 'No') {
+      caseType = 'A58';
+    }
 
-  private async createCase(/* serviceType: Adoption, userDetails: UserDetails) */): Promise<CaseWithId> {
-    /*
+    return caseType;
+  }
+
+  public async createCaseNew(req: AppRequest, userDetails: UserDetails, formData: Partial<Case>): Promise<CaseWithId> {
+    const caseType = this.getCaseType(req);
+    console.log('caseType=>' + caseType);
+    const tokenResponse: AxiosResponse<CcdTokenResponse> = await this.axios.get(
+      `/case-types/${CASE_TYPE}/event-triggers/${CITIZEN_CREATE}`
+    );
+    //console.log('caseapi.ts ' + serviceType);
+    const token = tokenResponse.data.token;
+    const event = { id: CITIZEN_CREATE };
+    const data = {
+      //adoption: serviceType,
+      // applicant1FirstName: userDetails.givenName,
+      // applicant1LastName: userDetails.familyName,
+      // applicant1Email: userDetails.email,
+      applicant1FirstName: formData.applicant1FirstNames,
+      applicant1LastName: formData.applicant1LastNames,
+      applicant1Email: userDetails.email,
+    };
+    //console.log("token => "+token+", event => "+event+", data => "+data);
+    try {
+      const response = await this.axios.post<CcdV2Response>(`/case-types/${CASE_TYPE}/cases`, {
+        data,
+        event,
+        event_token: token,
+      });
+
+      //console.log("response =======> "+JSON.stringify(response.data));
+      return { id: response.data.id, state: response.data.state, ...fromApiFormat(response.data.data) };
+    } catch (err) {
+      this.logError(err);
+      throw new Error('Case could not be created.');
+    }
+  }
+
+  // TODO: clean up below code
+  /*private async createCase(serviceType: Adoption, userDetails: UserDetails) ): Promise<CaseWithId> {
+
     const tokenResponse: AxiosResponse<CcdTokenResponse> = await this.axios.get(
           `/case-types/${CASE_TYPE}/event-triggers/${CITIZEN_CREATE}`
         );
@@ -128,22 +160,22 @@ export class CaseApi {
           applicant1LastName: userDetails.familyName,
           applicant1Email: userDetails.email,
         };
-    */
+
     try {
-      /*
+
     const response = await this.axios.post<CcdV2Response>(`/case-types/${CASE_TYPE}/cases`, {
             data,
             event,
             event_token: token,
           });
-    */
-      //return { id: response.data.id, state: response.data.state, ...fromApiFormat(response.data.data) };
-      return { id: '1234567890', state: State.Holding };
+
+      return { id: response.data.id, state: response.data.state, ...fromApiFormat(response.data.data) };
+      return { id: '', state: State.Holding };
     } catch (err) {
       this.logError(err);
       throw new Error('Case could not be created.');
     }
-  }
+  }*/
 
   public async getCaseUserRoles(caseId: string, userId: string): Promise<CaseAssignedUserRoles> {
     try {
