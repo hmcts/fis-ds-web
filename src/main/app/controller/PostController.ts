@@ -88,24 +88,20 @@ export class PostController<T extends AnyObject> {
   }
 
   protected redirect(req: AppRequest<T>, res: Response, nextUrl?: string): void {
-    console.log('AAAAAAAAAA');
     if (!nextUrl) {
-      console.log('BBBBBBBBBBB');
       nextUrl = req.session.errors?.length ? req.url : getNextStepUrl(req, req.session.userCase);
     }
 
     req.session.save(err => {
       if (err) {
-        console.log('CCCCCCCCCCCC');
         throw err;
       }
-      console.log(nextUrl);
       res.redirect(nextUrl!);
     });
   }
 
   //eslint-disable-next-line @typescript-eslint/no-unused-vars
-  private getEventName(req: AppRequest): string {
+  protected getEventName(req: AppRequest): string {
     let eventName = CITIZEN_UPDATE;
 
     if (req.originalUrl === FULL_NAME) {

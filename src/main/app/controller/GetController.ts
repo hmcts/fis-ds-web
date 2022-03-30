@@ -25,16 +25,13 @@ export class GetController {
     }
 
     const language = this.getPreferredLanguage(req) as Language;
-    const userCase = req.session?.userCase;
     const addresses = req.session?.addresses;
-    // const eligibility = req.session?.eligibility;
     const content = generatePageContent({
       language,
       pageContent: this.content,
       userCase: req.session.userCase,
       userEmail: req.session?.user?.email,
       addresses,
-      // eligibility,
     });
 
     const sessionErrors = req.session?.errors || [];
