@@ -66,9 +66,9 @@ export class PostController<T extends AnyObject> {
     req.session.errors = form.getErrors(formData);
 
     this.filterErrorsForSaveAsDraft(req);
-    
+
     if (req.session?.user && req.session.errors.length === 0) {
-     if (!(Object.values(noHitToSaveAndContinue) as string[]).includes(req.originalUrl)) {
+      if (!(Object.values(noHitToSaveAndContinue) as string[]).includes(req.originalUrl)) {
         const eventName = this.getEventName(req);
         if (eventName === CITIZEN_CREATE) {
           req.session.userCase = await this.createCase(req, formData);
@@ -77,12 +77,11 @@ export class PostController<T extends AnyObject> {
         }
       }
     }
-    console.log("redirect to next page");
     this.redirect(req, res);
   }
   async createCase(req: AppRequest<T>, formData: Partial<Case>): Promise<CaseWithId | PromiseLike<CaseWithId>> {
     try {
-      console.log("Create Case New");
+      console.log('Create Case New');
       req.session.userCase = await req.locals.api.createCaseNew(req, req.session.user, formData);
     } catch (err) {
       req.locals.logger.error('Error saving', err);
@@ -109,7 +108,7 @@ export class PostController<T extends AnyObject> {
 
   protected async save(req: AppRequest<T>, formData: Partial<Case>, eventName: string): Promise<CaseWithId> {
     try {
-      console.log("Update Existing Case");
+      console.log('Update Existing Case');
       req.session.userCase = await req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
     } catch (err) {
       req.locals.logger.error('Error saving', err);
