@@ -66,15 +66,10 @@ export class PostController<T extends AnyObject> {
     req.session.errors = form.getErrors(formData);
 
     this.filterErrorsForSaveAsDraft(req);
-    const eventName = this.getEventName(req);
-
-    let flagNoHit = false;
-    if ((Object.values(noHitToSaveAndContinue) as string[]).includes(req.originalUrl)) {
-      flagNoHit = true;
-    }
-
-    if (req.session.errors.length === 0) {
-      if (!flagNoHit) {
+    
+    if (req.session?.user && req.session.errors.length === 0) {
+     if (!(Object.values(noHitToSaveAndContinue) as string[]).includes(req.originalUrl)) {
+        const eventName = this.getEventName(req);
         if (eventName === CITIZEN_CREATE) {
           req.session.userCase = await this.createCase(req, formData);
         } else if (eventName === CITIZEN_UPDATE) {
@@ -82,11 +77,12 @@ export class PostController<T extends AnyObject> {
         }
       }
     }
-
+    console.log("redirect to next page");
     this.redirect(req, res);
   }
   async createCase(req: AppRequest<T>, formData: Partial<Case>): Promise<CaseWithId | PromiseLike<CaseWithId>> {
     try {
+      console.log("Create Case New");
       req.session.userCase = await req.locals.api.createCaseNew(req, req.session.user, formData);
     } catch (err) {
       req.locals.logger.error('Error saving', err);
@@ -113,6 +109,7 @@ export class PostController<T extends AnyObject> {
 
   protected async save(req: AppRequest<T>, formData: Partial<Case>, eventName: string): Promise<CaseWithId> {
     try {
+      console.log("Update Existing Case");
       req.session.userCase = await req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
     } catch (err) {
       req.locals.logger.error('Error saving', err);
@@ -148,7 +145,7 @@ export class PostController<T extends AnyObject> {
   }
 
   //eslint-disable-next-line @typescript-eslint/no-unused-vars
-  private getEventName(req: AppRequest): string {
+  protected getEventName(req: AppRequest): string {
     let eventName = CITIZEN_UPDATE;
     if (req.originalUrl === FULL_NAME && this.isBlank(req)) {
       console.log('creating new case event');
