@@ -124,9 +124,5 @@ describe('common > components > manual-address > content', () => {
   test('should contain submit button', () => {
     expect((form.submit.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save and continue');
   });
-
-  test('should contain saveAsDraft button', () => {
-    expect((form.saveAsDraft?.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save as draft');
-  });
 });
 /* eslint-enable @typescript-eslint/ban-types */

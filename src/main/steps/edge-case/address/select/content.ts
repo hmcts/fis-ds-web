@@ -6,10 +6,12 @@ import {
 } from '../../../common/components/address-select';
 import { FIND_ADDRESS, MANUAL_ADDRESS } from '../../../urls';
 
-const en = ({ selectAddressContent }): Record<string, unknown> => {
+const en = ({ selectAddressContent, userCase }): Record<string, unknown> => {
   const section = 'Applicant';
+  const title = userCase?.serviceType === 'Yes' ? userCase?.applyingWithAdoption : userCase?.applyingWithPrivateLaw;
   return {
     section,
+    serviceName: 'Apply to ' + title,
     title: "What's your home address?",
     errors: {
       applicant1SelectAddress: selectAddressContent.errors.selectAddress,
@@ -19,10 +21,12 @@ const en = ({ selectAddressContent }): Record<string, unknown> => {
   };
 };
 
-const cy = ({ selectAddressContent }): Record<string, unknown> => {
+const cy = ({ selectAddressContent, userCase }): Record<string, unknown> => {
   const section = 'Applicant (in Welsh)';
+  const title = userCase?.serviceType === 'Yes' ? userCase?.applyingWithAdoption : userCase?.applyingWithPrivateLaw;
   return {
     section,
+    serviceName: 'Apply to ' + title + ' (in Welsh)',
     title: "What's your home address? (in Welsh)",
     errors: {
       applicant1SelectAddress: selectAddressContent.errors.selectAddress,
@@ -47,7 +51,7 @@ const languages = {
 
 export const generateContent: TranslationFn = content => {
   const selectAddressContent = selectAddressGenerateContent(content);
-  const translations = languages[content.language]({ selectAddressContent });
+  const translations = languages[content.language]({ selectAddressContent, userCase: content.userCase });
 
   return {
     ...selectAddressContent,

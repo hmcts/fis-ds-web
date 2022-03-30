@@ -5,10 +5,12 @@ import {
   generateContent as manualAddressGenerateContent,
 } from '../../../common/components/address-manual';
 
-const en = ({ manualAddressContent }): Record<string, unknown> => {
+const en = ({ manualAddressContent, userCase }): Record<string, unknown> => {
   const section = 'Applicant';
+  const title = userCase?.serviceType === 'Yes' ? userCase?.applyingWithAdoption : userCase?.applyingWithPrivateLaw;
   return {
     section,
+    serviceName: 'Apply to ' + title,
     title: "What's your address?",
     errors: {
       applicant1Address1: manualAddressContent.errors.address1,
@@ -18,10 +20,12 @@ const en = ({ manualAddressContent }): Record<string, unknown> => {
   };
 };
 
-const cy = ({ manualAddressContent }): Record<string, unknown> => {
+const cy = ({ manualAddressContent, userCase }): Record<string, unknown> => {
   const section = 'Applicant (in welsh)';
+  const title = userCase?.serviceType === 'Yes' ? userCase?.applyingWithAdoption : userCase?.applyingWithPrivateLaw;
   return {
     section,
+    serviceName: 'Apply to ' + title + ' (in Welsh)',
     title: "What's your address? (in welsh)",
     errors: {
       applicant1Address1: manualAddressContent.errors.address1,
@@ -50,7 +54,7 @@ const languages = {
 
 export const generateContent: TranslationFn = content => {
   const manualAddressContent = manualAddressGenerateContent(content);
-  const translations = languages[content.language]({ manualAddressContent });
+  const translations = languages[content.language]({ manualAddressContent, userCase: content.userCase });
 
   return {
     ...manualAddressContent,
