@@ -19,7 +19,7 @@ const en = () => ({
   five: LabelMessages.PRL_FIVE,
   fiveHint: HintMessages.PRL_FIVE_HINT,
   errors: {
-    applyingWith: {
+    applyingWithPrivateLaw: {
       required: ErrorMessages.PRL_ERROR_MESSAGE,
     },
   },
@@ -40,7 +40,7 @@ const cy = () => ({
   five: LabelMessagesWelsh.PRL_FIVE,
   fiveHint: HintMessagesWelsh.PRL_FIVE_HINT,
   errors: {
-    applyingWith: {
+    applyingWithPrivateLaw: {
       required: ErrorMessagesWelsh.PRL_ERROR_MESSAGE,
     },
   },
@@ -48,7 +48,7 @@ const cy = () => ({
 
 export const form: FormContent = {
   fields: {
-    applyingWith: {
+    applyingWithPrivateLaw: {
       type: 'radios',
       classes: 'govuk-radios',
       label: l => l.label,

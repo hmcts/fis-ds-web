@@ -4,6 +4,7 @@ import {
   form as addressLookupForm,
   generateContent as generateAddressLookupContent,
 } from '../../../common/components/address-lookup';
+import { MANUAL_ADDRESS } from '../../../urls';
 
 import { generateContent } from './content';
 
@@ -33,7 +34,7 @@ describe('applicant1 > address > lookup > content', () => {
     expect(generatedContent.errors).toEqual({
       applicant1AddressPostcode: (addressLookupContent.errors as any).addressPostcode,
     });
-    expect(generatedContent.manualAddressUrl).toEqual('/address/manual');
+    expect(generatedContent.manualAddressUrl).toEqual(MANUAL_ADDRESS);
   });
 
   test('should return correct welsh content', () => {
@@ -44,7 +45,21 @@ describe('applicant1 > address > lookup > content', () => {
     expect(generatedContent.errors).toEqual({
       applicant1AddressPostcode: (addressLookupContent.errors as any).addressPostcode,
     });
-    expect(generatedContent.manualAddressUrl).toEqual('/address/manual');
+    expect(generatedContent.manualAddressUrl).toEqual(MANUAL_ADDRESS);
+  });
+
+  it('should have applicant1AddressPostcode label when language: en and  applyingWith: alone', () => {
+    const commonContent1 = { language: 'en' } as CommonContent;
+
+    const generatedContent1 = generateContent(commonContent1);
+    expect(generatedContent1.section).toBe('Applicant');
+  });
+
+  it('should have an applicant1AddressPostcode label when language: cy and  applyingWith: alone', () => {
+    const commonContent1 = { language: 'cy' } as CommonContent;
+
+    const generatedContent1 = generateContent(commonContent1);
+    expect(generatedContent1.section).toBe('Applicant (in welsh)');
   });
 
   test('should contain applicant1AddressPostcode field', () => {

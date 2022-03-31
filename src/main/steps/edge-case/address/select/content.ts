@@ -6,33 +6,41 @@ import {
 } from '../../../common/components/address-select';
 import { FIND_ADDRESS, MANUAL_ADDRESS } from '../../../urls';
 
-const en = selectAddressContent => ({
-  section: 'Applicant',
-  title: "What's your home address?",
-  errors: {
-    applicant1SelectAddress: selectAddressContent.errors.selectAddress,
-  },
-  changePostCodeUrl: FIND_ADDRESS,
-  cantFindAddressUrl: MANUAL_ADDRESS,
-});
+const en = ({ selectAddressContent, userCase }): Record<string, unknown> => {
+  const section = 'Applicant';
+  const title = userCase?.serviceType === 'Yes' ? userCase?.applyingWithAdoption : userCase?.applyingWithPrivateLaw;
+  return {
+    section,
+    serviceName: 'Apply to ' + title,
+    title: "What's your home address?",
+    errors: {
+      applicant1SelectAddress: selectAddressContent.errors.selectAddress,
+    },
+    changePostCodeUrl: FIND_ADDRESS,
+    cantFindAddressUrl: MANUAL_ADDRESS,
+  };
+};
 
-const cy = selectAddressContent => ({
-  section: 'Applicant (in welsh)',
-  title: "What's your home address? (in welsh)",
-  errors: {
-    applicant1SelectAddress: selectAddressContent.errors.selectAddress,
-  },
-  changePostCodeUrl: FIND_ADDRESS,
-  cantFindAddressUrl: MANUAL_ADDRESS,
-});
+const cy = ({ selectAddressContent, userCase }): Record<string, unknown> => {
+  const section = 'Applicant (in Welsh)';
+  const title = userCase?.serviceType === 'Yes' ? userCase?.applyingWithAdoption : userCase?.applyingWithPrivateLaw;
+  return {
+    section,
+    serviceName: 'Apply to ' + title + ' (in Welsh)',
+    title: "What's your home address? (in Welsh)",
+    errors: {
+      applicant1SelectAddress: selectAddressContent.errors.selectAddress,
+    },
+    changePostCodeUrl: FIND_ADDRESS,
+    cantFindAddressUrl: MANUAL_ADDRESS,
+  };
+};
 
 const selectAddressFormFields = selectAddressForm.fields as FormFields;
 export const form: FormContent = {
+  ...selectAddressForm,
   fields: {
     applicant1SelectAddress: selectAddressFormFields.selectAddress,
-  },
-  submit: {
-    text: l => l.continue,
   },
 };
 
@@ -43,7 +51,8 @@ const languages = {
 
 export const generateContent: TranslationFn = content => {
   const selectAddressContent = selectAddressGenerateContent(content);
-  const translations = languages[content.language](selectAddressContent);
+  const translations = languages[content.language]({ selectAddressContent, userCase: content.userCase });
+
   return {
     ...selectAddressContent,
     ...translations,

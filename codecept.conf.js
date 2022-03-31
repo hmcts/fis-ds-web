@@ -74,6 +74,8 @@ exports.config = {
     adoptionpage: './src/test/e2e/pages/Adoption.page.js',
     applytoapplicantpage: './src/test/e2e/pages/ApplytoApplicant.page.js',
     contactdetails: './src/test/e2e/pages/Contactdetails.page.js',
+    addresswithpostcode: './src/test/e2e/pages/AddressWithPostCode.page.js',
+    dateofbirth: './src/test/e2e/pages/DateOfBirth.page.js'
   },
   plugins: {
     retryFailedStep: {

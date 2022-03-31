@@ -1,5 +1,5 @@
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
-//import { isAddressSelected } from '../../../app/form/validation';
+import { isAddressSelected } from '../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
 import { generateContent } from './address-select';
@@ -7,7 +7,8 @@ import { generateContent } from './address-select';
 jest.mock('../../../app/form/validation');
 
 const enContent = {
-  line1: "We'll send all court papers to this address.",
+  line1:
+    "We'll send all court papers to this address unless you advise us that you are happy to be served court orders by email.",
   postcode: 'Postcode',
   selectAddress: 'Select an address',
   cannotFindAddress: 'I cannot find the address in the list',
@@ -21,7 +22,8 @@ const enContent = {
 };
 
 const cyContent = {
-  line1: "We'll send all court papers to this address. (in welsh)",
+  line1:
+    "We'll send all court papers to this address unless you advise us that you are happy to be served court orders by email.",
   postcode: 'Postcode (in welsh)',
   selectAddress: 'Select an address (in welsh)',
   cannotFindAddress: 'I cannot find the address in the list (in welsh)',
@@ -130,17 +132,12 @@ describe('common > components > address-select', () => {
     expect(selectAddressField.type).toBe('select');
     expect((selectAddressField.label as Function)(generatedContent)).toBe('Select an address');
     expect(selectAddressField.labelSize).toBe('m');
-    //   expect(selectAddressField.validator).toBe(isAddressSelected);
+    expect(selectAddressField.validator).toBe(isAddressSelected);
   });
 
   test('should contain submit button', () => {
     const form = generatedContent.form as FormContent;
     expect((form.submit.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save and continue');
-  });
-
-  test('should contain saveAsDraft button', () => {
-    const form = generatedContent.form as FormContent;
-    expect((form.saveAsDraft?.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save as draft');
   });
 });
 /* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */

@@ -3,13 +3,20 @@ import config from 'config';
 import { Response } from 'express';
 
 import { getNextStepUrl } from '../../steps';
-import { SAVE_AND_SIGN_OUT } from '../../steps/urls';
+import { FULL_NAME, SAVE_AND_SIGN_OUT } from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
-import { CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE } from '../case/definition';
+import { CITIZEN_CREATE, CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE } from '../case/definition';
 import { Form, FormFields, FormFieldsFn } from '../form/Form';
 import { ValidationError } from '../form/validation';
 
 import { AppRequest } from './AppRequest';
+
+enum noHitToSaveAndContinue {
+  CITIZEN_HOME_URL = '/citizen-home',
+  SERVICE_TYPE = '/service-type',
+  ADOPTION_APPLICATION_TYPE = '/adoption-application-type',
+  PRIVATE_LAW_APPLICATION_TYPE = '/private-law-application-type',
+}
 
 @autobind
 export class PostController<T extends AnyObject> {
@@ -60,11 +67,28 @@ export class PostController<T extends AnyObject> {
 
     this.filterErrorsForSaveAsDraft(req);
 
-    //if (req.session.errors.length === 0) {
-    //req.session.userCase = await this.save(req, formData, this.getEventName(req));
-    //}
-
+    if (req.session?.user && req.session.errors.length === 0) {
+      if (!(Object.values(noHitToSaveAndContinue) as string[]).includes(req.originalUrl)) {
+        const eventName = this.getEventName(req);
+        if (eventName === CITIZEN_CREATE) {
+          req.session.userCase = await this.createCase(req, formData);
+        } else if (eventName === CITIZEN_UPDATE) {
+          req.session.userCase = await this.save(req, formData, eventName);
+        }
+      }
+    }
     this.redirect(req, res);
+  }
+  async createCase(req: AppRequest<T>, formData: Partial<Case>): Promise<CaseWithId | PromiseLike<CaseWithId>> {
+    try {
+      console.log('Create Case New');
+      req.session.userCase = await req.locals.api.createCaseNew(req, req.session.user, formData);
+    } catch (err) {
+      req.locals.logger.error('Error saving', err);
+      req.session.errors = req.session.errors || [];
+      req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+    }
+    return req.session.userCase;
   }
 
   private async cancel(req: AppRequest<T>, res: Response): Promise<void> {
@@ -84,6 +108,7 @@ export class PostController<T extends AnyObject> {
 
   protected async save(req: AppRequest<T>, formData: Partial<Case>, eventName: string): Promise<CaseWithId> {
     try {
+      console.log('Update Existing Case');
       req.session.userCase = await req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
     } catch (err) {
       req.locals.logger.error('Error saving', err);
@@ -120,7 +145,20 @@ export class PostController<T extends AnyObject> {
 
   //eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected getEventName(req: AppRequest): string {
-    return CITIZEN_UPDATE;
+    let eventName = CITIZEN_UPDATE;
+    if (req.originalUrl === FULL_NAME && this.isBlank(req)) {
+      console.log('creating new case event');
+      eventName = CITIZEN_CREATE;
+    }
+    console.log('event is => ' + eventName);
+    return eventName;
+  }
+
+  private isBlank(req: AppRequest<Partial<Case>>) {
+    console.log('inside isBlank() case id is => ' + req.session.userCase.id);
+    if (req.session.userCase.id === null || req.session.userCase.id === undefined || req.session.userCase.id === '') {
+      return true;
+    }
   }
 }
 

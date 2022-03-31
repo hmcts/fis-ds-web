@@ -6,7 +6,7 @@ import { LanguageToggle } from '../../modules/i18n';
 import { CommonContent, Language, generatePageContent } from '../../steps/common/common.content';
 import * as Urls from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
-// import { CITIZEN_UPDATE, State } from '../case/definition';
+import { CITIZEN_UPDATE, State } from '../case/definition';
 
 import { AppRequest } from './AppRequest';
 
@@ -25,16 +25,13 @@ export class GetController {
     }
 
     const language = this.getPreferredLanguage(req) as Language;
-    // const userCase = req.session?.userCase;
     const addresses = req.session?.addresses;
-    const eligibility = req.session?.eligibility;
     const content = generatePageContent({
       language,
       pageContent: this.content,
-      // userCase,
+      userCase: req.session.userCase,
       userEmail: req.session?.user?.email,
       addresses,
-      eligibility,
     });
 
     const sessionErrors = req.session?.errors || [];
@@ -47,7 +44,7 @@ export class GetController {
       ...content,
       sessionErrors,
       htmlLang: language,
-      // isDraft: req.session?.userCase?.state ? req.session.userCase.state === State.Draft : true,
+      isDraft: req.session?.userCase?.state ? req.session.userCase.state === State.Draft : true,
       // getNextIncompleteStepUrl: () => getNextIncompleteStepUrl(req),
     });
   }
@@ -81,9 +78,9 @@ export class GetController {
     try {
       return await req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
     } catch (err) {
-      //req.locals.logger.error('Error saving', err);
-      //req.session.errors = req.session.errors || [];
-      //req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+      req.locals.logger.error('Error saving', err);
+      req.session.errors = req.session.errors || [];
+      req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
       return req.session.userCase;
     }
   }
@@ -103,7 +100,7 @@ export class GetController {
   }
 
   //eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // protected getEventName(req: AppRequest): string {
-  //   return CITIZEN_UPDATE;
-  // }
+  protected getEventName(req: AppRequest): string {
+    return CITIZEN_UPDATE;
+  }
 }

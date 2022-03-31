@@ -189,7 +189,7 @@ export const generatePageContent = ({
   userCase,
   userEmail,
   addresses = [],
-  eligibility,
+  // eligibility,
   fee,
 }: {
   language: Language;
@@ -197,7 +197,7 @@ export const generatePageContent = ({
   userCase?: Partial<CaseWithId>;
   userEmail?: string;
   addresses?: [];
-  eligibility?: Eligibility;
+  // eligibility?: Eligibility;
   fee?: Fee;
 }): PageContent => {
   const commonTranslations: typeof en = language === 'en' ? en : cy;
@@ -212,7 +212,7 @@ export const generatePageContent = ({
     userEmail,
     contactEmail,
     addresses,
-    eligibility,
+    // eligibility,
     fee,
   };
 

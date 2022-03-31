@@ -1,14 +1,15 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFields } from '../../../app/form/Form';
-//import { CommonContent } from '../../../steps/common/common.content';
+import { CommonContent } from '../../../steps/common/common.content';
 import { ErrorMessages, ErrorMessagesWelsh } from '../../../steps/errorMesages';
 import { form as fullNameForm, generateContent as fullNameGenerateContent } from '../../common/components/full-name';
 
-export const en = (): Record<string, unknown> => {
+export const en = ({ userCase }: CommonContent): Record<string, unknown> => {
   const section = 'Applicant';
+  const title = userCase?.serviceType === 'Yes' ? userCase?.applyingWithAdoption : userCase?.applyingWithPrivateLaw;
   return {
     section,
-    serviceName: 'Apply to Applicant',
+    serviceName: 'Apply to ' + title,
     title: "What's your full name?",
     errors: {
       applicant1FirstNames: {
@@ -21,11 +22,12 @@ export const en = (): Record<string, unknown> => {
   };
 };
 
-export const cy = (): Record<string, unknown> => {
+export const cy = ({ userCase }: CommonContent): Record<string, unknown> => {
   const section = 'Applicant (in Welsh)';
+  const title = userCase?.serviceType === 'Yes' ? userCase?.applyingWithAdoption : userCase?.applyingWithPrivateLaw;
   return {
     section,
-    serviceName: 'Apply to Applicant',
+    serviceName: 'Apply to ' + title + ' (in Welsh)',
     title: "What's your full name? (in Welsh)",
     errors: {
       applicant1FirstNames: {
@@ -61,7 +63,7 @@ export const generateContent: TranslationFn = content => {
   const fullNameContent = fullNameGenerateContent(content);
   return {
     ...fullNameContent,
-    ...languages[content.language](),
+    ...languages[content.language](content),
     form,
   };
 };

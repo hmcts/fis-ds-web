@@ -9,17 +9,17 @@ import { generateContent } from './content';
 
 const enContent = {
   section: 'Applicant',
-  title: "What's your home address?",
+  title: "What's your address?",
 };
 
 const cyContent = {
   section: 'Applicant (in welsh)',
-  title: "What's your home address? (in welsh)",
+  title: "What's your address? (in welsh)",
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
 describe('applicant1 > address > manual > content', () => {
-  const commonContent = { language: 'en', userCase: {} } as CommonContent;
+  const commonContent = { language: 'en' } as CommonContent;
   let generatedContent;
   let form;
   let fields;
@@ -77,6 +77,20 @@ describe('applicant1 > address > manual > content', () => {
   test('should contain applicant1AddressPostcode field', () => {
     const applicant1AddressPostcodeField = fields.applicant1AddressPostcode as FormOptions;
     expect(applicant1AddressPostcodeField).toEqual(manualAddressFormFields.addressPostcode);
+  });
+
+  it('should have applicant1AddressPostcode label when language: en and  applyingWith: alone', () => {
+    const commonContent1 = { language: 'en', userCase: { applyingWith: 'alone' } } as CommonContent;
+
+    const generatedContent1 = generateContent(commonContent1);
+    expect(generatedContent1.section).toBe('Applicant');
+  });
+
+  it('should have an applicant1AddressPostcode label when language: cy and  applyingWith: alone', () => {
+    const commonContent1 = { language: 'cy', userCase: { applyingWith: 'alone' } } as CommonContent;
+
+    const generatedContent1 = generateContent(commonContent1);
+    expect(generatedContent1.section).toBe('Applicant (in welsh)');
   });
 
   test('should contain submit button', () => {

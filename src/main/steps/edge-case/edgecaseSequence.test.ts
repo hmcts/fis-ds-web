@@ -1,3 +1,5 @@
+import { DATE_OF_BIRTH, FIND_ADDRESS, SELECT_ADDRESS } from '../urls';
+
 import { edgecaseSequence } from './edgecaseSequence';
 
 describe('applicant1Sequence', () => {
@@ -22,17 +24,17 @@ describe('applicant1Sequence', () => {
 
     expect(edgecaseSequence[4].url).toBe('/full-name');
     expect(edgecaseSequence[4].showInSection).toBe('aboutEdgeCase');
-    expect(edgecaseSequence[4].getNextStep({})).toBe('/citizen-home');
+    expect(edgecaseSequence[4].getNextStep({})).toBe(DATE_OF_BIRTH);
 
-    expect(edgecaseSequence[5].url).toBe('/date-of-birth');
+    expect(edgecaseSequence[5].url).toBe(DATE_OF_BIRTH);
     expect(edgecaseSequence[5].showInSection).toBe('aboutEdgeCase');
-    expect(edgecaseSequence[5].getNextStep({})).toBe('/address/lookup');
+    expect(edgecaseSequence[5].getNextStep({})).toBe(FIND_ADDRESS);
 
-    expect(edgecaseSequence[6].url).toBe('/address/lookup');
+    expect(edgecaseSequence[6].url).toBe(FIND_ADDRESS);
     expect(edgecaseSequence[6].showInSection).toBe('aboutEdgeCase');
-    expect(edgecaseSequence[6].getNextStep({})).toBe('/address/select');
+    expect(edgecaseSequence[6].getNextStep({})).toBe(SELECT_ADDRESS);
 
-    expect(edgecaseSequence[7].url).toBe('/address/select');
+    expect(edgecaseSequence[7].url).toBe(SELECT_ADDRESS);
     expect(edgecaseSequence[7].showInSection).toBe('aboutEdgeCase');
     expect(edgecaseSequence[7].getNextStep({})).toBe('/address/manual');
 
