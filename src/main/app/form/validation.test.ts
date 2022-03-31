@@ -219,7 +219,7 @@ describe('Validation', () => {
       { mockTel: '12345!', expected: 'invalid' },
       { mockTel: 'A1B23C', expected: 'invalid' },
       { mockTel: '123456', expected: 'invalid' },
-      { mockTel: '0123456789', expected: 'invalid' },
+      { mockTel: '0123456789', expected: undefined },
       { mockTel: '01234567890', expected: undefined },
       { mockTel: '+1 (0)12345678901', expected: undefined },
       { mockTel: '+1 (0)12345678901$', expected: 'invalid' },

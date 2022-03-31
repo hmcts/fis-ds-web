@@ -2,21 +2,49 @@
 
 @Library("Infrastructure")
 
+import uk.gov.hmcts.contino.AppPipelineConfig
+
 def type = "nodejs"
 def product = "fis"
 def component = "ds-web"
 
+static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
+  [ $class: 'AzureKeyVaultSecret',
+    secretType: 'Secret',
+    name: secretName,
+    version: '',
+    envVariable: envVar
+  ]
+}
+
+def secrets = [
+  'fis-${env}': [
+    secret('idam-ui-secret', 'IDAM_SECRET'),
+    secret('citizen-user', 'CITIZEN_USERNAME'),
+    secret('citizen-password', 'CITIZEN_PASSWORD')
+  ],
+  's2s-${env}': [
+    secret('microservicekey-ds-ui', 'SERVICE_AUTH_SECRET')
+  ]
+]
+
 def yarnBuilder = new uk.gov.hmcts.contino.YarnBuilder(this)
-def branchesToSync = ['demo', 'perftest']
+def branchesToSync = ['demo']
+def pipelineConf = new AppPipelineConfig()
+
+pipelineConf.vaultSecrets = secrets
 
 withPipeline(type, product, component) {
+  enableAksStagingDeployment()
   disableLegacyDeployment()
   syncBranchesWithMaster(branchesToSync)
+  loadVaultSecrets(secrets)
+
   after('build') {
     yarnBuilder.yarn('build')
   }
   before('functionalTest:preview') {
-    env.TEST_URL = "https://fis-ds-web-pr-${CHANGE_ID}.service.core-compute-preview.internal/"
+    env.DS_UI_URL = "https://fis-ds-web-pr-${CHANGE_ID}.service.core-compute-preview.internal/"
   }
 
   after('functionalTest:preview') {
@@ -24,15 +52,18 @@ withPipeline(type, product, component) {
   }
 
   before('smoketest:preview') {
-    env.TEST_URL = "https://fis-ds-web-pr-${CHANGE_ID}.service.core-compute-preview.internal/"
+    env.DS_UI_URL = "https://fis-ds-web-pr-${CHANGE_ID}.service.core-compute-preview.internal/"
+  }
+
+  after('smoketest:preview') {
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
   }
 
   before('smoketest:aat') {
-  env.DS_UI_URL = "https://fis-ds-web.aat.platform.hmcts.net/"
+  env.DS_UI_URL = "https://fis-ds-web-staging.service.core-compute-aat.internal/"
   }
 
   after('smoketest:aat') {
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
-
   }
 }
