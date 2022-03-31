@@ -8,6 +8,7 @@ Scenario(
     familypage,
     applytoapplicantpage,
     adoptionpage,
+    contactdetails,
   }) => {
     await loginPage.SignInUser();
     await landingPage.seeTheLandingPage();
@@ -18,5 +19,7 @@ Scenario(
     await applytoapplicantpage.applicantFullnames();
     await dateofbirth.dateSelection('10', '10', '2020');
     await addresswithpostcode.PostCodeLookUpAndSelect();
+    await contactdetails.seeTheTitleOfThePage();
+    await contactdetails.selectEmail();
   }
 );
