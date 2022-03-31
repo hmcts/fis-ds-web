@@ -1,3 +1,4 @@
+import { CaseDate } from '../../../app/case/case';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { covertToDateObject } from '../../../app/form/parser';
@@ -72,10 +73,14 @@ export const form: FormContent = {
         },
       ],
       parser: body => covertToDateObject('applicant1DateOfBirth', body as Record<string, unknown>),
+      validator: value => isDateInputInvalid(value as CaseDate) || isFutureDate(value as CaseDate),
     },
   },
   submit: {
     text: l => l.continue,
+  },
+  cancel: {
+    text: l => l.cancel,
   },
 };
 
