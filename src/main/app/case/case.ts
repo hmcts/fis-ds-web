@@ -210,6 +210,10 @@ export interface Case {
   applicant1AddressCounty?: string;
   applicant1AddressPostcode?: string;
   applicant1ContactDetails?: ContactDetails[];
+  emailAddressConsent?: string;
+  homePhoneNumber?: string;
+  mobilePhoneNumber?: string;
+  emailAddress?: string;
 
   /***** Applicant2 *****/
   applicant2FirstNames?: string;

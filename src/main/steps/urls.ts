@@ -28,6 +28,7 @@ export const DATE_OF_BIRTH: PageLink = '/date-of-birth';
 export const FIND_ADDRESS: PageLink = '/address/lookup';
 export const SELECT_ADDRESS: PageLink = '/address/select';
 export const MANUAL_ADDRESS: PageLink = '/address/manual';
+export const CONTACT_DETAILS: PageLink = '/contact-details';
 
 export const APPLICANT_1: PageLink = '/applicant1';
 export const APPLICANT_1_FULL_NAME: PageLink = `${APPLICANT_1}/full-name`;
