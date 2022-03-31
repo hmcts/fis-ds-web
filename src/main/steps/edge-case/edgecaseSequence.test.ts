@@ -4,7 +4,7 @@ import { edgecaseSequence } from './edgecaseSequence';
 
 describe('applicant1Sequence', () => {
   test('should contain 12 entries in applicant 1 screen sequence', () => {
-    expect(edgecaseSequence).toHaveLength(9);
+    expect(edgecaseSequence).toHaveLength(10);
 
     expect(edgecaseSequence[0].url).toBe('/citizen-home');
     expect(edgecaseSequence[0].showInSection).toBe('aboutEdgeCase');
@@ -36,10 +36,10 @@ describe('applicant1Sequence', () => {
 
     expect(edgecaseSequence[7].url).toBe(SELECT_ADDRESS);
     expect(edgecaseSequence[7].showInSection).toBe('aboutEdgeCase');
-    expect(edgecaseSequence[7].getNextStep({})).toBe('/address/manual');
+    expect(edgecaseSequence[7].getNextStep({})).toBe('/contact-details');
 
     expect(edgecaseSequence[8].url).toBe('/address/manual');
     expect(edgecaseSequence[8].showInSection).toBe('aboutEdgeCase');
-    expect(edgecaseSequence[8].getNextStep({})).toBe('/citizen-home');
+    expect(edgecaseSequence[8].getNextStep({})).toBe('/contact-details');
   });
 });
