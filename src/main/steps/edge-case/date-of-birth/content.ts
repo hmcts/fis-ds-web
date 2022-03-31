@@ -2,6 +2,7 @@ import { CaseDate } from '../../../app/case/case';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { covertToDateObject } from '../../../app/form/parser';
+import { isDateInputInvalid, isFutureDate } from '../../../app/form/validation';
 import { CommonContent } from '../../../steps/common/common.content';
 
 export const en = ({ userCase }: CommonContent): Record<string, unknown> => {
