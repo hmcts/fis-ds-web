@@ -82,6 +82,7 @@ export class PostController<T extends AnyObject> {
       }
     }
 
+    // here we explicitly assigning the values to userCase to get the title
     if (typeof req.session.userCase !== 'undefined' && req.session.userCase !== null) {
       req.session.userCase.serviceType = tempServiceType;
       req.session.userCase.applyingWithAdoption = tempApplyingWithAdoption;
