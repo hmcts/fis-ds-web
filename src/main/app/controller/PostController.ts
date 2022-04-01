@@ -82,7 +82,7 @@ export class PostController<T extends AnyObject> {
       }
     }
 
-    if (typeof (req.session.userCase) !== 'undefined' && req.session.userCase !== null) {
+    if (typeof req.session.userCase !== 'undefined' && req.session.userCase !== null) {
       req.session.userCase.serviceType = tempServiceType;
       req.session.userCase.applyingWithAdoption = tempApplyingWithAdoption;
       req.session.userCase.applyingWithPrivateLaw = tempApplyingWithPrivateLaw;
