@@ -66,27 +66,28 @@ export class PostController<T extends AnyObject> {
     req.session.errors = form.getErrors(formData);
 
     this.filterErrorsForSaveAsDraft(req);
-    
-    let tempServiceType = req.session.userCase?.serviceType;
-    let tempApplyingWithAdoption = req.session.userCase?.applyingWithAdoption;
-    let tempApplyingWithPrivateLaw = req.session.userCase?.applyingWithPrivateLaw;
+
+    const tempServiceType = req.session.userCase.serviceType;
+    const tempApplyingWithAdoption = req.session.userCase.applyingWithAdoption;
+    const tempApplyingWithPrivateLaw = req.session.userCase.applyingWithPrivateLaw;
 
     if (req.session?.user && req.session.errors.length === 0) {
       if (!(Object.values(noHitToSaveAndContinue) as string[]).includes(req.originalUrl)) {
         const eventName = this.getEventName(req);
         if (eventName === CITIZEN_CREATE) {
           req.session.userCase = await this.createCase(req, formData);
-          
         } else if (eventName === CITIZEN_UPDATE) {
           req.session.userCase = await this.save(req, formData, eventName);
         }
       }
     }
 
-    // Here we are re-assigning the serviceType and applicationType values to be used in title
-    req.session.userCase.serviceType = tempServiceType;
-    req.session.userCase.applyingWithAdoption = tempApplyingWithAdoption;
-    req.session.userCase.applyingWithPrivateLaw = tempApplyingWithPrivateLaw;
+    if (typeof (req.session.userCase) !== 'undefined' && req.session.userCase !== null) {
+      req.session.userCase.serviceType = tempServiceType;
+      req.session.userCase.applyingWithAdoption = tempApplyingWithAdoption;
+      req.session.userCase.applyingWithPrivateLaw = tempApplyingWithPrivateLaw;
+    }
+
     this.redirect(req, res);
   }
   async createCase(req: AppRequest<T>, formData: Partial<Case>): Promise<CaseWithId | PromiseLike<CaseWithId>> {
