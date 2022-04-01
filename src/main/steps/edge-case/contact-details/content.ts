@@ -5,8 +5,7 @@ import { isEmailValid, isFieldFilledIn, isPhoneNoValid } from '../../../app/form
 import { CommonContent } from '../../../steps/common/common.content';
 
 export const en = ({ userCase }: CommonContent): Record<string, unknown> => {
-  const titleBar =
-    userCase?.serviceType === 'Yes' ? userCase?.adoptionApplicationType : userCase?.applyingWithPrivateLaw;
+  const titleBar = userCase?.serviceType === 'Yes' ? userCase?.applyingWithAdoption : userCase?.applyingWithPrivateLaw;
   return {
     label: 'What are your contact details?',
     serviceName: 'Apply to ' + titleBar,
