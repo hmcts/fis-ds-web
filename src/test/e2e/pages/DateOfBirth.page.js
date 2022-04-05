@@ -8,7 +8,9 @@ module.exports = {
   },
   async dateSelection(date, month, year) {
     await I.waitForText("What's your date of birth?", 30);
+    await I.wait(2);
     await I.fillField(this.fields.day, date);
+    await I.wait(2);
     await I.fillField(this.fields.month, month);
     await I.wait('2');
     await I.fillField(this.fields.year, year);
