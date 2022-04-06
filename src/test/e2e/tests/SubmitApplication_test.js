@@ -9,6 +9,8 @@ Scenario(
     applytoapplicantpage,
     adoptionpage,
     contactdetails,
+    dateofbirth,
+    addresswithpostcode
   }) => {
     await loginPage.SignInUser();
     await landingPage.seeTheLandingPage();

@@ -2,10 +2,10 @@ const { I } = inject();
 
 module.exports = {
   fields: {
-    internationaladoption: 'input[id$="applyingWith"]',
-    relinquishedadoption: 'input[id$="applyingWith-2"]',
-    stepparentadoption: 'input[id$="applyingWith-3"]',
-    parentalorder: 'input[id$="applyingWith-4"]',
+    internationaladoption: '#applyingWithAdoption',
+    relinquishedadoption: '#applyingWithAdoption-2',
+    stepparentadoption: '#applyingWithAdoption-3',
+    parentalorder: '#applyingWithAdoption-4',
   },
 
     selectInternationalAdoption() {

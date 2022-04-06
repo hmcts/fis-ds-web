@@ -67,6 +67,13 @@ withPipeline(type, product, component) {
 
   after('smoketest:aat') {
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
+  }
 
+  before('functionalTest:aat') {
+    env.ADOP_WEB_URL = "https://fis-ds-web-staging.service.core-compute-aat.internal/"
+  }
+
+  after('functionalTest:aat') {
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
   }
 }
