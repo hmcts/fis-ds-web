@@ -30,6 +30,7 @@ export const SELECT_ADDRESS: PageLink = '/address/select';
 export const MANUAL_ADDRESS: PageLink = '/address/manual';
 export const CONTACT_DETAILS: PageLink = '/contact-details';
 export const PAY_YOUR_FEE: PageLink = '/payment/pay-your-fee';
+export const UPLOAD_YOUR_DOCUMENTS: PageLink = '/upload-your-documents';
 
 export const APPLICANT_1: PageLink = '/applicant1';
 export const APPLICANT_1_FULL_NAME: PageLink = `${APPLICANT_1}/full-name`;
