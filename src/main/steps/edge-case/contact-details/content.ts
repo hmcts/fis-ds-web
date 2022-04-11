@@ -103,7 +103,6 @@ export const form: FormContent = {
       type: 'text',
       classes: 'govuk-input--width-20',
       label: l => l.mobilePhoneNumber,
-      hideError: true,
       labelSize: null,
       validator: (value, formData) => {
         const hasMobilePhoneNumberEntered = (value as string[])?.length && (value as string) !== '[]';
