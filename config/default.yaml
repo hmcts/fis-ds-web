@@ -48,6 +48,8 @@ services:
     tokenKey: 'SERVICE_TOKEN_KEY'
   hmctsHomePage:
     url: 'https://www.gov.uk/government/organisations/hm-courts-and-tribunals-service'
+  documentManagement:
+    url: 'http://dm-store-aat.service.core-compute-aat.internal/documents'  
 health:
   timeout: 5000
   deadline: 15000

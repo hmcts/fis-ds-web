@@ -24,6 +24,7 @@ import { LoadTimeouts } from './modules/timeouts';
 import { TooBusy } from './modules/too-busy';
 import { Webpack } from './modules/webpack';
 import { Routes } from './routes';
+import {FileUpload} from './modules/fileupload'
 
 const { Logger } = require('@hmcts/nodejs-logging');
 const logger: LoggerInstance = Logger.getLogger('server');
@@ -38,6 +39,8 @@ app.use((req, res, next) => {
   res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
   next();
 });
+new FileUpload().enableFor(app);
+
 
 new AxiosLogger().enableFor(app);
 new PropertiesVolume().enableFor(app);
@@ -57,6 +60,7 @@ new OidcMiddleware().enableFor(app);
 new StateRedirectMiddleware().enableFor(app);
 new Routes().enableFor(app);
 new ErrorHandler().handleNextErrorsFor(app);
+
 
 const port = config.get('port');
 const server = app.listen(port, () => {

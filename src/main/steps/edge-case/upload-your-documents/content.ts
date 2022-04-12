@@ -110,6 +110,8 @@ const cy = () => {
   };
 };
 
+
+
 export const form: FormContent = {
   fields: userCase => {
     const checkboxes: { id: string; value: DocumentType }[] = [];

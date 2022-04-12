@@ -67,6 +67,29 @@
   }) }}
   <p class="govuk-body">{{ minRequirements }}</p>
 
+  <form action="/upload-your-documents?_csrf={{ csrfToken }}" method="post" enctype="multipart/form-data">
+
+      {{ govukFileUpload({
+  id: "file-upload-1",
+  name: "file-upload-1",
+  label: {
+    text: "Upload a file"
+  }
+}) }}
+
+
+
+  {{ govukButton({
+          text: upload,
+          type: "upload document",
+          classes: "govuk-button--primary govuk-!-margin-bottom-0"
+        }) }}
+
+
+</form>
+
+<br/>
+
   <script id="uploadContent" type="application/json">
   {
     "isAmendableStates": {{ isAmendableStates }},
@@ -103,6 +126,8 @@
         <div id="uploadProgressBar"></div>
       </div>
     </div>
+
+
 
     <noscript>
       <form action="/document-manager?_csrf={{ csrfToken }}" method="post" enctype="multipart/form-data">
