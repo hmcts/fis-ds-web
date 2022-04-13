@@ -1,4 +1,4 @@
-Feature('Create application').retry(1);
+Feature('Create application @e2e-tests').retry(1);
 
 Scenario(
   'Create full application and submit',
@@ -10,8 +10,7 @@ Scenario(
     adoptionpage,
     contactdetails,
     dateofbirth,
-    addresswithpostcode,
-    reviewpaymentpage
+    addresswithpostcode
   }) => {
     await loginPage.SignInUser();
     await landingPage.seeTheLandingPage();
@@ -24,7 +23,5 @@ Scenario(
     await addresswithpostcode.PostCodeLookUpAndSelect();
     await contactdetails.seeTheTitleOfThePage();
     await contactdetails.selectEmail();
-    await reviewpaymentpage.seeTheTitleOfThePage();
-    await reviewpaymentpage.selectPayByCard();
   }
 );
