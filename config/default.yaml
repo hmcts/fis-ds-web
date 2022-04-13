@@ -22,6 +22,22 @@ services:
     token: 'NEED TO INSERT SECRET'
   feeLookup:
     url: 'http://fees-register-api-aat.service.core-compute-aat.internal/fees-register/fees/lookup'
+    ApplyAdoption:
+      event: 'issue'
+      service: 'adoption'
+    AppnParent:
+      event: 'issue'
+      service: 'other'
+    PQR:
+      event: 'miscellaneous'
+      service: 'private law'
+    SpecialGuardian:
+      event: 'miscellaneous'
+      service: 'private law'
+    Private:
+      event: 'issue'
+      service: 'other'
+
   payments:
     url: http://payment-api-aat.service.core-compute-aat.internal
   equalityAndDiversity:

@@ -29,6 +29,7 @@ export const FIND_ADDRESS: PageLink = '/address/lookup';
 export const SELECT_ADDRESS: PageLink = '/address/select';
 export const MANUAL_ADDRESS: PageLink = '/address/manual';
 export const CONTACT_DETAILS: PageLink = '/contact-details';
+export const PAY_YOUR_FEE: PageLink = '/payment/pay-your-fee';
 
 export const APPLICANT_1: PageLink = '/applicant1';
 export const APPLICANT_1_FULL_NAME: PageLink = `${APPLICANT_1}/full-name`;
@@ -148,7 +149,6 @@ export const BIRTH_FATHER_OCCUPATION: PageLink = `${BIRTH_FATHER}/occupation`;
 
 export const REVIEW_PAY_SUBMIT: PageLink = '/review-pay-submit';
 export const CHECK_ANSWERS_URL: PageLink = `${REVIEW_PAY_SUBMIT}/check-your-answers`;
-export const PAY_YOUR_FEE: PageLink = `${REVIEW_PAY_SUBMIT}/payment/pay-your-fee`;
 export const PAYMENT_CALLBACK_URL: PageLink = `${REVIEW_PAY_SUBMIT}/payment/payment-callback`;
 
 export const ADOPTION_AGENCY: PageLink = `${CHILDREN}/adoption-agency`;

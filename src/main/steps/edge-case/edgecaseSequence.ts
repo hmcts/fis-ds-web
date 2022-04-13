@@ -8,6 +8,7 @@ import {
   FIND_ADDRESS,
   FULL_NAME,
   MANUAL_ADDRESS,
+  PAY_YOUR_FEE,
   PRIVATE_LAW_APPLICATION_TYPE,
   SELECT_ADDRESS,
   SERVICE_TYPE,
@@ -61,6 +62,11 @@ export const edgecaseSequence: Step[] = [
   },
   {
     url: CONTACT_DETAILS,
+    showInSection: Sections.AboutEdgeCase,
+    getNextStep: () => PAY_YOUR_FEE,
+  },
+  {
+    url: PAY_YOUR_FEE,
     showInSection: Sections.AboutEdgeCase,
     getNextStep: () => CITIZEN_HOME_URL,
   },
