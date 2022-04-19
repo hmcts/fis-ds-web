@@ -76,7 +76,9 @@ export default class UploadDocumentController  extends PostController<AnyObject>
          if((await RpeApi.getRpeToken()).response){
             req.session.rpeToken =  (await RpeApi.getRpeToken()).data;
           }
-          
+           if(req.session.caseDocuments == undefined){
+             req.session.caseDocuments = [];
+           }
           const {files}  = req;
           //@ts-ignore
           const {documents} = files;
