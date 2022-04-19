@@ -6,7 +6,9 @@ import {AnyObject, PostController} from '../../../app/controller/PostController'
 import { FormFields, FormFieldsFn } from '../../../app/form/Form';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import axios, { AxiosInstance, AxiosRequestHeaders } from 'axios';
-//import FormData from 'form-data';
+import FormData from 'form-data';
+import config from 'config';
+
 
 const FileMimeType = {
   "csv": "text/csv",
@@ -44,6 +46,9 @@ class FileValidations{
 }
 
 
+const FileUploadBaseURL : string = config.get('services.documentManagement.url');
+
+
 
 
 @autobind
@@ -51,92 +56,63 @@ export default class UploadDocumentController  extends PostController<AnyObject>
     constructor(protected readonly fields: FormFields | FormFieldsFn) {
       super(fields);
     }
-
-    public static FileUploadBaseURL = '';
-
-
     public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
         //@ts-ignore
-      const UplaodDocumentInstance  = (BASEURL: string , header: AxiosRequestHeaders) : AxiosInstance => {
+      const UploadDocumentInstance  = (BASEURL: string  , header: AxiosRequestHeaders) : AxiosInstance  => {
         return axios.create( {
             baseURL: BASEURL,
             headers: header
         });
     }
+          const {files} : any = req;
+          const {documents} = files;
+          const checkIfMultipleFiles : Boolean = Array.isArray(documents);
 
-
-      const {files} = req;
-
-      console.log(files)
-
-      /**
-       * 
-       *  const checkIfMultipleFiles = Array.isArray(files);
-    
-      if(checkIfMultipleFiles){
-        for (const file of files) {
-            const fileMimeType = file.mimetype;
-            const fileSize = file.size;
-
-            const validateMimeType = FileValidations.formatValidation(fileMimeType);
-            const validateFileSize = FileValidations.sizeValidation(fileSize);
-
+          // making sure single file is uploaded 
+          if(!checkIfMultipleFiles){
+            const validateMimeType : Boolean = FileValidations.formatValidation(documents.mimetype);
+            const validateFileSize : Boolean = FileValidations.sizeValidation(documents.size);
+            const formData : FormData = new FormData();
             if (validateMimeType && validateFileSize) {
-                const formData = new FormData();
-                //@ts-ignore
-                formData.append('data', file.data, {
-                  contentType: file.mimetype,
-                  //@ts-ignore
-                  filename: file.name,
+
+              formData.append('files', documents.data, {
+                contentType: documents.mimetype,
+                filename: documents.name,
+              });
+              formData.append('caseTypeId', 'PRLAPPS');
+              formData.append('jurisdictionId', 'PRIVATELAW');
+              formData.append('classification', 'RESTRICTED')
+
+
+              const formHeaders = formData.getHeaders();
+              /**
+               * @RequestHeaders
+               */
+              const Headers = {
+                Authorization: `Bearer ${req.session.user['accessToken']}`,
+                ServiceAuthorization: ''
+              };
+
+              try {
+               const RequestDocument =  await UploadDocumentInstance(FileUploadBaseURL, Headers).post('/cases/documents', formData, {
+                  headers: {
+                    ...formHeaders,
+                  },
                 });
-                //@ts-ignore
-                formData.append('description', file.name);
-                formData.append('audience', 'supplier');
-                //@ts-ignore
-                const formHeaders = formData.getHeaders();
+                console.log(RequestDocument.data)
+                this.redirect(req, res);
 
-
-                try {
-                  
-                    //@ts-ignore
-                   // await UplaodDocumentInstance().post(FileStorageEndpoint, formData, { headers: {...formHeaders}})
-                } catch (error) {
-                    console.log({msg: 'file has thrown error'})
-                }
+               // console.log({msg: 'document has been uploaded successfully'})
+              } catch (error) {
+              console.log(error)
 
             }
-        }
+          }
+            
+          }
+   
 
-
-    }
-    else{
-        const formData = new FormData();
-        //@ts-ignore
-        formData.append('data', files.data, {
-           //@ts-ignore
-          contentType: files.mimetype,
-           //@ts-ignore
-          filename: files.name,
-        });
-         //@ts-ignore
-        formData.append('description', files.name);
-        formData.append('audience', 'supplier');
-        //@ts-ignore
-        const formHeaders = formData.getHeaders();
-
-
-        try {
-            //@ts-ignore
-          //  await UplaodDocumentInstance().post(FileStorageEndpoint, formData, { headers: {...formHeaders}})
-        } catch (error) {
-            console.log({msg: 'file has thrown error'})
-        }
-    }
-       * 
-       */
-     
-
-    this.redirect(req, res);
+    
 
 
 
