@@ -1,0 +1,28 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2022-04-20T09:35:17.371Z",
+    "end": "2022-04-20T09:36:39.775Z",
+    "duration": 82404,
+    "testsRegistered": 2,
+    "passPercent": 50,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 1,
+    "hasSkipped": true
+  },
+  "passes": [
+    {
+      "title": "Create application @e2e-tests: Create full application and submit",
+      "code": "async ({\n    loginPage,\n    landingPage,\n    familypage,\n    applytoapplicantpage,\n    adoptionpage,\n    contactdetails,\n    dateofbirth,\n    addresswithpostcode\n  }) => {\n    await loginPage.SignInUser();\n    await landingPage.seeTheLandingPage();\n    await landingPage.selectjurisdictionasfamily();\n    await familypage.seeTheTitleOfThePage();\n    await familypage.selectAdoptionService();\n    await adoptionpage.selectInternationalAdoption();\n    await applytoapplicantpage.applicantFullnames();\n    await dateofbirth.dateSelection('10', '10', '2020');\n    await addresswithpostcode.PostCodeLookUpAndSelect();\n    await contactdetails.seeTheTitleOfThePage();\n    await contactdetails.selectEmail();\n  }",
+      "error": {}
+    }
+  ],
+  "pending": [],
+  "failures": []
+}
