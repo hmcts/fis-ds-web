@@ -42,6 +42,8 @@
     ]
   }) }}
 
+
+
   <h1 class="govuk-heading-l">{{ title }}</h1>
   <p class="govuk-body">{{ youNeed }}</p>
   <p class="govuk-body">{{ youNeed2 }}</p>
@@ -67,26 +69,7 @@
   }) }}
   <p class="govuk-body">{{ minRequirements }}</p>
 
-  <form action="/upload-your-documents?_csrf={{ csrfToken }}" method="post" enctype="multipart/form-data">
 
-      {{ govukFileUpload({
-  id: "file-upload-1",
-  name: "documents",
-  label: {
-    text: "Upload a file"
-  }
-}) }}
-
-
-
-  {{ govukButton({
-          text: upload,
-          type: "upload document",
-          classes: "govuk-button--primary govuk-!-margin-bottom-0"
-        }) }}
-
-
-</form>
 
 <br/>
 
@@ -97,13 +80,18 @@
   }
   </script>
 
+
+  
+
   <div id="uploadGroup" tabindex="0" class="uploadGroup">
     <h2 class="govuk-heading-s">{{ uploadFiles }}</h2>
-    <p class="govuk-body govuk-section-break govuk-section-break--visible govuk-!-padding-bottom-3{% if userCase.applicant1DocumentsUploaded|length %} hidden{% endif %}" id="noFilesUploaded">{{ noFilesUploaded }}</p>
+    <p class="govuk-body govuk-section-break govuk-section-break--visible govuk-!-padding-bottom-3{% if uploadedDocuments|length %} hidden{% endif %}" id="noFilesUploaded">{{ noFilesUploaded }}</p>
     <ul id="filesUploaded" class="govuk-list">
-      {% for file in userCase.applicant1DocumentsUploaded %}
+      {% for file in uploadedDocuments %}
         <li class="uploadedFile govuk-!-padding-top-2 govuk-!-padding-bottom-3 govuk-section-break govuk-section-break--visible">
-          {{ file.value.documentFileName }} <a href="/document-manager/delete/{{ loop.index0 }}?_csrf={{ csrfToken }}" class="govuk-link--no-visited-state">{{ delete }}</a>
+          {{ file.originalDocumentName }} 
+          <a href="/document-manager/delete/{{ loop.index0 }}?_csrf={{ csrfToken }}" class="govuk-link--no-visited-state ">{{ delete }}</a>
+
         </li>
       {% endfor %}
     </ul>
@@ -114,8 +102,27 @@
     {{ fileSize }}
   </p>
 
+
+    <form action="/upload-your-documents?_csrf={{ csrfToken }}" method="post" enctype="multipart/form-data">
+
+      {{ govukFileUpload({
+  id: "file-upload-1",
+  name: "documents",
+  label: {
+    text: ""
+  }
+}) }}
+  {{ govukButton({
+          text: upload,
+          type: "upload document",
+          classes: "govuk-button--primary govuk-!-margin-bottom-0"
+        }) }}
+
+
+</form>
+
   <div class="govuk-form-group {{ 'hidden' if not isAmendableStates }}">
-    <div class="govuk-panel upload hidden">
+    <div class="govuk-panel upload hidden ">
       <span class="upload-arrow-icon govuk-!-margin-bottom-5"></span>
       <div class="govuk-form-group">
         <p class="govuk-body govuk-!-margin-bottom-0">

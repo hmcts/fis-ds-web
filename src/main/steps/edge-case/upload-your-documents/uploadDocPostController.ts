@@ -1,6 +1,7 @@
 //@ts-ignore
 
 import autobind from 'autobind-decorator';
+import { Logger } from '@hmcts/nodejs-logging';
 import { Response } from 'express';
 import {AnyObject, PostController} from '../../../app/controller/PostController';
 import { FormFields, FormFieldsFn } from '../../../app/form/Form';
@@ -8,6 +9,12 @@ import { AppRequest } from '../../../app/controller/AppRequest';
 import axios, { AxiosInstance, AxiosRequestHeaders } from 'axios';
 import FormData from 'form-data';
 import config from 'config';
+import {RpeApi} from '../../../app/rpe/rpeApi'
+const logger = Logger.getLogger('uploadDocumentPostController');
+import {UPLOAD_YOUR_DOCUMENTS} from '../../urls'
+
+
+
 
 
 const FileMimeType = {
@@ -34,7 +41,7 @@ const FileMimeType = {
 class FileValidations{
 
   static sizeValidation = (fileSize: number) => {
-  const KbsInMBS = 300000;
+  const KbsInMBS = 200000;
   if(fileSize < KbsInMBS) return true;
   else return false;
   }
@@ -49,13 +56,14 @@ class FileValidations{
 const FileUploadBaseURL : string = config.get('services.documentManagement.url');
 
 
-
-
 @autobind
 export default class UploadDocumentController  extends PostController<AnyObject> {
     constructor(protected readonly fields: FormFields | FormFieldsFn) {
       super(fields);
     }
+
+
+
     public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
         //@ts-ignore
       const UploadDocumentInstance  = (BASEURL: string  , header: AxiosRequestHeaders) : AxiosInstance  => {
@@ -64,7 +72,13 @@ export default class UploadDocumentController  extends PostController<AnyObject>
             headers: header
         });
     }
-          const {files} : any = req;
+
+         if((await RpeApi.getRpeToken()).response){
+            req.session.rpeToken =  (await RpeApi.getRpeToken()).data;
+          }
+          
+          const {files}  = req;
+          //@ts-ignore
           const {documents} = files;
           const checkIfMultipleFiles : Boolean = Array.isArray(documents);
 
@@ -83,40 +97,34 @@ export default class UploadDocumentController  extends PostController<AnyObject>
               formData.append('jurisdictionId', 'PRIVATELAW');
               formData.append('classification', 'RESTRICTED')
 
-
               const formHeaders = formData.getHeaders();
               /**
                * @RequestHeaders
                */
               const Headers = {
                 Authorization: `Bearer ${req.session.user['accessToken']}`,
-                ServiceAuthorization: ''
+                ServiceAuthorization: req.session['rpeToken']
               };
-
               try {
                const RequestDocument =  await UploadDocumentInstance(FileUploadBaseURL, Headers).post('/cases/documents', formData, {
                   headers: {
                     ...formHeaders,
                   },
                 });
-                console.log(RequestDocument.data)
-                this.redirect(req, res);
-
-               // console.log({msg: 'document has been uploaded successfully'})
+               const {originalDocumentName, _links} = RequestDocument.data.documents[0];
+               req.session['caseDocuments'].push({originalDocumentName, _links})
+               console.log(req.session['caseDocuments'])
+                this.redirect(req, res, UPLOAD_YOUR_DOCUMENTS);
               } catch (error) {
-              console.log(error)
+              logger.error(error);
 
-            }
-          }
+              }
+           }
+           else{
+             res.json({msg: 'error validating files'})
+           }
             
-          }
-   
-
-    
-
-
-
-
+        }
 
     }
 

@@ -6,6 +6,8 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFieldsFn } from '../../../app/form/Form';
 import { ValidationError, atLeastOneFieldIsChecked } from '../../../app/form/validation';
 
+
+
 const en = () => {
   return {
     title: "Upload the child's documents",
@@ -38,7 +40,6 @@ const en = () => {
       '<p class="govuk-body govuk-!-margin-top-5">You can post or email your documents to the court. If you post them you must send the original documents or certified copies. You’ll receive details of how to send them after you have submitted this application.</p><p class="govuk-body">Continue with your application.</p>',
     birthOrAdoptionCertificate: 'Birth or adoption certificate',
     deathCertificate: 'Death certiticate',
-
     errors: {
       applicant1UploadedFiles: {
         [ValidationError.NOT_UPLOADED]:
@@ -109,6 +110,7 @@ const cy = () => {
     },
   };
 };
+
 
 
 
@@ -197,6 +199,8 @@ const languages = {
 
 export const generateContent: TranslationFn = content => {
   const translations = languages[content.language]();
+
+
   return {
     ...translations,
     form: { ...form, fields: (form.fields as FormFieldsFn)(content.userCase || {}) },

@@ -18,6 +18,8 @@ export interface AppRequest<T = Partial<Case>> extends Request {
 }
 
 export interface AppSession extends Session {
+  rpeToken: any;
+  caseDocuments: Array<any>;
   user: UserDetails;
   userCase: CaseWithId;
   eligibility: Eligibility;

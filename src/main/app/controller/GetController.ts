@@ -26,6 +26,7 @@ export class GetController {
 
     const language = this.getPreferredLanguage(req) as Language;
     const addresses = req.session?.addresses;
+    const uploadedDocuments = req.session.caseDocuments;
     const content = generatePageContent({
       language,
       pageContent: this.content,
@@ -44,6 +45,7 @@ export class GetController {
 
     res.render(this.view, {
       ...content,
+      uploadedDocuments,
       sessionErrors,
       htmlLang: language,
       isDraft: req.session?.userCase?.state ? req.session.userCase.state === State.Draft : true,
