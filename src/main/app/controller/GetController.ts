@@ -41,8 +41,6 @@ export class GetController {
       req.session.errors = undefined;
     }
 
-
-
     res.render(this.view, {
       ...content,
       uploadedDocuments,

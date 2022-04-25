@@ -12,6 +12,7 @@ import { AuthProvider } from './modules/auth-provider';
 import { AxiosLogger } from './modules/axios-logger';
 import { CSRFToken } from './modules/csrf';
 import { ErrorHandler } from './modules/error-handler';
+import { FileUpload } from './modules/fileupload';
 import { HealthCheck } from './modules/health';
 import { Helmet } from './modules/helmet';
 import { LanguageToggle } from './modules/i18n';
@@ -24,7 +25,6 @@ import { LoadTimeouts } from './modules/timeouts';
 import { TooBusy } from './modules/too-busy';
 import { Webpack } from './modules/webpack';
 import { Routes } from './routes';
-import {FileUpload} from './modules/fileupload'
 
 const { Logger } = require('@hmcts/nodejs-logging');
 const logger: LoggerInstance = Logger.getLogger('server');
@@ -40,7 +40,6 @@ app.use((req, res, next) => {
   next();
 });
 new FileUpload().enableFor(app);
-
 
 new AxiosLogger().enableFor(app);
 new PropertiesVolume().enableFor(app);
@@ -60,7 +59,6 @@ new OidcMiddleware().enableFor(app);
 new StateRedirectMiddleware().enableFor(app);
 new Routes().enableFor(app);
 new ErrorHandler().handleNextErrorsFor(app);
-
 
 const port = config.get('port');
 const server = app.listen(port, () => {

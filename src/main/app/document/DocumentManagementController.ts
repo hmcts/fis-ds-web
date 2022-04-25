@@ -26,7 +26,7 @@ export class DocumentManagerController {
       if (req.headers.accept?.includes('application/json')) {
         throw new Error('No files were uploaded');
       } else {
-        console.log("Files are uploaded successfully-----")
+        console.log('Files are uploaded successfully-----');
         return res.redirect(UPLOAD_YOUR_DOCUMENTS);
       }
     }

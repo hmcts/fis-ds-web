@@ -6,8 +6,6 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFieldsFn } from '../../../app/form/Form';
 import { ValidationError, atLeastOneFieldIsChecked } from '../../../app/form/validation';
 
-
-
 const en = () => {
   return {
     title: "Upload the child's documents",
@@ -111,9 +109,6 @@ const cy = () => {
   };
 };
 
-
-
-
 export const form: FormContent = {
   fields: userCase => {
     const checkboxes: { id: string; value: DocumentType }[] = [];
@@ -199,7 +194,6 @@ const languages = {
 
 export const generateContent: TranslationFn = content => {
   const translations = languages[content.language]();
-
 
   return {
     ...translations,

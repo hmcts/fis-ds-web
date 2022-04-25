@@ -68,7 +68,7 @@ export const edgecaseSequence: Step[] = [
   },
   {
     url: PAY_YOUR_FEE,
-    getNextStep: () =>UPLOAD_YOUR_DOCUMENTS,
+    getNextStep: () => UPLOAD_YOUR_DOCUMENTS,
   },
   {
     url: UPLOAD_YOUR_DOCUMENTS,

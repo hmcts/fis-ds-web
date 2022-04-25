@@ -1,7 +1,5 @@
-
 import { Application } from 'express';
-import fileUpload from 'express-fileupload'
-
+import fileUpload from 'express-fileupload';
 
 /**
  * @FileUpload
@@ -9,10 +7,10 @@ import fileUpload from 'express-fileupload'
  */
 export class FileUpload {
   public enableFor(app: Application): void {
-
-    app.use(fileUpload({
+    app.use(
+      fileUpload({
         limits: { fileSize: 100 * 1024 * 1024 },
-      }));
-
-  }}
-
+      })
+    );
+  }
+}
