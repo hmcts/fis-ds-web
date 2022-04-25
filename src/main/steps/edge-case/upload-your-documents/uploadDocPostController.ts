@@ -1,4 +1,3 @@
-//@ts-ignore
 
 import autobind from 'autobind-decorator';
 import { Logger } from '@hmcts/nodejs-logging';
@@ -65,7 +64,6 @@ export default class UploadDocumentController  extends PostController<AnyObject>
 
 
     public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
-        //@ts-ignore
       const UploadDocumentInstance  = (BASEURL: string  , header: AxiosRequestHeaders) : AxiosInstance  => {
         return axios.create( {
             baseURL: BASEURL,
@@ -79,8 +77,7 @@ export default class UploadDocumentController  extends PostController<AnyObject>
            if(req.session.caseDocuments == undefined){
              req.session.caseDocuments = [];
            }
-          const {files}  = req;
-          //@ts-ignore
+          const {files} : any  = req;
           const {documents} = files;
           const checkIfMultipleFiles : Boolean = Array.isArray(documents);
 
