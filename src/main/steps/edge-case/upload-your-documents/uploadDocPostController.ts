@@ -9,7 +9,7 @@ import { AppRequest } from '../../../app/controller/AppRequest';
 import axios, { AxiosInstance, AxiosRequestHeaders } from 'axios';
 import FormData from 'form-data';
 import config from 'config';
-import {RpeApi} from '../../../app/rpe/rpeApi'
+import {RpeApi} from '../../../app/rpe/RpeApi'
 const logger = Logger.getLogger('uploadDocumentPostController');
 import {UPLOAD_YOUR_DOCUMENTS} from '../../urls'
 
