@@ -228,7 +228,7 @@ describe('applicant1UploadedFiles', () => {
     expect((applicant1UploadedFiles.validator as Function)(value, formData)).toBe(expected);
   });
 });
-
+/* eslint-disable */
 describe('applicant1UploadedFiles parser', () => {
   test.each([
     { data: {}, expected: [] },
@@ -238,7 +238,6 @@ describe('applicant1UploadedFiles parser', () => {
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
     const applicant1UploadedFiles = fields.applicant1UploadedFiles;
-
     expect((applicant1UploadedFiles.parser as Function)(data)).toEqual(expected);
   });
 });
