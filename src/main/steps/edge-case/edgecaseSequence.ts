@@ -12,6 +12,7 @@ import {
   PRIVATE_LAW_APPLICATION_TYPE,
   SELECT_ADDRESS,
   SERVICE_TYPE,
+  UPLOAD_YOUR_DOCUMENTS,
 } from '../urls';
 
 export const edgecaseSequence: Step[] = [
@@ -67,6 +68,10 @@ export const edgecaseSequence: Step[] = [
   },
   {
     url: PAY_YOUR_FEE,
+    getNextStep: () => UPLOAD_YOUR_DOCUMENTS,
+  },
+  {
+    url: UPLOAD_YOUR_DOCUMENTS,
     showInSection: Sections.AboutEdgeCase,
     getNextStep: () => CITIZEN_HOME_URL,
   },

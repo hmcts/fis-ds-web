@@ -1456,6 +1456,8 @@ export const enum ConfidentialDocumentsReceived {
 }
 
 export const enum DocumentType {
+  BIRTH_OR_ADOPTION_CERTIFICATE = 'birthOrAdoptionCertificate',
+  DEATH_CERTIFICATE = 'deathCertificate',
   AOS_OVERDUE_COVER_LETTER = 'aosOverdueCoverLetter',
   ACKNOWLEDGEMENT_OF_SERVICE = 'acknowledgementOfService',
   ANNEX_A = 'annexA',
@@ -1496,7 +1498,9 @@ export const enum DocumentType {
   RESPONDENT_INVITATION = 'aos',
   SOLICITOR_SERVICE = 'solicitorService',
   WELSH_TRANSLATION = 'welshTranslation',
+  
 }
+
 
 export const enum PaymentStatus {
   IN_PROGRESS = 'inProgress',
@@ -1515,6 +1519,14 @@ export const enum PbaErrorMessage {
   GENERAL = 'GENERAL',
 }
 
+export interface AdoptionDocument {
+  documentDateAdded: DateAsString;
+  documentComment: string;
+  documentFileName: string;
+  documentType: DocumentType;
+  documentEmailContent: string;
+  documentLink: Document;
+}
 export const enum ThePrayer {
   I_CONFIRM = 'Yes',
 }
