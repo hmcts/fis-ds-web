@@ -12,7 +12,6 @@ import { RpeApi } from '../../../app/rpe/RpeApi';
 const logger = Logger.getLogger('uploadDocumentPostController');
 import { UPLOAD_YOUR_DOCUMENTS } from '../../urls';
 
-
 /**
  * @FileHandler
  */
