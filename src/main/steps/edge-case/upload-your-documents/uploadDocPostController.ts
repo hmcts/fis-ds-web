@@ -38,7 +38,7 @@ const FileMimeType = {
 
 class FileValidations {
   static sizeValidation = (fileSize: number) => {
-    const KbsInMBS = 200000;
+    const KbsInMBS = 2000000;
     if (fileSize < KbsInMBS) {
       return true;
     } else {
