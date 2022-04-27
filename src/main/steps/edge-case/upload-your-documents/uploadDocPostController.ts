@@ -16,14 +16,13 @@ import { UPLOAD_YOUR_DOCUMENTS } from '../../urls';
  * @FileHandler
  */
 const FileMimeType = {
-  csv: 'text/csv',
   doc: 'application/msword',
   docx: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-  jpg: 'image/jpeg',
+  /**
+   *  jpg: 'image/jpeg',
   kml: 'application/vnd.google-earth.kml+xml',
   ods: 'application/vnd.oasis.opendocument.spreadsheet',
   odt: 'application/vnd.oasis.opendocument.text',
-  pdf: 'application/pdf',
   png: 'image/png',
   ppt: 'application/vnd.ms-powerpoint',
   pptx: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
@@ -34,6 +33,9 @@ const FileMimeType = {
   xlsx: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
   xml: 'text/xml',
   zip: 'application/x-zip-compressed',
+  csv: 'text/csv',
+   */
+  pdf: 'application/pdf',
 };
 
 class FileValidations {
@@ -72,8 +74,12 @@ export default class UploadDocumentController extends PostController<AnyObject> 
       req.session.rpeToken = (await RpeApi.getRpeToken()).data;
     }
 
-    if (req.session.caseDocuments === undefined) {
-      req.session.caseDocuments = [];
+    if (!req.session.hasOwnProperty('caseDocuments')) {
+      req.session['caseDocuments'] = [];
+    }
+
+    if (!req.session.hasOwnProperty('errors')) {
+      req.session['errors'] = [];
     }
 
     const { files }: AppRequest<AnyObject> = req;
@@ -115,13 +121,19 @@ export default class UploadDocumentController extends PostController<AnyObject> 
           );
           const { originalDocumentName, _links } = RequestDocument.data.documents[0];
           req.session['caseDocuments'].push({ originalDocumentName, _links });
+          req.session['errors'] = undefined;
           this.redirect(req, res, UPLOAD_YOUR_DOCUMENTS);
         } catch (error) {
           logger.error(error);
           res.json({ msg: 'error occured', error });
         }
       } else {
-        res.json({ msg: 'error validating files' });
+        req.session.errors?.push({
+          propertyName: 'applicant1UploadedFiles',
+          errorType: 'size of the file isnt right ',
+        });
+        // res.json({ msg: 'error validating files' });
+        this.redirect(req, res, UPLOAD_YOUR_DOCUMENTS);
       }
     }
   }
