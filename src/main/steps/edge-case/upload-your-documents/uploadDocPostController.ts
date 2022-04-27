@@ -118,7 +118,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
           this.redirect(req, res, UPLOAD_YOUR_DOCUMENTS);
         } catch (error) {
           logger.error(error);
-          res.json({msg: 'error occured'})
+          res.json({ msg: 'error occured' });
         }
       } else {
         res.json({ msg: 'error validating files' });
