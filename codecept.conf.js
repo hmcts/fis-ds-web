@@ -76,7 +76,8 @@ exports.config = {
     contactdetails: './src/test/e2e/pages/Contactdetails.page.js',
     addresswithpostcode: './src/test/e2e/pages/AddressWithPostCode.page.js',
     dateofbirth: './src/test/e2e/pages/DateOfBirth.page.js',
-    reviewpaymentpage: './src/test/e2e/pages/ReviewPayment.page.js'
+    reviewpaymentpage: './src/test/e2e/pages/ReviewPayment.page.js',
+    uploadfilepage: './src/test/e2e/pages/UploadDocuments.page.js',
   },
   plugins: {
     retryFailedStep: {
