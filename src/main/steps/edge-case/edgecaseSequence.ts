@@ -64,15 +64,16 @@ export const edgecaseSequence: Step[] = [
   {
     url: CONTACT_DETAILS,
     showInSection: Sections.AboutEdgeCase,
-    getNextStep: () => PAY_YOUR_FEE,
-  },
-  {
-    url: PAY_YOUR_FEE,
     getNextStep: () => UPLOAD_YOUR_DOCUMENTS,
   },
   {
     url: UPLOAD_YOUR_DOCUMENTS,
     showInSection: Sections.AboutEdgeCase,
+    getNextStep: () => PAY_YOUR_FEE,
+  },
+  {
+    url: PAY_YOUR_FEE,
     getNextStep: () => CITIZEN_HOME_URL,
   },
+ 
 ];

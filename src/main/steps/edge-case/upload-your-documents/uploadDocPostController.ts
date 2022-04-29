@@ -11,6 +11,7 @@ import { FormFields, FormFieldsFn } from '../../../app/form/Form';
 import { RpeApi } from '../../../app/rpe/RpeApi';
 const logger = Logger.getLogger('uploadDocumentPostController');
 import { UPLOAD_YOUR_DOCUMENTS } from '../../urls';
+import {PAY_YOUR_FEE} from '../../urls'
 
 /**
  * @FileHandler
@@ -69,6 +70,13 @@ export default class UploadDocumentController extends PostController<AnyObject> 
         headers: header,
       });
     };
+
+    const {documentUploadProceed} = req.body;
+
+    if(Boolean(documentUploadProceed)){
+      res.redirect(PAY_YOUR_FEE)
+    }
+    else{
 
     if ((await RpeApi.getRpeToken()).response) {
       req.session.rpeToken = (await RpeApi.getRpeToken()).data;
@@ -136,5 +144,6 @@ export default class UploadDocumentController extends PostController<AnyObject> 
         this.redirect(req, res, UPLOAD_YOUR_DOCUMENTS);
       }
     }
+  }
   }
 }
