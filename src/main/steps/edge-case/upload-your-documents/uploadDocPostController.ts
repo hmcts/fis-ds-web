@@ -72,7 +72,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
 
     const { documentUploadProceed } = req.body;
 
-    if (documentUploadProceed) {
+    if (Boolean(documentUploadProceed)) {
       res.redirect(PAY_YOUR_FEE);
     } else {
       if ((await RpeApi.getRpeToken()).response) {
