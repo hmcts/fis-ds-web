@@ -1,4 +1,4 @@
-//import { isObject } from 'lodash';
+import { isObject } from 'lodash';
 
 import { Checkbox } from '../../../app/case/case';
 import { DocumentType } from '../../../app/case/definition';
@@ -39,7 +39,7 @@ const en = () => {
     birthOrAdoptionCertificate: 'Birth or adoption certificate',
     deathCertificate: 'Death certiticate',
     errors: {
-      documentUploadProceed: {
+      applicant1UploadedFiles: {
         [ValidationError.NOT_UPLOADED]:
           'You have not provided any information or uploaded any documents. You need to provide the information or documents the court has requested. Or if you are going to post any documents in, select that option.',
         errorUploading:
@@ -91,7 +91,7 @@ const cy = () => {
     deathCertificate: 'Tystysgrif marwolaeth',
 
     errors: {
-      documentUploadProceed: {
+      applicant1UploadedFiles: {
         [ValidationError.NOT_UPLOADED]:
           'Nid ydych wedi darparu unrhyw wybodaeth nac wedi uwchlwytho unrhyw ddogfennau. Mae angen i chi ddarparu’r wybodaeth neu’r dogfennau y mae’r llys wedi gofyn amdanynt. Neu os ydych am bostio unrhyw ddogfennau i mewn, dewiswch yr opsiwn hwnnw.',
         errorUploading:
@@ -110,7 +110,7 @@ const cy = () => {
 };
 
 export const form: FormContent = {
-  fields: () => {
+  fields: userCase => {
     const checkboxes: { id: string; value: DocumentType }[] = [];
 
     checkboxes.push({
@@ -124,6 +124,28 @@ export const form: FormContent = {
     });
 
     return {
+      applicant1UploadedFiles: {
+        type: 'hidden',
+        label: l => l.uploadFiles,
+        labelHidden: true,
+        value:
+          (isObject(userCase.applicant1UploadedFiles)
+            ? JSON.stringify(userCase.applicant1UploadedFiles)
+            : userCase.applicant1UploadedFiles) || '[]',
+        parser: data => JSON.parse((data as Record<string, string>).applicant1UploadedFiles || '[]'),
+        validator: (value, formData) => {
+          const hasUploadedFiles = (value as string[])?.length && (value as string) !== '[]';
+          const selectedCannotUploadDocuments =
+            formData.applicant1CannotUpload && !!formData.applicant1CannotUploadDocuments?.length;
+          if (!hasUploadedFiles && !selectedCannotUploadDocuments) {
+            return ValidationError.NOT_UPLOADED;
+          }
+          const fileArray = JSON.parse((formData as Record<string, string>).applicant1UploadedFiles || '[]');
+          if (Object.keys(fileArray).length > 10) {
+            return ValidationError.FILE_COUNT_LIMIT_EXCEEDED;
+          }
+        },
+      },
       documentUploadProceed: {
         type: 'hidden',
         label: l => l.uploadFiles,
