@@ -110,7 +110,7 @@ const cy = () => {
 };
 
 export const form: FormContent = {
-  fields: userCase => {
+  fields: () => {
     const checkboxes: { id: string; value: DocumentType }[] = [];
 
     checkboxes.push({
@@ -128,8 +128,7 @@ export const form: FormContent = {
         type: 'hidden',
         label: l => l.uploadFiles,
         labelHidden: true,
-        value: 'true'
-
+        value: 'true',
       },
       applicant1CannotUpload: {
         type: 'checkboxes',

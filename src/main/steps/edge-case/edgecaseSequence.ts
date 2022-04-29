@@ -75,5 +75,4 @@ export const edgecaseSequence: Step[] = [
     url: PAY_YOUR_FEE,
     getNextStep: () => CITIZEN_HOME_URL,
   },
- 
 ];
