@@ -146,6 +146,12 @@ export const form: FormContent = {
           }
         },
       },
+      documentUploadProceed: {
+        type: 'hidden',
+        label: l => l.uploadFiles,
+        labelHidden: true,
+        value: 'true',
+      },
       applicant1CannotUpload: {
         type: 'checkboxes',
         label: l => l.cannotUploadDocuments,

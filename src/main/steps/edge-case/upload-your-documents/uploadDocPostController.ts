@@ -10,7 +10,7 @@ import { AnyObject, PostController } from '../../../app/controller/PostControlle
 import { FormFields, FormFieldsFn } from '../../../app/form/Form';
 import { RpeApi } from '../../../app/rpe/RpeApi';
 const logger = Logger.getLogger('uploadDocumentPostController');
-import { UPLOAD_YOUR_DOCUMENTS } from '../../urls';
+import { PAY_YOUR_FEE, UPLOAD_YOUR_DOCUMENTS } from '../../urls';
 
 /**
  * @FileHandler
@@ -70,70 +70,76 @@ export default class UploadDocumentController extends PostController<AnyObject> 
       });
     };
 
-    if ((await RpeApi.getRpeToken()).response) {
-      req.session.rpeToken = (await RpeApi.getRpeToken()).data;
-    }
+    const { documentUploadProceed } = req.body;
 
-    if (!req.session.hasOwnProperty('caseDocuments')) {
-      req.session['caseDocuments'] = [];
-    }
+    if (documentUploadProceed) {
+      res.redirect(PAY_YOUR_FEE);
+    } else {
+      if ((await RpeApi.getRpeToken()).response) {
+        req.session.rpeToken = (await RpeApi.getRpeToken()).data;
+      }
 
-    if (!req.session.hasOwnProperty('errors')) {
-      req.session['errors'] = [];
-    }
+      if (!req.session.hasOwnProperty('caseDocuments')) {
+        req.session['caseDocuments'] = [];
+      }
 
-    const { files }: AppRequest<AnyObject> = req;
-    const { documents }: any = files;
+      if (!req.session.hasOwnProperty('errors')) {
+        req.session['errors'] = [];
+      }
 
-    const checkIfMultipleFiles: boolean = Array.isArray(documents);
+      const { files }: AppRequest<AnyObject> = req;
+      const { documents }: any = files;
 
-    // making sure single file is uploaded
-    if (!checkIfMultipleFiles) {
-      const validateMimeType: boolean = FileValidations.formatValidation(documents.mimetype);
-      const validateFileSize: boolean = FileValidations.sizeValidation(documents.size);
-      const formData: FormData = new FormData();
-      if (validateMimeType && validateFileSize) {
-        formData.append('files', documents.data, {
-          contentType: documents.mimetype,
-          filename: documents.name,
-        });
-        formData.append('caseTypeId', 'PRLAPPS');
-        formData.append('jurisdictionId', 'PRIVATELAW');
-        formData.append('classification', 'RESTRICTED');
+      const checkIfMultipleFiles: boolean = Array.isArray(documents);
 
-        const formHeaders = formData.getHeaders();
-        /**
-         * @RequestHeaders
-         */
-        const Headers = {
-          Authorization: `Bearer ${req.session.user['accessToken']}`,
-          ServiceAuthorization: req.session['rpeToken'],
-        };
-        try {
-          const RequestDocument = await UploadDocumentInstance(FileUploadBaseURL, Headers).post(
-            '/cases/documents',
-            formData,
-            {
-              headers: {
-                ...formHeaders,
-              },
-            }
-          );
-          const { originalDocumentName, _links } = RequestDocument.data.documents[0];
-          req.session['caseDocuments'].push({ originalDocumentName, _links });
-          req.session['errors'] = undefined;
+      // making sure single file is uploaded
+      if (!checkIfMultipleFiles) {
+        const validateMimeType: boolean = FileValidations.formatValidation(documents.mimetype);
+        const validateFileSize: boolean = FileValidations.sizeValidation(documents.size);
+        const formData: FormData = new FormData();
+        if (validateMimeType && validateFileSize) {
+          formData.append('files', documents.data, {
+            contentType: documents.mimetype,
+            filename: documents.name,
+          });
+          formData.append('caseTypeId', 'PRLAPPS');
+          formData.append('jurisdictionId', 'PRIVATELAW');
+          formData.append('classification', 'RESTRICTED');
+
+          const formHeaders = formData.getHeaders();
+          /**
+           * @RequestHeaders
+           */
+          const Headers = {
+            Authorization: `Bearer ${req.session.user['accessToken']}`,
+            ServiceAuthorization: req.session['rpeToken'],
+          };
+          try {
+            const RequestDocument = await UploadDocumentInstance(FileUploadBaseURL, Headers).post(
+              '/cases/documents',
+              formData,
+              {
+                headers: {
+                  ...formHeaders,
+                },
+              }
+            );
+            const { originalDocumentName, _links } = RequestDocument.data.documents[0];
+            req.session['caseDocuments'].push({ originalDocumentName, _links });
+            req.session['errors'] = undefined;
+            this.redirect(req, res, UPLOAD_YOUR_DOCUMENTS);
+          } catch (error) {
+            logger.error(error);
+            res.json({ msg: 'error occured', error });
+          }
+        } else {
+          req.session.errors?.push({
+            propertyName: 'applicant1UploadedFiles',
+            errorType: 'size of the file isnt right ',
+          });
+          // res.json({ msg: 'error validating files' });
           this.redirect(req, res, UPLOAD_YOUR_DOCUMENTS);
-        } catch (error) {
-          logger.error(error);
-          res.json({ msg: 'error occured', error });
         }
-      } else {
-        req.session.errors?.push({
-          propertyName: 'applicant1UploadedFiles',
-          errorType: 'size of the file isnt right ',
-        });
-        // res.json({ msg: 'error validating files' });
-        this.redirect(req, res, UPLOAD_YOUR_DOCUMENTS);
       }
     }
   }
