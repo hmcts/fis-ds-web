@@ -11,8 +11,8 @@ Scenario(
     contactdetails,
     dateofbirth,
     addresswithpostcode,
-    reviewpaymentpage,
     uploadfilepage,
+    reviewpaymentpage,
   }) => {
     await loginPage.SignInUser();
     await landingPage.seeTheLandingPage();
@@ -25,8 +25,8 @@ Scenario(
     await addresswithpostcode.PostCodeLookUpAndSelect();
     await contactdetails.seeTheTitleOfThePage();
     await contactdetails.selectEmail();
+    await uploadfilepage.uploadDocumentsSection();
     await reviewpaymentpage.seeTheTitleOfThePage();
     await reviewpaymentpage.selectPayByCard();
-    await uploadfilepage.uploadDocumentsSection();
   }
 );
