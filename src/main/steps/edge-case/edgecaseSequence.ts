@@ -17,6 +17,11 @@ import {
 
 export const edgecaseSequence: Step[] = [
   {
+    url: FULL_NAME,
+    showInSection: Sections.AboutEdgeCase,
+    getNextStep: () => DATE_OF_BIRTH,
+  },
+  {
     url: CITIZEN_HOME_URL,
     showInSection: Sections.AboutEdgeCase,
     getNextStep: () => SERVICE_TYPE,
@@ -35,11 +40,6 @@ export const edgecaseSequence: Step[] = [
     url: PRIVATE_LAW_APPLICATION_TYPE,
     showInSection: Sections.AboutEdgeCase,
     getNextStep: () => FULL_NAME,
-  },
-  {
-    url: FULL_NAME,
-    showInSection: Sections.AboutEdgeCase,
-    getNextStep: () => DATE_OF_BIRTH,
   },
   {
     url: DATE_OF_BIRTH,

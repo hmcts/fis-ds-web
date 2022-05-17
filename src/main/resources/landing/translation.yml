@@ -1,0 +1,13 @@
+en:
+  serviceTitle: Getting Started
+  banner: This is a new service – your <a  class='govuk-link' href='#'>feedback</a> will help us to improve it.
+  heading: Submit an application to HM Courts and Tribunal service
+  body: Use this service to upload and submit a complete form.You may be asked to upload supporting documents along with a complete application, so make sure you have everything you need before getting started.<br><br><span class=' govuk-!-font-weight-bold'>Submitting an application </span><br> <br>As well as uploading a completed application form, you will also be asked a handful of simple questions. You’ll be able to review and change the answers you give to these questions before you submit them. <br> <br> Uploading and submitting an application should take not longer than 20 minutes.
+  button: Start now
+
+cy: 
+  serviceTitle: Getting Started (Whelsh)
+  banner: This is a new service – your <a  class='govuk-link' href='#'>feedback</a> will help us to improve it. (Whelsh)
+  heading: Submit an application to HM Courts and Tribunal service (Whelsh)
+  body: Use this service to upload and submit a complete form.You may be asked to upload supporting documents along with a complete application, so make sure you have everything you need before getting started.<br><br><span class=' govuk-!-font-weight-bold'>Submitting an application </span><br> <br>As well as uploading a completed application form, you will also be asked a handful of simple questions. You’ll be able to review and change the answers you give to these questions before you submit them. <br> <br> Uploading and submitting an application should take not longer than 20 minutes (Whelsh)
+  button: Start now (Whelsh)

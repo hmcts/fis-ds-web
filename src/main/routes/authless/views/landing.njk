@@ -1,0 +1,46 @@
+{% extends "authless-templates.njk" %}
+{% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
+
+
+{% block header %}
+      {{ govukHeader({serviceName: content.serviceTitle}) }}
+{% endblock %}
+
+
+{%set language = "Cyramaeg"%}
+
+{%if ToggleLanguage == "cy" %}
+{%set language = "Cyramaeg"%}
+{%elif ToggleLanguage == "en"%}
+{%set language = "English"%}
+{%else%}
+{%set language = "Cyramaeg"%}
+{%endif%}
+
+
+
+{% block beforeContent %}
+{{ govukPhaseBanner({
+  tag: {
+    text: "BETA"
+  },
+  html: content.banner +'<span class="float-right"><a href="?lang='+ToggleLanguage+'" class="govuk-link ">'+language+'</a></span>'
+}) }}
+{% endblock %}
+
+
+{% block content %}
+
+{{languagetext}}
+<h1 class="govuk-heading-l">{{content['heading']}}</h1>
+<p class="govuk-body-l">{{content['body'] | safe}}</p>
+
+<br/>
+
+{{ govukButton({
+  text: content.button,
+  href: loginURL,
+  isStartButton: true
+}) }}
+
+{% endblock %}
