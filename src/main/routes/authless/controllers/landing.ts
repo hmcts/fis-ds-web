@@ -1,19 +1,12 @@
-import FileSystem from 'fs/promises';
-import pathGuide from 'path';
-
 import { Request, Response } from 'express';
-import ymlTranspiler from 'js-yaml';
-
 import { SIGN_IN_URL } from '../../../steps/urls';
+import {ResourceReader} from '../../../modules/resourcereader/ResourceReader'
 
 export const LandingController = async (req: Request, res: Response): Promise<void> => {
   const loginURL = SIGN_IN_URL;
   try {
-    const ymlContentLoader = ymlTranspiler.load(
-      await FileSystem.readFile(pathGuide.resolve(__dirname, '../../../resources/landing/translation.yml'), {
-        encoding: 'utf-8',
-      })
-    );
+
+    const ymlContentLoader = await (new ResourceReader()).Loader('landing/translation.yml');
 
     /**
      * @SystemLanguage
