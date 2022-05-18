@@ -9,8 +9,7 @@ module.exports = {
   submitButton: 'input[value="Sign in"]',
 
   async SignInUser() {
-    console.log('User using the URL= ' + config.baseUrl);
-    await I.amOnPage(config.baseUrl)
+    I.wait(5);
     await I.fillField(this.fields.username, config.citizenUserOne.email);
     await I.fillField(this.fields.password, config.citizenUserOne.password);
     I.wait(5)

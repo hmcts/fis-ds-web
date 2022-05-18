@@ -1,21 +1,13 @@
+const config = require('../config');
 const { I } = inject();
 module.exports = {
-  fields: {
-    family: 'input[id$="selectJurisdiction"]',
-    tribunals: 'input[id$="selectJurisdiction-2"]',
-  },
+
   async seeTheLandingPage() {
+    console.log('User using the URL= ' + config.baseUrl);
+    await I.amOnPage(config.baseUrl)
     I.wait('2');
-    await I.see('Select Jurisdiction');
-  },
-    selectjurisdictionasfamily() {
-      I.click(this.fields.family);
-      I.click('Continue');
-      I.wait(5);
-    },
-    selectjurisdictionastribunals() {
-      I.click(this.fields.tribunals);
-      I.click('Continue');
-      I.wait(5);
+    await I.see('Submit an application to HM Courts and Tribunal service');
+    I.wait(5);
+    I.click('Start now'); 
   },
 };
