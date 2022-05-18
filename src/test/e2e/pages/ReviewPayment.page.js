@@ -11,8 +11,12 @@ module.exports = {
   async seeTheTitleOfThePage() {
     I.wait('2');
     await I.see('Review your application, pay and send');
-
-    if (I.see('Paying your International adoption application court fees')) {
+  
+    if (I.see('Paying your undefined application court fees')){
+    I.see('The application court fees total £0.')
+    }
+    
+    else if (I.see('Paying your International adoption application court fees')) {
     I.see('The application court fees total £183.');
     }
 

@@ -14,12 +14,8 @@ Scenario(
     uploadfilepage,
     reviewpaymentpage,
   }) => {
-    await loginPage.SignInUser();
     await landingPage.seeTheLandingPage();
-    await landingPage.selectjurisdictionasfamily();
-    await familypage.seeTheTitleOfThePage();
-    await familypage.selectAdoptionService();
-    await adoptionpage.selectInternationalAdoption();
+    await loginPage.SignInUser();
     await applytoapplicantpage.applicantFullnames();
     await dateofbirth.dateSelection('10', '10', '2020');
     await addresswithpostcode.PostCodeLookUpAndSelect();
@@ -28,5 +24,8 @@ Scenario(
     await uploadfilepage.uploadDocumentsSection();
     await reviewpaymentpage.seeTheTitleOfThePage();
     await reviewpaymentpage.selectPayByCard();
+    //await familypage.seeTheTitleOfThePage();
+    //await familypage.selectAdoptionService();
+    //await adoptionpage.selectInternationalAdoption();
   }
 );
