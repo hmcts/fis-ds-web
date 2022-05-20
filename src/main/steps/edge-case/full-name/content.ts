@@ -6,7 +6,6 @@ import { form as fullNameForm, generateContent as fullNameGenerateContent } from
 
 export const en = ({ userCase }: CommonContent): Record<string, unknown> => {
   const section = 'Applicant';
-  const title = userCase?.serviceType === 'Yes' ? userCase?.applyingWithAdoption : userCase?.applyingWithPrivateLaw;
   return {
     section,
     serviceName: 'Full Name',
