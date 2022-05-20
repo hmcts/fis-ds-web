@@ -9,7 +9,7 @@ export const en = ({ userCase }: CommonContent): Record<string, unknown> => {
   const title = userCase?.serviceType === 'Yes' ? userCase?.applyingWithAdoption : userCase?.applyingWithPrivateLaw;
   return {
     section,
-    serviceName: 'Apply to ' + title,
+    serviceName: 'Full Name',
     title: "What's your full name?",
     errors: {
       applicant1FirstNames: {
