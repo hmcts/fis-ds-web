@@ -26,6 +26,7 @@ import {
 
 export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>> = {
   serviceType: 'serviceType',
+  applyingForSelf: 'applyingForSelf',
   applicationType: 'applicationType',
   dateChildMovedIn: 'dateChildMovedIn',
   applyingWith: 'applyingWith',
@@ -190,6 +191,7 @@ export interface Case {
   dateChildMovedIn?: CaseDate;
   serviceType?: string;
   adoptionApplicationType?: string;
+  applyingForSelf?: string;
 
   /***** Applicant1 *****/
   applicant1FirstNames?: string;
