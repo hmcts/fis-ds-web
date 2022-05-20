@@ -7,12 +7,14 @@ import { CommonContent, Language, generatePageContent } from '../../steps/common
 import * as Urls from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
 import { CITIZEN_UPDATE, State } from '../case/definition';
+import { DocumentDeleteManager } from '../document/deleteManager';
 
 import { AppRequest } from './AppRequest';
 
 export type PageContent = Record<string, unknown>;
 export type TranslationFn = (content: CommonContent) => PageContent;
 
+export type AsyncTranslationFn = any;
 @autobind
 export class GetController {
   constructor(protected readonly view: string, protected readonly content: TranslationFn) {}
@@ -24,9 +26,12 @@ export class GetController {
       return;
     }
 
+
     const language = this.getPreferredLanguage(req) as Language;
     const addresses = req.session?.addresses;
     const uploadedDocuments = req.session.caseDocuments;
+
+
     const content = generatePageContent({
       language,
       pageContent: this.content,
@@ -34,6 +39,13 @@ export class GetController {
       userEmail: req.session?.user?.email,
       addresses,
     });
+    /**
+     * @Document_Delete_Manager
+     */
+    if(req.query.hasOwnProperty('query') && req.query.hasOwnProperty('documentId') ){
+        new DocumentDeleteManager().deleteManager(req, res);
+    }
+    
 
     const sessionErrors = req.session?.errors || [];
 
@@ -41,14 +53,29 @@ export class GetController {
       req.session.errors = undefined;
     }
 
-    res.render(this.view, {
-      ...content,
-      uploadedDocuments,
-      sessionErrors,
-      htmlLang: language,
-      isDraft: req.session?.userCase?.state ? req.session.userCase.state === State.Draft : true,
-      // getNextIncompleteStepUrl: () => getNextIncompleteStepUrl(req),
-    });
+
+    const RedirectConditions = {
+      "query": req.query.hasOwnProperty('query'),
+      "documentId": req.query.hasOwnProperty('documentId')
+    }
+
+
+
+    const checkConditions = Object.values(RedirectConditions).includes(true);
+      if(!checkConditions){
+        res.render(this.view, {
+          ...content,
+          uploadedDocuments,
+          sessionErrors,
+          htmlLang: language,
+          isDraft: req.session?.userCase?.state ? req.session.userCase.state === State.Draft : true,
+          // getNextIncompleteStepUrl: () => getNextIncompleteStepUrl(req),
+        });
+      }
+     
+    
+
+   
   }
 
   private getPreferredLanguage(req: AppRequest) {
