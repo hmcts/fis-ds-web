@@ -18,23 +18,6 @@ import { PAY_YOUR_FEE, UPLOAD_YOUR_DOCUMENTS } from '../../urls';
 const FileMimeType = {
   doc: 'application/msword',
   docx: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-  /**
-   *  jpg: 'image/jpeg',
-  kml: 'application/vnd.google-earth.kml+xml',
-  ods: 'application/vnd.oasis.opendocument.spreadsheet',
-  odt: 'application/vnd.oasis.opendocument.text',
-  png: 'image/png',
-  ppt: 'application/vnd.ms-powerpoint',
-  pptx: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-  rdf: 'application/rdf+xml',
-  rtf: 'application/rtf',
-  txt: 'text/plain',
-  xls: 'application/vnd.ms-excel',
-  xlsx: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-  xml: 'text/xml',
-  zip: 'application/x-zip-compressed',
-  csv: 'text/csv',
-   */
   pdf: 'application/pdf',
 };
 
@@ -124,6 +107,8 @@ export default class UploadDocumentController extends PostController<AnyObject> 
                 },
               }
             );
+
+            
             const { originalDocumentName, _links } = RequestDocument.data.documents[0];
             req.session['caseDocuments'].push({ originalDocumentName, _links });
             req.session['errors'] = undefined;

@@ -47,52 +47,29 @@
   <h1 class="govuk-heading-l">{{ title }}</h1>
   <p class="govuk-body">{{ youNeed }}</p>
   <p class="govuk-body">{{ youNeed2 }}</p>
-  <ul class="govuk-list govuk-list--bullet">
-    <li>{{ certificate }}</li>
-    <li>{{ certificateForeign }}</li>
-  </ul>
-  {{ govukInsetText({
-    text: warningPhoto
-  }) }}
-  {% set infoTakePhotoDetails %}
-    <ol class="govuk-list govuk-list--number">
-      <li>{{ infoBullet1 }}</li>
-      <li>{{ infoBullet2 }}</li>
-      <li>{{ infoBullet3 }}</li>
-      <li>{{ infoBullet4 }}</li>
-      <li>{{ infoBullet5 }}</li>
-    </ol>
-  {% endset %}
-  {{ govukDetails({
-    summaryText: infoTakePhoto,
-    html: infoTakePhotoDetails
-  }) }}
-  <p class="govuk-body">{{ minRequirements }}</p>
+ <p class="govuk-body">{{ youNeed3 }}</p>
 
+<p class="govuk-body">{{ uploadDescription }}</p>
 
-<br/>
-
-  <script id="uploadContent" type="application/json">
-  {
-    "isAmendableStates": {{ isAmendableStates }},
-    "delete": "{{ delete }}"
-  }
-  </script>
-
-
-  
+{{ govukDetails({
+  summaryText: "File uploads requirements",
+  text: uploadRequirement | safe
+}) }}
 
   <div id="uploadGroup" tabindex="0" class="uploadGroup">
     <h2 class="govuk-heading-s">{{ uploadFiles }}</h2>
     <p class="govuk-body govuk-section-break govuk-section-break--visible govuk-!-padding-bottom-3{% if uploadedDocuments|length %} hidden{% endif %}" id="noFilesUploaded">{{ noFilesUploaded }}</p>
     <ul id="filesUploaded" class="govuk-list">
+      {%if uploadedDocuments.length >0 %}
       {% for file in uploadedDocuments %}
         <li class="uploadedFile govuk-!-padding-top-2 govuk-!-padding-bottom-3 govuk-section-break govuk-section-break--visible">
           {{ file.originalDocumentName }} 
-          <a href="/document-manager/delete/{{ loop.index0 }}?_csrf={{ csrfToken }}" class="govuk-link--no-visited-state ">{{ delete }}</a>
-
+          {% set words = file._links.self.href | split("/") %}
+          {% set documentId = words[4] %}
+          <a href="/upload-your-documents?query=delete&documentId={{documentId}}" class="govuk-link--no-visited-state float-right ">{{ delete }}</a>
         </li>
       {% endfor %}
+      {%endif%}
     </ul>
   </div>
 
@@ -102,65 +79,23 @@
   </p>
 
 
-    <form action="/upload-your-documents?_csrf={{ csrfToken }}" method="post" enctype="multipart/form-data">
+ <form action="/upload-your-documents?_csrf={{ csrfToken }}" method="post" enctype="multipart/form-data">
 
       {{ govukFileUpload({
   id: "file-upload-1",
   name: "documents",
+  classes: "govuk-!-margin-bottom-5",
   label: {
     text: ""
   }
 }) }}
   {{ govukButton({
-          text: upload,
+          text: uploadButton,
           type: "upload document",
-          classes: "govuk-button--primary govuk-!-margin-bottom-0"
+          classes: "govuk-button--secondary govuk-!-margin-bottom-0 govuk--custom__button"
         }) }}
 
 
 </form>
 
-  <div class="govuk-form-group {{ 'hidden' if not isAmendableStates }}">
-    <div class="govuk-panel upload hidden ">
-      <span class="upload-arrow-icon govuk-!-margin-bottom-5"></span>
-      <div class="govuk-form-group">
-        <p class="govuk-body govuk-!-margin-bottom-0">
-          <span id="upload"></span>
-          <strong>{{ orStr }}</strong><br>
-          {{ dragDropHere }}
-        </p>
-        <div id="uploadProgressBar"></div>
-      </div>
-    </div>
-
-
-
-    <noscript>
-      <form action="/document-manager?_csrf={{ csrfToken }}" method="post" enctype="multipart/form-data">
-        {{ govukFileUpload({
-          name: "files[]",
-          attributes: {
-            multiple: true,
-            accept: "image/jpeg,image/tiff,image/png,application/pdf"
-          },
-          label: {
-            text: chooseFilePhoto
-          },
-          classes: "govuk-!-margin-bottom-4"
-        }) }}
-        {{ govukButton({
-          text: upload,
-          type: "submit",
-          classes: "govuk-button--secondary govuk-!-margin-bottom-0"
-        }) }}
-      </form>
-    </noscript>
-  </div>
-
-<!--
-  <div class="govuk-form-group">
-    <p class="govuk-body">
-      {{cannotUploadYouCanPost}}
-    </p>
-  </div>-->
 {% endblock %}

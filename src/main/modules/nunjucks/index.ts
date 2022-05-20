@@ -99,6 +99,11 @@ export class Nunjucks {
       return new nunjucks.runtime.SafeString(jsonString);
     });
 
+
+    env.addFilter('split', function (array, cursor) {
+      return array.split(cursor);
+    });
+
     app.use((req, res, next) => {
       res.locals.host = req.headers['x-forwarded-host'] || req.hostname;
       res.locals.pagePath = req.path;
