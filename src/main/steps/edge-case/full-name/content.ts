@@ -4,7 +4,7 @@ import { CommonContent } from '../../../steps/common/common.content';
 import { ErrorMessages, ErrorMessagesWelsh } from '../../../steps/errorMesages';
 import { form as fullNameForm, generateContent as fullNameGenerateContent } from '../../common/components/full-name';
 
-export const en = ({ userCase }: CommonContent): Record<string, unknown> => {
+export const en = (): Record<string, unknown> => {
   const section = 'Applicant';
   return {
     section,
