@@ -309,6 +309,7 @@ export interface PlacementOrder {
 
 export interface CaseData {
   serviceType: string;
+  applyingForSelf: string;
   applyingWith: ApplyingWith;
   applyingWithPrivateLaw:string;
   applyingWithAdoption: string;
