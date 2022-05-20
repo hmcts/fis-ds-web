@@ -45,7 +45,8 @@ export const form: FormContent = {
     },
     courtContemptLabel: {
       type: 'label',
-      label: l => l.courtContempt,
+      classes: 'govukWarningText',
+      label:l=>l.confirmContempt,
     },
   },
   submit: {
