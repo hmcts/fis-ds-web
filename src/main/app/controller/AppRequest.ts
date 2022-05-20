@@ -18,7 +18,7 @@ export interface AppRequest<T = Partial<Case>> extends Request {
 }
 
 export interface AppSession extends Session {
-  csrfSecret: string;
+  csrfSecret: String;
   rpeToken: any;
   caseDocuments: any[];
   user: UserDetails;

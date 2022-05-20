@@ -43,4 +43,13 @@ export const generateContent: TranslationFn = content => {
     ...translations,
     form: { ...form, fields: (form.fields as FormFieldsFn)(content.userCase || {}) },
   };
+
+
+  
+  
+
+  
+ // 
+  
+  
 };

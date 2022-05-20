@@ -7,6 +7,7 @@ import { CommonContent, Language, generatePageContent } from '../../steps/common
 import * as Urls from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
 import { CITIZEN_UPDATE, State } from '../case/definition';
+import { DocumentDeleteManager } from '../document/deleteManager';
 
 import { AppRequest } from './AppRequest';
 
@@ -24,6 +25,7 @@ export class GetController {
       // so we don't want to call render again
       return;
     }
+
 
     const language = this.getPreferredLanguage(req) as Language;
     const addresses = req.session?.addresses;
