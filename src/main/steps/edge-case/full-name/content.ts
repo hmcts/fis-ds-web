@@ -4,12 +4,11 @@ import { CommonContent } from '../../../steps/common/common.content';
 import { ErrorMessages, ErrorMessagesWelsh } from '../../../steps/errorMesages';
 import { form as fullNameForm, generateContent as fullNameGenerateContent } from '../../common/components/full-name';
 
-export const en = ({ userCase }: CommonContent): Record<string, unknown> => {
+export const en = (): Record<string, unknown> => {
   const section = 'Applicant';
-  const title = userCase?.serviceType === 'Yes' ? userCase?.applyingWithAdoption : userCase?.applyingWithPrivateLaw;
   return {
     section,
-    serviceName: 'Apply to ' + title,
+    serviceName: 'Full Name',
     title: "What's your full name?",
     errors: {
       applicant1FirstNames: {
