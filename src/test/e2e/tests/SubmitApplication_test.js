@@ -13,9 +13,11 @@ Scenario(
     addresswithpostcode,
     uploadfilepage,
     reviewpaymentpage,
+    determineapplicantrole
   }) => {
     await landingPage.seeTheLandingPage();
     await loginPage.SignInUser();
+    await determineapplicantrole.DetermineApplicant(true);
     await applytoapplicantpage.applicantFullnames();
     await dateofbirth.dateSelection('10', '10', '2020');
     await addresswithpostcode.PostCodeLookUpAndSelect();
