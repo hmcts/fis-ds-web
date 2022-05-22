@@ -3,16 +3,18 @@ import { Request, Response } from 'express';
 import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 import { SIGN_IN_URL } from '../../../steps/urls';
 
-export const LandingController = async (req: Request, res: Response): Promise<void> => {
+export const LandingController = (req: Request, res: Response): void => {
   const loginURL = SIGN_IN_URL;
   try {
-    const ymlContentLoader = await new ResourceReader().Loader('landing/translation.yml');
+    const resourceLoader = new ResourceReader();
+    resourceLoader.Loader('landing/translation.json');
+    const Translations = resourceLoader.getFileContents().translations;
 
     /**
      * @SystemLanguage
      */
-    const en = ymlContentLoader.en;
-    const cy = ymlContentLoader.cy;
+    const en = Translations.en;
+    const cy = Translations.cy;
 
     let SystemContent = en;
     let ToggleLanguage = 'cy';

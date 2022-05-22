@@ -37,7 +37,6 @@ services:
     Private:
       event: 'issue'
       service: 'other'
-
   payments:
     url: http://payment-api-aat.service.core-compute-aat.internal
   equalityAndDiversity:
@@ -64,3 +63,5 @@ e2e:
   userTestPassword: ''
 appInsights:
   instrumentationKey:
+      
+ 

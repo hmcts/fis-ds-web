@@ -99,7 +99,6 @@ export class Nunjucks {
       return new nunjucks.runtime.SafeString(jsonString);
     });
 
-
     env.addFilter('split', function (array, cursor) {
       return array.split(cursor);
     });

@@ -26,11 +26,9 @@ export class GetController {
       return;
     }
 
-
     const language = this.getPreferredLanguage(req) as Language;
     const addresses = req.session?.addresses;
     const uploadedDocuments = req.session.caseDocuments;
-
 
     const content = generatePageContent({
       language,
@@ -42,10 +40,9 @@ export class GetController {
     /**
      * @Document_Delete_Manager
      */
-    if(req.query.hasOwnProperty('query') && req.query.hasOwnProperty('documentId') ){
-        new DocumentDeleteManager().deleteManager(req, res);
+    if (req.query.hasOwnProperty('query') && req.query.hasOwnProperty('documentId')) {
+      new DocumentDeleteManager().deleteManager(req, res);
     }
-    
 
     const sessionErrors = req.session?.errors || [];
 
@@ -53,29 +50,22 @@ export class GetController {
       req.session.errors = undefined;
     }
 
-
     const RedirectConditions = {
-      "query": req.query.hasOwnProperty('query'),
-      "documentId": req.query.hasOwnProperty('documentId')
-    }
-
-
+      query: req.query.hasOwnProperty('query'),
+      documentId: req.query.hasOwnProperty('documentId'),
+    };
 
     const checkConditions = Object.values(RedirectConditions).includes(true);
-      if(!checkConditions){
-        res.render(this.view, {
-          ...content,
-          uploadedDocuments,
-          sessionErrors,
-          htmlLang: language,
-          isDraft: req.session?.userCase?.state ? req.session.userCase.state === State.Draft : true,
-          // getNextIncompleteStepUrl: () => getNextIncompleteStepUrl(req),
-        });
-      }
-     
-    
-
-   
+    if (!checkConditions) {
+      res.render(this.view, {
+        ...content,
+        uploadedDocuments,
+        sessionErrors,
+        htmlLang: language,
+        isDraft: req.session?.userCase?.state ? req.session.userCase.state === State.Draft : true,
+        // getNextIncompleteStepUrl: () => getNextIncompleteStepUrl(req),
+      });
+    }
   }
 
   private getPreferredLanguage(req: AppRequest) {
