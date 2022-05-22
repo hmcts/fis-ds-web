@@ -183,7 +183,7 @@ const cy: typeof en = {
   telephoneDetails: 'Dydd Llun i Ddydd Gwener, 8.30am - 5pm.',
 };
 
-export const  generatePageContent =  ({
+export const generatePageContent = ({
   language,
   pageContent,
   userCase,

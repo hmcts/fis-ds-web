@@ -19,6 +19,13 @@ const FileMimeType = {
   doc: 'application/msword',
   docx: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
   pdf: 'application/pdf',
+  png: 'image/png',
+  xls: 'application/vnd.ms-excel',
+  xlsx: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  jpg: 'image/jpeg',
+  txt: 'text/plain',
+  rtf: 'application/rtf',
+  gif: 'image/gif',
 };
 
 class FileValidations {
@@ -45,6 +52,11 @@ export default class UploadDocumentController extends PostController<AnyObject> 
     super(fields);
   }
 
+  async PostDocumentUploader(req: AppRequest<AnyObject>, res: Response): Promise<void> {
+    logger.log({ message: 'document has been successfully procceed and attached to the case' });
+    res.redirect(PAY_YOUR_FEE);
+  }
+
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
     const UploadDocumentInstance = (BASEURL: string, header: AxiosRequestHeaders): AxiosInstance => {
       return axios.create({
@@ -56,7 +68,10 @@ export default class UploadDocumentController extends PostController<AnyObject> 
     const { documentUploadProceed } = req.body;
 
     if (documentUploadProceed) {
-      res.redirect(PAY_YOUR_FEE);
+      /**
+       * @PostDocumentUploader
+       */
+      this.PostDocumentUploader(req, res);
     } else {
       if ((await RpeApi.getRpeToken()).response) {
         req.session.rpeToken = (await RpeApi.getRpeToken()).data;
@@ -108,7 +123,6 @@ export default class UploadDocumentController extends PostController<AnyObject> 
               }
             );
 
-            
             const { originalDocumentName, _links } = RequestDocument.data.documents[0];
             req.session['caseDocuments'].push({ originalDocumentName, _links });
             req.session['errors'] = undefined;
