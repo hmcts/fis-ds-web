@@ -7,8 +7,7 @@ const en = () => ({
   continue: 'Continue to payment',
   serviceName: 'Statement Of truth',
   one: 'I believe that the facts stated in this application are true',
-  confirmStatement:
-    "This confirms that the information you are submitting is true and accurate to the best of your knowledge. It's known as your 'Statement Of Truth'",
+  confirmStatement: "This confirms that the information you are submitting is true and accurate to the best of your knowledge. It's known as your 'Statement Of Truth'",
   errors: {
     statementOfTruth: {
       required: ErrorMessages.STATEMENTOFTRUTH_ERROR_MESSAGE,
@@ -19,8 +18,7 @@ const en = () => ({
 const cy = () => ({
   continue: 'Continue to payment',
   one: 'I believe that the facts stated in this application are true',
-  confirmStatement:
-    "This confirms that the information you are submitting is true and accurate to the best of your knowledge. It's known as your 'Statement Of Truth'",
+  confirmStatement: "This confirms that the information you are submitting is true and accurate to the best of your knowledge. It's known as your 'Statement Of Truth'",
   errors: {
     statementOfTruth: {
       required: ErrorMessagesWelsh.STATEMENTOFTRUTH_ERROR_MESSAGE,
@@ -34,16 +32,18 @@ export const form: FormContent = {
       type: 'checkboxes',
       classes: 'govuk-checkboxes',
       label: l => l.label,
-      values: [{ label: l => l.one, value: 'statementOfTruth' }],
+      values: [
+        { label: l => l.one, value: 'statementOfTruth' }
+      ],
       validator: isFieldFilledIn,
     },
     confirmStatementLabel: {
       type: 'label',
-      label: l => l.confirmStatement,
+      label: l => l.confirmStatement
     },
   },
 
-  submit: {
+submit: {
     text: b => b.continue,
   },
 };
