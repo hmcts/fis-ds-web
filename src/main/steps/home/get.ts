@@ -14,7 +14,7 @@ import {
   // PAY_YOUR_FEE,
   // SENT_TO_APPLICANT2_FOR_REVIEW,
   // TASK_LIST_URL,
-   //DATE_OF_BIRTH,
+  //DATE_OF_BIRTH,
   FULL_NAME,
 } from '../urls';
 

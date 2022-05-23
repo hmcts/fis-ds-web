@@ -7,7 +7,7 @@ import { Form, FormContent } from '../app/form/Form';
 
 import { Step } from './constants';
 import { edgecaseSequence } from './edge-case/edgecaseSequence';
-import { FULL_NAME, EDGE_CASE_URL } from './urls';
+import { EDGE_CASE_URL, FULL_NAME } from './urls';
 
 const stepForms: Record<string, Form> = {};
 
