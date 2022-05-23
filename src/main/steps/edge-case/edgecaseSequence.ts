@@ -13,9 +13,15 @@ import {
   SELECT_ADDRESS,
   SERVICE_TYPE,
   UPLOAD_YOUR_DOCUMENTS,
+  USER_ROLE,
 } from '../urls';
 
 export const edgecaseSequence: Step[] = [
+  {
+    url: USER_ROLE,
+    showInSection: Sections.AboutEdgeCase,
+    getNextStep: () => FULL_NAME,
+  },
   {
     url: FULL_NAME,
     showInSection: Sections.AboutEdgeCase,
