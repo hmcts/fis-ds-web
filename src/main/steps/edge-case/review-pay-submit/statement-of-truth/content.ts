@@ -34,13 +34,13 @@ export const form: FormContent = {
       classes: 'govuk-checkboxes',
       label: l => l.label,
       values: [
-        { label: l => l.one, value: 'statementOfTruth' },
+        { label: l => l.one, value: 'statementOfTruth' }
       ],
       validator: isFieldFilledIn,
     },
     confirmStatementLabel: {
       type: 'label',
-      label: l => l.confirmStatement,
+      label: l => l.confirmStatement
     },
   },
 
