@@ -68,6 +68,11 @@ export const edgecaseSequence: Step[] = [
     getNextStep: () => UPLOAD_YOUR_DOCUMENTS,
   },
   {
+    url: UPLOAD_YOUR_DOCUMENTS,
+    showInSection: Sections.AboutEdgeCase,
+    getNextStep: () => STATEMENT_OF_TRUTH,
+  },
+  {
     url: STATEMENT_OF_TRUTH,
     showInSection: Sections.AboutEdgeCase,
     getNextStep: () => PAY_YOUR_FEE,

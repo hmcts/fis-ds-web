@@ -4,6 +4,7 @@ export const enum ErrorMessages {
   ADOPTION_ERROR_MESSAGE = 'Select if any of the type of adoption you want to apply for',
   PRL_ERROR_MESSAGE = 'Select if any of the type of private law you want to apply for',
   JURISDICTION_ERROR_MESSAGE = 'Select the jurisdiction type',
+  STATEMENTOFTRUTH_ERROR_MESSAGE = 'Tick checkbox to affirm Statement of truth',
 }
 
 export const enum ErrorMessagesWelsh {
@@ -12,4 +13,5 @@ export const enum ErrorMessagesWelsh {
   ADOPTION_ERROR_MESSAGE = 'Select if any of the type of adoption you want to apply for (in welsh)',
   PRL_ERROR_MESSAGE = 'Select if any of the type of private law you want to apply for (in welsh)',
   JURISDICTION_ERROR_MESSAGE = 'Select the jurisdiction type (in welsh)',
+  STATEMENTOFTRUTH_ERROR_MESSAGE = 'Tick checkbox to affirm Statement of truth (in welsh)',
 }

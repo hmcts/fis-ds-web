@@ -3,15 +3,15 @@ import { FormContent } from '../../../../app/form/Form';
 import { isFieldFilledIn } from '../../../../app/form/validation';
 import { ErrorMessages, ErrorMessagesWelsh } from '../../../../steps/errorMesages';
 
+
 const en = () => ({
   continue: 'Continue to payment',
   serviceName: 'Statement Of truth',
   one: 'I believe that the facts stated in this application are true',
   confirmStatement: "This confirms that the information you are submitting is true and accurate to the best of your knowledge. It's known as your 'Statement Of Truth'",
-  courtContempt: "Proceedings for contempt of court may be brought against anyone who makes, or causes to be made, a false statement verified by a statement of truth without an honest belief in the truth",
   errors: {
-    statementTruth: {
-      required: ErrorMessages.JURISDICTION_ERROR_MESSAGE,
+    statementOfTruth: {
+      required: ErrorMessages.STATEMENTOFTRUTH_ERROR_MESSAGE,
     },
   },
 });
@@ -20,10 +20,9 @@ const cy = () => ({
   continue: 'Continue to payment',
   one: 'I believe that the facts stated in this application are true',
   confirmStatement: "This confirms that the information you are submitting is true and accurate to the best of your knowledge. It's known as your 'Statement Of Truth'",
-  courtContempt: "Proceedings for contempt of court may be brought against anyone who makes, or causes to be made, a false statement verified by a statement of truth without an honest belief in the truth",
   errors: {
-    statementTruth: {
-      required: ErrorMessagesWelsh.JURISDICTION_ERROR_MESSAGE,
+    statementOfTruth: {
+      required: ErrorMessagesWelsh.STATEMENTOFTRUTH_ERROR_MESSAGE,
     },
   },
 });
@@ -43,14 +42,10 @@ export const form: FormContent = {
       type: 'label',
       label: l => l.confirmStatement,
     },
-    courtContemptLabel: {
-      type: 'label',
-      classes: 'govukWarningText',
-      label:l=>l.confirmContempt,
-    },
   },
-  submit: {
-    text: l => l.continue,
+
+submit: {
+    text: b => b.continue,
   },
 };
 

@@ -3,12 +3,6 @@
 
 {% block backLink %}{% endblock %}
 
-{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
-
-{{ govukInsetText({
-  text: "This confirms that the information you are submitting is true and accurate to the best of your knowledge. It's known as your 'Statement Of Truth'"
-}) }}
-
 {% from "govuk/components/warning-text/macro.njk" import govukWarningText %}
 
 {% block courtContemptLabel %}
