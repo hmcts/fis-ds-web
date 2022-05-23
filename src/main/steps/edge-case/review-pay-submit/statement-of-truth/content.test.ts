@@ -20,7 +20,9 @@ describe('statement-of-truth content', () => {
     const statementOfTruthField = fields.statementOfTruth as FormOptions;
     expect(statementOfTruthField.type).toBe('checkboxes');
     expect(statementOfTruthField.classes).toBe('govuk-checkboxes');
-    expect((statementOfTruthField.values[0].label as Function)(generatedContent)).toBe('I believe that the facts stated in this application are true');
+    expect((statementOfTruthField.values[0].label as Function)(generatedContent)).toBe(
+      'I believe that the facts stated in this application are true'
+    );
   });
 
   test('should contain submit button', () => {
