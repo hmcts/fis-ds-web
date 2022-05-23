@@ -1,5 +1,4 @@
 import { FormContent, FormFields, FormOptions } from '../../../../app/form/Form';
-//import { isFieldFilledIn } from '../../../../app/form/validation';
 import { CommonContent, generatePageContent } from '../../../common/common.content';
 
 import { generateContent } from './content';
@@ -7,32 +6,21 @@ import { generateContent } from './content';
 jest.mock('../../../../app/form/validation');
 
 /* eslint-disable @typescript-eslint/ban-types */
-describe('citizen-home content', () => {
+describe('statement-of-truth content', () => {
   const commonContent = { language: 'en', userCase: { applyingWith: 'alone' } } as CommonContent;
   test('should return correct english content', () => {
     const generatedContent = generateContent(commonContent);
-    expect(generatedContent.label).toEqual('Select Jurisdiction');
-    expect(generatedContent.one).toEqual('Family');
-    expect(generatedContent.two).toEqual('Tribunals');
+    expect(generatedContent.one).toEqual('I believe that the facts stated in this application are true');
   });
 
-  test('should return correct welsh content', () => {
-    const generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.label).toEqual('Select Jurisdiction (in welsh)');
-    expect(generatedContent.one).toEqual('Family (in welsh)');
-    expect(generatedContent.two).toEqual('Tribunals (in welsh)');
-  });
-
-  test('should contain Select Jurisdiction field', () => {
+  test('should contain checkbox and  Lbel', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const selectJurisdictionField = fields.selectJurisdiction as FormOptions;
-    expect(selectJurisdictionField.type).toBe('radios');
-    expect(selectJurisdictionField.classes).toBe('govuk-radios');
-    expect((selectJurisdictionField.label as Function)(generatedContent)).toBe('Select Jurisdiction');
-    expect((selectJurisdictionField.values[0].label as Function)(generatedContent)).toBe('Family');
-    expect((selectJurisdictionField.values[1].label as Function)(generatedContent)).toBe('Tribunals');
+    const statementOfTruthField = fields.statementOfTruth as FormOptions;
+    expect(statementOfTruthField.type).toBe('checkboxes');
+    expect(statementOfTruthField.classes).toBe('govuk-checkboxes');
+    expect((statementOfTruthField.values[0].label as Function)(generatedContent)).toBe('I believe that the facts stated in this application are true');
   });
 
   test('should contain submit button', () => {
