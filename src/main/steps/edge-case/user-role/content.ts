@@ -7,7 +7,7 @@ import { ErrorMessages, ErrorMessagesWelsh } from '../../../steps/errorMesages';
 const en = () => ({
   continue: 'Continue',
   serviceName: "Determine user's role",
-  label: 'Are you named as the applicant on the on the application form you are submitting?',
+  label: 'Are you named as the applicant on the application form you are submitting?',
   one: 'Yes',
   two: 'No - I am sending an application for someone else.',
   errors: {
@@ -20,7 +20,7 @@ const en = () => ({
 const cy = () => ({
   continue: 'Continue',
   serviceName: "Determine user's role (in welsh)",
-  label: 'Are you named as the applicant on the on the application form you are submitting? (in welsh)',
+  label: 'Are you named as the applicant on the application form you are submitting? (in welsh)',
   one: 'Yes (in welsh)',
   two: 'No - I am sending an application for someone else. (in welsh)',
   errors: {
