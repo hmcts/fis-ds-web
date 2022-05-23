@@ -7,7 +7,7 @@ import { Form, FormContent } from '../app/form/Form';
 
 import { Step } from './constants';
 import { edgecaseSequence } from './edge-case/edgecaseSequence';
-import { CITIZEN_HOME_URL, EDGE_CASE_URL } from './urls';
+import { EDGE_CASE_URL, FULL_NAME } from './urls';
 
 const stepForms: Record<string, Form> = {};
 
@@ -49,7 +49,7 @@ const getNextIncompleteStep = (
 
       return nextStep
         ? getNextIncompleteStep(data, nextStep, sequence, removeExcluded, checkedSteps.concat(step))
-        : CITIZEN_HOME_URL;
+        : FULL_NAME;
     }
   }
 
@@ -68,12 +68,12 @@ export const getNextIncompleteStepUrl = (req: AppRequest): string => {
 export const getNextStepUrl = (req: AppRequest, data: Partial<Case>): string => {
   //eslint-disable-next-line @typescript-eslint/no-explicit-any
   if ((req.body as any).saveAsDraft) {
-    return CITIZEN_HOME_URL;
+    return FULL_NAME;
   }
   const { path, queryString } = getPathAndQueryString(req);
   const nextStep = [...edgecaseSequence].find(s => s.url === path);
 
-  const url = nextStep ? nextStep.getNextStep(data) : CITIZEN_HOME_URL;
+  const url = nextStep ? nextStep.getNextStep(data) : FULL_NAME;
 
   return `${url}${queryString}`;
 };
