@@ -4,7 +4,7 @@ import { State } from '../../app/case/definition';
 import {
   // APPLICATION_SUBMITTED,
   // CHECK_ANSWERS_URL,
-  FULL_NAME
+  FULL_NAME,
   // CONFIRM_JOINT_APPLICATION,
   // HUB_PAGE,
   // PAY_YOUR_FEE,

@@ -10,4 +10,4 @@ export const enum LabelMessages {
   PRL_THREE = 'Special Guardianship',
   PRL_FOUR = 'Financial applications',
   PRL_FIVE = 'Declaration of parentage',
-} 
+}
