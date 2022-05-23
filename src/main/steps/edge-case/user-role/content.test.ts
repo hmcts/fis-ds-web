@@ -32,7 +32,7 @@ describe('role-type content', () => {
     const generatedContent = generateContent(commonContent);
     expect(generatedContent.continue).toEqual('Continue');
     expect(generatedContent.label).toEqual(
-      'Are you named as the applicant on the on the application form you are submitting?'
+      'Are you named as the applicant on the application form you are submitting?'
     );
     expect(generatedContent.serviceName).toEqual("Determine user's role");
     expect(generatedContent.one).toEqual('Yes');
@@ -44,7 +44,7 @@ describe('role-type content', () => {
     const generatedContent = generateContent({ ...commonContent, language: 'cy' });
     expect(generatedContent.continue).toEqual('Continue');
     expect(generatedContent.label).toEqual(
-      'Are you named as the applicant on the on the application form you are submitting? (in welsh)'
+      'Are you named as the applicant on the application form you are submitting? (in welsh)'
     );
     expect(generatedContent.serviceName).toEqual("Determine user's role (in welsh)");
     expect(generatedContent.one).toEqual('Yes (in welsh)');
@@ -60,7 +60,7 @@ describe('role-type content', () => {
     expect(applyingForSelfField.type).toBe('radios');
     expect(applyingForSelfField.classes).toBe('govuk-radios');
     expect((applyingForSelfField.label as Function)(generatedContent)).toBe(
-      'Are you named as the applicant on the on the application form you are submitting?'
+      'Are you named as the applicant on the application form you are submitting?'
     );
     expect((applyingForSelfField.values[0].label as Function)(generatedContent)).toBe('Yes');
     expect((applyingForSelfField.values[1].label as Function)(generatedContent)).toBe(
