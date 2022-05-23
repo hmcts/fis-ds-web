@@ -1,17 +1,13 @@
 //import { YesOrNo } from '../../app/case/definition';
 import { Sections, Step } from '../constants';
 import {
-  //ADOPTION_APPLICATION_TYPE,
-  //CITIZEN_HOME_URL,
   CONTACT_DETAILS,
   DATE_OF_BIRTH,
   FIND_ADDRESS,
   FULL_NAME,
   MANUAL_ADDRESS,
   PAY_YOUR_FEE,
-  //PRIVATE_LAW_APPLICATION_TYPE,
   SELECT_ADDRESS,
-  //SERVICE_TYPE,
   UPLOAD_YOUR_DOCUMENTS,
   USER_ROLE,
 } from '../urls';
