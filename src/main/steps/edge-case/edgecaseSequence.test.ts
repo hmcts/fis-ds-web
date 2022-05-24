@@ -1,6 +1,5 @@
 //import { DATE_OF_BIRTH, FIND_ADDRESS, SELECT_ADDRESS } from '../urls';
 
-import { edgecaseSequence } from './edgecaseSequence';
 import { YesOrNo } from '../../app/case/definition';
 import { Sections, Step } from '../constants';
 import {
@@ -19,6 +18,7 @@ import {
   UPLOAD_YOUR_DOCUMENTS,
 } from '../urls';
 
+import { edgecaseSequence } from './edgecaseSequence';
 
 const MockEdgeCaseFlow: Step[] = [
   {
@@ -87,21 +87,17 @@ const MockEdgeCaseFlow: Step[] = [
   },
 ];
 
-
-
-
 describe('applicant1Sequence', () => {
   test('should contain 12 entries in applicant 1 screen sequence', () => {
     expect('a').toBe('a');
   });
 });
 
-
-
 describe('edge case sequence must match the flow', () => {
   test('the flow of the application', () => {
     const totalEdgeCaseSequences = edgecaseSequence.length;
-    for(var a =0; a < totalEdgeCaseSequences; a++)  expect(edgecaseSequence[a].url).toBe(MockEdgeCaseFlow[a].url)
-  
+    for (let a = 0; a < totalEdgeCaseSequences; a++) {
+      expect(edgecaseSequence[a].url).toBe(MockEdgeCaseFlow[a].url);
+    }
   });
 });

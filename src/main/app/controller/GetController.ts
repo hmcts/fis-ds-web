@@ -40,7 +40,7 @@ export class GetController {
      * @Document_Delete_Manager
      */
     if (req.query.hasOwnProperty('query') && req.query.hasOwnProperty('documentId')) {
-      res.redirect('/upload-your-documents')
+      res.redirect('/upload-your-documents');
     }
 
     const sessionErrors = req.session?.errors || [];
