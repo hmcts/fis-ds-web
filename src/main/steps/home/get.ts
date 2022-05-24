@@ -14,8 +14,14 @@ import {
   // PAY_YOUR_FEE,
   // SENT_TO_APPLICANT2_FOR_REVIEW,
   // TASK_LIST_URL,
+  //CITIZEN_HOME_URL,
+  //CITIZEN_DETAILS_URL,
+  //SELECT_JURISDICTION,
+  //SERVICE_TYPE,
+  //ADOPTION_APPLICATION_TYPE,
   //DATE_OF_BIRTH,
-  FULL_NAME,
+  CITIZEN_HOME_URL,
+  //CITIZEN_HOME_URL,
 } from '../urls';
 
 export class HomeGetController {
@@ -31,7 +37,7 @@ export class HomeGetController {
 }
 
 const applicant1RedirectPageSwitch = (isFirstQuestionComplete: boolean) => {
-  return isFirstQuestionComplete ? FULL_NAME : FULL_NAME;
+  return isFirstQuestionComplete ? CITIZEN_HOME_URL : CITIZEN_HOME_URL;
 };
 
 // const getApplicantFirstQuestionForm = () => {

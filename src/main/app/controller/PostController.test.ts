@@ -380,6 +380,7 @@ describe('PostController', () => {
     const body = {
       id: '',
       state: 'Holding',
+      selectJurisdiction: 'family',
       saveAndContinue: 'true',
       serviceType: 'No',
       applyingWithPrivateLaw: 'Financial applications',

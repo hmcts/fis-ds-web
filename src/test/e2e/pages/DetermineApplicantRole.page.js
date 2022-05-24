@@ -7,6 +7,7 @@ module.exports = {
     ApplyingForYourself: 'input[id$="applyingForSelf"]'
   },
   async DetermineApplicant(applyingForSomeone) {
+
     await I.wait(2);
     await I.see('Are you named as the applicant on the application form you are submitting?');
     if(applyingForSomeone)
