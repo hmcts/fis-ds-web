@@ -15,3 +15,4 @@ export const enum ErrorMessagesWelsh {
   JURISDICTION_ERROR_MESSAGE = 'Select the jurisdiction type (in welsh)',
   APPLYINGFORSELF_ERROR_MESSAGE = 'Please select an answer before you can proceed further (in welsh)',
 }
+
