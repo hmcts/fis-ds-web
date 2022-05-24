@@ -15,7 +15,7 @@ import { PAY_YOUR_FEE, UPLOAD_YOUR_DOCUMENTS } from '../../urls';
 /**
  * @FileHandler
  */
-const FileMimeType = {
+export const FileMimeType = {
   doc: 'application/msword',
   docx: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
   pdf: 'application/pdf',
@@ -28,8 +28,8 @@ const FileMimeType = {
   gif: 'image/gif',
 };
 
-class FileValidations {
-  static sizeValidation = (fileSize: number) => {
+export class FileValidations {
+  static sizeValidation = (fileSize: number): boolean => {
     const KbsInMBS = 2000000;
     if (fileSize < KbsInMBS) {
       return true;
@@ -37,14 +37,14 @@ class FileValidations {
       return false;
     }
   };
-  static formatValidation = (mimeType: string) => {
+  static formatValidation = (mimeType: string): boolean => {
     const allMimeTypes = Object.values(FileMimeType);
     const checkForFileMimeType = allMimeTypes.filter(aMimeType => aMimeType === mimeType).length > 0;
     return checkForFileMimeType;
   };
 }
 
-const FileUploadBaseURL: string = config.get('services.documentManagement.url');
+export const FileUploadBaseURL: string = config.get('services.documentManagement.url');
 
 @autobind
 export default class UploadDocumentController extends PostController<AnyObject> {
