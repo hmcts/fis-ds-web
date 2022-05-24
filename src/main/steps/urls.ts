@@ -18,8 +18,6 @@ export const TASK_LIST_URL: PageLink = '/task-list';
 
 export const APPLYING_WITH_URL: PageLink = '/applying-with';
 export const DATE_CHILD_MOVED_IN: PageLink = '/date-child-moved-in';
-//export const CITIZEN_DETAILS_URL: PageLink = '/citizen-details';
-//export const CITIZEN_HOME_URL: PageLink = '/citizen-home';
 export const EDGE_CASE_URL: PageLink = '/edge-case';
 export const FULL_NAME: PageLink = '/full-name';
 export const USER_ROLE: PageLink = '/user-role';
