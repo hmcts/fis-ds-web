@@ -1,0 +1,14 @@
+{
+    "translations": {
+        "en": {
+            "section": "Applicant",
+            "serviceName": "Address/Postcode lookup",
+            "title": "What is the address of the person named on the application ?"
+        },
+        "cy": {
+            "section": "Applicant (whelsh)",
+            "serviceName": "Address/Postcode lookup (whelsh)",
+            "title": "What is the address of the person named on the application ? (whelsh)"
+        }
+    }
+}

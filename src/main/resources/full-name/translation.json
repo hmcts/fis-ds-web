@@ -1,0 +1,14 @@
+{
+    "translations": {
+        "en": {
+            "section": "Applicant",
+            "serviceName": "Enter Full name",
+            "title": "What's your full name ?"
+        },
+        "cy": {
+            "section": "Applicant (whelsh)",
+            "serviceName": "Enter Full name (whelsh)",
+            "title": "What's your full name ? (whelsh)"
+        }
+    }
+}

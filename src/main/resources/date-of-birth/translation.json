@@ -1,0 +1,14 @@
+{
+    "translations": {
+        "en": {
+            "section": "Applicant",
+            "serviceName": "Enter Date of birth",
+            "title": "What's your date of birth ?"
+        },
+        "cy": {
+            "section": "Applicant (whelsh)",
+            "serviceName": "Enter Full name (whelsh)",
+            "title": "What's your date of birth ? (whelsh)"
+        }
+    }
+}
