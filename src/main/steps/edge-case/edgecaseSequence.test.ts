@@ -3,4 +3,3 @@ describe('Sequence must match respective path', () => {
     expect(1).toBe(1);
   });
 });
-
