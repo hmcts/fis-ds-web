@@ -4,7 +4,7 @@ import { LoggerInstance } from 'winston';
 import { UserDetails } from '../controller/AppRequest';
 
 import { CaseApi, getCaseApi } from './CaseApi';
-import { /* Adoption, CITIZEN_UPDATE,*/ State } from './definition';
+import { /**Adoption */ CITIZEN_UPDATE,State } from './definition';
 
 jest.mock('axios');
 
@@ -34,7 +34,7 @@ describe('CaseApi', () => {
     api = new CaseApi(mockedAxios, /* userDetails, */ mockLogger);
   });
 
-  // const serviceType = Adoption.ADOPTION;
+  //const serviceType = Adoption.ADOPTION;
 
   /*test('Should throw error when case could not be retrieved', async () => {
     mockedAxios.get.mockRejectedValue({
@@ -120,7 +120,7 @@ describe('CaseApi', () => {
     });
   });
 
-  /*   test('Should update case', async () => {
+   test('Should update case', async () => {
     mockedAxios.get.mockResolvedValue({ data: { token: '123' } });
     mockedAxios.post.mockResolvedValue({
       data: { data: { id: '1234' } },
@@ -160,7 +160,7 @@ describe('CaseApi', () => {
 
     const userCase = await api.getCaseById('1234');
     expect(userCase).toStrictEqual({ id: '1234', state: 'Draft' });
-  }); */
+  }); 
 
   test('Should throw error when case could not be fetched', async () => {
     mockedAxios.get.mockRejectedValue({
@@ -173,7 +173,7 @@ describe('CaseApi', () => {
     //expect(mockLogger.error).toHaveBeenCalledWith('API Error GET https://example.com');
   });
 
-  /* test('Should return case roles for userId and caseId passed', async () => {
+   test('Should return case roles for userId and caseId passed', async () => {
     mockedAxios.get.mockResolvedValue({
       data: {
         case_users: [
@@ -209,7 +209,7 @@ describe('CaseApi', () => {
     );
 
     expect(mockLogger.error).toHaveBeenCalledWith('API Error GET https://example.com/case-users');
-  }); */
+  }); 
 
   test('Should catch all errors', async () => {
     mockedAxios.get.mockRejectedValue({
