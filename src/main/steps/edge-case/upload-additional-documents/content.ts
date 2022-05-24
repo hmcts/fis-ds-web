@@ -20,7 +20,7 @@ export const form: FormContent = {
 
 export const generateContent: TranslationFn = content => {
   const resourceLoader = new ResourceReader();
-  resourceLoader.Loader('upload-your-documents');
+  resourceLoader.Loader('upload-addtional-documents');
   const Translations = resourceLoader.getFileContents().translations;
 
   const en = () => {

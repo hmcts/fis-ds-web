@@ -11,7 +11,7 @@ export class ResourceReader {
   }
 
   Loader(filePath: string): void {
-    filePath = '../../resources/' + filePath;
+    filePath = '../../resources/' + filePath + '/translation.json';
     this.ContentTranslation = require(filePath);
   }
 }

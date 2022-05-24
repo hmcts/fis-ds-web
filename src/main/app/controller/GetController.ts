@@ -7,7 +7,6 @@ import { CommonContent, Language, generatePageContent } from '../../steps/common
 import * as Urls from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
 import { CITIZEN_UPDATE, State } from '../case/definition';
-import { DocumentDeleteManager } from '../document/deleteManager';
 
 import { AppRequest } from './AppRequest';
 
@@ -41,7 +40,7 @@ export class GetController {
      * @Document_Delete_Manager
      */
     if (req.query.hasOwnProperty('query') && req.query.hasOwnProperty('documentId')) {
-      new DocumentDeleteManager().deleteManager(req, res);
+      res.redirect('/upload-your-documents')
     }
 
     const sessionErrors = req.session?.errors || [];

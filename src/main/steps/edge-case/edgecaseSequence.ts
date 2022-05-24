@@ -1,6 +1,7 @@
 import { YesOrNo } from '../../app/case/definition';
 import { Sections, Step } from '../constants';
 import {
+  ADDITIONAL_DOCUMENTS_UPLOAD,
   ADOPTION_APPLICATION_TYPE,
   CITIZEN_HOME_URL,
   CONTACT_DETAILS,
@@ -74,6 +75,11 @@ export const edgecaseSequence: Step[] = [
   },
   {
     url: UPLOAD_YOUR_DOCUMENTS,
+    showInSection: Sections.AboutEdgeCase,
+    getNextStep: () => ADDITIONAL_DOCUMENTS_UPLOAD,
+  },
+  {
+    url: ADDITIONAL_DOCUMENTS_UPLOAD,
     showInSection: Sections.AboutEdgeCase,
     getNextStep: () => PAY_YOUR_FEE,
   },

@@ -7,7 +7,7 @@ export const LandingController = (req: Request, res: Response): void => {
   const loginURL = SIGN_IN_URL;
   try {
     const resourceLoader = new ResourceReader();
-    resourceLoader.Loader('landing/translation.json');
+    resourceLoader.Loader('landing');
     const Translations = resourceLoader.getFileContents().translations;
 
     /**
