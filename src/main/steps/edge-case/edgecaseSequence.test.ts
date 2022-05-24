@@ -4,5 +4,3 @@ describe('Sequence must match respective path', () => {
   });
 });
 
-
-=
