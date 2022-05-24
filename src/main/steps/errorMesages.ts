@@ -13,3 +13,4 @@ export const enum ErrorMessagesWelsh {
   PRL_ERROR_MESSAGE = 'Select if any of the type of private law you want to apply for (in welsh)',
   JURISDICTION_ERROR_MESSAGE = 'Select the jurisdiction type (in welsh)',
 }
+
