@@ -3,7 +3,7 @@ import config from 'config';
 import { Response } from 'express';
 
 import { getNextStepUrl } from '../../steps';
-import { FULL_NAME, SAVE_AND_SIGN_OUT } from '../../steps/urls';
+import { CONTACT_DETAILS, SAVE_AND_SIGN_OUT } from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
 import { CITIZEN_CREATE, CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE } from '../case/definition';
 import { Form, FormFields, FormFieldsFn } from '../form/Form';
@@ -157,10 +157,12 @@ export class PostController<T extends AnyObject> {
 
   //eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected getEventName(req: AppRequest): string {
-    let eventName = CITIZEN_UPDATE;
-    if (req.originalUrl === FULL_NAME && this.isBlank(req)) {
+    let eventName;
+    if (req.originalUrl === CONTACT_DETAILS && this.isBlank(req)) {
       console.log('creating new case event');
       eventName = CITIZEN_CREATE;
+    } else if (req.originalUrl === CONTACT_DETAILS) {
+      eventName = CITIZEN_UPDATE;
     }
     console.log('event is => ' + eventName);
     return eventName;
