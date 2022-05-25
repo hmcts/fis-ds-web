@@ -1,13 +1,13 @@
 import config from 'config';
 
-import uploadDocPostController, { FileMimeType, FileUploadBaseURL, FileValidations } from './uploadDocPostController';
-
- import { mockRequest } from '../../../../test/unit/utils/mockRequest';
+import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
 import { YesOrNo } from '../../../app/case/definition';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import * as steps from '../../../steps';
- const getNextStepUrlMock = jest.spyOn(steps, 'getNextStepUrl');
+
+import uploadDocPostController, { FileMimeType, FileUploadBaseURL, FileValidations } from './uploadDocPostController';
+const getNextStepUrlMock = jest.spyOn(steps, 'getNextStepUrl');
 
 describe('EligibilityPostController', () => {
   afterEach(() => {
@@ -67,7 +67,6 @@ describe('EligibilityPostController', () => {
     });
   });
 });
- 
 
 describe('All of the listed Validation for files should be in place', () => {
   const allTypes = {
