@@ -1,0 +1,22 @@
+{
+  "translations": {
+    "en": {
+      "serviceName": "Statement of truth",
+      "confirmStatement": "This confirms that the information you are submitting is true and accurate to the best of your knowledge. It's known as your 'Statement Of Truth'",
+      "continuePaymentButton": "Continue to payment"
+    },
+    "cy": {
+      "serviceName": "Statement of truth (in Welsh)",
+      "confirmStatement": "This confirms that the information you are submitting is true and accurate to the best of your knowledge. It's known as your 'Statement Of Truth' (in Welsh)",
+      "continuePaymentButton": "Continue to payment (in Welsh)"
+    }
+  },
+  "errors": {
+    "en": {
+      "STATEMENTOFTRUTH_ERROR_MESSAGE": "Tick checkbox to affirm Statement of truth"
+    },
+    "cy": {
+      "STATEMENTOFTRUTH_ERROR_MESSAGE": "Tick checkbox to affirm Statement of truth (in Welsh)"
+    }
+  }
+}

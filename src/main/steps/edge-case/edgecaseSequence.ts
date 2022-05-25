@@ -8,6 +8,7 @@ import {
   MANUAL_ADDRESS,
   PAY_YOUR_FEE,
   SELECT_ADDRESS,
+  STATEMENT_OF_TRUTH,
   UPLOAD_YOUR_DOCUMENTS,
   USER_ROLE,
 } from '../urls';
@@ -56,6 +57,11 @@ export const edgecaseSequence: Step[] = [
   },
   {
     url: ADDITIONAL_DOCUMENTS_UPLOAD,
+    showInSection: Sections.AboutEdgeCase,
+    getNextStep: () => STATEMENT_OF_TRUTH,
+  },
+  {
+    url: STATEMENT_OF_TRUTH,
     showInSection: Sections.AboutEdgeCase,
     getNextStep: () => PAY_YOUR_FEE,
   },
