@@ -132,11 +132,11 @@ export default class UploadDocumentController extends PostController<AnyObject> 
             res.json({ msg: 'error occured', error });
           }
         } else {
-          req.session.errors?.push({
-            propertyName: 'applicant1UploadedFiles',
-            errorType: 'size of the file isnt right ',
+          req.session.fileErrors.push({
+            text: 'File extension Error',
+            href: '#passport-issued-day',
           });
-          // res.json({ msg: 'error validating files' });
+
           this.redirect(req, res, UPLOAD_YOUR_DOCUMENTS);
         }
       }

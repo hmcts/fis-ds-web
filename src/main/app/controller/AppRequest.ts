@@ -26,6 +26,7 @@ export interface AppSession extends Session {
   eligibility: Eligibility;
   lang: string | undefined;
   errors: FormError[] | undefined;
+  fileErrors: any[];
   addresses: [];
   returnUrl?: string;
 }

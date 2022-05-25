@@ -44,9 +44,11 @@ export class GetController {
     }
 
     const sessionErrors = req.session?.errors || [];
+    const FileErrors = req.session.fileErrors || [];
 
-    if (req.session?.errors) {
+    if (req.session?.errors || req.session.fileErrors) {
       req.session.errors = undefined;
+      req.session.fileErrors = [];
     }
 
     const RedirectConditions = {
@@ -60,6 +62,7 @@ export class GetController {
         ...content,
         uploadedDocuments,
         sessionErrors,
+        FileErrors,
         htmlLang: language,
         isDraft: req.session?.userCase?.state ? req.session.userCase.state === State.Draft : true,
         // getNextIncompleteStepUrl: () => getNextIncompleteStepUrl(req),

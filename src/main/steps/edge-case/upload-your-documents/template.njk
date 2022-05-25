@@ -12,41 +12,17 @@
 
 
 {% block page_content %}
-  {{ govukErrorSummary({
-    titleText: errorSummaryHeading,
-    classes: "hidden",
-    attributes: {
-      id: "uploadErrorSummary"
-    },
-    errorList: [
-      {
-        text: errors.applicant1UploadedFiles,
-        href: "#upload",
-        attributes: {
-          id: "errorGeneric",
-          class: "hidden"
-        }
-      },
-      {
-        text: errors.applicant1UploadedFiles.fileSizeTooBig,
-        href: "#upload",
-        attributes: {
-          id: "errorFileSizeTooBig",
-          class: "hidden"
-        }
-      },
-      {
-        text: errors.applicant1UploadedFiles.fileWrongFormat,
-        href: "#upload",
-        attributes: {
-          id: "errorFileWrongFormat",
-          class: "hidden"
-        }
-      }
-    ]
-  }) }}
 
 
+{% if FileErrors.length > 0 %}
+{{ govukErrorSummary({
+  titleText: "There is a problem",
+  errorList: FileErrors
+}) }}
+
+{%endif%}
+
+  
 
   <h1 class="govuk-heading-l">{{ title }}</h1>
   <p class="govuk-body">{{ youNeed }}</p>
