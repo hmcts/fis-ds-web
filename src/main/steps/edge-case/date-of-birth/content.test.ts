@@ -119,7 +119,21 @@ describe('appllicant1 > dob-content', () => {
         'applicant1DateOfBirth-year': '2018',
       })
     ).toEqual({ day: '21', month: '12', year: '2018' });
-    // expect((dobField.validator as Function)({ day: '21', month: '12', year: '2018' })).toBe(undefined);
+    expect((dobField.validator as Function)({ day: '21', month: '12', year: '2018' })).toBe(undefined);
   });
 });
+it('should have dateOfBirth label when language: en and  applyingWith: alone', () => {
+  const commonContent1 = { language: 'en', userCase: { applyingWith: 'alone' } } as CommonContent;
+
+  const generatedContent1 = generateContent(commonContent1);
+  expect(generatedContent1.section).toBe('Applicant');
+});
+
+it('should have an dateOfBirth label when language: cy and  applyingWith: alone', () => {
+  const commonContent1 = { language: 'cy', userCase: { applyingWith: 'alone' } } as CommonContent;
+
+  const generatedContent1 = generateContent(commonContent1);
+  expect(generatedContent1.section).not.toBe('Ceisydd');
+});
+
 /* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
