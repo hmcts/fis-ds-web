@@ -52,7 +52,6 @@ export class FileValidations {
   };
 }
 
-
 export const FileUploadBaseURL: string = config.get('services.documentManagement.url');
 
 @autobind
