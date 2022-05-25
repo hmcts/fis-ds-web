@@ -1,15 +1,13 @@
 import config from 'config';
 
-import { FileMimeType, FileUploadBaseURL, FileValidations } from './uploadDocPostController';
+import uploadDocPostController, { FileMimeType, FileUploadBaseURL, FileValidations } from './uploadDocPostController';
 
-/**
- * 
- * import { mockRequest } from '../../../../test/unit/utils/mockRequest';
+ import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
 import { YesOrNo } from '../../../app/case/definition';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import * as steps from '../../../steps';
- * const getNextStepUrlMock = jest.spyOn(steps, 'getNextStepUrl');
+ const getNextStepUrlMock = jest.spyOn(steps, 'getNextStepUrl');
 
 describe('EligibilityPostController', () => {
   afterEach(() => {
@@ -41,12 +39,13 @@ describe('EligibilityPostController', () => {
     const req = mockRequest({});
     const res = mockResponse();
     req.files = { documents: [] };
+    req.session.caseDocuments = [];
     await controller.post(req, res);
 
-   // expect(req.locals.api.triggerEvent).not.toHaveBeenCalled();
-   // expect(getNextStepUrlMock).not.toHaveBeenCalled();
-    // expect(res.redirect).toBeCalledWith('/upload-your-documents');
-   // expect(req.session.errors).not.toEqual(errors);
+    expect(req.locals.api.triggerEvent).not.toHaveBeenCalled();
+    expect(getNextStepUrlMock).not.toHaveBeenCalled();
+    expect(res.redirect).not.toBeCalledWith('/upload-your-documents');
+    expect(req.session.errors).not.toEqual(errors);
   });
 
   describe('when there is an error in saving session', () => {
@@ -68,7 +67,7 @@ describe('EligibilityPostController', () => {
     });
   });
 });
- */
+ 
 
 describe('All of the listed Validation for files should be in place', () => {
   const allTypes = {
