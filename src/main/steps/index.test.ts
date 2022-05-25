@@ -3,26 +3,15 @@ import { AppRequest } from '../app/controller/AppRequest';
 
 import { APPLYING_WITH_URL, TASK_LIST_URL } from './urls';
 
-import {  getNextStepUrl, getNextIncompleteStepUrl } from './index';
+import { getNextIncompleteStepUrl, getNextStepUrl } from './index';
 
 describe('getNextIncompleteStepUrl()', () => {
-    it('returns the next step when correct details a passed', () => {
-
-        
-        expect(getNextIncompleteStepUrl(mockRequest())).not.toBe(TASK_LIST_URL);
-    });
-   
-
-
+  it('returns the next step when correct details a passed', () => {
+    expect(getNextIncompleteStepUrl(mockRequest())).not.toBe(TASK_LIST_URL);
+  });
 });
 
-
-
 describe('Steps', () => {
-
-
-
-
   describe('getNextStep()', () => {
     let mockReq: AppRequest;
     beforeEach(() => {
@@ -34,7 +23,6 @@ describe('Steps', () => {
       const data = {};
       expect(getNextStepUrl(mockReq, data)).not.toBe(TASK_LIST_URL);
     });
-
 
     it('moves into a dead end when the response matches', () => {
       mockReq.originalUrl = APPLYING_WITH_URL;
