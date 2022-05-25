@@ -4,7 +4,7 @@ import axios, { AxiosInstance, AxiosRequestHeaders } from 'axios';
 import config from 'config';
 import { Response } from 'express';
 import FormData from 'form-data';
-
+import {ResourceReader} from '../../../modules/resourcereader/ResourceReader'
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { FormFields, FormFieldsFn } from '../../../app/form/Form';
@@ -29,6 +29,14 @@ export const FileMimeType = {
 };
 
 export class FileValidations {
+
+
+  static ResourceReaderContents = () : Object => {
+    let  resourceLoader = new ResourceReader();
+    resourceLoader.Loader('upload-your-documents');
+    return resourceLoader.getFileContents().errors;
+  }
+
   static sizeValidation = (fileSize: number): boolean => {
     const KbsInMBS = 2000000;
     if (fileSize < KbsInMBS) {
@@ -43,6 +51,7 @@ export class FileValidations {
     return checkForFileMimeType;
   };
 }
+
 
 export const FileUploadBaseURL: string = config.get('services.documentManagement.url');
 
@@ -65,6 +74,10 @@ export default class UploadDocumentController extends PostController<AnyObject> 
       });
     };
 
+    const CurrentNumberOfDocuments = req.session.caseDocuments.length;
+
+    if(CurrentNumberOfDocuments < 5){
+      
     const { documentUploadProceed } = req.body;
 
     if (documentUploadProceed) {
@@ -87,6 +100,8 @@ export default class UploadDocumentController extends PostController<AnyObject> 
 
       const { files }: AppRequest<AnyObject> = req;
       const { documents }: any = files;
+
+    
 
       const checkIfMultipleFiles: boolean = Array.isArray(documents);
 
@@ -132,14 +147,40 @@ export default class UploadDocumentController extends PostController<AnyObject> 
             res.json({ msg: 'error occured', error });
           }
         } else {
-          req.session.fileErrors.push({
-            text: 'File extension Error',
-            href: '#passport-issued-day',
-          });
+
+          let FormattedError: Object[] = [];
+          if(!validateMimeType){
+              FormattedError.push({
+                "text": "",
+                "href": "#"
+              })
+            
+          }
+          if(!validateFileSize){
+            FormattedError.push({
+              "text": "File size exceeds 20Mb. Please upload a file that is less than 20Mb",
+              "href": "#"
+            })
+          }
+
+          req.session.fileErrors.push(...FormattedError);
 
           this.redirect(req, res, UPLOAD_YOUR_DOCUMENTS);
         }
       }
     }
   }
+      else{
+        /**
+         * For more than 5 documents
+         */
+
+        req.session.fileErrors.push({
+          "text": "You can upload 5 files only. Please delete one of the uploaded files and retry",
+          "href": "#"
+        });
+        this.redirect(req, res, UPLOAD_YOUR_DOCUMENTS);
+  }
+  }
+  
 }
