@@ -4,7 +4,13 @@ import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 
 export const form: FormContent = {
   fields: () => {
-    return { };
+    return {
+      statementOfTruth: {
+        type: 'checkbox',
+        classes: 'govuk-checkboxes',
+        label: l => l.statementOfTruthLabel,
+      },
+    };
   },
   submit: {
     text: s => s.continue,
@@ -18,7 +24,7 @@ export const generateContent: TranslationFn = content => {
 
   const en = () => {
     return {
-      ...Translations.en,    
+      ...Translations.en,
     };
   };
   const cy = () => {

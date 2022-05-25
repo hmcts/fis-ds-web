@@ -10,14 +10,16 @@ const EN = 'en';
 
 const enContent = {
   serviceName: 'Statement of truth',
-  confirmStatement: "This confirms that the information you are submitting is true and accurate to the best of your knowledge. It's known as your 'Statement Of Truth'",
-  continuePaymentButton: "Continue to payment"
+  confirmStatement:
+    "This confirms that the information you are submitting is true and accurate to the best of your knowledge. It's known as your 'Statement Of Truth'",
+  continuePaymentButton: 'Continue to payment',
 };
 
 const cyContent = {
   serviceName: 'Statement of truth (in Welsh)',
-  confirmStatement: "This confirms that the information you are submitting is true and accurate to the best of your knowledge. It's known as your 'Statement Of Truth' (in Welsh)",
-  continuePaymentButton: "Continue to paymen (in Welsh)t"
+  confirmStatement:
+    "This confirms that the information you are submitting is true and accurate to the best of your knowledge. It's known as your 'Statement Of Truth' (in Welsh)",
+  continuePaymentButton: 'Continue to paymen (in Welsh)t',
 };
 
 const commonContent = { language: EN } as CommonContent;
