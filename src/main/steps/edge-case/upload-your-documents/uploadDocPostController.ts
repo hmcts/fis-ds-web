@@ -72,9 +72,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
       });
     };
 
-    const CurrentNumberOfDocuments = req.session.caseDocuments.length;
 
-    if (CurrentNumberOfDocuments < 5) {
       const { documentUploadProceed } = req.body;
 
       if (documentUploadProceed) {
@@ -145,7 +143,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
             const FormattedError: any[] = [];
             if (!validateMimeType) {
               FormattedError.push({
-                text: '',
+                text: 'This service only accepts files in the formats - Ms Word, Ms Excel, PDF, JPG, GIF, PNG, TXT, RTF',
                 href: '#',
               });
             }
@@ -162,16 +160,5 @@ export default class UploadDocumentController extends PostController<AnyObject> 
           }
         }
       }
-    } else {
-      /**
-       * For more than 5 documents
-       */
-
-      req.session.fileErrors.push({
-        text: 'You can upload 5 files only. Please delete one of the uploaded files and retry',
-        href: '#',
-      });
-      this.redirect(req, res, UPLOAD_YOUR_DOCUMENTS);
     }
-  }
 }
