@@ -7,6 +7,7 @@ import {
   FULL_NAME,
   MANUAL_ADDRESS,
   PAY_YOUR_FEE,
+  REVIEW_PAY_SUBMIT,
   SELECT_ADDRESS,
   UPLOAD_YOUR_DOCUMENTS,
   USER_ROLE,
@@ -61,6 +62,6 @@ export const edgecaseSequence: Step[] = [
   },
   {
     url: PAY_YOUR_FEE,
-    getNextStep: () => USER_ROLE,
+    getNextStep: () => REVIEW_PAY_SUBMIT,
   },
 ];

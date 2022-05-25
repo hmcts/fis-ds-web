@@ -72,93 +72,92 @@ export default class UploadDocumentController extends PostController<AnyObject> 
       });
     };
 
+    const { documentUploadProceed } = req.body;
 
-      const { documentUploadProceed } = req.body;
+    if (documentUploadProceed) {
+      /**
+       * @PostDocumentUploader
+       */
+      this.PostDocumentUploader(req, res);
+    } else {
+      if ((await RpeApi.getRpeToken()).response) {
+        req.session.rpeToken = (await RpeApi.getRpeToken()).data;
+      }
 
-      if (documentUploadProceed) {
-        /**
-         * @PostDocumentUploader
-         */
-        this.PostDocumentUploader(req, res);
-      } else {
-        if ((await RpeApi.getRpeToken()).response) {
-          req.session.rpeToken = (await RpeApi.getRpeToken()).data;
-        }
+      if (!req.session.hasOwnProperty('caseDocuments')) {
+        req.session['caseDocuments'] = [];
+      }
 
-        if (!req.session.hasOwnProperty('caseDocuments')) {
-          req.session['caseDocuments'] = [];
-        }
+      if (!req.session.hasOwnProperty('errors')) {
+        req.session['errors'] = [];
+      }
 
-        if (!req.session.hasOwnProperty('errors')) {
-          req.session['errors'] = [];
-        }
+      const { files }: AppRequest<AnyObject> = req;
+      const { documents }: any = files;
 
-        const { files }: AppRequest<AnyObject> = req;
-        const { documents }: any = files;
+      const checkIfMultipleFiles: boolean = Array.isArray(documents);
 
-        const checkIfMultipleFiles: boolean = Array.isArray(documents);
+      // making sure single file is uploaded
+      if (!checkIfMultipleFiles) {
+        const validateMimeType: boolean = FileValidations.formatValidation(documents.mimetype);
+        const validateFileSize: boolean = FileValidations.sizeValidation(documents.size);
+        const formData: FormData = new FormData();
+        if (validateMimeType && validateFileSize) {
+          formData.append('files', documents.data, {
+            contentType: documents.mimetype,
+            filename: documents.name,
+          });
+          formData.append('caseTypeId', 'PRLAPPS');
+          formData.append('jurisdictionId', 'PRIVATELAW');
+          formData.append('classification', 'RESTRICTED');
 
-        // making sure single file is uploaded
-        if (!checkIfMultipleFiles) {
-          const validateMimeType: boolean = FileValidations.formatValidation(documents.mimetype);
-          const validateFileSize: boolean = FileValidations.sizeValidation(documents.size);
-          const formData: FormData = new FormData();
-          if (validateMimeType && validateFileSize) {
-            formData.append('files', documents.data, {
-              contentType: documents.mimetype,
-              filename: documents.name,
-            });
-            formData.append('caseTypeId', 'PRLAPPS');
-            formData.append('jurisdictionId', 'PRIVATELAW');
-            formData.append('classification', 'RESTRICTED');
+          const formHeaders = formData.getHeaders();
+          /**
+           * @RequestHeaders
+           */
+          const Headers = {
+            Authorization: `Bearer ${req.session.user['accessToken']}`,
+            ServiceAuthorization: req.session['rpeToken'],
+          };
+          try {
+            const RequestDocument = await UploadDocumentInstance(FileUploadBaseURL, Headers).post(
+              '/cases/documents',
+              formData,
+              {
+                headers: {
+                  ...formHeaders,
+                },
+              }
+            );
 
-            const formHeaders = formData.getHeaders();
-            /**
-             * @RequestHeaders
-             */
-            const Headers = {
-              Authorization: `Bearer ${req.session.user['accessToken']}`,
-              ServiceAuthorization: req.session['rpeToken'],
-            };
-            try {
-              const RequestDocument = await UploadDocumentInstance(FileUploadBaseURL, Headers).post(
-                '/cases/documents',
-                formData,
-                {
-                  headers: {
-                    ...formHeaders,
-                  },
-                }
-              );
-
-              const { originalDocumentName, _links } = RequestDocument.data.documents[0];
-              req.session['caseDocuments'].push({ originalDocumentName, _links });
-              req.session['errors'] = undefined;
-              this.redirect(req, res, UPLOAD_YOUR_DOCUMENTS);
-            } catch (error) {
-              logger.error(error);
-              res.json({ msg: 'error occured', error });
-            }
-          } else {
-            const FormattedError: any[] = [];
-            if (!validateMimeType) {
-              FormattedError.push({
-                text: 'This service only accepts files in the formats - Ms Word, Ms Excel, PDF, JPG, GIF, PNG, TXT, RTF',
-                href: '#',
-              });
-            }
-            if (!validateFileSize) {
-              FormattedError.push({
-                text: 'File size exceeds 20Mb. Please upload a file that is less than 20Mb',
-                href: '#',
-              });
-            }
-
-            req.session.fileErrors.push(...FormattedError);
-
+            const { originalDocumentName, _links } = RequestDocument.data.documents[0];
+            req.session['caseDocuments'].push({ originalDocumentName, _links });
+            req.session['errors'] = undefined;
             this.redirect(req, res, UPLOAD_YOUR_DOCUMENTS);
+          } catch (error) {
+            logger.error(error);
+            res.json({ msg: 'error occured', error });
           }
+        } else {
+          const FormattedError: any[] = [];
+          if (!validateMimeType) {
+            FormattedError.push({
+              text: 'This service only accepts files in the formats - Ms Word, Ms Excel, PDF, JPG, GIF, PNG, TXT, RTF',
+              href: '#',
+            });
+          }
+          if (!validateFileSize) {
+            FormattedError.push({
+              text: 'File size exceeds 20Mb. Please upload a file that is less than 20Mb',
+              href: '#',
+            });
+          }
+
+          req.session.fileErrors.push(...FormattedError);
+
+          this.redirect(req, res, UPLOAD_YOUR_DOCUMENTS);
         }
       }
     }
+  }
 }
