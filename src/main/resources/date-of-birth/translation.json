@@ -1,0 +1,40 @@
+{
+    "translations": {
+        "en": {
+            "continue": "Continue",
+            "section": "Applicant",
+            "serviceName": "Enter Date of birth",
+            "title": "What's your date of birth?",
+            "hint": "For example, 27 3 2007"
+        },
+        "cy": {
+            "continue": "Continue (in Welsh)",
+            "section": "Applicant (in Welsh)",
+            "serviceName": "Enter Full name (in Welsh)",
+            "title": "What's your date of birth? (in Welsh)",
+            "hint": "For example, 27 3 2007 (in Welsh)"
+        }
+    },
+    "errors":{
+        "en": {
+            "applicant1DateOfBirth": {
+                "required": "Enter your date of birth",
+                "invalidDate": "Date of birth must be a real date",
+                "incompleteDay": "Your date of birth must include a day",
+                "incompleteMonth": "Your date of birth must include a month",
+                "incompleteYear": "Your date of birth must include a year",
+                "invalidDateInFuture": "Your date of birth must be in the past"
+            }
+        },
+        "cy": {
+            "applicant1DateOfBirth": {
+                "required": "Enter your date of birth (in Welsh)",
+                "invalidDate": "Date of birth must be a real date (in Welsh)",
+                "incompleteDay": "Your date of birth must include a day (in Welsh)",
+                "incompleteMonth": "Your date of birth must include a month (in Welsh)",
+                "incompleteYear": "Your date of birth must include a year (in Welsh)",
+                "invalidDateInFuture": "Your date of birth must be in the past (in Welsh)"
+            }
+        }
+    }
+}

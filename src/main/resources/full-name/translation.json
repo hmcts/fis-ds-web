@@ -1,0 +1,34 @@
+{
+    "translations": {
+        "en": {
+            "continue": "Continue",
+            "section": "Applicant",
+            "serviceName": "Enter Full name",
+            "title": "What's your full name?"
+        },
+        "cy": {
+            "continue": "Continue (in Welsh)",
+            "section": "Applicant (in Welsh)",
+            "serviceName": "Enter Full name (in Welsh)",
+            "title": "What's your full name? (in Welsh)"
+        }
+    },
+    "errors":{
+        "en": {
+            "applicant1FirstNames": {
+                "required": "Enter your first names"
+            },
+            "applicant1LastNames": {
+                "required": "Enter your last names"
+            }
+        },
+        "cy": {
+            "applicant1FirstNames": {
+                "required": "Enter your last names (in Welsh)"
+            },
+            "applicant1LastNames": {
+                "required": "Enter your last names (in Welsh)"
+            }
+        }
+    }
+}

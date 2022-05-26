@@ -1,0 +1,30 @@
+{
+    "translations": {
+        "en": {
+            "continue": "Continue",
+            "serviceName": "Determine user's role",
+            "label": "Are you named as the applicant on the application form you are submitting?",
+            "one": "Yes",
+            "two": "No - I am sending an application for someone else."
+        },
+        "cy": {
+            "continue": "Continue (in Welsh)",
+            "serviceName": "Determine user's role (in Welsh)",
+            "label": "Are you named as the applicant on the application form you are submitting? (in Welsh)",
+            "one": "Yes (in Welsh)",
+            "two": "No - I am sending an application for someone else. (in Welsh)"
+        }
+    },
+    "errors":{
+        "en": {
+            "applyingForSelf": {
+                "required": "Please select an answer before you can proceed further"
+            }
+        },
+        "cy": {
+            "applyingForSelf": {
+                "required": "Please select an answer before you can proceed further (in Welsh)"
+            }
+        }
+    }
+}

@@ -36,7 +36,7 @@ const enContent = {
 const cyContent = {
   section: 'Applicant (in Welsh)',
   title: "What's your date of birth? (in Welsh)",
-  hint: 'For example, 28 6 1997 (in Welsh)',
+  hint: 'For example, 27 3 2007 (in Welsh)',
   errors: {
     applicant1DateOfBirth: {
       required: 'Enter your date of birth (in Welsh)',
@@ -76,13 +76,6 @@ describe('appllicant1 > dob-content', () => {
     const form = generatedContent.form as FormContent;
 
     expect((form.submit.text as Function)(generatePageContent({ language: EN }))).toBe('Save and continue');
-  });
-
-  test('should contain cancel button', () => {
-    const generatedContent = generateContent(commonContent);
-    const form = generatedContent.form as FormContent;
-
-    expect((form.cancel!.text as Function)(generatePageContent({ language: EN }))).toBe('Cancel');
   });
 
   test('should contain dateOfBirth field', () => {

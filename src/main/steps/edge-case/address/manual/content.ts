@@ -1,64 +1,63 @@
 import { TranslationFn } from '../../../../app/controller/GetController';
-import { FormContent, FormFields } from '../../../../app/form/Form';
+import { FormContent, FormFields, FormFieldsFn } from '../../../../app/form/Form';
+import { ResourceReader } from '../../../../modules/resourcereader/ResourceReader';
 import {
   form as manualAddressForm,
   generateContent as manualAddressGenerateContent,
 } from '../../../common/components/address-manual';
 
-const en = ({ manualAddressContent, userCase }): Record<string, unknown> => {
-  const section = 'Applicant';
-  const title = userCase?.serviceType === 'Yes' ? userCase?.applyingWithAdoption : userCase?.applyingWithPrivateLaw;
-  return {
-    section,
-    serviceName: 'Apply to ' + title,
-    title: "What's your address?",
-    errors: {
-      applicant1Address1: manualAddressContent.errors.address1,
-      applicant1AddressTown: manualAddressContent.errors.addressTown,
-      applicant1AddressPostcode: manualAddressContent.errors.addressPostcode,
-    },
-  };
-};
-
-const cy = ({ manualAddressContent, userCase }): Record<string, unknown> => {
-  const section = 'Applicant (in welsh)';
-  const title = userCase?.serviceType === 'Yes' ? userCase?.applyingWithAdoption : userCase?.applyingWithPrivateLaw;
-  return {
-    section,
-    serviceName: 'Apply to ' + title + ' (in Welsh)',
-    title: "What's your address? (in welsh)",
-    errors: {
-      applicant1Address1: manualAddressContent.errors.address1,
-      applicant1AddressTown: manualAddressContent.errors.addressTown,
-      applicant1AddressPostcode: manualAddressContent.errors.addressPostcode,
-    },
-  };
-};
-
 const manualAddressFormFields = manualAddressForm.fields as FormFields;
+
 export const form: FormContent = {
   ...manualAddressForm,
-  fields: {
-    applicant1Address1: manualAddressFormFields.address1,
-    applicant1Address2: manualAddressFormFields.address2,
-    applicant1AddressTown: manualAddressFormFields.addressTown,
-    applicant1AddressCounty: manualAddressFormFields.addressCounty,
-    applicant1AddressPostcode: manualAddressFormFields.addressPostcode,
+  fields: () => {
+    return {
+      applicant1Address1: manualAddressFormFields.address1,
+      applicant1Address2: manualAddressFormFields.address2,
+      applicant1AddressTown: manualAddressFormFields.addressTown,
+      applicant1AddressCounty: manualAddressFormFields.addressCounty,
+      applicant1AddressPostcode: manualAddressFormFields.addressPostcode,
+    };
+  },
+  submit: {
+    text: l => l.continue,
   },
 };
 
-const languages = {
-  en,
-  cy,
-};
-
 export const generateContent: TranslationFn = content => {
+  const resourceLoader = new ResourceReader();
+  resourceLoader.Loader('manual-address');
+  const Translations = resourceLoader.getFileContents().translations;
+  const errors = resourceLoader.getFileContents().errors;
+
+  const en = () => {
+    return {
+      ...Translations.en,
+      errors: {
+        ...errors.en,
+      },
+    };
+  };
+  const cy = () => {
+    return {
+      ...Translations.cy,
+      errors: {
+        ...errors.cy,
+      },
+    };
+  };
+
+  const languages = {
+    en,
+    cy,
+  };
+
   const manualAddressContent = manualAddressGenerateContent(content);
-  const translations = languages[content.language]({ manualAddressContent, userCase: content.userCase });
+  const translations = languages[content.language]();
 
   return {
     ...manualAddressContent,
     ...translations,
-    form,
+    form: { ...form, fields: (form.fields as FormFieldsFn)(content.userCase || {}) },
   };
 };

@@ -1,58 +1,59 @@
 import { TranslationFn } from '../../../../app/controller/GetController';
-import { FormContent, FormFields } from '../../../../app/form/Form';
+import { FormContent, FormFields, FormFieldsFn } from '../../../../app/form/Form';
+import { ResourceReader } from '../../../../modules/resourcereader/ResourceReader';
 import {
   form as addressLookupForm,
   generateContent as addressLookupGenerateContent,
 } from '../../../common/components/address-lookup';
 import { MANUAL_ADDRESS } from '../../../urls';
 
-const en = ({ addressLookupContent, userCase }): Record<string, unknown> => {
-  const section = 'Applicant';
-  const title = userCase?.serviceType === 'Yes' ? userCase?.applyingWithAdoption : userCase?.applyingWithPrivateLaw;
-  return {
-    section,
-    serviceName: 'Apply to ' + title,
-    title: "What's your home address?",
-    errors: {
-      applicant1AddressPostcode: addressLookupContent.errors.addressPostcode,
-    },
-    manualAddressUrl: MANUAL_ADDRESS,
-  };
-};
-
-const cy = ({ addressLookupContent, userCase }): Record<string, unknown> => {
-  const section = 'Applicant (in welsh)';
-  const title = userCase?.serviceType === 'Yes' ? userCase?.applyingWithAdoption : userCase?.applyingWithPrivateLaw;
-  return {
-    section,
-    serviceName: 'Apply to ' + title + ' (in Welsh)',
-    title: "What's your home address? (in welsh)",
-    errors: {
-      applicant1AddressPostcode: addressLookupContent.errors.addressPostcode,
-    },
-    manualAddressUrl: MANUAL_ADDRESS,
-  };
-};
-
 const addressLookupFormFields = addressLookupForm.fields as FormFields;
+
 export const form: FormContent = {
   ...addressLookupForm,
-  fields: {
-    applicant1AddressPostcode: addressLookupFormFields.addressPostcode,
+  fields: () => {
+    return {
+      applicant1AddressPostcode: addressLookupFormFields.addressPostcode,
+    };
   },
 };
 
-const languages = {
-  en,
-  cy,
-};
-
 export const generateContent: TranslationFn = content => {
+  const resourceLoader = new ResourceReader();
+  resourceLoader.Loader('address-lookup');
+  const Translations = resourceLoader.getFileContents().translations;
+  const errors = resourceLoader.getFileContents().errors;
+
+  const en = () => {
+    return {
+      ...Translations.en,
+      errors: {
+        ...errors.en,
+      },
+      manualAddressUrl: MANUAL_ADDRESS,
+    };
+  };
+  const cy = () => {
+    return {
+      ...Translations.cy,
+      errors: {
+        ...errors.cy,
+      },
+      manualAddressUrl: MANUAL_ADDRESS,
+    };
+  };
+
+  const languages = {
+    en,
+    cy,
+  };
+
   const addressLookupContent = addressLookupGenerateContent(content);
-  const translations = languages[content.language]({ addressLookupContent, userCase: content.userCase });
+  const translations = languages[content.language]();
+
   return {
     ...addressLookupContent,
     ...translations,
-    form,
+    form: { ...form, fields: (form.fields as FormFieldsFn)(content.userCase || {}) },
   };
 };

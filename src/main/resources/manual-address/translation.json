@@ -1,0 +1,42 @@
+{
+    "translations": {
+        "en": {
+            "continue": "Continue",
+            "section": "Applicant",
+            "serviceName": "Select Address",
+            "title": "What's your home address?"
+        },
+        "cy": {
+            "continue": "Continue (in Welsh)",
+            "section": "Applicant (in Welsh)",
+            "serviceName": "Select Address (in Welsh)",
+            "title": "What's your home address? (in Welsh)"
+        }
+    },
+    "errors":{
+        "en": {
+            "applicant1Address1": {
+                "required": "Enter the first line of the address"
+            },
+            "applicant1AddressTown": {
+                "required": "Enter the town or city"
+            },
+            "applicant1AddressPostcode": {
+                "required": "Enter a real postcode",
+                "invalid": "Enter a real postcode"
+            }
+        },
+        "cy": {
+            "applicant1Address1": {
+                "required": "Enter the first line of the address (in Welsh)"
+            },
+            "applicant1AddressTown": {
+                "required": "Enter the town or city (in Welsh)"
+            },
+            "applicant1AddressPostcode": {
+                "required": "Enter a real postcode (in Welsh)",
+                "invalid": "Enter a real postcode (in Welsh)"
+            }
+        }
+    }
+}

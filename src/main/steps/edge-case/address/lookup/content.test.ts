@@ -10,12 +10,12 @@ import { generateContent } from './content';
 
 const enContent = {
   section: 'Applicant',
-  title: "What's your home address?",
+  title: 'What is the address of the person named on the application ?',
 };
 
 const cyContent = {
-  section: 'Applicant (in welsh)',
-  title: "What's your home address? (in welsh)",
+  section: 'Applicant (in Welsh)',
+  title: 'What is the address of the person named on the application ? (in Welsh)',
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
@@ -59,7 +59,7 @@ describe('applicant1 > address > lookup > content', () => {
     const commonContent1 = { language: 'cy' } as CommonContent;
 
     const generatedContent1 = generateContent(commonContent1);
-    expect(generatedContent1.section).toBe('Applicant (in welsh)');
+    expect(generatedContent1.section).toBe('Applicant (in Welsh)');
   });
 
   test('should contain applicant1AddressPostcode field', () => {

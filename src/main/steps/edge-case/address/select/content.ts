@@ -1,61 +1,64 @@
 import { TranslationFn } from '../../../../app/controller/GetController';
-import { FormContent, FormFields } from '../../../../app/form/Form';
+import { FormContent, FormFields, FormFieldsFn } from '../../../../app/form/Form';
+import { ResourceReader } from '../../../../modules/resourcereader/ResourceReader';
 import {
   form as selectAddressForm,
   generateContent as selectAddressGenerateContent,
 } from '../../../common/components/address-select';
 import { FIND_ADDRESS, MANUAL_ADDRESS } from '../../../urls';
 
-const en = ({ selectAddressContent, userCase }): Record<string, unknown> => {
-  const section = 'Applicant';
-  const title = userCase?.serviceType === 'Yes' ? userCase?.applyingWithAdoption : userCase?.applyingWithPrivateLaw;
-  return {
-    section,
-    serviceName: 'Apply to ' + title,
-    title: "What's your home address?",
-    errors: {
-      applicant1SelectAddress: selectAddressContent.errors.selectAddress,
-    },
-    changePostCodeUrl: FIND_ADDRESS,
-    cantFindAddressUrl: MANUAL_ADDRESS,
-  };
-};
-
-const cy = ({ selectAddressContent, userCase }): Record<string, unknown> => {
-  const section = 'Applicant (in Welsh)';
-  const title = userCase?.serviceType === 'Yes' ? userCase?.applyingWithAdoption : userCase?.applyingWithPrivateLaw;
-  return {
-    section,
-    serviceName: 'Apply to ' + title + ' (in Welsh)',
-    title: "What's your home address? (in Welsh)",
-    errors: {
-      applicant1SelectAddress: selectAddressContent.errors.selectAddress,
-    },
-    changePostCodeUrl: FIND_ADDRESS,
-    cantFindAddressUrl: MANUAL_ADDRESS,
-  };
-};
-
 const selectAddressFormFields = selectAddressForm.fields as FormFields;
+
 export const form: FormContent = {
   ...selectAddressForm,
-  fields: {
-    applicant1SelectAddress: selectAddressFormFields.selectAddress,
+  fields: () => {
+    return {
+      applicant1SelectAddress: selectAddressFormFields.selectAddress,
+    };
+  },
+  submit: {
+    text: l => l.continue,
   },
 };
 
-const languages = {
-  en,
-  cy,
-};
-
 export const generateContent: TranslationFn = content => {
+  const resourceLoader = new ResourceReader();
+  resourceLoader.Loader('manual-address');
+  const Translations = resourceLoader.getFileContents().translations;
+  const errors = resourceLoader.getFileContents().errors;
+
+  const en = () => {
+    return {
+      ...Translations.en,
+      errors: {
+       ...errors.en
+      },
+      changePostCodeUrl: FIND_ADDRESS,
+      cantFindAddressUrl: MANUAL_ADDRESS,
+    };
+  };
+  const cy = () => {
+    return {
+      ...Translations.cy,
+      errors: {
+        ...errors.cy,
+      },
+      changePostCodeUrl: FIND_ADDRESS,
+      cantFindAddressUrl: MANUAL_ADDRESS,
+    };
+  };
+
+  const languages = {
+    en,
+    cy,
+  };
+
   const selectAddressContent = selectAddressGenerateContent(content);
-  const translations = languages[content.language]({ selectAddressContent, userCase: content.userCase });
+  const translations = languages[content.language]();
 
   return {
     ...selectAddressContent,
     ...translations,
-    form,
+    form: { ...form, fields: (form.fields as FormFieldsFn)(content.userCase || {}) },
   };
 };

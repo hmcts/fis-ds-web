@@ -9,12 +9,12 @@ import { generateContent } from './content';
 
 const enContent = {
   section: 'Applicant',
-  title: "What's your address?",
+  title: "What's your home address?",
 };
 
 const cyContent = {
-  section: 'Applicant (in welsh)',
-  title: "What's your address? (in welsh)",
+  section: 'Applicant (in Welsh)',
+  title: "What's your home address? (in Welsh)",
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
@@ -90,7 +90,7 @@ describe('applicant1 > address > manual > content', () => {
     const commonContent1 = { language: 'cy', userCase: { applyingWith: 'alone' } } as CommonContent;
 
     const generatedContent1 = generateContent(commonContent1);
-    expect(generatedContent1.section).toBe('Applicant (in welsh)');
+    expect(generatedContent1.section).toBe('Applicant (in Welsh)');
   });
 
   test('should contain submit button', () => {
