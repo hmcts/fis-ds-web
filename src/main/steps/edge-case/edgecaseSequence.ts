@@ -1,6 +1,7 @@
 import { Sections, Step } from '../constants';
 import {
   CONTACT_DETAILS,
+  CONTACT_PREFERENCES,
   DATE_OF_BIRTH,
   FIND_ADDRESS,
   FULL_NAME,
@@ -35,10 +36,15 @@ export const edgecaseSequence: Step[] = [
   {
     url: SELECT_ADDRESS,
     showInSection: Sections.AboutEdgeCase,
-    getNextStep: () => CONTACT_DETAILS,
+    getNextStep: () => CONTACT_PREFERENCES,
   },
   {
     url: MANUAL_ADDRESS,
+    showInSection: Sections.AboutEdgeCase,
+    getNextStep: () => CONTACT_PREFERENCES,
+  },
+  {
+    url: CONTACT_PREFERENCES,
     showInSection: Sections.AboutEdgeCase,
     getNextStep: () => CONTACT_DETAILS,
   },
