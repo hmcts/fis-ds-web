@@ -13,6 +13,7 @@ import { AppRequest } from './AppRequest';
 export type PageContent = Record<string, unknown>;
 export type TranslationFn = (content: CommonContent) => PageContent;
 
+export type AsyncTranslationFn = any;
 @autobind
 export class GetController {
   constructor(protected readonly view: string, protected readonly content: TranslationFn) {}
@@ -27,6 +28,7 @@ export class GetController {
     const language = this.getPreferredLanguage(req) as Language;
     const addresses = req.session?.addresses;
     const uploadedDocuments = req.session.caseDocuments;
+
     const content = generatePageContent({
       language,
       pageContent: this.content,
@@ -34,21 +36,38 @@ export class GetController {
       userEmail: req.session?.user?.email,
       addresses,
     });
-
-    const sessionErrors = req.session?.errors || [];
-
-    if (req.session?.errors) {
-      req.session.errors = undefined;
+    /**
+     * @Document_Delete_Manager
+     */
+    if (req.query.hasOwnProperty('query') && req.query.hasOwnProperty('documentId')) {
+      res.redirect('/upload-your-documents');
     }
 
-    res.render(this.view, {
-      ...content,
-      uploadedDocuments,
-      sessionErrors,
-      htmlLang: language,
-      isDraft: req.session?.userCase?.state ? req.session.userCase.state === State.Draft : true,
-      // getNextIncompleteStepUrl: () => getNextIncompleteStepUrl(req),
-    });
+    const sessionErrors = req.session?.errors || [];
+    const FileErrors = req.session.fileErrors || [];
+
+    if (req.session?.errors || req.session.fileErrors) {
+      req.session.errors = undefined;
+      req.session.fileErrors = [];
+    }
+
+    const RedirectConditions = {
+      query: req.query.hasOwnProperty('query'),
+      documentId: req.query.hasOwnProperty('documentId'),
+    };
+
+    const checkConditions = Object.values(RedirectConditions).includes(true);
+    if (!checkConditions) {
+      res.render(this.view, {
+        ...content,
+        uploadedDocuments,
+        sessionErrors,
+        FileErrors,
+        htmlLang: language,
+        isDraft: req.session?.userCase?.state ? req.session.userCase.state === State.Draft : true,
+        // getNextIncompleteStepUrl: () => getNextIncompleteStepUrl(req),
+      });
+    }
   }
 
   private getPreferredLanguage(req: AppRequest) {

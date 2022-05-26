@@ -12,28 +12,47 @@
 
 
 {% block page_content %}
+  {{ govukErrorSummary({
+    titleText: errorSummaryHeading,
+    classes: "hidden",
+    attributes: {
+      id: "uploadErrorSummary"
+    },
+    errorList: [
+      {
+        text: errors.applicant1UploadedFiles,
+        href: "#upload",
+        attributes: {
+          id: "errorGeneric",
+          class: "hidden"
+        }
+      },
+      {
+        text: errors.applicant1UploadedFiles.fileSizeTooBig,
+        href: "#upload",
+        attributes: {
+          id: "errorFileSizeTooBig",
+          class: "hidden"
+        }
+      },
+      {
+        text: errors.applicant1UploadedFiles.fileWrongFormat,
+        href: "#upload",
+        attributes: {
+          id: "errorFileWrongFormat",
+          class: "hidden"
+        }
+      }
+    ]
+  }) }}
 
-{% if FileErrors.length > 0 %}
-{{ govukErrorSummary({
-  titleText: "There is a problem",
-  errorList: FileErrors
-}) }}
 
-{%endif%}
-
-  
 
   <h1 class="govuk-heading-l">{{ title }}</h1>
   <p class="govuk-body">{{ youNeed }}</p>
   <p class="govuk-body">{{ youNeed2 }}</p>
  <p class="govuk-body">{{ youNeed3 }}</p>
 
-<p class="govuk-body">{{ uploadDescription }}</p>
-
-{{ govukDetails({
-  summaryText: "File uploads requirements",
-  text: uploadRequirement | safe
-}) }}
 
   <div id="uploadGroup" tabindex="0" class="uploadGroup">
     <h2 class="govuk-heading-s">{{ uploadFiles }}</h2>
@@ -65,7 +84,7 @@
   name: "documents",
   classes: "govuk-!-margin-bottom-5",
   label: {
-    text: ""
+    text: "Upload a file"
   }
 }) }}
   {{ govukButton({

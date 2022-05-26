@@ -11,6 +11,8 @@ export const CSRF_TOKEN_ERROR_URL: PageLink = '/csrf-token-error';
 
 export const DOCUMENT_UPLOAD_URL: PageLink = '/document-manager';
 
+export const ADDITIONAL_DOCUMENTS_UPLOAD: PageLink = '/upload-additional-documents';
+
 export const RESPONDENT: PageLink = '/respondent';
 
 export const APPLICATION_ENDED: PageLink = '/application-ended';

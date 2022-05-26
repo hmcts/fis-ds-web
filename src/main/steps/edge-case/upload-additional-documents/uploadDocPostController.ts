@@ -9,7 +9,6 @@ import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { FormFields, FormFieldsFn } from '../../../app/form/Form';
 import { RpeApi } from '../../../app/rpe/RpeApi';
-import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 const logger = Logger.getLogger('uploadDocumentPostController');
 import { PAY_YOUR_FEE, UPLOAD_YOUR_DOCUMENTS } from '../../urls';
 
@@ -30,12 +29,6 @@ export const FileMimeType = {
 };
 
 export class FileValidations {
-  static ResourceReaderContents = (): any => {
-    const resourceLoader = new ResourceReader();
-    resourceLoader.Loader('upload-your-documents');
-    return resourceLoader.getFileContents().errors;
-  };
-
   static sizeValidation = (fileSize: number): boolean => {
     const KbsInMBS = 2000000;
     if (fileSize < KbsInMBS) {
@@ -139,22 +132,11 @@ export default class UploadDocumentController extends PostController<AnyObject> 
             res.json({ msg: 'error occured', error });
           }
         } else {
-          const FormattedError: any[] = [];
-          if (!validateMimeType) {
-            FormattedError.push({
-              text: 'This service only accepts files in the formats - Ms Word, Ms Excel, PDF, JPG, GIF, PNG, TXT, RTF',
-              href: '#',
-            });
-          }
-          if (!validateFileSize) {
-            FormattedError.push({
-              text: 'File size exceeds 20Mb. Please upload a file that is less than 20Mb',
-              href: '#',
-            });
-          }
-
-          req.session.fileErrors.push(...FormattedError);
-
+          req.session.errors?.push({
+            propertyName: 'applicant1UploadedFiles',
+            errorType: 'size of the file isnt right ',
+          });
+          // res.json({ msg: 'error validating files' });
           this.redirect(req, res, UPLOAD_YOUR_DOCUMENTS);
         }
       }

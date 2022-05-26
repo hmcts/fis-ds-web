@@ -18,6 +18,7 @@ export interface AppRequest<T = Partial<Case>> extends Request {
 }
 
 export interface AppSession extends Session {
+  csrfSecret: string;
   rpeToken: any;
   caseDocuments: any[];
   user: UserDetails;
@@ -25,6 +26,7 @@ export interface AppSession extends Session {
   eligibility: Eligibility;
   lang: string | undefined;
   errors: FormError[] | undefined;
+  fileErrors: any[];
   addresses: [];
   returnUrl?: string;
 }
