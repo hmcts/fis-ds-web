@@ -63,5 +63,8 @@ e2e:
   userTestPassword: ''
 appInsights:
   instrumentationKey:
-      
+documentUpload:
+  validation:
+    totaldocuments: 5    
+    sizeInKB: 2000000  
  

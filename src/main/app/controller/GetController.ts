@@ -46,6 +46,7 @@ export class GetController {
     const sessionErrors = req.session?.errors || [];
     const FileErrors = req.session.fileErrors || [];
 
+    console.log(req.session);
     if (req.session?.errors || req.session.fileErrors) {
       req.session.errors = undefined;
       req.session.fileErrors = [];

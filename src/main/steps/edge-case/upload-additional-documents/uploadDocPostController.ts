@@ -9,13 +9,62 @@ import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { FormFields, FormFieldsFn } from '../../../app/form/Form';
 import { RpeApi } from '../../../app/rpe/RpeApi';
+import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 const logger = Logger.getLogger('uploadDocumentPostController');
 import { PAY_YOUR_FEE, UPLOAD_YOUR_DOCUMENTS } from '../../urls';
 
 /**
+ * ****** File Extensions Types are being check
+ */
+type URL_OF_FILE = string;
+
+/**
+ * ****** File Extensions Types are being check
+ */
+type FileType = {
+  doc: string;
+  docx: string;
+  pdf: string;
+  png: string;
+  xls: string;
+  xlsx: string;
+  jpg: string;
+  txt: string;
+  rtf: string;
+  gif: string;
+};
+
+/**
+ * ****** File MimeTypes are being check
+ */
+type FileMimeTypeInfo = {
+  'application/msword': string;
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document': string;
+  'application/pdf': string;
+  'image/png': string;
+  'application/vnd.ms-excel': string;
+  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': string;
+  'image/jpeg': string;
+  'text/plain': string;
+  'application/rtf': string;
+  'image/gif': string;
+};
+
+/**
+ * ****** File Upload validations Message
+ */
+type FileUploadErrorTranslatables = {
+  FORMAT_ERROR?: string;
+  SIZE_ERROR?: string;
+  TOTAL_FILES_EXCEED_ERROR?: string;
+};
+
+export const FileUploadBaseURL: URL_OF_FILE = config.get('services.documentManagement.url');
+
+/**
  * @FileHandler
  */
-export const FileMimeType = {
+export const FileMimeType: Partial<Record<keyof FileType, keyof FileMimeTypeInfo>> = {
   doc: 'application/msword',
   docx: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
   pdf: 'application/pdf',
@@ -29,22 +78,56 @@ export const FileMimeType = {
 };
 
 export class FileValidations {
+  /**
+   *
+   * @param req
+   * @returns
+   */
+
+  static ResourceReaderContents = (req: AppRequest<AnyObject>): FileUploadErrorTranslatables => {
+    let SystemContent: any | FileUploadErrorTranslatables = {};
+    const SystemLangauge = req.session['lang'];
+    const resourceLoader = new ResourceReader();
+    resourceLoader.Loader('upload-your-documents');
+    const ErrorInLangauges = resourceLoader.getFileContents().errors;
+    switch (SystemLangauge) {
+      case 'en':
+        SystemContent = ErrorInLangauges.en;
+        break;
+      case 'cy':
+        SystemContent = ErrorInLangauges.cy;
+        break;
+      default:
+        SystemContent = ErrorInLangauges.en;
+    }
+    return SystemContent;
+  };
+
+  /**
+   *
+   * @param fileSize
+   * @returns
+   */
   static sizeValidation = (fileSize: number): boolean => {
-    const KbsInMBS = 2000000;
+    const KbsInMBS = Number(config.get('documentUpload.validation.sizeInKB'));
     if (fileSize < KbsInMBS) {
       return true;
     } else {
       return false;
     }
   };
+
+  /**
+   *
+   * @param mimeType
+   * @returns
+   */
   static formatValidation = (mimeType: string): boolean => {
     const allMimeTypes = Object.values(FileMimeType);
-    const checkForFileMimeType = allMimeTypes.filter(aMimeType => aMimeType === mimeType).length > 0;
-    return checkForFileMimeType;
+    const checkForFileMimeType = allMimeTypes.filter(aMimeType => aMimeType === mimeType);
+    return checkForFileMimeType.length > 0;
   };
 }
-
-export const FileUploadBaseURL: string = config.get('services.documentManagement.url');
 
 @autobind
 export default class UploadDocumentController extends PostController<AnyObject> {
@@ -54,9 +137,26 @@ export default class UploadDocumentController extends PostController<AnyObject> 
 
   async PostDocumentUploader(req: AppRequest<AnyObject>, res: Response): Promise<void> {
     logger.log({ message: 'document has been successfully procceed and attached to the case' });
+    let CaseDocument: any[] = [];
+    if (req.session.hasOwnProperty('caseDocuments')) {
+      CaseDocument = req.session.caseDocuments.map(document => {
+        return {
+          document_binary_url: document._links.binary.href,
+          document_filename: document.originalDocumentName,
+          document_url: document._links.self.href,
+        };
+      });
+    }
+
+    console.log(CaseDocument);
     res.redirect(PAY_YOUR_FEE);
   }
 
+  /**
+   *
+   * @param req
+   * @param res
+   */
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
     const UploadDocumentInstance = (BASEURL: string, header: AxiosRequestHeaders): AxiosInstance => {
       return axios.create({
@@ -67,79 +167,106 @@ export default class UploadDocumentController extends PostController<AnyObject> 
 
     const { documentUploadProceed } = req.body;
 
-    if (documentUploadProceed) {
-      /**
-       * @PostDocumentUploader
-       */
-      this.PostDocumentUploader(req, res);
+    let TotalUploadDocuments = 0;
+    if (!req.session.hasOwnProperty('caseDocuments')) {
+      req.session['caseDocuments'] = [];
+      TotalUploadDocuments = 0;
     } else {
-      if ((await RpeApi.getRpeToken()).response) {
-        req.session.rpeToken = (await RpeApi.getRpeToken()).data;
-      }
+      TotalUploadDocuments = req.session['caseDocuments'].length;
+    }
 
-      if (!req.session.hasOwnProperty('caseDocuments')) {
-        req.session['caseDocuments'] = [];
-      }
+    if (TotalUploadDocuments < Number(config.get('documentUpload.validation.totaldocuments'))) {
+      if (documentUploadProceed) {
+        /**
+         * @PostDocumentUploader
+         */
+        this.PostDocumentUploader(req, res);
+      } else {
+        if ((await RpeApi.getRpeToken()).response) {
+          req.session.rpeToken = (await RpeApi.getRpeToken()).data;
+        }
 
-      if (!req.session.hasOwnProperty('errors')) {
-        req.session['errors'] = [];
-      }
+        if (!req.session.hasOwnProperty('errors')) {
+          req.session['errors'] = [];
+        }
 
-      const { files }: AppRequest<AnyObject> = req;
-      const { documents }: any = files;
+        const { files }: AppRequest<AnyObject> = req;
+        const { documents }: any = files;
 
-      const checkIfMultipleFiles: boolean = Array.isArray(documents);
+        const checkIfMultipleFiles: boolean = Array.isArray(documents);
 
-      // making sure single file is uploaded
-      if (!checkIfMultipleFiles) {
-        const validateMimeType: boolean = FileValidations.formatValidation(documents.mimetype);
-        const validateFileSize: boolean = FileValidations.sizeValidation(documents.size);
-        const formData: FormData = new FormData();
-        if (validateMimeType && validateFileSize) {
-          formData.append('files', documents.data, {
-            contentType: documents.mimetype,
-            filename: documents.name,
-          });
-          formData.append('caseTypeId', 'PRLAPPS');
-          formData.append('jurisdictionId', 'PRIVATELAW');
-          formData.append('classification', 'RESTRICTED');
+        // making sure single file is uploaded
+        if (!checkIfMultipleFiles) {
+          const validateMimeType: boolean = FileValidations.formatValidation(documents.mimetype);
+          const validateFileSize: boolean = FileValidations.sizeValidation(documents.size);
+          const formData: FormData = new FormData();
+          if (validateMimeType && validateFileSize) {
+            formData.append('files', documents.data, {
+              contentType: documents.mimetype,
+              filename: documents.name,
+            });
+            formData.append('caseTypeId', 'PRLAPPS');
+            formData.append('jurisdictionId', 'PRIVATELAW');
+            formData.append('classification', 'RESTRICTED');
 
-          const formHeaders = formData.getHeaders();
-          /**
-           * @RequestHeaders
-           */
-          const Headers = {
-            Authorization: `Bearer ${req.session.user['accessToken']}`,
-            ServiceAuthorization: req.session['rpeToken'],
-          };
-          try {
-            const RequestDocument = await UploadDocumentInstance(FileUploadBaseURL, Headers).post(
-              '/cases/documents',
-              formData,
-              {
-                headers: {
-                  ...formHeaders,
-                },
-              }
-            );
+            console.log(req.session);
 
-            const { originalDocumentName, _links } = RequestDocument.data.documents[0];
-            req.session['caseDocuments'].push({ originalDocumentName, _links });
-            req.session['errors'] = undefined;
+            console.log(req.session.caseDocuments.map(i => i._links));
+            const formHeaders = formData.getHeaders();
+            /**
+             * @RequestHeaders
+             */
+            const Headers = {
+              Authorization: `Bearer ${req.session.user['accessToken']}`,
+              ServiceAuthorization: req.session['rpeToken'],
+            };
+            try {
+              const RequestDocument = await UploadDocumentInstance(FileUploadBaseURL, Headers).post(
+                '/cases/documents',
+                formData,
+                {
+                  headers: {
+                    ...formHeaders,
+                  },
+                }
+              );
+
+              const { originalDocumentName, _links } = RequestDocument.data.documents[0];
+              req.session['caseDocuments'].push({ originalDocumentName, _links });
+              req.session['errors'] = undefined;
+              this.redirect(req, res, UPLOAD_YOUR_DOCUMENTS);
+            } catch (error) {
+              logger.error(error);
+              res.json({ msg: 'error occured', error });
+            }
+          } else {
+            const FormattedError: any[] = [];
+            if (!validateMimeType) {
+              FormattedError.push({
+                text: FileValidations.ResourceReaderContents(req).FORMAT_ERROR,
+                href: '#',
+              });
+            }
+            if (!validateFileSize) {
+              FormattedError.push({
+                text: FileValidations.ResourceReaderContents(req).SIZE_ERROR,
+                href: '#',
+              });
+            }
+
+            req.session.fileErrors.push(...FormattedError);
+
             this.redirect(req, res, UPLOAD_YOUR_DOCUMENTS);
-          } catch (error) {
-            logger.error(error);
-            res.json({ msg: 'error occured', error });
           }
-        } else {
-          req.session.errors?.push({
-            propertyName: 'applicant1UploadedFiles',
-            errorType: 'size of the file isnt right ',
-          });
-          // res.json({ msg: 'error validating files' });
-          this.redirect(req, res, UPLOAD_YOUR_DOCUMENTS);
         }
       }
+    } else {
+      req.session.fileErrors.push({
+        text: FileValidations.ResourceReaderContents(req).TOTAL_FILES_EXCEED_ERROR,
+        href: '#',
+      });
+
+      this.redirect(req, res, UPLOAD_YOUR_DOCUMENTS);
     }
   }
 }

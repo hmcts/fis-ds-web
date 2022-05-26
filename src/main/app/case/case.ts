@@ -25,6 +25,9 @@ import {
 } from './definition';
 
 export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>> = {
+  /******* ApplicantInformation**** */
+
+  /**Junk data */
   serviceType: 'serviceType',
   applyingForSelf: 'applyingForSelf',
   applicationType: 'applicationType',

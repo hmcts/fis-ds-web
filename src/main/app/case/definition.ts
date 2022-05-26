@@ -308,6 +308,12 @@ export interface PlacementOrder {
 }
 
 export interface CaseData {
+
+  /*****Applicant Information***** */
+
+
+
+
   serviceType: string;
   applyingForSelf: string;
   applyingWith: ApplyingWith;
