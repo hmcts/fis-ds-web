@@ -11,7 +11,7 @@ import { FormFields, FormFieldsFn } from '../../../app/form/Form';
 import { RpeApi } from '../../../app/rpe/RpeApi';
 import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 const logger = Logger.getLogger('uploadDocumentPostController');
-import { STATEMENT_OF_TRUTH, UPLOAD_YOUR_DOCUMENTS } from '../../urls';
+import { PAY_YOUR_FEE, UPLOAD_YOUR_DOCUMENTS } from '../../urls';
 
 /**
  * @FileHandler
@@ -30,12 +30,40 @@ export const FileMimeType = {
 };
 
 export class FileValidations {
-  static ResourceReaderContents = (): any => {
-    const resourceLoader = new ResourceReader();
-    resourceLoader.Loader('upload-your-documents');
-    return resourceLoader.getFileContents().errors;
-  };
 
+      /**
+       * 
+       * @param req 
+       * @returns 
+       */
+      static ResourceReaderContents = (req: AppRequest<AnyObject>): any => {
+        let SystemContent= [];
+        let SystemLangauge = req.session['lang'];
+        const resourceLoader = new ResourceReader();
+        resourceLoader.Loader('upload-your-documents')
+      let ErrorInLangauges = resourceLoader.getFileContents().errors;
+
+
+        switch(SystemLangauge){
+          case "en":
+            SystemContent = ErrorInLangauges.en;
+          break;
+
+          case "cy":
+            SystemContent = ErrorInLangauges.cy;
+          break;
+
+          default: SystemContent =  ErrorInLangauges.en;
+        }
+
+        return SystemContent;
+      };
+  
+  /**
+   * 
+   * @param fileSize 
+   * @returns 
+   */
   static sizeValidation = (fileSize: number): boolean => {
     const KbsInMBS = 2000000;
     if (fileSize < KbsInMBS) {
@@ -44,6 +72,11 @@ export class FileValidations {
       return false;
     }
   };
+  /**
+   * 
+   * @param mimeType 
+   * @returns 
+   */
   static formatValidation = (mimeType: string): boolean => {
     const allMimeTypes = Object.values(FileMimeType);
     const checkForFileMimeType = allMimeTypes.filter(aMimeType => aMimeType === mimeType).length > 0;
@@ -61,7 +94,19 @@ export default class UploadDocumentController extends PostController<AnyObject> 
 
   async PostDocumentUploader(req: AppRequest<AnyObject>, res: Response): Promise<void> {
     logger.log({ message: 'document has been successfully procceed and attached to the case' });
-    res.redirect(STATEMENT_OF_TRUTH);
+    let CaseDocument: any[] = [];
+    if(req.session.hasOwnProperty('caseDocuments')){
+      CaseDocument = req.session.caseDocuments.map(document=> {
+        return{
+          "document_binary_url":document._links.binary.href,
+          "document_filename":  document.originalDocumentName ,
+          "document_url":  document._links.self.href,
+        }
+      })
+    }
+
+    console.log(CaseDocument)
+    res.redirect(PAY_YOUR_FEE);
   }
 
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
@@ -111,6 +156,9 @@ export default class UploadDocumentController extends PostController<AnyObject> 
           formData.append('jurisdictionId', 'PRIVATELAW');
           formData.append('classification', 'RESTRICTED');
 
+          console.log(req.session)
+
+          console.log(req.session.caseDocuments.map(i => i._links))
           const formHeaders = formData.getHeaders();
           /**
            * @RequestHeaders
@@ -142,13 +190,13 @@ export default class UploadDocumentController extends PostController<AnyObject> 
           const FormattedError: any[] = [];
           if (!validateMimeType) {
             FormattedError.push({
-              text: 'This service only accepts files in the formats - Ms Word, Ms Excel, PDF, JPG, GIF, PNG, TXT, RTF',
+              text: FileValidations.ResourceReaderContents(req).FORMAT_ERROR,
               href: '#',
             });
           }
           if (!validateFileSize) {
             FormattedError.push({
-              text: 'File size exceeds 20Mb. Please upload a file that is less than 20Mb',
+              text: FileValidations.ResourceReaderContents(req).SIZE_ERROR,
               href: '#',
             });
           }
