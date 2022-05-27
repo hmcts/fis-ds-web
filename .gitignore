@@ -22,7 +22,7 @@ npm-debug.log.*
 
 .project
 .settings/
-test-results/*
+test-results/
 dist/
 public/
 output/
