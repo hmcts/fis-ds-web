@@ -1,41 +1,38 @@
 import { ContactPreference } from '../../../app/case/definition';
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
+import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 import { CommonContent } from '../../common/common.content';
 import { generateContent } from '../contact-preferences/content';
 
 jest.mock('../../../app/form/validation');
 
+const CONTACT_PREFERENCES_TRANSLATION_FILE = 'contact-preferences';
+
+const resourceLoader = new ResourceReader();
+resourceLoader.Loader(CONTACT_PREFERENCES_TRANSLATION_FILE);
+const translations = resourceLoader.getFileContents().translations;
+const errors = resourceLoader.getFileContents().errors;
+
+const EN = 'en';
+const CY = 'cy';
+
 const en = {
-  continue: 'Continue',
-  serviceName: 'Contact preferences',
-  label: 'Who should receive emails about this application',
-  accountOwner: 'The account owner',
-  namedPerson: 'The person named on this application',
-  bothReceiveEmail: 'Both the account owner and the person named on this application',
+  ...translations.en,
   errors: {
-    contactPreferenceType: {
-      required: 'Select an option',
-    },
+    ...errors.en,
   },
 };
 
 const cy = {
-  continue: 'Continue (in welsh)',
-  serviceName: 'Contact preferences (in Welsh)',
-  label: 'Who should receive emails about this application (in Welsh)',
-  accountOwner: 'The account owner (in Welsh)',
-  namedPerson: 'The person named on this application (in Welsh)',
-  bothReceiveEmail: 'Both the account owner and the person named on this application (in Welsh)',
+  ...translations.cy,
   errors: {
-    contactPreferenceType: {
-      required: 'Select an option (in Welsh)',
-    },
+    ...errors.cy,
   },
 };
 
 describe('contact-preferences', () => {
-  const commonContent = { language: 'en' } as CommonContent;
+  const commonContent = { language: EN } as CommonContent;
 
   let generatedContent;
   let form;
@@ -57,7 +54,7 @@ describe('contact-preferences', () => {
   });
 
   test('should return correct welsh content', () => {
-    generatedContent = generateContent({ ...commonContent, language: 'cy' });
+    generatedContent = generateContent({ ...commonContent, language: CY });
     expect(generatedContent.serviceName).toEqual(cy.serviceName);
     expect(generatedContent.label).toEqual(cy.label);
     expect(generatedContent.accountOwner).toEqual(cy.accountOwner);
@@ -75,7 +72,7 @@ describe('contact-preferences', () => {
     expect((field.label as Function)(generatedContent)).toBe(en.label);
 
     expect((field.values[0].label as Function)(generatedContent)).toBe(en.accountOwner);
-    expect(field.values[0].value).toBe(ContactPreference.ACOOUNT_OWNER);
+    expect(field.values[0].value).toBe(ContactPreference.ACCOUNT_OWNER);
 
     expect((field.values[1].label as Function)(generatedContent)).toBe(en.namedPerson);
     expect(field.values[1].value).toBe(ContactPreference.NAMED_PERSON);

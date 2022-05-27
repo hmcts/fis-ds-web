@@ -4,6 +4,8 @@ import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 
+const CONTACT_PREFERENCES_TRANSLATION_FILE = 'contact-preferences';
+
 export const form: FormContent = {
   fields: {
     contactPreferenceType: {
@@ -11,7 +13,7 @@ export const form: FormContent = {
       classes: 'govuk-radios',
       label: l => l.label,
       values: [
-        { label: l => l.accountOwner, value: ContactPreference.ACOOUNT_OWNER },
+        { label: l => l.accountOwner, value: ContactPreference.ACCOUNT_OWNER },
         {
           label: l => l.namedPerson,
           value: ContactPreference.NAMED_PERSON,
@@ -28,13 +30,13 @@ export const form: FormContent = {
 
 export const generateContent: TranslationFn = content => {
   const resourceLoader = new ResourceReader();
-  resourceLoader.Loader('contact-preferences');
-  const Translations = resourceLoader.getFileContents().translations;
+  resourceLoader.Loader(CONTACT_PREFERENCES_TRANSLATION_FILE);
+  const translations = resourceLoader.getFileContents().translations;
   const errors = resourceLoader.getFileContents().errors;
 
   const en = () => {
     return {
-      ...Translations.en,
+      ...translations.en,
       errors: {
         ...errors.en,
       },
@@ -42,7 +44,7 @@ export const generateContent: TranslationFn = content => {
   };
   const cy = () => {
     return {
-      ...Translations.cy,
+      ...translations.cy,
       errors: {
         ...errors.cy,
       },
@@ -53,9 +55,9 @@ export const generateContent: TranslationFn = content => {
     en,
     cy,
   };
-  const translations = languages[content.language]();
+  const languageTranslation = languages[content.language]();
   return {
-    ...translations,
+    ...languageTranslation,
     form,
   };
 };

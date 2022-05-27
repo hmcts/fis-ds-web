@@ -1696,7 +1696,7 @@ export const enum HttpStatus {
 }
 
 export const enum ContactPreference {
-  ACOOUNT_OWNER = 'ap',
+  ACCOUNT_OWNER = 'ao',
   NAMED_PERSON = 'np',
   BOTH_RECEIVE = 'bre',
 }
