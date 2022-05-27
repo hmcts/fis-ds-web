@@ -258,14 +258,15 @@ export default class UploadDocumentController extends PostController<AnyObject> 
             this.redirect(req, res, ADDITIONAL_DOCUMENTS_UPLOAD);
           }
         }
-        else {
-          req.session.fileErrors.push({
-            text: FileValidations.ResourceReaderContents(req).TOTAL_FILES_EXCEED_ERROR,
-            href: '#',
-          });
-    
-          this.redirect(req, res, ADDITIONAL_DOCUMENTS_UPLOAD);
-        }
+       
+      }
+      else {
+        req.session.fileErrors.push({
+          text: FileValidations.ResourceReaderContents(req).TOTAL_FILES_EXCEED_ERROR,
+          href: '#',
+        });
+  
+        this.redirect(req, res, ADDITIONAL_DOCUMENTS_UPLOAD);
       }
     } 
   }
