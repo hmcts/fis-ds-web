@@ -11,7 +11,7 @@ import { FormFields, FormFieldsFn } from '../../../app/form/Form';
 import { RpeApi } from '../../../app/rpe/RpeApi';
 import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 const logger = Logger.getLogger('uploadDocumentPostController');
-import { PAY_YOUR_FEE, UPLOAD_YOUR_DOCUMENTS } from '../../urls';
+import { ADDITIONAL_DOCUMENTS_UPLOAD, PAY_YOUR_FEE } from '../../urls';
 
 /**
  * ****** File Extensions Types are being check
@@ -135,11 +135,12 @@ export default class UploadDocumentController extends PostController<AnyObject> 
     super(fields);
   }
 
+
   async PostDocumentUploader(req: AppRequest<AnyObject>, res: Response): Promise<void> {
     logger.log({ message: 'document has been successfully procceed and attached to the case' });
-    let CaseDocument: any[] = [];
-    if (req.session.hasOwnProperty('caseDocuments')) {
-      CaseDocument = req.session.caseDocuments.map(document => {
+    let AddtionalCaseDocuments: any[] = [];
+    if (req.session.hasOwnProperty('AddtionalCaseDocuments')) {
+      AddtionalCaseDocuments = req.session.AddtionalCaseDocuments.map(document => {
         return {
           document_binary_url: document._links.binary.href,
           document_filename: document.originalDocumentName,
@@ -148,7 +149,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
       });
     }
 
-    console.log(CaseDocument);
+    console.log(AddtionalCaseDocuments);
     res.redirect(PAY_YOUR_FEE);
   }
 
@@ -168,20 +169,21 @@ export default class UploadDocumentController extends PostController<AnyObject> 
     const { documentUploadProceed } = req.body;
 
     let TotalUploadDocuments = 0;
-    if (!req.session.hasOwnProperty('caseDocuments')) {
-      req.session['caseDocuments'] = [];
+    if (!req.session.hasOwnProperty('AddtionalCaseDocuments')) {
+      req.session['AddtionalCaseDocuments'] = [];
       TotalUploadDocuments = 0;
     } else {
-      TotalUploadDocuments = req.session['caseDocuments'].length;
+      TotalUploadDocuments = req.session['AddtionalCaseDocuments'].length;
     }
 
-    if (TotalUploadDocuments < Number(config.get('documentUpload.validation.totaldocuments'))) {
+   
       if (documentUploadProceed) {
         /**
          * @PostDocumentUploader
          */
         this.PostDocumentUploader(req, res);
       } else {
+        if (TotalUploadDocuments < Number(config.get('documentUpload.validation.totaldocuments'))) {
         if ((await RpeApi.getRpeToken()).response) {
           req.session.rpeToken = (await RpeApi.getRpeToken()).data;
         }
@@ -209,9 +211,6 @@ export default class UploadDocumentController extends PostController<AnyObject> 
             formData.append('jurisdictionId', 'PRIVATELAW');
             formData.append('classification', 'RESTRICTED');
 
-            console.log(req.session);
-
-            console.log(req.session.caseDocuments.map(i => i._links));
             const formHeaders = formData.getHeaders();
             /**
              * @RequestHeaders
@@ -232,9 +231,9 @@ export default class UploadDocumentController extends PostController<AnyObject> 
               );
 
               const { originalDocumentName, _links } = RequestDocument.data.documents[0];
-              req.session['caseDocuments'].push({ originalDocumentName, _links });
+              req.session['AddtionalCaseDocuments'].push({ originalDocumentName, _links });
               req.session['errors'] = undefined;
-              this.redirect(req, res, UPLOAD_YOUR_DOCUMENTS);
+              this.redirect(req, res, ADDITIONAL_DOCUMENTS_UPLOAD);
             } catch (error) {
               logger.error(error);
               res.json({ msg: 'error occured', error });
@@ -256,17 +255,18 @@ export default class UploadDocumentController extends PostController<AnyObject> 
 
             req.session.fileErrors.push(...FormattedError);
 
-            this.redirect(req, res, UPLOAD_YOUR_DOCUMENTS);
+            this.redirect(req, res, ADDITIONAL_DOCUMENTS_UPLOAD);
           }
         }
+        else {
+          req.session.fileErrors.push({
+            text: FileValidations.ResourceReaderContents(req).TOTAL_FILES_EXCEED_ERROR,
+            href: '#',
+          });
+    
+          this.redirect(req, res, ADDITIONAL_DOCUMENTS_UPLOAD);
+        }
       }
-    } else {
-      req.session.fileErrors.push({
-        text: FileValidations.ResourceReaderContents(req).TOTAL_FILES_EXCEED_ERROR,
-        href: '#',
-      });
-
-      this.redirect(req, res, UPLOAD_YOUR_DOCUMENTS);
-    }
+    } 
   }
 }

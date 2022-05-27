@@ -21,6 +21,7 @@ export interface AppSession extends Session {
   csrfSecret: string;
   rpeToken: any;
   caseDocuments: any[];
+  AddtionalCaseDocuments: any[]
   user: UserDetails;
   userCase: CaseWithId;
   eligibility: Eligibility;

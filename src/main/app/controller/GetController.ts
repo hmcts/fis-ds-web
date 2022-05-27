@@ -28,6 +28,7 @@ export class GetController {
     const language = this.getPreferredLanguage(req) as Language;
     const addresses = req.session?.addresses;
     const uploadedDocuments = req.session.caseDocuments;
+    const addtionalDocuments = req.session.AddtionalCaseDocuments;
 
     const content = generatePageContent({
       language,
@@ -45,8 +46,6 @@ export class GetController {
 
     const sessionErrors = req.session?.errors || [];
     const FileErrors = req.session.fileErrors || [];
-
-    console.log(req.session);
     if (req.session?.errors || req.session.fileErrors) {
       req.session.errors = undefined;
       req.session.fileErrors = [];
@@ -62,6 +61,7 @@ export class GetController {
       res.render(this.view, {
         ...content,
         uploadedDocuments,
+        addtionalDocuments,
         sessionErrors,
         FileErrors,
         htmlLang: language,
