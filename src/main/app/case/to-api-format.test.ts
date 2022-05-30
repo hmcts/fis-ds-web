@@ -25,15 +25,7 @@ describe('to-api-format', () => {
     applicantDateOfBirth: { day: '20', month: '1', year: '2000' },
     applicant2DateOfBirth: undefined,
     childrenDateOfBirth: { day: '5', month: '1', year: '2020' },
-    placementOrders: [
-      {
-        placementOrderId: 'MOCK_ID',
-        placementOrderType: 'MOCK_TYPE',
-        placementOrderNumber: 'MOCK_NUMBER',
-        placementOrderCourt: 'MOCK_COURT',
-        placementOrderDate: { day: '5', month: '1', year: '2021' },
-      },
-    ],
+
     siblings: [
       {
         siblingId: 'MOCK_SIBLING_ID',

@@ -672,24 +672,7 @@ export interface Children {
   SexAtBirth: Gender;
 }
 
-export interface Parent {
-  FirstName: string;
-  LastName: string;
-  StillAlive: string;
-  NotAliveReason: string;
-  Nationality: Nationality[];
-  Occupation: string;
-  AddressKnown: YesOrNo;
-  Address1: string;
-  Address2: string;
-  Address3: string;
-  AddressTown: string;
-  AddressCounty: string;
-  AddressPostCode: string;
-  AddressCountry: string;
-  OtherNationalities: ListValue<AdditionalNationality>[];
-  NameOnCertificate: string;
-}
+
 
 export interface AdoptionAgencyOrLocalAuthority {
   adopAgencyOrLaId: string;
