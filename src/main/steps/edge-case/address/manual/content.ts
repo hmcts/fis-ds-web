@@ -6,6 +6,8 @@ import {
   generateContent as manualAddressGenerateContent,
 } from '../../../common/components/address-manual';
 
+const MANUAL_ADDRESS = 'manual-address';
+
 const manualAddressFormFields = manualAddressForm.fields as FormFields;
 
 export const form: FormContent = {
@@ -26,13 +28,13 @@ export const form: FormContent = {
 
 export const generateContent: TranslationFn = content => {
   const resourceLoader = new ResourceReader();
-  resourceLoader.Loader('manual-address');
-  const Translations = resourceLoader.getFileContents().translations;
+  resourceLoader.Loader(MANUAL_ADDRESS);
+  const translations = resourceLoader.getFileContents().translations;
   const errors = resourceLoader.getFileContents().errors;
 
   const en = () => {
     return {
-      ...Translations.en,
+      ...translations.en,
       errors: {
         ...errors.en,
       },
@@ -40,7 +42,7 @@ export const generateContent: TranslationFn = content => {
   };
   const cy = () => {
     return {
-      ...Translations.cy,
+      ...translations.cy,
       errors: {
         ...errors.cy,
       },
@@ -53,11 +55,11 @@ export const generateContent: TranslationFn = content => {
   };
 
   const manualAddressContent = manualAddressGenerateContent(content);
-  const translations = languages[content.language]();
+  const translationContent = languages[content.language]();
 
   return {
     ...manualAddressContent,
-    ...translations,
+    ...translationContent,
     form: { ...form, fields: (form.fields as FormFieldsFn)(content.userCase || {}) },
   };
 };

@@ -1,6 +1,6 @@
-import { FormContent, FormFields } from '../../../../app/form/Form';
+import { FormFields } from '../../../../app/form/Form';
 import { ResourceReader } from '../../../../modules/resourcereader/ResourceReader';
-import { CommonContent, generatePageContent } from '../../../common/common.content';
+import { CommonContent } from '../../../common/common.content';
 import {
   generateContent as generateSelectAddressContent,
   form as selectAddressForm,
@@ -12,6 +12,9 @@ const resourceLoader = new ResourceReader();
 resourceLoader.Loader('select-address');
 const translations = resourceLoader.getFileContents().translations;
 
+const EN = 'en';
+const CY = 'cy';
+
 const enContent = {
   ...translations.en,
 };
@@ -22,7 +25,7 @@ const cyContent = {
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
 describe('applicant1 > address > select > content', () => {
-  const commonContent = { language: 'en', userCase: {}, addresses: [] as any[] } as CommonContent;
+  const commonContent = { language: EN, userCase: {}, addresses: [] as any[] } as CommonContent;
   let generatedContent;
 
   beforeEach(() => {
@@ -41,8 +44,8 @@ describe('applicant1 > address > select > content', () => {
   });
 
   test('should return correct welsh content', () => {
-    const selectAddressContent = generateSelectAddressContent({ ...commonContent, language: 'cy' });
-    generatedContent = generateContent({ ...commonContent, language: 'cy' });
+    const selectAddressContent = generateSelectAddressContent({ ...commonContent, language: CY });
+    generatedContent = generateContent({ ...commonContent, language: CY });
     expect(generatedContent.section).toEqual(cyContent.section);
     expect(generatedContent.title).toEqual(cyContent.title);
     expect(generatedContent.errors).toEqual({
@@ -58,23 +61,22 @@ describe('applicant1 > address > select > content', () => {
     expect(fields.applicant1SelectAddress).toEqual(selectAddressFormFields.selectAddress);
   });
 
-  it('should have applicant1SelectAddress label when language: en and  applyingWith: alone', () => {
-    const commonContent1 = { language: 'en', userCase: { applyingWith: 'alone' } } as CommonContent;
+  it('should have applicant1SelectAddress label when language: en', () => {
+    const commonContent1 = { language: EN, userCase: {} } as CommonContent;
 
     const generatedContent1 = generateContent(commonContent1);
-    expect(generatedContent1.section).toBe('Applicant');
+    expect(generatedContent1.section).toBe(enContent.section);
   });
 
-  it('should have applicant1SelectAddress label when language: cy and  applyingWith: alone', () => {
-    const commonContent1 = { language: 'cy', userCase: { applyingWith: 'alone' } } as CommonContent;
+  it('should have applicant1SelectAddress label when language: cy', () => {
+    const commonContent1 = { language: CY, userCase: {} } as CommonContent;
 
     const generatedContent1 = generateContent(commonContent1);
-    expect(generatedContent1.section).toBe('Applicant (in welsh)');
+    expect(generatedContent1.section).toBe(cyContent.section);
   });
 
-  test('should contain submit button', () => {
-    const form = generatedContent.form as FormContent;
-    expect((form.submit.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save and continue');
+  test('should contain continue button', () => {
+    expect(generatedContent.continue).toEqual(enContent.continue);
   });
 });
 /* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */

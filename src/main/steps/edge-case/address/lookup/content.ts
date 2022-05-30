@@ -7,6 +7,8 @@ import {
 } from '../../../common/components/address-lookup';
 import { MANUAL_ADDRESS } from '../../../urls';
 
+const LOOKUP_ADDRESS = 'address-lookup';
+
 const addressLookupFormFields = addressLookupForm.fields as FormFields;
 
 export const form: FormContent = {
@@ -20,13 +22,13 @@ export const form: FormContent = {
 
 export const generateContent: TranslationFn = content => {
   const resourceLoader = new ResourceReader();
-  resourceLoader.Loader('address-lookup');
-  const Translations = resourceLoader.getFileContents().translations;
+  resourceLoader.Loader(LOOKUP_ADDRESS);
+  const translations = resourceLoader.getFileContents().translations;
   const errors = resourceLoader.getFileContents().errors;
 
   const en = () => {
     return {
-      ...Translations.en,
+      ...translations.en,
       errors: {
         ...errors.en,
       },
@@ -35,7 +37,7 @@ export const generateContent: TranslationFn = content => {
   };
   const cy = () => {
     return {
-      ...Translations.cy,
+      ...translations.cy,
       errors: {
         ...errors.cy,
       },
@@ -49,11 +51,11 @@ export const generateContent: TranslationFn = content => {
   };
 
   const addressLookupContent = addressLookupGenerateContent(content);
-  const translations = languages[content.language]();
+  const translationContent = languages[content.language]();
 
   return {
     ...addressLookupContent,
-    ...translations,
+    ...translationContent,
     form: { ...form, fields: (form.fields as FormFieldsFn)(content.userCase || {}) },
   };
 };

@@ -1,6 +1,6 @@
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
-import { CommonContent, generatePageContent } from '../../common/common.content';
+import { CommonContent } from '../../common/common.content';
 import { form as fullNameForm } from '../../common/components/full-name';
 
 import { generateContent } from './content';
@@ -11,6 +11,9 @@ const resourceLoader = new ResourceReader();
 resourceLoader.Loader('full-name');
 const translations = resourceLoader.getFileContents().translations;
 const errors = resourceLoader.getFileContents().errors;
+
+const EN = 'en';
+const CY = 'cy';
 
 const enContent = {
   ...translations.en,
@@ -29,7 +32,7 @@ const cyContent = {
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
 describe('Applicant > full-name', () => {
   const fullNameFormFields = fullNameForm.fields as FormFields;
-  const commonContent = { language: 'en', userCase: {} } as CommonContent;
+  const commonContent = { language: EN, userCase: {} } as CommonContent;
   let generatedContent;
   let form;
   let fields;
@@ -45,7 +48,7 @@ describe('Applicant > full-name', () => {
   });
 
   test('should return correct welsh content', () => {
-    generatedContent = generateContent({ ...commonContent, language: 'cy' });
+    generatedContent = generateContent({ ...commonContent, language: CY });
     expect(generatedContent.title).toEqual(cyContent.title);
     expect(generatedContent.errors).toEqual(cyContent.errors);
   });
@@ -60,8 +63,8 @@ describe('Applicant > full-name', () => {
     expect(lastNamesField).toEqual(fullNameFormFields.lastNames);
   });
 
-  test('should contain submit button', () => {
-    expect((form.submit.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save and continue');
+  test('should contain continue button', () => {
+    expect(generatedContent.continue).toEqual(enContent.continue);
   });
 });
 /* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */

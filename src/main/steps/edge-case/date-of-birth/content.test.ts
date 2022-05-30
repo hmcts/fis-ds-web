@@ -72,11 +72,9 @@ describe('appllicant1 > dob-content', () => {
 
     expect(dobField.type).toBe('date');
     expect(dobField.classes).toBe('govuk-date-input');
-    expect((dobField.label as Function)(generatedContent)).toBe(
-      'What is the date of birth of the person named on this application?'
-    );
+    expect((dobField.label as Function)(generatedContent)).toBe(enContent.title);
     expect(dobField.labelHidden).toBe(true);
-    expect((dobField.hint as Function)(generatedContent)).toBe('For example, 27 3 2007');
+    expect((dobField.hint as Function)(generatedContent)).toBe(enContent.hint);
 
     expect((dobField.values[0].label as Function)(commonContent)).toBe('Day');
     expect(dobField.values[0].name).toBe('day');
@@ -103,15 +101,15 @@ describe('appllicant1 > dob-content', () => {
     expect((dobField.validator as Function)({ day: '21', month: '12', year: '2018' })).toBe(undefined);
   });
 });
-it('should have dateOfBirth label when language: en and  applyingWith: alone', () => {
-  const commonContent1 = { language: 'en', userCase: { applyingWith: 'alone' } } as CommonContent;
+it('should have dateOfBirth label when language: en', () => {
+  const commonContent1 = { language: 'en', userCase: {} } as CommonContent;
 
   const generatedContent1 = generateContent(commonContent1);
-  expect(generatedContent1.title).toBe('What is the date of birth of the person named on this application?');
+  expect(generatedContent1.title).toBe(enContent.title);
 });
 
-it('should have an dateOfBirth label when language: cy and  applyingWith: alone', () => {
-  const commonContent1 = { language: 'cy', userCase: { applyingWith: 'alone' } } as CommonContent;
+it('should have an dateOfBirth label when language: cy', () => {
+  const commonContent1 = { language: 'cy', userCase: {} } as CommonContent;
 
   const generatedContent1 = generateContent(commonContent1);
   expect(generatedContent1.section).not.toBe('Ceisydd');

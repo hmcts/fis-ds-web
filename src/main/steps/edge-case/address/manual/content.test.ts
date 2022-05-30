@@ -1,6 +1,6 @@
 import { FormContent, FormFields, FormOptions } from '../../../../app/form/Form';
 import { ResourceReader } from '../../../../modules/resourcereader/ResourceReader';
-import { CommonContent, generatePageContent } from '../../../common/common.content';
+import { CommonContent } from '../../../common/common.content';
 import {
   generateContent as generateManualAddressContent,
   form as manualAddressForm,
@@ -96,8 +96,8 @@ describe('applicant1 > address > manual > content', () => {
     expect(generatedContent1.section).toBe('Applicant (in welsh)');
   });
 
-  test('should contain submit button', () => {
-    expect((form.submit.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save and continue');
+  test('should contain continue button', () => {
+    expect(generatedContent.continue).toEqual(enContent.continue);
   });
 });
 /* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
