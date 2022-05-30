@@ -14,9 +14,8 @@ export interface Address {
   Country: string;
 }
 
-export interface AddressGlobal extends Address {}
 
-export interface AddressGlobalUK extends Address {}
+
 
 export interface AddressUK extends Address {}
 
@@ -374,10 +373,10 @@ export interface CaseData {
   applicant1LastNameChangedWhenMarried: YesOrNo;
   applicant1NameDifferentToMarriageCertificate: YesOrNo;
   applicant1NameChangedHowOtherDetails: string;
-  applicant1HomeAddress: AddressGlobalUK;
+  applicant1HomeAddress: AddressUK;
   applicant1KeepContactDetailsConfidential: YesOrNo;
   applicant1Gender: Gender;
-  applicant1CorrespondenceAddress: AddressGlobalUK;
+  applicant1CorrespondenceAddress: AddressUK;
   applicant1SolicitorRepresented: YesOrNo;
   applicant1SolicitorName: string;
   applicant1SolicitorReference: string;
@@ -394,10 +393,10 @@ export interface CaseData {
   applicant2LastNameChangedWhenMarried: YesOrNo;
   applicant2NameDifferentToMarriageCertificate: YesOrNo;
   applicant2NameChangedHowOtherDetails: string;
-  applicant2HomeAddress: AddressGlobalUK;
+  applicant2HomeAddress: AddressUK;
   applicant2KeepContactDetailsConfidential: YesOrNo;
   applicant2Gender: Gender;
-  applicant2CorrespondenceAddress: AddressGlobalUK;
+  applicant2CorrespondenceAddress: AddressUK;
   applicant2SolicitorRepresented: YesOrNo;
   applicant2SolicitorName: string;
   applicant2SolicitorReference: string;
