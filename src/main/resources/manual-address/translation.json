@@ -7,10 +7,10 @@
             "title": "What's your home address?"
         },
         "cy": {
-            "continue": "Continue (in Welsh)",
-            "section": "Applicant (in Welsh)",
-            "serviceName": "Select Address (in Welsh)",
-            "title": "What's your home address? (in Welsh)"
+            "continue": "Continue",
+            "section": "Applicant (in welsh)",
+            "serviceName": "Select Address (in welsh)",
+            "title": "What's your home address? (in welsh)"
         }
     },
     "errors":{
@@ -28,14 +28,14 @@
         },
         "cy": {
             "applicant1Address1": {
-                "required": "Enter the first line of the address (in Welsh)"
+                "required": "Enter the first line of the address (in welsh)"
             },
             "applicant1AddressTown": {
-                "required": "Enter the town or city (in Welsh)"
+                "required": "Enter the town or city (in welsh)"
             },
             "applicant1AddressPostcode": {
-                "required": "Enter a real postcode (in Welsh)",
-                "invalid": "Enter a real postcode (in Welsh)"
+                "required": "Enter a real postcode (in welsh)",
+                "invalid": "Enter a real postcode (in welsh)"
             }
         }
     }

@@ -1,4 +1,5 @@
 import { FormContent, FormFields, FormOptions } from '../../../../app/form/Form';
+import { ResourceReader } from '../../../../modules/resourcereader/ResourceReader';
 import { CommonContent, generatePageContent } from '../../../common/common.content';
 import {
   generateContent as generateManualAddressContent,
@@ -7,14 +8,16 @@ import {
 
 import { generateContent } from './content';
 
+const resourceLoader = new ResourceReader();
+resourceLoader.Loader('manual-address');
+const translations = resourceLoader.getFileContents().translations;
+
 const enContent = {
-  section: 'Applicant',
-  title: "What's your home address?",
+  ...translations.en,
 };
 
 const cyContent = {
-  section: 'Applicant (in Welsh)',
-  title: "What's your home address? (in Welsh)",
+  ...translations.cy,
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
@@ -90,7 +93,7 @@ describe('applicant1 > address > manual > content', () => {
     const commonContent1 = { language: 'cy', userCase: { applyingWith: 'alone' } } as CommonContent;
 
     const generatedContent1 = generateContent(commonContent1);
-    expect(generatedContent1.section).toBe('Applicant (in Welsh)');
+    expect(generatedContent1.section).toBe('Applicant (in welsh)');
   });
 
   test('should contain submit button', () => {

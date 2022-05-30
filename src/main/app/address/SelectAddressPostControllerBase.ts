@@ -13,7 +13,8 @@ export default class SelectAddressPostControllerBase extends PostController<AnyO
   }
 
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
-    const form = new Form(<FormFields>this.fields);
+    const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase) : this.fields;
+    const form = new Form(fields);
     const { saveAndSignOut, saveBeforeSessionTimeout, _csrf, ...formData } = form.getParsedBody(req.body);
 
     req.session.errors = form.getErrors(formData);

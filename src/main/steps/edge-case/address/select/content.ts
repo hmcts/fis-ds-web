@@ -23,7 +23,7 @@ export const form: FormContent = {
 
 export const generateContent: TranslationFn = content => {
   const resourceLoader = new ResourceReader();
-  resourceLoader.Loader('manual-address');
+  resourceLoader.Loader('select-address');
   const Translations = resourceLoader.getFileContents().translations;
   const errors = resourceLoader.getFileContents().errors;
 
@@ -31,7 +31,7 @@ export const generateContent: TranslationFn = content => {
     return {
       ...Translations.en,
       errors: {
-       ...errors.en
+        ...errors.en,
       },
       changePostCodeUrl: FIND_ADDRESS,
       cantFindAddressUrl: MANUAL_ADDRESS,

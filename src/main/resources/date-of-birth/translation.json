@@ -2,17 +2,15 @@
     "translations": {
         "en": {
             "continue": "Continue",
-            "section": "Applicant",
-            "serviceName": "Enter Date of birth",
-            "title": "What's your date of birth?",
+            "serviceName": "Enter subject's DOB",
+            "title": "What is the date of birth of the person named on this application?",
             "hint": "For example, 27 3 2007"
         },
         "cy": {
-            "continue": "Continue (in Welsh)",
-            "section": "Applicant (in Welsh)",
-            "serviceName": "Enter Full name (in Welsh)",
-            "title": "What's your date of birth? (in Welsh)",
-            "hint": "For example, 27 3 2007 (in Welsh)"
+            "continue": "Continue",
+            "serviceName": "Enter subject's DOB (in welsh)",
+            "title": "What is the date of birth of the person named on this application? (in welsh)",
+            "hint": "For example, 27 3 2007 (in welsh)"
         }
     },
     "errors":{
@@ -28,12 +26,12 @@
         },
         "cy": {
             "applicant1DateOfBirth": {
-                "required": "Enter your date of birth (in Welsh)",
-                "invalidDate": "Date of birth must be a real date (in Welsh)",
-                "incompleteDay": "Your date of birth must include a day (in Welsh)",
-                "incompleteMonth": "Your date of birth must include a month (in Welsh)",
-                "incompleteYear": "Your date of birth must include a year (in Welsh)",
-                "invalidDateInFuture": "Your date of birth must be in the past (in Welsh)"
+                "required": "Enter your date of birth (in welsh)",
+                "invalidDate": "Date of birth must be a real date (in welsh)",
+                "incompleteDay": "Your date of birth must include a day (in welsh)",
+                "incompleteMonth": "Your date of birth must include a month (in welsh)",
+                "incompleteYear": "Your date of birth must include a year (in welsh)",
+                "invalidDateInFuture": "Your date of birth must be in the past (in welsh)"
             }
         }
     }

@@ -1,4 +1,5 @@
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
+import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 import { form as fullNameForm } from '../../common/components/full-name';
 
@@ -6,28 +7,22 @@ import { generateContent } from './content';
 
 jest.mock('../../../app/form/validation');
 
+const resourceLoader = new ResourceReader();
+resourceLoader.Loader('full-name');
+const translations = resourceLoader.getFileContents().translations;
+const errors = resourceLoader.getFileContents().errors;
+
 const enContent = {
-  section: 'Applicant',
-  title: "What's your full name?",
+  ...translations.en,
   errors: {
-    applicant1FirstNames: {
-      required: 'Enter your first names',
-    },
-    applicant1LastNames: {
-      required: 'Enter your last names',
-    },
+    ...errors.en,
   },
 };
+
 const cyContent = {
-  section: 'Applicant (in Welsh)',
-  title: "What's your full name? (in Welsh)",
+  ...translations.cy,
   errors: {
-    applicant1FirstNames: {
-      required: 'Enter your first names (in Welsh)',
-    },
-    applicant1LastNames: {
-      required: 'Enter your last names (in Welsh)',
-    },
+    ...errors.cy,
   },
 };
 
@@ -45,14 +40,12 @@ describe('Applicant > full-name', () => {
   });
 
   test('should return correct english content', () => {
-    expect(generatedContent.section).toEqual(enContent.section);
     expect(generatedContent.title).toEqual(enContent.title);
     expect(generatedContent.errors).toEqual(enContent.errors);
   });
 
   test('should return correct welsh content', () => {
     generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.section).toEqual(cyContent.section);
     expect(generatedContent.title).toEqual(cyContent.title);
     expect(generatedContent.errors).toEqual(cyContent.errors);
   });

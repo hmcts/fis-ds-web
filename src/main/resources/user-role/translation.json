@@ -8,11 +8,11 @@
             "two": "No - I am sending an application for someone else."
         },
         "cy": {
-            "continue": "Continue (in Welsh)",
-            "serviceName": "Determine user's role (in Welsh)",
-            "label": "Are you named as the applicant on the application form you are submitting? (in Welsh)",
-            "one": "Yes (in Welsh)",
-            "two": "No - I am sending an application for someone else. (in Welsh)"
+            "continue": "Continue",
+            "serviceName": "Determine user's role (in welsh)",
+            "label": "Are you named as the applicant on the application form you are submitting? (in welsh)",
+            "one": "Yes (in welsh)",
+            "two": "No - I am sending an application for someone else. (in welsh)"
         }
     },
     "errors":{
@@ -23,7 +23,7 @@
         },
         "cy": {
             "applyingForSelf": {
-                "required": "Please select an answer before you can proceed further (in Welsh)"
+                "required": "Please select an answer before you can proceed further (in welsh)"
             }
         }
     }

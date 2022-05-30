@@ -1,16 +1,16 @@
 {
     "translations": {
         "en": {
-            "continue": "Continue (in Welsh)",
+            "continue": "Continue",
             "section": "Applicant",
             "serviceName": "Select Address",
             "title": "What's your home address?"
         },
         "cy": {
             "continue": "Continue",
-            "section": "Applicant (in Welsh)",
-            "serviceName": "Select Address (in Welsh)",
-            "title": "What's your home address? (in Welsh)"
+            "section": "Applicant (in welsh)",
+            "serviceName": "Select Address (in welsh)",
+            "title": "What's your home address? (in welsh)"
         }
     },
     "errors":{
@@ -21,7 +21,7 @@
         },
         "cy": {
             "applicant1SelectAddress": {
-                "notSelected": "Select an address (in Welsh)"
+                "notSelected": "Select an address (in welsh)"
             }
         }
     }

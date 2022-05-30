@@ -2,15 +2,13 @@
     "translations": {
         "en": {
             "continue": "Continue",
-            "section": "Applicant",
-            "serviceName": "Enter Full name",
-            "title": "What's your full name?"
+            "serviceName": "Enter subject's name",
+            "title": "Who is the person named on this application?"
         },
         "cy": {
-            "continue": "Continue (in Welsh)",
-            "section": "Applicant (in Welsh)",
-            "serviceName": "Enter Full name (in Welsh)",
-            "title": "What's your full name? (in Welsh)"
+            "continue": "Continue",
+            "serviceName": "Enter subject's name (in welsh)",
+            "title": "Who is the person named on this application? (in welsh)"
         }
     },
     "errors":{
@@ -24,10 +22,10 @@
         },
         "cy": {
             "applicant1FirstNames": {
-                "required": "Enter your last names (in Welsh)"
+                "required": "Enter your first names (in welsh)"
             },
             "applicant1LastNames": {
-                "required": "Enter your last names (in Welsh)"
+                "required": "Enter your last names (in welsh)"
             }
         }
     }

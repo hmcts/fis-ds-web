@@ -1,4 +1,5 @@
 import { FormContent, FormFields } from '../../../../app/form/Form';
+import { ResourceReader } from '../../../../modules/resourcereader/ResourceReader';
 import { CommonContent } from '../../../common/common.content';
 import {
   form as addressLookupForm,
@@ -8,14 +9,16 @@ import { MANUAL_ADDRESS } from '../../../urls';
 
 import { generateContent } from './content';
 
+const resourceLoader = new ResourceReader();
+resourceLoader.Loader('address-lookup');
+const translations = resourceLoader.getFileContents().translations;
+
 const enContent = {
-  section: 'Applicant',
-  title: 'What is the address of the person named on the application ?',
+  ...translations.en,
 };
 
 const cyContent = {
-  section: 'Applicant (in Welsh)',
-  title: 'What is the address of the person named on the application ? (in Welsh)',
+  ...translations.cy,
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
@@ -59,7 +62,7 @@ describe('applicant1 > address > lookup > content', () => {
     const commonContent1 = { language: 'cy' } as CommonContent;
 
     const generatedContent1 = generateContent(commonContent1);
-    expect(generatedContent1.section).toBe('Applicant (in Welsh)');
+    expect(generatedContent1.section).toBe('Applicant (in welsh)');
   });
 
   test('should contain applicant1AddressPostcode field', () => {
