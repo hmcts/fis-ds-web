@@ -111,6 +111,8 @@ export default class UploadDocumentController extends PostController<AnyObject> 
           formData.append('jurisdictionId', 'PRIVATELAW');
           formData.append('classification', 'RESTRICTED');
 
+          console.log(req.session.userCase)
+
           const formHeaders = formData.getHeaders();
           /**
            * @RequestHeaders

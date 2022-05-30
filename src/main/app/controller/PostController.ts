@@ -62,14 +62,18 @@ export class PostController<T extends AnyObject> {
   }
 
   private async saveAndContinue(req: AppRequest<T>, res: Response, form: Form, formData: Partial<Case>): Promise<void> {
+
+   // console.log(formData);
+ 
+
     Object.assign(req.session.userCase, formData);
     req.session.errors = form.getErrors(formData);
 
+    console.log({userCase: req.session.userCase})
+    console.log({form})
+
     this.filterErrorsForSaveAsDraft(req);
 
-    const tempServiceType = req.session.userCase.serviceType;
-    const tempApplyingWithAdoption = req.session.userCase.applyingWithAdoption;
-    const tempApplyingWithPrivateLaw = req.session.userCase.applyingWithPrivateLaw;
 
     if (req.session?.user && req.session.errors.length === 0) {
       if (!(Object.values(noHitToSaveAndContinue) as string[]).includes(req.originalUrl)) {
@@ -84,9 +88,7 @@ export class PostController<T extends AnyObject> {
 
     // here we explicitly assigning the values to userCase to get the title
     if (typeof req.session.userCase !== 'undefined' && req.session.userCase !== null) {
-      req.session.userCase.serviceType = tempServiceType;
-      req.session.userCase.applyingWithAdoption = tempApplyingWithAdoption;
-      req.session.userCase.applyingWithPrivateLaw = tempApplyingWithPrivateLaw;
+
     }
 
     this.redirect(req, res);

@@ -1,7 +1,7 @@
 import { AnyObject } from '../controller/PostController';
 
 import {
-  Adoption,
+
   AdoptionAgencyOrLocalAuthority,
   ApplicationType,
   ApplyingWith,
@@ -344,7 +344,6 @@ export interface Case {
   applicationType?: ApplicationType;
   payments?: ListValue<Payment>[];
 
-  adoption?: Adoption;
 
   applicant1HelpPayingNeeded?: YesOrNo;
   applicant1AlreadyAppliedForHelpPaying?: YesOrNo;

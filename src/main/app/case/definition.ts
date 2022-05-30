@@ -142,28 +142,7 @@ export interface Applicant {
   AddressSameAsApplicant1: string;
   contactDetails: ContactDetails[];
 
-  AgreedToReceiveEmails: YesOrNo;
-  ConfirmReceipt: YesOrNo;
-  LanguagePreferenceWelsh: YesOrNo;
-  LastNameChangedWhenMarried: YesOrNo;
-  NameDifferentToMarriageCertificate: YesOrNo;
-  NameChangedHowOtherDetails: string;
-  HomeAddress: AddressGlobalUK;
-  KeepContactDetailsConfidential: YesOrNo;
-  Gender: Gender;
-  CorrespondenceAddress: AddressGlobalUK;
-  SolicitorRepresented: YesOrNo;
-  SolicitorName: string;
-  SolicitorReference: string;
-  SolicitorPhone: string;
-  SolicitorEmail: string;
-  SolicitorAddress: string;
-  SolicitorAgreeToReceiveEmails: YesOrNo;
-  SolicitorOrganisationPolicy: OrganisationPolicy<UserRole>;
-  FinancialOrder: YesOrNo;
-  FinancialOrderFor: FinancialOrderFor[];
-  LegalProceedings: YesOrNo;
-  LegalProceedingsDetails: string;
+
 }
 
 export interface Application {
