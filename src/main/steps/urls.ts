@@ -36,6 +36,8 @@ export const MANUAL_ADDRESS: PageLink = '/address/manual';
 export const CONTACT_DETAILS: PageLink = '/contact-details';
 export const PAY_YOUR_FEE: PageLink = '/payment/pay-your-fee';
 export const UPLOAD_YOUR_DOCUMENTS: PageLink = '/upload-your-documents';
+export const CONTACT_PREFERENCES: PageLink = '/contact-preferences';
+export const STATEMENT_OF_TRUTH: PageLink = '/statement-of-truth';
 
 export const APPLICANT_1: PageLink = '/applicant1';
 export const APPLICANT_1_FULL_NAME: PageLink = `${APPLICANT_1}/full-name`;
@@ -92,7 +94,7 @@ export const BIRTH_MOTHER_NATIONALITY: PageLink = `${BIRTH_MOTHER}/nationality`;
 export const BIRTH_MOTHER_OCCUPATION: PageLink = `${BIRTH_MOTHER}/occupation`;
 export const BIRTH_MOTHER_ADDRESS_KNOWN: PageLink = `${BIRTH_MOTHER}/address-known`;
 export const BIRTH_MOTHER_FIND_ADDRESS: PageLink = `${BIRTH_MOTHER}/address/lookup`;
-export const BIRTH_MOTHER_SELECT_ADDRESS: PageLink = `${BIRTH_MOTHER}/address/select`;
+export const BIRTH_MOTHER_SELECT_ADDRESS: PageLink = `${BIRTH_MOTHER}/address/se    lect`;
 export const BIRTH_MOTHER_MANUAL_ADDRESS: PageLink = `${BIRTH_MOTHER}/address/manual`;
 export const BIRTH_MOTHER_INTERNATIONAL_ADDRESS: PageLink = `${BIRTH_MOTHER}/address/international`;
 
@@ -160,5 +162,4 @@ export const PAYMENT_CALLBACK_URL: PageLink = `${REVIEW_PAY_SUBMIT}/payment/paym
 export const ADOPTION_AGENCY: PageLink = `${CHILDREN}/adoption-agency`;
 export const OTHER_ADOPTION_AGENCY: PageLink = `${CHILDREN}/other-adoption-agency`;
 export const SOCIAL_WORKER: PageLink = `${CHILDREN}/social-worker`;
-export const STATEMENT_OF_TRUTH: PageLink = '/statement-of-truth';
 export const EQUALITY: PageLink = `${REVIEW_PAY_SUBMIT}/equality`;
