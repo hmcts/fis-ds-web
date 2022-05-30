@@ -11,7 +11,7 @@ import { FormFields, FormFieldsFn } from '../../../app/form/Form';
 import { RpeApi } from '../../../app/rpe/RpeApi';
 import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 const logger = Logger.getLogger('uploadDocumentPostController');
-import { PAY_YOUR_FEE, UPLOAD_YOUR_DOCUMENTS } from '../../urls';
+import { STATEMENT_OF_TRUTH, UPLOAD_YOUR_DOCUMENTS } from '../../urls';
 
 /**
  * @FileHandler
@@ -61,7 +61,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
 
   async PostDocumentUploader(req: AppRequest<AnyObject>, res: Response): Promise<void> {
     logger.log({ message: 'document has been successfully procceed and attached to the case' });
-    res.redirect(PAY_YOUR_FEE);
+    res.redirect(STATEMENT_OF_TRUTH);
   }
 
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
