@@ -574,54 +574,7 @@ export const enum PaymentMethod {
   PAY_BY_HWF = 'payByHWF',
   APPLY_FOR_HWF = 'applyForHWF',
 }
-export interface CaseInvite {
-  applicant2InviteEmailAddress: string;
-  accessCode: string;
-  applicant2UserId: string;
-}
 
-export interface ConditionalOrder {
-  DateSubmitted: DateAsString;
-  RespondentAnswersLink: Document;
-  ApplyForConditionalOrder: YesOrNo;
-  OnlinePetitionLink: Document;
-  ChangeOrAddToApplication: YesOrNo;
-  IsEverythingInApplicationTrue: YesOrNo;
-  SolicitorName: string;
-  SolicitorFirm: string;
-  SolicitorAdditionalComments: string;
-  Granted: YesOrNo;
-  ClaimsGranted: YesOrNo;
-  ClaimsCostsOrderInformation: string;
-  DecisionDate: DateAsString;
-  GrantedDate: DateAsString;
-  RefusalDecision: RefusalOption;
-  RefusalAdminErrorInfo: string;
-  RefusalRejectionReason: RejectionReason;
-  RefusalRejectionAdditionalInfo: string;
-  RefusalClarificationReason: ClarificationReason;
-  RefusalClarificationAdditionalInfo: string;
-  ClarificationResponse: string;
-  ClarificationUploadDocuments: ListValue<DivorceDocument>[];
-  OutcomeCase: YesOrNo;
-  Court: ConditionalOrderCourt;
-  DateAndTimeOfHearing: DateAsString;
-  PronouncementJudge: string;
-  JudgeCostsClaimGranted: JudgeCostsClaimGranted;
-  JudgeCostsOrderAdditionalInfo: string;
-  CertificateOfEntitlementDocument: DivorceDocument;
-  ApplicantStatementOfTruth: YesOrNo;
-}
-
-export interface CtscContactDetails {
-  serviceCentre: string;
-  centreName: string;
-  poBox: string;
-  town: string;
-  postcode: string;
-  emailAddress: string;
-  phoneNumber: string;
-}
 
 export interface DivorceGeneralOrder {
   generalOrderDocument: DivorceDocument;
