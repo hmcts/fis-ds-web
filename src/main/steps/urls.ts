@@ -94,7 +94,7 @@ export const BIRTH_MOTHER_NATIONALITY: PageLink = `${BIRTH_MOTHER}/nationality`;
 export const BIRTH_MOTHER_OCCUPATION: PageLink = `${BIRTH_MOTHER}/occupation`;
 export const BIRTH_MOTHER_ADDRESS_KNOWN: PageLink = `${BIRTH_MOTHER}/address-known`;
 export const BIRTH_MOTHER_FIND_ADDRESS: PageLink = `${BIRTH_MOTHER}/address/lookup`;
-export const BIRTH_MOTHER_SELECT_ADDRESS: PageLink = `${BIRTH_MOTHER}/address/se    lect`;
+export const BIRTH_MOTHER_SELECT_ADDRESS: PageLink = `${BIRTH_MOTHER}/address/select`;
 export const BIRTH_MOTHER_MANUAL_ADDRESS: PageLink = `${BIRTH_MOTHER}/address/manual`;
 export const BIRTH_MOTHER_INTERNATIONAL_ADDRESS: PageLink = `${BIRTH_MOTHER}/address/international`;
 
