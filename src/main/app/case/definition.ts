@@ -89,15 +89,6 @@ export interface CaseNote {
   note: string;
 }
 
-export interface AcknowledgementOfService {
-  jurisdictionDisagreeReason: string;
-  dateAosSubmitted: DateAsString;
-  digitalNoticeOfProceedings: YesOrNo;
-  noticeOfProceedingsEmail: string;
-  noticeOfProceedingsSolicitorFirm: string;
-  statementOfTruth: YesOrNo;
-  prayerHasBeenGiven: YesOrNo;
-}
 
 
 
