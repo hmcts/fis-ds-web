@@ -99,27 +99,7 @@ export interface AcknowledgementOfService {
   prayerHasBeenGiven: YesOrNo;
 }
 
-export interface AlternativeService {
-  receivedServiceApplicationDate: DateAsString;
-  alternativeServiceType: AlternativeServiceType;
-  receivedServiceAddedDate: DateAsString;
-  serviceApplicationGranted: YesOrNo;
-  serviceApplicationRefusalReason: string;
-  serviceApplicationDecisionDate: DateAsString;
-  deemedServiceDate: DateAsString;
-  dateOfPayment: DateAsString;
-  paymentMethod: ServicePaymentMethod;
-  feeAccountNumber: string;
-  feeAccountReferenceNumber: string;
-  helpWithFeesReferenceNumber: string;
-  servicePaymentFeeOrderSummary: OrderSummary;
-  localCourtName: string;
-  localCourtEmail: string;
-  certificateOfServiceDocument: DivorceDocument;
-  certificateOfServiceDate: DateAsString;
-  successfulServedByBailiff: YesOrNo;
-  reasonFailureToServeByBailiff: string;
-}
+
 
 export interface Applicant {
   FirstName: string;
@@ -589,7 +569,7 @@ export interface CaseData {
   generalReferralJudgeDetails: string;
   generalReferralLegalAdvisorDetails: string;
   generalReferralFeeRequired: YesOrNo;
-  alternativeServiceApplications: ListValue<AlternativeService>[];
+  alternativeServiceApplications: ListValue<any>[];
   receivedServiceApplicationDate: DateAsString;
   alternativeServiceType: AlternativeServiceType;
   receivedServiceAddedDate: DateAsString;
