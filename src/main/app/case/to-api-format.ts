@@ -3,7 +3,7 @@ import { v4 as generateUuid } from 'uuid';
 import { isInvalidHelpWithFeesRef } from '../form/validation';
 
 import { Case, CaseDate, Checkbox, formFieldsToCaseMapping, formatCase } from './case';
-import { CaseData, PlacementOrder, YesOrNo } from './definition';
+import { CaseData, YesOrNo } from './definition';
 
 export type OrNull<T> = { [K in keyof T]: T[K] | null };
 
@@ -67,22 +67,14 @@ const fields: ToApiConverters = {
       value: { country: `${item}` },
     })),
   }),
-  placementOrders: data => ({
-    placementOrders: (data.placementOrders || []).map(item => ({
-      id: generateUuid(),
-      value: {
-        ...item,
-        placementOrderDate: toApiDate(item.placementOrderDate as CaseDate),
-      },
-    })),
-  }),
+
   siblings: data => ({
     siblings: (data.siblings || []).map(item => ({
       id: generateUuid(),
       value: {
         ...item,
-        siblingPlacementOrders: ((item.siblingPlacementOrders || []) as PlacementOrder[]).map(
-          (item2: PlacementOrder) => ({
+        siblingPlacementOrders: ((item.siblingPlacementOrders || []) as any[]).map(
+          (item2: any) => ({
             id: generateUuid(),
             value: {
               ...item2,

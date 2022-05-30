@@ -2,7 +2,7 @@
 /* eslint-disable */
 // Generated using typescript-generator version 2.33.956 on 2021-11-12 15:28:24.
 
-import { CaseDate } from '../case/case';
+
 
 export interface Address {
   AddressLine1: string;
@@ -278,13 +278,6 @@ export const enum Gender {
   INTERSEX = 'intersex',
 }
 
-export interface PlacementOrder {
-  placementOrderId: string;
-  placementOrderType?: string;
-  placementOrderNumber?: string;
-  placementOrderCourt?: string;
-  placementOrderDate?: CaseDate | string;
-}
 
 export interface CaseData {
   serviceType: string;
@@ -338,7 +331,6 @@ export interface CaseData {
   childrenFirstNameAfterAdoption: string;
   childrenLastNameAfterAdoption: string;
   childrenSexAtBirth: Gender;
-  placementOrders: ListValue<PlacementOrder>[];
   addAnotherPlacementOrder: YesOrNo;
   selectedPlacementOrderId: string;
   hyphenatedCaseRef: string;
@@ -711,7 +703,7 @@ export interface Sibling {
   siblingId: string;
   siblingFirstName?: string;
   siblingLastNames?: string;
-  siblingPlacementOrders?: (PlacementOrder | ListValue<PlacementOrder>)[];
+  siblingPlacementOrders?: (any | ListValue<any>)[];
 }
 
 export interface SocialWorker {
