@@ -68,20 +68,8 @@ export interface Organisation {
   OrganisationId: string;
 }
 
-export interface OrganisationPolicy<R> {
-  Organisation: Organisation;
-  PreviousOrganisations: PreviousOrganisation[];
-  OrgPolicyReference: string;
-  PrepopulateToUsersOrganisation: YesOrNo;
-  OrgPolicyCaseAssignedRole: R;
-}
 
-export interface PreviousOrganisation {
-  FromTimeStamp: DateAsString;
-  ToTimeStamp: DateAsString;
-  OrganisationName: string;
-  OrganisationAddress: string;
-}
+
 
 export interface CaseNote {
   author: string;
@@ -396,7 +384,7 @@ export interface CaseData {
   applicant1SolicitorPhone: string;
   applicant1SolicitorEmail: string;
   applicant1SolicitorAgreeToReceiveEmails: YesOrNo;
-  applicant1SolicitorOrganisationPolicy: OrganisationPolicy<UserRole>;
+  applicant1SolicitorOrganisationPolicy: any;
   applicant1FinancialOrder: YesOrNo;
   applicant1FinancialOrderFor: FinancialOrderFor[];
 
@@ -416,7 +404,7 @@ export interface CaseData {
   applicant2SolicitorPhone: string;
   applicant2SolicitorEmail: string;
   applicant2SolicitorAgreeToReceiveEmails: YesOrNo;
-  applicant2SolicitorOrganisationPolicy: OrganisationPolicy<UserRole>;
+  applicant2SolicitorOrganisationPolicy: any;
   applicant2FinancialOrder: YesOrNo;
   applicant2FinancialOrderFor: FinancialOrderFor[];
   applicant1ScreenHasMarriageBroken: YesOrNo;
@@ -832,7 +820,7 @@ export interface Solicitor {
   Email: string;
   Address: string;
   AgreeToReceiveEmails: YesOrNo;
-  OrganisationPolicy: OrganisationPolicy<UserRole>;
+  OrganisationPolicy: any;
 }
 
 export interface SolicitorService {
