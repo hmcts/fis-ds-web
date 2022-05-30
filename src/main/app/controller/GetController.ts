@@ -25,6 +25,8 @@ export class GetController {
       return;
     }
 
+    console.log('user case in session GET controller ====>', req.session.userCase);
+
     const language = this.getPreferredLanguage(req) as Language;
     const addresses = req.session?.addresses;
     const uploadedDocuments = req.session.caseDocuments;

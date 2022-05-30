@@ -47,11 +47,11 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   applicant1PhoneNumber: 'applicant1PhoneNumber',
   applicant1Nationality: 'applicant1Nationality',
   applicant1AdditionalNationalities: 'applicant1AdditionalNationalities',
-  applicant1Address1: 'applicant1Address1',
-  applicant1Address2: 'applicant1Address2',
-  applicant1AddressTown: 'applicant1AddressTown',
-  applicant1AddressCounty: 'applicant1AddressCountry',
-  applicant1AddressPostcode: 'applicant1AddressPostCode',
+  applicantAddress1: 'applicantAddress1',
+  applicantAddress2: 'applicantAddress2',
+  applicantAddressTown: 'applicantAddressTown',
+  applicantAddressCounty: 'applicant1AddressCountry',
+  applicantAddressPostcode: 'applicantAddressPostcode',
   applicant1ContactDetails: 'applicant1ContactDetails',
 
   applicant2FirstNames: 'applicant2FirstName',
@@ -205,12 +205,12 @@ export interface Case {
   applicant1Occupation?: string;
   applicant1Nationality?: Nationality[];
   applicant1AdditionalNationalities?: string[];
-  applicant1SelectAddress?: string;
-  applicant1Address1?: string;
-  applicant1Address2?: string;
-  applicant1AddressTown?: string;
-  applicant1AddressCounty?: string;
-  applicant1AddressPostcode?: string;
+  applicantSelectAddress?: string;
+  applicantAddress1?: string;
+  applicantAddress2?: string;
+  applicantAddressTown?: string;
+  applicantAddressCounty?: string;
+  applicantAddressPostcode?: string;
   applicant1ContactDetails?: ContactDetails[];
   emailAddressConsent?: string;
   homePhoneNumber?: string;
@@ -395,7 +395,7 @@ export interface UploadedFile {
 }
 
 export enum FieldPrefix {
-  APPLICANT1 = 'applicant1',
+  APPLICANT = 'applicant',
   APPLICANT2 = 'applicant2',
   CHILDREN = 'children',
   BIRTH_FATHER = 'birthFather',
