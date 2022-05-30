@@ -61,11 +61,7 @@ export interface OrderSummary {
   PaymentTotal: string;
 }
 
-export interface Organisation {
-  OrganisationName: string;
-  OrganisationID: string;
-  OrganisationId: string;
-}
+
 
 
 
@@ -223,7 +219,7 @@ export const enum Gender {
 export interface CaseData {
   serviceType: string;
   applyingForSelf: string;
-  applyingWith: ApplyingWith;
+  applyingWith: any;
   applyingWithPrivateLaw:string;
   applyingWithAdoption: string;
   dateChildMovedIn?: DateAsString;
@@ -1028,11 +1024,7 @@ export const enum ApplicationType {
   JOINT_APPLICATION = 'jointApplication',
 }
 
-export const enum ApplyingWith {
-  ALONE = 'alone',
-  WITH_SPOUSE_OR_CIVIL_PARTNER = 'withSpouseOrCivilPartner',
-  WITH_SOME_ONE_ELSE = 'withSomeoneElse',
-}
+
 
 export const enum ClarificationReason {
   JURISDICTION_DETAILS = 'jurisdictionDetails',

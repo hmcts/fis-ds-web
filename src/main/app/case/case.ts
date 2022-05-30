@@ -4,7 +4,6 @@ import {
 
   AdoptionAgencyOrLocalAuthority,
   ApplicationType,
-  ApplyingWith,
   CaseData,
   ContactDetails,
   DateAsString,
@@ -183,7 +182,7 @@ export function formatCase<InputFormat, OutputFormat>(fields: FieldFormats, data
 export type FieldFormats = Record<string, string | ((AnyObject) => AnyObject)>;
 
 export interface Case {
-  applyingWith?: ApplyingWith;
+  applyingWith?: any;
   applyingWithAdoption?: string;
   applyingWithPrivateLaw?: string;
   dateChildMovedIn?: CaseDate;
