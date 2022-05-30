@@ -8,6 +8,7 @@ import {
   MANUAL_ADDRESS,
   PAY_YOUR_FEE,
   SELECT_ADDRESS,
+  STATEMENT_OF_TRUTH,
   UPLOAD_YOUR_DOCUMENTS,
   USER_ROLE,
 } from '../urls';
@@ -43,7 +44,10 @@ describe('Sequence must match respective path', () => {
     expect(edgecaseSequence[8].getNextStep({})).toBe(ADDITIONAL_DOCUMENTS_UPLOAD);
 
     expect(edgecaseSequence[9].url).toBe(ADDITIONAL_DOCUMENTS_UPLOAD);
-    expect(edgecaseSequence[9].getNextStep({})).toBe(PAY_YOUR_FEE);
+    expect(edgecaseSequence[9].getNextStep({})).toBe(STATEMENT_OF_TRUTH);
+
+    expect(edgecaseSequence[10].url).toBe(STATEMENT_OF_TRUTH);
+    expect(edgecaseSequence[10].getNextStep({})).toBe(PAY_YOUR_FEE);
     /**
  *     expect(edgecaseSequence[9].url).toBe(PAY_YOUR_FEE);
     expect(edgecaseSequence[9].getNextStep({})).toBe(USER_ROLE);

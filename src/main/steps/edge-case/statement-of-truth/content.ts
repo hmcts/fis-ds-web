@@ -3,11 +3,7 @@ import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 
-export const stringToHTML = function (str) {
-const parser = new DOMParser();
-const doc = parser.parseFromString(str.value, 'text/html');
-return doc.body.textContent?.toString();
-};
+const STATEMENT_OF_TRUTH_TRANSLATION_FILE = 'statement-of-truth';
 
 export const form: FormContent = {
   fields: {
@@ -22,7 +18,7 @@ export const form: FormContent = {
       type: 'label',
       label: l => l.confirmStatement,
     },
- },
+  },
   submit: {
     classes: 'govuk-!-margin-top-5',
     text: s => s.continue,
@@ -31,7 +27,7 @@ export const form: FormContent = {
 
 export const generateContent: TranslationFn = content => {
   const resourceLoader = new ResourceReader();
-  resourceLoader.Loader('statement-of-truth');
+  resourceLoader.Loader(STATEMENT_OF_TRUTH_TRANSLATION_FILE);
   const Translations = resourceLoader.getFileContents().translations;
   const errors = resourceLoader.getFileContents().errors;
 
@@ -49,7 +45,7 @@ export const generateContent: TranslationFn = content => {
       errors: {
         ...errors.cy,
       },
-   };
+    };
   };
 
   const languages = {
@@ -59,7 +55,6 @@ export const generateContent: TranslationFn = content => {
   const translations = languages[content.language]();
   return {
     ...translations,
-    form: { ...form,
-    },
+    form: { ...form },
   };
 };
