@@ -75,26 +75,21 @@ export interface CaseNote {
 
 
 
+
 export interface Applicant {
-  FirstName: string;
-  LastName: string;
-  Email: string;
-  FullName: string;
-  HasOtherNames: YesOrNo;
-  AdditionalNames: ListValue<OtherName>[];
-  DateOfBirth: DateAsString;
-  Occupation: string;
-  EmailAddress: string;
+
+  applicantFirstName: string;
+  applicantLastName: string;
+  applicantEmailAddress: string;
+  applicantDateOfBirth: DateAsString;
+  applicantPhoneNumber: string,
+  applicantHomeNumber: string,
   PhoneNumber: string;
-  Nationality: Nationality[];
-  AdditionalNationality: ListValue<OtherName>[];
-  Address1: string;
-  Address2: string;
-  AddressTown: string;
-  AddressCountry: string;
-  AddressPostCode: string;
-  AddressSameAsApplicant1: string;
-  contactDetails: ContactDetails[];
+  applicantAddress1: string;
+  applicantAddress2: string;
+  applicantAddressTown: string;
+  applicantAddressCountry: string;
+  applicantAddressPostCode: string;
 
 
 }
