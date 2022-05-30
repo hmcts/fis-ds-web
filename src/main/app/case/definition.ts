@@ -77,7 +77,6 @@ export interface CaseNote {
 
 
 export interface Applicant {
-
   applicantFirstName: string;
   applicantLastName: string;
   applicantEmailAddress: string;
@@ -90,90 +89,24 @@ export interface Applicant {
   applicantAddressTown: string;
   applicantAddressCountry: string;
   applicantAddressPostCode: string;
-
-
 }
 
 export interface Application {
-  applicant1ScreenHasMarriageBroken: YesOrNo;
-  applicant2ScreenHasMarriageBroken: YesOrNo;
-  screenHasMarriageCert: YesOrNo;
-  marriageApplicant1Name: string;
-  marriageApplicant2Name: string;
-  marriageMarriedInUk: YesOrNo;
-  marriageCertificateInEnglish: YesOrNo;
-  marriageCertifiedTranslation: YesOrNo;
-  marriageCountryOfMarriage: string;
-  marriagePlaceOfMarriage: string;
-  marriageDate: DateAsString;
-  marriageIsSameSexCouple: YesOrNo;
-  marriageCertifyMarriageCertificateIsCorrect: YesOrNo;
-  marriageMarriageCertificateIsIncorrectDetails: string;
-  marriageIssueApplicationWithoutMarriageCertificate: YesOrNo;
-  jurisdictionApplicant1Residence: YesOrNo;
-  jurisdictionApplicant2Residence: YesOrNo;
-  jurisdictionApplicant1Domicile: YesOrNo;
-  jurisdictionApplicant2Domicile: YesOrNo;
-  jurisdictionApp1HabituallyResLastTwelveMonths: YesOrNo;
-  jurisdictionApp1HabituallyResLastSixMonths: YesOrNo;
-  jurisdictionResidualEligible: YesOrNo;
-  jurisdictionBothLastHabituallyResident: YesOrNo;
-  jurisdictionConnections: JurisdictionConnections[];
-  solServiceDateOfService: DateAsString;
-  solServiceDocumentsServed: string;
-  solServiceOnWhomServed: string;
-  solServiceHowServed: DocumentsServedHow;
-  solServiceServiceDetails: string;
-  solServiceAddressServed: string;
-  solServiceBeingThe: DocumentsServedBeingThe;
-  solServiceLocationServed: DocumentsServedWhere;
-  solServiceSpecifyLocationServed: string;
-  solServiceServiceSotName: string;
-  solServiceServiceSotFirm: string;
-  solServiceTruthStatement: string;
-  applicant1HWFReferenceNumber: string;
-  applicant1HWFNeedHelp: YesOrNo;
-  applicant1HWFAppliedForFees: YesOrNo;
-  applicant2HWFReferenceNumber: string;
-  applicant2HWFNeedHelp: YesOrNo;
-  applicant2HWFAppliedForFees: YesOrNo;
-  divorceWho: WhoDivorcing;
-  solUrgentCase: YesOrNo;
-  solUrgentCaseSupportingInformation: string;
-  applicant1WantsToHavePapersServedAnotherWay: YesOrNo;
-  solServiceMethod: ServiceMethod;
-  solStatementOfReconciliationCertify: YesOrNo;
-  solStatementOfReconciliationDiscussed: YesOrNo;
-  applicant1PrayerHasBeenGivenCheckbox: ThePrayer[];
-  applicant2PrayerHasBeenGiven: YesOrNo;
-  applicant1StatementOfTruth: YesOrNo;
-  applicant2StatementOfTruth: YesOrNo;
-  solSignStatementOfTruth: YesOrNo;
-  solStatementOfReconciliationName: string;
-  solStatementOfReconciliationFirm: string;
-  statementOfReconciliationComments: string;
-  solApplicationFeeInPounds: string;
-  solPaymentHowToPay: SolicitorPaymentMethod;
-  pbaNumbers: DynamicList;
+  applicantHWFReferenceNumber: string;
+  applicantHWFNeedHelp: YesOrNo;
+  applicantHWFAppliedForFees: YesOrNo;
+  applicantStatementOfTruth: YesOrNo;
   feeAccountReference: string;
   applicationFeeOrderSummary: OrderSummary;
-  applicant1KnowsApplicant2EmailAddress: YesOrNo;
-  app2ContactMethodIsDigital: YesOrNo;
-  applicant1CannotUploadSupportingDocument: DocumentType[];
-  applicant2CannotUploadSupportingDocument: DocumentType[];
   documentUploadComplete: YesOrNo;
-  miniApplicationLink: Document;
   dateSubmitted: DateAsString;
-  applicant2ConfirmApplicant1Information: YesOrNo;
-  applicant2ExplainsApplicant1IncorrectInformation: string;
   reissueDate: DateAsString;
   createdDate: DateAsString;
   rejectReason: RejectReason;
   previousState: State;
   applicationPayments: ListValue<Payment>[];
   overdueNotificationSent: YesOrNo;
-  applicant1ReminderSent: YesOrNo;
-  applicant2ReminderSent: YesOrNo;
+  applicantReminderSent: YesOrNo;
   applicant1NotifiedCanApplyForConditionalOrder: YesOrNo;
   reissueOption: ReissueOption;
 }
