@@ -31,7 +31,7 @@ describe('applicant1 > address > select > content', () => {
     expect(generatedContent.section).toEqual(enContent.section);
     expect(generatedContent.title).toEqual(enContent.title);
     expect(generatedContent.errors).toEqual({
-      applicant1SelectAddress: (selectAddressContent.errors as any).selectAddress,
+      applicantSelectAddress: (selectAddressContent.errors as any).selectAddress,
     });
     expect(generatedContent.changePostCodeUrl).toEqual('/address/lookup');
     expect(generatedContent.cantFindAddressUrl).toEqual('/address/manual');
@@ -43,26 +43,26 @@ describe('applicant1 > address > select > content', () => {
     expect(generatedContent.section).toEqual(cyContent.section);
     expect(generatedContent.title).toEqual(cyContent.title);
     expect(generatedContent.errors).toEqual({
-      applicant1SelectAddress: (selectAddressContent.errors as any).selectAddress,
+      applicantSelectAddress: (selectAddressContent.errors as any).selectAddress,
     });
     expect(generatedContent.changePostCodeUrl).toEqual('/address/lookup');
     expect(generatedContent.cantFindAddressUrl).toEqual('/address/manual');
   });
 
-  test('should contain applicant1SelectAddress field', () => {
+  test('should contain applicantSelectAddress field', () => {
     const selectAddressFormFields = selectAddressForm.fields as FormFields;
     const fields = generatedContent.form.fields as FormFields;
-    expect(fields.applicant1SelectAddress).toEqual(selectAddressFormFields.selectAddress);
+    expect(fields.applicantSelectAddress).toEqual(selectAddressFormFields.selectAddress);
   });
 
-  it('should have applicant1SelectAddress label when language: en and  applyingWith: alone', () => {
+  it('should have applicantSelectAddress label when language: en and  applyingWith: alone', () => {
     const commonContent1 = { language: 'en', userCase: { applyingWith: 'alone' } } as CommonContent;
 
     const generatedContent1 = generateContent(commonContent1);
     expect(generatedContent1.section).toBe('Applicant');
   });
 
-  it('should have applicant1SelectAddress label when language: cy and  applyingWith: alone', () => {
+  it('should have applicantSelectAddress label when language: cy and  applyingWith: alone', () => {
     const commonContent1 = { language: 'cy', userCase: { applyingWith: 'alone' } } as CommonContent;
 
     const generatedContent1 = generateContent(commonContent1);

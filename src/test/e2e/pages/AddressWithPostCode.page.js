@@ -2,9 +2,9 @@ const { I } = inject();
 
 module.exports = {
   fields: {
-    PostCode: '#applicant1AddressPostcode',
+    PostCode: '#applicantAddressPostcode',
     Submit: '#main-form-submit',
-    addressList: 'select[id$="applicant1SelectAddress"]',
+    addressList: 'select[id$="applicantSelectAddress"]',
     lookupOption: '3, COPSE CLOSE, FLEET, GU51 1FA'
   },
 

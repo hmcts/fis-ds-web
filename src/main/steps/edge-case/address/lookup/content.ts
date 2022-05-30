@@ -14,7 +14,7 @@ const en = ({ addressLookupContent, userCase }): Record<string, unknown> => {
     serviceName: 'Apply to ' + title,
     title: "What's your home address?",
     errors: {
-      applicant1AddressPostcode: addressLookupContent.errors.addressPostcode,
+      applicantAddressPostcode: addressLookupContent.errors.addressPostcode,
     },
     manualAddressUrl: MANUAL_ADDRESS,
   };
@@ -28,7 +28,7 @@ const cy = ({ addressLookupContent, userCase }): Record<string, unknown> => {
     serviceName: 'Apply to ' + title + ' (in Welsh)',
     title: "What's your home address? (in welsh)",
     errors: {
-      applicant1AddressPostcode: addressLookupContent.errors.addressPostcode,
+      applicantAddressPostcode: addressLookupContent.errors.addressPostcode,
     },
     manualAddressUrl: MANUAL_ADDRESS,
   };
@@ -38,7 +38,7 @@ const addressLookupFormFields = addressLookupForm.fields as FormFields;
 export const form: FormContent = {
   ...addressLookupForm,
   fields: {
-    applicant1AddressPostcode: addressLookupFormFields.addressPostcode,
+    applicantAddressPostcode: addressLookupFormFields.addressPostcode,
   },
 };
 

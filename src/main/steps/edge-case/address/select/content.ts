@@ -14,7 +14,7 @@ const en = ({ selectAddressContent, userCase }): Record<string, unknown> => {
     serviceName: 'Apply to ' + title,
     title: "What's your home address?",
     errors: {
-      applicant1SelectAddress: selectAddressContent.errors.selectAddress,
+      applicantSelectAddress: selectAddressContent.errors.selectAddress,
     },
     changePostCodeUrl: FIND_ADDRESS,
     cantFindAddressUrl: MANUAL_ADDRESS,
@@ -29,7 +29,7 @@ const cy = ({ selectAddressContent, userCase }): Record<string, unknown> => {
     serviceName: 'Apply to ' + title + ' (in Welsh)',
     title: "What's your home address? (in Welsh)",
     errors: {
-      applicant1SelectAddress: selectAddressContent.errors.selectAddress,
+      applicantSelectAddress: selectAddressContent.errors.selectAddress,
     },
     changePostCodeUrl: FIND_ADDRESS,
     cantFindAddressUrl: MANUAL_ADDRESS,
@@ -40,7 +40,7 @@ const selectAddressFormFields = selectAddressForm.fields as FormFields;
 export const form: FormContent = {
   ...selectAddressForm,
   fields: {
-    applicant1SelectAddress: selectAddressFormFields.selectAddress,
+    applicantSelectAddress: selectAddressFormFields.selectAddress,
   },
 };
 
