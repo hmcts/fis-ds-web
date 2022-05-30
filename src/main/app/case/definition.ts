@@ -229,14 +229,6 @@ export interface Application {
   reissueOption: ReissueOption;
 }
 
-export interface Bailiff {
-  localCourtName: string;
-  localCourtEmail: string;
-  certificateOfServiceDocument: DivorceDocument;
-  certificateOfServiceDate: DateAsString;
-  successfulServedByBailiff: YesOrNo;
-  reasonFailureToServeByBailiff: string;
-}
 
 export const enum Nationality {
   BRITHISH = 'British',
