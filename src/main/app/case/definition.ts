@@ -439,14 +439,14 @@ export interface CaseData {
   coRefusalClarificationReason: any;
   coRefusalClarificationAdditionalInfo: string;
   coClarificationResponse: string;
-  coClarificationUploadDocuments: ListValue<DivorceDocument>[];
+  coClarificationUploadDocuments: ListValue<any>[];
   coOutcomeCase: YesOrNo;
   coCourt: any;
   coDateAndTimeOfHearing: DateAsString;
   coPronouncementJudge: string;
   coJudgeCostsClaimGranted: JudgeCostsClaimGranted;
   coJudgeCostsOrderAdditionalInfo: string;
-  coCertificateOfEntitlementDocument: DivorceDocument;
+  coCertificateOfEntitlementDocument: any;
   coApplicantStatementOfTruth: YesOrNo;
   dateFinalOrderSubmitted: DateAsString;
   dateFinalOrderEligibleFrom: DateAsString;
@@ -487,16 +487,16 @@ export interface CaseData {
   servicePaymentFeeOrderSummary: OrderSummary;
   localCourtName: string;
   localCourtEmail: string;
-  certificateOfServiceDocument: DivorceDocument;
+  certificateOfServiceDocument: any;
   certificateOfServiceDate: DateAsString;
   successfulServedByBailiff: YesOrNo;
   reasonFailureToServeByBailiff: string;
-  applicant1DocumentsUploaded: ListValue<DivorceDocument>[];
-  applicant2DocumentsUploaded: ListValue<DivorceDocument>[];
+  applicant1DocumentsUploaded: ListValue<any>[];
+  applicant2DocumentsUploaded: ListValue<any>[];
   divorceUnit: Court;
-  documentsGenerated: ListValue<DivorceDocument>[];
-  documentsUploaded: ListValue<DivorceDocument>[];
-  confidentialDocumentsUploaded: ListValue<ConfidentialDivorceDocument>[];
+  documentsGenerated: ListValue<any>[];
+  documentsUploaded: ListValue<any>[];
+  confidentialDocumentsUploaded: ListValue<any>[];
   generalOrders: ListValue<any>[];
   previousCaseId: CaseLink;
   dueDate: DateAsString;
@@ -523,19 +523,11 @@ export interface CaseData {
   courtName: Court;
   applicant1PrayerHasBeenGiven: YesOrNo;
   coAddNewDocuments: YesOrNo;
-  coDocumentsUploaded: ListValue<DivorceDocument>[];
+  coDocumentsUploaded: ListValue<any>[];
   coIsEverythingInPetitionTrue: YesOrNo;
 }
 
-export interface Children {
-  FirstName: string;
-  LastName: string;
-  DateOfBirth: DateAsString;
-  Nationality: Nationality[];
-  FirstNameAfterAdoption: string;
-  LastNameAfterAdoption: string;
-  SexAtBirth: Gender;
-}
+
 
 
 
@@ -606,72 +598,17 @@ export interface HelpWithFees {
   AppliedForFees: YesOrNo;
 }
 
-export interface Jurisdiction {
-  Applicant1Residence: YesOrNo;
-  Applicant2Residence: YesOrNo;
-  Applicant1Domicile: YesOrNo;
-  Applicant2Domicile: YesOrNo;
-  App1HabituallyResLastTwelveMonths: YesOrNo;
-  App1HabituallyResLastSixMonths: YesOrNo;
-  ResidualEligible: YesOrNo;
-  BothLastHabituallyResident: YesOrNo;
-  Connections: JurisdictionConnections[];
-}
 
-export interface LabelContent {
-  Applicant2: string;
-  TheApplicant2: string;
-  TheApplicant2UC: string;
-  Applicant2UC: string;
-  UnionType: string;
-  UnionTypeUC: string;
-  ApplicationType: any;
-}
 
-export interface MarriageDetails {
-  Applicant1Name: string;
-  Applicant2Name: string;
-  MarriedInUk: YesOrNo;
-  CertificateInEnglish: YesOrNo;
-  CertifiedTranslation: YesOrNo;
-  CountryOfMarriage: string;
-  PlaceOfMarriage: string;
-  Date: DateAsString;
-  IsSameSexCouple: YesOrNo;
-  CertifyMarriageCertificateIsCorrect: YesOrNo;
-  MarriageCertificateIsIncorrectDetails: string;
-  IssueApplicationWithoutMarriageCertificate: YesOrNo;
-}
+
+
+
 
 export interface RejectReason {
   rejectReasonType: RejectReasonType;
   rejectDetails: string;
 }
 
-export interface RetiredFields {
-  dataVersion: number;
-  exampleRetiredField: string;
-  applicant1ContactDetailsConfidential: any;
-  applicant2ContactDetailsConfidential: any;
-  applicant1LegalProceedingsRelated: LegalProceedingsRelated[];
-  applicant2LegalProceedingsRelated: LegalProceedingsRelated[];
-  dateConditionalOrderSubmitted: DateAsString;
-  coWhoPaysCosts: WhoPaysCostOrder;
-  coJudgeWhoPaysCosts: WhoPaysCostOrder;
-  coJudgeTypeCostsDecision: any;
-  selectedDivorceCentreSiteId: string;
-  coTypeCostsDecision: any;
-  legalProceedingsExist: YesOrNo;
-  legalProceedingsDescription: string;
-  doYouAgreeCourtHasJurisdiction: YesOrNo;
-  serviceApplicationType: AlternativeServiceType;
-  coCourtName: Court;
-  courtName: Court;
-  applicant1PrayerHasBeenGiven: YesOrNo;
-  coAddNewDocuments: YesOrNo;
-  coDocumentsUploaded: ListValue<DivorceDocument>[];
-  coIsEverythingInPetitionTrue: YesOrNo;
-}
 
 export interface Solicitor {
   Name: string;
@@ -698,53 +635,6 @@ export interface SolicitorService {
   TruthStatement: string;
 }
 
-export interface ConfidentialDivorceDocument {
-  confidentialDocumentsReceived: ConfidentialDocumentsReceived;
-  documentEmailContent: string;
-  documentLink: Document;
-  documentDateAdded: DateAsString;
-  documentComment: string;
-  documentFileName: string;
-}
-
-export interface DivorceDocument {
-  documentDateAdded: DateAsString;
-  documentComment: string;
-  documentFileName: string;
-  documentType: DocumentType;
-  documentEmailContent: string;
-  documentLink: Document;
-}
-
-export interface DocAssemblyRequest {
-  templateId: string;
-  outputType: string;
-  formPayload: any;
-  outputFilename: string;
-}
-
-export interface DocAssemblyResponse {
-  renditionOutputLocation: string;
-  binaryFilePath: string;
-}
-
-export interface DocumentInfo {
-  url: string;
-  filename: string;
-  binaryUrl: string;
-}
-
-export interface Letter {
-  divorceDocument: DivorceDocument;
-  count: number;
-}
-
-export interface Print {
-  letters: Letter[];
-  caseId: string;
-  caseRef: string;
-  letterType: string;
-}
 
 export interface CreditAccountPaymentRequest {
   ccd_case_number: string;

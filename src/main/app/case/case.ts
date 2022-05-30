@@ -6,7 +6,6 @@ import {
   CaseData,
   ContactDetails,
   DateAsString,
-  DivorceDocument,
   DocumentType,
   Gender,
   JurisdictionConnections,
@@ -349,9 +348,9 @@ export interface Case {
   applyForFinancialOrder?: YesOrNo;
   applicant1UploadedFiles?: UploadedFile[];
   applicant2UploadedFiles?: UploadedFile[];
-  documentsGenerated?: ListValue<DivorceDocument>[];
-  applicant1DocumentsUploaded?: ListValue<Partial<DivorceDocument> | null>[];
-  applicant2DocumentsUploaded?: ListValue<Partial<DivorceDocument> | null>[];
+  documentsGenerated?: ListValue<any>[];
+  applicant1DocumentsUploaded?: ListValue<Partial<any> | null>[];
+  applicant2DocumentsUploaded?: ListValue<Partial<any> | null>[];
   applicant1CannotUpload?: Checkbox;
   applicant2CannotUpload?: Checkbox;
   applicant1CannotUploadDocuments?: DocumentType | DocumentType[];
