@@ -250,16 +250,7 @@ export const enum ContactDetails {
   PHONE = 'phone',
 }
 
-export interface Children {
-  FirstName: string;
-  LastName: string;
-  DateOfBirth: DateAsString;
-  Nationality: Nationality[];
-  AdditionalNationality: ListValue<OtherName>[];
-  FirstNameAfterAdoption: string;
-  LastNameAfterAdoption: string;
-  SexAtBirth: Gender;
-}
+
 
 export interface OtherName {
   id?: string;
