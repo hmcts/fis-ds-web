@@ -1,41 +1,37 @@
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
-import { CommonContent, generatePageContent } from '../../common/common.content';
+import { CommonContent } from '../../common/common.content';
 import { isFieldFilledIn } from '../../../app/form/validation';
+import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 import { generateContent } from './content';
+
+const STATEMENT_OF_TRUTH_TRANSLATION_FILE = 'statement-of-truth';
+
+const resourceLoader = new ResourceReader();
+resourceLoader.Loader(STATEMENT_OF_TRUTH_TRANSLATION_FILE);const translations = resourceLoader.getFileContents().translations;
+const errors = resourceLoader.getFileContents().errors;
+
 
 jest.mock('../../../app/form/validation');
 
-const EN = 'en';
+const ENGLISH = 'en';
+const CYMRAEG = 'cy';
 
 const enContent = {
-  serviceName: 'Statement of truth',
-  statementOfTruthLabel: 'I believe that the facts stated in this application are true',
-  confirmStatement:
-    "This confirms that the information you are submitting is true and accurate to the best of your knowledge. It's known as your 'Statement Of Truth'",
-  continuePaymentButton: 'Continue to payment',
+  ...translations.en,
   errors: {
-      statementOfTruth: {
-        required : 'Tick checkbox to confirm Statement of truth'
-      }
-    }
+    ...errors.en,
+  },
 };
 
 const cyContent = {
-  serviceName: 'Statement of truth (in Welsh)',
-  statementOfTruthLabel: 'I believe that the facts stated in this application are true (in Welsh)',
-  confirmStatement:
-    "This confirms that the information you are submitting is true and accurate to the best of your knowledge. It's known as your 'Statement Of Truth' (in Welsh)",
-  continuePaymentButton: 'Continue to paymen (in Welsh)t',
+  ...translations.cy,
   errors: {
-    statementOfTruth: {
-      required : 'Tick checkbox to confirm Statement of truth (in Welsh)'
-    }
-  }
+    ...errors.cy,
+  },
 };
 
-
 describe('statement-of-truth', () => {
-  const commonContent = { language: 'en' } as CommonContent;
+  const commonContent = { language: ENGLISH } as CommonContent;
 
   let generatedContent;
   let form;
@@ -55,7 +51,8 @@ describe('statement-of-truth', () => {
   });
 
   test('should return correct content in Welsh', () => {
-    expect(generatedContent.serviceName).toEqual(cyContent.serviceName);
+    generatedContent = generateContent({ ...commonContent, language: CYMRAEG });
+        expect(generatedContent.serviceName).toEqual(cyContent.serviceName);
     expect(generatedContent.statementOfTruthLabel).toEqual(cyContent.statementOfTruthLabel);
     expect(generatedContent.confirmStatement).toEqual(cyContent.confirmStatement);
     expect(generatedContent.errors).toEqual(cyContent.errors);
