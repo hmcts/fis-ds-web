@@ -3,7 +3,6 @@ import { AnyObject } from '../controller/PostController';
 import {
 
   AdoptionAgencyOrLocalAuthority,
-  ApplicationType,
   CaseData,
   ContactDetails,
   DateAsString,
@@ -337,7 +336,7 @@ export interface Case {
   addButton?: string;
   addAnotherNationality?: string;
   addAnotherNameHidden?: string;
-  applicationType?: ApplicationType;
+  applicationType?: any;
   payments?: ListValue<Payment>[];
 
 

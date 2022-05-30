@@ -282,7 +282,7 @@ export interface CaseData {
   applicant2SotFullName: string;
   pcqId: string;
 
-  applicationType: ApplicationType;
+  applicationType: any;
   divorceOrDissolution: DivorceOrDissolution;
   labelContentApplicant2: string;
   labelContentTheApplicant2: string;
@@ -290,7 +290,7 @@ export interface CaseData {
   labelContentApplicant2UC: string;
   labelContentUnionType: string;
   labelContentUnionTypeUC: string;
-  labelContentApplicationType: ApplicationType;
+  labelContentApplicationType: any;
 
   applicant1AgreedToReceiveEmails: YesOrNo;
   applicant1LanguagePreferenceWelsh: YesOrNo;
@@ -436,12 +436,12 @@ export interface CaseData {
   coRefusalAdminErrorInfo: string;
   coRefusalRejectionReason: RejectionReason;
   coRefusalRejectionAdditionalInfo: string;
-  coRefusalClarificationReason: ClarificationReason;
+  coRefusalClarificationReason: any;
   coRefusalClarificationAdditionalInfo: string;
   coClarificationResponse: string;
   coClarificationUploadDocuments: ListValue<DivorceDocument>[];
   coOutcomeCase: YesOrNo;
-  coCourt: ConditionalOrderCourt;
+  coCourt: any;
   coDateAndTimeOfHearing: DateAsString;
   coPronouncementJudge: string;
   coJudgeCostsClaimGranted: JudgeCostsClaimGranted;
@@ -497,7 +497,7 @@ export interface CaseData {
   documentsGenerated: ListValue<DivorceDocument>[];
   documentsUploaded: ListValue<DivorceDocument>[];
   confidentialDocumentsUploaded: ListValue<ConfidentialDivorceDocument>[];
-  generalOrders: ListValue<DivorceGeneralOrder>[];
+  generalOrders: ListValue<any>[];
   previousCaseId: CaseLink;
   dueDate: DateAsString;
   notes: ListValue<CaseNote>[];
@@ -505,16 +505,16 @@ export interface CaseData {
   bulkListCaseReference: string;
   dataVersion: number;
   exampleRetiredField: string;
-  applicant1ContactDetailsConfidential: ConfidentialAddress;
-  applicant2ContactDetailsConfidential: ConfidentialAddress;
+  applicant1ContactDetailsConfidential: any;
+  applicant2ContactDetailsConfidential: any;
   applicant1LegalProceedingsRelated: LegalProceedingsRelated[];
   applicant2LegalProceedingsRelated: LegalProceedingsRelated[];
   dateConditionalOrderSubmitted: DateAsString;
   coWhoPaysCosts: WhoPaysCostOrder;
   coJudgeWhoPaysCosts: WhoPaysCostOrder;
-  coJudgeTypeCostsDecision: CostOrderList;
+  coJudgeTypeCostsDecision: any;
   selectedDivorceCentreSiteId: string;
-  coTypeCostsDecision: CostOrderList;
+  coTypeCostsDecision: any;
   legalProceedingsExist: YesOrNo;
   legalProceedingsDescription: string;
   doYouAgreeCourtHasJurisdiction: YesOrNo;
@@ -576,22 +576,6 @@ export const enum PaymentMethod {
 }
 
 
-export interface DivorceGeneralOrder {
-  generalOrderDocument: DivorceDocument;
-  generalOrderDivorceParties: GeneralOrderDivorceParties[];
-}
-
-export interface FinalOrder {
-  dateFinalOrderSubmitted: DateAsString;
-  dateFinalOrderEligibleFrom: DateAsString;
-}
-
-export interface GeneralEmail {
-  generalEmailParties: GeneralParties;
-  generalEmailOtherRecipientEmail: string;
-  generalEmailOtherRecipientName: string;
-  generalEmailDetails: string;
-}
 
 export interface GeneralOrder {
   generalOrderDate: DateAsString;
@@ -641,7 +625,7 @@ export interface LabelContent {
   Applicant2UC: string;
   UnionType: string;
   UnionTypeUC: string;
-  ApplicationType: ApplicationType;
+  ApplicationType: any;
 }
 
 export interface MarriageDetails {
@@ -667,16 +651,16 @@ export interface RejectReason {
 export interface RetiredFields {
   dataVersion: number;
   exampleRetiredField: string;
-  applicant1ContactDetailsConfidential: ConfidentialAddress;
-  applicant2ContactDetailsConfidential: ConfidentialAddress;
+  applicant1ContactDetailsConfidential: any;
+  applicant2ContactDetailsConfidential: any;
   applicant1LegalProceedingsRelated: LegalProceedingsRelated[];
   applicant2LegalProceedingsRelated: LegalProceedingsRelated[];
   dateConditionalOrderSubmitted: DateAsString;
   coWhoPaysCosts: WhoPaysCostOrder;
   coJudgeWhoPaysCosts: WhoPaysCostOrder;
-  coJudgeTypeCostsDecision: CostOrderList;
+  coJudgeTypeCostsDecision: any;
   selectedDivorceCentreSiteId: string;
-  coTypeCostsDecision: CostOrderList;
+  coTypeCostsDecision: any;
   legalProceedingsExist: YesOrNo;
   legalProceedingsDescription: string;
   doYouAgreeCourtHasJurisdiction: YesOrNo;
@@ -900,38 +884,7 @@ export const enum AlternativeServiceType {
   BAILIFF = 'bailiff',
 }
 
-export const enum ApplicationType {
-  SOLE_APPLICATION = 'soleApplication',
-  JOINT_APPLICATION = 'jointApplication',
-}
 
-
-
-export const enum ClarificationReason {
-  JURISDICTION_DETAILS = 'jurisdictionDetails',
-  MARRIAGE_CERTIFICATE_TRANSLATION = 'marriageCertTranslation',
-  MARRIAGE_CERTIFICATE = 'marriageCertificate',
-  PREVIOUS_PROCEEDINGS_DETAILS = 'previousProceedingDetails',
-  STATEMENT_OF_CASE_DETAILS = 'caseDetailsStatement',
-  OTHER = 'other',
-}
-
-export const enum ConditionalOrderCourt {
-  BIRMIGHAM = 'birmingham',
-  BURY_ST_EDMUNDS = 'buryStEdmunds',
-}
-
-export const enum ConfidentialAddress {
-  SHARE = 'share',
-  KEEP = 'keep',
-}
-
-export const enum CostOrderList {
-  ADDITIONAL_INFO = 'additionalInformation',
-  SUBJECT_TO_DETAILED_ASSESSMENT = 'subjectToDetailedAssessment',
-  HALF_COSTS = 'half',
-  ALL_COSTS = 'all',
-}
 
 export const enum Court {
   SERVICE_CENTRE = 'serviceCentre',
