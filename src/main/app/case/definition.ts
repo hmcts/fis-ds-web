@@ -1695,10 +1695,15 @@ export const enum HttpStatus {
   NETWORK_AUTHENTICATION_REQUIRED = 'NETWORK_AUTHENTICATION_REQUIRED',
 }
 
+
 export const enum ContactPreference {
   ACCOUNT_OWNER = 'ao',
   NAMED_PERSON = 'np',
   BOTH_RECEIVE = 'bre',
+}
+
+export const enum EmailAddress {
+  EMAIL_ADDRESS = 'em'
 }
 
 export const CASE_TYPE = 'A58';

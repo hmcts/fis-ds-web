@@ -1,8 +1,8 @@
 import {
   ADDITIONAL_DOCUMENTS_UPLOAD,
-  CONTACT_DETAILS,
   CONTACT_PREFERENCES,
   DATE_OF_BIRTH,
+  EMAIL_ADDRESS,
   FIND_ADDRESS,
   FULL_NAME,
   MANUAL_ADDRESS,
@@ -34,9 +34,9 @@ describe('Sequence must match respective path', () => {
     expect(edgecaseSequence[5].getNextStep({})).toBe(CONTACT_PREFERENCES);
 
     expect(edgecaseSequence[6].url).toBe(CONTACT_PREFERENCES);
-    expect(edgecaseSequence[6].getNextStep({})).toBe(CONTACT_DETAILS);
+    expect(edgecaseSequence[6].getNextStep({})).toBe(EMAIL_ADDRESS);
 
-    expect(edgecaseSequence[7].url).toBe(CONTACT_DETAILS);
+    expect(edgecaseSequence[7].url).toBe(EMAIL_ADDRESS);
     expect(edgecaseSequence[7].getNextStep({})).toBe(UPLOAD_YOUR_DOCUMENTS);
 
     expect(edgecaseSequence[8].url).toBe(UPLOAD_YOUR_DOCUMENTS);

@@ -166,6 +166,16 @@ export const isEmailValid: Validator = value => {
   }
 };
 
+export const isOptionalEmailAddressValid: Validator = value => {
+  if (typeof value === 'string') {
+    return !value.match(
+      ('^$|[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')
+      ) 
+      ? 'invalid' : undefined;
+  }
+};
+
+
 export const isFieldLetters: Validator = value => {
   if (!(value as string).match(/^[\p{Script=Latin}'’\-\s]*$/gu)) {
     return 'invalid';
