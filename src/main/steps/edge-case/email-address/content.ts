@@ -8,15 +8,13 @@ export const form: FormContent = {
   fields: {
     emailAddress: {
       type: 'text',
-      classes: "govuk-input",
-      label: l => l.label, 
-      hint: h=> h.hint,
-      
-      values: [
-        { label: l => l.emailAddress, value: EmailAddress.EMAIL_ADDRESS},
-      ],
+      classes: 'govuk-input',
+      label: l => l.label,
+      hint: h => h.hint,
+
+      values: [{ label: l => l.emailAddress, value: EmailAddress.EMAIL_ADDRESS }],
       validator: value => isOptionalEmailAddressValid(value),
-    }
+    },
   },
   submit: {
     text: l => l.continue,
