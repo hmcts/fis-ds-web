@@ -129,7 +129,7 @@ export class CaseApi {
       applicant1LastName: formData.applicant1LastNames,
       applicant1Email: userDetails.email,
     };
-    console.log("token => "+token+", event => "+event+", data => "+data);
+    console.log('token => ' + token + ', event => ' + event + ', data => ' + data);
     try {
       const response = await this.axios.post<CcdV2Response>(`/case-types/${CASE_TYPE}/cases`, {
         data,

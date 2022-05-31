@@ -158,7 +158,8 @@ export class PostController<T extends AnyObject> {
   //eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected getEventName(req: AppRequest): string {
     let eventName;
-    if (req.originalUrl === EMAIL_ADDRESS && this.isBlank(req)) { //RB CONTACT_DETAILS
+    if (req.originalUrl === EMAIL_ADDRESS && this.isBlank(req)) {
+      //RB CONTACT_DETAILS
       console.log('creating new case event');
       eventName = CITIZEN_CREATE;
     } else if (req.originalUrl === EMAIL_ADDRESS) {
