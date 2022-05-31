@@ -6,7 +6,6 @@ import {
   FIND_ADDRESS,
   FULL_NAME,
   MANUAL_ADDRESS,
-  PAY_YOUR_FEE,
   SELECT_ADDRESS,
   STATEMENT_OF_TRUTH,
   UPLOAD_YOUR_DOCUMENTS,
@@ -47,11 +46,7 @@ describe('Sequence must match respective path', () => {
     expect(edgecaseSequence[9].getNextStep({})).toBe(STATEMENT_OF_TRUTH);
 
     expect(edgecaseSequence[10].url).toBe(STATEMENT_OF_TRUTH);
-    expect(edgecaseSequence[10].getNextStep({})).toBe(PAY_YOUR_FEE);
-    /**
- *     expect(edgecaseSequence[9].url).toBe(PAY_YOUR_FEE);
-    expect(edgecaseSequence[9].getNextStep({})).toBe(USER_ROLE);
- */
+    expect(edgecaseSequence[10].getNextStep({})).toBe(USER_ROLE);
   });
 });
 
