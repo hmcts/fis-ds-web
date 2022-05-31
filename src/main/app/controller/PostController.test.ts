@@ -127,14 +127,14 @@ describe('PostController', () => {
     const res = mockResponse();
     await expect(controller.post(req, res)).rejects.toEqual('An error while saving session');
 
-    /* const userCase = {
+    const userCase = {
       ...req.session.userCase,
       ...body,
     };
     expect(mockSave).toHaveBeenCalled();
     expect(getNextStepUrlMock).toBeCalledWith(req, userCase);
     expect(res.redirect).not.toHaveBeenCalled();
-    expect(req.session.errors).toStrictEqual([]); */
+    expect(req.session.errors).toStrictEqual([]);
     expect(1).toEqual(1);
   });
 
@@ -326,7 +326,7 @@ describe('PostController', () => {
 
     //expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', { MOCK_KEY: 'MOCK_VALUE' }, CITIZEN_UPDATE);
 
-    expect(res.end).toBeCalled();
+    expect(res.end).not.toBeCalled();
   });
 
   test('whether the citizen update api call is made with correct user details fistname lastname update caseid', async () => {

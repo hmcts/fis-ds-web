@@ -136,7 +136,6 @@ export default class UploadDocumentController extends PostController<AnyObject> 
   }
 
   async PostDocumentUploader(req: AppRequest<AnyObject>, res: Response): Promise<void> {
-    logger.log({ message: 'document has been successfully procceed and attached to the case' });
     let AddtionalCaseDocuments: any[] = [];
     if (req.session.hasOwnProperty('AddtionalCaseDocuments')) {
       AddtionalCaseDocuments = req.session.AddtionalCaseDocuments.map(document => {
@@ -147,10 +146,16 @@ export default class UploadDocumentController extends PostController<AnyObject> 
         };
       });
     }
-
     console.log(AddtionalCaseDocuments);
     res.redirect(PAY_YOUR_FEE);
   }
+
+  public UploadDocumentInstance = (BASEURL: string, header: AxiosRequestHeaders): AxiosInstance => {
+    return axios.create({
+      baseURL: BASEURL,
+      headers: header,
+    });
+  };
 
   /**
    *
@@ -158,12 +163,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
    * @param res
    */
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
-    const UploadDocumentInstance = (BASEURL: string, header: AxiosRequestHeaders): AxiosInstance => {
-      return axios.create({
-        baseURL: BASEURL,
-        headers: header,
-      });
-    };
+    console.log(req.files);
 
     const { documentUploadProceed } = req.body;
 
@@ -181,7 +181,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
        */
       this.PostDocumentUploader(req, res);
     } else {
-      if (TotalUploadDocuments < Number(config.get('documentUpload.validation.totaldocuments'))) {
+      if (TotalUploadDocuments < Number(config.get('documentUpload.validation.totalAdditionalDocuments'))) {
         if ((await RpeApi.getRpeToken()).response) {
           req.session.rpeToken = (await RpeApi.getRpeToken()).data;
         }
@@ -218,7 +218,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
               ServiceAuthorization: req.session['rpeToken'],
             };
             try {
-              const RequestDocument = await UploadDocumentInstance(FileUploadBaseURL, Headers).post(
+              const RequestDocument = await this.UploadDocumentInstance(FileUploadBaseURL, Headers).post(
                 '/cases/documents',
                 formData,
                 {
@@ -227,8 +227,10 @@ export default class UploadDocumentController extends PostController<AnyObject> 
                   },
                 }
               );
+              console.log(RequestDocument.data.documents[0]);
 
               const { originalDocumentName, _links } = RequestDocument.data.documents[0];
+
               req.session['AddtionalCaseDocuments'].push({ originalDocumentName, _links });
               req.session['errors'] = undefined;
               this.redirect(req, res, ADDITIONAL_DOCUMENTS_UPLOAD);

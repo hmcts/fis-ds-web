@@ -37,7 +37,7 @@ describe('Upload content', () => {
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
     const documentUploadProceed = fields.documentUploadProceed;
-
+    expect(documentUploadProceed.label).not.toBe('');
     expect(documentUploadProceed.type).toBe('hidden');
   });
 

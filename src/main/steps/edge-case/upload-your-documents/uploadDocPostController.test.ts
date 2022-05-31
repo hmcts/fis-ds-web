@@ -1,12 +1,16 @@
+import { Axios } from 'axios';
 import config from 'config';
 
 import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
 import { YesOrNo } from '../../../app/case/definition';
 import { isFieldFilledIn } from '../../../app/form/validation';
+import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 import * as steps from '../../../steps';
-import {ResourceReader} from '../../../modules/resourcereader/ResourceReader'
-import uploadDocPostController, { FileMimeType, FileUploadBaseURL, FileValidations } from './uploadDocPostController';
+import { ADDITIONAL_DOCUMENTS_UPLOAD } from '../../../steps/urls';
+
+import UploadDocumentController, { FileMimeType, FileUploadBaseURL, FileValidations } from './uploadDocPostController';
+
 const getNextStepUrlMock = jest.spyOn(steps, 'getNextStepUrl');
 
 describe('Document upload controller', () => {
@@ -28,7 +32,7 @@ describe('Document upload controller', () => {
         text: l => l.continue,
       },
     };
-    const controller = new uploadDocPostController(mockForm.fields);
+    const controller = new UploadDocumentController(mockForm.fields);
     const QUERY = {
       query: 'delete',
       documentId: 'xyz',
@@ -56,7 +60,7 @@ describe('Document upload controller', () => {
 
   describe('when there is an error in saving session', () => {
     test('should throw an error', async () => {
-      const controller = new uploadDocPostController({});
+      const controller = new UploadDocumentController({});
       const res = mockResponse();
       const req = mockRequest({
         session: {
@@ -131,46 +135,139 @@ describe('Checking for file upload size', () => {
  *      test for document upload controller
  */
 
-
-describe('Check for System contents to match for en', ()=> {
-
+describe('Check for System contents to match for en', () => {
   const resourceLoader = new ResourceReader();
   resourceLoader.Loader('upload-your-documents');
   const getContents = resourceLoader.getFileContents().errors;
 
-
-
   it('must match load English as Langauage', () => {
-    let req = mockRequest({});
-    req.query['lng']= 'en';
+    const req = mockRequest({});
+    req.query['lng'] = 'en';
+    req.session['lang'] = 'en';
     const SystemContentLoader = FileValidations.ResourceReaderContents(req);
     const getEnglishContents = getContents.en;
     expect(SystemContentLoader).toEqual(getEnglishContents);
   });
+});
 
-
-})
-
-
-describe('Check for System contents to match for cy', ()=> {
-
+describe('Check for System contents to match for cy', () => {
   const resourceLoader = new ResourceReader();
   resourceLoader.Loader('upload-your-documents');
   const getContents = resourceLoader.getFileContents().errors;
 
-
-
   it('must match load English as Langauage', () => {
-    let req = mockRequest({});
-    req.query['lng']= 'cy';
+    const req = mockRequest({});
+    req.query['lng'] = 'cy';
+    req.session['lang'] = 'cy';
     const SystemContentLoader = FileValidations.ResourceReaderContents(req);
-    const getEnglishContents = getContents.cy;
-    expect(SystemContentLoader).not.toEqual(getEnglishContents);
+    const getWhelshContents = getContents.cy;
+    expect(SystemContentLoader).toEqual(getWhelshContents);
+  });
+});
+
+describe('Check for System contents to match for fr', () => {
+  const resourceLoader = new ResourceReader();
+  resourceLoader.Loader('upload-your-documents');
+  const getContents = resourceLoader.getFileContents().errors;
+
+  it('must match load English as default Langauage', () => {
+    const req = mockRequest({});
+    req.query['lng'] = 'fr';
+    req.session['lang'] = 'fr';
+    const SystemContentLoader = FileValidations.ResourceReaderContents(req);
+    const getWhelshContents = getContents.en;
+    expect(SystemContentLoader).toEqual(getWhelshContents);
+  });
+});
+
+describe('checking for the redirect of post document upload', () => {
+  const mockForm = {
+    fields: {
+      field: {
+        type: 'file',
+        values: [{ label: l => l.no, value: YesOrNo.YES }],
+        validator: isFieldFilledIn,
+      },
+    },
+    submit: {
+      text: l => l.continue,
+    },
+  };
+
+  const req = mockRequest({});
+  const res = mockResponse();
+  const postingcontroller = new UploadDocumentController(mockForm.fields);
+  it('redirection after the documents has been proccessed', async () => {
+    req.session.caseDocuments = [
+      {
+        originalDocumentName: 'document1.docx',
+        _links: {
+          self: {
+            href: 'http://dm-example/documents/sae33',
+          },
+          binary: {
+            href: 'http://dm-example/documents/sae33/binary',
+          },
+        },
+      },
+      {
+        originalDocumentName: 'document2.docx',
+        _links: {
+          self: {
+            href: 'http://dm-example/documents/ce6e2',
+          },
+          binary: {
+            href: 'http://dm-example/documents/ce6e2/binary',
+          },
+        },
+      },
+    ];
+
+    await postingcontroller.PostDocumentUploader(req, res);
+    expect(res.redirect).toHaveBeenCalledWith(ADDITIONAL_DOCUMENTS_UPLOAD);
   });
 
+  it('must be have axios instance', () => {
+    const SystemInstance = postingcontroller.UploadDocumentInstance('/', {});
+    expect(SystemInstance instanceof Axios);
+  });
 
-})
+  it('procceding the document upload', () => {
+    const SystemInstance = postingcontroller.UploadDocumentInstance('/', {});
+    expect(SystemInstance instanceof Axios);
+  });
 
+  req.body['documentUploadProceed'] = true;
+  req.session.caseDocuments = [];
 
+  it('Post controller attributes', async () => {
+    req.session.caseDocuments = [];
 
-
+    /**
+     * req.session.AddtionalCaseDocuments = [{
+      originalDocumentName : 'document1.docx',
+      _links: {
+        self: {
+        href: 'http://dm-example/documents/sae33'
+          },
+     binary: {
+      href: 'http://dm-example/documents/sae33/binary'
+       }
+     }
+    },
+    {
+      originalDocumentName : 'document2.docx',
+      _links: {
+          self: {
+          href: 'http://dm-example/documents/ce6e2'
+            },
+       binary: {
+        href: 'http://dm-example/documents/ce6e2/binary'
+         }
+       }
+    }];
+     */
+    await postingcontroller.post(req, res);
+    expect(res.redirect).toHaveBeenCalledWith(ADDITIONAL_DOCUMENTS_UPLOAD);
+  });
+});

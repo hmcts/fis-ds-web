@@ -136,7 +136,6 @@ export default class UploadDocumentController extends PostController<AnyObject> 
   }
 
   async PostDocumentUploader(req: AppRequest<AnyObject>, res: Response): Promise<void> {
-    logger.log({ message: 'document has been successfully procceed and attached to the case' });
     let CaseDocument: any[] = [];
     if (req.session.hasOwnProperty('caseDocuments')) {
       CaseDocument = req.session.caseDocuments.map(document => {
@@ -152,19 +151,19 @@ export default class UploadDocumentController extends PostController<AnyObject> 
     res.redirect(ADDITIONAL_DOCUMENTS_UPLOAD);
   }
 
+  public UploadDocumentInstance = (BASEURL: string, header: AxiosRequestHeaders): AxiosInstance => {
+    return axios.create({
+      baseURL: BASEURL,
+      headers: header,
+    });
+  };
+
   /**
    *
    * @param req
    * @param res
    */
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
-    const UploadDocumentInstance = (BASEURL: string, header: AxiosRequestHeaders): AxiosInstance => {
-      return axios.create({
-        baseURL: BASEURL,
-        headers: header,
-      });
-    };
-
     const { documentUploadProceed } = req.body;
 
     let TotalUploadDocuments = 0;
@@ -217,7 +216,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
               ServiceAuthorization: req.session['rpeToken'],
             };
             try {
-              const RequestDocument = await UploadDocumentInstance(FileUploadBaseURL, Headers).post(
+              const RequestDocument = await this.UploadDocumentInstance(FileUploadBaseURL, Headers).post(
                 '/cases/documents',
                 formData,
                 {

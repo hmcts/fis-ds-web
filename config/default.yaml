@@ -65,6 +65,7 @@ appInsights:
   instrumentationKey:
 documentUpload:
   validation:
-    totaldocuments: 5    
+    totaldocuments: 5
+    totalAdditionalDocuments: 10    
     sizeInKB: 2000000  
  
