@@ -3,14 +3,14 @@
       "en": {
         "serviceName": "Statement of truth",
         "statementOfTruthLabel": "I believe that the facts stated in this application are true",
-        "confirmStatement": "This confirms that the information you are submitting is true and accurate to the best of your knowledge. It's known as your 'statement Of truth'",
-        "continue": "Continue to payment"
+        "confirmStatement": "This confirms that the information you are submitting is true and accurate to the best of your knowledge. It's known as your 'statement of truth'.",
+        "continue": "Continue"
       },
       "cy": {
         "serviceName": "Statement of truth (in Welsh)",
         "statementOfTruthLabel": "I believe that the facts stated in this application are true (in Welsh)",
-        "confirmStatement": "This confirms that the information you are submitting is true and accurate to the best of your knowledge. It's known as your 'statement Of truth' (in Welsh)",
-        "continue": "Continue to payment (in Welsh)"
+        "confirmStatement": "This confirms that the information you are submitting is true and accurate to the best of your knowledge. It's known as your 'statement of truth'. (in Welsh)",
+        "continue": "Continue (in Welsh)"
       }
     },
     "errors": {
