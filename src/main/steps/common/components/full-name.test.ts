@@ -68,7 +68,7 @@ describe('common > components > full-name', () => {
   });
 
   test('should contain submit button', () => {
-    expect((form.submit.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save and continue');
+    expect((form.submit.text as Function)(generatePageContent({ language: 'en' }))).toBe('Continue');
   });
 
   test('should contain saveAsDraft button', () => {

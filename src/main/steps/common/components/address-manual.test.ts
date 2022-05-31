@@ -122,7 +122,7 @@ describe('common > components > manual-address > content', () => {
   });
 
   test('should contain submit button', () => {
-    expect((form.submit.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save and continue');
+    expect((form.submit.text as Function)(generatePageContent({ language: 'en' }))).toBe('Continue');
   });
 });
 /* eslint-enable @typescript-eslint/ban-types */
