@@ -8,7 +8,6 @@ import { generateContent } from './content';
 jest.mock('../../../app/form/validation');
 
 const EN = 'en';
-const CY = 'cy';
 const enContent = {
   continue: 'Continue',
   serviceName: 'Email Address',
@@ -58,6 +57,5 @@ describe('Email Address', () => {
     const form = generatedContent.form as FormContent;
 
     expect((form.submit.text as Function)(generateContent({ ...commonContent, language: EN }))).toBe('Continue');
-    expect((form.submit.text as Function)(generateContent({ ...commonContent, language: CY }))).toBe('Continue (Welsh)');
   });
 });
