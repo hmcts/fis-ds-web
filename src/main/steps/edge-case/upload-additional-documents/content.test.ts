@@ -1,7 +1,8 @@
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { FormContent, FormFields } from '../../../app/form/Form';
+import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 import { CommonContent, generatePageContent } from '../../common/common.content';
-import {ResourceReader} from '../../../modules/resourcereader/ResourceReader'
+
 import { generateContent } from './content';
 
 const resourceLoader = new ResourceReader();
@@ -13,11 +14,11 @@ jest.mock('../../../app/form/validation');
 const EN = 'en';
 
 const enContent = {
-  ...Translations.en
+  ...Translations.en,
 };
 
 const cyContent = {
-  ...Translations.cy
+  ...Translations.cy,
 };
 
 const commonContent = { language: EN } as CommonContent;

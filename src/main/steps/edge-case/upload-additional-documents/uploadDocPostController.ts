@@ -131,10 +131,9 @@ export class FileValidations {
 
 @autobind
 export default class UploadDocumentController extends PostController<AnyObject> {
-  constructor(protected readonly fields: FormFields | FormFieldsFn) {
+  constructor(protected fields: FormFields | FormFieldsFn) {
     super(fields);
   }
-
 
   async PostDocumentUploader(req: AppRequest<AnyObject>, res: Response): Promise<void> {
     logger.log({ message: 'document has been successfully procceed and attached to the case' });
@@ -176,14 +175,13 @@ export default class UploadDocumentController extends PostController<AnyObject> 
       TotalUploadDocuments = req.session['AddtionalCaseDocuments'].length;
     }
 
-   
-      if (documentUploadProceed) {
-        /**
-         * @PostDocumentUploader
-         */
-        this.PostDocumentUploader(req, res);
-      } else {
-        if (TotalUploadDocuments < Number(config.get('documentUpload.validation.totaldocuments'))) {
+    if (documentUploadProceed) {
+      /**
+       * @PostDocumentUploader
+       */
+      this.PostDocumentUploader(req, res);
+    } else {
+      if (TotalUploadDocuments < Number(config.get('documentUpload.validation.totaldocuments'))) {
         if ((await RpeApi.getRpeToken()).response) {
           req.session.rpeToken = (await RpeApi.getRpeToken()).data;
         }
@@ -258,16 +256,14 @@ export default class UploadDocumentController extends PostController<AnyObject> 
             this.redirect(req, res, ADDITIONAL_DOCUMENTS_UPLOAD);
           }
         }
-       
-      }
-      else {
+      } else {
         req.session.fileErrors.push({
           text: FileValidations.ResourceReaderContents(req).TOTAL_FILES_EXCEED_ERROR,
           href: '#',
         });
-  
+
         this.redirect(req, res, ADDITIONAL_DOCUMENTS_UPLOAD);
       }
-    } 
+    }
   }
 }

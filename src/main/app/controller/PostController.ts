@@ -20,7 +20,7 @@ enum noHitToSaveAndContinue {
 
 @autobind
 export class PostController<T extends AnyObject> {
-  constructor(protected readonly fields: FormFields | FormFieldsFn) {}
+  constructor(protected fields: FormFields | FormFieldsFn) {}
 
   /**
    * Parse the form body and decide whether this is a save and sign out, save and continue or session time out

@@ -45,7 +45,7 @@
           {{ file.originalDocumentName }} 
           {% set words = file._links.self.href | split("/") %}
           {% set documentId = words[4] %}
-          <a href="/upload-your-documents?query=delete&documentId={{documentId}}" class="govuk-link--no-visited-state float-right ">{{ delete }}</a>
+          <a href="/upload-your-documents?query=delete&documentId={{documentId}}&documentType=applicationform" class="govuk-link--no-visited-state float-right ">{{ delete }}</a>
         </li>
       {% endfor %}
       {%endif%}

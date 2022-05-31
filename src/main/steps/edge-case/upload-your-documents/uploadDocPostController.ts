@@ -148,7 +148,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
       });
     }
 
-    console.log(CaseDocument)
+    console.log(CaseDocument);
     res.redirect(ADDITIONAL_DOCUMENTS_UPLOAD);
   }
 
@@ -175,14 +175,13 @@ export default class UploadDocumentController extends PostController<AnyObject> 
       TotalUploadDocuments = req.session['caseDocuments'].length;
     }
 
-  
-      if (documentUploadProceed) {
-        /**
-         * @PostDocumentUploader
-         */
-        this.PostDocumentUploader(req, res);
-      } else {
-        if (TotalUploadDocuments < Number(config.get('documentUpload.validation.totaldocuments'))) {
+    if (documentUploadProceed) {
+      /**
+       * @PostDocumentUploader
+       */
+      this.PostDocumentUploader(req, res);
+    } else {
+      if (TotalUploadDocuments < Number(config.get('documentUpload.validation.totaldocuments'))) {
         if ((await RpeApi.getRpeToken()).response) {
           req.session.rpeToken = (await RpeApi.getRpeToken()).data;
         }
@@ -234,7 +233,6 @@ export default class UploadDocumentController extends PostController<AnyObject> 
               this.redirect(req, res, UPLOAD_YOUR_DOCUMENTS);
             } catch (error) {
               logger.error(error);
-              res.json({ msg: 'error occured', error });
             }
           } else {
             const FormattedError: any[] = [];
@@ -256,14 +254,14 @@ export default class UploadDocumentController extends PostController<AnyObject> 
             this.redirect(req, res, UPLOAD_YOUR_DOCUMENTS);
           }
         }
-      }else {
+      } else {
         req.session.fileErrors.push({
           text: FileValidations.ResourceReaderContents(req).TOTAL_FILES_EXCEED_ERROR,
           href: '#',
         });
-  
+
         this.redirect(req, res, UPLOAD_YOUR_DOCUMENTS);
       }
-    } 
+    }
   }
 }

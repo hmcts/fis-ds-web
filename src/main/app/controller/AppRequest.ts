@@ -20,8 +20,9 @@ export interface AppRequest<T = Partial<Case>> extends Request {
 export interface AppSession extends Session {
   csrfSecret: string;
   rpeToken: any;
-  caseDocuments: any[];
-  AddtionalCaseDocuments: any[]
+  caseDocuments: any;
+  AddtionalCaseDocuments: any;
+  postDocs: any;
   user: UserDetails;
   userCase: CaseWithId;
   eligibility: Eligibility;
@@ -38,6 +39,10 @@ export interface UserDetails {
   email: string;
   givenName: string;
   familyName: string;
+}
+
+export interface Namer {
+  name: string;
 }
 
 export interface Eligibility {
