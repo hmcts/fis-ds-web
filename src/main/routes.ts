@@ -4,7 +4,6 @@ import { Application, RequestHandler } from 'express';
 
 import { GetController } from './app/controller/GetController';
 import { PostController } from './app/controller/PostController';
-import { DocumentDeleteManager } from './app/document/deleteManager';
 import { KeepAliveController } from './app/keepalive/KeepAliveController';
 import { stepsWithContent } from './steps';
 import { ErrorController } from './steps/error/error.controller';
@@ -17,10 +16,9 @@ import {
   HOME_URL,
   KEEP_ALIVE_URL,
   SAVE_AND_SIGN_OUT,
-  UPLOAD_YOUR_DOCUMENTS,
+  TIMED_OUT_URL,
   //DOCUMENT_UPLOAD_URL,
   // TASK_LIST_URL,
-  TIMED_OUT_URL,
 } from './steps/urls';
 
 export class Routes {
@@ -32,9 +30,6 @@ export class Routes {
     app.get(HOME_URL, errorHandler(new HomeGetController().get));
     app.get(SAVE_AND_SIGN_OUT, errorHandler(new SaveSignOutGetController().get));
     app.get(TIMED_OUT_URL, errorHandler(new TimedOutGetController().get));
-
-    /**@Document_Manager */
-    app.get(`${UPLOAD_YOUR_DOCUMENTS}/delete`, errorHandler(DocumentDeleteManager));
 
     for (const step of stepsWithContent) {
       const files = fs.readdirSync(`${step.stepDir}`);

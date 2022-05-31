@@ -5,11 +5,11 @@ import { mockResponse } from '../../../../test/unit/utils/mockResponse';
 import { YesOrNo } from '../../../app/case/definition';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import * as steps from '../../../steps';
-
+import {ResourceReader} from '../../../modules/resourcereader/ResourceReader'
 import uploadDocPostController, { FileMimeType, FileUploadBaseURL, FileValidations } from './uploadDocPostController';
 const getNextStepUrlMock = jest.spyOn(steps, 'getNextStepUrl');
 
-describe('EligibilityPostController', () => {
+describe('Document upload controller', () => {
   afterEach(() => {
     getNextStepUrlMock.mockClear();
   });
@@ -19,28 +19,34 @@ describe('EligibilityPostController', () => {
     const mockForm = {
       fields: {
         field: {
-          type: 'radios',
-          values: [
-            { label: l => l.no, value: YesOrNo.YES },
-            { label: l => l.yes, value: YesOrNo.NO },
-          ],
+          type: 'file',
+          values: [{ label: l => l.no, value: YesOrNo.YES }],
           validator: isFieldFilledIn,
         },
       },
       submit: {
         text: l => l.continue,
       },
-      saveAsDraft: {
-        text: '',
-      },
     };
     const controller = new uploadDocPostController(mockForm.fields);
+    const QUERY = {
+      query: 'delete',
+      documentId: 'xyz',
+      documentType: 'applicationform',
+    };
 
     const req = mockRequest({});
     const res = mockResponse();
     req.files = { documents: [] };
     req.session.caseDocuments = [];
+    req.query = QUERY;
     await controller.post(req, res);
+
+    expect(req.query).toEqual({
+      query: 'delete',
+      documentId: 'xyz',
+      documentType: 'applicationform',
+    });
 
     expect(req.locals.api.triggerEvent).not.toHaveBeenCalled();
     expect(getNextStepUrlMock).not.toHaveBeenCalled();
@@ -55,6 +61,7 @@ describe('EligibilityPostController', () => {
       const req = mockRequest({
         session: {
           user: { email: 'test@example.com' },
+
           save: jest.fn(done => done('MOCK_ERROR')),
         },
       });
@@ -124,8 +131,46 @@ describe('Checking for file upload size', () => {
  *      test for document upload controller
  */
 
-describe('Uploading documents should should redirect', () => {
-  it('must match redirect', () => {
-    expect(1).not.toBe(2);
+
+describe('Check for System contents to match for en', ()=> {
+
+  const resourceLoader = new ResourceReader();
+  resourceLoader.Loader('upload-your-documents');
+  const getContents = resourceLoader.getFileContents().errors;
+
+
+
+  it('must match load English as Langauage', () => {
+    let req = mockRequest({});
+    req.query['lng']= 'en';
+    const SystemContentLoader = FileValidations.ResourceReaderContents(req);
+    const getEnglishContents = getContents.en;
+    expect(SystemContentLoader).toEqual(getEnglishContents);
   });
-});
+
+
+})
+
+
+describe('Check for System contents to match for cy', ()=> {
+
+  const resourceLoader = new ResourceReader();
+  resourceLoader.Loader('upload-your-documents');
+  const getContents = resourceLoader.getFileContents().errors;
+
+
+
+  it('must match load English as Langauage', () => {
+    let req = mockRequest({});
+    req.query['lng']= 'cy';
+    const SystemContentLoader = FileValidations.ResourceReaderContents(req);
+    const getEnglishContents = getContents.cy;
+    expect(SystemContentLoader).not.toEqual(getEnglishContents);
+  });
+
+
+})
+
+
+
+

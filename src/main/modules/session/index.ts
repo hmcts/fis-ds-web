@@ -19,9 +19,8 @@ export class SessionStorage {
       session({
         name: 'ds-ui-session',
         resave: false,
-        saveUninitialized: true,
+        saveUninitialized: false,
         secret: config.get('session.secret'),
-        proxy: true,
         cookie: {
           httpOnly: true,
           maxAge: cookieMaxAge,

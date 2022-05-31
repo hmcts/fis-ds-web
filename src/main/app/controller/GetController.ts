@@ -116,7 +116,7 @@ export class GetController {
     });
   }
 
-  public documentDeleteManager(req: AppRequest, res: Response, callback?: Function): void {
+  public documentDeleteManager(req: AppRequest, res: Response): void {
     if (
       req.query.hasOwnProperty('query') &&
       req.query.hasOwnProperty('documentId') &&
@@ -127,38 +127,34 @@ export class GetController {
         const { documentType } = req.query;
         const { documentId } = req.query;
         /** Switching type of documents */
+        /*eslint no-case-declarations: "error"*/
         switch (documentType) {
-          case 'applicationform':
+          case 'applicationform': {
             const sessionObjectOfApplicationDocuments = req.session['caseDocuments'].filter(document => {
               const { _links } = document;
               const documentIdFound = _links.self['href'].split('/')[4];
               return documentIdFound !== documentId;
             });
             req.session['caseDocuments'] = sessionObjectOfApplicationDocuments;
-            req.session.save(function (err) {
-              if (err) {
-                throw err;
-              }
+            this.saveSessionAndRedirect(req, res, () => {
               res.redirect(UPLOAD_YOUR_DOCUMENTS);
             });
 
             break;
+          }
 
-          case 'additional':
+          case 'additional': {
             const sessionObjectOfAdditionalDocuments = req.session['AddtionalCaseDocuments'].filter(document => {
               const { _links } = document;
               const documentIdFound = _links.self['href'].split('/')[4];
               return documentIdFound !== documentId;
             });
             req.session['AddtionalCaseDocuments'] = sessionObjectOfAdditionalDocuments;
-            // console.log({deletedDocuments : sessionObjectOfApplicationDocuments})
-            req.session.save(function (err) {
-              if (err) {
-                throw err;
-              }
+            this.saveSessionAndRedirect(req, res, () => {
               res.redirect(ADDITIONAL_DOCUMENTS_UPLOAD);
             });
             break;
+          }
         }
       }
     }

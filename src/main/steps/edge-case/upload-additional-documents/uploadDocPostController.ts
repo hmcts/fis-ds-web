@@ -88,7 +88,7 @@ export class FileValidations {
     let SystemContent: any | FileUploadErrorTranslatables = {};
     const SystemLangauge = req.session['lang'];
     const resourceLoader = new ResourceReader();
-    resourceLoader.Loader('upload-your-documents');
+    resourceLoader.Loader('upload-addtional-documents');
     const ErrorInLangauges = resourceLoader.getFileContents().errors;
     switch (SystemLangauge) {
       case 'en':
