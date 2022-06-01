@@ -1,13 +1,9 @@
 import { AnyObject } from '../controller/PostController';
 
-import {
-  CaseData,
-  State
-} from './definition';
+import { CaseData, State } from './definition';
 
 export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>> = {
   /***Form related Schema mapped according to case data */
-
 };
 
 export function formatCase<InputFormat, OutputFormat>(fields: FieldFormats, data: InputFormat): OutputFormat {
@@ -24,29 +20,23 @@ export function formatCase<InputFormat, OutputFormat>(fields: FieldFormats, data
   return result as OutputFormat;
 }
 
-
-
 export type FieldFormats = Record<string, string | ((AnyObject) => AnyObject)>;
-
-
 
 /***@caseData */
 export interface Case {
- /*********All information related to the Case */
- namedApplicant: boolean;
- applicantFirstName: string;
- applicantLastName: string;
- applicantDateOfBirth: string;
- applicantEmailAddress: string;
- applicantPhoneNumber: string;
- applicantHomeNumber: string;
- applicantAddress1: string;
- applicantAddress2: string;
- applicantAddressTown: string;
- applicantAddressCountry: any;
- applicantAddressPostCode: any; 
-
-
+  /*********All information related to the Case */
+  namedApplicant: boolean;
+  applicantFirstName: string;
+  applicantLastName: string;
+  applicantDateOfBirth: string;
+  applicantEmailAddress: string;
+  applicantPhoneNumber: string;
+  applicantHomeNumber: string;
+  applicantAddress1: string;
+  applicantAddress2: string;
+  applicantAddressTown: string;
+  applicantAddressCountry: any;
+  applicantAddressPostCode: any;
 }
 
 export interface CaseWithId extends Case {
@@ -65,7 +55,7 @@ export interface CaseDate {
   day: string;
 }
 
-export type Date =  string
+export type Date = string;
 
 export enum LanguagePreference {
   English = 'english',

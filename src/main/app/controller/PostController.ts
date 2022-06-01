@@ -19,7 +19,6 @@ import { AppRequest } from './AppRequest';
 }
  */
 
-
 @autobind
 export class PostController<T extends AnyObject> {
   constructor(protected readonly fields: FormFields | FormFieldsFn) {}
@@ -56,7 +55,7 @@ export class PostController<T extends AnyObject> {
 
   private async saveBeforeSessionTimeout(req: AppRequest<T>, res: Response, formData: Partial<Case>): Promise<void> {
     try {
-      await this.save(req, formData/**this.getEventName(req) */);
+      await this.save(req, formData /**this.getEventName(req) */);
     } catch {
       // ignore
     }
@@ -64,8 +63,6 @@ export class PostController<T extends AnyObject> {
   }
 
   private async saveAndContinue(req: AppRequest<T>, res: Response, form: Form, formData: Partial<Case>): Promise<void> {
-
-
     Object.assign(req.session.userCase, formData);
     req.session.errors = form.getErrors(formData);
     this.filterErrorsForSaveAsDraft(req);
@@ -88,8 +85,6 @@ export class PostController<T extends AnyObject> {
 
     }
      */
-
-
 
     this.redirect(req, res);
   }
@@ -190,6 +185,5 @@ export class PostController<T extends AnyObject> {
 
 
    */
-
 }
 export type AnyObject = Record<string, unknown>;

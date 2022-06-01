@@ -1,26 +1,8 @@
-import { CaseData, Gender, ThePrayer, YesOrNo } from './definition';
+import { CaseData } from './definition';
 import { fromApiFormat } from './from-api-format';
 
 describe('from-api-format', () => {
-  const results: Partial<Record<keyof CaseData, string | ThePrayer[] | null>> = {
-    marriageIsSameSexCouple: YesOrNo.YES,
-    applicant2Gender: Gender.MALE,
-    applicant1Gender: Gender.MALE,
-    applicant1ScreenHasMarriageBroken: YesOrNo.YES,
-    applicant1HWFReferenceNumber: 'HWF-ABC-123',
-    applicant1AgreedToReceiveEmails: YesOrNo.YES,
-    applicant1KeepContactDetailsConfidential: YesOrNo.YES,
-    applicant1KnowsApplicant2EmailAddress: YesOrNo.NO,
-    applicant1WantsToHavePapersServedAnotherWay: null,
-    applicant1LanguagePreferenceWelsh: YesOrNo.YES,
-    applicant2LanguagePreferenceWelsh: YesOrNo.YES,
-    applicant2KeepContactDetailsConfidential: YesOrNo.YES,
-    applicant1PrayerHasBeenGivenCheckbox: [ThePrayer.I_CONFIRM],
-    applicant2PrayerHasBeenGiven: YesOrNo.YES,
-    applicant1StatementOfTruth: YesOrNo.YES,
-    applicant2StatementOfTruth: YesOrNo.YES,
-    dueDate: '2021-07-26',
-  };
+  const results: Partial<Record<keyof CaseData, string | any | null>> = {};
 
   test('should convert results from api to adoption-web format', async () => {
     const adoptionFormat = fromApiFormat({

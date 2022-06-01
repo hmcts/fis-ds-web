@@ -63,7 +63,7 @@ export class GetController {
         sessionErrors,
         FileErrors,
         htmlLang: language,
-        isDraft: req.session?.userCase?.state 
+        isDraft: req.session?.userCase?.state,
       });
     }
   }
@@ -117,5 +117,4 @@ export class GetController {
       }
     });
   }
-
 }

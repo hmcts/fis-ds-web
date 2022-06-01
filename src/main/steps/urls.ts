@@ -9,8 +9,6 @@ export const TIMED_OUT_URL: PageLink = '/timed-out';
 export const KEEP_ALIVE_URL: PageLink = '/keep-alive';
 export const CSRF_TOKEN_ERROR_URL: PageLink = '/csrf-token-error';
 
-
-
 export const ADDITIONAL_DOCUMENTS_UPLOAD: PageLink = '/upload-additional-documents';
 
 export const RESPONDENT: PageLink = '/respondent';

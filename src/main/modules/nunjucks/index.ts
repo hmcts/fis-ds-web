@@ -2,6 +2,7 @@ import path from 'path';
 
 import express from 'express';
 import nunjucks from 'nunjucks';
+
 import { FormInput } from '../../app/form/Form';
 
 export class Nunjucks {

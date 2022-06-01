@@ -3,8 +3,7 @@ import advancedFormat from 'dayjs/plugin/advancedFormat';
 import { invert } from 'lodash';
 
 import { Case, /**Checkbox*/ formFieldsToCaseMapping, formatCase } from './case';
-import { CaseData, /**YesOrNo*/ } from './definition';
-
+import { CaseData /**YesOrNo*/ } from './definition';
 
 dayjs.extend(advancedFormat);
 
@@ -18,8 +17,6 @@ type FromApiConverters = Partial<Record<keyof CaseData, string | ((data: Partial
     return value === YesOrNo.YES ? Checkbox.Checked : Checkbox.Unchecked;
 };
  */
-
-
 
 const fields: FromApiConverters = {
   ...invert(formFieldsToCaseMapping),
@@ -47,7 +44,5 @@ const fields: FromApiConverters = {
 };
 
  */
-
-
 
 export const fromApiFormat = (data: CaseData): Case => formatCase(fields, data);

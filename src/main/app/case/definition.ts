@@ -1,5 +1,3 @@
-
-
 export interface Address {
   AddressLine1: string;
   AddressLine2: string;
@@ -10,16 +8,13 @@ export interface Address {
   Country: string;
 }
 
-
-
 export enum ContactPreference {
   ACCOUNT_OWNER = 'ACCOUNT_OWNER',
   NAMED_PERSON = 'NAMED_PERSON',
-  BOTH_RECEIVE = 'BOTH_RECEIVE'
-} 
+  BOTH_RECEIVE = 'BOTH_RECEIVE',
+}
 
-
-export interface AddressUK extends Address {}
+export type AddressUK = Address;
 
 export interface CaseLink {
   CaseReference: string;
@@ -63,13 +58,7 @@ export interface OrderSummary {
   PaymentTotal: string;
 }
 
-
-
-export interface State {
-
-}
-
-
+export interface State {}
 
 export interface CaseNote {
   author: string;
@@ -77,17 +66,13 @@ export interface CaseNote {
   note: string;
 }
 
-
-
-
-
 export interface Applicant {
   applicantFirstName: string;
   applicantLastName: string;
   applicantEmailAddress: string;
   applicantDateOfBirth: DateAsString;
-  applicantPhoneNumber: string,
-  applicantHomeNumber: string,
+  applicantPhoneNumber: string;
+  applicantHomeNumber: string;
   PhoneNumber: string;
   applicantAddress1: string;
   applicantAddress2: string;
@@ -100,15 +85,12 @@ export interface Application {
   applicantStatementOfTruth: YesOrNo;
 }
 
-
 export const enum ContactDetails {
   EMAIL = 'email',
   PHONE = 'phone',
 }
 
-
-
-export interface CaseData{
+export interface CaseData {
   caseID: string;
   namedApplicant: boolean;
   applicantFirstName: string;
@@ -123,8 +105,6 @@ export interface CaseData{
   applicantAddressCountry: any;
   applicantAddressPostCode: any;
 }
-
-
 
 export interface StatusHistoriesItem {
   date_updated: string;
@@ -173,15 +153,10 @@ export const enum SectionStatus {
   COMPLETED = 'COMPLETED',
 }
 
-
 export const enum LanguagePreference {
   ENGLISH = 'ENGLISH',
   WELSH = 'WELSH',
 }
-
-
-
-
 
 /**
  * Values:
@@ -346,6 +321,3 @@ export const enum HttpStatus {
   NOT_EXTENDED = 'NOT_EXTENDED',
   NETWORK_AUTHENTICATION_REQUIRED = 'NETWORK_AUTHENTICATION_REQUIRED',
 }
-
-
-

@@ -36,7 +36,7 @@ export const en = ({ userCase }: CommonContent): Record<string, unknown> => {
 };
 
 export const cy = ({ userCase }: CommonContent): Record<string, unknown> => {
-  const titleBar = ''
+  const titleBar = '';
   return {
     label: 'What are your contact details? (in welsh)',
     serviceName: 'Apply to ' + titleBar + ' (in welsh)',
@@ -104,7 +104,6 @@ export const form: FormContent = {
       label: l => l.mobilePhoneNumber,
       labelSize: null,
       validator: (value, formData) => {
-       
         /**
          *  
          *  const hasMobilePhoneNumberEntered = (value as string[])?.length && (value as string) !== '[]';
@@ -117,9 +116,7 @@ export const form: FormContent = {
           return 'atleastOneRequired';
         }
          */
-      
 
-     
         return isPhoneNoValid(value);
       },
     },

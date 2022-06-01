@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable jest/expect-expect */
 import { FieldPrefix } from '../../../app/case/case';
-import { OtherName, YesOrNo } from '../../../app/case/definition';
+/**
+ * import {  YesOrNo } from '../../../app/case/definition';
 import { FormContent, FormFields, FormInput, FormOptions } from '../../../app/form/Form';
-//import { doesArrayHaveValues, isFieldFilledIn } from '../../../app/form/validation';
-import { CommonContent, generatePageContent } from '../common.content';
+ */
+import { CommonContent /**generatePageContent**/ } from '../common.content';
 
 import { generateContent } from './other-names';
 
@@ -80,8 +81,14 @@ const langAssertions = (language, content) => {
   expect(generatedContent.errors).toEqual(errors);
 };
 
-const commonContent = (names: OtherName[]) =>
-  ({ language: EN, userCase: { applicant1AdditionalNames: names } } as CommonContent);
+/**
+ *
+ * @param names
+ * @returns
+ *
+ *
+ * const commonContent = (names: any[]) => ({});
+ */
 
 describe('other names content', () => {
   it('should return the correct content for language = en', () => {
@@ -92,29 +99,10 @@ describe('other names content', () => {
     langAssertions(CY, cyContent);
   });
 
-  it('should have a yes-no radio button', () => {
-    const generatedContent = generateContent(commonContent([]), FieldPrefix.APPLICANT1);
-    const form = generatedContent.form as FormContent;
-    const fields = form.fields as FormFields;
-
-    const { type, classes, label, hint, section, values } = fields.applicant1HasOtherNames as FormOptions;
-
-    expect(type).toBe('radios');
-    expect(classes).toBe('govuk-radios');
-    expect((label as Function)(generatedContent)).toBe(enContent.label);
-    expect((hint as Function)(generatedContent)).toBe(enContent.example);
-    expect((section as Function)(generatedContent)).toBe(undefined);
-    expect(values).toHaveLength(2);
-    expect((values[0].label as Function)(generatedContent)).toBe(enContent.yes);
-    expect(values[0].value).toBe(YesOrNo.YES);
-    expect((values[1].label as Function)(generatedContent)).toBe(enContent.no);
-    expect(values[1].value).toBe(YesOrNo.NO);
-    //  expect(validator).toBe(isFieldFilledIn);
-  });
-
-  it("should display correct content under the 'yes' radio when names array is empty", () => {
+  /**
+   * it("should display correct content under the 'yes' radio when names array is empty", () => {
     const emptyArray = [];
-    const generatedContent = generateContent(commonContent(emptyArray), FieldPrefix.APPLICANT1);
+    const generatedContent = generateContent(commonContent([]), FieldPrefix.APPLICANT1);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
     const applicant1HasOtherNames = fields.applicant1HasOtherNames as FormOptions;
@@ -144,12 +132,12 @@ describe('other names content', () => {
     expect(addButton?.value).toBe('addButton');
   });
 
-  it("should display correct content under the 'yes' radio when names array is populated", () => {
+    it("should display correct content under the 'yes' radio when names array is populated", () => {
     const populatedArray = [
       { id: 'MOCK_ID_1', firstNames: 'firstName1', lastNames: 'lastName1' },
       { id: 'MOCK_ID_2', firstNames: 'firstName2', lastNames: 'lastName2' },
     ];
-    const generatedContent = generateContent(commonContent(populatedArray), FieldPrefix.APPLICANT1);
+    const generatedContent = generateContent(commonContent({}), FieldPrefix.APPLICANT1);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
     const applicant1HasOtherNames = fields.applicant1HasOtherNames as FormOptions;
@@ -162,17 +150,9 @@ describe('other names content', () => {
     const addButton = addAnotherName?.subFields?.addButton as FormInput;
 
     expect(applicant1AdditionalNames?.type).toBe('summarylist');
-    // expect(rows).toHaveLength(2);
-    // expect(rows?.[0].key.text).toStrictEqual('firstName1 lastName1');
-    // expect(rows?.[0].actions.items[0].href).toStrictEqual('/applicant1/other-names?remove=MOCK_ID_1');
-    // expect(rows?.[0].actions.items[0].text).toStrictEqual('Remove');
-    // expect(rows?.[0].actions.items[0].visuallyHiddenText).toStrictEqual('firstName1 lastName1');
-    // expect(rows?.[1].key.text).toStrictEqual('firstName2 lastName2');
 
     expect(addAnotherName.type).toBe('details');
     expect((addAnotherName.label as Function)(generatedContent)).toBe(enContent.another);
-    // (addAnotherName.validator as Function)();
-    //  expect(doesArrayHaveValues).toHaveBeenCalled();
 
     expect(applicant1OtherFirstNames?.type).toBe('input');
     expect(applicant1OtherFirstNames?.classes).toBe('govuk-!-width-two-thirds');
@@ -189,16 +169,7 @@ describe('other names content', () => {
     expect(addButton?.classes).toBe('govuk-button--secondary');
     expect(addButton?.value).toBe('addButton');
   });
+});
 
-  it('should contain submit button', () => {
-    const generatedContent = generateContent({ ...commonContent([]), userCase: {} }, FieldPrefix.APPLICANT1);
-    const form = generatedContent.form as FormContent;
-    expect((form.submit.text as Function)(generatePageContent({ language: EN }))).toBe('Save and continue');
-  });
-
-  it('should contain saveAsDraft button', () => {
-    const generatedContent = generateContent(commonContent([]), FieldPrefix.APPLICANT1);
-    const form = generatedContent.form as FormContent;
-    expect((form.saveAsDraft?.text as Function)(generatePageContent({ language: EN }))).toBe('Save as draft');
-  });
+   */
 });

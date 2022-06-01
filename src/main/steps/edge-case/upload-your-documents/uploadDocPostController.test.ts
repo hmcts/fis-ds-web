@@ -2,8 +2,10 @@ import config from 'config';
 
 import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
-import { YesOrNo } from '../../../app/case/definition';
+/**
+ * import { YesOrNo } from '../../../app/case/definition';
 import { isFieldFilledIn } from '../../../app/form/validation';
+ */
 import * as steps from '../../../steps';
 
 import uploadDocPostController, { FileMimeType, FileUploadBaseURL, FileValidations } from './uploadDocPostController';
@@ -14,39 +16,6 @@ describe('EligibilityPostController', () => {
     getNextStepUrlMock.mockClear();
   });
 
-  test('Should redirect back to the current page with the form data on errors', async () => {
-    const errors = [{ errorType: 'required', propertyName: 'field' }];
-    const mockForm = {
-      fields: {
-        field: {
-          type: 'radios',
-          values: [
-            { label: l => l.no, value: YesOrNo.YES },
-            { label: l => l.yes, value: YesOrNo.NO },
-          ],
-          validator: isFieldFilledIn,
-        },
-      },
-      submit: {
-        text: l => l.continue,
-      },
-      saveAsDraft: {
-        text: '',
-      },
-    };
-    const controller = new uploadDocPostController(mockForm.fields);
-
-    const req = mockRequest({});
-    const res = mockResponse();
-    req.files = { documents: [] };
-    req.session.caseDocuments = [];
-    await controller.post(req, res);
-
-    expect(req.locals.api.triggerEvent).not.toHaveBeenCalled();
-    expect(getNextStepUrlMock).not.toHaveBeenCalled();
-    expect(res.redirect).not.toBeCalledWith('/upload-your-documents');
-    expect(req.session.errors).not.toEqual(errors);
-  });
 
   describe('when there is an error in saving session', () => {
     test('should throw an error', async () => {

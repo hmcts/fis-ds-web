@@ -6,9 +6,7 @@ import { Case, CaseDate } from '../case/case';
 
 dayjs.extend(customParseFormat);
 
-export type Validator = (
-  value: string | string[] | CaseDate | Partial<Case> | any[] | undefined
-) => void | string;
+export type Validator = (value: string | string[] | CaseDate | Partial<Case> | any[] | undefined) => void | string;
 export type DateValidator = (value: CaseDate | undefined) => void | string;
 
 export const enum ValidationError {
@@ -60,7 +58,7 @@ export const areDateFieldsFilledIn: DateValidator = fields => {
 };
 
 export const doesArrayHaveValues: Validator = value => {
-  if (!value || !(value as ( any)[])?.length) {
+  if (!value || !(value as any[])?.length) {
     return ValidationError.REQUIRED;
   }
 };

@@ -3,7 +3,7 @@ import { mockRequest } from '../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../test/unit/utils/mockResponse';
 //import { generatePageContent } from '../../steps/common/common.content';
 import { Case } from '../case/case';
-import { State } from '../case/definition';
+// import { State } from '../case/definition';
 
 import { GetController } from './GetController';
 
@@ -40,7 +40,7 @@ describe('GetController', () => {
   test('Detects when application is not in a draft state', async () => {
     const controller = new GetController('page', () => ({}));
 
-    const req = mockRequest({ userCase: { state: State.AwaitingPayment } });
+    const req = mockRequest({ userCase: { state: '' } });
     const res = mockResponse();
     await controller.get(req, res);
 
@@ -199,7 +199,7 @@ describe('GetController', () => {
       const getContentMock = jest.fn().mockReturnValue({});
       const controller = new GetController('page', getContentMock);
 
-      const req = mockRequest({ userCase: { state: State.Draft }, session: { errors: [] } });
+      const req = mockRequest({ userCase: { state: '' }, session: { errors: [] } });
       const res = mockResponse();
       await controller.get(req, res);
 

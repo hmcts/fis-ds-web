@@ -1,27 +1,19 @@
-import Axios, { AxiosError, AxiosInstance} from 'axios';
+import Axios, { AxiosError, AxiosInstance } from 'axios';
 import config from 'config';
 import { LoggerInstance } from 'winston';
-
 
 import { getServiceAuthToken } from '../auth/service/get-service-auth-token';
 import { AppRequest, UserDetails } from '../controller/AppRequest';
 
 import { Case, CaseWithId } from './case';
-import {
-  CaseData,
-} from './definition';
+import { CaseData } from './definition';
 import { toApiFormat } from './to-api-format';
 
-
-
 export class CaseApi {
-  constructor(
-    private readonly axios: AxiosInstance,
-    private readonly logger: LoggerInstance
-  ) {}
+  constructor(private readonly axios: AxiosInstance, private readonly logger: LoggerInstance) {}
 
   public async getOrCreateCase(): Promise<CaseWithId> {
-     return new Promise((req, res)=> {})
+    return new Promise((req, res) => {});
   }
 
   public async getOrCreateCaseNew(
@@ -32,26 +24,19 @@ export class CaseApi {
     return this.createCaseNew(req, userDetails, formData);
   }
 
- 
-
-
-
   public async createCaseNew(req: AppRequest, userDetails: UserDetails, formData: Partial<Case>): Promise<CaseWithId> {
-     const date =   this.axios.interceptors.request;
-      //********** ADD axios data */
-      console.log(date)
-      return new Promise((reject, resolve)=> {})
+    const date = this.axios.interceptors.request;
+    //********** ADD axios data */
+    console.log(date);
+    return new Promise((reject, resolve) => {});
   }
 
-
-
   private async dispatchCaseEvent(caseId: string, data: Partial<CaseData>): Promise<CaseWithId> {
-    try {  
+    try {
     } catch (error) {
-      this.logError(error)
-    }
-    finally{
-      return new Promise((reject, resolve)=> {})
+      this.logError(error);
+    } finally {
+      return new Promise((reject, resolve) => {});
     }
   }
 
@@ -71,7 +56,6 @@ export class CaseApi {
     }
   }
 }
-
 
 export const getCaseApi = (userDetails: UserDetails, logger: LoggerInstance): CaseApi => {
   return new CaseApi(
