@@ -6,7 +6,6 @@ import { LanguageToggle } from '../../modules/i18n';
 import { CommonContent, Language, generatePageContent } from '../../steps/common/common.content';
 import * as Urls from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
-import { CITIZEN_UPDATE, State } from '../case/definition';
 
 import { AppRequest } from './AppRequest';
 
@@ -64,8 +63,7 @@ export class GetController {
         sessionErrors,
         FileErrors,
         htmlLang: language,
-        isDraft: req.session?.userCase?.state ? req.session.userCase.state === State.Draft : true,
-        // getNextIncompleteStepUrl: () => getNextIncompleteStepUrl(req),
+        isDraft: req.session?.userCase?.state 
       });
     }
   }
@@ -97,7 +95,7 @@ export class GetController {
 
   public async save(req: AppRequest, formData: Partial<Case>, eventName: string): Promise<CaseWithId> {
     try {
-      return await req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
+      return await req.locals.api.triggerEvent(req.session.userCase.id, formData);
     } catch (err) {
       req.locals.logger.error('Error saving', err);
       req.session.errors = req.session.errors || [];
@@ -120,8 +118,4 @@ export class GetController {
     });
   }
 
-  //eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected getEventName(req: AppRequest): string {
-    return CITIZEN_UPDATE;
-  }
 }

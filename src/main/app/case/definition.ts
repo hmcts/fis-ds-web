@@ -1,7 +1,3 @@
-/* tslint:disable */
-/* eslint-disable */
-// Generated using typescript-generator version 2.33.956 on 2021-11-12 15:28:24.
-
 
 
 export interface Address {
@@ -15,6 +11,12 @@ export interface Address {
 }
 
 
+
+export enum ContactPreference {
+  ACCOUNT_OWNER = 'ACCOUNT_OWNER',
+  NAMED_PERSON = 'NAMED_PERSON',
+  BOTH_RECEIVE = 'BOTH_RECEIVE'
+} 
 
 
 export interface AddressUK extends Address {}
@@ -64,7 +66,7 @@ export interface OrderSummary {
 
 
 export interface State {
-  
+
 }
 
 

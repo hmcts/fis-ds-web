@@ -3,20 +3,22 @@ import config from 'config';
 import { Response } from 'express';
 
 import { getNextStepUrl } from '../../steps';
-import { CONTACT_DETAILS, SAVE_AND_SIGN_OUT } from '../../steps/urls';
+import { SAVE_AND_SIGN_OUT } from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
-import { CITIZEN_CREATE, CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE } from '../case/definition';
 import { Form, FormFields, FormFieldsFn } from '../form/Form';
 import { ValidationError } from '../form/validation';
 
 import { AppRequest } from './AppRequest';
 
-enum noHitToSaveAndContinue {
+/**
+ * enum noHitToSaveAndContinue {
   CITIZEN_HOME_URL = '/citizen-home',
   SERVICE_TYPE = '/service-type',
   ADOPTION_APPLICATION_TYPE = '/adoption-application-type',
   PRIVATE_LAW_APPLICATION_TYPE = '/private-law-application-type',
 }
+ */
+
 
 @autobind
 export class PostController<T extends AnyObject> {
@@ -45,7 +47,7 @@ export class PostController<T extends AnyObject> {
 
   private async saveAndSignOut(req: AppRequest<T>, res: Response, formData: Partial<Case>): Promise<void> {
     try {
-      await this.save(req, formData, CITIZEN_SAVE_AND_CLOSE);
+      await this.save(req, formData);
     } catch {
       // ignore
     }
@@ -54,7 +56,7 @@ export class PostController<T extends AnyObject> {
 
   private async saveBeforeSessionTimeout(req: AppRequest<T>, res: Response, formData: Partial<Case>): Promise<void> {
     try {
-      await this.save(req, formData, this.getEventName(req));
+      await this.save(req, formData/**this.getEventName(req) */);
     } catch {
       // ignore
     }
@@ -63,19 +65,14 @@ export class PostController<T extends AnyObject> {
 
   private async saveAndContinue(req: AppRequest<T>, res: Response, form: Form, formData: Partial<Case>): Promise<void> {
 
-   // console.log(formData);
- 
 
     Object.assign(req.session.userCase, formData);
     req.session.errors = form.getErrors(formData);
-
-    console.log({userCase: req.session.userCase})
-    console.log({form})
-
     this.filterErrorsForSaveAsDraft(req);
 
-
-    if (req.session?.user && req.session.errors.length === 0) {
+    /**
+     * 
+     *     if (req.session?.user && req.session.errors.length === 0) {
       if (!(Object.values(noHitToSaveAndContinue) as string[]).includes(req.originalUrl)) {
         const eventName = this.getEventName(req);
         if (eventName === CITIZEN_CREATE) {
@@ -90,6 +87,9 @@ export class PostController<T extends AnyObject> {
     if (typeof req.session.userCase !== 'undefined' && req.session.userCase !== null) {
 
     }
+     */
+
+
 
     this.redirect(req, res);
   }
@@ -120,10 +120,10 @@ export class PostController<T extends AnyObject> {
     }
   }
 
-  protected async save(req: AppRequest<T>, formData: Partial<Case>, eventName: string): Promise<CaseWithId> {
+  protected async save(req: AppRequest<T>, formData: Partial<Case>): Promise<CaseWithId> {
     try {
       console.log('Update Existing Case');
-      req.session.userCase = await req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
+      req.session.userCase = await req.locals.api.triggerEvent(req.session.userCase.id, formData);
     } catch (err) {
       req.locals.logger.error('Error saving', err);
       req.session.errors = req.session.errors || [];
@@ -158,7 +158,14 @@ export class PostController<T extends AnyObject> {
   }
 
   //eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected getEventName(req: AppRequest): string {
+
+  /**
+   * 
+   * @param req 
+   * @returns 
+   * 
+   * 
+   *   protected getEventName(req: AppRequest): string {
     let eventName;
     if (req.originalUrl === CONTACT_DETAILS && this.isBlank(req)) {
       console.log('creating new case event');
@@ -170,7 +177,9 @@ export class PostController<T extends AnyObject> {
     return eventName;
   }
 
-  private isBlank(req: AppRequest<Partial<Case>>) {
+
+
+    private isBlank(req: AppRequest<Partial<Case>>) {
     console.log('inside isBlank() case id is => ' + req.session.userCase.id);
     if (req.session.userCase.id === null || req.session.userCase.id === undefined || req.session.userCase.id === '') {
       return true;
@@ -178,4 +187,9 @@ export class PostController<T extends AnyObject> {
   }
 }
 
+
+
+   */
+
+}
 export type AnyObject = Record<string, unknown>;

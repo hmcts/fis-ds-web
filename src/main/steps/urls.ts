@@ -9,7 +9,7 @@ export const TIMED_OUT_URL: PageLink = '/timed-out';
 export const KEEP_ALIVE_URL: PageLink = '/keep-alive';
 export const CSRF_TOKEN_ERROR_URL: PageLink = '/csrf-token-error';
 
-export const DOCUMENT_UPLOAD_URL: PageLink = '/document-manager';
+
 
 export const ADDITIONAL_DOCUMENTS_UPLOAD: PageLink = '/upload-additional-documents';
 
@@ -20,13 +20,9 @@ export const TASK_LIST_URL: PageLink = '/task-list';
 
 export const APPLYING_WITH_URL: PageLink = '/applying-with';
 export const DATE_CHILD_MOVED_IN: PageLink = '/date-child-moved-in';
-//export const CITIZEN_DETAILS_URL: PageLink = '/citizen-details';
-//export const CITIZEN_HOME_URL: PageLink = '/citizen-home';
+
 export const EDGE_CASE_URL: PageLink = '/edge-case';
-//export const SELECT_JURISDICTION: PageLink = '/select-jurisdiction';
-//export const SERVICE_TYPE: PageLink = '/service-type';
-//export const ADOPTION_APPLICATION_TYPE: PageLink = '/adoption-application-type';
-//export const PRIVATE_LAW_APPLICATION_TYPE: PageLink = '/pr////ivate-law-application-type';
+
 export const FULL_NAME: PageLink = '/full-name';
 export const USER_ROLE: PageLink = '/user-role';
 export const DATE_OF_BIRTH: PageLink = '/date-of-birth';

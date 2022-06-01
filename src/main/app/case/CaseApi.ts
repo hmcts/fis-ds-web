@@ -1,4 +1,4 @@
-import Axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
+import Axios, { AxiosError, AxiosInstance} from 'axios';
 import config from 'config';
 import { LoggerInstance } from 'winston';
 
@@ -7,12 +7,9 @@ import { getServiceAuthToken } from '../auth/service/get-service-auth-token';
 import { AppRequest, UserDetails } from '../controller/AppRequest';
 
 import { Case, CaseWithId } from './case';
-import { CaseAssignedUserRoles } from './case-roles';
 import {
   CaseData,
-  State,
 } from './definition';
-import { fromApiFormat } from './from-api-format';
 import { toApiFormat } from './to-api-format';
 
 
@@ -39,54 +36,28 @@ export class CaseApi {
 
 
 
-  public async getCaseById(caseId: string): Promise<CaseWithId> {
-    try {
-      const response = await this.axios.get<CcdV2Response>(`/cases/${caseId}`);
-      return { id: response.data.id, state: response.data.state, ...fromApiFormat(response.data.data) };
-    } catch (err) {
-      this.logError(err);
-      throw new Error('Case could not be retrieved.');
-    }
-  }
-
-
   public async createCaseNew(req: AppRequest, userDetails: UserDetails, formData: Partial<Case>): Promise<CaseWithId> {
+     const date =   this.axios.interceptors.request;
+      //********** ADD axios data */
+      console.log(date)
       return new Promise((reject, resolve)=> {})
   }
 
 
 
-  public async getCaseUserRoles(caseId: string, userId: string): Promise<CaseAssignedUserRoles> {
-    try {
-      const response = await this.axios.get<CaseAssignedUserRoles>(`case-users?case_ids=${caseId}&user_ids=${userId}`);
-      return response.data;
-    } catch (err) {
-      this.logError(err);
-      throw new Error('Case roles could not be fetched.');
+  private async dispatchCaseEvent(caseId: string, data: Partial<CaseData>): Promise<CaseWithId> {
+    try {  
+    } catch (error) {
+      this.logError(error)
+    }
+    finally{
+      return new Promise((reject, resolve)=> {})
     }
   }
 
-  private async sendEvent(caseId: string, data: Partial<CaseData>, eventName: string): Promise<CaseWithId> {
-    try {
-      const tokenResponse = await this.axios.get<CcdTokenResponse>(`/cases/${caseId}/event-triggers/${eventName}`);
-      const token = tokenResponse.data.token;
-      const event = { id: eventName };
-
-      const response: AxiosResponse<CcdV2Response> = await this.axios.post(`/cases/${caseId}/events`, {
-        event,
-        data,
-        event_token: token,
-      });
-      return { id: response.data.id, state: response.data.state, ...fromApiFormat(response.data.data) };
-    } catch (err) {
-      this.logError(err);
-      throw new Error('Case could not be updated.');
-    }
-  }
-
-  public async triggerEvent(caseId: string, userData: Partial<Case>, eventName: string): Promise<CaseWithId> {
+  public async triggerEvent(caseId: string, userData: Partial<Case>): Promise<CaseWithId> {
     const data = toApiFormat(userData);
-    return this.sendEvent(caseId, data, eventName);
+    return this.dispatchCaseEvent(caseId, data);
   }
 
   private logError(error: AxiosError) {
@@ -100,6 +71,7 @@ export class CaseApi {
     }
   }
 }
+
 
 export const getCaseApi = (userDetails: UserDetails, logger: LoggerInstance): CaseApi => {
   return new CaseApi(
@@ -117,19 +89,3 @@ export const getCaseApi = (userDetails: UserDetails, logger: LoggerInstance): Ca
     logger
   );
 };
-
-/* interface CcdV1Response {
-  id: string;
-  state: State;
-  case_data: CaseData;
-} */
-
-interface CcdV2Response {
-  id: string;
-  state: State;
-  data: CaseData;
-}
-
-interface CcdTokenResponse {
-  token: string;
-}

@@ -21,10 +21,6 @@ export default class SelectAddressPostControllerBase extends PostController<AnyO
 
     Object.assign(req.session.userCase, formData);
 
-    const tempServiceType = req.session.userCase.serviceType;
-    const tempApplyingWithAdoption = req.session.userCase.applyingWithAdoption;
-    const tempApplyingWithPrivateLaw = req.session.userCase.applyingWithPrivateLaw;
-
     if (req.session.errors.length === 0) {
       const selectedAddressIndex = Number(formData[`${this.fieldPrefix}SelectAddress`]);
       if (selectedAddressIndex >= 0) {
@@ -49,12 +45,6 @@ export default class SelectAddressPostControllerBase extends PostController<AnyO
 
     this.filterErrorsForSaveAsDraft(req);
 
-    // here we explicitly assigning the values to userCase to get the title
-    if (typeof req.session.userCase !== 'undefined' && req.session.userCase !== null) {
-      req.session.userCase.serviceType = tempServiceType;
-      req.session.userCase.applyingWithAdoption = tempApplyingWithAdoption;
-      req.session.userCase.applyingWithPrivateLaw = tempApplyingWithPrivateLaw;
-    }
 
     this.redirect(req, res);
   }
