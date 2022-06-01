@@ -246,7 +246,7 @@ describe('Validation', () => {
   describe('isOptionalEmailAddressValid()', () => {
     it.each([
       { mockEmail: 'test', expected: 'invalid' },
-      { mockEmail: 'test@test', expected: 'valid' },
+      { mockEmail: 'test@test', expected: 'invalid' },
       { mockEmail: 'test@test.com', expected: 'valid' },
       { mockEmail: 'test_123@test.com', expected: 'valid' },
       { mockEmail: 'test_123@test@test.com', expected: 'valid' },
