@@ -1694,6 +1694,13 @@ export const enum HttpStatus {
   NOT_EXTENDED = 'NOT_EXTENDED',
   NETWORK_AUTHENTICATION_REQUIRED = 'NETWORK_AUTHENTICATION_REQUIRED',
 }
+
+export const enum ContactPreference {
+  ACCOUNT_OWNER = 'ao',
+  NAMED_PERSON = 'np',
+  BOTH_RECEIVE = 'bre',
+}
+
 export const CASE_TYPE = 'A58';
 export const JURISDICTION = 'ADOPTION';
 export const CITIZEN_SUBMIT = 'citizen-submit-application';

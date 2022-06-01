@@ -78,7 +78,8 @@ exports.config = {
     dateofbirth: './src/test/e2e/pages/DateOfBirth.page.js',
     uploadfilepage: './src/test/e2e/pages/UploadDocuments.page.js',
     reviewpaymentpage: './src/test/e2e/pages/ReviewPayment.page.js',
-    determineapplicantrole:'./src/test/e2e/pages/DetermineApplicantRole.page.js'
+    determineapplicantrole:'./src/test/e2e/pages/DetermineApplicantRole.page.js',
+    contactpreferencepage: './src/test/e2e/pages/ContactPreference.page.js'
   },
   plugins: {
     retryFailedStep: {
