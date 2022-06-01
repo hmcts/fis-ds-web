@@ -51,17 +51,6 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   applicant1ContactDetails: 'applicant1ContactDetails',
 
 
-  childrenFirstName: 'childrenFirstName',
-  childrenLastName: 'childrenLastName',
-  childrenDateOfBirth: 'childrenDateOfBirth',
-  childrenNationality: 'childrenNationality',
-  childrenAdditionalNationalities: 'childrenAdditionalNationalities',
-  childrenFirstNameAfterAdoption: 'childrenFirstNameAfterAdoption',
-  childrenLastNameAfterAdoption: 'childrenLastNameAfterAdoption',
-  childrenSexAtBirth: 'childrenSexAtBirth',
-  addAnotherPlacementOrder: 'addAnotherPlacementOrder',
-  selectedPlacementOrderId: 'selectedPlacementOrderId',
-
   birthMotherFirstNames: 'birthMotherFirstName',
   birthMotherLastNames: 'birthMotherLastName',
   birthMotherStillAlive: 'birthMotherStillAlive',
