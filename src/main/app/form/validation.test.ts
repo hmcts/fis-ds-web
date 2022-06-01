@@ -14,6 +14,7 @@ import {
   isInvalidPostcode,
   isLessThanAYear,
   isMoreThan18Years,
+  isOptionalEmailAddressValid,
   isPhoneNoValid,
   isTextAreaValid,
   isValidAccessCode,
@@ -244,14 +245,13 @@ describe('Validation', () => {
   //RB
   describe('isOptionalEmailAddressValid()', () => {
     it.each([
-      //{ mockEmail: '', expected: 'invalid' },
       { mockEmail: 'test', expected: 'invalid' },
-      { mockEmail: '12345', expected: 'invalid' },
-      { mockEmail: 'test@test.com', expected: undefined },
-      { mockEmail: 'test_123@test.com', expected: undefined },
-      { mockEmail: 'test_123@test@test.com', expected: 'invalid' },
+      { mockEmail: 'test@test', expected: 'invalid' },
+      { mockEmail: 'test@test.com', expected: 'valid' },
+      { mockEmail: 'test_123@test.com', expected: 'valid' },
+      { mockEmail: 'test_123@test@test.com', expected: 'valid' },
     ])('validates an email when %o', ({ mockEmail, expected }) => {
-      expect(isEmailValid(mockEmail)).toEqual(expected);
+      expect(isOptionalEmailAddressValid(mockEmail)).toEqual(expected);
     });
   });
 

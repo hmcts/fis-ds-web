@@ -32,13 +32,6 @@ export const atLeastOneFieldIsChecked: Validator = fields => {
   }
 };
 
-export const notSureViolation: Validator = fields => {
-  const arr = fields as string[];
-  if (arr.length > 1 && arr.find(s => s === 'Not sure')) {
-    return 'notSureViolation';
-  }
-};
-
 export const areDateFieldsFilledIn: DateValidator = fields => {
   if (typeof fields !== 'object' || Object.keys(fields).length !== 3) {
     return ValidationError.REQUIRED;
@@ -168,7 +161,11 @@ export const isEmailValid: Validator = value => {
 
 export const isOptionalEmailAddressValid: Validator = value => {
   if (typeof value === 'string') {
-    return !value.match('^$|[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$') ? 'invalid' : undefined;
+    return !value.match(
+      '^(?=.{1,64})[A-Za-z0-9_-]+(.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(.[A-Za-z0-9-]+)*(.[A-Za-z]{2,})$'
+    )
+      ? 'invalid'
+      : 'valid';
   }
 };
 
