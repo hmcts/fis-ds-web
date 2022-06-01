@@ -58,7 +58,6 @@ cookieManager.init({
   'cookie-banner-saved-callback': cookieBannerSaved,
   'cookie-banner-auto-hide': false,
   'cookie-manifest': [
-    //TODO add additional GA cookies
     {
       'category-name': 'essential',
       optional: false,
