@@ -37,11 +37,11 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   applicant1HelpWithFeesRefNo: 'applicant1HWFReferenceNumber',
   connections: 'jurisdictionConnections',
 
-  applicant1FirstNames: 'applicant1FirstName',
-  applicant1LastNames: 'applicant1LastName',
+  applicantFirstNames: 'applicantFirstName',
+  applicantLastNames: 'applicantLastName',
   applicant1HasOtherNames: 'applicant1HasOtherNames',
   applicant1AdditionalNames: 'applicant1AdditionalNames',
-  applicant1DateOfBirth: 'applicant1DateOfBirth',
+  applicantDateOfBirth: 'applicantDateOfBirth',
   applicant1Occupation: 'applicant1Occupation',
   applicant1EmailAddress: 'applicant1EmailAddress',
   applicant1PhoneNumber: 'applicant1PhoneNumber',
@@ -194,14 +194,14 @@ export interface Case {
   applyingForSelf?: string;
 
   /***** Applicant1 *****/
-  applicant1FirstNames?: string;
-  applicant1LastNames?: string;
+  applicantFirstNames?: string;
+  applicantLastNames?: string;
   applicant1HasOtherNames?: YesOrNo;
   applicant1AdditionalName?: string;
   applicant1AdditionalNames?: OtherName[];
   applicant1EmailAddress?: string;
   applicant1PhoneNumber?: string;
-  applicant1DateOfBirth?: CaseDate;
+  applicantDateOfBirth?: CaseDate;
   applicant1Occupation?: string;
   applicant1Nationality?: Nationality[];
   applicant1AdditionalNationalities?: string[];

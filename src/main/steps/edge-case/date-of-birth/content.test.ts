@@ -1,8 +1,28 @@
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
+import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 import { CommonContent, generatePageContent } from '../../common/common.content';
 
 import { generateContent } from './content';
+
+const resourceLoader = new ResourceReader();
+resourceLoader.Loader('date-of-birth');
+const translations = resourceLoader.getFileContents().translations;
+const errors = resourceLoader.getFileContents().errors;
+
+const enContent = {
+  ...translations.en,
+  errors: {
+    ...errors.en,
+  },
+};
+
+const cyContent = {
+  ...translations.cy,
+  errors: {
+    ...errors.cy,
+  },
+};
 
 jest.mock('../../../app/form/validation');
 
@@ -17,44 +37,11 @@ const commonContent = {
   },
 } as CommonContent;
 
-const enContent = {
-  section: 'Applicant',
-  title: "What's your date of birth?",
-  hint: 'For example, 27 3 2007',
-  errors: {
-    applicant1DateOfBirth: {
-      required: 'Enter your date of birth',
-      invalidDate: 'Date of birth must be a real date',
-      incompleteDay: 'Your date of birth must include a day',
-      incompleteMonth: 'Your date of birth must include a month',
-      incompleteYear: 'Your date of birth must include a year',
-      invalidDateInFuture: 'Your date of birth must be in the past',
-    },
-  },
-};
-
-const cyContent = {
-  section: 'Applicant (in Welsh)',
-  title: "What's your date of birth? (in Welsh)",
-  hint: 'For example, 28 6 1997 (in Welsh)',
-  errors: {
-    applicant1DateOfBirth: {
-      required: 'Enter your date of birth (in Welsh)',
-      invalidDate: 'Date of birth must be a real date (in Welsh)',
-      incompleteDay: 'Your date of birth must include a day (in Welsh)',
-      incompleteMonth: 'Your date of birth must include a month (in Welsh)',
-      incompleteYear: 'Your date of birth must include a year (in Welsh)',
-      invalidDateInFuture: 'Your date of birth must be in the past (in Welsh)',
-    },
-  },
-};
-
 describe('appllicant1 > dob-content', () => {
   test('should return correct english content', () => {
     const generatedContent = generateContent({ ...commonContent });
 
     expect(generatedContent.title).toEqual(enContent.title);
-    expect(generatedContent.section).toEqual(enContent.section);
     expect(generatedContent.hint).toEqual(enContent.hint);
     expect(generatedContent.errors).toEqual(enContent.errors);
   });
@@ -66,7 +53,6 @@ describe('appllicant1 > dob-content', () => {
     });
 
     expect(generatedContent.title).toEqual(cyContent.title);
-    expect(generatedContent.section).toEqual(cyContent.section);
     expect(generatedContent.hint).toEqual(cyContent.hint);
     expect(generatedContent.errors).toEqual(cyContent.errors);
   });
@@ -78,24 +64,17 @@ describe('appllicant1 > dob-content', () => {
     expect((form.submit.text as Function)(generatePageContent({ language: EN }))).toBe('Save and continue');
   });
 
-  test('should contain cancel button', () => {
-    const generatedContent = generateContent(commonContent);
-    const form = generatedContent.form as FormContent;
-
-    expect((form.cancel!.text as Function)(generatePageContent({ language: EN }))).toBe('Cancel');
-  });
-
   test('should contain dateOfBirth field', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const dobField = fields.applicant1DateOfBirth as FormOptions;
+    const dobField = fields.applicantDateOfBirth as FormOptions;
 
     expect(dobField.type).toBe('date');
     expect(dobField.classes).toBe('govuk-date-input');
-    expect((dobField.label as Function)(generatedContent)).toBe("What's your date of birth?");
+    expect((dobField.label as Function)(generatedContent)).toBe(enContent.title);
     expect(dobField.labelHidden).toBe(true);
-    expect((dobField.hint as Function)(generatedContent)).toBe('For example, 27 3 2007');
+    expect((dobField.hint as Function)(generatedContent)).toBe(enContent.hint);
 
     expect((dobField.values[0].label as Function)(commonContent)).toBe('Day');
     expect(dobField.values[0].name).toBe('day');
@@ -114,23 +93,23 @@ describe('appllicant1 > dob-content', () => {
 
     expect(
       (dobField.parser as Function)({
-        'applicant1DateOfBirth-day': '21',
-        'applicant1DateOfBirth-month': '12',
-        'applicant1DateOfBirth-year': '2018',
+        'applicantDateOfBirth-day': '21',
+        'applicantDateOfBirth-month': '12',
+        'applicantDateOfBirth-year': '2018',
       })
     ).toEqual({ day: '21', month: '12', year: '2018' });
     expect((dobField.validator as Function)({ day: '21', month: '12', year: '2018' })).toBe(undefined);
   });
 });
-it('should have dateOfBirth label when language: en and  applyingWith: alone', () => {
-  const commonContent1 = { language: 'en', userCase: { applyingWith: 'alone' } } as CommonContent;
+it('should have dateOfBirth label when language: en', () => {
+  const commonContent1 = { language: 'en', userCase: {} } as CommonContent;
 
   const generatedContent1 = generateContent(commonContent1);
-  expect(generatedContent1.section).toBe('Applicant');
+  expect(generatedContent1.title).toBe(enContent.title);
 });
 
-it('should have an dateOfBirth label when language: cy and  applyingWith: alone', () => {
-  const commonContent1 = { language: 'cy', userCase: { applyingWith: 'alone' } } as CommonContent;
+it('should have an dateOfBirth label when language: cy', () => {
+  const commonContent1 = { language: 'cy', userCase: {} } as CommonContent;
 
   const generatedContent1 = generateContent(commonContent1);
   expect(generatedContent1.section).not.toBe('Ceisydd');

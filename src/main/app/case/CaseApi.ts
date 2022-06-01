@@ -125,8 +125,8 @@ export class CaseApi {
       // applicant1FirstName: userDetails.givenName,
       // applicant1LastName: userDetails.familyName,
       // applicant1Email: userDetails.email,
-      applicant1FirstName: formData.applicant1FirstNames,
-      applicant1LastName: formData.applicant1LastNames,
+      applicantFirstName: formData.applicantFirstNames,
+      applicantLastName: formData.applicantLastNames,
       applicant1Email: userDetails.email,
     };
     //console.log("token => "+token+", event => "+event+", data => "+data);
