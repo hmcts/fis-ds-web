@@ -30,11 +30,22 @@ export type FieldFormats = Record<string, string | ((AnyObject) => AnyObject)>;
 
 
 
-/**
- * @CaseData
- */
+/***@caseData */
 export interface Case {
  /*********All information related to the Case */
+ namedApplicant: boolean;
+ applicantFirstName: string;
+ applicantLastName: string;
+ applicantDateOfBirth: string;
+ applicantEmailAddress: string;
+ applicantPhoneNumber: string;
+ applicantHomeNumber: string;
+ applicantAddress1: string;
+ applicantAddress2: string;
+ applicantAddressTown: string;
+ applicantAddressCountry: any;
+ applicantAddressPostCode: any; 
+
 
 }
 
@@ -53,6 +64,8 @@ export interface CaseDate {
   month: string;
   day: string;
 }
+
+export type Date =  string
 
 export enum LanguagePreference {
   English = 'english',

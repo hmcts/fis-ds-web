@@ -1,8 +1,8 @@
-import { OtherName } from '../../../app/case/definition';
+
 import { SummaryListContent } from '../models/summaryListContent';
 
 export const mapSummaryListContent = (
-  values: (string | OtherName)[],
+  values: (string | any)[],
   actionItems: string[],
   path: string
 ): SummaryListContent => ({

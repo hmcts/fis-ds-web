@@ -101,13 +101,6 @@ export interface Application {
 }
 
 
-export const enum Nationality {
-  BRITHISH = 'British',
-  IRISH = 'Irish',
-  OTHER = 'Other',
-  NOT_SURE = 'Not sure',
-}
-
 export const enum ContactDetails {
   EMAIL = 'email',
   PHONE = 'phone',
@@ -115,43 +108,20 @@ export const enum ContactDetails {
 
 
 
-export interface OtherName {
-  id?: string;
-  firstNames: string;
-  lastNames: string;
-}
-
-export interface AdditionalNationality {
-  country: string;
-}
-
-
-export interface CaseData {
-  serviceType: string;
-  applyingForSelf: string;
-  applyingWith: any;
-  applyingWithPrivateLaw:string;
-  applyingWithAdoption: string;
-  dateChildMovedIn?: DateAsString;
+export interface CaseData{
+  caseID: string;
+  namedApplicant: boolean;
   applicantFirstName: string;
   applicantLastName: string;
-  applicant1Email: string;
-  applicant1HasOtherNames: YesOrNo;
-  applicant1AdditionalNames: ListValue<OtherName>[];
-  applicantDateOfBirth: DateAsString;
-  applicant1Occupation: string;
-  applicant1EmailAddress: string;
-  applicant1PhoneNumber: string;
-  applicant1Nationality: Nationality[];
-  applicant1AdditionalNationalities: ListValue<AdditionalNationality>[];
-  applicant1Address1: string;
-  applicant1Address2: string;
-  applicant1AddressTown: string;
-  applicant1AddressCountry: string;
-  applicant1AddressPostCode: string;
-  applicant1ContactDetails: ContactDetails[];
-
-
+  applicantDateOfBirth: string;
+  applicantEmailAddress: string;
+  applicantPhoneNumber: string;
+  applicantHomeNumber: string;
+  applicantAddress1: string;
+  applicantAddress2: string;
+  applicantAddressTown: string;
+  applicantAddressCountry: any;
+  applicantAddressPostCode: any;
 }
 
 
