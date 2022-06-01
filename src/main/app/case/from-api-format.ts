@@ -62,8 +62,8 @@ const fields: FromApiConverters = {
   dateChildMovedIn: data => ({
     dateChildMovedIn: fromApiDate(data.dateChildMovedIn),
   }),
-  applicant1DateOfBirth: data => ({
-    applicant1DateOfBirth: fromApiDate(data.applicant1DateOfBirth),
+  applicantDateOfBirth: data => ({
+    applicantDateOfBirth: fromApiDate(data.applicantDateOfBirth),
   }),
   applicant2DateOfBirth: data => ({
     applicant2DateOfBirth: fromApiDate(data.applicant2DateOfBirth),

@@ -3,13 +3,13 @@
         "en": {
             "continue": "Continue",
             "section": "Applicant",
-            "serviceName": "Select Address",
+            "serviceName": "Enter Address",
             "title": "What's your home address?"
         },
         "cy": {
             "continue": "Continue",
             "section": "Applicant (in welsh)",
-            "serviceName": "Select Address (in welsh)",
+            "serviceName": "Enter Address (in welsh)",
             "title": "What's your home address? (in welsh)"
         }
     },

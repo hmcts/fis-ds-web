@@ -68,7 +68,7 @@ describe('appllicant1 > dob-content', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const dobField = fields.applicant1DateOfBirth as FormOptions;
+    const dobField = fields.applicantDateOfBirth as FormOptions;
 
     expect(dobField.type).toBe('date');
     expect(dobField.classes).toBe('govuk-date-input');
@@ -93,9 +93,9 @@ describe('appllicant1 > dob-content', () => {
 
     expect(
       (dobField.parser as Function)({
-        'applicant1DateOfBirth-day': '21',
-        'applicant1DateOfBirth-month': '12',
-        'applicant1DateOfBirth-year': '2018',
+        'applicantDateOfBirth-day': '21',
+        'applicantDateOfBirth-month': '12',
+        'applicantDateOfBirth-year': '2018',
       })
     ).toEqual({ day: '21', month: '12', year: '2018' });
     expect((dobField.validator as Function)({ day: '21', month: '12', year: '2018' })).toBe(undefined);

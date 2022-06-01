@@ -15,7 +15,7 @@
     },
     "errors":{
         "en": {
-            "applicant1DateOfBirth": {
+            "applicantDateOfBirth": {
                 "required": "Enter your date of birth",
                 "invalidDate": "Date of birth must be a real date",
                 "incompleteDay": "Your date of birth must include a day",
@@ -25,7 +25,7 @@
             }
         },
         "cy": {
-            "applicant1DateOfBirth": {
+            "applicantDateOfBirth": {
                 "required": "Enter your date of birth (in welsh)",
                 "invalidDate": "Date of birth must be a real date (in welsh)",
                 "incompleteDay": "Your date of birth must include a day (in welsh)",

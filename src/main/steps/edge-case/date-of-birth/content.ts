@@ -10,7 +10,7 @@ const DATE_OF_BIRTH = 'date-of-birth';
 export const form: FormContent = {
   fields: () => {
     return {
-      applicant1DateOfBirth: {
+      applicantDateOfBirth: {
         type: 'date',
         classes: 'govuk-date-input',
         label: l => l.title,
@@ -36,7 +36,7 @@ export const form: FormContent = {
             attributes: { maxLength: 4, pattern: '[0-9]*', inputMode: 'numeric' },
           },
         ],
-        parser: body => covertToDateObject('applicant1DateOfBirth', body as Record<string, unknown>),
+        parser: body => covertToDateObject('applicantDateOfBirth', body as Record<string, unknown>),
         validator: value => isDateInputInvalid(value as CaseDate) || isFutureDate(value as CaseDate),
       },
     };
