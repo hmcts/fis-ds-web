@@ -1,4 +1,5 @@
 import { FormContent, FormFields } from '../../../../app/form/Form';
+import { ResourceReader } from '../../../../modules/resourcereader/ResourceReader';
 import { CommonContent } from '../../../common/common.content';
 import {
   form as addressLookupForm,
@@ -8,14 +9,16 @@ import { MANUAL_ADDRESS } from '../../../urls';
 
 import { generateContent } from './content';
 
+const resourceLoader = new ResourceReader();
+resourceLoader.Loader('address-lookup');
+const translations = resourceLoader.getFileContents().translations;
+
 const enContent = {
-  section: 'Applicant',
-  title: "What's your home address?",
+  ...translations.en,
 };
 
 const cyContent = {
-  section: 'Applicant (in welsh)',
-  title: "What's your home address? (in welsh)",
+  ...translations.cy,
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */

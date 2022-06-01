@@ -1,55 +1,54 @@
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
-import { CommonContent, generatePageContent } from '../../common/common.content';
+import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
+import { CommonContent } from '../../common/common.content';
 
 import { generateContent } from './content';
 
 jest.mock('../../../app/form/validation');
 
-const en = () => ({
-  continue: 'Save and continue',
-});
+const resourceLoader = new ResourceReader();
+resourceLoader.Loader('user-role');
+const translations = resourceLoader.getFileContents().translations;
+const errors = resourceLoader.getFileContents().errors;
 
-const enContentError = {
+const EN = 'en';
+const CY = 'cy';
+
+const enContent = {
+  ...translations.en,
   errors: {
-    applyingForSelf: {
-      required: 'Please select an answer before you can proceed further',
-    },
+    ...errors.en,
   },
 };
 
-const cyContentError = {
+const cyContent = {
+  ...translations.cy,
   errors: {
-    applyingForSelf: {
-      required: 'Please select an answer before you can proceed further (in welsh)',
-    },
+    ...errors.cy,
   },
 };
 
 /* eslint-disable @typescript-eslint/ban-types */
 describe('role-type content', () => {
-  const commonContent = { language: 'en', userCase: {} } as CommonContent;
+  const commonContent = { language: EN, userCase: {} } as CommonContent;
   test('should return correct english content', () => {
     const generatedContent = generateContent(commonContent);
-    expect(generatedContent.continue).toEqual('Continue');
-    expect(generatedContent.label).toEqual(
-      'Are you named as the applicant on the application form you are submitting?'
-    );
-    expect(generatedContent.serviceName).toEqual("Determine user's role");
-    expect(generatedContent.one).toEqual('Yes');
-    expect(generatedContent.two).toEqual('No - I am sending an application for someone else.');
-    expect(generatedContent.errors).toEqual(enContentError.errors);
+    expect(generatedContent.continue).toEqual(enContent.continue);
+    expect(generatedContent.label).toEqual(enContent.label);
+    expect(generatedContent.serviceName).toEqual(enContent.serviceName);
+    expect(generatedContent.one).toEqual(enContent.one);
+    expect(generatedContent.two).toEqual(enContent.two);
+    expect(generatedContent.errors).toEqual(enContent.errors);
   });
 
   test('should return correct welsh content', () => {
-    const generatedContent = generateContent({ ...commonContent, language: 'cy' });
-    expect(generatedContent.continue).toEqual('Continue');
-    expect(generatedContent.label).toEqual(
-      'Are you named as the applicant on the application form you are submitting? (in welsh)'
-    );
-    expect(generatedContent.serviceName).toEqual("Determine user's role (in welsh)");
-    expect(generatedContent.one).toEqual('Yes (in welsh)');
-    expect(generatedContent.two).toEqual('No - I am sending an application for someone else. (in welsh)');
-    expect(generatedContent.errors).toEqual(cyContentError.errors);
+    const generatedContent = generateContent({ ...commonContent, language: CY });
+    expect(generatedContent.continue).toEqual(cyContent.continue);
+    expect(generatedContent.label).toEqual(cyContent.label);
+    expect(generatedContent.serviceName).toEqual(cyContent.serviceName);
+    expect(generatedContent.one).toEqual(cyContent.one);
+    expect(generatedContent.two).toEqual(cyContent.two);
+    expect(generatedContent.errors).toEqual(cyContent.errors);
   });
 
   test('should contain applyingForSelf field', () => {
@@ -59,19 +58,14 @@ describe('role-type content', () => {
     const applyingForSelfField = fields.applyingForSelf as FormOptions;
     expect(applyingForSelfField.type).toBe('radios');
     expect(applyingForSelfField.classes).toBe('govuk-radios');
-    expect((applyingForSelfField.label as Function)(generatedContent)).toBe(
-      'Are you named as the applicant on the application form you are submitting?'
-    );
-    expect((applyingForSelfField.values[0].label as Function)(generatedContent)).toBe('Yes');
-    expect((applyingForSelfField.values[1].label as Function)(generatedContent)).toBe(
-      'No - I am sending an application for someone else.'
-    );
+    expect((applyingForSelfField.label as Function)(generatedContent)).toBe(enContent.label);
+    expect((applyingForSelfField.values[0].label as Function)(generatedContent)).toBe(enContent.one);
+    expect((applyingForSelfField.values[1].label as Function)(generatedContent)).toBe(enContent.two);
   });
 
-  test('should contain submit button', () => {
+  test('should contain continue button', () => {
     const generatedContent = generateContent(commonContent);
-    const form = generatedContent.form as FormContent;
-    expect((form.submit.text as Function)(generatePageContent({ language: 'en' }))).toBe(en().continue);
+    expect(generatedContent.continue).toEqual(enContent.continue);
   });
 });
 /* eslint-enable @typescript-eslint/ban-types */

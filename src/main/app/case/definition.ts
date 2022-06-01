@@ -314,12 +314,12 @@ export interface CaseData {
   applyingWithPrivateLaw:string;
   applyingWithAdoption: string;
   dateChildMovedIn?: DateAsString;
-  applicant1FirstName: string;
-  applicant1LastName: string;
+  applicantFirstName: string;
+  applicantLastName: string;
   applicant1Email: string;
   applicant1HasOtherNames: YesOrNo;
   applicant1AdditionalNames: ListValue<OtherName>[];
-  applicant1DateOfBirth: DateAsString;
+  applicantDateOfBirth: DateAsString;
   applicant1Occupation: string;
   applicant1EmailAddress: string;
   applicant1PhoneNumber: string;

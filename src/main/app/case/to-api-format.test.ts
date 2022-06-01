@@ -22,7 +22,7 @@ describe('to-api-format', () => {
     applicant2AdditionalNationalities: ['MOCK_COUNTRY'],
     childrenAdditionalNationalities: ['MOCK_COUNTRY'],
     dateChildMovedIn: { day: '1', month: '1', year: '2021' },
-    applicant1DateOfBirth: { day: '20', month: '1', year: '2000' },
+    applicantDateOfBirth: { day: '20', month: '1', year: '2000' },
     applicant2DateOfBirth: undefined,
     childrenDateOfBirth: { day: '5', month: '1', year: '2020' },
     placementOrders: [
@@ -126,7 +126,7 @@ describe('to-api-format', () => {
         },
       ],
       dateChildMovedIn: '2021-01-01',
-      applicant1DateOfBirth: '2000-01-20',
+      applicantDateOfBirth: '2000-01-20',
       applicant2DateOfBirth: '',
       childrenDateOfBirth: '2020-01-05',
       applicant1StatementOfTruth: 'No',
