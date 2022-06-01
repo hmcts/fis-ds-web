@@ -50,23 +50,6 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   applicant1AddressPostcode: 'applicant1AddressPostCode',
   applicant1ContactDetails: 'applicant1ContactDetails',
 
-  applicant2FirstNames: 'applicant2FirstName',
-  applicant2LastNames: 'applicant2LastName',
-  applicant2HasOtherNames: 'applicant2HasOtherNames',
-  applicant2AdditionalNames: 'applicant2AdditionalNames',
-  applicant2DateOfBirth: 'applicant2DateOfBirth',
-  applicant2Occupation: 'applicant2Occupation',
-  applicant2EmailAddress: 'applicant2EmailAddress',
-  applicant2PhoneNumber: 'applicant2PhoneNumber',
-  applicant2Nationality: 'applicant2Nationality',
-  applicant2AdditionalNationalities: 'applicant2AdditionalNationalities',
-  applicant2Address1: 'applicant2Address1',
-  applicant2Address2: 'applicant2Address2',
-  applicant2AddressTown: 'applicant2AddressTown',
-  applicant2AddressCounty: 'applicant2AddressCountry',
-  applicant2AddressPostcode: 'applicant2AddressPostCode',
-  applicant2AddressSameAsApplicant1: 'applicant2AddressSameAsApplicant1',
-  applicant2ContactDetails: 'applicant2ContactDetails',
 
   childrenFirstName: 'childrenFirstName',
   childrenLastName: 'childrenLastName',
@@ -176,6 +159,8 @@ export function formatCase<InputFormat, OutputFormat>(fields: FieldFormats, data
   }
   return result as OutputFormat;
 }
+
+
 
 export type FieldFormats = Record<string, string | ((AnyObject) => AnyObject)>;
 
