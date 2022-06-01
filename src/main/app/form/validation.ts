@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { validate as isValidEmail } from 'email-validator';
+import { isEmpty } from 'lodash';
 
 import { OtherName } from '../../app/case/definition';
 import { Case, CaseDate } from '../case/case';
@@ -154,18 +155,12 @@ export const isPhoneNoValid: Validator = value => {
 };
 
 export const isEmailValid: Validator = value => {
+  if (isEmpty(value)) {
+    return undefined;
+  }
+
   if (!isValidEmail(value as string)) {
     return 'invalid';
-  }
-};
-
-export const isOptionalEmailAddressValid: Validator = value => {
-  if (typeof value === 'string') {
-    return !value.match(
-      '^(?=.{1,64})[A-Za-z0-9_-]+(.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(.[A-Za-z0-9-]+)*(.[A-Za-z]{2,})$'
-    )
-      ? 'invalid'
-      : 'valid';
   }
 };
 
