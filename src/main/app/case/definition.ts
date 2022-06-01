@@ -1499,7 +1499,7 @@ export const enum DocumentType {
   RESPONDENT_INVITATION = 'aos',
   SOLICITOR_SERVICE = 'solicitorService',
   WELSH_TRANSLATION = 'welshTranslation',
-  
+
 }
 
 
@@ -1694,7 +1694,6 @@ export const enum HttpStatus {
   NOT_EXTENDED = 'NOT_EXTENDED',
   NETWORK_AUTHENTICATION_REQUIRED = 'NETWORK_AUTHENTICATION_REQUIRED',
 }
-
 
 export const enum ContactPreference {
   ACCOUNT_OWNER = 'ao',
