@@ -51,22 +51,6 @@ export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>
   applicant1ContactDetails: 'applicant1ContactDetails',
 
 
-  birthMotherFirstNames: 'birthMotherFirstName',
-  birthMotherLastNames: 'birthMotherLastName',
-  birthMotherStillAlive: 'birthMotherStillAlive',
-  birthMotherNotAliveReason: 'birthMotherNotAliveReason',
-  birthMotherNationality: 'birthMotherNationality',
-  birthMotherAdditionalNationalities: 'birthMotherOtherNationalities',
-  birthMotherOccupation: 'birthMotherOccupation',
-  birthMotherAddressKnown: 'birthMotherAddressKnown',
-  birthMotherAddress1: 'birthMotherAddress1',
-  birthMotherAddress2: 'birthMotherAddress2',
-  birthMotherAddress3: 'birthMotherAddress3',
-  birthMotherAddressTown: 'birthMotherAddressTown',
-  birthMotherAddressCounty: 'birthMotherAddressCounty',
-  birthMotherAddressPostcode: 'birthMotherAddressPostCode',
-  birthMotherAddressCountry: 'birthMotherAddressCountry',
-  birthMotherAddressNotKnownReason: 'birthMotherAddressNotKnownReason',
 
   birthFatherNameOnCertificate: 'birthFatherNameOnCertificate',
   birthFatherFirstNames: 'birthFatherFirstName',
