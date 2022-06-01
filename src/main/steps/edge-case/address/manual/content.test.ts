@@ -1,5 +1,6 @@
 import { FormContent, FormFields, FormOptions } from '../../../../app/form/Form';
-import { CommonContent, generatePageContent } from '../../../common/common.content';
+import { ResourceReader } from '../../../../modules/resourcereader/ResourceReader';
+import { CommonContent } from '../../../common/common.content';
 import {
   generateContent as generateManualAddressContent,
   form as manualAddressForm,
@@ -7,14 +8,16 @@ import {
 
 import { generateContent } from './content';
 
+const resourceLoader = new ResourceReader();
+resourceLoader.Loader('manual-address');
+const translations = resourceLoader.getFileContents().translations;
+
 const enContent = {
-  section: 'Applicant',
-  title: "What's your address?",
+  ...translations.en,
 };
 
 const cyContent = {
-  section: 'Applicant (in welsh)',
-  title: "What's your address? (in welsh)",
+  ...translations.cy,
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
@@ -93,8 +96,8 @@ describe('applicant1 > address > manual > content', () => {
     expect(generatedContent1.section).toBe('Applicant (in welsh)');
   });
 
-  test('should contain submit button', () => {
-    expect((form.submit.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save and continue');
+  test('should contain continue button', () => {
+    expect(generatedContent.continue).toEqual(enContent.continue);
   });
 });
 /* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */

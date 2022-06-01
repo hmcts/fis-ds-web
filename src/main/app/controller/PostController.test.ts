@@ -382,8 +382,8 @@ describe('PostController', () => {
       state: 'Holding',
       saveAndContinue: 'true',
       serviceType: 'No',
-      applicant1FirstNames: 'qazqazqwe',
-      applicant1LastNames: 'wsxwsxdfg',
+      applicantFirstNames: 'qazqazqwe',
+      applicantLastNames: 'wsxwsxdfg',
     };
     const controller = new PostController(mockFormContent.fields);
 
@@ -396,8 +396,8 @@ describe('PostController', () => {
     expect(req.session.userCase.state).toEqual('Holding');
     expect(req.session.userCase.serviceType).toEqual('No');
     // expect(req.session.userCase.applyingWithPrivateLaw).toEqual('Financial applications');
-    expect(req.session.userCase.applicant1FirstNames).toEqual('qazqazqwe');
-    expect(req.session.userCase.applicant1LastNames).toEqual('wsxwsxdfg');
+    expect(req.session.userCase.applicantFirstNames).toEqual('qazqazqwe');
+    expect(req.session.userCase.applicantLastNames).toEqual('wsxwsxdfg');
   });
 });
 
