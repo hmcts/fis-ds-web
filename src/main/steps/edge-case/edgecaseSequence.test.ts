@@ -6,8 +6,8 @@ import {
   FIND_ADDRESS,
   FULL_NAME,
   MANUAL_ADDRESS,
-  PAY_YOUR_FEE,
   SELECT_ADDRESS,
+  STATEMENT_OF_TRUTH,
   UPLOAD_YOUR_DOCUMENTS,
   USER_ROLE,
 } from '../urls';
@@ -16,7 +16,7 @@ import { edgecaseSequence } from './edgecaseSequence';
 
 describe('Sequence must match respective path', () => {
   test('must match the path', () => {
-    expect(edgecaseSequence).toHaveLength(11);
+    expect(edgecaseSequence).toHaveLength(12);
 
     expect(edgecaseSequence[0].url).toBe(USER_ROLE);
     expect(edgecaseSequence[0].getNextStep({})).toBe(FULL_NAME);
@@ -43,11 +43,10 @@ describe('Sequence must match respective path', () => {
     expect(edgecaseSequence[8].getNextStep({})).toBe(ADDITIONAL_DOCUMENTS_UPLOAD);
 
     expect(edgecaseSequence[9].url).toBe(ADDITIONAL_DOCUMENTS_UPLOAD);
-    expect(edgecaseSequence[9].getNextStep({})).toBe(PAY_YOUR_FEE);
-    /**
- *     expect(edgecaseSequence[9].url).toBe(PAY_YOUR_FEE);
-    expect(edgecaseSequence[9].getNextStep({})).toBe(USER_ROLE);
- */
+    expect(edgecaseSequence[9].getNextStep({})).toBe(STATEMENT_OF_TRUTH);
+
+    expect(edgecaseSequence[10].url).toBe(STATEMENT_OF_TRUTH);
+    expect(edgecaseSequence[10].getNextStep({})).toBe(USER_ROLE);
   });
 });
 
