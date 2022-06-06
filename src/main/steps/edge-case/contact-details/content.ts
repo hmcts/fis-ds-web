@@ -5,6 +5,7 @@ import { isEmailValid, isFieldFilledIn, isPhoneNoValid } from '../../../app/form
 import { CommonContent } from '../../../steps/common/common.content';
 
 export const en = ({ userCase }: CommonContent): Record<string, unknown> => {
+  console.log({ userCase });
   const titleBar = '';
   return {
     label: 'What are your contact details?',
@@ -36,6 +37,7 @@ export const en = ({ userCase }: CommonContent): Record<string, unknown> => {
 };
 
 export const cy = ({ userCase }: CommonContent): Record<string, unknown> => {
+  console.log({ userCase });
   const titleBar = '';
   return {
     label: 'What are your contact details? (in welsh)',
@@ -103,20 +105,7 @@ export const form: FormContent = {
       classes: 'govuk-input--width-20',
       label: l => l.mobilePhoneNumber,
       labelSize: null,
-      validator: (value, formData) => {
-        /**
-         *  
-         *  const hasMobilePhoneNumberEntered = (value as string[])?.length && (value as string) !== '[]';
-         *  const hasHomePhoneNumberEntered = formData.homePhoneNumber && !!formData.homePhoneNumber?.length;
-        const hasEmailEntered =
-          formData.emailAddressConsent?.includes(YesOrNo.YES) &&
-          formData.emailAddress &&
-          !!formData.emailAddress?.length;
-             if (!hasHomePhoneNumberEntered && !hasMobilePhoneNumberEntered && !hasEmailEntered) {
-          return 'atleastOneRequired';
-        }
-         */
-
+      validator: value => {
         return isPhoneNoValid(value);
       },
     },

@@ -9,12 +9,8 @@ const fields: ToApiConverters = {
   ...formFieldsToCaseMapping,
 
   applicantDateOfBirth: data => ({
-    applicantDateOfBirth: toApiDate(data.applicantDateOfBirth),
+    applicantDateOfBirth: data.applicantDateOfBirth,
   }),
-};
-
-export const toApiDate = (date: any): string => {
-  return date;
 };
 
 export const toApiFormat = (data: Partial<Case>): CaseData => formatCase(fields, data);

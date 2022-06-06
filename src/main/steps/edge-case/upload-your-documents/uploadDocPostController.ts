@@ -31,6 +31,7 @@ type FileType = {
   jpg: string;
   txt: string;
   rtf: string;
+  rtf2: string;
   gif: string;
 };
 
@@ -47,6 +48,7 @@ type FileMimeTypeInfo = {
   'image/jpeg': string;
   'text/plain': string;
   'application/rtf': string;
+  'text/rtf': string;
   'image/gif': string;
 };
 
@@ -74,6 +76,7 @@ export const FileMimeType: Partial<Record<keyof FileType, keyof FileMimeTypeInfo
   jpg: 'image/jpeg',
   txt: 'text/plain',
   rtf: 'application/rtf',
+  rtf2: 'text/rtf',
   gif: 'image/gif',
 };
 
@@ -196,6 +199,8 @@ export default class UploadDocumentController extends PostController<AnyObject> 
 
         // making sure single file is uploaded
         if (!checkIfMultipleFiles) {
+
+          console.log({mimetype : documents.mimetype})
           const validateMimeType: boolean = FileValidations.formatValidation(documents.mimetype);
           const validateFileSize: boolean = FileValidations.sizeValidation(documents.size);
           const formData: FormData = new FormData();

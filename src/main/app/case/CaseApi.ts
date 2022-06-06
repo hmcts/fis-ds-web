@@ -46,8 +46,10 @@ export class CaseApi {
    * @param caseId
    * @returns
    */
-  public async getCaseById(caseId: string): Promise<CaseWithId> {
-    return new Promise((reject, resolve) => {});
+  public async getCaseById(): Promise<CaseWithId> {
+    return new Promise(() => {
+      null;
+    });
   }
 
   /**
@@ -60,7 +62,7 @@ export class CaseApi {
 
   public async createCaseNew(req: AppRequest, userDetails: UserDetails, formData: Partial<Case>): Promise<any> {
     //***** this part need to be implemented on creating a new case  */
-    console.log({ case: req.session.userCase });
+    console.log({ case: req.session.userCase, userDetails, formData });
     return req.session.userCase;
   }
 
@@ -88,7 +90,10 @@ export class CaseApi {
    * @returns
    */
   private async sendEvent(caseId: string, data: Partial<CaseData>, eventName: string): Promise<CaseWithId> {
-    return new Promise((reject, resolve) => {});
+    console.log({ caseId, data, eventName });
+    return new Promise(() => {
+      null;
+    });
   }
 
   /**

@@ -26,8 +26,6 @@ export interface Document {
   document_binary_url: string;
 }
 
-export interface DynamicElementIndicator {}
-
 export interface DynamicList {
   value: DynamicListElement;
   list_items: DynamicListElement[];
@@ -57,8 +55,6 @@ export interface OrderSummary {
   Fees: ListValue<Fee>[];
   PaymentTotal: string;
 }
-
-export interface State {}
 
 export interface CaseNote {
   author: string;

@@ -18,10 +18,11 @@ import { ADDITIONAL_DOCUMENTS_UPLOAD, PAY_YOUR_FEE } from '../../urls';
  */
 type URL_OF_FILE = string;
 
+
 /**
  * ****** File Extensions Types are being check
  */
-type FileType = {
+ type FileType = {
   doc: string;
   docx: string;
   pdf: string;
@@ -31,6 +32,7 @@ type FileType = {
   jpg: string;
   txt: string;
   rtf: string;
+  rtf2: string;
   gif: string;
 };
 
@@ -47,9 +49,9 @@ type FileMimeTypeInfo = {
   'image/jpeg': string;
   'text/plain': string;
   'application/rtf': string;
+  'text/rtf': string;
   'image/gif': string;
 };
-
 /**
  * ****** File Upload validations Message
  */
@@ -74,6 +76,7 @@ export const FileMimeType: Partial<Record<keyof FileType, keyof FileMimeTypeInfo
   jpg: 'image/jpeg',
   txt: 'text/plain',
   rtf: 'application/rtf',
+  rtf2: 'text/rtf',
   gif: 'image/gif',
 };
 
