@@ -6,7 +6,6 @@ import { LanguageToggle } from '../../modules/i18n';
 import { CommonContent, Language, generatePageContent } from '../../steps/common/common.content';
 import * as Urls from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
-import { CITIZEN_UPDATE} from '../case/definition';
 
 import { AppRequest } from './AppRequest';
 
@@ -124,6 +123,6 @@ export class GetController {
 
   //eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected getEventName(req: AppRequest): string {
-    return CITIZEN_UPDATE;
+    return ''
   }
 }
