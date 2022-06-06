@@ -61,7 +61,7 @@ describe('applicant1 > address > select > content', () => {
     expect(fields.applicantSelectAddress).toEqual(selectAddressFormFields.selectAddress);
   });
 
-  it('should have applicant1SelectAddress label when language: en', () => {
+  it('should have applicantSelectAddress label when language: en', () => {
     const commonContent1 = { language: EN, userCase: {} } as CommonContent;
 
     const generatedContent1 = generateContent(commonContent1);
