@@ -235,18 +235,20 @@ export default class UploadDocumentController extends PostController<AnyObject> 
             }
           } else {
             const FormattedError: any[] = [];
-            if (!validateMimeType) {
-              FormattedError.push({
-                text: FileValidations.ResourceReaderContents(req).FORMAT_ERROR,
-                href: '#',
-              });
-            }
             if (!validateFileSize) {
               FormattedError.push({
                 text: FileValidations.ResourceReaderContents(req).SIZE_ERROR,
                 href: '#',
               });
             }
+            
+            if (!validateMimeType) {
+              FormattedError.push({
+                text: FileValidations.ResourceReaderContents(req).FORMAT_ERROR,
+                href: '#',
+              });
+            }
+
 
             req.session.fileErrors.push(...FormattedError);
 
