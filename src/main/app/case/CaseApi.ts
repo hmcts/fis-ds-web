@@ -30,7 +30,7 @@ export class CaseApi {
    * @returns 
    */
   public async getOrCreateCase(): Promise<any> {
-    return { id: '', state: 'any' };
+    return { id: '', state: 'FIS' };
   }
 
 
