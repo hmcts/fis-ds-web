@@ -110,7 +110,7 @@ export class FileValidations {
    */
   static sizeValidation = (fileSize: number): boolean => {
     const KbsInMBS = Number(config.get('documentUpload.validation.sizeInKB'));
-    if (fileSize < KbsInMBS) {
+    if (fileSize <= KbsInMBS) {
       return true;
     } else {
       return false;
