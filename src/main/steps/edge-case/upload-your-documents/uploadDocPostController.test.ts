@@ -113,15 +113,15 @@ describe('The url must match the config url', () => {
 });
 
 describe('Checking for file upload size', () => {
-  const file1Size = 1000000;
-  const file2Size = 2000000;
-  const file3Size = 3000000;
+  const file1Size = 10000000;
+  const file2Size = 20000000;
+  const file3Size = 30000000;
   it('Checking for file1 size', () => {
     expect(FileValidations.sizeValidation(file1Size)).toBe(true);
   });
 
   it('Checking for file2 size', () => {
-    expect(FileValidations.sizeValidation(file2Size)).toBe(false);
+    expect(FileValidations.sizeValidation(file2Size)).toBe(true);
   });
 
   it('Checking for file3 size', () => {
