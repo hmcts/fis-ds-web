@@ -4,7 +4,7 @@ import {
   CONTACT_PREFERENCES,
   DATE_OF_BIRTH,
   EMAIL_ADDRESS,
-  CONTACT_NUMBER,
+  CONTACT_DETAILS,
   FIND_ADDRESS,
   FULL_NAME,
   MANUAL_ADDRESS,
@@ -54,13 +54,13 @@ export const edgecaseSequence: Step[] = [
   {
     url: EMAIL_ADDRESS,
     showInSection: Sections.AboutEdgeCase,
-    getNextStep: () => CONTACT_NUMBER,
+    getNextStep: () => CONTACT_NU,
   },
   {
-      url: CONTACT_NUMBER,
-      showInSection: Sections.AboutEdgeCase,
-      getNextStep: () => UPLOAD_YOUR_DOCUMENTS,
-    },
+    url: CONTACT_DETAILS,
+    showInSection: Sections.AboutEdgeCase,
+    getNextStep: () => UPLOAD_YOUR_DOCUMENTS,
+  },
   {
     url: UPLOAD_YOUR_DOCUMENTS,
     showInSection: Sections.AboutEdgeCase,

@@ -154,6 +154,14 @@ export const isPhoneNoValid: Validator = value => {
   }
 };
 
+/* export const isHomeOrPhoneNoEntered: Validator = fields => {
+  const values = Object.values(fields);
+  const allFieldsMissing = values.every(value => !value);
+  if (allFieldsMissing) {
+    return ValidationError.REQUIRED;
+  }
+}; */
+
 export const isEmailValid: Validator = value => {
   if (isEmpty(value)) {
     return undefined;
