@@ -1,4 +1,4 @@
-import Axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
+import Axios, { AxiosError, AxiosInstance } from 'axios';
 import config from 'config';
 
 import { LoggerInstance } from 'winston';
@@ -9,27 +9,39 @@ import { AppRequest, UserDetails } from '../controller/AppRequest';
 import { Case, CaseWithId } from './case';
 import { CaseAssignedUserRoles } from './case-roles';
 import {
-  CITIZEN_ADD_PAYMENT,
   CaseData,
-  ListValue,
-  Payment,
   State,
 } from './definition';
-import { fromApiFormat } from './from-api-format';
 import { toApiFormat } from './to-api-format';
 
 
 export class CaseApi {
+  /**
+   * 
+   * @param axios 
+   * @param logger 
+   */
   constructor(
     private readonly axios: AxiosInstance,
     private readonly logger: LoggerInstance
   ) {}
 
+  /**
+   * 
+   * @returns 
+   */
   public async getOrCreateCase(): Promise<CaseWithId> {
-
     return { id: '', state: State.Holding };
   }
 
+
+  /**
+   * 
+   * @param req 
+   * @param userDetails 
+   * @param formData 
+   * @returns 
+   */
   public async getOrCreateCaseNew(
     req: AppRequest,
     userDetails: UserDetails,
@@ -38,16 +50,35 @@ export class CaseApi {
     return this.createCaseNew(req, userDetails, formData);
   }
 
+
+
+  /**
+   * 
+   * @param caseId 
+   * @returns 
+   */
   public async getCaseById(caseId: string): Promise<CaseWithId> {
    return new Promise((reject, resolve)=> {})
   }
 
+  /**
+   * 
+   * @param req 
+   * @param userDetails 
+   * @param formData 
+   * @returns 
+   */
 
   public async createCaseNew(req: AppRequest, userDetails: UserDetails, formData: Partial<Case>): Promise<CaseWithId> {
     return new Promise((reject, resolve)=> {})
   }
 
-
+/**
+ * 
+ * @param caseId 
+ * @param userId 
+ * @returns 
+ */
   public async getCaseUserRoles(caseId: string, userId: string): Promise<CaseAssignedUserRoles> {
     try {
       const response = await this.axios.get<CaseAssignedUserRoles>(`case-users?case_ids=${caseId}&user_ids=${userId}`);
@@ -58,33 +89,35 @@ export class CaseApi {
     }
   }
 
-  private async sendEvent(caseId: string, data: Partial<CaseData>, eventName: string): Promise<CaseWithId> {
-    try {
-      const tokenResponse = await this.axios.get<CcdTokenResponse>(`/cases/${caseId}/event-triggers/${eventName}`);
-      const token = tokenResponse.data.token;
-      const event = { id: eventName };
 
-      const response: AxiosResponse<CcdV2Response> = await this.axios.post(`/cases/${caseId}/events`, {
-        event,
-        data,
-        event_token: token,
-      });
-      return { id: response.data.id, state: response.data.state, ...fromApiFormat(response.data.data) };
-    } catch (err) {
-      this.logError(err);
-      throw new Error('Case could not be updated.');
-    }
+
+/**
+ * 
+ * @param caseId 
+ * @param data 
+ * @param eventName 
+ * @returns 
+ */
+  private async sendEvent(caseId: string, data: Partial<CaseData>, eventName: string): Promise<CaseWithId> {
+    return new Promise((reject, resolve)=> {})
   }
 
+  /**
+   * 
+   * @param caseId 
+   * @param userData 
+   * @param eventName 
+   * @returns 
+   */
   public async triggerEvent(caseId: string, userData: Partial<Case>, eventName: string): Promise<CaseWithId> {
     const data = toApiFormat(userData);
     return this.sendEvent(caseId, data, eventName);
   }
 
-  public async addPayment(caseId: string, payments: ListValue<Payment>[]): Promise<CaseWithId> {
-    return this.sendEvent(caseId, { applicationPayments: payments }, CITIZEN_ADD_PAYMENT);
-  }
-
+/**
+ * 
+ * @param error 
+ */
   private logError(error: AxiosError) {
     if (error.response) {
       this.logger.error(`API Error ${error.config.method} ${error.config.url} ${error.response.status}`);
@@ -97,6 +130,13 @@ export class CaseApi {
   }
 }
 
+
+/**
+ * 
+ * @param userDetails 
+ * @param logger 
+ * @returns 
+ */
 export const getCaseApi = (userDetails: UserDetails, logger: LoggerInstance): CaseApi => {
   return new CaseApi(
     Axios.create({
@@ -109,18 +149,8 @@ export const getCaseApi = (userDetails: UserDetails, logger: LoggerInstance): Ca
         'Content-Type': 'application/json',
       },
     }),
-    //userDetails,
     logger
   );
 };
 
 
-interface CcdV2Response {
-  id: string;
-  state: State;
-  data: CaseData;
-}
-
-interface CcdTokenResponse {
-  token: string;
-}
