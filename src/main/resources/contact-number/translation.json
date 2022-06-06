@@ -1,0 +1,36 @@
+{
+    "translations": {
+        "en": {
+            "continue": "Continue",
+            "serviceName": "Contact Numbers",
+            "homePhoneLabel": "What is the home phone number of the person named on the application",
+            "mobilePhoneLabel": "What is the mobile phone number of the person named on the application",
+            "homePhoneHint": "Home Phone",
+            "mobilePhoneHint": "Mobile Phone",
+            "homePhone": "Enter home phone number",
+            "mobilePhone": "Enter mobile phone number"
+        },
+        "cy": {
+            "continue": "Continue (Welsh)",
+            "serviceName": "Contact Numbers (Welsh)",
+            "homePhoneLabel": "What is the home phone number of the person named on the application (Welsh)",
+            "mobilePhoneLabel": "What is the home phone number of the person named on the application (Welsh)",
+            "homePhoneHint": "Home Phone (Welsh)",
+            "mobilePhoneHint": "Mobile Phone (Welsh)",
+            "homePhone": "Enter home phone number (Welsh)",
+            "mobilePhone": "Enter mobile phone number (Welsh)"
+        }
+    },
+    "errors":{
+        "en": {
+            "emailAddress": {
+                "invalid": "Please either enter home or mobile phone number"
+            }
+        },
+        "cy": {
+            "emailAddress": {
+              "invalid": "Please either enter home or mobile phone number (Welsh)"
+            }
+        }
+    }
+}

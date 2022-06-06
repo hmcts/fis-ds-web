@@ -1,0 +1,30 @@
+{
+    "translations": {
+        "en": {
+            "continue": "Continue",
+            "serviceName": "Email Address",
+            "label": "What is the email address of the person named on the application",
+            "hint": "Email Address",
+            "emailAddress": "Insert email address"
+        },
+        "cy": {
+            "continue": "Continue (Welsh)",
+            "serviceName": "Email Address (Welsh)",
+            "label": "What is the email address of the person named on the application (Welsh)",
+            "hint": "Email Address",
+            "emailAddress": "Insert email address (Welsh)"
+        }
+    },
+    "errors":{
+        "en": {
+            "emailAddress": {
+                "invalid": "Every email address consists of 3 elements: local-part, @ symbol (pronounced as “at”), and a domain name"
+            }
+        },
+        "cy": {
+            "emailAddress": {
+                "invalid": "Every email address consists of 3 elements: local-part, @ symbol (pronounced as “at”), and a domain name (Welsh)"
+            }
+        }
+    }
+}

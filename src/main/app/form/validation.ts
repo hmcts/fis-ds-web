@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { validate as isValidEmail } from 'email-validator';
+import { isEmpty } from 'lodash';
 
 import { OtherName } from '../../app/case/definition';
 import { Case, CaseDate } from '../case/case';
@@ -29,13 +30,6 @@ export const isFieldFilledIn: Validator = value => {
 export const atLeastOneFieldIsChecked: Validator = fields => {
   if (!fields || (fields as []).length === 0) {
     return ValidationError.REQUIRED;
-  }
-};
-
-export const notSureViolation: Validator = fields => {
-  const arr = fields as string[];
-  if (arr.length > 1 && arr.find(s => s === 'Not sure')) {
-    return 'notSureViolation';
   }
 };
 
@@ -161,6 +155,10 @@ export const isPhoneNoValid: Validator = value => {
 };
 
 export const isEmailValid: Validator = value => {
+  if (isEmpty(value)) {
+    return undefined;
+  }
+
   if (!isValidEmail(value as string)) {
     return 'invalid';
   }

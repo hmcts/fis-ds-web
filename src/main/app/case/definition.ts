@@ -1499,7 +1499,7 @@ export const enum DocumentType {
   RESPONDENT_INVITATION = 'aos',
   SOLICITOR_SERVICE = 'solicitorService',
   WELSH_TRANSLATION = 'welshTranslation',
-  
+
 }
 
 
@@ -1699,6 +1699,10 @@ export const enum ContactPreference {
   ACCOUNT_OWNER = 'ao',
   NAMED_PERSON = 'np',
   BOTH_RECEIVE = 'bre',
+}
+
+export const enum EmailAddress {
+  EMAIL_ADDRESS = 'em'
 }
 
 export const CASE_TYPE = 'A58';
