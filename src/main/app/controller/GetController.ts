@@ -5,8 +5,9 @@ import Negotiator from 'negotiator';
 import { LanguageToggle } from '../../modules/i18n';
 import { CommonContent, Language, generatePageContent } from '../../steps/common/common.content';
 import * as Urls from '../../steps/urls';
-import { Case, CaseWithId } from '../case/case';
 import { ADDITIONAL_DOCUMENTS_UPLOAD, UPLOAD_YOUR_DOCUMENTS } from '../../steps/urls';
+import { Case, CaseWithId } from '../case/case';
+
 import { AppRequest } from './AppRequest';
 
 export type PageContent = Record<string, unknown>;
@@ -134,7 +135,7 @@ export class GetController {
               return documentIdFound !== documentId;
             });
             req.session['caseDocuments'] = sessionObjectOfApplicationDocuments;
-            console.log({caseDocument: req.session['caseDocuments']})
+            console.log({ caseDocument: req.session['caseDocuments'] });
             this.saveSessionAndRedirect(req, res, () => {
               res.redirect(UPLOAD_YOUR_DOCUMENTS);
             });
@@ -149,7 +150,7 @@ export class GetController {
               return documentIdFound !== documentId;
             });
             req.session['AddtionalCaseDocuments'] = sessionObjectOfAdditionalDocuments;
-            console.log({AddtionalDocuments: req.session['AddtionalCaseDocuments']})
+            console.log({ AddtionalDocuments: req.session['AddtionalCaseDocuments'] });
             this.saveSessionAndRedirect(req, res, () => {
               res.redirect(ADDITIONAL_DOCUMENTS_UPLOAD);
             });
