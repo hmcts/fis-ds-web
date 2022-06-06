@@ -18,11 +18,10 @@ import { ADDITIONAL_DOCUMENTS_UPLOAD, PAY_YOUR_FEE } from '../../urls';
  */
 type URL_OF_FILE = string;
 
-
 /**
  * ****** File Extensions Types are being check
  */
- type FileType = {
+type FileType = {
   doc: string;
   docx: string;
   pdf: string;

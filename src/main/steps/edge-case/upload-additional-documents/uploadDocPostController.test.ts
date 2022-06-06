@@ -77,6 +77,7 @@ describe('All of the listed Validation for files should be in place', () => {
     jpg: 'image/jpeg',
     txt: 'text/plain',
     rtf: 'application/rtf',
+    rtf2: 'text/rtf',
     gif: 'image/gif',
   };
 

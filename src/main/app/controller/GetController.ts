@@ -43,7 +43,7 @@ export class GetController {
       req.session.fileErrors = [];
     }
 
-    console.log({caseData: req.session['userCase']})
+    console.log({ caseData: req.session['userCase'] });
 
     this.documentDeleteManager(req, res);
     const RedirectConditions = {
