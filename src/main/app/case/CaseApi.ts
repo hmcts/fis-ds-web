@@ -10,7 +10,6 @@ import { Case, CaseWithId } from './case';
 import { CaseAssignedUserRoles } from './case-roles';
 import {
   CaseData,
-  State,
 } from './definition';
 import { toApiFormat } from './to-api-format';
 
@@ -30,8 +29,8 @@ export class CaseApi {
    * 
    * @returns 
    */
-  public async getOrCreateCase(): Promise<CaseWithId> {
-    return { id: '', state: State.Holding };
+  public async getOrCreateCase(): Promise<any> {
+    return { id: '', state: 'any' };
   }
 
 

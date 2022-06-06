@@ -1,4 +1,6 @@
-
+/* tslint:disable */
+/* eslint-disable */
+// Generated using typescript-generator version 2.33.956 on 2021-11-12 15:28:24.
 
 import { CaseDate } from '../case/case';
 
@@ -1363,39 +1365,7 @@ export const enum SolicitorPaymentMethod {
 }
 
 export const enum State {
-  Holding = 'Holding',
-  AwaitingAos = 'AwaitingAos',
-  AosDrafted = 'AosDrafted',
-  AosOverdue = 'AosOverdue',
-  Applicant2Approved = 'Applicant2Approved',
-  AwaitingPayment = 'AwaitingPayment',
-  Rejected = 'Rejected',
-  Withdrawn = 'Withdrawn',
-  AwaitingDocuments = 'AwaitingDocuments',
-  AwaitingApplicant1Response = 'AwaitingApplicant1Response',
-  AwaitingApplicant2Response = 'AwaitingApplicant2Response',
-  AwaitingBailiffReferral = 'AwaitingBailiffReferral',
-  AwaitingBailiffService = 'AwaitingBailiffService',
-  AwaitingClarification = 'AwaitingClarification',
-  AwaitingConditionalOrder = 'AwaitingConditionalOrder',
-  AwaitingGeneralConsideration = 'AwaitingGeneralConsideration',
-  AwaitingGeneralReferralPayment = 'AwaitingGeneralReferralPayment',
-  AwaitingHWFDecision = 'AwaitingHWFDecision',
-  AwaitingLegalAdvisorReferral = 'AwaitingLegalAdvisorReferral',
-  AwaitingService = 'AwaitingService',
-  AwaitingServiceConsideration = 'AwaitingServiceConsideration',
-  AwaitingServicePayment = 'AwaitingServicePayment',
-  ConditionalOrderDrafted = 'ConditionalOrderDrafted',
-  ConditionalOrderPronounced = 'ConditionalOrderPronounced',
-  ConditionalOrderRefused = 'ConditionalOrderRefused',
-  Disputed = 'Disputed',
-  Draft = 'Draft',
-  FinalOrderComplete = 'FinalOrderComplete',
-  IssuedToBailiff = 'IssuedToBailiff',
-  AwaitingPronouncement = 'AwaitingPronouncement',
-  PendingDispute = 'PendingDispute',
-  BulkCaseReject = 'BulkCaseReject',
-  Submitted = 'Submitted',
+  AnyObject = ''
 }
 
 export const enum UserRole {
