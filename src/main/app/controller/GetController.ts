@@ -56,6 +56,8 @@ export class GetController {
       documentId: req.query.hasOwnProperty('documentId'),
     };
 
+    console.log({sessionRequest: req.session.userCase})
+
     const checkConditions = Object.values(RedirectConditions).includes(true);
     if (!checkConditions) {
       res.render(this.view, {

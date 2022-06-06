@@ -70,6 +70,7 @@ export class CaseApi {
 
   public async createCaseNew(req: AppRequest, userDetails: UserDetails, formData: Partial<Case>): Promise<any> {
     //***** this part need to be implemented on creating a new case  */
+    console.log({case: req.session.userCase})
     return { id: '', state: '', };
   }
 
