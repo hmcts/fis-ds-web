@@ -9,9 +9,7 @@ import { AppRequest, UserDetails } from '../controller/AppRequest';
 import { Case, CaseWithId } from './case';
 import { CaseAssignedUserRoles } from './case-roles';
 import {
-  CASE_TYPE,
   CITIZEN_ADD_PAYMENT,
-  CITIZEN_CREATE,
   CaseData,
   ListValue,
   Payment,
@@ -24,7 +22,6 @@ import { toApiFormat } from './to-api-format';
 export class CaseApi {
   constructor(
     private readonly axios: AxiosInstance,
-    //private readonly userDetails: UserDetails,
     private readonly logger: LoggerInstance
   ) {}
 
@@ -45,42 +42,9 @@ export class CaseApi {
    return new Promise((reject, resolve)=> {})
   }
 
-  private getCaseType(req: AppRequest): string {
-    let caseType = '';
-    if (req.session.userCase.serviceType === 'Yes') {
-      caseType = 'A58';
-    } else if (req.session.userCase.serviceType === 'No') {
-      caseType = 'A58';
-    }
-
-    return caseType;
-  }
 
   public async createCaseNew(req: AppRequest, userDetails: UserDetails, formData: Partial<Case>): Promise<CaseWithId> {
-    const caseType = this.getCaseType(req);
-    console.log('caseType=>' + caseType);
-    const tokenResponse: AxiosResponse<CcdTokenResponse> = await this.axios.get(
-      `/case-types/${CASE_TYPE}/event-triggers/${CITIZEN_CREATE}`
-    );
-    const token = tokenResponse.data.token;
-    const event = { id: CITIZEN_CREATE };
-    const data = {
-      applicantFirstName: formData.applicantFirstNames,
-      applicantLastName: formData.applicantLastNames,
-      applicant1Email: userDetails.email,
-    };
-    try {
-      const response = await this.axios.post<CcdV2Response>(`/case-types/${CASE_TYPE}/cases`, {
-        data,
-        event,
-        event_token: token,
-      });
-
-      return { id: response.data.id, state: response.data.state, ...fromApiFormat(response.data.data) };
-    } catch (err) {
-      this.logError(err);
-      throw new Error('Case could not be created.');
-    }
+    return new Promise((reject, resolve)=> {})
   }
 
 
