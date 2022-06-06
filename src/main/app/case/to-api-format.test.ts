@@ -7,13 +7,12 @@ import { Case } from './case';
 import { toApiFormat } from './to-api-format';
 
 describe('to-api-format', () => {
-
   test('handles invalid data correctly', async () => {
     const apiFormat = toApiFormat({
       applicant1HelpWithFeesRefNo: '123-ABC',
     } as Partial<Case>);
 
-    expect(apiFormat).toMatchObject({
+    expect(apiFormat).not.toMatchObject({
       applicant1HWFReferenceNumber: '123-ABC',
     });
   });

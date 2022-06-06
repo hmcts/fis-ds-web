@@ -6,9 +6,7 @@ import { Case, CaseDate } from '../case/case';
 
 dayjs.extend(customParseFormat);
 
-export type Validator = (
-  value: string | string[] | CaseDate | Partial<Case> | any[] | undefined
-) => void | string;
+export type Validator = (value: string | string[] | CaseDate | Partial<Case> | any[] | undefined) => void | string;
 export type DateValidator = (value: CaseDate | undefined) => void | string;
 
 export const enum ValidationError {

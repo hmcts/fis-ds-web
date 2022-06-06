@@ -26,7 +26,6 @@ export class PostController<T extends AnyObject> {
    * Parse the form body and decide whether this is a save and sign out, save and continue or session time out
    */
   public async post(req: AppRequest<T>, res: Response): Promise<void> {
-    //const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase) : this.fields;
     const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase) : this.fields;
     const form = new Form(fields);
 
@@ -77,7 +76,6 @@ export class PostController<T extends AnyObject> {
         }
       }
     }
-
 
     this.redirect(req, res);
   }

@@ -1,5 +1,3 @@
-
-
 export interface CaseAssignedUserRoles {
   case_users: CaseAssignedUserRole[];
 }

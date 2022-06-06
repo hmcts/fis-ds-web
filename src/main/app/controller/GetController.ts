@@ -6,7 +6,7 @@ import { LanguageToggle } from '../../modules/i18n';
 import { CommonContent, Language, generatePageContent } from '../../steps/common/common.content';
 import * as Urls from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
-
+import { ADDITIONAL_DOCUMENTS_UPLOAD, UPLOAD_YOUR_DOCUMENTS } from '../../steps/urls';
 import { AppRequest } from './AppRequest';
 
 export type PageContent = Record<string, unknown>;
@@ -26,7 +26,6 @@ export class GetController {
 
     const language = this.getPreferredLanguage(req) as Language;
     const addresses = req.session?.addresses;
-    const uploadedDocuments = req.session.caseDocuments;
 
     const content = generatePageContent({
       language,
@@ -35,33 +34,27 @@ export class GetController {
       userEmail: req.session?.user?.email,
       addresses,
     });
-    /**
-     * @Document_Delete_Manager
-     */
-    if (req.query.hasOwnProperty('query') && req.query.hasOwnProperty('documentId')) {
-      res.redirect('/upload-your-documents');
-    }
 
     const sessionErrors = req.session?.errors || [];
     const FileErrors = req.session.fileErrors || [];
-
     if (req.session?.errors || req.session.fileErrors) {
       req.session.errors = undefined;
       req.session.fileErrors = [];
     }
 
+    this.documentDeleteManager(req, res);
     const RedirectConditions = {
       query: req.query.hasOwnProperty('query'),
       documentId: req.query.hasOwnProperty('documentId'),
+      documentType: req.query.hasOwnProperty('documentType'),
     };
-
-    console.log({sessionRequest: req.session.userCase})
 
     const checkConditions = Object.values(RedirectConditions).includes(true);
     if (!checkConditions) {
       res.render(this.view, {
         ...content,
-        uploadedDocuments,
+        uploadedDocuments: req.session['caseDocuments'],
+        addtionalDocuments: req.session['AddtionalCaseDocuments'],
         sessionErrors,
         FileErrors,
         htmlLang: language,
@@ -121,8 +114,54 @@ export class GetController {
     });
   }
 
+  public documentDeleteManager(req: AppRequest, res: Response): void {
+    if (
+      req.query.hasOwnProperty('query') &&
+      req.query.hasOwnProperty('documentId') &&
+      req.query.hasOwnProperty('documentType')
+    ) {
+      const checkForDeleteQuery = req.query['query'] === 'delete';
+      if (checkForDeleteQuery) {
+        const { documentType } = req.query;
+        const { documentId } = req.query;
+        /** Switching type of documents */
+        /*eslint no-case-declarations: "error"*/
+        switch (documentType) {
+          case 'applicationform': {
+            const sessionObjectOfApplicationDocuments = req.session['caseDocuments'].filter(document => {
+              const { _links } = document;
+              const documentIdFound = _links.self['href'].split('/')[4];
+              return documentIdFound !== documentId;
+            });
+            req.session['caseDocuments'] = sessionObjectOfApplicationDocuments;
+            console.log({caseDocument: req.session['caseDocuments']})
+            this.saveSessionAndRedirect(req, res, () => {
+              res.redirect(UPLOAD_YOUR_DOCUMENTS);
+            });
+
+            break;
+          }
+
+          case 'additional': {
+            const sessionObjectOfAdditionalDocuments = req.session['AddtionalCaseDocuments'].filter(document => {
+              const { _links } = document;
+              const documentIdFound = _links.self['href'].split('/')[4];
+              return documentIdFound !== documentId;
+            });
+            req.session['AddtionalCaseDocuments'] = sessionObjectOfAdditionalDocuments;
+            console.log({AddtionalDocuments: req.session['AddtionalCaseDocuments']})
+            this.saveSessionAndRedirect(req, res, () => {
+              res.redirect(ADDITIONAL_DOCUMENTS_UPLOAD);
+            });
+            break;
+          }
+        }
+      }
+    }
+  }
+
   //eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected getEventName(req: AppRequest): string {
-    return ''
+    return '';
   }
 }

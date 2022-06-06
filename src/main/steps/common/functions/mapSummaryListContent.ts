@@ -1,4 +1,3 @@
-
 import { SummaryListContent } from '../models/summaryListContent';
 
 export const mapSummaryListContent = (
