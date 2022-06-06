@@ -9,21 +9,22 @@ import { stepsWithContent } from './steps';
 import { ErrorController } from './steps/error/error.controller';
 import { HomeGetController } from './steps/home/get';
 import { SaveSignOutGetController } from './steps/save-sign-out/get';
-// import { TaskListGetController } from './steps/task-list/get';
 import { TimedOutGetController } from './steps/timed-out/get';
-//import {UploadDocumentPOSTController} from './steps/edge-case/upload-your-documents/post'
 import {
   CSRF_TOKEN_ERROR_URL,
   HOME_URL,
   KEEP_ALIVE_URL,
   SAVE_AND_SIGN_OUT,
-  //DOCUMENT_UPLOAD_URL,
-  // TASK_LIST_URL,
   TIMED_OUT_URL,
 } from './steps/urls';
 
 
 export class Routes {
+
+  /**
+   * 
+   * @param app 
+   */
   public enableFor(app: Application): void {
     const { errorHandler } = app.locals;
     const errorController = new ErrorController();

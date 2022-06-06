@@ -68,8 +68,9 @@ export class CaseApi {
    * @returns 
    */
 
-  public async createCaseNew(req: AppRequest, userDetails: UserDetails, formData: Partial<Case>): Promise<CaseWithId> {
-    return new Promise((reject, resolve)=> {})
+  public async createCaseNew(req: AppRequest, userDetails: UserDetails, formData: Partial<Case>): Promise<any> {
+    //***** this part need to be implemented on creating a new case  */
+    return { id: '', state: '', };
   }
 
 /**
