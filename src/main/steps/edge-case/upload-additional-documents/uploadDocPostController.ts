@@ -252,7 +252,6 @@ export default class UploadDocumentController extends PostController<AnyObject> 
                 href: '#',
               });
             }
-          
 
             req.session.fileErrors.push(...FormattedError);
 

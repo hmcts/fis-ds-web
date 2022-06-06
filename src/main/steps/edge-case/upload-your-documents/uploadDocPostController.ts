@@ -241,14 +241,13 @@ export default class UploadDocumentController extends PostController<AnyObject> 
                 href: '#',
               });
             }
-            
+
             if (!validateMimeType) {
               FormattedError.push({
                 text: FileValidations.ResourceReaderContents(req).FORMAT_ERROR,
                 href: '#',
               });
             }
-
 
             req.session.fileErrors.push(...FormattedError);
 
