@@ -15,25 +15,25 @@
     },
     "errors":{
         "en": {
-            "applicant1Address1": {
+            "applicantAddress1": {
                 "required": "Enter the first line of the address"
             },
-            "applicant1AddressTown": {
+            "applicantAddressTown": {
                 "required": "Enter the town or city"
             },
-            "applicant1AddressPostcode": {
+            "applicantAddressPostcode": {
                 "required": "Enter a real postcode",
                 "invalid": "Enter a real postcode"
             }
         },
         "cy": {
-            "applicant1Address1": {
+            "applicantAddress1": {
                 "required": "Enter the first line of the address (in welsh)"
             },
-            "applicant1AddressTown": {
+            "applicantAddressTown": {
                 "required": "Enter the town or city (in welsh)"
             },
-            "applicant1AddressPostcode": {
+            "applicantAddressPostcode": {
                 "required": "Enter a real postcode (in welsh)",
                 "invalid": "Enter a real postcode (in welsh)"
             }

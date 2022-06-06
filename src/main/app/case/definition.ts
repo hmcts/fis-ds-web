@@ -325,11 +325,11 @@ export interface CaseData {
   applicant1PhoneNumber: string;
   applicant1Nationality: Nationality[];
   applicant1AdditionalNationalities: ListValue<AdditionalNationality>[];
-  applicant1Address1: string;
-  applicant1Address2: string;
-  applicant1AddressTown: string;
-  applicant1AddressCountry: string;
-  applicant1AddressPostCode: string;
+  applicantAddress1: string;
+  applicantAddress2: string;
+  applicantAddressTown: string;
+  applicantAddressCountry: string;
+  applicantAddressPostcode: string;
   applicant1ContactDetails: ContactDetails[];
 
   applicant2FirstName: string;
