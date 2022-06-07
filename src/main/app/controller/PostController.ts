@@ -118,7 +118,7 @@ export class PostController<T extends AnyObject> {
     return req.session.userCase;
   }
 
-  protected redirect(req: AppRequest<T>, res: Response, nextUrl?: string): void {
+  public redirect(req: AppRequest<T>, res: Response, nextUrl?: string): void {
     if (!nextUrl) {
       nextUrl = req.session.errors?.length ? req.url : getNextStepUrl(req, req.session.userCase);
     }
@@ -133,7 +133,7 @@ export class PostController<T extends AnyObject> {
 
   // method to check if there is a returnUrl in session and
   // it is one of the allowed redirects from current page
-  protected checkReturnUrlAndRedirect(req: AppRequest<T>, res: Response, allowedReturnUrls: string[]): void {
+  public checkReturnUrlAndRedirect(req: AppRequest<T>, res: Response, allowedReturnUrls: string[]): void {
     const returnUrl = req.session.returnUrl;
     if (returnUrl && allowedReturnUrls.includes(returnUrl)) {
       req.session.returnUrl = undefined;
@@ -144,7 +144,7 @@ export class PostController<T extends AnyObject> {
   }
 
   //eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected getEventName(req: AppRequest): string {
+  public getEventName(req: AppRequest): string {
     let eventName;
     if (req.originalUrl === CONTACT_DETAILS && this.isBlank(req)) {
       console.log('creating new case event');
