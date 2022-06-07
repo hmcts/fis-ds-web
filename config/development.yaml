@@ -24,7 +24,7 @@ services:
   hmctsHomePage:
     url: 'https://www.gov.uk/government/organisations/hm-courts-and-tribunals-service'
   documentManagement:
-    url: 'http://ccd-case-document-am-api-aat.service.core-compute-aat.internal'  
+    url: 'http://fis-cos-api-aat.service.core-compute-aat.internal'  
   RPE_TOKEN:
     url: 'http://rpe-service-auth-provider-aat.service.core-compute-aat.internal'      
 health:
