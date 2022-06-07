@@ -1,0 +1,16 @@
+{
+    "translations": {
+        "en": {
+            "continue": "Continue",
+            "serviceName": "Enter subject's DOB",
+            "title": "What is the date of birth of the person named on this application?",
+            "hint": "For example, 27 3 2007"
+        },
+        "cy": {
+            "continue": "Continue",
+            "serviceName": "Enter subject's DOB (in welsh)",
+            "title": "What is the date of birth of the person named on this application? (in welsh)",
+            "hint": "For example, 27 3 2007 (in welsh)"
+        }
+    }
+}
