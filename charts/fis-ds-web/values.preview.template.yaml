@@ -2,8 +2,17 @@ nodejs:
   # Don't modify below here
   image: ${IMAGE_NAME}
   ingressHost: ${SERVICE_FQDN}
+  ingressIP: ${INGRESS_IP}
+  consulIP: ${CONSUL_LB_IP}
+  devmemoryLimits: 2Gi
+  devmemoryRequests: 512Mi
+  devcpuLimits: 1000m
+  devcpuRequests: 500m
+  autoscaling:
+    enabled: false
+
 idam-pr:
   enabled: true
   redirect_uris:
-    fis-ds-web:
+    ds-ui:
       - https://${SERVICE_FQDN}/receiver
