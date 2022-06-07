@@ -13,13 +13,13 @@
     },
     "errors":{
         "en": {
-            "applicant1AddressPostcode": {
+            "applicantAddressPostcode": {
                 "required": "Enter a real postcode",
                 "invalid": "Enter a real postcode"
             }
         },
         "cy": {
-            "applicant1AddressPostcode": {
+            "applicantAddressPostcode": {
                 "required": "Enter a real postcode (in welsh)",
                 "invalid": "Enter a real postcode (in welsh)"
             }

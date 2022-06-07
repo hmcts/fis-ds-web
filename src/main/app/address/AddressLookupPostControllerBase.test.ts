@@ -32,14 +32,14 @@ describe('AddressLookupPostControllerBase', () => {
   beforeEach(() => {
     req = mockRequest({ session: { userCase: { email: 'test@example.com' } } });
     res = mockResponse();
-    controller = new AddressLookupPostControllerBase({}, FieldPrefix.APPLICANT1);
+    controller = new AddressLookupPostControllerBase({}, FieldPrefix.APPLICANT);
   });
 
   describe('when there are no form errors', () => {
     beforeEach(() => {
       mockGetParsedBody.mockReturnValue({});
       mockGetErrors.mockReturnValue([]);
-      req.body.applicant1AddressPostcode = 'MOCK_POSTCODE';
+      req.body.applicantAddressPostcode = 'MOCK_POSTCODE';
       mockGetAddressesFromPostcode.mockResolvedValue([{ MOCK_KEY: 'MOCK_VALUE' }]);
     });
 
@@ -66,7 +66,7 @@ describe('AddressLookupPostControllerBase', () => {
     beforeEach(() => {
       mockGetParsedBody.mockReturnValue({});
       mockGetErrors.mockReturnValue(['MOCK_ERROR']);
-      req.body.applicant1AddressPostcode = 'MOCK_POSTCODE';
+      req.body.applicantAddressPostcode = 'MOCK_POSTCODE';
       mockGetAddressesFromPostcode.mockResolvedValue([{ MOCK_KEY: 'MOCK_VALUE' }]);
     });
 
@@ -127,7 +127,7 @@ describe('AddressLookupPostControllerBase', () => {
         expected: [],
       },
     ])('should save stubbed addresses in session', async ({ postcode, expected }) => {
-      req.body.applicant1AddressPostcode = postcode;
+      req.body.applicantAddressPostcode = postcode;
       await controller.post(req, res);
       expect(req.session.addresses).toEqual(expected);
     });
