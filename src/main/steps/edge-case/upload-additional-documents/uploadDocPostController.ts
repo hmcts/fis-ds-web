@@ -11,7 +11,7 @@ import { FormFields, FormFieldsFn } from '../../../app/form/Form';
 import { RpeApi } from '../../../app/rpe/RpeApi';
 import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 const logger = Logger.getLogger('uploadDocumentPostController');
-import { ADDITIONAL_DOCUMENTS_UPLOAD, PAY_YOUR_FEE } from '../../urls';
+import { ADDITIONAL_DOCUMENTS_UPLOAD, STATEMENT_OF_TRUTH } from '../../urls';
 
 /**
  * ****** File Extensions Types are being check
@@ -149,7 +149,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
       });
     }
     console.log(AddtionalCaseDocuments);
-    res.redirect(PAY_YOUR_FEE);
+    res.redirect(STATEMENT_OF_TRUTH);
   }
 
   public UploadDocumentInstance = (BASEURL: string, header: AxiosRequestHeaders): AxiosInstance => {
