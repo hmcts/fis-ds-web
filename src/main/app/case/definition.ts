@@ -155,7 +155,7 @@ export const enum LanguagePreference {
 }
 
 export const enum EmailAddress {
-  EMAIL_ADDRESS = 'em'
+  EMAIL_ADDRESS = 'em',
 }
 
 /**
