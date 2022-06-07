@@ -181,19 +181,6 @@ describe('GetController', () => {
     expect(1).toEqual(1);
   });
 
-  describe('parseAndSetReturnUrl', () => {
-    test.each([
-      { returnUrl: undefined, expected: undefined },
-      { returnUrl: '/unknown-url', expected: undefined },
-      { returnUrl: '/applicant1/full-name', expected: '/applicant1/full-name' },
-    ])('correctly parses and sets the return url in session', ({ returnUrl, expected }) => {
-      const controller = new GetController('page', () => ({}));
-      const req = mockRequest({ query: { returnUrl } });
-      controller.parseAndSetReturnUrl(req);
-      expect(req.session.returnUrl).toBe(expected);
-    });
-  });
-
   describe('generatePageContent()', () => {
     test('calls generatePageContent with correct arguments for new sessions', async () => {
       const getContentMock = jest.fn().mockReturnValue({});
