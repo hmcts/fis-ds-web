@@ -154,6 +154,10 @@ export const enum LanguagePreference {
   WELSH = 'WELSH',
 }
 
+export const enum EmailAddress {
+  EMAIL_ADDRESS = 'em'
+}
+
 /**
  * Values:
  * - `CONTINUE`
