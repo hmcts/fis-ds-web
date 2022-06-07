@@ -156,6 +156,8 @@ export default class UploadDocumentController extends PostController<AnyObject> 
     return axios.create({
       baseURL: BASEURL,
       headers: header,
+      'maxContentLength': Infinity,
+      'maxBodyLength': Infinity
     });
   };
 
@@ -238,7 +240,6 @@ export default class UploadDocumentController extends PostController<AnyObject> 
               this.redirect(req, res, ADDITIONAL_DOCUMENTS_UPLOAD);
             } catch (error) {
               logger.error(error);
-              res.json({ msg: 'error occured', error });
             }
           } else {
             const FormattedError: any[] = [];
