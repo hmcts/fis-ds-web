@@ -2,14 +2,11 @@ import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { validate as isValidEmail } from 'email-validator';
 
-import { OtherName } from '../../app/case/definition';
 import { Case, CaseDate } from '../case/case';
 
 dayjs.extend(customParseFormat);
 
-export type Validator = (
-  value: string | string[] | CaseDate | Partial<Case> | OtherName[] | undefined
-) => void | string;
+export type Validator = (value: string | string[] | CaseDate | Partial<Case> | any[] | undefined) => void | string;
 export type DateValidator = (value: CaseDate | undefined) => void | string;
 
 export const enum ValidationError {
@@ -61,7 +58,7 @@ export const areDateFieldsFilledIn: DateValidator = fields => {
 };
 
 export const doesArrayHaveValues: Validator = value => {
-  if (!value || !(value as (string | OtherName)[])?.length) {
+  if (!value || !(value as (string | any)[])?.length) {
     return ValidationError.REQUIRED;
   }
 };

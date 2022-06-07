@@ -57,43 +57,29 @@ describe('applicant1 > address > manual > content', () => {
     });
   });
 
-  test('should contain applicantAddress1 field', () => {
+  test('should contain applicant1Address1 field', () => {
     const applicantAddress1Field = fields.applicantAddress1 as FormOptions;
     expect(applicantAddress1Field).toEqual(manualAddressFormFields.address1);
   });
 
-  test('should contain applicantAddress2 field', () => {
+  test('should contain applicant1Address2 field', () => {
     const applicantAddress2Field = fields.applicantAddress2 as FormOptions;
     expect(applicantAddress2Field).toEqual(manualAddressFormFields.address2);
   });
 
-  test('should contain applicantAddressTown field', () => {
-    const applicantAddressTownField = fields.applicantAddressTown as FormOptions;
-    expect(applicantAddressTownField).toEqual(manualAddressFormFields.addressTown);
+  test('should contain applicant1AddressTown field', () => {
+    const applicant1AddressTownField = fields.applicantAddressTown as FormOptions;
+    expect(applicant1AddressTownField).toEqual(manualAddressFormFields.addressTown);
   });
 
-  test('should contain applicantAddressCounty field', () => {
-    const applicantAddressCountyField = fields.applicantAddressCounty as FormOptions;
-    expect(applicantAddressCountyField).toEqual(manualAddressFormFields.addressCounty);
+  test('should contain applicant1AddressCounty field', () => {
+    const applicant1AddressCountyField = fields.applicantAddressCounty as FormOptions;
+    expect(applicant1AddressCountyField).toEqual(manualAddressFormFields.addressCounty);
   });
 
-  test('should contain applicantAddressPostcode field', () => {
-    const applicantAddressPostcodeField = fields.applicantAddressPostcode as FormOptions;
-    expect(applicantAddressPostcodeField).toEqual(manualAddressFormFields.addressPostcode);
-  });
-
-  it('should have applicantAddressPostcode label when language: en and  applyingWith: alone', () => {
-    const commonContent1 = { language: 'en', userCase: { applyingWith: 'alone' } } as CommonContent;
-
-    const generatedContent1 = generateContent(commonContent1);
-    expect(generatedContent1.section).toBe('Applicant');
-  });
-
-  it('should have an applicantAddressPostcode label when language: cy and  applyingWith: alone', () => {
-    const commonContent1 = { language: 'cy', userCase: { applyingWith: 'alone' } } as CommonContent;
-
-    const generatedContent1 = generateContent(commonContent1);
-    expect(generatedContent1.section).toBe('Applicant (in welsh)');
+  test('should contain applicant1AddressPostcode field', () => {
+    const applicant1AddressPostcodeField = fields.applicantAddressPostcode as FormOptions;
+    expect(applicant1AddressPostcodeField).toEqual(manualAddressFormFields.addressPostcode);
   });
 
   test('should contain continue button', () => {
