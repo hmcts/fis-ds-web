@@ -17,7 +17,8 @@ Scenario(
     reviewpaymentpage,
     determineapplicantrole,
     statementoftruth,
-    contactpreferencepage
+    contactpreferencepage,
+    additionaldocumentpage
   }) => {
     await landingPage.seeTheLandingPage();
     await loginPage.SignInUser();
@@ -29,6 +30,7 @@ Scenario(
     await contactdetails.seeTheTitleOfThePage();
     await contactdetails.selectEmail();
     await uploadfilepage.uploadDocumentsSection();
+    await additionaldocumentpage.uploadDocumentsSection();
     await statementoftruth.statementOfTruth();
     //await reviewpaymentpage.seeTheTitleOfThePage();
     //await reviewpaymentpage.selectPayByCard();
