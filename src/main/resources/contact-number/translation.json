@@ -23,12 +23,12 @@
     },
     "errors":{
         "en": {
-            "emailAddress": {
+            "contactNumber": {
                 "invalid": "Please either enter home or mobile phone number"
             }
         },
         "cy": {
-            "emailAddress": {
+            "contactNumber": {
               "invalid": "Please either enter home or mobile phone number (Welsh)"
             }
         }
