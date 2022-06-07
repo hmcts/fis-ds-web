@@ -19,19 +19,19 @@ module.exports = {
       I.wait(5);
       I.see('Your email address');
       I.fillField(this.fields.emailAddress, "hello@abc.com");
-      I.click('Save and continue');
+      I.click('Continue');
       I.wait(5);
     },
   
     selecthomenumber() {
       I.fillField(this.fields.homenumber, "1234567890");
-      I.click('Save and continue');
+      I.click('Continue');
       I.wait(5);
     },
 
     selecthomenumber() {
         I.fillField(this.fields.mobilenumber, "1234567890");
-        I.click('Save and continue');
+        I.click('Continue');
         I.wait(5);
     },
 };

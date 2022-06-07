@@ -3,24 +3,26 @@ import config from 'config';
 import { Response } from 'express';
 
 import { getNextStepUrl } from '../../steps';
-import { CONTACT_DETAILS, SAVE_AND_SIGN_OUT } from '../../steps/urls';
+import { /*CONTACT_DETAILS*/ SAVE_AND_SIGN_OUT } from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
-import { CITIZEN_CREATE, CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE } from '../case/definition';
+import { /**CITIZEN_CREATE*/ CITIZEN_SAVE_AND_CLOSE /*CITIZEN_UPDATE */ } from '../case/definition';
 import { Form, FormFields, FormFieldsFn } from '../form/Form';
 import { ValidationError } from '../form/validation';
 
 import { AppRequest } from './AppRequest';
 
-enum noHitToSaveAndContinue {
+/**
+ * enum noHitToSaveAndContinue {
   CITIZEN_HOME_URL = '/citizen-home',
   SERVICE_TYPE = '/service-type',
   ADOPTION_APPLICATION_TYPE = '/adoption-application-type',
   PRIVATE_LAW_APPLICATION_TYPE = '/private-law-application-type',
 }
+ */
 
 @autobind
 export class PostController<T extends AnyObject> {
-  constructor(protected readonly fields: FormFields | FormFieldsFn) {}
+  constructor(protected fields: FormFields | FormFieldsFn) {}
 
   /**
    * Parse the form body and decide whether this is a save and sign out, save and continue or session time out
@@ -35,7 +37,7 @@ export class PostController<T extends AnyObject> {
     if (req.body.saveAndSignOut) {
       await this.saveAndSignOut(req, res, formData);
     } else if (req.body.saveBeforeSessionTimeout) {
-      await this.saveBeforeSessionTimeout(req, res, formData);
+      // await this.saveBeforeSessionTimeout(req, res, formData);
     } else if (req.body.cancel) {
       await this.cancel(req, res);
     } else {
@@ -52,14 +54,20 @@ export class PostController<T extends AnyObject> {
     res.redirect(SAVE_AND_SIGN_OUT);
   }
 
-  private async saveBeforeSessionTimeout(req: AppRequest<T>, res: Response, formData: Partial<Case>): Promise<void> {
+  /**
+   * 
+   * @param req 
+   * @param res 
+   * @param formData 
+   *   private async saveBeforeSessionTimeout(req: AppRequest<T>, res: Response, formData: Partial<Case>): Promise<void> {
     try {
-      await this.save(req, formData, this.getEventName(req));
+       await this.save(req, formData, this.getEventName(req));
     } catch {
       // ignore
     }
     res.end();
   }
+   */
 
   private async saveAndContinue(req: AppRequest<T>, res: Response, form: Form, formData: Partial<Case>): Promise<void> {
     Object.assign(req.session.userCase, formData);
@@ -67,11 +75,8 @@ export class PostController<T extends AnyObject> {
 
     this.filterErrorsForSaveAsDraft(req);
 
-    const tempServiceType = req.session.userCase.serviceType;
-    const tempApplyingWithAdoption = req.session.userCase.applyingWithAdoption;
-    const tempApplyingWithPrivateLaw = req.session.userCase.applyingWithPrivateLaw;
-
-    if (req.session?.user && req.session.errors.length === 0) {
+    /**
+     *     if (req.session?.user && req.session.errors.length === 0) {
       if (!(Object.values(noHitToSaveAndContinue) as string[]).includes(req.originalUrl)) {
         const eventName = this.getEventName(req);
         if (eventName === CITIZEN_CREATE) {
@@ -82,12 +87,7 @@ export class PostController<T extends AnyObject> {
       }
     }
 
-    // here we explicitly assigning the values to userCase to get the title
-    if (typeof req.session.userCase !== 'undefined' && req.session.userCase !== null) {
-      req.session.userCase.serviceType = tempServiceType;
-      req.session.userCase.applyingWithAdoption = tempApplyingWithAdoption;
-      req.session.userCase.applyingWithPrivateLaw = tempApplyingWithPrivateLaw;
-    }
+     */
 
     this.redirect(req, res);
   }
@@ -155,7 +155,12 @@ export class PostController<T extends AnyObject> {
     }
   }
 
-  //eslint-disable-next-line @typescript-eslint/no-unused-vars
+  /**
+   * 
+   * @param req 
+   * @returns 
+   * 
+   *   //eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected getEventName(req: AppRequest): string {
     let eventName;
     if (req.originalUrl === CONTACT_DETAILS && this.isBlank(req)) {
@@ -174,6 +179,7 @@ export class PostController<T extends AnyObject> {
       return true;
     }
   }
+   */
 }
 
 export type AnyObject = Record<string, unknown>;
