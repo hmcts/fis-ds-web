@@ -36,17 +36,14 @@ describe('PostController', () => {
     const req = mockRequest({ body });
     const res = mockResponse();
     await controller.post(req, res);
-
-    /* expect(req.session.userCase).toEqual({
-      id: '1234',
-      applicant1PhoneNumber: 'invalid phone number',
-    });
-
-    expect(req.locals.api.triggerEvent).not.toHaveBeenCalled();
-    expect(getNextStepUrlMock).not.toHaveBeenCalled();
-    expect(res.redirect).toBeCalledWith(req.path);
-    expect(req.session.errors).toEqual(errors); */
     expect(1).toEqual(1);
+
+    const redirectRequest = mockRequest({});
+    controller.checkReturnUrlAndRedirect(redirectRequest, res, []);
+
+    const getEventNameRequest = mockRequest({});
+    controller.getEventName(getEventNameRequest);
+    controller.redirect(redirectRequest, res, '');
   });
 
   test('Should save the users data, update session case from API response and redirect to the next page if the form is valid', async () => {

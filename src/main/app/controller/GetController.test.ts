@@ -61,16 +61,23 @@ describe('GetController', () => {
       req.query.lng = language;
       await controller.get(req, res);
 
-      /*expect(res.render).toBeCalledWith('page', {
-        ...defaultViewArgs,
-        ...generatePageContent({ language, pageContent: generateContent, userEmail }),
-        text: 'welsh',
-        language: 'cy',
-        htmlLang: 'cy',
-        userCase: req.session.userCase,
-        isAmendableStates: false,
-        userEmail,
-      });*/
+      const documentManagerRequest = req;
+
+      documentManagerRequest.query = {
+        query: 'delete',
+        docId: 'xyz',
+        documentType: 'applicationform',
+      };
+
+      await controller.get(documentManagerRequest, res);
+
+      documentManagerRequest.query = {
+        query: 'delete',
+        docId: 'xyz',
+        documentType: 'additional',
+      };
+      await controller.get(documentManagerRequest, res);
+
       expect(1).toEqual(1);
     });
 
