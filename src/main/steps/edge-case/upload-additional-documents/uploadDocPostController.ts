@@ -156,8 +156,8 @@ export default class UploadDocumentController extends PostController<AnyObject> 
     return axios.create({
       baseURL: BASEURL,
       headers: header,
-      'maxContentLength': Infinity,
-      'maxBodyLength': Infinity
+      maxContentLength: Infinity,
+      maxBodyLength: Infinity,
     });
   };
 

@@ -21,7 +21,7 @@ export class LoadTimeouts {
       // Set the server response timeout for all HTTP requests
 
       /**
-       * 
+       *
        */
       res.setTimeout(timeoutMs, () => {
         const err = new HTTPError('Service Unavailable', StatusCodes.SERVICE_UNAVAILABLE);
