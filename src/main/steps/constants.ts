@@ -13,4 +13,3 @@ export interface Step {
   excludeFromContinueApplication?: boolean;
   getNextStep: (data: Partial<CaseWithId>) => PageLink;
 }
-
