@@ -5,5 +5,5 @@ nodejs:
 idam-pr:
   enabled: true
   redirect_uris:
-    adoption-web:
+    fis-ds-web:
       - https://${SERVICE_FQDN}/receiver
