@@ -1,95 +1,29 @@
-import { YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isPhoneNoValid } from '../../../app/form/validation';
-import { CommonContent } from '../../../steps/common/common.content';
-
-export const en = ({ userCase }: CommonContent): Record<string, unknown> => {
-  const titleBar = userCase?.serviceType === 'Yes' ? userCase?.applyingWithAdoption : userCase?.applyingWithPrivateLaw;
-  return {
-    label: 'What are your contact details?',
-    serviceName: 'Apply to ' + titleBar,
-    one: 'I can provide an email address',
-    two: 'I can not provide an email address',
-    emailAddress: 'Your email address',
-    homePhoneNumber: 'Your home phone',
-    mobilePhoneNumber: 'Your mobile phone',
-    errors: {
-      emailAddressConsent: {
-        required: 'Please answer the question',
-      },
-      emailAddress: {
-        required: 'Enter your email address',
-        invalid: 'Enter a real email address',
-      },
-      homePhoneNumber: {
-        required: 'Enter your home phone number',
-        invalid: 'Enter a real home phone number',
-      },
-      mobilePhoneNumber: {
-        required: 'Enter your mobile number',
-        invalid: 'Enter a real UK mobile number',
-        atleastOneRequired: 'Enter atleast one contact detail out of email, home or mobile phone number',
-      },
-    },
-  };
-};
-
-export const cy = ({ userCase }: CommonContent): Record<string, unknown> => {
-  const titleBar =
-    userCase?.serviceType === 'Yes' ? userCase?.adoptionApplicationType : userCase?.applyingWithPrivateLaw;
-  return {
-    label: 'What are your contact details? (in welsh)',
-    serviceName: 'Apply to ' + titleBar + ' (in welsh)',
-    one: 'I can provide an email address (in welsh)',
-    two: 'I can not provide an email address (in welsh)',
-    emailAddress: 'Your email address (in welsh)',
-    homePhoneNumber: 'Your home phone (in welsh)',
-    mobilePhoneNumber: 'Your mobile phone (in welsh)',
-    errors: {
-      emailAddressConsent: {
-        required: 'Please answer the question (in welsh)',
-      },
-      emailAddress: {
-        required: 'Enter your email address (in welsh)',
-        invalid: 'Enter a real email address (in welsh)',
-      },
-      homePhoneNumber: {
-        required: 'Enter your home phone number (in welsh)',
-        invalid: 'Enter a real home phone number (in welsh)',
-      },
-      mobilePhoneNumber: {
-        required: 'Enter your mobile number (in welsh)',
-        invalid: 'Enter a real UK mobile number (in welsh)',
-        atleastOneRequired: 'Enter atleast one contact detail out of email, home or mobile phone number (in welsh)',
-      },
-    },
-  };
-};
+import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 
 export const form: FormContent = {
   fields: {
     homePhoneNumber: {
       type: 'text',
-      classes: 'govuk-input--width-20',
-      label: l => l.homePhoneNumber,
+      classes: 'govuk-input',
+      label: hl => hl.homePhoneLabel,
+      hint: hh => hh.homePhoneHint,
       labelSize: null,
       validator: value => isPhoneNoValid(value),
     },
     mobilePhoneNumber: {
       type: 'text',
-      classes: 'govuk-input--width-20',
-      label: l => l.mobilePhoneNumber,
+      classes: 'govuk-input',
+      label: ml => ml.mobilePhoneLabel,
+      hint: mh => mh.mobilePhoneHint,
       labelSize: null,
       validator: (value, formData) => {
         const hasMobilePhoneNumberEntered = (value as string[])?.length && (value as string) !== '[]';
         const hasHomePhoneNumberEntered = formData.homePhoneNumber && !!formData.homePhoneNumber?.length;
-        const hasEmailEntered =
-          formData.emailAddressConsent?.includes(YesOrNo.YES) &&
-          formData.emailAddress &&
-          !!formData.emailAddress?.length;
 
-        if (!hasHomePhoneNumberEntered && !hasMobilePhoneNumberEntered && !hasEmailEntered) {
+        if (!hasHomePhoneNumberEntered && !hasMobilePhoneNumberEntered) {
           return 'atleastOneRequired';
         }
         return isPhoneNoValid(value);
@@ -104,12 +38,36 @@ export const form: FormContent = {
   },
 };
 
-const languages = {
-  en,
-  cy,
-};
+export const generateContent: TranslationFn = content => {
+  const resourceLoader = new ResourceReader();
+  resourceLoader.Loader('contact-number');
+  const Translations = resourceLoader.getFileContents().translations;
+  const errors = resourceLoader.getFileContents().errors;
 
-export const generateContent: TranslationFn = content => ({
-  ...languages[content.language](content),
-  form,
-});
+  const en = () => {
+    return {
+      ...Translations.en,
+      errors: {
+        ...errors.en,
+      },
+    };
+  };
+  const cy = () => {
+    return {
+      ...Translations.cy,
+      errors: {
+        ...errors.cy,
+      },
+    };
+  };
+
+  const languages = {
+    en,
+    cy,
+  };
+  const translations = languages[content.language]();
+  return {
+    ...translations,
+    form,
+  };
+};

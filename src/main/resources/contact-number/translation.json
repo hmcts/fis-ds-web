@@ -24,12 +24,16 @@
     "errors":{
         "en": {
             "contactNumber": {
-                "invalid": "Please either enter home or mobile phone number"
+                "required": "Please either enter home or mobile phone number",
+                "invalid": "Please either enter home or mobile phone number",
+                "atleastOneRequired": "Please either enter home or mobile phone number"
             }
         },
         "cy": {
             "contactNumber": {
-              "invalid": "Please either enter home or mobile phone number (Welsh)"
+                "required": "Please either enter home or mobile phone number (Welsh)",
+                "invalid": "Please either enter home or mobile phone number (Welsh)",
+                "atleastOneRequired": "Please either enter home or mobile phone number (Welsh)"
             }
         }
     }
