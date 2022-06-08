@@ -25,6 +25,7 @@ services:
     url: 'https://www.gov.uk/government/organisations/hm-courts-and-tribunals-service'
   documentManagement:
     url: 'http://fis-cos-api-aat.service.core-compute-aat.internal'  
+    uploadSizeinMB: 30
   RPE_TOKEN:
     url: 'http://rpe-service-auth-provider-aat.service.core-compute-aat.internal'      
 health:
