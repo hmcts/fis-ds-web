@@ -100,7 +100,7 @@ describe('contact-number-content', () => {
     expect(generatedContent.mobilePhone).toEqual(cyContent.mobilePhone);
     expect(generatedContent.errors).toEqual(cyContent.errors);
   });
-
+  /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
   test('should contain submit button', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
@@ -116,12 +116,12 @@ describe('contact-number-content', () => {
     expect((mobilePhoneNumberOption.label as Function)(generatedContent)).toBe(
       'What is the mobile phone number of the person named on the application'
     );
-    expect((mobilePhoneNumberOption.validator as Function)(null, mobilePhoneNumberOption)).toBe("atleastOneRequired");
+    expect((mobilePhoneNumberOption.validator as Function)(null, mobilePhoneNumberOption)).toBe('atleastOneRequired');
 
     const homePhoneNumberOption = fields.homePhoneNumber as FormOptions;
     expect((homePhoneNumberOption.label as Function)(generatedContent)).toBe(
       'What is the home phone number of the person named on the application'
     );
-    expect((homePhoneNumberOption.validator as Function)(null, homePhoneNumberOption)).toBe("atleastOneRequired");
+    expect((homePhoneNumberOption.validator as Function)(null, homePhoneNumberOption)).toBe('atleastOneRequired');
   });
 });
