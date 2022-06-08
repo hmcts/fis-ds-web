@@ -50,6 +50,7 @@ describe('Email Address', () => {
     expect(emailAddressOptions.values[0].value).toBe(EmailAddress.EMAIL_ADDRESS);
     expect((emailAddressOptions.values[0].label as Function)(generatedContent)).toBe('Insert email address');
     expect((emailAddressOptions.validator as Function)('test@gmail.com')).toBe(undefined);
+    expect((emailAddressOptions.validator as Function)('')).toBe(undefined);
   });
 
   test('should contain submit button', () => {
