@@ -26,7 +26,7 @@ export interface Case {
   namedApplicant: boolean;
   applicantFirstName: string;
   applicantLastName: string;
-  applicantDateOfBirth: string;
+  applicantDateOfBirth: CaseDate;
   applicantEmailAddress: string;
   applicantPhoneNumber: string;
   applicantHomeNumber: string;

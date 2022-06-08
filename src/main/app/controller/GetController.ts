@@ -21,6 +21,8 @@ export class GetController {
   constructor(protected readonly view: string, protected readonly content: TranslationFn) {}
 
   public async get(req: AppRequest, res: Response): Promise<void> {
+console.log('usercase session --->',req.session.userCase);
+
     if (res.locals.isError || res.headersSent) {
       // If there's an async error, it will have already rendered an error page upstream,
       // so we don't want to call render again

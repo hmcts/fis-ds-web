@@ -1,5 +1,6 @@
 import {
   ADDITIONAL_DOCUMENTS_UPLOAD,
+  CHECK_YOUR_ANSWERS,
   CONTACT_DETAILS,
   CONTACT_PREFERENCES,
   DATE_OF_BIRTH,
@@ -47,6 +48,13 @@ describe('Sequence must match respective path', () => {
     expect(edgecaseSequence[9].getNextStep({})).toBe(ADDITIONAL_DOCUMENTS_UPLOAD);
 
     expect(edgecaseSequence[10].url).toBe(ADDITIONAL_DOCUMENTS_UPLOAD);
+    expect(edgecaseSequence[8].url).toBe(UPLOAD_YOUR_DOCUMENTS);
+    // expect(edgecaseSequence[8].getNextStep({})).toBe(ADDITIONAL_DOCUMENTS_UPLOAD);
+
+    expect(edgecaseSequence[9].url).toBe(ADDITIONAL_DOCUMENTS_UPLOAD);
+    expect(edgecaseSequence[9].getNextStep({})).toBe(CHECK_YOUR_ANSWERS);
+
+    expect(edgecaseSequence[10].url).toBe(CHECK_YOUR_ANSWERS);
     expect(edgecaseSequence[10].getNextStep({})).toBe(STATEMENT_OF_TRUTH);
 
     expect(edgecaseSequence[11].url).toBe(STATEMENT_OF_TRUTH);
