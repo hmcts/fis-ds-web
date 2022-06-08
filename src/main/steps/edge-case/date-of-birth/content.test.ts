@@ -61,7 +61,7 @@ describe('appllicant1 > dob-content', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
 
-    expect((form.submit.text as Function)(generatePageContent({ language: EN }))).toBe('Save and continue');
+    expect((form.submit.text as Function)(generatePageContent({ language: EN }))).toBe('Continue');
   });
 
   test('should contain dateOfBirth field', () => {

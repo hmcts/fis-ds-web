@@ -137,7 +137,7 @@ describe('common > components > address-select', () => {
 
   test('should contain submit button', () => {
     const form = generatedContent.form as FormContent;
-    expect((form.submit.text as Function)(generatePageContent({ language: 'en' }))).toBe('Save and continue');
+    expect((form.submit.text as Function)(generatePageContent({ language: 'en' }))).toBe('Continue');
   });
 });
 /* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */

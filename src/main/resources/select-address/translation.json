@@ -15,12 +15,12 @@
     },
     "errors":{
         "en": {
-            "applicant1SelectAddress": {
+            "applicantSelectAddress": {
                 "notSelected": "Select an address"
             }
         },
         "cy": {
-            "applicant1SelectAddress": {
+            "applicantSelectAddress": {
                 "notSelected": "Select an address (in welsh)"
             }
         }
