@@ -29,8 +29,8 @@ Scenario(
     await addresswithpostcode.PostCodeLookUpAndSelect();
     await contactpreferencepage.contactPreference();
     await emailaddresspage.emailAddress();
-    await contactdetails.seeTheTitleOfThePage();
-    await contactdetails.selectEmail();
+    //await contactdetails.seeTheTitleOfThePage();
+    //await contactdetails.selectEmail();
     await uploadfilepage.uploadDocumentsSection();
     await additiondocumentpage.uploadDocumentsSection();
     await statementoftruth.statementOfTruth();
