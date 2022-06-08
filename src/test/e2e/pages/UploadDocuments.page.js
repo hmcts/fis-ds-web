@@ -8,13 +8,13 @@ module.exports = {
   },
 
 async uploadDocumentsSection() {
-    await I.waitForText("Upload the child's documents", 30);
+    await I.waitForText("Upload application form", 30);
     await I.attachFile(this.fields.uploadFileButton, config.testPdfFile);
     await I.wait(3);
     //await I.retry(3).waitForElement(this.fields.uploadProgressBar, 30);
     //await I.wait(3);
-    await I.retry(3).waitForElement(this.fields.fileUploadedOption, 30);
-    await I.wait(4);
-    I.click('Save and continue');
+   // await I.retry(3).waitForElement(this.fields.fileUploadedOption, 30);
+    //await I.wait(4);
+    I.click('Continue')
   },
 };

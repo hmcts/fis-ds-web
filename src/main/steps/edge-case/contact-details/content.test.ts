@@ -140,14 +140,14 @@ describe('applicant > contact-details-content', () => {
     expect((mobilePhoneNumberField.label as Function)(generatedContent)).toBe('Your mobile phone');
     expect(mobilePhoneNumberField.labelSize).toBe(null);
     expect((mobilePhoneNumberField.validator as Function)('0999999999', {})).toBe(undefined);
-    expect((mobilePhoneNumberField.validator as Function)('', {})).toBe('atleastOneRequired');
+    expect((mobilePhoneNumberField.validator as Function)('', {})).not.toBe('atleastOneRequired');
   });
 
   test('should contain submit button', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
 
-    expect((form.submit.text as Function)(generatePageContent({ language: EN }))).toBe('Save and continue');
+    expect((form.submit.text as Function)(generatePageContent({ language: EN }))).toBe('Continue');
   });
 
   test('should contain cancel button', () => {

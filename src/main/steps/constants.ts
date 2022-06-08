@@ -13,11 +13,3 @@ export interface Step {
   excludeFromContinueApplication?: boolean;
   getNextStep: (data: Partial<CaseWithId>) => PageLink;
 }
-export enum FEE_APPLICATION_TYPES {
-  APPLY_ADOPTION = 'ApplyAdoption',
-  APPLY_PARENT = 'AppnParent',
-  PQR = 'PQR',
-  SPECIAL_GUARDIAN = 'SpecialGuardian',
-  NO_FEE = 'NoFee',
-  PRIVATE = 'Private',
-}

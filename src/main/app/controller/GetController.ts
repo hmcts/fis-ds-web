@@ -5,14 +5,15 @@ import Negotiator from 'negotiator';
 import { LanguageToggle } from '../../modules/i18n';
 import { CommonContent, Language, generatePageContent } from '../../steps/common/common.content';
 import * as Urls from '../../steps/urls';
+import { ADDITIONAL_DOCUMENTS_UPLOAD, UPLOAD_YOUR_DOCUMENTS } from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
-import { CITIZEN_UPDATE, State } from '../case/definition';
 
 import { AppRequest } from './AppRequest';
 
 export type PageContent = Record<string, unknown>;
 export type TranslationFn = (content: CommonContent) => PageContent;
 
+export type AsyncTranslationFn = any;
 @autobind
 export class GetController {
   constructor(protected readonly view: string, protected readonly content: TranslationFn) {}
@@ -26,7 +27,7 @@ export class GetController {
 
     const language = this.getPreferredLanguage(req) as Language;
     const addresses = req.session?.addresses;
-    const uploadedDocuments = req.session.caseDocuments;
+
     const content = generatePageContent({
       language,
       pageContent: this.content,
@@ -36,19 +37,34 @@ export class GetController {
     });
 
     const sessionErrors = req.session?.errors || [];
-
-    if (req.session?.errors) {
+    const FileErrors = req.session.fileErrors || [];
+    if (req.session?.errors || req.session.fileErrors) {
       req.session.errors = undefined;
+      req.session.fileErrors = [];
     }
 
-    res.render(this.view, {
-      ...content,
-      uploadedDocuments,
-      sessionErrors,
-      htmlLang: language,
-      isDraft: req.session?.userCase?.state ? req.session.userCase.state === State.Draft : true,
-      // getNextIncompleteStepUrl: () => getNextIncompleteStepUrl(req),
-    });
+    console.log({ caseData: req.session['userCase'] });
+
+    this.documentDeleteManager(req, res);
+    const RedirectConditions = {
+      query: req.query.hasOwnProperty('query'),
+      documentId: req.query.hasOwnProperty('documentId'),
+      documentType: req.query.hasOwnProperty('documentType'),
+    };
+
+    const checkConditions = Object.values(RedirectConditions).includes(true);
+    if (!checkConditions) {
+      res.render(this.view, {
+        ...content,
+        uploadedDocuments: req.session['caseDocuments'],
+        addtionalDocuments: req.session['AddtionalCaseDocuments'],
+        sessionErrors,
+        FileErrors,
+        htmlLang: language,
+        isDraft: req.session?.userCase?.state ? req.session.userCase.state === '' : true,
+        // getNextIncompleteStepUrl: () => getNextIncompleteStepUrl(req),
+      });
+    }
   }
 
   private getPreferredLanguage(req: AppRequest) {
@@ -101,8 +117,54 @@ export class GetController {
     });
   }
 
+  public documentDeleteManager(req: AppRequest, res: Response): void {
+    if (
+      req.query.hasOwnProperty('query') &&
+      req.query.hasOwnProperty('documentId') &&
+      req.query.hasOwnProperty('documentType')
+    ) {
+      const checkForDeleteQuery = req.query['query'] === 'delete';
+      if (checkForDeleteQuery) {
+        const { documentType } = req.query;
+        const { documentId } = req.query;
+        /** Switching type of documents */
+        /*eslint no-case-declarations: "error"*/
+        switch (documentType) {
+          case 'applicationform': {
+            const sessionObjectOfApplicationDocuments = req.session['caseDocuments'].filter(document => {
+              const { _links } = document;
+              const documentIdFound = _links.self['href'].split('/')[4];
+              return documentIdFound !== documentId;
+            });
+            req.session['caseDocuments'] = sessionObjectOfApplicationDocuments;
+            console.log({ caseDocument: req.session['caseDocuments'] });
+            this.saveSessionAndRedirect(req, res, () => {
+              res.redirect(UPLOAD_YOUR_DOCUMENTS);
+            });
+
+            break;
+          }
+
+          case 'additional': {
+            const sessionObjectOfAdditionalDocuments = req.session['AddtionalCaseDocuments'].filter(document => {
+              const { _links } = document;
+              const documentIdFound = _links.self['href'].split('/')[4];
+              return documentIdFound !== documentId;
+            });
+            req.session['AddtionalCaseDocuments'] = sessionObjectOfAdditionalDocuments;
+            console.log({ AddtionalDocuments: req.session['AddtionalCaseDocuments'] });
+            this.saveSessionAndRedirect(req, res, () => {
+              res.redirect(ADDITIONAL_DOCUMENTS_UPLOAD);
+            });
+            break;
+          }
+        }
+      }
+    }
+  }
+
   //eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected getEventName(req: AppRequest): string {
-    return CITIZEN_UPDATE;
+    return '';
   }
 }

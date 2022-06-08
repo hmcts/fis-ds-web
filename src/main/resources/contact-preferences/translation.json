@@ -1,0 +1,32 @@
+{
+    "translations": {
+        "en": {
+            "continue": "Continue",
+            "serviceName": "Contact preferences",
+            "label": "Who should receive emails about this application?",
+            "accountOwner": "The account owner",
+            "namedPerson": "The person named on this application",
+            "bothReceiveEmail": "Both the account owner and the person named on this application"
+        },
+        "cy": {
+            "continue": "Continue (in welsh)",
+            "serviceName": "Contact preferences (in Welsh)",
+            "label": "Who should receive emails about this application (in Welsh)?",
+            "accountOwner": "The account owner (in Welsh)",
+            "namedPerson": "The person named on this application (in Welsh)",
+            "bothReceiveEmail": "Both the account owner and the person named on this application (in Welsh)"
+        }
+    },
+    "errors":{
+        "en": {
+            "contactPreferenceType": {
+                "required": "Select an option"
+            }
+        },
+        "cy": {
+            "contactPreferenceType": {
+                "required": "Select an option (in Welsh)"
+            }
+        }
+    }
+} 

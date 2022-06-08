@@ -3,7 +3,7 @@ import { mockRequest } from '../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../test/unit/utils/mockResponse';
 //import { generatePageContent } from '../../steps/common/common.content';
 import { Case } from '../case/case';
-import { State } from '../case/definition';
+// import { State } from '../case/definition';
 
 import { GetController } from './GetController';
 
@@ -40,7 +40,7 @@ describe('GetController', () => {
   test('Detects when application is not in a draft state', async () => {
     const controller = new GetController('page', () => ({}));
 
-    const req = mockRequest({ userCase: { state: State.AwaitingPayment } });
+    const req = mockRequest({ userCase: { state: '' } });
     const res = mockResponse();
     await controller.get(req, res);
 
@@ -181,25 +181,12 @@ describe('GetController', () => {
     expect(1).toEqual(1);
   });
 
-  describe('parseAndSetReturnUrl', () => {
-    test.each([
-      { returnUrl: undefined, expected: undefined },
-      { returnUrl: '/unknown-url', expected: undefined },
-      { returnUrl: '/applicant1/full-name', expected: '/applicant1/full-name' },
-    ])('correctly parses and sets the return url in session', ({ returnUrl, expected }) => {
-      const controller = new GetController('page', () => ({}));
-      const req = mockRequest({ query: { returnUrl } });
-      controller.parseAndSetReturnUrl(req);
-      expect(req.session.returnUrl).toBe(expected);
-    });
-  });
-
   describe('generatePageContent()', () => {
     test('calls generatePageContent with correct arguments for new sessions', async () => {
       const getContentMock = jest.fn().mockReturnValue({});
       const controller = new GetController('page', getContentMock);
 
-      const req = mockRequest({ userCase: { state: State.Draft }, session: { errors: [] } });
+      const req = mockRequest({ userCase: { state: '' }, session: { errors: [] } });
       const res = mockResponse();
       await controller.get(req, res);
 
@@ -292,5 +279,69 @@ describe('GetController', () => {
       }
       expect(res.redirect).not.toBeCalledWith('/request');
     });
+  });
+});
+
+describe('checking for documents Delete manager', () => {
+  it('should delete additional documents', async () => {
+    const languages = {
+      en: {
+        text: 'english',
+      },
+      cy: {
+        text: 'welsh',
+      },
+    };
+    //const userEmail = 'test@example.com';
+    const generateContent = content => languages[content.language];
+
+    /**
+     *     const mockFormContent = {
+      fields: {},
+    } as unknown ;
+     * 
+     */
+
+    /**
+     * const body = { applicant1PhoneNumber: 'invalid phone number' };
+    const query = `/upload-your-documents?query=delete&documentId=10&documentType=applicationform`
+
+    */
+
+    const controller = new GetController('page', generateContent);
+
+    const req = mockRequest();
+    const res = mockResponse();
+    req.session.caseDocuments = [
+      {
+        originalDocumentName: 'document1.docx',
+        _links: {
+          self: {
+            href: 'http://dm-example/documents/sae33',
+          },
+          binary: {
+            href: 'http://dm-example/documents/sae33/binary',
+          },
+        },
+      },
+      {
+        originalDocumentName: 'document2.docx',
+        _links: {
+          self: {
+            href: 'http://dm-example/documents/ce6e2',
+          },
+          binary: {
+            href: 'http://dm-example/documents/ce6e2/binary',
+          },
+        },
+      },
+    ];
+
+    req.query = {
+      query: 'delete',
+      documentId: '10',
+      documentType: 'applicationform',
+    };
+    await controller.get(req, res);
   });
 });

@@ -1,69 +1,56 @@
 import { TranslationFn } from '../../../app/controller/GetController';
-import { FormContent, FormFields } from '../../../app/form/Form';
-import { CommonContent } from '../../../steps/common/common.content';
-import { ErrorMessages, ErrorMessagesWelsh } from '../../../steps/errorMesages';
+import { FormContent, FormFields, FormFieldsFn } from '../../../app/form/Form';
+import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 import { form as fullNameForm, generateContent as fullNameGenerateContent } from '../../common/components/full-name';
 
-export const en = ({ userCase }: CommonContent): Record<string, unknown> => {
-  const section = 'Applicant';
-  const title = userCase?.serviceType === 'Yes' ? userCase?.applyingWithAdoption : userCase?.applyingWithPrivateLaw;
-  return {
-    section,
-    serviceName: 'Apply to ' + title,
-    title: "What's your full name?",
-    errors: {
-      applicant1FirstNames: {
-        required: ErrorMessages.ENTER_FIRST_NAME,
-      },
-      applicant1LastNames: {
-        required: ErrorMessages.ENTER_LAST_NAME,
-      },
-    },
-  };
-};
-
-export const cy = ({ userCase }: CommonContent): Record<string, unknown> => {
-  const section = 'Applicant (in Welsh)';
-  const title = userCase?.serviceType === 'Yes' ? userCase?.applyingWithAdoption : userCase?.applyingWithPrivateLaw;
-  return {
-    section,
-    serviceName: 'Apply to ' + title + ' (in Welsh)',
-    title: "What's your full name? (in Welsh)",
-    errors: {
-      applicant1FirstNames: {
-        required: ErrorMessagesWelsh.ENTER_FIRST_NAME,
-      },
-      applicant1LastNames: {
-        required: ErrorMessagesWelsh.ENTER_LAST_NAME,
-      },
-    },
-  };
-};
-
 const fullNameFormFields = fullNameForm.fields as FormFields;
+
+const FULL_NAME = 'full-name';
+
 export const form: FormContent = {
-  fields: {
-    applicant1FirstNames: fullNameFormFields.firstNames,
-    applicant1LastNames: fullNameFormFields.lastNames,
+  fields: () => {
+    return {
+      applicantFirstNames: fullNameFormFields.firstNames,
+      applicantLastNames: fullNameFormFields.lastNames,
+    };
   },
   submit: {
     text: l => l.continue,
   },
-  cancel: {
-    text: l => l.cancel,
-  },
-};
-
-const languages = {
-  en,
-  cy,
 };
 
 export const generateContent: TranslationFn = content => {
+  const resourceLoader = new ResourceReader();
+  resourceLoader.Loader(FULL_NAME);
+  const translations = resourceLoader.getFileContents().translations;
+  const errors = resourceLoader.getFileContents().errors;
+
+  const en = () => {
+    return {
+      ...translations.en,
+      errors: {
+        ...errors.en,
+      },
+    };
+  };
+  const cy = () => {
+    return {
+      ...translations.cy,
+      errors: {
+        ...errors.cy,
+      },
+    };
+  };
+
+  const languages = {
+    en,
+    cy,
+  };
+  const translationContent = languages[content.language]();
   const fullNameContent = fullNameGenerateContent(content);
   return {
     ...fullNameContent,
-    ...languages[content.language](content),
-    form,
+    ...translationContent,
+    form: { ...form, fields: (form.fields as FormFieldsFn)(content.userCase || {}) },
   };
 };

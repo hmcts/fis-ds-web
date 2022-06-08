@@ -13,16 +13,13 @@ export default class SelectAddressPostControllerBase extends PostController<AnyO
   }
 
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
-    const form = new Form(<FormFields>this.fields);
+    const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase) : this.fields;
+    const form = new Form(fields);
     const { saveAndSignOut, saveBeforeSessionTimeout, _csrf, ...formData } = form.getParsedBody(req.body);
 
     req.session.errors = form.getErrors(formData);
 
     Object.assign(req.session.userCase, formData);
-
-    const tempServiceType = req.session.userCase.serviceType;
-    const tempApplyingWithAdoption = req.session.userCase.applyingWithAdoption;
-    const tempApplyingWithPrivateLaw = req.session.userCase.applyingWithPrivateLaw;
 
     if (req.session.errors.length === 0) {
       const selectedAddressIndex = Number(formData[`${this.fieldPrefix}SelectAddress`]);
@@ -42,18 +39,11 @@ export default class SelectAddressPostControllerBase extends PostController<AnyO
         formData[`${this.fieldPrefix}AddressCounty`] = selectedAddress.county;
         formData[`${this.fieldPrefix}AddressPostcode`] = selectedAddress.postcode;
 
-        req.session.userCase = await this.save(req, formData, this.getEventName(req));
+        //req.session.userCase = await this.save(req, formData, this.getEventName(req));
       }
     }
 
     this.filterErrorsForSaveAsDraft(req);
-
-    // here we explicitly assigning the values to userCase to get the title
-    if (typeof req.session.userCase !== 'undefined' && req.session.userCase !== null) {
-      req.session.userCase.serviceType = tempServiceType;
-      req.session.userCase.applyingWithAdoption = tempApplyingWithAdoption;
-      req.session.userCase.applyingWithPrivateLaw = tempApplyingWithPrivateLaw;
-    }
 
     this.redirect(req, res);
   }

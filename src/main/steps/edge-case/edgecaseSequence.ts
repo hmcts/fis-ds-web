@@ -1,38 +1,21 @@
-import { YesOrNo } from '../../app/case/definition';
 import { Sections, Step } from '../constants';
 import {
-  ADOPTION_APPLICATION_TYPE,
-  CITIZEN_HOME_URL,
+  ADDITIONAL_DOCUMENTS_UPLOAD,
   CONTACT_DETAILS,
+  CONTACT_PREFERENCES,
   DATE_OF_BIRTH,
   FIND_ADDRESS,
   FULL_NAME,
   MANUAL_ADDRESS,
-  PAY_YOUR_FEE,
-  PRIVATE_LAW_APPLICATION_TYPE,
   SELECT_ADDRESS,
-  SERVICE_TYPE,
+  STATEMENT_OF_TRUTH,
   UPLOAD_YOUR_DOCUMENTS,
+  USER_ROLE,
 } from '../urls';
 
 export const edgecaseSequence: Step[] = [
   {
-    url: CITIZEN_HOME_URL,
-    showInSection: Sections.AboutEdgeCase,
-    getNextStep: () => SERVICE_TYPE,
-  },
-  {
-    url: SERVICE_TYPE,
-    showInSection: Sections.AboutEdgeCase,
-    getNextStep: data => (data.serviceType === YesOrNo.YES ? ADOPTION_APPLICATION_TYPE : PRIVATE_LAW_APPLICATION_TYPE),
-  },
-  {
-    url: ADOPTION_APPLICATION_TYPE,
-    showInSection: Sections.AboutEdgeCase,
-    getNextStep: () => FULL_NAME,
-  },
-  {
-    url: PRIVATE_LAW_APPLICATION_TYPE,
+    url: USER_ROLE,
     showInSection: Sections.AboutEdgeCase,
     getNextStep: () => FULL_NAME,
   },
@@ -41,6 +24,7 @@ export const edgecaseSequence: Step[] = [
     showInSection: Sections.AboutEdgeCase,
     getNextStep: () => DATE_OF_BIRTH,
   },
+
   {
     url: DATE_OF_BIRTH,
     showInSection: Sections.AboutEdgeCase,
@@ -54,10 +38,15 @@ export const edgecaseSequence: Step[] = [
   {
     url: SELECT_ADDRESS,
     showInSection: Sections.AboutEdgeCase,
-    getNextStep: () => CONTACT_DETAILS,
+    getNextStep: () => CONTACT_PREFERENCES,
   },
   {
     url: MANUAL_ADDRESS,
+    showInSection: Sections.AboutEdgeCase,
+    getNextStep: () => CONTACT_PREFERENCES,
+  },
+  {
+    url: CONTACT_PREFERENCES,
     showInSection: Sections.AboutEdgeCase,
     getNextStep: () => CONTACT_DETAILS,
   },
@@ -69,10 +58,20 @@ export const edgecaseSequence: Step[] = [
   {
     url: UPLOAD_YOUR_DOCUMENTS,
     showInSection: Sections.AboutEdgeCase,
-    getNextStep: () => PAY_YOUR_FEE,
+    getNextStep: () => ADDITIONAL_DOCUMENTS_UPLOAD,
   },
   {
-    url: PAY_YOUR_FEE,
-    getNextStep: () => CITIZEN_HOME_URL,
+    url: ADDITIONAL_DOCUMENTS_UPLOAD,
+    showInSection: Sections.AboutEdgeCase,
+    getNextStep: () => STATEMENT_OF_TRUTH,
+  },
+  {
+    url: STATEMENT_OF_TRUTH,
+    showInSection: Sections.AboutEdgeCase,
+    getNextStep: () => USER_ROLE,
+  },
+  {
+    url: USER_ROLE,
+    getNextStep: () => FULL_NAME,
   },
 ];

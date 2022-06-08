@@ -3,7 +3,6 @@ import path from 'path';
 import express from 'express';
 import nunjucks from 'nunjucks';
 
-import { Adoption } from '../../app/case/definition'; //TODO correct this//DivorceOrDissolution
 import { FormInput } from '../../app/form/Form';
 
 export class Nunjucks {
@@ -11,11 +10,18 @@ export class Nunjucks {
     app.set('view engine', 'njk');
     const govUkFrontendPath = path.join(__dirname, '..', '..', '..', '..', 'node_modules', 'govuk-frontend');
     const hmctsFrontendPath = path.join(__dirname, '..', '..', '..', '..', 'node_modules', '@hmcts', 'frontend');
-    const env = nunjucks.configure([path.join(__dirname, '..', '..', 'steps'), govUkFrontendPath, hmctsFrontendPath], {
-      autoescape: true,
-      watch: app.locals.developmentMode,
-      express: app,
-    });
+
+    const authLessPath = path.join(__dirname, '..', '..', 'routes', 'authless', 'views');
+    const GeneralViewPath = path.join(__dirname, '..', '..', 'views');
+
+    const env = nunjucks.configure(
+      [path.join(__dirname, '..', '..', 'steps'), govUkFrontendPath, GeneralViewPath, hmctsFrontendPath, authLessPath],
+      {
+        autoescape: true,
+        watch: app.locals.developmentMode,
+        express: app,
+      }
+    );
 
     env.addGlobal('getContent', function (prop): string {
       return typeof prop === 'function' ? prop(this.ctx) : prop;
@@ -92,10 +98,14 @@ export class Nunjucks {
       return new nunjucks.runtime.SafeString(jsonString);
     });
 
+    env.addFilter('split', function (array, cursor) {
+      return array.split(cursor);
+    });
+
     app.use((req, res, next) => {
       res.locals.host = req.headers['x-forwarded-host'] || req.hostname;
       res.locals.pagePath = req.path;
-      res.locals.serviceType = Adoption.ADOPTION;
+      res.locals.serviceType = '';
       next();
     });
   }

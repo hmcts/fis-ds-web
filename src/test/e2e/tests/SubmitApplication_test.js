@@ -1,3 +1,5 @@
+const ContactPreferencePage = require("../pages/ContactPreference.page");
+
 Feature('Create application @e2e-tests').retry(1);
 
 Scenario(
@@ -13,20 +15,27 @@ Scenario(
     addresswithpostcode,
     uploadfilepage,
     reviewpaymentpage,
+    determineapplicantrole,
+    statementoftruth,
+    contactpreferencepage,
+    additiondocumentpage
   }) => {
-    await loginPage.SignInUser();
     await landingPage.seeTheLandingPage();
-    await landingPage.selectjurisdictionasfamily();
-    await familypage.seeTheTitleOfThePage();
-    await familypage.selectAdoptionService();
-    await adoptionpage.selectInternationalAdoption();
+    await loginPage.SignInUser();
+    await determineapplicantrole.DetermineApplicant(true);
     await applytoapplicantpage.applicantFullnames();
     await dateofbirth.dateSelection('10', '10', '2020');
     await addresswithpostcode.PostCodeLookUpAndSelect();
+    await contactpreferencepage.contactPreference();
     await contactdetails.seeTheTitleOfThePage();
     await contactdetails.selectEmail();
     await uploadfilepage.uploadDocumentsSection();
-    await reviewpaymentpage.seeTheTitleOfThePage();
-    await reviewpaymentpage.selectPayByCard();
+    await additiondocumentpage.uploadDocumentsSection();
+    await statementoftruth.statementOfTruth();
+    //await reviewpaymentpage.seeTheTitleOfThePage();
+    //await reviewpaymentpage.selectPayByCard();
+    //await familypage.seeTheTitleOfThePage();
+    //await familypage.selectAdoptionService();
+    //await adoptionpage.selectInternationalAdoption();
   }
 );

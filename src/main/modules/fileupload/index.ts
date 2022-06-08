@@ -9,7 +9,7 @@ export class FileUpload {
   public enableFor(app: Application): void {
     app.use(
       fileUpload({
-        limits: { fileSize: 100 * 1024 * 1024 },
+        limits: { fileSize: 1024 * 1024 * 30 },
       })
     );
   }

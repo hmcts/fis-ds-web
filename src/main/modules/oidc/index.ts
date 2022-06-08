@@ -4,7 +4,7 @@ import { Application, NextFunction, Response } from 'express';
 import { getRedirectUrl, getUserDetails } from '../../app/auth/user/oidc';
 import { getCaseApi } from '../../app/case/CaseApi';
 import { AppRequest } from '../../app/controller/AppRequest';
-import { CALLBACK_URL, ELIGIBILITY_URL, SIGN_IN_URL, SIGN_OUT_URL } from '../../steps/urls';
+import { CALLBACK_URL, ELIGIBILITY_URL, SIGN_IN_URL, SIGN_OUT_URL, USER_ROLE } from '../../steps/urls';
 
 //TODO remove applicant2 related stuff
 /**
@@ -27,7 +27,7 @@ export class OidcMiddleware {
       errorHandler(async (req, res) => {
         if (typeof req.query.code === 'string') {
           req.session.user = await getUserDetails(`${protocol}${res.locals.host}${port}`, req.query.code, CALLBACK_URL);
-          req.session.save(() => res.redirect('/'));
+          req.session.save(() => res.redirect(USER_ROLE));
         } else {
           res.redirect(SIGN_IN_URL);
         }

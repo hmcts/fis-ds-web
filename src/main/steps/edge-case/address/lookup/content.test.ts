@@ -1,4 +1,5 @@
 import { FormContent, FormFields } from '../../../../app/form/Form';
+import { ResourceReader } from '../../../../modules/resourcereader/ResourceReader';
 import { CommonContent } from '../../../common/common.content';
 import {
   form as addressLookupForm,
@@ -8,14 +9,16 @@ import { MANUAL_ADDRESS } from '../../../urls';
 
 import { generateContent } from './content';
 
+const resourceLoader = new ResourceReader();
+resourceLoader.Loader('address-lookup');
+const translations = resourceLoader.getFileContents().translations;
+
 const enContent = {
-  section: 'Applicant',
-  title: "What's your home address?",
+  ...translations.en,
 };
 
 const cyContent = {
-  section: 'Applicant (in welsh)',
-  title: "What's your home address? (in welsh)",
+  ...translations.cy,
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
@@ -32,7 +35,7 @@ describe('applicant1 > address > lookup > content', () => {
     expect(generatedContent.section).toEqual(enContent.section);
     expect(generatedContent.title).toEqual(enContent.title);
     expect(generatedContent.errors).toEqual({
-      applicant1AddressPostcode: (addressLookupContent.errors as any).addressPostcode,
+      applicantAddressPostcode: (addressLookupContent.errors as any).addressPostcode,
     });
     expect(generatedContent.manualAddressUrl).toEqual(MANUAL_ADDRESS);
   });
@@ -43,29 +46,29 @@ describe('applicant1 > address > lookup > content', () => {
     expect(generatedContent.section).toEqual(cyContent.section);
     expect(generatedContent.title).toEqual(cyContent.title);
     expect(generatedContent.errors).toEqual({
-      applicant1AddressPostcode: (addressLookupContent.errors as any).addressPostcode,
+      applicantAddressPostcode: (addressLookupContent.errors as any).addressPostcode,
     });
     expect(generatedContent.manualAddressUrl).toEqual(MANUAL_ADDRESS);
   });
 
-  it('should have applicant1AddressPostcode label when language: en and  applyingWith: alone', () => {
+  it('should have applicantAddressPostcode label when language: en and  applyingWith: alone', () => {
     const commonContent1 = { language: 'en' } as CommonContent;
 
     const generatedContent1 = generateContent(commonContent1);
     expect(generatedContent1.section).toBe('Applicant');
   });
 
-  it('should have an applicant1AddressPostcode label when language: cy and  applyingWith: alone', () => {
+  it('should have an applicantAddressPostcode label when language: cy and  applyingWith: alone', () => {
     const commonContent1 = { language: 'cy' } as CommonContent;
 
     const generatedContent1 = generateContent(commonContent1);
     expect(generatedContent1.section).toBe('Applicant (in welsh)');
   });
 
-  test('should contain applicant1AddressPostcode field', () => {
+  test('should contain applicantAddressPostcode field', () => {
     const addressLookupFormFields = addressLookupForm.fields as FormFields;
     const fields = generatedContent.form.fields as FormFields;
-    expect(fields.applicant1AddressPostcode).toEqual(addressLookupFormFields.addressPostcode);
+    expect(fields.applicantAddressPostcode).toEqual(addressLookupFormFields.addressPostcode);
   });
 
   test('should contain find address button', () => {
