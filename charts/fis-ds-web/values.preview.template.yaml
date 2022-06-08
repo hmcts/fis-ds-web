@@ -2,3 +2,10 @@ nodejs:
   # Don't modify below here
   image: ${IMAGE_NAME}
   ingressHost: ${SERVICE_FQDN}
+
+idam-pr:
+  enabled: true
+  redirect_uris:
+    adoption-web:
+      - https://${SERVICE_FQDN}/receiver
+
