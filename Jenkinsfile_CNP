@@ -3,7 +3,6 @@
 @Library("Infrastructure")
 
 import uk.gov.hmcts.contino.AppPipelineConfig
-import uk.gov.hmcts.contino.AppPipelineDsl
 
 def type = "nodejs"
 def product = "fis"
@@ -36,7 +35,6 @@ def pipelineConf = new AppPipelineConfig()
 
 pipelineConf.vaultSecrets = secrets
 
-env.IDAM_URL = 'https://idam-api.aat.platform.hmcts.net'
 
 withPipeline(type, product, component) {
   enableAksStagingDeployment()
