@@ -10,7 +10,7 @@ Running the application requires the following tools to be installed in your env
 - [yarn](https://yarnpkg.com/)
 - [Docker](https://www.docker.com)
 
-#### Running the application
+### Running the application
 
 Install dependencies by executing the following command:
 
@@ -32,7 +32,7 @@ $ yarn start
 
 The applications's home page will be available at https://localhost:4000
 
-## Running with Docker
+### Running with Docker
 
 Create docker image:
 

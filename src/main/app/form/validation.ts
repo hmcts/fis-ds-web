@@ -153,7 +153,7 @@ export const isPhoneNoValid: Validator = value => {
 
 export const isEmailValid: Validator = value => {
   if (isEmpty(value)) {
-    return undefined;
+    return '';
   }
 
   if (!isValidEmail(value as string)) {

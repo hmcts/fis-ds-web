@@ -230,7 +230,7 @@ describe('Validation', () => {
 
   describe('isEmailValid()', () => {
     it.each([
-      { mockEmail: '', expected: undefined },
+      { mockEmail: '', expected: '' },
       { mockEmail: 'test', expected: 'invalid' },
       { mockEmail: '12345', expected: 'invalid' },
       { mockEmail: 'test@test.com', expected: undefined },
