@@ -147,7 +147,6 @@ export class PostController<T extends AnyObject> {
   protected getEventName(req: AppRequest): string {
     let eventName;
     if (req.originalUrl === CONTACT_DETAILS && this.isBlank(req)) {
-      //RB CONTACT_DETAILS
       console.log('creating new case event');
       eventName = CITIZEN_CREATE;
     } else if (req.originalUrl === CONTACT_DETAILS) {
