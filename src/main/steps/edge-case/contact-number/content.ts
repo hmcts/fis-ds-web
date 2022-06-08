@@ -10,15 +10,21 @@ export const form: FormContent = {
       classes: 'govuk-input',
       label: hl => hl.homePhoneLabel,
       hint: hh => hh.homePhoneHint,
-      labelSize: null,
-      validator: value => isPhoneNoValid(value),
+      validator: (value, formData) => {
+        const hasHomePhoneNumberEntered = (value as string[])?.length && (value as string) !== '[]';
+        const hasMobilePhoneNumberEntered = formData.mobilePhoneNumber && !!formData.mobilePhoneNumber?.length;
+
+        if (!hasHomePhoneNumberEntered && !hasMobilePhoneNumberEntered) {
+          return 'atleastOneRequired';
+        }
+        return isPhoneNoValid(value);
+      },
     },
     mobilePhoneNumber: {
       type: 'text',
       classes: 'govuk-input',
       label: ml => ml.mobilePhoneLabel,
       hint: mh => mh.mobilePhoneHint,
-      labelSize: null,
       validator: (value, formData) => {
         const hasMobilePhoneNumberEntered = (value as string[])?.length && (value as string) !== '[]';
         const hasHomePhoneNumberEntered = formData.homePhoneNumber && !!formData.homePhoneNumber?.length;

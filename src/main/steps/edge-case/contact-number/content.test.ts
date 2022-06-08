@@ -8,14 +8,10 @@ jest.mock('../../../app/form/validation', () => ({
   isPhoneNoValid: mockIsPhoneNoValid,
 }));
 
-/* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-import { YesOrNo } from '../../../app/case/definition';
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
-import { isFieldFilledIn } from '../../../app/form/validation';
-import { CommonContent, generatePageContent } from '../../common/common.content';
+import { CommonContent } from '../../common/common.content';
 
 import { generateContent } from './content';
-
 jest.mock('../../../app/form/validation');
 
 const EN = 'en';
@@ -25,69 +21,66 @@ const commonContent = {
 } as CommonContent;
 
 const enContent = {
-  label: 'What are your contact details?',
-  one: 'I can provide an email address',
-  two: 'I can not provide an email address',
-  emailAddress: 'Your email address',
-  homePhoneNumber: 'Your home phone',
-  mobilePhoneNumber: 'Your mobile phone',
+  continue: 'Continue',
+  serviceName: 'Contact Numbers',
+  homePhoneLabel: 'What is the home phone number of the person named on the application',
+  mobilePhoneLabel: 'What is the mobile phone number of the person named on the application',
+  homePhoneHint: 'Home Phone',
+  mobilePhoneHint: 'Mobile Phone',
+  homePhone: 'Enter home phone number',
+  mobilePhone: 'Enter mobile phone number',
   errors: {
-    emailAddressConsent: {
-      required: 'Please answer the question',
-    },
-    emailAddress: {
-      required: 'Enter your email address',
-      invalid: 'Enter a real email address',
+    mobilePhoneNumber: {
+      required: 'Please enter correct mobile phone number',
+      invalid: 'Please enter correct mobile phone number',
+      atleastOneRequired: 'Please either enter home or mobile phone number',
+      undefined: 'undefined',
     },
     homePhoneNumber: {
-      required: 'Enter your home phone number',
-      invalid: 'Enter a real home phone number',
-    },
-    mobilePhoneNumber: {
-      required: 'Enter your mobile number',
-      invalid: 'Enter a real UK mobile number',
-      atleastOneRequired: 'Enter atleast one contact detail out of email, home or mobile phone number',
+      required: 'Please enter correct home phone number',
+      invalid: 'Please enter correct home phone number',
+      atleastOneRequired: 'Please either enter home or mobile phone number',
+      undefined: 'undefined',
     },
   },
 };
 
 const cyContent = {
-  label: 'What are your contact details? (in welsh)',
-  one: 'I can provide an email address (in welsh)',
-  two: 'I can not provide an email address (in welsh)',
-  emailAddress: 'Your email address (in welsh)',
-  homePhoneNumber: 'Your home phone (in welsh)',
-  mobilePhoneNumber: 'Your mobile phone (in welsh)',
+  continue: 'Continue (Welsh)',
+  serviceName: 'Contact Numbers (Welsh)',
+  homePhoneLabel: 'What is the home phone number of the person named on the application (Welsh)',
+  mobilePhoneLabel: 'What is the mobile phone number of the person named on the application (Welsh)',
+  homePhoneHint: 'Home Phone (Welsh)',
+  mobilePhoneHint: 'Mobile Phone (Welsh)',
+  homePhone: 'Enter home phone number (Welsh)',
+  mobilePhone: 'Enter mobile phone number (Welsh)',
   errors: {
-    emailAddressConsent: {
-      required: 'Please answer the question (in welsh)',
-    },
-    emailAddress: {
-      required: 'Enter your email address (in welsh)',
-      invalid: 'Enter a real email address (in welsh)',
+    mobilePhoneNumber: {
+      required: 'Please either enter home or mobile phone number (Welsh)',
+      invalid: 'Please either enter home or mobile phone number (Welsh)',
+      atleastOneRequired: 'Please either enter home or mobile phone number (Welsh)',
+      undefined: 'undefined (Welsh)',
     },
     homePhoneNumber: {
-      required: 'Enter your home phone number (in welsh)',
-      invalid: 'Enter a real home phone number (in welsh)',
-    },
-    mobilePhoneNumber: {
-      required: 'Enter your mobile number (in welsh)',
-      invalid: 'Enter a real UK mobile number (in welsh)',
-      atleastOneRequired: 'Enter atleast one contact detail out of email, home or mobile phone number (in welsh)',
+      required: 'Please enter correct home phone number (Welsh)',
+      invalid: 'Please enter correct home phone number (Welsh)',
+      atleastOneRequired: 'Please enter correct home phone number (Welsh)',
+      undefined: 'undefined (Welsh)',
     },
   },
 };
 
-describe('applicant > contact-details-content', () => {
+describe('contact-number-content', () => {
   test('should return correct english content', () => {
     const generatedContent = generateContent({ ...commonContent });
-
-    expect(generatedContent.label).toEqual(enContent.label);
-    expect(generatedContent.one).toEqual(enContent.one);
-    expect(generatedContent.two).toEqual(enContent.two);
-    expect(generatedContent.emailAddress).toEqual(enContent.emailAddress);
-    expect(generatedContent.homePhoneNumber).toEqual(enContent.homePhoneNumber);
-    expect(generatedContent.mobilePhoneNumber).toEqual(enContent.mobilePhoneNumber);
+    expect(generatedContent.continue).toEqual(enContent.continue);
+    expect(generatedContent.serviceName).toEqual(enContent.serviceName);
+    expect(generatedContent.homePhoneLabel).toEqual(enContent.homePhoneLabel);
+    expect(generatedContent.mobilePhoneLabel).toEqual(enContent.mobilePhoneLabel);
+    expect(generatedContent.homePhoneHint).toEqual(enContent.homePhoneHint);
+    expect(generatedContent.mobilePhoneHint).toEqual(enContent.mobilePhoneHint);
+    expect(generatedContent.homePhone).toEqual(enContent.homePhone);
+    expect(generatedContent.mobilePhone).toEqual(enContent.mobilePhone);
     expect(generatedContent.errors).toEqual(enContent.errors);
   });
 
@@ -97,64 +90,38 @@ describe('applicant > contact-details-content', () => {
       language: CY,
     });
 
-    expect(generatedContent.label).toEqual(cyContent.label);
-    expect(generatedContent.one).toEqual(cyContent.one);
-    expect(generatedContent.two).toEqual(cyContent.two);
-    expect(generatedContent.emailAddress).toEqual(cyContent.emailAddress);
-    expect(generatedContent.homePhoneNumber).toEqual(cyContent.homePhoneNumber);
-    expect(generatedContent.mobilePhoneNumber).toEqual(cyContent.mobilePhoneNumber);
+    expect(generatedContent.continue).toEqual(cyContent.continue);
+    expect(generatedContent.serviceName).toEqual(cyContent.serviceName);
+    expect(generatedContent.homePhoneLabel).toEqual(cyContent.homePhoneLabel);
+    expect(generatedContent.mobilePhoneLabel).toEqual(cyContent.mobilePhoneLabel);
+    expect(generatedContent.homePhoneHint).toEqual(cyContent.homePhoneHint);
+    expect(generatedContent.mobilePhoneHint).toEqual(cyContent.mobilePhoneHint);
+    expect(generatedContent.homePhone).toEqual(cyContent.homePhone);
+    expect(generatedContent.mobilePhone).toEqual(cyContent.mobilePhone);
     expect(generatedContent.errors).toEqual(cyContent.errors);
-  });
-
-  test('should contain applicantContactDetails field', () => {
-    const generatedContent = generateContent(commonContent);
-    const form = generatedContent.form as FormContent;
-    const fields = form.fields as FormFields;
-    const emailAddressConsentField = fields.emailAddressConsent as FormFields;
-    const homePhoneNumberField = fields.homePhoneNumber as FormFields;
-    const mobilePhoneNumberField = fields.mobilePhoneNumber as FormFields;
-
-    expect(emailAddressConsentField.type).toBe('radios');
-    expect(emailAddressConsentField.classes).toBe('govuk-radios');
-    expect((emailAddressConsentField.label as Function)(generatedContent)).toBe('What are your contact details?');
-    const emailAddressConsentOptions = fields.emailAddressConsent as FormOptions;
-    expect((emailAddressConsentOptions.values[0].label as Function)({ one: 'Yes' })).toBe(YesOrNo.YES);
-    expect((emailAddressConsentOptions.values[1].label as Function)({ two: 'No' })).toBe(YesOrNo.NO);
-    expect(emailAddressConsentOptions.validator as Function).toBe(isFieldFilledIn);
-
-    expect((emailAddressConsentOptions.values[0].subFields!.emailAddress.label as Function)(generatedContent)).toBe(
-      'Your email address'
-    );
-    expect((emailAddressConsentOptions.values[0].subFields!.emailAddress.validator as Function)('test@gmail.com')).toBe(
-      undefined
-    );
-
-    expect(homePhoneNumberField.type).toBe('text');
-    expect(homePhoneNumberField.classes).toBe('govuk-input--width-20');
-    expect((homePhoneNumberField.label as Function)(generatedContent)).toBe('Your home phone');
-    expect(homePhoneNumberField.labelSize).toBe(null);
-    expect((homePhoneNumberField.validator as Function)('0999999999')).toBe(undefined);
-
-    expect(mobilePhoneNumberField.type).toBe('text');
-    expect(mobilePhoneNumberField.classes).toBe('govuk-input--width-20');
-    expect((mobilePhoneNumberField.label as Function)(generatedContent)).toBe('Your mobile phone');
-    expect(mobilePhoneNumberField.labelSize).toBe(null);
-    expect((mobilePhoneNumberField.validator as Function)('0999999999', {})).toBe(undefined);
-    expect((mobilePhoneNumberField.validator as Function)('', {})).toBe('atleastOneRequired');
   });
 
   test('should contain submit button', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
 
-    expect((form.submit.text as Function)(generatePageContent({ language: EN }))).toBe('Save and continue');
+    expect((form.submit.text as Function)(generateContent({ ...commonContent, language: EN }))).toBe('Continue');
   });
 
-  test('should contain cancel button', () => {
+  test('should call validation function', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
+    const fields = form.fields as FormFields;
+    const mobilePhoneNumberOption = fields.mobilePhoneNumber as FormOptions;
+    expect((mobilePhoneNumberOption.label as Function)(generatedContent)).toBe(
+      'What is the mobile phone number of the person named on the application'
+    );
+    expect((mobilePhoneNumberOption.validator as Function)(null, mobilePhoneNumberOption)).toBe("atleastOneRequired");
 
-    expect((form.cancel!.text as Function)(generatePageContent({ language: EN }))).toBe('Cancel');
+    const homePhoneNumberOption = fields.homePhoneNumber as FormOptions;
+    expect((homePhoneNumberOption.label as Function)(generatedContent)).toBe(
+      'What is the home phone number of the person named on the application'
+    );
+    expect((homePhoneNumberOption.validator as Function)(null, homePhoneNumberOption)).toBe("atleastOneRequired");
   });
 });
-/* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */

@@ -14,7 +14,7 @@
             "continue": "Continue (Welsh)",
             "serviceName": "Contact Numbers (Welsh)",
             "homePhoneLabel": "What is the home phone number of the person named on the application (Welsh)",
-            "mobilePhoneLabel": "What is the home phone number of the person named on the application (Welsh)",
+            "mobilePhoneLabel": "What is the mobile phone number of the person named on the application (Welsh)",
             "homePhoneHint": "Home Phone (Welsh)",
             "mobilePhoneHint": "Mobile Phone (Welsh)",
             "homePhone": "Enter home phone number (Welsh)",
@@ -24,23 +24,29 @@
     "errors":{
         "en": {
             "mobilePhoneNumber": {
-                "required": "Please either enter home or mobile phone number",
-                "invalid": "Please either enter home or mobile phone number",
+                "required": "Please enter correct mobile phone number",
+                "invalid": "Please enter correct mobile phone number",
                 "atleastOneRequired": "Please either enter home or mobile phone number",
                 "undefined": "undefined"
             },
             "homePhoneNumber": {
                 "required": "Please enter correct home phone number",
                 "invalid": "Please enter correct home phone number",
-                "atleastOneRequired": "Please enter correct home phone number",
+                "atleastOneRequired": "Please either enter home or mobile phone number",
                 "undefined": "undefined"
             }
         },
         "cy": {
-            "contactNumber": {
+            "mobilePhoneNumber": {
                 "required": "Please either enter home or mobile phone number (Welsh)",
                 "invalid": "Please either enter home or mobile phone number (Welsh)",
                 "atleastOneRequired": "Please either enter home or mobile phone number (Welsh)",
+                "undefined": "undefined (Welsh)"
+            },
+            "homePhoneNumber": {
+                "required": "Please enter correct home phone number (Welsh)",
+                "invalid": "Please enter correct home phone number (Welsh)",
+                "atleastOneRequired": "Please enter correct home phone number (Welsh)",
                 "undefined": "undefined (Welsh)"
             }
         }
