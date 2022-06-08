@@ -2,8 +2,6 @@
 /* eslint-disable */
 // Generated using typescript-generator version 2.33.956 on 2021-11-12 15:28:24.
 
-import { CaseDate } from '../case/case';
-
 export interface Address {
   AddressLine1: string;
   AddressLine2: string;

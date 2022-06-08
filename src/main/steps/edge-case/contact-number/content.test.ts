@@ -23,8 +23,8 @@ const commonContent = {
 const enContent = {
   continue: 'Continue',
   serviceName: 'Contact Numbers',
-  homePhoneLabel: 'What is the home phone number of the person named on the application',
-  mobilePhoneLabel: 'What is the mobile phone number of the person named on the application',
+  homePhoneLabel: 'What is the home phone number of the person named on the application?',
+  mobilePhoneLabel: 'What is the mobile phone number of the person named on the application?',
   homePhoneHint: 'Home Phone',
   mobilePhoneHint: 'Mobile Phone',
   homePhone: 'Enter home phone number',
@@ -34,13 +34,11 @@ const enContent = {
       required: 'Please enter correct mobile phone number',
       invalid: 'Please enter correct mobile phone number',
       atleastOneRequired: 'Please either enter home or mobile phone number',
-      undefined: 'undefined',
     },
     homePhoneNumber: {
       required: 'Please enter correct home phone number',
       invalid: 'Please enter correct home phone number',
       atleastOneRequired: 'Please either enter home or mobile phone number',
-      undefined: 'undefined',
     },
   },
 };
@@ -48,24 +46,22 @@ const enContent = {
 const cyContent = {
   continue: 'Continue (Welsh)',
   serviceName: 'Contact Numbers (Welsh)',
-  homePhoneLabel: 'What is the home phone number of the person named on the application (Welsh)',
-  mobilePhoneLabel: 'What is the mobile phone number of the person named on the application (Welsh)',
+  homePhoneLabel: 'What is the home phone number of the person named on the application? (Welsh)',
+  mobilePhoneLabel: 'What is the mobile phone number of the person named on the application? (Welsh)',
   homePhoneHint: 'Home Phone (Welsh)',
   mobilePhoneHint: 'Mobile Phone (Welsh)',
   homePhone: 'Enter home phone number (Welsh)',
   mobilePhone: 'Enter mobile phone number (Welsh)',
   errors: {
     mobilePhoneNumber: {
-      required: 'Please either enter home or mobile phone number (Welsh)',
-      invalid: 'Please either enter home or mobile phone number (Welsh)',
+      required: 'Please enter correct mobile phone number (Welsh)',
+      invalid: 'Please enter correct mobile phone number (Welsh)',
       atleastOneRequired: 'Please either enter home or mobile phone number (Welsh)',
-      undefined: 'undefined (Welsh)',
     },
     homePhoneNumber: {
       required: 'Please enter correct home phone number (Welsh)',
       invalid: 'Please enter correct home phone number (Welsh)',
-      atleastOneRequired: 'Please enter correct home phone number (Welsh)',
-      undefined: 'undefined (Welsh)',
+      atleastOneRequired: 'Please either enter home or mobile phone number (Welsh)',
     },
   },
 };
@@ -114,13 +110,13 @@ describe('contact-number-content', () => {
     const fields = form.fields as FormFields;
     const mobilePhoneNumberOption = fields.mobilePhoneNumber as FormOptions;
     expect((mobilePhoneNumberOption.label as Function)(generatedContent)).toBe(
-      'What is the mobile phone number of the person named on the application'
+      'What is the mobile phone number of the person named on the application?'
     );
     expect((mobilePhoneNumberOption.validator as Function)(null, mobilePhoneNumberOption)).toBe('atleastOneRequired');
 
     const homePhoneNumberOption = fields.homePhoneNumber as FormOptions;
     expect((homePhoneNumberOption.label as Function)(generatedContent)).toBe(
-      'What is the home phone number of the person named on the application'
+      'What is the home phone number of the person named on the application?'
     );
     expect((homePhoneNumberOption.validator as Function)(null, homePhoneNumberOption)).toBe('atleastOneRequired');
   });
