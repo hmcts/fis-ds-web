@@ -18,7 +18,8 @@ Scenario(
     determineapplicantrole,
     statementoftruth,
     contactpreferencepage,
-    additiondocumentpage
+    additiondocumentpage,
+    emailaddresspage
   }) => {
     await landingPage.seeTheLandingPage();
     await loginPage.SignInUser();
@@ -27,6 +28,7 @@ Scenario(
     await dateofbirth.dateSelection('10', '10', '2020');
     await addresswithpostcode.PostCodeLookUpAndSelect();
     await contactpreferencepage.contactPreference();
+    await emailaddresspage.emailAddress();
     await contactdetails.seeTheTitleOfThePage();
     await contactdetails.selectEmail();
     await uploadfilepage.uploadDocumentsSection();
