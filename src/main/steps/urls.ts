@@ -22,6 +22,7 @@ export const DATE_OF_BIRTH: PageLink = '/date-of-birth';
 export const FIND_ADDRESS: PageLink = '/address/lookup';
 export const SELECT_ADDRESS: PageLink = '/address/select';
 export const EMAIL_ADDRESS: PageLink = '/email-address';
+export const CONTACT_DETAILS: PageLink = '/contact-details';
 export const MANUAL_ADDRESS: PageLink = '/address/manual';
 export const PAY_YOUR_FEE: PageLink = '/payment/pay-your-fee';
 export const UPLOAD_YOUR_DOCUMENTS: PageLink = '/upload-your-documents';
