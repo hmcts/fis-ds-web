@@ -113,16 +113,12 @@ describe('contact-number-content', () => {
       'What is the mobile phone number of the person named on the application?'
     );
     expect((mobilePhoneNumberOption.validator as Function)(null, mobilePhoneNumberOption)).toBe('atleastOneRequired');
-    expect((mobilePhoneNumberOption.hint as Function)(generatedContent)).toBe(
-      'Mobile Phone'
-    );
+    expect((mobilePhoneNumberOption.hint as Function)(generatedContent)).toBe('Mobile Phone');
     const homePhoneNumberOption = fields.homePhoneNumber as FormOptions;
     expect((homePhoneNumberOption.label as Function)(generatedContent)).toBe(
       'What is the home phone number of the person named on the application?'
     );
     expect((homePhoneNumberOption.validator as Function)(null, homePhoneNumberOption)).toBe('atleastOneRequired');
-    expect((homePhoneNumberOption.hint as Function)(generatedContent)).toBe(
-      'Home Phone'
-    );
+    expect((homePhoneNumberOption.hint as Function)(generatedContent)).toBe('Home Phone');
   });
 });
