@@ -22,7 +22,7 @@ const commonContent = {
 
 const enContent = {
   continue: 'Continue',
-  serviceName: 'Contact Numbers',
+  serviceName: 'Contact Details',
   homePhoneLabel: 'What is the home phone number of the person named on the application?',
   mobilePhoneLabel: 'What is the mobile phone number of the person named on the application?',
   homePhoneHint: 'Home Phone',
@@ -33,19 +33,19 @@ const enContent = {
     mobilePhoneNumber: {
       required: 'Please enter correct mobile phone number',
       invalid: 'Please enter correct mobile phone number',
-      atleastOneRequired: 'Please either enter home or mobile phone number',
+      atleastOneRequired: 'Mobile phone number is empty, please fill up at least one contact',
     },
     homePhoneNumber: {
       required: 'Please enter correct home phone number',
       invalid: 'Please enter correct home phone number',
-      atleastOneRequired: 'Please either enter home or mobile phone number',
+      atleastOneRequired: 'Home phone number is empty, please fill up at least one contact',
     },
   },
 };
 
 const cyContent = {
   continue: 'Continue (Welsh)',
-  serviceName: 'Contact Numbers (Welsh)',
+  serviceName: 'Contact Details (Welsh)',
   homePhoneLabel: 'What is the home phone number of the person named on the application? (Welsh)',
   mobilePhoneLabel: 'What is the mobile phone number of the person named on the application? (Welsh)',
   homePhoneHint: 'Home Phone (Welsh)',
@@ -56,12 +56,12 @@ const cyContent = {
     mobilePhoneNumber: {
       required: 'Please enter correct mobile phone number (Welsh)',
       invalid: 'Please enter correct mobile phone number (Welsh)',
-      atleastOneRequired: 'Please either enter home or mobile phone number (Welsh)',
+      atleastOneRequired: 'Mobile phone number is empty, please fill up at least one contact (Welsh)',
     },
     homePhoneNumber: {
       required: 'Please enter correct home phone number (Welsh)',
       invalid: 'Please enter correct home phone number (Welsh)',
-      atleastOneRequired: 'Please either enter home or mobile phone number (Welsh)',
+      atleastOneRequired: 'Home phone number is empty, please fill up at least one contact (Welsh)',
     },
   },
 };

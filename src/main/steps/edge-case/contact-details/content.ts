@@ -43,7 +43,7 @@ export const form: FormContent = {
 
 export const generateContent: TranslationFn = content => {
   const resourceLoader = new ResourceReader();
-  resourceLoader.Loader('contact-number');
+  resourceLoader.Loader('contact-details');
   const Translations = resourceLoader.getFileContents().translations;
   const errors = resourceLoader.getFileContents().errors;
 
