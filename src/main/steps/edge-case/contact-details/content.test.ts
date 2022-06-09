@@ -9,6 +9,7 @@ jest.mock('../../../app/form/validation', () => ({
 }));
 
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
+import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 import { CommonContent } from '../../common/common.content';
 
 import { generateContent } from './content';
@@ -20,49 +21,22 @@ const commonContent = {
   language: EN,
 } as CommonContent;
 
+const resourceLoader = new ResourceReader();
+resourceLoader.Loader('contact-details');
+const translations = resourceLoader.getFileContents().translations;
+const errors = resourceLoader.getFileContents().errors;
+
 const enContent = {
-  continue: 'Save and Continue',
-  serviceName: 'Contact Details',
-  homePhoneLabel: 'What is the home phone number of the person named on the application?',
-  mobilePhoneLabel: 'What is the mobile phone number of the person named on the application?',
-  homePhoneHint: 'Home Phone',
-  mobilePhoneHint: 'Mobile Phone',
-  homePhone: 'Enter home phone number',
-  mobilePhone: 'Enter mobile phone number',
+  ...translations.en,
   errors: {
-    mobilePhoneNumber: {
-      required: 'Please enter correct mobile phone number',
-      invalid: 'Please enter correct mobile phone number',
-      atleastOneRequired: 'Mobile phone number is empty, please fill up at least one contact',
-    },
-    homePhoneNumber: {
-      required: 'Please enter correct home phone number',
-      invalid: 'Please enter correct home phone number',
-      atleastOneRequired: 'Home phone number is empty, please fill up at least one contact',
-    },
+    ...errors.en,
   },
 };
 
 const cyContent = {
-  continue: 'Save and Continue (Welsh)',
-  serviceName: 'Contact Details (Welsh)',
-  homePhoneLabel: 'What is the home phone number of the person named on the application? (Welsh)',
-  mobilePhoneLabel: 'What is the mobile phone number of the person named on the application? (Welsh)',
-  homePhoneHint: 'Home Phone (Welsh)',
-  mobilePhoneHint: 'Mobile Phone (Welsh)',
-  homePhone: 'Enter home phone number (Welsh)',
-  mobilePhone: 'Enter mobile phone number (Welsh)',
+  ...translations.cy,
   errors: {
-    mobilePhoneNumber: {
-      required: 'Please enter correct mobile phone number (Welsh)',
-      invalid: 'Please enter correct mobile phone number (Welsh)',
-      atleastOneRequired: 'Mobile phone number is empty, please fill up at least one contact (Welsh)',
-    },
-    homePhoneNumber: {
-      required: 'Please enter correct home phone number (Welsh)',
-      invalid: 'Please enter correct home phone number (Welsh)',
-      atleastOneRequired: 'Home phone number is empty, please fill up at least one contact (Welsh)',
-    },
+    ...errors.cy,
   },
 };
 
@@ -111,16 +85,12 @@ describe('contact-number-content', () => {
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
     const mobilePhoneNumberOption = fields.mobilePhoneNumber as FormOptions;
-    expect((mobilePhoneNumberOption.label as Function)(generatedContent)).toBe(
-      'What is the mobile phone number of the person named on the application?'
-    );
+    expect((mobilePhoneNumberOption.label as Function)(generatedContent)).toBe(enContent.mobilePhoneLabel);
     expect((mobilePhoneNumberOption.validator as Function)(null, mobilePhoneNumberOption)).toBe('atleastOneRequired');
-    expect((mobilePhoneNumberOption.hint as Function)(generatedContent)).toBe('Mobile Phone');
+    expect((mobilePhoneNumberOption.hint as Function)(generatedContent)).toBe(enContent.mobilePhoneHint);
     const homePhoneNumberOption = fields.homePhoneNumber as FormOptions;
-    expect((homePhoneNumberOption.label as Function)(generatedContent)).toBe(
-      'What is the home phone number of the person named on the application?'
-    );
+    expect((homePhoneNumberOption.label as Function)(generatedContent)).toBe(enContent.homePhoneLabel);
     expect((homePhoneNumberOption.validator as Function)(null, homePhoneNumberOption)).toBe('atleastOneRequired');
-    expect((homePhoneNumberOption.hint as Function)(generatedContent)).toBe('Home Phone');
+    expect((homePhoneNumberOption.hint as Function)(generatedContent)).toBe(enContent.homePhoneHint);
   });
 });
