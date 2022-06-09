@@ -2,7 +2,7 @@
     "translations": {
         "en": {
             "continue": "Save and Continue",
-            "serviceName": "Contact Details",
+            "serviceName": "Contact Number",
             "homePhoneLabel": "What is the home phone number of the person named on the application?",
             "mobilePhoneLabel": "What is the mobile phone number of the person named on the application?",
             "homePhoneHint": "Home Phone",
@@ -12,7 +12,7 @@
         },
         "cy": {
             "continue": "Save and Continue (Welsh)",
-            "serviceName": "Contact Details (Welsh)",
+            "serviceName": "Contact Number (Welsh)",
             "homePhoneLabel": "What is the home phone number of the person named on the application? (Welsh)",
             "mobilePhoneLabel": "What is the mobile phone number of the person named on the application? (Welsh)",
             "homePhoneHint": "Home Phone (Welsh)",
