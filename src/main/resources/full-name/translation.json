@@ -13,18 +13,18 @@
     },
     "errors":{
         "en": {
-            "applicantFirstNames": {
+            "applicantFirstName": {
                 "required": "Enter your first names"
             },
-            "applicantLastNames": {
+            "applicantLastName": {
                 "required": "Enter your last names"
             }
         },
         "cy": {
-            "applicantFirstNames": {
+            "applicantFirstName": {
                 "required": "Enter your first names (in welsh)"
             },
-            "applicantLastNames": {
+            "applicantLastName": {
                 "required": "Enter your last names (in welsh)"
             }
         }

@@ -3,6 +3,7 @@ import { AnyObject } from '../controller/PostController';
 import { CaseData } from './definition';
 
 export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>> = {
+  applicantDateOfBirth: 'applicantDateOfBirth',
   /**
  *   namedApplicant: 'namedApplicant',
   applicantFirstName:'applicantFirstName',
@@ -41,7 +42,7 @@ export interface Case {
   namedApplicant: boolean;
   applicantFirstName: string;
   applicantLastName: string;
-  applicantDateOfBirth: string;
+  applicantDateOfBirth: CaseDate;
   applicantEmailAddress: string;
   applicantPhoneNumber: string;
   applicantHomeNumber: string;
@@ -49,8 +50,10 @@ export interface Case {
   applicantAddress2: string;
   applicantAddressTown: string;
   applicantAddressCountry: any;
-  applicantAddressPostCode: any;
+  applicantAddressPostcode: any;
+  //id:number // ccd reference number would be set once the case is created
 }
+
 
 export interface CaseWithId extends Case {
   id: string;
@@ -74,6 +77,7 @@ export enum LanguagePreference {
   English = 'english',
   Welsh = 'welsh',
 }
+
 
 export interface UploadedFile {
   id: string;

@@ -349,8 +349,8 @@ describe('PostController', () => {
       state: 'Holding',
       saveAndContinue: 'true',
       serviceType: 'No',
-      applicantFirstNames: 'qazqazqwe',
-      applicantLastNames: 'wsxwsxdfg',
+      applicantFirstName: 'qazqazqwe',
+      applicantLastName: 'wsxwsxdfg',
     };
     const controller = new PostController(mockFormContent.fields);
 

@@ -10,8 +10,8 @@ const FULL_NAME = 'full-name';
 export const form: FormContent = {
   fields: () => {
     return {
-      applicantFirstNames: fullNameFormFields.firstNames,
-      applicantLastNames: fullNameFormFields.lastNames,
+      applicantFirstName: fullNameFormFields.firstNames,
+      applicantLastName: fullNameFormFields.lastNames,
     };
   },
   submit: {
