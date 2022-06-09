@@ -57,7 +57,7 @@ const getSectionSummaryList = (rows: SummaryListRow[], content: PageContent): Go
             actions: {
               items: [
                 {
-                  href: changeUrl,
+                  href: changeUrl , //
                   text: content.change as string,
                   visuallyHiddenText: `${item.key}`,
                 },
@@ -79,36 +79,47 @@ export const applicantSummaryList = (
   console.log("usercase in check your answer -->",userCase);
   const sectionTitle = sectionTitles.applicantDetails;
   console.log('Address in util userCase --->', userCase);
+
+
+  let SummaryData =    [
+    {
+      key: keys.fullName,
+      value: userCase['applicantFirstName'] + ' ' + userCase['applicantLastName'],
+      changeUrl: Urls['FULL_NAME'],
+    },
+    {
+      key: keys.dateOfBirth,
+      value: getFormattedDate(userCase['applicantDateOfBirth'], content.language),
+      changeUrl: Urls['DATE_OF_BIRTH'],
+    },
+    {
+      key: keys.address,
+      valueHtml: getFormattedAddress(userCase),
+      changeUrl: Urls['MANUAL_ADDRESS'],
+    },
+    {
+      key: keys.recievingEmail,
+      value: userCase['emailAddress'],
+      changeUrl: Urls['CONTACT_DETAILS'],
+    },
+    {
+      key: keys.namedPersonEmail,
+      value: userCase['homePhoneNumber'],
+      changeUrl: Urls['CONTACT_DETAILS'],
+    },
+    {
+      key: keys.namedPersonTel,
+      value: userCase['homePhoneNumber'],
+      changeUrl: Urls['CONTACT_DETAILS'],
+    },
+  ];
+
+  /** Removes entry in @summarydata if user is not a named user */
+
   return {
     title: sectionTitle,
     rows: getSectionSummaryList(
-      [
-        {
-          key: keys.fullName,
-          value: userCase['applicantFirstNames'] + ' ' + userCase['applicantLastNames'],
-          changeUrl: Urls['FULL_NAME'],
-        },
-        {
-          key: keys.dateOfBirth,
-          value: getFormattedDate(userCase['applicantDateOfBirth'], content.language),
-          changeUrl: Urls['DATE_OF_BIRTH'],
-        },
-        {
-          key: keys.address,
-          valueHtml: getFormattedAddress(userCase),
-          changeUrl: Urls['MANUAL_ADDRESS'],
-        },
-        {
-          key: keys.emailAddress,
-          value: userCase['emailAddress'],
-          changeUrl: Urls['CONTACT_DETAILS'],
-        },
-        {
-          key: keys.phoneNumber,
-          value: userCase['homePhoneNumber'],
-          changeUrl: Urls['CONTACT_DETAILS'],
-        },
-      ],
+   SummaryData,
       content
     ),
   };

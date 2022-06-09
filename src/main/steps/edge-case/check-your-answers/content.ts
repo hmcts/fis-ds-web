@@ -5,17 +5,20 @@ import { CommonContent } from '../../../steps/common/common.content';
 import { applicantSummaryList } from './utils';
 
 export const enContent = {
-  section: 'Review your application',
-  title: 'Review your answers',
+  section: '',
+  title: 'Check your Answers',
   sectionTitles: {
-    applicantDetails: "Applicant's details",
+    applicantDetails: "Applicant details",
   },
   keys: {
     phoneNumber: 'Phone number',
-    emailAddress: 'Email address',
-    fullName: 'Full name',
-    dateOfBirth: 'Date of birth',
-    address: 'Address',
+    emailAddress: 'Contact number of the person named on the application',
+    fullName: 'Subject’s name',
+    dateOfBirth: 'Subject’s DoB',
+    address: ' Address',
+    recievingEmail: 'Who should receive emails about the application',
+    namedPersonEmail: 'Email address of the person named on the application',
+    namedPersonTel : 'Contact number of the person named on the application'
   },
 };
 
@@ -42,6 +45,9 @@ const cyContent: typeof enContent = {
     fullName: 'Enw llawn',
     dateOfBirth: 'Dyddiad geni',
     address: 'Cyfeiriad',
+    recievingEmail: 'Who should receive emails about the application',
+    namedPersonEmail: 'Email address of the person named on the application',
+    namedPersonTel : 'Contact number of the person named on the application'
   },
 };
 
