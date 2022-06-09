@@ -3,6 +3,8 @@ import { mockResponse } from '../../../test/unit/utils/mockResponse';
 import { FormContent } from '../../app/form/Form';
 import * as steps from '../../steps';
 //import { SAVE_AND_SIGN_OUT } from '../../steps/urls';
+import { CONTACT_DETAILS } from '../../steps/urls'; //TOOK out CONTACT_DETAILS for EMAIL_ADDRESS RB
+//import { CITIZEN_UPDATE } from '../case/definition';
 import { isPhoneNoValid } from '../form/validation';
 
 import { PostController } from './PostController';
@@ -51,12 +53,13 @@ describe('PostController', () => {
 
   test('Should save the users data, update session case from API response and redirect to the next page if the form is valid', async () => {
     getNextStepUrlMock.mockReturnValue('/next-step-url');
-    const body = { MOCK_KEY: 'MOCK_VALUE' };
+    const body = { MOCK_KEY: 'MOCK_VALUE', originalUrl: CONTACT_DETAILS };
     const controller = new PostController(mockFormContent.fields);
 
     const expectedUserCase = {
       id: '1234',
       MOCK_KEY: 'MOCK_VALUE',
+      originalUrl: CONTACT_DETAILS,
     };
 
     const req = mockRequest({ body });

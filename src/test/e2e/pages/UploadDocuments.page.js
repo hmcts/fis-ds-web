@@ -2,7 +2,7 @@ const { I } = inject();
 const config = require('../config.js');
 module.exports = {
   fields: {
-    uploadFileButton: 'input[id$="file-upload-1"]',
+    uploadFileButton: '#file-upload-1',
     uploadProgressBar: '#uploadProgressBar div[aria-hidden="true"]',
     fileUploadedOption: 'button[type="upload document"]',
   },

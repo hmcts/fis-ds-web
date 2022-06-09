@@ -11,7 +11,7 @@ const EN = 'en';
 const enContent = {
   continue: 'Continue',
   serviceName: 'Email Address',
-  label: 'What is the email address of the person named on the application',
+  label: 'What is the email address of the person named on the application?',
   hint: 'Email Address',
   emailAddress: 'Insert email address',
 };
@@ -19,7 +19,7 @@ const enContent = {
 const cyContent = {
   continue: 'Continue (Welsh)',
   serviceName: 'Email Address (Welsh)',
-  label: 'What is the email address of the person named on the application (Welsh)',
+  label: 'What is the email address of the person named on the application? (Welsh)',
   hint: 'Email Address',
   emailAddress: 'Insert email address (Welsh)',
 };
@@ -41,7 +41,7 @@ describe('Email Address', () => {
     const emailAddress = fields.emailAddress;
     expect(emailAddress.classes).toBe('govuk-input');
     expect((emailAddress.label as Function)(generatedContent)).toBe(
-      'What is the email address of the person named on the application'
+      'What is the email address of the person named on the application?'
     );
     expect((emailAddress.hint as Function)(generatedContent)).toBe('Email Address');
     expect(emailAddress.type).toBe('text');
@@ -50,6 +50,7 @@ describe('Email Address', () => {
     expect(emailAddressOptions.values[0].value).toBe(EmailAddress.EMAIL_ADDRESS);
     expect((emailAddressOptions.values[0].label as Function)(generatedContent)).toBe('Insert email address');
     expect((emailAddressOptions.validator as Function)('test@gmail.com')).toBe(undefined);
+    expect((emailAddressOptions.validator as Function)('')).toBe(undefined);
   });
 
   test('should contain submit button', () => {
