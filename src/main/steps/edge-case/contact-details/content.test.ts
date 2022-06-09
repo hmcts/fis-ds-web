@@ -21,7 +21,7 @@ const commonContent = {
 } as CommonContent;
 
 const enContent = {
-  continue: 'Continue',
+  continue: 'Save and Continue',
   serviceName: 'Contact Details',
   homePhoneLabel: 'What is the home phone number of the person named on the application?',
   mobilePhoneLabel: 'What is the mobile phone number of the person named on the application?',
@@ -44,7 +44,7 @@ const enContent = {
 };
 
 const cyContent = {
-  continue: 'Continue (Welsh)',
+  continue: 'Save and Continue (Welsh)',
   serviceName: 'Contact Details (Welsh)',
   homePhoneLabel: 'What is the home phone number of the person named on the application? (Welsh)',
   mobilePhoneLabel: 'What is the mobile phone number of the person named on the application? (Welsh)',
@@ -101,7 +101,9 @@ describe('contact-number-content', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
 
-    expect((form.submit.text as Function)(generateContent({ ...commonContent, language: EN }))).toBe('Continue');
+    expect((form.submit.text as Function)(generateContent({ ...commonContent, language: EN }))).toBe(
+      'Save and Continue'
+    );
   });
 
   test('should call validation function', () => {

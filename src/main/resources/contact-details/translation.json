@@ -1,7 +1,7 @@
 {
     "translations": {
         "en": {
-            "continue": "Continue",
+            "continue": "Save and Continue",
             "serviceName": "Contact Details",
             "homePhoneLabel": "What is the home phone number of the person named on the application?",
             "mobilePhoneLabel": "What is the mobile phone number of the person named on the application?",
@@ -11,7 +11,7 @@
             "mobilePhone": "Enter mobile phone number"
         },
         "cy": {
-            "continue": "Continue (Welsh)",
+            "continue": "Save and Continue (Welsh)",
             "serviceName": "Contact Details (Welsh)",
             "homePhoneLabel": "What is the home phone number of the person named on the application? (Welsh)",
             "mobilePhoneLabel": "What is the mobile phone number of the person named on the application? (Welsh)",
