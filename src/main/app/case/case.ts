@@ -57,12 +57,10 @@ export interface Case {
   homePhoneNumber: string;
   applicantAddressCountry: any;
   applicantAddressPostcode: any;
-  //id:number // ccd reference number would be set once the case is created
 }
 
-
 export interface CaseWithId extends Case {
-  id: string;
+  id: string; //ccd reference number would be set once the case is created
   state: any;
 }
 
@@ -83,7 +81,6 @@ export enum LanguagePreference {
   English = 'english',
   Welsh = 'welsh',
 }
-
 
 export interface UploadedFile {
   id: string;

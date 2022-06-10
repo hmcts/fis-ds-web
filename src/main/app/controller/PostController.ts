@@ -13,9 +13,6 @@ import { AppRequest } from './AppRequest';
 
 enum noHitToSaveAndContinue {
   CITIZEN_HOME_URL = '/citizen-home',
- // SERVICE_TYPE = '/service-type',
-  ADOPTION_APPLICATION_TYPE = '/adoption-application-type',
-  PRIVATE_LAW_APPLICATION_TYPE = '/private-law-application-type',
 }
 
 @autobind
@@ -70,7 +67,7 @@ export class PostController<T extends AnyObject> {
       if (!(Object.values(noHitToSaveAndContinue) as string[]).includes(req.originalUrl)) {
         const eventName = this.getEventName(req);
         if (eventName === CITIZEN_CREATE) {
-          req.session.userCase = await this.createCase(req, formData);
+          req.session.userCase = await this.createCase(req);
         } else if (eventName === CITIZEN_UPDATE) {
           req.session.userCase = await this.save(req, formData, eventName);
         }
@@ -79,10 +76,10 @@ export class PostController<T extends AnyObject> {
 
     this.redirect(req, res);
   }
-  async createCase(req: AppRequest<T>, formData: Partial<Case>): Promise<CaseWithId | PromiseLike<CaseWithId>> {
+  async createCase(req: AppRequest<T>): Promise<CaseWithId | PromiseLike<CaseWithId>> {
     try {
       console.log('Create Case New');
-      req.session.userCase = await req.locals.api.createCaseNew(req, req.session.user, formData);
+      req.session.userCase = await req.locals.api.createCaseNew(req, req.session.user);
     } catch (err) {
       req.locals.logger.error('Error saving', err);
       req.session.errors = req.session.errors || [];

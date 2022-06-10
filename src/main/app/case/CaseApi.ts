@@ -1,4 +1,4 @@
-import Axios, { AxiosError, AxiosInstance,AxiosResponse } from 'axios';
+import Axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import config from 'config';
 import { LoggerInstance } from 'winston';
 
@@ -8,7 +8,7 @@ import { AppRequest, UserDetails } from '../controller/AppRequest';
 import { Case, CaseWithId } from './case';
 import { CaseAssignedUserRoles } from './case-roles';
 import { CaseData } from './definition';
-import { toApiFormat,toApiDate } from './to-api-format';
+import { toApiFormat } from './to-api-format';
 
 export class CaseApi {
   /**
@@ -33,12 +33,8 @@ export class CaseApi {
    * @param formData
    * @returns
    */
-  public async getOrCreateCaseNew(
-    req: AppRequest,
-    userDetails: UserDetails,
-    formData: Partial<Case>
-  ): Promise<CaseWithId> {
-    return this.createCaseNew(req, userDetails, formData);
+  public async getOrCreateCaseNew(req: AppRequest, userDetails: UserDetails): Promise<CaseWithId> {
+    return this.createCaseNew(req, userDetails);
   }
 
   /**
@@ -59,44 +55,22 @@ export class CaseApi {
    * @param  formData
    * @returns
    */
-
-  public async createCaseNew(req: AppRequest, userDetails: UserDetails, formData: Partial<Case>): Promise<any> {
-    //***** this part need to be implemented on creating a new case  */
-
-    //console.log("/////////formData:",formData);
-  
-  //console.log("token => "+token+", event => "+event+", data => "+data);
+  public async createCaseNew(req: AppRequest, userDetails: UserDetails): Promise<any> {
     try {
-      // const requestData : CaseWithId =req.session.userCase;
       const url: string = config.get('services.createcase.url');
-      const headers = { 'Content-Type': 'application/json', 'Authorization':'Bearer ' + userDetails.accessToken };
-      const data= {
-        applicantFirstName:req.session.userCase.applicantFirstName,
-        applicantLastName: req.session.userCase.applicantLastName,
-        applicantDateOfBirth: toApiDate(req.session.userCase.applicantDateOfBirth),
-        applicantEmailAddress:req.session.userCase.applicantEmailAddress,
-        applicantPhoneNumber: req.session.userCase.applicantPhoneNumber,
-        applicantHomeNumber:req.session.userCase.applicantHomeNumber,
-        applicantAddress1: req.session.userCase.applicantAddress1,
-        applicantAddress2: req.session.userCase.applicantAddress2,
-        applicantAddressTown: req.session.userCase.applicantAddressTown,
-        applicantAddressCountry:req.session.userCase.applicantAddressCountry,
-        applicantAddressPostCode:req.session.userCase.applicantAddressPostcode
-          
-      };
-      console.log('url:' ,url)
-      console.log('headers:',headers)
-      console.log("Data: ",data)
-       const response: AxiosResponse<createCaseResponse> = await Axios.post(url,data,{headers});
-       console.log('Response::::::/n',response)
-       return {id:response.data}
-        console.log('Response::::::/n',response.status)
+      const headers = { 'Content-Type': 'application/json', Authorization: 'Bearer ' + userDetails.accessToken };
+      console.log('headers:', headers);
+      const response: AxiosResponse<createCaseResponse> = await Axios.post(url, mapCaseData(req), { headers });
+
+      console.log('Response:', response.status);
+      if (response.status === 200) {
+        return { id: response.data.id };
+      } else {
+        return { id: '' };
       }
-     catch (err) {
-      console.log("error in creating case")
-      console.log(err)  
-     }
-    
+    } catch (err) {
+      console.log('Error in creating case');
+    }
   }
 
   /**
@@ -164,7 +138,6 @@ export class CaseApi {
  * @returns
  */
 export const getCaseApi = (userDetails: UserDetails, logger: LoggerInstance): CaseApi => {
-  
   return new CaseApi(
     Axios.create({
       baseURL: config.get('services.createcase.url'),
@@ -181,11 +154,24 @@ export const getCaseApi = (userDetails: UserDetails, logger: LoggerInstance): Ca
 };
 
 interface createCaseResponse {
-  results: {
-    status:string,
-    id:number
-  
-  }[];
+  status: string;
+  id: string;
 }
 
-
+export const mapCaseData = (req: AppRequest): any => {
+  const data = {
+    applicantFirstName: req.session.userCase.applicantFirstName,
+    applicantLastName: req.session.userCase.applicantLastName,
+    applicantDateOfBirth: req.session.userCase.applicantDateOfBirth,
+    applicantEmailAddress: req.session.userCase.applicantEmailAddress,
+    applicantPhoneNumber: req.session.userCase.applicantPhoneNumber,
+    applicantHomeNumber: req.session.userCase.applicantHomeNumber,
+    applicantAddress1: req.session.userCase.applicantAddress1,
+    applicantAddress2: req.session.userCase.applicantAddress2,
+    applicantAddressTown: req.session.userCase.applicantAddressTown,
+    applicantAddressCountry: req.session.userCase.applicantAddressCountry,
+    applicantAddressPostCode: req.session.userCase.applicantAddressPostcode,
+  };
+  console.log('Data:', data);
+  return data;
+};
