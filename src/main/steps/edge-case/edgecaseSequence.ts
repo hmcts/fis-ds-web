@@ -1,6 +1,7 @@
 import { Sections, Step } from '../constants';
 import {
   ADDITIONAL_DOCUMENTS_UPLOAD,
+  CONTACT_DETAILS,
   CONTACT_PREFERENCES,
   DATE_OF_BIRTH,
   EMAIL_ADDRESS,
@@ -52,6 +53,11 @@ export const edgecaseSequence: Step[] = [
   },
   {
     url: EMAIL_ADDRESS,
+    showInSection: Sections.AboutEdgeCase,
+    getNextStep: () => CONTACT_DETAILS,
+  },
+  {
+    url: CONTACT_DETAILS,
     showInSection: Sections.AboutEdgeCase,
     getNextStep: () => UPLOAD_YOUR_DOCUMENTS,
   },

@@ -1,5 +1,6 @@
 import {
   ADDITIONAL_DOCUMENTS_UPLOAD,
+  CONTACT_DETAILS,
   CONTACT_PREFERENCES,
   DATE_OF_BIRTH,
   EMAIL_ADDRESS,
@@ -16,7 +17,7 @@ import { edgecaseSequence } from './edgecaseSequence';
 
 describe('Sequence must match respective path', () => {
   test('must match the path', () => {
-    expect(edgecaseSequence).toHaveLength(12);
+    expect(edgecaseSequence).toHaveLength(13);
 
     expect(edgecaseSequence[0].url).toBe(USER_ROLE);
     expect(edgecaseSequence[0].getNextStep({})).toBe(FULL_NAME);
@@ -37,16 +38,19 @@ describe('Sequence must match respective path', () => {
     expect(edgecaseSequence[6].getNextStep({})).toBe(EMAIL_ADDRESS);
 
     expect(edgecaseSequence[7].url).toBe(EMAIL_ADDRESS);
-    expect(edgecaseSequence[7].getNextStep({})).toBe(UPLOAD_YOUR_DOCUMENTS);
+    expect(edgecaseSequence[7].getNextStep({})).toBe(CONTACT_DETAILS);
 
-    expect(edgecaseSequence[8].url).toBe(UPLOAD_YOUR_DOCUMENTS);
-    expect(edgecaseSequence[8].getNextStep({})).toBe(ADDITIONAL_DOCUMENTS_UPLOAD);
+    expect(edgecaseSequence[8].url).toBe(CONTACT_DETAILS);
+    expect(edgecaseSequence[8].getNextStep({})).toBe(UPLOAD_YOUR_DOCUMENTS);
 
-    expect(edgecaseSequence[9].url).toBe(ADDITIONAL_DOCUMENTS_UPLOAD);
-    expect(edgecaseSequence[9].getNextStep({})).toBe(STATEMENT_OF_TRUTH);
+    expect(edgecaseSequence[9].url).toBe(UPLOAD_YOUR_DOCUMENTS);
+    expect(edgecaseSequence[9].getNextStep({})).toBe(ADDITIONAL_DOCUMENTS_UPLOAD);
 
-    expect(edgecaseSequence[10].url).toBe(STATEMENT_OF_TRUTH);
-    expect(edgecaseSequence[10].getNextStep({})).toBe(USER_ROLE);
+    expect(edgecaseSequence[10].url).toBe(ADDITIONAL_DOCUMENTS_UPLOAD);
+    expect(edgecaseSequence[10].getNextStep({})).toBe(STATEMENT_OF_TRUTH);
+
+    expect(edgecaseSequence[11].url).toBe(STATEMENT_OF_TRUTH);
+    expect(edgecaseSequence[11].getNextStep({})).toBe(USER_ROLE);
   });
 });
 
