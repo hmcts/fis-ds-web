@@ -142,19 +142,18 @@ export class GetController {
           case 'applicationform': {
             try {
               const baseURL = `/doc/dss-orhestration/${docId}/delete`;
-             const response = await DOCUMENT_DELETEMANAGER.delete(baseURL);
-             if(response.statusText === "OK"){
-              const sessionObjectOfApplicationDocuments = req.session['caseDocuments'].filter(document => {
-                const { documentId } = document;
-                return documentId !== docId;
-              });
-              req.session['caseDocuments'] = sessionObjectOfApplicationDocuments;
-              console.log({ caseDocument: req.session['caseDocuments'] });
-              this.saveSessionAndRedirect(req, res, () => {
-                res.redirect(UPLOAD_YOUR_DOCUMENTS);
-              });
-             }
-             
+              const response = await DOCUMENT_DELETEMANAGER.delete(baseURL);
+              if (response.statusText === 'OK') {
+                const sessionObjectOfApplicationDocuments = req.session['caseDocuments'].filter(document => {
+                  const { documentId } = document;
+                  return documentId !== docId;
+                });
+                req.session['caseDocuments'] = sessionObjectOfApplicationDocuments;
+                console.log({ caseDocument: req.session['caseDocuments'] });
+                this.saveSessionAndRedirect(req, res, () => {
+                  res.redirect(UPLOAD_YOUR_DOCUMENTS);
+                });
+              }
             } catch (error) {
               console.log(error);
             }
@@ -165,8 +164,8 @@ export class GetController {
           case 'additional': {
             try {
               const baseURL = `/doc/dss-orhestration/${docId}/delete`;
-             const response = await DOCUMENT_DELETEMANAGER.delete(baseURL);
-              if(response.statusText === 'OK'){
+              const response = await DOCUMENT_DELETEMANAGER.delete(baseURL);
+              if (response.statusText === 'OK') {
                 const sessionObjectOfAdditionalDocuments = req.session['AddtionalCaseDocuments'].filter(document => {
                   const { documentId } = document;
                   return documentId !== docId;
@@ -177,7 +176,6 @@ export class GetController {
                   res.redirect(ADDITIONAL_DOCUMENTS_UPLOAD);
                 });
               }
-             
             } catch (error) {
               console.log(error);
             }
