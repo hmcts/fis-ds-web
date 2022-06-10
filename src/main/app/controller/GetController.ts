@@ -142,7 +142,8 @@ export class GetController {
           case 'applicationform': {
             try {
               const baseURL = `/doc/dss-orhestration/${docId}/delete`;
-              await DOCUMENT_DELETEMANAGER.delete(baseURL);
+             const response = await DOCUMENT_DELETEMANAGER.delete(baseURL);
+             if(response.statusText === "OK"){
               const sessionObjectOfApplicationDocuments = req.session['caseDocuments'].filter(document => {
                 const { documentId } = document;
                 return documentId !== docId;
@@ -152,6 +153,8 @@ export class GetController {
               this.saveSessionAndRedirect(req, res, () => {
                 res.redirect(UPLOAD_YOUR_DOCUMENTS);
               });
+             }
+             
             } catch (error) {
               console.log(error);
             }
@@ -162,16 +165,19 @@ export class GetController {
           case 'additional': {
             try {
               const baseURL = `/doc/dss-orhestration/${docId}/delete`;
-              await DOCUMENT_DELETEMANAGER.delete(baseURL);
-              const sessionObjectOfAdditionalDocuments = req.session['AddtionalCaseDocuments'].filter(document => {
-                const { documentId } = document;
-                return documentId !== docId;
-              });
-              req.session['AddtionalCaseDocuments'] = sessionObjectOfAdditionalDocuments;
-              console.log({ AddtionalDocuments: req.session['AddtionalCaseDocuments'] });
-              this.saveSessionAndRedirect(req, res, () => {
-                res.redirect(ADDITIONAL_DOCUMENTS_UPLOAD);
-              });
+             const response = await DOCUMENT_DELETEMANAGER.delete(baseURL);
+              if(response.statusText === 'OK'){
+                const sessionObjectOfAdditionalDocuments = req.session['AddtionalCaseDocuments'].filter(document => {
+                  const { documentId } = document;
+                  return documentId !== docId;
+                });
+                req.session['AddtionalCaseDocuments'] = sessionObjectOfAdditionalDocuments;
+                console.log({ AddtionalDocuments: req.session['AddtionalCaseDocuments'] });
+                this.saveSessionAndRedirect(req, res, () => {
+                  res.redirect(ADDITIONAL_DOCUMENTS_UPLOAD);
+                });
+              }
+             
             } catch (error) {
               console.log(error);
             }

@@ -1,7 +1,7 @@
 security:
   referrerPolicy: 'origin'
 port: 4000
-timeout: 30000
+timeout: 300000
 services:
   authProvider:
     url: 'http://rpe-service-auth-provider-aat.service.core-compute-aat.internal'
@@ -25,7 +25,7 @@ services:
   hmctsHomePage:
     url: 'https://www.gov.uk/government/organisations/hm-courts-and-tribunals-service'
   documentManagement:
-    url: 'http://fis-cos-api-aat.service.core-compute-aat.internal' 
+    url: 'http://fis-cos-api-pr-62.service.core-compute-preview.internal' 
     uploadSizeinMB: 30
   RPE_TOKEN:
     url: 'http://rpe-service-auth-provider-aat.service.core-compute-aat.internal'     
