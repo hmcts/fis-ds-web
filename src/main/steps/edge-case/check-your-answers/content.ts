@@ -7,8 +7,10 @@ import { applicantSummaryList } from './utils';
 export const enContent = {
   section: '',
   title: 'Check your Answers',
+  change: 'change',
   sectionTitles: {
     applicantDetails: "Applicant details",
+    abc: 'xyz'
   },
   keys: {
     phoneNumber: 'Phone number',
@@ -36,8 +38,10 @@ const en = (content: CommonContent) => {
 const cyContent: typeof enContent = {
   section: 'Adolygu eich cais',
   title: 'Adolygu eich atebion',
+  change: 'change',
   sectionTitles: {
     applicantDetails: 'Manylion y ceisydd',
+    abc: 'xyz'
   },
   keys: {
     phoneNumber: 'Rhif ffôn',
