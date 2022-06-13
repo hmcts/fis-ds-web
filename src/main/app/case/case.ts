@@ -2,27 +2,10 @@ import { AnyObject } from '../controller/PostController';
 
 import { CaseData } from './definition';
 
-<<<<<<< HEAD
-export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>> = {};
-=======
+
 export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>> = {
   applicantDateOfBirth: 'applicantDateOfBirth',
-  /**
- *   namedApplicant: 'namedApplicant',
-  applicantFirstName:'applicantFirstName',
-  applicantLastName: 'applicantLastName',
-  applicantDateOfBirth: 'applicantDateOfBirth',
-  applicantEmailAddress: 'applicantEmailAddress',
-  applicantPhoneNumber: 'applicantPhoneNumber',
-  applicantHomeNumber: 'applicantHomeNumber',
-  applicantAddress1: 'applicantAddress1',
-  applicantAddress2: 'applicantAddress2',
-  applicantAddressTown: 'applicantAddressTown',
-  applicantAddressCountry: 'applicantAddressCountry',
-  applicantAddressPostCode: 'applicantAddressPostCode'
- */
 };
->>>>>>> 794d82f (Integrating with backend)
 
 export function formatCase<InputFormat, OutputFormat>(fields: FieldFormats, data: InputFormat): OutputFormat {
   const result = {};
