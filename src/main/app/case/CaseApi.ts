@@ -1,4 +1,4 @@
-import Axios, { AxiosError, AxiosInstance } from 'axios';
+import Axios, { AxiosError, AxiosInstance,AxiosResponse } from 'axios';
 import config from 'config';
 import { LoggerInstance } from 'winston';
 
@@ -8,7 +8,7 @@ import { AppRequest, UserDetails } from '../controller/AppRequest';
 import { Case, CaseWithId } from './case';
 import { CaseAssignedUserRoles } from './case-roles';
 import { CaseData } from './definition';
-import { toApiFormat } from './to-api-format';
+import { toApiFormat,toApiDate } from './to-api-format';
 
 export class CaseApi {
   /**
@@ -56,14 +56,47 @@ export class CaseApi {
    *
    * @param req
    * @param userDetails
-   * @param formData
+   * @param  formData
    * @returns
    */
 
   public async createCaseNew(req: AppRequest, userDetails: UserDetails, formData: Partial<Case>): Promise<any> {
     //***** this part need to be implemented on creating a new case  */
-    console.log({ case: req.session.userCase, userDetails, formData });
-    return req.session.userCase;
+
+    //console.log("/////////formData:",formData);
+  
+  //console.log("token => "+token+", event => "+event+", data => "+data);
+    try {
+      // const requestData : CaseWithId =req.session.userCase;
+      const url: string = config.get('services.createcase.url');
+      const headers = { 'Content-Type': 'application/json', 'Authorization':'Bearer ' + userDetails.accessToken };
+      const data= {
+        applicantFirstName:req.session.userCase.applicantFirstName,
+        applicantLastName: req.session.userCase.applicantLastName,
+        applicantDateOfBirth: toApiDate(req.session.userCase.applicantDateOfBirth),
+        applicantEmailAddress:req.session.userCase.applicantEmailAddress,
+        applicantPhoneNumber: req.session.userCase.applicantPhoneNumber,
+        applicantHomeNumber:req.session.userCase.applicantHomeNumber,
+        applicantAddress1: req.session.userCase.applicantAddress1,
+        applicantAddress2: req.session.userCase.applicantAddress2,
+        applicantAddressTown: req.session.userCase.applicantAddressTown,
+        applicantAddressCountry:req.session.userCase.applicantAddressCountry,
+        applicantAddressPostCode:req.session.userCase.applicantAddressPostcode
+          
+      };
+      console.log('url:' ,url)
+      console.log('headers:',headers)
+      console.log("Data: ",data)
+       const response: AxiosResponse<createCaseResponse> = await Axios.post(url,data,{headers});
+       console.log('Response::::::/n',response)
+       return {id:response.data}
+        console.log('Response::::::/n',response.status)
+      }
+     catch (err) {
+      console.log("error in creating case")
+      console.log(err)  
+     }
+    
   }
 
   /**
@@ -131,9 +164,10 @@ export class CaseApi {
  * @returns
  */
 export const getCaseApi = (userDetails: UserDetails, logger: LoggerInstance): CaseApi => {
+  
   return new CaseApi(
     Axios.create({
-      baseURL: config.get('services.case.url'),
+      baseURL: config.get('services.createcase.url'),
       headers: {
         Authorization: 'Bearer ' + userDetails.accessToken,
         ServiceAuthorization: getServiceAuthToken(),
@@ -145,3 +179,13 @@ export const getCaseApi = (userDetails: UserDetails, logger: LoggerInstance): Ca
     logger
   );
 };
+
+interface createCaseResponse {
+  results: {
+    status:string,
+    id:number
+  
+  }[];
+}
+
+

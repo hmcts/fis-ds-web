@@ -14,3 +14,5 @@ const fields: FromApiConverters = {
 };
 
 export const fromApiFormat = (data: CaseData): Case => formatCase(fields, data);
+
+

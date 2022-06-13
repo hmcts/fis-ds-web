@@ -13,7 +13,7 @@ import { AppRequest } from './AppRequest';
 
 enum noHitToSaveAndContinue {
   CITIZEN_HOME_URL = '/citizen-home',
-  SERVICE_TYPE = '/service-type',
+ // SERVICE_TYPE = '/service-type',
   ADOPTION_APPLICATION_TYPE = '/adoption-application-type',
   PRIVATE_LAW_APPLICATION_TYPE = '/private-law-application-type',
 }
