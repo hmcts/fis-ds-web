@@ -57,7 +57,7 @@ const getSectionSummaryList = (rows: SummaryListRow[], content: PageContent): Go
             actions: {
               items: [
                 {
-                  href: changeUrl , //
+                  href: changeUrl, //
                   text: content.change as string,
                   visuallyHiddenText: `${item.key}`,
                 },
@@ -75,16 +75,14 @@ export const applicantSummaryList = (
   { sectionTitles, keys, ...content }: SummaryListContent,
   userCase: Partial<CaseWithId>
 ): SummaryList | undefined => {
-
-  console.log("usercase in check your answer -->",userCase);
+  console.log('usercase in check your answer -->', userCase);
   const sectionTitle = sectionTitles.applicantDetails;
   console.log('Address in util userCase --->', userCase);
 
-
-  let SummaryData =    [
+  const SummaryData = [
     {
       key: keys.fullName,
-      value: userCase['applicantFirstName'] + ' ' + userCase['applicantLastName'],
+      value: userCase['applicantFirstNames'] + ' ' + userCase['applicantLastNames'],
       changeUrl: Urls['FULL_NAME'],
     },
     {
@@ -105,7 +103,7 @@ export const applicantSummaryList = (
     {
       key: keys.namedPersonEmail,
       value: userCase['homePhoneNumber'],
-      changeUrl: Urls['CONTACT_DETAILS'],
+      changeUrl: Urls['CONTACT_PREFERENCES'],
     },
     {
       key: keys.namedPersonTel,
@@ -118,9 +116,56 @@ export const applicantSummaryList = (
 
   return {
     title: sectionTitle,
-    rows: getSectionSummaryList(
-   SummaryData,
-      content
-    ),
+    rows: getSectionSummaryList(SummaryData, content),
+  };
+};
+
+/* eslint-disable import/namespace */
+export const UploadFormSummary = (
+  { sectionTitles, keys, ...content }: SummaryListContent,
+  userCase: Partial<CaseWithId>
+): SummaryList | undefined => {
+  console.log('usercase in check your answer -->', userCase);
+  //  const sectionTitle = sectionTitles.applicantDetails;
+  console.log('Address in util userCase --->', userCase);
+
+  const SummaryData = [
+    {
+      key: keys.uploadDocuments,
+      value: userCase['applicantFirstName'],
+      changeUrl: Urls['UPLOAD_YOUR_DOCUMENTS'],
+    },
+  ];
+
+  /** Removes entry in @summarydata if user is not a named user */
+
+  return {
+    title: 'List of forms uploaded ',
+    rows: getSectionSummaryList(SummaryData, content),
+  };
+};
+
+/* eslint-disable import/namespace */
+export const AdditonalFormSummary = (
+  { sectionTitles, keys, ...content }: SummaryListContent,
+  userCase: Partial<CaseWithId>
+): SummaryList | undefined => {
+  console.log('usercase in check your answer -->', userCase);
+  //  const sectionTitle = sectionTitles.applicantDetails;
+  console.log('Address in util userCase --->', userCase);
+
+  const SummaryData = [
+    {
+      key: keys.additionalDocuments,
+      value: userCase['applicantFirstName'],
+      changeUrl: Urls['ADDITIONAL_DOCUMENTS_UPLOAD'],
+    },
+  ];
+
+  /** Removes entry in @summarydata if user is not a named user */
+
+  return {
+    title: 'List of Documents uploaded  ',
+    rows: getSectionSummaryList(SummaryData, content),
   };
 };

@@ -2,15 +2,15 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { CommonContent } from '../../../steps/common/common.content';
 
-import { applicantSummaryList } from './utils';
+import { AdditonalFormSummary, UploadFormSummary, applicantSummaryList } from './utils';
 
 export const enContent = {
   section: '',
   title: 'Check your Answers',
   change: 'change',
   sectionTitles: {
-    applicantDetails: "Applicant details",
-    abc: 'xyz'
+    applicantDetails: 'Applicant details',
+    abc: 'xyz',
   },
   keys: {
     phoneNumber: 'Phone number',
@@ -20,17 +20,23 @@ export const enContent = {
     address: ' Address',
     recievingEmail: 'Who should receive emails about the application',
     namedPersonEmail: 'Email address of the person named on the application',
-    namedPersonTel : 'Contact number of the person named on the application'
+    namedPersonTel: 'Contact number of the person named on the application',
+    uploadDocuments: 'List of forms uploaded (Application form)',
+    additionalDocuments: 'List of Documents uploaded (supporting documents)',
   },
 };
 
 const en = (content: CommonContent) => {
   const userCase = content.userCase!;
+  const caseDocuments = content.caseDocuments!;
+
   return {
     ...enContent,
     language: content.language,
     sections: [
       applicantSummaryList(enContent, userCase),
+      UploadFormSummary(enContent, caseDocuments),
+      AdditonalFormSummary(enContent, userCase),
     ],
   };
 };
@@ -41,7 +47,7 @@ const cyContent: typeof enContent = {
   change: 'change',
   sectionTitles: {
     applicantDetails: 'Manylion y ceisydd',
-    abc: 'xyz'
+    abc: 'xyz',
   },
   keys: {
     phoneNumber: 'Rhif ffôn',
@@ -51,7 +57,9 @@ const cyContent: typeof enContent = {
     address: 'Cyfeiriad',
     recievingEmail: 'Who should receive emails about the application',
     namedPersonEmail: 'Email address of the person named on the application',
-    namedPersonTel : 'Contact number of the person named on the application'
+    namedPersonTel: 'Contact number of the person named on the application',
+    uploadDocuments: 'Application form(s)',
+    additionalDocuments: 'Supporting document(s)',
   },
 };
 
@@ -60,18 +68,15 @@ const cy: typeof en = (content: CommonContent) => {
   return {
     ...cyContent,
     language: content.language,
-    sections: [
-      applicantSummaryList(cyContent, userCase),
-    ],
+    sections: [applicantSummaryList(cyContent, userCase)],
   };
 };
 
 export const form: FormContent = {
-  fields: {
-  },
+  fields: {},
   submit: {
     text: l => l.continue,
-  }
+  },
 };
 
 const languages = {
