@@ -8,7 +8,6 @@ import FormData from 'form-data';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { FormFields, FormFieldsFn } from '../../../app/form/Form';
-import { RpeApi } from '../../../app/rpe/RpeApi';
 import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 const logger = Logger.getLogger('uploadDocumentPostController');
 import { ADDITIONAL_DOCUMENTS_UPLOAD, UPLOAD_YOUR_DOCUMENTS } from '../../urls';
@@ -139,18 +138,11 @@ export default class UploadDocumentController extends PostController<AnyObject> 
   }
 
   async PostDocumentUploader(req: AppRequest<AnyObject>, res: Response): Promise<void> {
-    let CaseDocument: any[] = [];
+    const CaseDocument: any[] = [];
     if (req.session.hasOwnProperty('caseDocuments')) {
-      CaseDocument = req.session.caseDocuments.map(document => {
-        return {
-          document_binary_url: document._links.binary.href,
-          document_filename: document.originalDocumentName,
-          document_url: document._links.self.href,
-        };
-      });
+      console.log(CaseDocument);
     }
 
-    console.log(CaseDocument);
     res.redirect(ADDITIONAL_DOCUMENTS_UPLOAD);
   }
 
@@ -188,10 +180,6 @@ export default class UploadDocumentController extends PostController<AnyObject> 
       this.PostDocumentUploader(req, res);
     } else {
       if (TotalUploadDocuments < Number(config.get('documentUpload.validation.totaldocuments'))) {
-        if ((await RpeApi.getRpeToken()).response) {
-          req.session.rpeToken = (await RpeApi.getRpeToken()).data;
-        }
-
         if (!req.session.hasOwnProperty('errors')) {
           req.session['errors'] = [];
         }
@@ -208,24 +196,20 @@ export default class UploadDocumentController extends PostController<AnyObject> 
           const validateFileSize: boolean = FileValidations.sizeValidation(documents.size);
           const formData: FormData = new FormData();
           if (validateMimeType && validateFileSize) {
-            formData.append('files', documents.data, {
+            formData.append('file', documents.data, {
               contentType: documents.mimetype,
               filename: documents.name,
             });
-            formData.append('caseTypeId', 'PRLAPPS');
-            formData.append('jurisdictionId', 'PRIVATELAW');
-            formData.append('classification', 'RESTRICTED');
             const formHeaders = formData.getHeaders();
             /**
              * @RequestHeaders
              */
             const Headers = {
               Authorization: `Bearer ${req.session.user['accessToken']}`,
-              ServiceAuthorization: req.session['rpeToken'],
             };
             try {
               const RequestDocument = await this.UploadDocumentInstance(FileUploadBaseURL, Headers).post(
-                '/cases/documents',
+                '/doc/dss-orhestration/upload',
                 formData,
                 {
                   headers: {
@@ -234,8 +218,8 @@ export default class UploadDocumentController extends PostController<AnyObject> 
                 }
               );
 
-              const { originalDocumentName, _links } = RequestDocument.data.documents[0];
-              req.session['caseDocuments'].push({ originalDocumentName, _links });
+              const uploadedDocument = RequestDocument.data.document;
+              req.session['caseDocuments'].push(uploadedDocument);
               req.session['errors'] = undefined;
               this.redirect(req, res, UPLOAD_YOUR_DOCUMENTS);
             } catch (error) {

@@ -37,10 +37,9 @@
       {%if addtionalDocuments.length >0 %}
       {% for file in addtionalDocuments %}
         <li class="uploadedFile govuk-!-padding-top-2 govuk-!-padding-bottom-3 govuk-section-break govuk-section-break--visible">
-          {{ file.originalDocumentName }} 
-          {% set words = file._links.self.href | split("/") %}
-          {% set documentId = words[4] %}
-          <a href="/upload-additional-documents?query=delete&documentId={{documentId}}&documentType=additional" class="govuk-link--no-visited-state float-right ">{{ delete }}</a>
+          {{ file.fileName }} 
+          {% set documentId = file.documentId %}
+          <a href="/upload-additional-documents?query=delete&docId={{documentId}}&documentType=additional" class="govuk-link--no-visited-state float-right ">{{ delete }}</a>
         </li>
       {% endfor %}
       {%endif%}
