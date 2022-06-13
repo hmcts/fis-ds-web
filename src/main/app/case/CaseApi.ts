@@ -1,5 +1,6 @@
 import Axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import config from 'config';
+import { Response } from 'express';
 import { LoggerInstance } from 'winston';
 
 import { getServiceAuthToken } from '../auth/service/get-service-auth-token';
@@ -9,6 +10,7 @@ import { Case, CaseWithId } from './case';
 import { CaseAssignedUserRoles } from './case-roles';
 import { CaseData } from './definition';
 import { toApiFormat } from './to-api-format';
+
 
 export class CaseApi {
   /**
@@ -33,7 +35,7 @@ export class CaseApi {
    * @param formData
    * @returns
    */
-  public async getOrCreateCaseNew(req: AppRequest, userDetails: UserDetails): Promise<CaseWithId> {
+  public async getOrCreateCaseNew(req: AppRequest, userDetails: UserDetails,res: Response): Promise<CaseWithId> {
     return this.createCaseNew(req, userDetails);
   }
 
@@ -60,16 +62,17 @@ export class CaseApi {
       const url: string = config.get('services.createcase.url');
       const headers = { 'Content-Type': 'application/json', Authorization: 'Bearer ' + userDetails.accessToken };
       console.log('headers:', headers);
-      const response: AxiosResponse<createCaseResponse> = await Axios.post(url, mapCaseData(req), { headers });
+      const res: AxiosResponse<createCaseResponse> = await Axios.post(url, mapCaseData(req), { headers });
 
-      console.log('Response:', response.status);
-      if (response.status === 200) {
-        return { id: response.data.id };
-      } else {
-        return { id: '' };
-      }
+      console.log('Response:', res.status);
+      if (res.status === 200) {
+        return { id: res.data.id };
+      } 
     } catch (err) {
       console.log('Error in creating case');
+      console.log(err);
+      window.alert(err.statusCode + ':' + err.status);
+     
     }
   }
 
