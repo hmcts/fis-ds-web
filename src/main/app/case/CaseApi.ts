@@ -1,4 +1,4 @@
-import Axios, { AxiosError, AxiosInstance } from 'axios';
+import Axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import config from 'config';
 import { LoggerInstance } from 'winston';
 
@@ -33,12 +33,8 @@ export class CaseApi {
    * @param formData
    * @returns
    */
-  public async getOrCreateCaseNew(
-    req: AppRequest,
-    userDetails: UserDetails,
-    formData: Partial<Case>
-  ): Promise<CaseWithId> {
-    return this.createCaseNew(req, userDetails, formData);
+  public async getOrCreateCaseNew(req: AppRequest, userDetails: UserDetails): Promise<CaseWithId> {
+    return this.createCaseNew(req, userDetails);
   }
 
   /**
@@ -56,14 +52,44 @@ export class CaseApi {
    *
    * @param req
    * @param userDetails
+   * @param  formData
+   * @returns
+   */
+  public async updateCase(req: AppRequest, userDetails: UserDetails): Promise<any> {
+    Axios.defaults.headers.put['Content-Type'] = 'application/json';
+    Axios.defaults.headers.put['Authorization'] = 'Bearer ' + userDetails.accessToken;
+    try {
+      const url: string = config.get('services.case.url');
+      const response: AxiosResponse<createCaseResponse> = await Axios.put(
+        url + req.session.userCase.id + '/update',
+        mapCaseData(req),
+        {
+          params: { event: 'UPDATE' },
+        }
+      );
+      return response;
+    } catch (err) {
+      console.log('Error in updating case' + err);
+    }
+  }
+  /**
+   *
+   * @param req
+   * @param userDetails
    * @param formData
    * @returns
    */
 
-  public async createCaseNew(req: AppRequest, userDetails: UserDetails, formData: Partial<Case>): Promise<any> {
-    //***** this part need to be implemented on creating a new case  */
-    console.log({ case: req.session.userCase, userDetails, formData });
-    return req.session.userCase;
+  public async createCaseNew(req: AppRequest, userDetails: UserDetails): Promise<any> {
+    try {
+      // const requestData : CaseWithId =req.session.userCase;
+      const url: string = config.get('services.createcase.url');
+      const headers = { 'Content-Type': 'application/json', Authorization: 'Bearer ' + userDetails.accessToken };
+      const response: AxiosResponse<createCaseResponse> = await Axios.post(url, mapCaseData(req), { headers });
+      return { id: response.data };
+    } catch (err) {
+      console.log('error in creating case :' + err);
+    }
   }
 
   /**
@@ -144,4 +170,26 @@ export const getCaseApi = (userDetails: UserDetails, logger: LoggerInstance): Ca
     }),
     logger
   );
+};
+
+interface createCaseResponse {
+  status: string;
+  id: string;
+}
+
+export const mapCaseData = (req: AppRequest): any => {
+  const data = {
+    applicantFirstName: req.session.userCase.applicantFirstName,
+    applicantLastName: req.session.userCase.applicantLastName,
+    applicantDateOfBirth: req.session.userCase.applicantDateOfBirth,
+    applicantEmailAddress: req.session.userCase.applicantEmailAddress,
+    applicantPhoneNumber: req.session.userCase.applicantPhoneNumber,
+    applicantHomeNumber: req.session.userCase.applicantHomeNumber,
+    applicantAddress1: req.session.userCase.applicantAddress1,
+    applicantAddress2: req.session.userCase.applicantAddress2,
+    applicantAddressTown: req.session.userCase.applicantAddressTown,
+    applicantAddressCountry: req.session.userCase.applicantAddressCountry,
+    applicantAddressPostCode: req.session.userCase.applicantAddressPostCode,
+  };
+  return data;
 };

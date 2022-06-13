@@ -70,19 +70,21 @@ export class PostController<T extends AnyObject> {
       if (!(Object.values(noHitToSaveAndContinue) as string[]).includes(req.originalUrl)) {
         const eventName = this.getEventName(req);
         if (eventName === CITIZEN_CREATE) {
-          req.session.userCase = await this.createCase(req, formData);
+          console.log('Creating case');
+          req.session.userCase = await this.createCase(req);
         } else if (eventName === CITIZEN_UPDATE) {
-          req.session.userCase = await this.save(req, formData, eventName);
+          console.log('Updateing case');
+          req.session.userCase = await this.updateCase(req);
         }
       }
     }
 
     this.redirect(req, res);
   }
-  async createCase(req: AppRequest<T>, formData: Partial<Case>): Promise<CaseWithId | PromiseLike<CaseWithId>> {
+  async createCase(req: AppRequest<T>): Promise<CaseWithId | PromiseLike<CaseWithId>> {
     try {
       console.log('Create Case New');
-      req.session.userCase = await req.locals.api.createCaseNew(req, req.session.user, formData);
+      req.session.userCase = await req.locals.api.createCaseNew(req, req.session.user);
     } catch (err) {
       req.locals.logger.error('Error saving', err);
       req.session.errors = req.session.errors || [];
@@ -110,6 +112,18 @@ export class PostController<T extends AnyObject> {
     try {
       console.log('Update Existing Case');
       req.session.userCase = await req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
+    } catch (err) {
+      req.locals.logger.error('Error saving', err);
+      req.session.errors = req.session.errors || [];
+      req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+    }
+    return req.session.userCase;
+  }
+
+  protected async updateCase(req: AppRequest<T>): Promise<CaseWithId> {
+    try {
+      console.log('Update Existing Case');
+      req.session.userCase = await req.locals.api.updateCase(req, req.session.user);
     } catch (err) {
       req.locals.logger.error('Error saving', err);
       req.session.errors = req.session.errors || [];

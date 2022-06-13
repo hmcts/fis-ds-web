@@ -102,6 +102,22 @@ describe('PostController', () => {
     });
   });
 
+  it('Case update test', async () => {
+    const body = { MOCK_KEY: 'MOCK_VALUE', originalUrl: CONTACT_DETAILS };
+    const controller = new PostController(mockFormContent.fields);
+    const req = mockRequest({ body });
+    req.session.userCase.id = '';
+    req.originalUrl = CONTACT_DETAILS;
+    const res = mockResponse();
+    await controller.post(req, res);
+
+    expect(req.session.userCase).toEqual({
+      id: '',
+      MOCK_KEY: 'MOCK_VALUE',
+      originalUrl: '/contact-details',
+    });
+  });
+
   test('rejects with an error when unable to save session data', async () => {
     getNextStepUrlMock.mockReturnValue('/next-step-url');
     const body = { MOCK_KEY: 'MOCK_VALUE' };

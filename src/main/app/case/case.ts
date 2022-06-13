@@ -2,7 +2,9 @@ import { AnyObject } from '../controller/PostController';
 
 import { CaseData } from './definition';
 
-export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>> = {};
+export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>> = {
+  applicantDateOfBirth: 'applicantDateOfBirth',
+};
 
 export function formatCase<InputFormat, OutputFormat>(fields: FieldFormats, data: InputFormat): OutputFormat {
   const result = {};
@@ -26,7 +28,7 @@ export interface Case {
   namedApplicant: boolean;
   applicantFirstName: string;
   applicantLastName: string;
-  applicantDateOfBirth: string;
+  applicantDateOfBirth: CaseDate;
   applicantEmailAddress: string;
   applicantPhoneNumber: string;
   applicantHomeNumber: string;
