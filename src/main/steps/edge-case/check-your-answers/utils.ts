@@ -179,7 +179,7 @@ export const UserRole = (
   /** Removes entry in @summarydata if user is not a named user */
 
   return {
-    title: 'List of forms uploaded ',
+    title: 'Determine User’s Role',
     rows: getSectionSummaryList(SummaryData, content),
   };
 };
