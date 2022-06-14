@@ -10,6 +10,7 @@
             "keys": {
               "phoneNumber": "Phone number",
               "emailAddress": "Contact number of the person named on the application",
+              "user-role": "Are you named as the applicant on the application form you are submitting? ",
               "fullName": "Subject’s name",
               "dateOfBirth": "Subject’s DoB",
               "address": "Address",
@@ -30,6 +31,7 @@
             "keys": {
               "phoneNumber": "Phone number -welsh",
               "emailAddress": "Contact number of the person named on the application - welsh",
+              "user-role": "Are you named as the applicant on the application form you are submitting? - welsh ",
               "fullName": "Subject’s name - welsh",
               "dateOfBirth": "Subject’s DoB welsh",
               "address": "Address - welsh",

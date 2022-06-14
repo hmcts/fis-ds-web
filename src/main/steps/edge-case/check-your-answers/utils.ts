@@ -161,6 +161,30 @@ export const UploadFormSummary = (
 };
 
 /* eslint-disable import/namespace */
+export const UserRole = (
+  { sectionTitles, keys, ...content }: SummaryListContent,
+  userCase: Partial<CaseWithId>
+): SummaryList | undefined => {
+  const isNamedApplicant =
+    userCase['namedApplicant'] === true ? 'Yes' : 'No - I am sending an application for someone else.';
+
+  const SummaryData = [
+    {
+      key: keys['user-role'],
+      value: isNamedApplicant,
+      changeUrl: Urls['USER_ROLE'],
+    },
+  ];
+
+  /** Removes entry in @summarydata if user is not a named user */
+
+  return {
+    title: 'List of forms uploaded ',
+    rows: getSectionSummaryList(SummaryData, content),
+  };
+};
+
+/* eslint-disable import/namespace */
 export const AdditonalFormSummary = (
   { sectionTitles, keys, ...content }: SummaryListContent,
   userCase: Partial<CaseWithDocuments>
