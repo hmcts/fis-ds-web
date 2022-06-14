@@ -1,6 +1,5 @@
-
 import { getFormattedDate } from '../../../app/case/answers/formatDate';
-import { CaseWithId, CaseWithDocuments } from '../../../app/case/case';
+import { CaseWithDocuments, CaseWithId } from '../../../app/case/case';
 import { getFormattedAddress } from '../../../app/case/formatter/address';
 import { PageContent } from '../../../app/controller/GetController';
 import * as Urls from '../../../steps/urls';
@@ -80,20 +79,19 @@ export const applicantSummaryList = (
   const sectionTitle = sectionTitles.applicantDetails;
   console.log('Address in util userCase --->', userCase);
 
-  const UserContactPreferences = function(){
-    let perference = ''
-    if(userCase['contactPreferenceType'] === 'NAMED_PERSON'){
+  const UserContactPreferences = function () {
+    let perference = '';
+    if (userCase['contactPreferenceType'] === 'NAMED_PERSON') {
       perference = 'The person named on this application';
-    }
-    else if(userCase['contactPreferenceType'] === 'ACCOUNT_OWNER'){
+    } else if (userCase['contactPreferenceType'] === 'ACCOUNT_OWNER') {
       perference = 'The account owner';
+    } else if (userCase['contactPreferenceType'] === 'BOTH_RECEIVE') {
+      perference = 'Both the account owner and the person named on this application';
+    } else {
+      perference = '';
     }
-    else if(userCase['contactPreferenceType'] === 'BOTH_RECEIVE'){
-      perference = 'Both the account owner and the person named on this application'
-    }
-    else perference = ''
     return perference;
-  }
+  };
 
   const SummaryData = [
     {
@@ -144,12 +142,12 @@ export const UploadFormSummary = (
   console.log('usercase in check your answer -->', userCase);
   //  const sectionTitle = sectionTitles.applicantDetails;
   console.log('Address in util userCase --->', userCase);
-  const caseDocs = userCase['uploadedDocuments'] === undefined ? [] : userCase['uploadedDocuments']
+  // const caseDocs = userCase['uploadedDocuments'] === undefined ? [] : userCase['uploadedDocuments']
 
   const SummaryData = [
     {
       key: keys.uploadDocuments,
-      value: caseDocs,
+      value: '',
       changeUrl: Urls['UPLOAD_YOUR_DOCUMENTS'],
     },
   ];
@@ -171,12 +169,12 @@ export const AdditonalFormSummary = (
   //  const sectionTitle = sectionTitles.applicantDetails;
   console.log('Address in util userCase --->', userCase);
 
-  const caseDocs = userCase['addtionalDocuments'] === undefined ? [] : userCase['addtionalDocuments']
+  //const caseDocs = userCase['addtionalDocuments'] === undefined ? [] : userCase['addtionalDocuments']
 
   const SummaryData = [
     {
       key: keys.additionalDocuments,
-      value: caseDocs,
+      value: '',
       changeUrl: Urls['ADDITIONAL_DOCUMENTS_UPLOAD'],
     },
   ];

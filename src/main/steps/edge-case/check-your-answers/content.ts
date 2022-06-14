@@ -1,28 +1,15 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
+import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 import { CommonContent } from '../../../steps/common/common.content';
 
 import { AdditonalFormSummary, UploadFormSummary, applicantSummaryList } from './utils';
+const resourceLoader = new ResourceReader();
+resourceLoader.Loader('check-your-answers');
+const Translations = resourceLoader.getFileContents().translations;
 
 export const enContent = {
-  section: '',
-  title: 'Check your Answers',
-  change: 'change',
-  sectionTitles: {
-    applicantDetails: 'Applicant details',
-  },
-  keys: {
-    phoneNumber: 'Phone number',
-    emailAddress: 'Contact number of the person named on the application',
-    fullName: 'Subject’s name',
-    dateOfBirth: 'Subject’s DoB',
-    address: ' Address',
-    recievingEmail: 'Who should receive emails about the application',
-    namedPersonEmail: 'Email address of the person named on the application',
-    namedPersonTel: 'Contact number of the person named on the application',
-    uploadDocuments: 'List of forms uploaded (Application form)',
-    additionalDocuments: 'List of Documents uploaded (supporting documents)',
-  },
+  ...Translations.en,
 };
 
 const en = (content: any) => {
@@ -42,24 +29,7 @@ const en = (content: any) => {
 };
 
 const cyContent: typeof enContent = {
-  section: '',
-  title: 'Check your Answers - welsh',
-  change: 'change - welsh',
-  sectionTitles: {
-    applicantDetails: 'Applicant details - welsh',
-  },
-  keys: {
-    phoneNumber: 'Phone number - welsh',
-    emailAddress: 'Contact number of the person named on the application -welsh',
-    fullName: 'Subject’s name -welsh',
-    dateOfBirth: 'Subject’s DoB - welsh',
-    address: ' Address - welsh',
-    recievingEmail: 'Who should receive emails about the application - welsh',
-    namedPersonEmail: 'Email address of the person named on the application - welsh',
-    namedPersonTel: 'Contact number of the person named on the application - welsh',
-    uploadDocuments: 'List of forms uploaded (Application form) - welsh',
-    additionalDocuments: 'List of Documents uploaded (supporting documents) - welsh',
-  },
+  ...Translations.cy,
 };
 
 const cy: typeof en = (content: CommonContent) => {
@@ -74,8 +44,6 @@ const cy: typeof en = (content: CommonContent) => {
       applicantSummaryList(cyContent, userCase),
       UploadFormSummary(enContent, caseDocuments),
       AdditonalFormSummary(enContent, AdditionalDocuments),
-    
-    
     ],
   };
 };

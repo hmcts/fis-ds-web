@@ -1,0 +1,44 @@
+{
+    "translations": {
+        "en": {
+            "section": "",
+            "title": "Check your Answers",
+            "change": "change",
+            "sectionTitles": {
+              "applicantDetails": "Applicant details"
+            },
+            "keys": {
+              "phoneNumber": "Phone number",
+              "emailAddress": "Contact number of the person named on the application",
+              "fullName": "Subject’s name",
+              "dateOfBirth": "Subject’s DoB",
+              "address": "Address",
+              "recievingEmail": "Who should receive emails about the application",
+              "namedPersonEmail": "Email address of the person named on the application",
+              "namedPersonTel": "Contact number of the person named on the application",
+              "uploadDocuments": "List of forms uploaded (Application form)",
+              "additionalDocuments": "List of Documents uploaded (supporting documents)"
+            }
+        },
+        "cy": {
+            "section": "",
+            "title": "Check your Answers -welsh",
+            "change": "change - welsh",
+            "sectionTitles": {
+              "applicantDetails": "Applicant details -welsh"
+            },
+            "keys": {
+              "phoneNumber": "Phone number -welsh",
+              "emailAddress": "Contact number of the person named on the application - welsh",
+              "fullName": "Subject’s name - welsh",
+              "dateOfBirth": "Subject’s DoB welsh",
+              "address": "Address - welsh",
+              "recievingEmail": "Who should receive emails about the application - welsh",
+              "namedPersonEmail": "Email address of the person named on the application -welsh",
+              "namedPersonTel": "Contact number of the person named on the application - welsh",
+              "uploadDocuments": "List of forms uploaded (Application form) - welsh",
+              "additionalDocuments": "List of Documents uploaded (supporting documents) - welsh"
+            }
+        }
+    }
+}
