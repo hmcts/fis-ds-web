@@ -3,8 +3,8 @@
         "en": {
             "continue": "Save and Continue",
             "serviceName": "Contact Number",
-            "homePhoneLabel": "What is the home phone number of the person named on the application?",
-            "mobilePhoneLabel": "What is the mobile phone number of the person named on the application?",
+            "homePhoneLabel": "Enter your home phone number",
+            "mobilePhoneLabel": "Enter your mobile phone number",
             "homePhoneHint": "Home Phone",
             "mobilePhoneHint": "Mobile Phone",
             "homePhone": "Enter home phone number",
@@ -13,8 +13,8 @@
         "cy": {
             "continue": "Save and Continue (Welsh)",
             "serviceName": "Contact Number (Welsh)",
-            "homePhoneLabel": "What is the home phone number of the person named on the application? (Welsh)",
-            "mobilePhoneLabel": "What is the mobile phone number of the person named on the application? (Welsh)",
+            "homePhoneLabel": "Enter your home phone number (Welsh)",
+            "mobilePhoneLabel": "Enter your mobile phone number (Welsh)",
             "homePhoneHint": "Home Phone (Welsh)",
             "mobilePhoneHint": "Mobile Phone (Welsh)",
             "homePhone": "Enter home phone number (Welsh)",
