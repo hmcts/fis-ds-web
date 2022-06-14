@@ -93,7 +93,6 @@ export const applicantSummaryList = (
     return perference;
   };
 
-
   const SummaryData = [
     {
       key: keys.fullName,

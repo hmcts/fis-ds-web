@@ -99,4 +99,4 @@ describe('upload-addition-documents > check-your-answers', () => {
       expect(applicantSummaryList(enContent, userCase)).not.toBe(expected);
     });
   });
-})
+});

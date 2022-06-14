@@ -269,6 +269,8 @@ describe('checking for the redirect of post document upload', () => {
       },
     ];
 
+    req.files = [];
+
     /**
      *
      */
