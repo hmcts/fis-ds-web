@@ -5,7 +5,7 @@ export type OrNull<T> = { [K in keyof T]: T[K] | null };
 
 type ToApiConverters = Partial<Record<keyof Case, string | ((data: Case) => OrNull<Partial<CaseData>>)>>;
 
-const fields: ToApiConverters = {
+export const fields: ToApiConverters = {
   ...formFieldsToCaseMapping,
 
   applicantDateOfBirth: data => ({
@@ -15,7 +15,7 @@ const fields: ToApiConverters = {
 
 export const toApiFormat = (data: Partial<Case>): CaseData => formatCase(fields, data);
 
-export const toApiDate = (date: CaseDate | undefined): string => {
+export const toApiDate = (date: CaseDate | any | undefined): string => {
   if (!date?.year || !date?.month || !date?.day) {
     return '';
   }

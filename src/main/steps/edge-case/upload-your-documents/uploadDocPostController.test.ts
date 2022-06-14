@@ -242,31 +242,35 @@ describe('checking for the redirect of post document upload', () => {
   req.session.caseDocuments = [];
 
   it('Post controller attributes', async () => {
-    req.session.caseDocuments = [];
+    // req.session.caseDocuments = [];
+
+    req.session.AddtionalCaseDocuments = [
+      {
+        originalDocumentName: 'document1.docx',
+        _links: {
+          self: {
+            href: 'http://dm-example/documents/sae33',
+          },
+          binary: {
+            href: 'http://dm-example/documents/sae33/binary',
+          },
+        },
+      },
+      {
+        originalDocumentName: 'document2.docx',
+        _links: {
+          self: {
+            href: 'http://dm-example/documents/ce6e2',
+          },
+          binary: {
+            href: 'http://dm-example/documents/ce6e2/binary',
+          },
+        },
+      },
+    ];
 
     /**
-     * req.session.AddtionalCaseDocuments = [{
-      originalDocumentName : 'document1.docx',
-      _links: {
-        self: {
-        href: 'http://dm-example/documents/sae33'
-          },
-     binary: {
-      href: 'http://dm-example/documents/sae33/binary'
-       }
-     }
-    },
-    {
-      originalDocumentName : 'document2.docx',
-      _links: {
-          self: {
-          href: 'http://dm-example/documents/ce6e2'
-            },
-       binary: {
-        href: 'http://dm-example/documents/ce6e2/binary'
-         }
-       }
-    }];
+     *
      */
     await postingcontroller.post(req, res);
     expect(res.redirect).toHaveBeenCalledWith(ADDITIONAL_DOCUMENTS_UPLOAD);

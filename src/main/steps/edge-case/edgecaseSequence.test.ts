@@ -18,7 +18,7 @@ import { edgecaseSequence } from './edgecaseSequence';
 
 describe('Sequence must match respective path', () => {
   test('must match the path', () => {
-    expect(edgecaseSequence).toHaveLength(13);
+    expect(edgecaseSequence).toHaveLength(14);
 
     expect(edgecaseSequence[0].url).toBe(USER_ROLE);
     expect(edgecaseSequence[0].getNextStep({})).toBe(FULL_NAME);
@@ -47,23 +47,17 @@ describe('Sequence must match respective path', () => {
     expect(edgecaseSequence[9].url).toBe(UPLOAD_YOUR_DOCUMENTS);
     expect(edgecaseSequence[9].getNextStep({})).toBe(ADDITIONAL_DOCUMENTS_UPLOAD);
 
-    expect(edgecaseSequence[10].url).toBe(ADDITIONAL_DOCUMENTS_UPLOAD);
-    expect(edgecaseSequence[8].url).toBe(UPLOAD_YOUR_DOCUMENTS);
+    expect(edgecaseSequence[8].url).toBe(CONTACT_DETAILS);
+    expect(edgecaseSequence[8].url).toBe(CONTACT_DETAILS);
     // expect(edgecaseSequence[8].getNextStep({})).toBe(ADDITIONAL_DOCUMENTS_UPLOAD);
 
-    expect(edgecaseSequence[9].url).toBe(ADDITIONAL_DOCUMENTS_UPLOAD);
-    expect(edgecaseSequence[9].getNextStep({})).toBe(CHECK_YOUR_ANSWERS);
+    expect(edgecaseSequence[9].url).toBe(UPLOAD_YOUR_DOCUMENTS);
+    expect(edgecaseSequence[9].getNextStep({})).toBe(ADDITIONAL_DOCUMENTS_UPLOAD);
 
-    expect(edgecaseSequence[10].url).toBe(CHECK_YOUR_ANSWERS);
-    expect(edgecaseSequence[10].getNextStep({})).toBe(STATEMENT_OF_TRUTH);
+    expect(edgecaseSequence[10].url).toBe(ADDITIONAL_DOCUMENTS_UPLOAD);
+    expect(edgecaseSequence[10].getNextStep({})).toBe(CHECK_YOUR_ANSWERS);
 
-    expect(edgecaseSequence[11].url).toBe(STATEMENT_OF_TRUTH);
-    expect(edgecaseSequence[11].getNextStep({})).toBe(USER_ROLE);
-  });
-});
-
-describe('sample test', () => {
-  test('should contain 12 entries in applicant 1 screen sequence', () => {
-    expect(1).toBe(1);
+    expect(edgecaseSequence[11].url).toBe(CHECK_YOUR_ANSWERS);
+    expect(edgecaseSequence[11].getNextStep({})).toBe(STATEMENT_OF_TRUTH);
   });
 });
