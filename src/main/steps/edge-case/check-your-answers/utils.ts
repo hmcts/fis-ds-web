@@ -1,5 +1,6 @@
+
 import { getFormattedDate } from '../../../app/case/answers/formatDate';
-import { CaseWithId } from '../../../app/case/case';
+import { CaseWithId, CaseWithDocuments } from '../../../app/case/case';
 import { getFormattedAddress } from '../../../app/case/formatter/address';
 import { PageContent } from '../../../app/controller/GetController';
 import * as Urls from '../../../steps/urls';
@@ -79,6 +80,21 @@ export const applicantSummaryList = (
   const sectionTitle = sectionTitles.applicantDetails;
   console.log('Address in util userCase --->', userCase);
 
+  const UserContactPreferences = function(){
+    let perference = ''
+    if(userCase['contactPreferenceType'] === 'NAMED_PERSON'){
+      perference = 'The person named on this application';
+    }
+    else if(userCase['contactPreferenceType'] === 'ACCOUNT_OWNER'){
+      perference = 'The account owner';
+    }
+    else if(userCase['contactPreferenceType'] === 'BOTH_RECEIVE'){
+      perference = 'Both the account owner and the person named on this application'
+    }
+    else perference = ''
+    return perference;
+  }
+
   const SummaryData = [
     {
       key: keys.fullName,
@@ -97,13 +113,13 @@ export const applicantSummaryList = (
     },
     {
       key: keys.recievingEmail,
-      value: userCase['emailAddress'],
-      changeUrl: Urls['CONTACT_DETAILS'],
+      value: UserContactPreferences(),
+      changeUrl: Urls['CONTACT_PREFERENCES'],
     },
     {
       key: keys.namedPersonEmail,
-      value: userCase['homePhoneNumber'],
-      changeUrl: Urls['CONTACT_PREFERENCES'],
+      value: userCase['emailAddress'],
+      changeUrl: Urls['EMAIL_ADDRESS'],
     },
     {
       key: keys.namedPersonTel,
@@ -123,16 +139,17 @@ export const applicantSummaryList = (
 /* eslint-disable import/namespace */
 export const UploadFormSummary = (
   { sectionTitles, keys, ...content }: SummaryListContent,
-  userCase: Partial<CaseWithId>
+  userCase: Partial<CaseWithDocuments>
 ): SummaryList | undefined => {
   console.log('usercase in check your answer -->', userCase);
   //  const sectionTitle = sectionTitles.applicantDetails;
   console.log('Address in util userCase --->', userCase);
+  const caseDocs = userCase['uploadedDocuments'] === undefined ? [] : userCase['uploadedDocuments']
 
   const SummaryData = [
     {
       key: keys.uploadDocuments,
-      value: userCase['applicantFirstName'],
+      value: caseDocs,
       changeUrl: Urls['UPLOAD_YOUR_DOCUMENTS'],
     },
   ];
@@ -148,16 +165,18 @@ export const UploadFormSummary = (
 /* eslint-disable import/namespace */
 export const AdditonalFormSummary = (
   { sectionTitles, keys, ...content }: SummaryListContent,
-  userCase: Partial<CaseWithId>
+  userCase: Partial<CaseWithDocuments>
 ): SummaryList | undefined => {
   console.log('usercase in check your answer -->', userCase);
   //  const sectionTitle = sectionTitles.applicantDetails;
   console.log('Address in util userCase --->', userCase);
 
+  const caseDocs = userCase['addtionalDocuments'] === undefined ? [] : userCase['addtionalDocuments']
+
   const SummaryData = [
     {
       key: keys.additionalDocuments,
-      value: userCase['applicantFirstName'],
+      value: caseDocs,
       changeUrl: Urls['ADDITIONAL_DOCUMENTS_UPLOAD'],
     },
   ];

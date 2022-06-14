@@ -10,7 +10,6 @@ export const enContent = {
   change: 'change',
   sectionTitles: {
     applicantDetails: 'Applicant details',
-    abc: 'xyz',
   },
   keys: {
     phoneNumber: 'Phone number',
@@ -26,9 +25,10 @@ export const enContent = {
   },
 };
 
-const en = (content: CommonContent) => {
+const en = (content: any) => {
   const userCase = content.userCase!;
-  const caseDocuments = content.caseDocuments!;
+  const caseDocuments = content.uploadedDocuments;
+  const AdditionalDocuments = content.addtionalDocuments;
 
   return {
     ...enContent,
@@ -36,39 +36,47 @@ const en = (content: CommonContent) => {
     sections: [
       applicantSummaryList(enContent, userCase),
       UploadFormSummary(enContent, caseDocuments),
-      AdditonalFormSummary(enContent, userCase),
+      AdditonalFormSummary(enContent, AdditionalDocuments),
     ],
   };
 };
 
 const cyContent: typeof enContent = {
-  section: 'Adolygu eich cais',
-  title: 'Adolygu eich atebion',
-  change: 'change',
+  section: '',
+  title: 'Check your Answers - welsh',
+  change: 'change - welsh',
   sectionTitles: {
-    applicantDetails: 'Manylion y ceisydd',
-    abc: 'xyz',
+    applicantDetails: 'Applicant details - welsh',
   },
   keys: {
-    phoneNumber: 'Rhif ffôn',
-    emailAddress: 'Cyfeiriad e-bost',
-    fullName: 'Enw llawn',
-    dateOfBirth: 'Dyddiad geni',
-    address: 'Cyfeiriad',
-    recievingEmail: 'Who should receive emails about the application',
-    namedPersonEmail: 'Email address of the person named on the application',
-    namedPersonTel: 'Contact number of the person named on the application',
-    uploadDocuments: 'Application form(s)',
-    additionalDocuments: 'Supporting document(s)',
+    phoneNumber: 'Phone number - welsh',
+    emailAddress: 'Contact number of the person named on the application -welsh',
+    fullName: 'Subject’s name -welsh',
+    dateOfBirth: 'Subject’s DoB - welsh',
+    address: ' Address - welsh',
+    recievingEmail: 'Who should receive emails about the application - welsh',
+    namedPersonEmail: 'Email address of the person named on the application - welsh',
+    namedPersonTel: 'Contact number of the person named on the application - welsh',
+    uploadDocuments: 'List of forms uploaded (Application form) - welsh',
+    additionalDocuments: 'List of Documents uploaded (supporting documents) - welsh',
   },
 };
 
 const cy: typeof en = (content: CommonContent) => {
   const userCase = content.userCase!;
+  const caseDocuments = content.uploadedDocuments;
+  const AdditionalDocuments = content.addtionalDocuments;
+
   return {
     ...cyContent,
     language: content.language,
-    sections: [applicantSummaryList(cyContent, userCase)],
+    sections: [
+      applicantSummaryList(cyContent, userCase),
+      UploadFormSummary(enContent, caseDocuments),
+      AdditonalFormSummary(enContent, AdditionalDocuments),
+    
+    
+    ],
   };
 };
 
