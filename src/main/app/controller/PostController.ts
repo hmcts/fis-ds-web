@@ -127,7 +127,7 @@ export class PostController<T extends AnyObject> {
     return req.session.userCase;
   }
 
-  protected redirect(req: AppRequest<T>, res: Response, nextUrl?: string): void {
+  public redirect(req: AppRequest<T>, res: Response, nextUrl?: string): void {
     if (!nextUrl) {
       nextUrl = req.session.errors?.length ? req.url : getNextStepUrl(req, req.session.userCase);
     }

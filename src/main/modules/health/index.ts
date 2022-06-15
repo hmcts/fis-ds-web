@@ -20,7 +20,7 @@ export class HealthCheck {
         ...(redis ? { redis } : {}),
         'authProvider-api': healthcheck.web(new URL('/health', config.get('services.authProvider.url'))),
         'idam-api': healthcheck.web(new URL('/health', idamUrl.replace('/o/token', ''))),
-        'case-api': healthcheck.web(new URL('/health', config.get('services.createcase.url'))),
+        'case-api': healthcheck.web(new URL('/health', config.get('services.case.url'))),
       },
       ...(redis
         ? {

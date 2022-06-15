@@ -1,6 +1,5 @@
 import Axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import config from 'config';
-import { Response } from 'express';
 import { LoggerInstance } from 'winston';
 
 import { getServiceAuthToken } from '../auth/service/get-service-auth-token';
@@ -89,10 +88,8 @@ export class CaseApi {
         return { id: res.data.id };
       }
     } catch (err) {
-      console.log('Error in creating case');
-      console.log(err);
-      window.alert(err.statusCode + ':' + err.status);
-
+      this.logError(err);
+      throw new Error('Error in creating case');
     }
   }
 
