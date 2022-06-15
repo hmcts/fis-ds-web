@@ -1,0 +1,50 @@
+{
+    "translations": {
+        "en": {
+            "continue": "Save and Continue",
+            "serviceName": "Contact Number",
+            "homePhoneLabel": "What is the home phone number of the person named on the application?",
+            "mobilePhoneLabel": "What is the mobile phone number of the person named on the application?",
+            "homePhoneHint": "Home Phone",
+            "mobilePhoneHint": "Mobile Phone",
+            "homePhone": "Enter home phone number",
+            "mobilePhone": "Enter mobile phone number"
+        },
+        "cy": {
+            "continue": "Save and Continue (Welsh)",
+            "serviceName": "Contact Number (Welsh)",
+            "homePhoneLabel": "What is the home phone number of the person named on the application? (Welsh)",
+            "mobilePhoneLabel": "What is the mobile phone number of the person named on the application? (Welsh)",
+            "homePhoneHint": "Home Phone (Welsh)",
+            "mobilePhoneHint": "Mobile Phone (Welsh)",
+            "homePhone": "Enter home phone number (Welsh)",
+            "mobilePhone": "Enter mobile phone number (Welsh)"
+        }
+    },
+    "errors":{
+        "en": {
+            "mobilePhoneNumber": {
+                "required": "Please enter correct mobile phone number",
+                "invalid": "Please enter correct mobile phone number",
+                "atleastOneRequired": "Mobile phone number is empty, please fill up at least one contact"
+            },
+            "homePhoneNumber": {
+                "required": "Please enter correct home phone number",
+                "invalid": "Please enter correct home phone number",
+                "atleastOneRequired": "Home phone number is empty, please fill up at least one contact"
+            }
+        },
+        "cy": {
+            "mobilePhoneNumber": {
+                "required": "Please enter correct mobile phone number (Welsh)",
+                "invalid": "Please enter correct mobile phone number (Welsh)",
+                "atleastOneRequired": "Mobile phone number is empty, please fill up at least one contact (Welsh)"
+            },
+            "homePhoneNumber": {
+                "required": "Please enter correct home phone number (Welsh)",
+                "invalid": "Please enter correct home phone number (Welsh)",
+                "atleastOneRequired": "Home phone number is empty, please fill up at least one contact (Welsh)"
+            }
+        }
+    }
+}

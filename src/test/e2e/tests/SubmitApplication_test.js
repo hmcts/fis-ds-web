@@ -18,7 +18,9 @@ Scenario(
     determineapplicantrole,
     statementoftruth,
     contactpreferencepage,
-    additiondocumentpage
+    additiondocumentpage,
+    emailaddresspage,
+    contactnumber
   }) => {
     await landingPage.seeTheLandingPage();
     await loginPage.SignInUser();
@@ -27,15 +29,10 @@ Scenario(
     await dateofbirth.dateSelection('10', '10', '2020');
     await addresswithpostcode.PostCodeLookUpAndSelect();
     await contactpreferencepage.contactPreference();
-    await contactdetails.seeTheTitleOfThePage();
-    await contactdetails.selectEmail();
+    await emailaddresspage.emailAddress();
+    await contactnumber.EnterHomeAndMobileNo('4423232323232', '4423232323232');
     await uploadfilepage.uploadDocumentsSection();
     await additiondocumentpage.uploadDocumentsSection();
     await statementoftruth.statementOfTruth();
-    //await reviewpaymentpage.seeTheTitleOfThePage();
-    //await reviewpaymentpage.selectPayByCard();
-    //await familypage.seeTheTitleOfThePage();
-    //await familypage.selectAdoptionService();
-    //await adoptionpage.selectInternationalAdoption();
   }
 );

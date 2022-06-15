@@ -2,22 +2,9 @@ import { AnyObject } from '../controller/PostController';
 
 import { CaseData } from './definition';
 
+
 export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>> = {
   applicantDateOfBirth: 'applicantDateOfBirth',
-  /**
- *   namedApplicant: 'namedApplicant',
-  applicantFirstName:'applicantFirstName',
-  applicantLastName: 'applicantLastName',
-  applicantDateOfBirth: 'applicantDateOfBirth',
-  applicantEmailAddress: 'applicantEmailAddress',
-  applicantPhoneNumber: 'applicantPhoneNumber',
-  applicantHomeNumber: 'applicantHomeNumber',
-  applicantAddress1: 'applicantAddress1',
-  applicantAddress2: 'applicantAddress2',
-  applicantAddressTown: 'applicantAddressTown',
-  applicantAddressCountry: 'applicantAddressCountry',
-  applicantAddressPostCode: 'applicantAddressPostCode'
- */
 };
 
 export function formatCase<InputFormat, OutputFormat>(fields: FieldFormats, data: InputFormat): OutputFormat {
@@ -49,14 +36,14 @@ export interface Case {
   applicantAddress1: string;
   applicantAddress2: string;
   applicantAddressTown: string;
+  mobilePhoneNumber: string;
+  homePhoneNumber: string;
   applicantAddressCountry: any;
   applicantAddressPostcode: any;
-  //id:number // ccd reference number would be set once the case is created
 }
 
-
 export interface CaseWithId extends Case {
-  id: string;
+  id: string; //ccd reference number would be set once the case is created
   state: any;
 }
 
@@ -77,7 +64,6 @@ export enum LanguagePreference {
   English = 'english',
   Welsh = 'welsh',
 }
-
 
 export interface UploadedFile {
   id: string;
