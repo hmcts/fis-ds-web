@@ -1,5 +1,6 @@
 import Axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import config from 'config';
+import { isEmpty } from 'lodash';
 import { LoggerInstance } from 'winston';
 
 import { getServiceAuthToken } from '../auth/service/get-service-auth-token';
@@ -59,6 +60,9 @@ export class CaseApi {
     Axios.defaults.headers.put['Content-Type'] = 'application/json';
     Axios.defaults.headers.put['Authorization'] = 'Bearer ' + userDetails.accessToken;
     try {
+      if (isEmpty(req.session.userCase.id)) {
+        throw new Error('Error in updating case, case id is missing');
+      }
       const url: string = config.get('services.case.url');
       const res: AxiosResponse<createCaseResponse> = await Axios.put(
         url + req.session.userCase.id + '/update',
@@ -86,6 +90,7 @@ export class CaseApi {
    */
   public async createCaseNew(req: AppRequest, userDetails: UserDetails): Promise<any> {
     try {
+      console.log(userDetails.accessToken);
       const url: string = config.get('services.case.url');
       const headers = { 'Content-Type': 'application/json', Authorization: 'Bearer ' + userDetails.accessToken };
       const res: AxiosResponse<createCaseResponse> = await Axios.post(url + 'create', mapCaseData(req), { headers });
