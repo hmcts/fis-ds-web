@@ -25,10 +25,10 @@ services:
   hmctsHomePage:
     url: 'https://www.gov.uk/government/organisations/hm-courts-and-tribunals-service'
   documentManagement:
-    url: 'http://fis-cos-api-pr-62.service.core-compute-preview.internal' 
+    url: 'http://fis-cos-api-pr-62.service.core-compute-preview.internal'
     uploadSizeinMB: 30
   RPE_TOKEN:
-    url: 'http://rpe-service-auth-provider-aat.service.core-compute-aat.internal'     
+    url: 'http://rpe-service-auth-provider-aat.service.core-compute-aat.internal'
 health:
   timeout: 5000
   deadline: 15000
@@ -44,6 +44,5 @@ appInsights:
 documentUpload:
   validation:
     totaldocuments: 5
-    totalAdditionalDocuments: 10    
-    sizeInKB: 20000000  
- 
+    totalAdditionalDocuments: 10
+    sizeInKB: 20000000

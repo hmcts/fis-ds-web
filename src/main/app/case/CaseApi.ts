@@ -83,9 +83,9 @@ export class CaseApi {
   public async createCaseNew(req: AppRequest, userDetails: UserDetails): Promise<any> {
     try {
       // const requestData : CaseWithId =req.session.userCase;
-      const url: string = config.get('services.createcase.url');
+      const url: string = config.get('services.case.url');
       const headers = { 'Content-Type': 'application/json', Authorization: 'Bearer ' + userDetails.accessToken };
-      const response: AxiosResponse<createCaseResponse> = await Axios.post(url, mapCaseData(req), { headers });
+      const response: AxiosResponse<createCaseResponse> = await Axios.post(url + 'create', mapCaseData(req), { headers });
       return { id: response.data };
     } catch (err) {
       console.log('error in creating case :' + err);
