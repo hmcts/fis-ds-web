@@ -99,7 +99,7 @@ describe('PostController', () => {
     });
   });
 
-  it('Case update test', async () => {
+  it('Case create test', async () => {
     const body = { MOCK_KEY: 'MOCK_VALUE', originalUrl: CONTACT_DETAILS };
     const controller = new PostController(mockFormContent.fields);
     const req = mockRequest({ body });
@@ -110,6 +110,21 @@ describe('PostController', () => {
 
     expect(req.session.userCase).toEqual({
       id: '',
+      MOCK_KEY: 'MOCK_VALUE',
+      originalUrl: '/contact-details',
+    });
+  });
+
+  it('Case update test', async () => {
+    const body = { MOCK_KEY: 'MOCK_VALUE', originalUrl: CONTACT_DETAILS };
+    const controller = new PostController(mockFormContent.fields);
+    const req = mockRequest({ body });
+    req.originalUrl = CONTACT_DETAILS;
+    const res = mockResponse();
+    await controller.post(req, res);
+
+    expect(req.session.userCase).toEqual({
+      id: '1234',
       MOCK_KEY: 'MOCK_VALUE',
       originalUrl: '/contact-details',
     });

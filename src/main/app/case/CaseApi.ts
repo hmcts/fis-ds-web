@@ -60,16 +60,21 @@ export class CaseApi {
     Axios.defaults.headers.put['Authorization'] = 'Bearer ' + userDetails.accessToken;
     try {
       const url: string = config.get('services.case.url');
-      const response: AxiosResponse<createCaseResponse> = await Axios.put(
+      const res: AxiosResponse<createCaseResponse> = await Axios.put(
         url + req.session.userCase.id + '/update',
         mapCaseData(req),
         {
           params: { event: 'UPDATE' },
         }
       );
-      return response;
+      if (res.status === 200) {
+        return { id: res.data.id };
+      } else {
+        throw new Error('Error in updating case');
+      }
     } catch (err) {
-      console.log('Error in updating case' + err);
+      this.logError(err);
+      throw new Error('Error in updating case');
     }
   }
   /**
@@ -86,6 +91,8 @@ export class CaseApi {
       const res: AxiosResponse<createCaseResponse> = await Axios.post(url + 'create', mapCaseData(req), { headers });
       if (res.status === 200) {
         return { id: res.data.id };
+      } else {
+        throw new Error('Error in creating case');
       }
     } catch (err) {
       this.logError(err);
