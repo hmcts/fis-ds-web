@@ -3,6 +3,14 @@ import { Request, Response } from 'express';
 import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 import { SIGN_IN_URL } from '../../../steps/urls';
 
+/*** query params for @edgeCaseType */
+const edgeCaseTypeQueryValidations = (req: Request) => {
+  if (req.query.hasOwnProperty('edgeCaseType')) {
+    /** validation need to be done */
+    req.session['edgeCaseType'] = req.query['edgeCaseType'];
+  }
+};
+
 export const LandingController = (req: Request, res: Response): void => {
   const loginURL = SIGN_IN_URL;
   try {
@@ -33,6 +41,7 @@ export const LandingController = (req: Request, res: Response): void => {
       }
     }
 
+    edgeCaseTypeQueryValidations(req);
     res.render('landing.njk', { loginURL, content: SystemContent, ToggleLanguage });
   } catch (exception) {
     console.log({ msg: 'Exception occured while reading the file' + exception });
