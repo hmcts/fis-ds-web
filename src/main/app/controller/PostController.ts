@@ -13,9 +13,6 @@ import { AppRequest } from './AppRequest';
 
 enum noHitToSaveAndContinue {
   CITIZEN_HOME_URL = '/citizen-home',
-  SERVICE_TYPE = '/service-type',
-  ADOPTION_APPLICATION_TYPE = '/adoption-application-type',
-  PRIVATE_LAW_APPLICATION_TYPE = '/private-law-application-type',
 }
 
 @autobind
@@ -70,10 +67,8 @@ export class PostController<T extends AnyObject> {
       if (!(Object.values(noHitToSaveAndContinue) as string[]).includes(req.originalUrl)) {
         const eventName = this.getEventName(req);
         if (eventName === CITIZEN_CREATE) {
-          console.log('Creating case');
           req.session.userCase = await this.createCase(req);
         } else if (eventName === CITIZEN_UPDATE) {
-          console.log('Updateing case');
           req.session.userCase = await this.updateCase(req);
         }
       }
@@ -147,7 +142,7 @@ export class PostController<T extends AnyObject> {
 
   // method to check if there is a returnUrl in session and
   // it is one of the allowed redirects from current page
-  protected checkReturnUrlAndRedirect(req: AppRequest<T>, res: Response, allowedReturnUrls: string[]): void {
+  public checkReturnUrlAndRedirect(req: AppRequest<T>, res: Response, allowedReturnUrls: string[]): void {
     const returnUrl = req.session.returnUrl;
     if (returnUrl && allowedReturnUrls.includes(returnUrl)) {
       req.session.returnUrl = undefined;
@@ -158,7 +153,7 @@ export class PostController<T extends AnyObject> {
   }
 
   //eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected getEventName(req: AppRequest): string {
+  public getEventName(req: AppRequest): string {
     let eventName;
     if (req.originalUrl === CONTACT_DETAILS && this.isBlank(req)) {
       console.log('creating new case event');

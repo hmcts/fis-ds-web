@@ -38,7 +38,7 @@ export interface Case {
   mobilePhoneNumber: string;
   homePhoneNumber: string;
   applicantAddressCountry: any;
-  applicantAddressPostCode: any;
+  applicantAddressPostcode: any;
 }
 
 export interface CaseWithId extends Case {

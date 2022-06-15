@@ -1,5 +1,6 @@
 import Axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import config from 'config';
+import { Response } from 'express';
 import { LoggerInstance } from 'winston';
 
 import { getServiceAuthToken } from '../auth/service/get-service-auth-token';
@@ -76,19 +77,22 @@ export class CaseApi {
    *
    * @param req
    * @param userDetails
-   * @param formData
+   * @param  formData
    * @returns
    */
-
   public async createCaseNew(req: AppRequest, userDetails: UserDetails): Promise<any> {
     try {
-      // const requestData : CaseWithId =req.session.userCase;
       const url: string = config.get('services.case.url');
       const headers = { 'Content-Type': 'application/json', Authorization: 'Bearer ' + userDetails.accessToken };
-      const response: AxiosResponse<createCaseResponse> = await Axios.post(url + 'create', mapCaseData(req), { headers });
-      return { id: response.data };
+      const res: AxiosResponse<createCaseResponse> = await Axios.post(url + 'create', mapCaseData(req), { headers });
+      if (res.status === 200) {
+        return { id: res.data.id };
+      }
     } catch (err) {
-      console.log('error in creating case :' + err);
+      console.log('Error in creating case');
+      console.log(err);
+      window.alert(err.statusCode + ':' + err.status);
+
     }
   }
 
@@ -189,7 +193,7 @@ export const mapCaseData = (req: AppRequest): any => {
     applicantAddress2: req.session.userCase.applicantAddress2,
     applicantAddressTown: req.session.userCase.applicantAddressTown,
     applicantAddressCountry: req.session.userCase.applicantAddressCountry,
-    applicantAddressPostCode: req.session.userCase.applicantAddressPostCode,
+    applicantAddressPostCode: req.session.userCase.applicantAddressPostcode,
   };
   return data;
 };

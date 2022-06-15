@@ -54,12 +54,12 @@ describe('Applicant > full-name', () => {
   });
 
   test('should contain firstNames field', () => {
-    const firstNamesField = fields.applicantFirstNames as FormOptions;
+    const firstNamesField = fields.applicantFirstName as FormOptions;
     expect(firstNamesField).toEqual(fullNameFormFields.firstNames);
   });
 
   test('should contain lastNames field', () => {
-    const lastNamesField = fields.applicantLastNames as FormOptions;
+    const lastNamesField = fields.applicantLastName as FormOptions;
     expect(lastNamesField).toEqual(fullNameFormFields.lastNames);
   });
 
