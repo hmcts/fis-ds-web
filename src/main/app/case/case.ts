@@ -26,7 +26,7 @@ export interface Case {
   namedApplicant: boolean;
   applicantFirstName: string;
   applicantLastName: string;
-  applicantDateOfBirth: string;
+  applicantDateOfBirth: CaseDate;
   applicantEmailAddress: string;
   applicantPhoneNumber: string;
   applicantHomeNumber: string;
@@ -42,6 +42,11 @@ export interface Case {
 export interface CaseWithId extends Case {
   id: string;
   state: any;
+}
+
+export interface CaseWithDocuments {
+  addtionalDocuments: any;
+  uploadedDocuments: any;
 }
 
 export enum Checkbox {

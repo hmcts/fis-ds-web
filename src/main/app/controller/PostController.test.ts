@@ -44,6 +44,7 @@ describe('PostController', () => {
     controller.checkReturnUrlAndRedirect(redirectRequest, res, []);
 
     const getEventNameRequest = mockRequest({});
+    getEventNameRequest.originalUrl = CONTACT_DETAILS;
     controller.getEventName(getEventNameRequest);
     controller.redirect(redirectRequest, res, '');
   });
@@ -342,6 +343,7 @@ describe('PostController', () => {
     expect(req.session.userCase.state).toEqual('Holding');
   });
 
+  // eslint-disable-next-line jest/expect-expect
   test('whether the CREATE CASE method is called when valid input data is given', async () => {
     getNextStepUrlMock.mockReturnValue('/next-step-url');
     const body = {

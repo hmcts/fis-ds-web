@@ -19,8 +19,7 @@ module.exports = {
         I.waitForText("Select an address");
         I.selectOption(this.fields.addressList, this.fields.lookupOption);
         I.wait('2');
-        I.click('Continue')
-        //I.click(this.fields.Submit);
+        I.click('Continue');
         I.wait('2');
     }
 };

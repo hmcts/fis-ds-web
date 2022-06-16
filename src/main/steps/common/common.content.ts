@@ -232,6 +232,8 @@ export type CommonContent = typeof en & {
   serviceName: string;
   pageContent?: TranslationFn;
   userCase?: Partial<CaseWithId>;
+  uploadedDocuments?: any;
+  addtionalDocuments?: any;
   userEmail?: string;
   contactEmail?: string;
   referenceNumber?: string;
