@@ -5,7 +5,7 @@ module.exports = {
 async checkyouranswers() {
     await I.waitForText("Check your Answers", 30);
     await I.wait(3);
-    I.click('Continue');
+    I.click('Accept and Send');
     await I.wait(5);
 },
 };
