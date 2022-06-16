@@ -49,7 +49,6 @@ describe('Sequence must match respective path', () => {
 
     expect(edgecaseSequence[8].url).toBe(CONTACT_DETAILS);
     expect(edgecaseSequence[8].url).toBe(CONTACT_DETAILS);
-    // expect(edgecaseSequence[8].getNextStep({})).toBe(ADDITIONAL_DOCUMENTS_UPLOAD);
 
     expect(edgecaseSequence[9].url).toBe(UPLOAD_YOUR_DOCUMENTS);
     expect(edgecaseSequence[9].getNextStep({})).toBe(ADDITIONAL_DOCUMENTS_UPLOAD);

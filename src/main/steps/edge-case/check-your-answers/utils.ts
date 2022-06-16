@@ -71,7 +71,7 @@ const getSectionSummaryList = (rows: SummaryListRow[], content: PageContent): Go
 };
 
 /* eslint-disable import/namespace */
-export const applicantSummaryList = (
+export const ApplicantSummaryList = (
   { sectionTitles, keys, ...content }: SummaryListContent,
   userCase: Partial<CaseWithId>
 ): SummaryList | undefined => {

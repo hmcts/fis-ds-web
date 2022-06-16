@@ -3,7 +3,7 @@ import { FormContent } from '../../../app/form/Form';
 import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 import { CommonContent } from '../../../steps/common/common.content';
 
-import { AdditonalFormSummary, UploadFormSummary, UserRole, applicantSummaryList } from './utils';
+import { AdditonalFormSummary, ApplicantSummaryList, UploadFormSummary, UserRole } from './utils';
 const resourceLoader = new ResourceReader();
 resourceLoader.Loader('check-your-answers');
 const Translations = resourceLoader.getFileContents().translations;
@@ -22,7 +22,7 @@ const en = (content: any) => {
     language: content.language,
     sections: [
       UserRole(enContent, userCase),
-      applicantSummaryList(enContent, userCase),
+      ApplicantSummaryList(enContent, userCase),
       UploadFormSummary(enContent, caseDocuments),
       AdditonalFormSummary(enContent, AdditionalDocuments),
     ],
@@ -42,7 +42,8 @@ const cy: typeof en = (content: CommonContent) => {
     ...cyContent,
     language: content.language,
     sections: [
-      applicantSummaryList(cyContent, userCase),
+      UserRole(enContent, userCase),
+      ApplicantSummaryList(cyContent, userCase),
       UploadFormSummary(enContent, caseDocuments),
       AdditonalFormSummary(enContent, AdditionalDocuments),
     ],

@@ -14,8 +14,6 @@ export default class UserRolePostController extends PostController<AnyObject> {
   }
 
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
-    console.log(req.body);
-    console.log(req.session);
     const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase) : this.fields;
     const form = new Form(fields);
 

@@ -3,7 +3,7 @@ import { mockUserCase1, mockUserCase2, mockUserCase3 } from '../../../../test/un
 //mockUserCase2, mockUserCase3
 
 import { enContent } from './content';
-import { applicantSummaryList } from './utils';
+import { ApplicantSummaryList } from './utils';
 /**AdditonalFormSummary UploadFormSummary   */
 
 describe('upload-addition-documents > check-your-answers', () => {
@@ -96,7 +96,7 @@ describe('upload-addition-documents > check-your-answers', () => {
         },
       },
     ])('return correct summary list items when %#', ({ userCase, expected }) => {
-      expect(applicantSummaryList(enContent, userCase)).not.toBe(expected);
+      expect(ApplicantSummaryList(enContent, userCase)).not.toBe(expected);
     });
   });
 });
@@ -191,7 +191,7 @@ describe('upload-addition-documents > named owner > check-your-answers', () => {
         },
       },
     ])('return correct summary list items when %#', ({ userCase, expected }) => {
-      expect(applicantSummaryList(enContent, userCase)).not.toBe(expected);
+      expect(ApplicantSummaryList(enContent, userCase)).not.toBe(expected);
     });
   });
 });
@@ -286,7 +286,7 @@ describe('upload-addition-documents > named owner and both > named owner > check
         },
       },
     ])('return correct summary list items when %#', ({ userCase, expected }) => {
-      expect(applicantSummaryList(enContent, userCase)).not.toBe(expected);
+      expect(ApplicantSummaryList(enContent, userCase)).not.toBe(expected);
     });
   });
 });
