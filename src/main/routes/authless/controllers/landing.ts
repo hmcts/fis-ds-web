@@ -11,7 +11,7 @@ const edgeCaseTypeQueryValidations = (req: Request, res: Response, loginURL, Sys
     const ValidqueryParams: [] = config.get('queryParamsforApp.query');
     const ValidQueryinConfig = Object.keys(ValidqueryParams).some(item => req.query['edgecaseType'] === item);
     if (ValidQueryinConfig) {
-      const queryElement: any = req.query?.['edgecaseType'];
+      const queryElement: any = req.query['edgecaseType'];
       const findRespectiveValueToQuery =
         Object.values(ValidqueryParams)[Object.keys(ValidqueryParams).indexOf(queryElement)];
       req.session['edgecaseType'] = findRespectiveValueToQuery;
