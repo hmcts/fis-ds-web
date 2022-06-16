@@ -20,6 +20,7 @@ Scenario(
     contactpreferencepage,
     additiondocumentpage,
     emailaddresspage,
+    checkyouranswerspage,
     contactnumber
   }) => {
     await landingPage.seeTheLandingPage();
@@ -33,6 +34,7 @@ Scenario(
     await contactnumber.EnterHomeAndMobileNo('4423232323232', '4423232323232');
     await uploadfilepage.uploadDocumentsSection();
     await additiondocumentpage.uploadDocumentsSection();
+    await checkyouranswerspage.checkyouranswers();
     await statementoftruth.statementOfTruth();
   }
 );
