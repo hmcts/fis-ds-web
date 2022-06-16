@@ -121,7 +121,7 @@ export const applicantSummaryList = (
     },
     {
       key: keys.namedPersonTel,
-      value: userCase['homePhoneNumber'],
+      value: userCase['homePhoneNumber'] + '<br> <br>' + userCase['mobilePhoneNumber'],
       changeUrl: Urls['CONTACT_DETAILS'],
     },
   ];

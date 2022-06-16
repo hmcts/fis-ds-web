@@ -17,7 +17,7 @@ export class Nunjucks {
     const env = nunjucks.configure(
       [path.join(__dirname, '..', '..', 'steps'), govUkFrontendPath, GeneralViewPath, hmctsFrontendPath, authLessPath],
       {
-        autoescape: true,
+        autoescape: false,
         watch: app.locals.developmentMode,
         express: app,
       }
