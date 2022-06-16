@@ -1,13 +1,26 @@
+import config from 'config';
 import { Request, Response } from 'express';
 
 import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 import { SIGN_IN_URL, USER_ROLE } from '../../../steps/urls';
 
 /*** query params for @edgeCaseType */
-const edgeCaseTypeQueryValidations = (req: Request) => {
-  if (req.query.hasOwnProperty('edgeCaseType')) {
+const edgeCaseTypeQueryValidations = (req: Request, res: Response, loginURL, SystemContent, ToggleLanguage) => {
+  if (req.query.hasOwnProperty('edgecaseType')) {
     /** validation need to be done */
-    req.session['edgeCaseType'] = req.query['edgeCaseType'];
+    const ValidqueryParams: [] = config.get('queryParamsforApp.query');
+    const ValidQueryinConfig = Object.keys(ValidqueryParams).some(item => req.query['edgecaseType'] === item);
+    if (ValidQueryinConfig) {
+      const queryElement: any = req.query?.['edgecaseType'];
+      const findRespectiveValueToQuery =
+        Object.values(ValidqueryParams)[Object.keys(ValidqueryParams).indexOf(queryElement)];
+      req.session['edgecaseType'] = findRespectiveValueToQuery;
+      res.render('landing.njk', { loginURL, content: SystemContent, ToggleLanguage });
+    } else {
+      res.render('error.njk');
+    }
+  } else {
+    res.render('landing.njk', { loginURL, content: SystemContent, ToggleLanguage });
   }
 };
 
@@ -38,16 +51,13 @@ export const LandingController = (req: Request, res: Response): void => {
           SystemContent = cy;
           ToggleLanguage = 'en';
         } else {
-          console.log({ msg: 'Invalid language - Setting default Langauge to English' });
           SystemContent = en;
           ToggleLanguage = 'cy';
         }
       }
 
-      edgeCaseTypeQueryValidations(req);
-      res.render('landing.njk', { loginURL, content: SystemContent, ToggleLanguage });
+      edgeCaseTypeQueryValidations(req, res, loginURL, SystemContent, ToggleLanguage);
     } catch (exception) {
-      console.log({ msg: 'Exception occured while reading the file' + exception });
       res.render('error');
     }
   }

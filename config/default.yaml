@@ -46,4 +46,8 @@ documentUpload:
     totaldocuments: 5
     totalAdditionalDocuments: 10    
     sizeInKB: 20000000  
- 
+queryParamsforApp:
+  query:
+    FMP: 'FMPO'
+    RLAD: 'RELADOP'
+    FGM: 'FGM'
