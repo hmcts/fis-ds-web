@@ -120,8 +120,13 @@ export const ApplicantSummaryList = (
       changeUrl: Urls['EMAIL_ADDRESS'],
     },
     {
+      key: keys.namedPersonMob,
+      value: userCase['mobilePhoneNumber'],
+      changeUrl: Urls['CONTACT_DETAILS'],
+    },
+    {
       key: keys.namedPersonTel,
-      value: userCase['homePhoneNumber'] + '<br> <br>' + userCase['mobilePhoneNumber'],
+      value: userCase['homePhoneNumber'],
       changeUrl: Urls['CONTACT_DETAILS'],
     },
   ];
