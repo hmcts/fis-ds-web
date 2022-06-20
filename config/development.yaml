@@ -40,3 +40,8 @@ e2e:
   userTestPassword: ''
 appInsights:
   instrumentationKey:
+queryParamsforApp:
+  query:
+    FMP: 'FMPO'
+    RLAD: 'RELADOP'
+    FGM: 'FGM'

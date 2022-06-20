@@ -17,7 +17,8 @@
               "address": "Address",
               "recievingEmail": "Who should receive emails about the application",
               "namedPersonEmail": "Email address of the person named on the application",
-              "namedPersonTel": "Contact number of the person named on the application",
+              "namedPersonMob": "Enter your mobile phone number",
+              "namedPersonTel": "Enter your home phone number",
               "uploadDocuments": "List of forms uploaded (Application form)",
               "additionalDocuments": "List of Documents uploaded (supporting documents)"
             }
@@ -39,7 +40,8 @@
               "address": "Address - welsh",
               "recievingEmail": "Who should receive emails about the application - welsh",
               "namedPersonEmail": "Email address of the person named on the application -welsh",
-              "namedPersonTel": "Contact number of the person named on the application - welsh",
+              "namedPersonMob": "Enter your mobile phone number - welsh",
+              "namedPersonTel": "Enter your home phone number - welsh",
               "uploadDocuments": "List of forms uploaded (Application form) - welsh",
               "additionalDocuments": "List of Documents uploaded (supporting documents) - welsh"
             }
