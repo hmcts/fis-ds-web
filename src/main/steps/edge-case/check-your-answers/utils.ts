@@ -1,5 +1,5 @@
 import { getFormattedDate } from '../../../app/case/answers/formatDate';
-import { CaseWithDocuments, CaseWithId } from '../../../app/case/case';
+import { CaseWithId } from '../../../app/case/case';
 import { getFormattedAddress } from '../../../app/case/formatter/address';
 import { PageContent } from '../../../app/controller/GetController';
 import * as Urls from '../../../steps/urls';
@@ -142,17 +142,21 @@ export const ApplicantSummaryList = (
 /* eslint-disable import/namespace */
 export const UploadFormSummary = (
   { sectionTitles, keys, ...content }: SummaryListContent,
-  userCase: Partial<CaseWithDocuments>
+  uploadedDocuments: Partial<any>
 ): SummaryList | undefined => {
-  console.log('usercase in check your answer -->', userCase);
-  //  const sectionTitle = sectionTitles.applicantDetails;
-  console.log('Address in util userCase --->', userCase);
-  // const caseDocs = userCase['uploadedDocuments'] === undefined ? [] : userCase['uploadedDocuments']
+  console.log(uploadedDocuments);
+  const ListOfUploadedDocuments = uploadedDocuments
+    .map((document): string => {
+      return document.fileName + '';
+    })
+    .toString()
+    .split(',')
+    .join('<div class="govuk-!-margin-top-3"></div>');
 
   const SummaryData = [
     {
       key: keys.uploadDocuments,
-      value: '',
+      value: ListOfUploadedDocuments,
       changeUrl: Urls['UPLOAD_YOUR_DOCUMENTS'],
     },
   ];
@@ -192,18 +196,19 @@ export const UserRole = (
 /* eslint-disable import/namespace */
 export const AdditonalFormSummary = (
   { sectionTitles, keys, ...content }: SummaryListContent,
-  userCase: Partial<CaseWithDocuments>
+  AddDocuments: Partial<any>
 ): SummaryList | undefined => {
-  console.log('usercase in check your answer -->', userCase);
-  //  const sectionTitle = sectionTitles.applicantDetails;
-  console.log('Address in util userCase --->', userCase);
-
-  //const caseDocs = userCase['addtionalDocuments'] === undefined ? [] : userCase['addtionalDocuments']
+  const ListOfAdditionalDocuments = AddDocuments.map((document): string => {
+    return document.fileName + '';
+  })
+    .toString()
+    .split(',')
+    .join('<div class="govuk-!-margin-top-3"></div>');
 
   const SummaryData = [
     {
       key: keys.additionalDocuments,
-      value: '',
+      value: ListOfAdditionalDocuments,
       changeUrl: Urls['ADDITIONAL_DOCUMENTS_UPLOAD'],
     },
   ];
