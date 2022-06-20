@@ -1,6 +1,5 @@
 import Axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import config from 'config';
-import { isEmpty } from 'lodash';
 import { LoggerInstance } from 'winston';
 
 import { getServiceAuthToken } from '../auth/service/get-service-auth-token';
@@ -9,7 +8,7 @@ import { AppRequest, UserDetails } from '../controller/AppRequest';
 import { Case, CaseWithId } from './case';
 import { CaseAssignedUserRoles } from './case-roles';
 import { CaseData } from './definition';
-import { toApiFormat } from './to-api-format';
+import { toApiDate, toApiFormat } from './to-api-format';
 
 export class CaseApi {
   /**
@@ -60,7 +59,7 @@ export class CaseApi {
     Axios.defaults.headers.put['Content-Type'] = 'application/json';
     Axios.defaults.headers.put['Authorization'] = 'Bearer ' + userDetails.accessToken;
     try {
-      if (isEmpty(req.session.userCase.id)) {
+      if (req.session.userCase.id === '') {
         throw new Error('Error in updating case, case id is missing');
       }
       const url: string = config.get('services.case.url');
@@ -95,6 +94,7 @@ export class CaseApi {
       const headers = { 'Content-Type': 'application/json', Authorization: 'Bearer ' + userDetails.accessToken };
       const res: AxiosResponse<createCaseResponse> = await Axios.post(url + 'create', mapCaseData(req), { headers });
       if (res.status === 200) {
+        req.session.userCase.id = res.data.id;
         return { id: res.data.id };
       } else {
         throw new Error('Error in creating case');
@@ -194,14 +194,14 @@ export const mapCaseData = (req: AppRequest): any => {
   const data = {
     applicantFirstName: req.session.userCase.applicantFirstName,
     applicantLastName: req.session.userCase.applicantLastName,
-    applicantDateOfBirth: req.session.userCase.applicantDateOfBirth,
+    applicantDateOfBirth: toApiDate(req.session.userCase.applicantDateOfBirth),
     applicantEmailAddress: req.session.userCase.applicantEmailAddress,
     applicantPhoneNumber: req.session.userCase.applicantPhoneNumber,
     applicantHomeNumber: req.session.userCase.applicantHomeNumber,
     applicantAddress1: req.session.userCase.applicantAddress1,
     applicantAddress2: req.session.userCase.applicantAddress2,
     applicantAddressTown: req.session.userCase.applicantAddressTown,
-    applicantAddressCountry: req.session.userCase.applicantAddressCountry,
+    applicantAddressCountry: 'United Kingdom',
     applicantAddressPostCode: req.session.userCase.applicantAddressPostcode,
   };
   return data;

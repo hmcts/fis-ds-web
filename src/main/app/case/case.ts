@@ -35,8 +35,6 @@ export interface Case {
   applicantAddress1: string;
   applicantAddress2: string;
   applicantAddressTown: string;
-  mobilePhoneNumber: string;
-  homePhoneNumber: string;
   applicantAddressCountry: any;
   applicantAddressPostcode: any;
 }
