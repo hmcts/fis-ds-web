@@ -2,14 +2,10 @@ import { mockRequest } from '../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../test/unit/utils/mockResponse';
 import { FormContent } from '../../app/form/Form';
 import * as steps from '../../steps';
-//import { SAVE_AND_SIGN_OUT } from '../../steps/urls';
 import { CONTACT_DETAILS } from '../../steps/urls'; //TOOK out CONTACT_DETAILS for EMAIL_ADDRESS RB
-//import { CITIZEN_UPDATE } from '../case/definition';
 import { isPhoneNoValid } from '../form/validation';
 
 import { PostController } from './PostController';
-
-// import Mock = jest.Mock;
 
 const getNextStepUrlMock = jest.spyOn(steps, 'getNextStepUrl');
 
@@ -23,7 +19,6 @@ describe('PostController', () => {
   } as unknown as FormContent;
 
   test('Should redirect back to the current page with the form data on errors', async () => {
-    //const errors = [{ propertyName: 'applicant1PhoneNumber', errorType: 'invalid' }];
     const body = { applicant1PhoneNumber: 'invalid phone number' };
     const mockPhoneNumberFormContent = {
       fields: {
@@ -66,10 +61,7 @@ describe('PostController', () => {
     await controller.post(req, res);
 
     expect(req.session.userCase).toEqual(expectedUserCase);
-    //expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', { ...body }, CITIZEN_CREATE);
-
     expect(getNextStepUrlMock).toBeCalledWith(req, expectedUserCase);
-    //expect(res.redirect).toBeCalledWith('/next-step-url');
     expect(req.session.errors).toStrictEqual([]);
   });
 
@@ -169,17 +161,6 @@ describe('PostController', () => {
     (req.locals.api.triggerEvent as jest.Mock).mockResolvedValueOnce(expectedUserCase);
     const res = mockResponse();
     await controller.post(req, res);
-
-    /* expect(req.session.userCase).toEqual(expectedUserCase);
-    expect(req.locals.api.triggerEvent).toHaveBeenCalledWith(
-      '1234',
-      { day: '1', month: '1', year: '2000' },
-      CITIZEN_UPDATE
-    );
-
-    expect(getNextStepUrlMock).toBeCalledWith(req, expectedUserCase);
-    expect(res.redirect).toBeCalledWith('/next-step-url');
-    expect(req.session.errors).toStrictEqual([]); */
     expect(1).toEqual(1);
   });
 
@@ -213,13 +194,6 @@ describe('PostController', () => {
     const req = mockRequest({ body, session: { user: { email: 'test@example.com' } } });
     const res = mockResponse();
     await controller.post(req, res);
-    /* expect(req.locals.api.triggerEvent).toHaveBeenCalledWith(
-      '1234',
-      { MOCK_KEY: 'MOCK_VALUE' },
-      CITIZEN_SAVE_AND_CLOSE
-    );
-
-    expect(res.redirect).toHaveBeenCalledWith(SAVE_AND_SIGN_OUT); */
     expect(1).toEqual(1);
   });
 
@@ -231,37 +205,25 @@ describe('PostController', () => {
     (req.locals.api.triggerEvent as jest.Mock).mockRejectedValue('Error saving');
     const res = mockResponse();
     await controller.post(req, res);
-
-    /* expect(req.locals.api.triggerEvent).toHaveBeenCalledWith(
-      '1234',
-      { MOCK_KEY: 'MOCK_VALUE' },
-      CITIZEN_SAVE_AND_CLOSE
-    );
-
-    expect(res.redirect).toHaveBeenCalledWith(SAVE_AND_SIGN_OUT); */
     expect(1).toEqual(1);
   });
 
   it('get the event name from the request url CITIZEN_UPDATE', async () => {
     const body = { MOCK_KEY: 'MOCK_VALUE', saveBeforeSessionTimeout: true };
-    //const bodyinreq = { MOCK_KEY: 'MOCK_VALUE' };
     const controller = new PostController(mockFormContent.fields);
     const req = mockRequest({ body, session: { user: { email: 'test@example.com' } } });
     const res = mockResponse();
     req.originalUrl = '/full-name-dummy';
     await controller.post(req, res);
-    //expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', bodyinreq, CITIZEN_UPDATE);
     expect(1).toEqual(1);
   });
 
   it('get the event name from the request - CITIZEN_CREATE', async () => {
     const body = { MOCK_KEY: 'MOCK_VALUE', saveBeforeSessionTimeout: true };
-    //const bodyinreq = { MOCK_KEY: 'MOCK_VALUE' };
     const controller = new PostController(mockFormContent.fields);
     const req = mockRequest({ body, session: { user: { email: 'test@example.com' } } });
     const res = mockResponse();
     await controller.post(req, res);
-    //expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', bodyinreq, CITIZEN_CREATE);
     expect(1).toEqual(1);
   });
 
@@ -285,10 +247,6 @@ describe('PostController', () => {
     const req = mockRequest({ body });
     const res = mockResponse();
     await controller.post(req, res);
-
-    /* expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', {}, CITIZEN_UPDATE);
-
-    expect(res.redirect).toHaveBeenCalledWith('/next-step-url'); */
     expect(1).toEqual(1);
   });
 
@@ -308,8 +266,6 @@ describe('PostController', () => {
     await controller.post(req, res);
 
     expect(req.session.userCase).toEqual(expectedUserCase);
-    //expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', { ...body }, CITIZEN_UPDATE);
-
     expect(getNextStepUrlMock).toBeCalledWith(req, expectedUserCase);
     expect(res.redirect).toBeCalledWith('/next-step-url');
     expect(req.session.errors).toStrictEqual([]);
@@ -322,9 +278,6 @@ describe('PostController', () => {
     const req = mockRequest({ body });
     const res = mockResponse();
     await controller.post(req, res);
-
-    //expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', { MOCK_KEY: 'MOCK_VALUE' }, CITIZEN_UPDATE);
-
     expect(res.end).toBeCalled();
   });
 
@@ -346,12 +299,6 @@ describe('PostController', () => {
     await controller.post(req, res);
 
     expect(req.session.userCase).toEqual(expectedUserCase);
-    /*expect(req.locals.api.triggerEvent).toHaveBeenCalledWith(
-      '1234',
-      { applicant1FirstName: 'Testm', applicant1LastName: 'Testn', applicant1Email: 'abc@gmail.com' },
-      CITIZEN_UPDATE
-    );*/
-
     expect(getNextStepUrlMock).toBeCalledWith(req, expectedUserCase);
     expect(res.redirect).toBeCalledWith('/next-step-url');
     expect(req.session.errors).toStrictEqual([]);

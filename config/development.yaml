@@ -7,13 +7,6 @@ services:
     url: 'http://rpe-service-auth-provider-aat.service.core-compute-aat.internal'
     microservice: 'ds_ui'
     secret: 'NEED TO INSERT SECRET'
-  # idam:
-  #   authorizationURL: 'http://localhost:3501/login'
-  #   tokenURL: 'http://localhost:5000/o/token'
-  #   clientID: 'adoption-web'
-  #   clientSecret: 'thUphEveC2Ekuqedaneh4jEcRuba4t2t'
-  #   systemUsername: 'dummy_user'
-  #   systemPassword: 'dummy_password'
   case:
     url: 'http://fis-cos-api-pr-65.service.core-compute-preview.internal/case/dss-orchestration/'
   postcodeLookup:

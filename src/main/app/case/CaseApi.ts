@@ -56,6 +56,7 @@ export class CaseApi {
    * @returns
    */
   public async updateCase(req: AppRequest, userDetails: UserDetails): Promise<any> {
+    console.log(CaseApi.name + 'Calling backend api update case');
     Axios.defaults.headers.put['Content-Type'] = 'application/json';
     Axios.defaults.headers.put['Authorization'] = 'Bearer ' + userDetails.accessToken;
     try {
@@ -89,7 +90,7 @@ export class CaseApi {
    */
   public async createCaseNew(req: AppRequest, userDetails: UserDetails): Promise<any> {
     try {
-      console.log(userDetails.accessToken);
+      console.log(CaseApi.name + 'Calling backend api create case');
       const url: string = config.get('services.case.url');
       const headers = { 'Content-Type': 'application/json', Authorization: 'Bearer ' + userDetails.accessToken };
       const res: AxiosResponse<createCaseResponse> = await Axios.post(url + 'create', mapCaseData(req), { headers });
