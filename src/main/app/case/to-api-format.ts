@@ -5,7 +5,7 @@ export type OrNull<T> = { [K in keyof T]: T[K] | null };
 
 type ToApiConverters = Partial<Record<keyof Case, string | ((data: Case) => OrNull<Partial<CaseData>>)>>;
 
-const fields: ToApiConverters = {
+export const fields: ToApiConverters = {
   ...formFieldsToCaseMapping,
 };
 

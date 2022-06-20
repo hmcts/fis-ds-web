@@ -21,6 +21,16 @@ export class ErrorController {
   }
 
   /**
+   * Catch all for BadRequest 400
+   */
+  public BadRequest(req: AppRequest, res: Response): void {
+    req.locals.logger.info(`404 Not Found: ${req.originalUrl}`);
+
+    res.statusCode = StatusCodes.BAD_REQUEST;
+    this.render(req, res);
+  }
+
+  /**
    * Catch all for 500 errors
    */
   public internalServerError(error: Errors, req: AppRequest, res: Response): void {

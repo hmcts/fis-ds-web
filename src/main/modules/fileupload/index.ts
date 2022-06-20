@@ -8,6 +8,7 @@ import fileUpload from 'express-fileupload';
 export class FileUpload {
   public enableFor(app: Application): void {
     // const DefaultFileUploadSize = config.get<number>('documentManagement.uploadSizeinMB');
+
     const DefaultFileUploadSize = 30;
     app.use(
       fileUpload({

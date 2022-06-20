@@ -10,7 +10,7 @@ import { AnyObject, PostController } from '../../../app/controller/PostControlle
 import { FormFields, FormFieldsFn } from '../../../app/form/Form';
 import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 const logger = Logger.getLogger('uploadDocumentPostController');
-import { ADDITIONAL_DOCUMENTS_UPLOAD, STATEMENT_OF_TRUTH } from '../../urls';
+import { ADDITIONAL_DOCUMENTS_UPLOAD, CHECK_YOUR_ANSWERS } from '../../urls';
 
 /**
  * ****** File Extensions Types are being check
@@ -141,8 +141,8 @@ export default class UploadDocumentController extends PostController<AnyObject> 
     if (req.session.hasOwnProperty('AddtionalCaseDocuments')) {
       console.log(AddtionalCaseDocuments);
     }
-
-    res.redirect(STATEMENT_OF_TRUTH);
+    console.log(AddtionalCaseDocuments);
+    res.redirect(CHECK_YOUR_ANSWERS);
   }
 
   public UploadDocumentInstance = (BASEURL: string, header: AxiosRequestHeaders): AxiosInstance => {

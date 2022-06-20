@@ -62,6 +62,30 @@ describe('GetController', () => {
       await controller.get(req, res);
 
       const documentManagerRequest = req;
+      documentManagerRequest.session.caseDocuments = [
+        {
+          originalDocumentName: 'document1.docx',
+          _links: {
+            self: {
+              href: 'http://dm-example/documents/sae33',
+            },
+            binary: {
+              href: 'http://dm-example/documents/sae33/binary',
+            },
+          },
+        },
+        {
+          originalDocumentName: 'document2.docx',
+          _links: {
+            self: {
+              href: 'http://dm-example/documents/ce6e2',
+            },
+            binary: {
+              href: 'http://dm-example/documents/ce6e2/binary',
+            },
+          },
+        },
+      ];
 
       documentManagerRequest.query = {
         query: 'delete',

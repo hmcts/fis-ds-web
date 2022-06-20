@@ -7,7 +7,7 @@ import { YesOrNo } from '../../../app/case/definition';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 import * as steps from '../../../steps';
-import { STATEMENT_OF_TRUTH } from '../../../steps/urls';
+import { CHECK_YOUR_ANSWERS } from '../../../steps/urls';
 
 import UploadDocumentController, { FileMimeType, FileUploadBaseURL, FileValidations } from './uploadDocPostController';
 
@@ -211,7 +211,7 @@ describe('checking for the redirect of post document upload', () => {
       },
     ];
     await postingcontroller.PostDocumentUploader(req, res);
-    expect(res.redirect).toHaveBeenCalledWith(STATEMENT_OF_TRUTH);
+    expect(res.redirect).toHaveBeenCalledWith(CHECK_YOUR_ANSWERS);
   });
 
   it('must be have axios instance', () => {
@@ -250,6 +250,6 @@ describe('checking for the redirect of post document upload', () => {
       }];
        */
     await postingcontroller.post(req, res);
-    expect(res.redirect).toHaveBeenCalledWith(STATEMENT_OF_TRUTH);
+    expect(res.redirect).toHaveBeenCalledWith(CHECK_YOUR_ANSWERS);
   });
 });

@@ -21,6 +21,8 @@ export class GetController {
   constructor(protected readonly view: string, protected readonly content: TranslationFn) {}
 
   public async get(req: AppRequest, res: Response): Promise<void> {
+    console.log('usercase session --->', req.session.userCase);
+
     if (res.locals.isError || res.headersSent) {
       // If there's an async error, it will have already rendered an error page upstream,
       // so we don't want to call render again
@@ -142,18 +144,16 @@ export class GetController {
           case 'applicationform': {
             try {
               const baseURL = `/doc/dss-orhestration/${docId}/delete`;
-              const response = await DOCUMENT_DELETEMANAGER.delete(baseURL);
-              if (response.statusText === 'OK') {
-                const sessionObjectOfApplicationDocuments = req.session['caseDocuments'].filter(document => {
-                  const { documentId } = document;
-                  return documentId !== docId;
-                });
-                req.session['caseDocuments'] = sessionObjectOfApplicationDocuments;
-                console.log({ caseDocument: req.session['caseDocuments'] });
-                this.saveSessionAndRedirect(req, res, () => {
-                  res.redirect(UPLOAD_YOUR_DOCUMENTS);
-                });
-              }
+              await DOCUMENT_DELETEMANAGER.delete(baseURL);
+              const sessionObjectOfApplicationDocuments = req.session['caseDocuments'].filter(document => {
+                const { documentId } = document;
+                return documentId !== docId;
+              });
+              req.session['caseDocuments'] = sessionObjectOfApplicationDocuments;
+              console.log({ caseDocument: req.session['caseDocuments'] });
+              this.saveSessionAndRedirect(req, res, () => {
+                res.redirect(UPLOAD_YOUR_DOCUMENTS);
+              });
             } catch (error) {
               console.log(error);
             }
@@ -164,18 +164,16 @@ export class GetController {
           case 'additional': {
             try {
               const baseURL = `/doc/dss-orhestration/${docId}/delete`;
-              const response = await DOCUMENT_DELETEMANAGER.delete(baseURL);
-              if (response.statusText === 'OK') {
-                const sessionObjectOfAdditionalDocuments = req.session['AddtionalCaseDocuments'].filter(document => {
-                  const { documentId } = document;
-                  return documentId !== docId;
-                });
-                req.session['AddtionalCaseDocuments'] = sessionObjectOfAdditionalDocuments;
-                console.log({ AddtionalDocuments: req.session['AddtionalCaseDocuments'] });
-                this.saveSessionAndRedirect(req, res, () => {
-                  res.redirect(ADDITIONAL_DOCUMENTS_UPLOAD);
-                });
-              }
+              await DOCUMENT_DELETEMANAGER.delete(baseURL);
+              const sessionObjectOfAdditionalDocuments = req.session['AddtionalCaseDocuments'].filter(document => {
+                const { documentId } = document;
+                return documentId !== docId;
+              });
+              req.session['AddtionalCaseDocuments'] = sessionObjectOfAdditionalDocuments;
+              console.log({ AddtionalDocuments: req.session['AddtionalCaseDocuments'] });
+              this.saveSessionAndRedirect(req, res, () => {
+                res.redirect(ADDITIONAL_DOCUMENTS_UPLOAD);
+              });
             } catch (error) {
               console.log(error);
             }

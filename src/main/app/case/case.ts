@@ -44,6 +44,11 @@ export interface CaseWithId extends Case {
   state: any;
 }
 
+export interface CaseWithDocuments {
+  addtionalDocuments: any;
+  uploadedDocuments: any;
+}
+
 export enum Checkbox {
   Checked = 'checked',
   Unchecked = '',
