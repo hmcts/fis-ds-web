@@ -2,8 +2,8 @@ const { I } = inject();
 
 module.exports = {
   fields: {
-    firstnames: 'input[id$="applicantFirstNames"]',
-    lastnames: 'input[id$="applicantLastNames"]',
+    firstnames: 'input[id$="applicantFirstName"]',
+    lastnames: 'input[id$="applicantLastName"]',
   },
 
  applicantFullnames() {
