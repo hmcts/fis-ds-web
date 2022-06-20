@@ -15,7 +15,7 @@ services:
     systemUsername: 'dummy_user'
     systemPassword: 'dummy_password'
   case:
-    url: 'http://ccd-data-store-api-aat.service.core-compute-aat.internal/'
+    url: 'http://fis-cos-api-pr-65.service.core-compute-preview.internal/case/dss-orchestration/'
   postcodeLookup:
     url: 'https://api.os.uk/search/places/v1'
     token: 'NEED TO INSERT SECRET'
