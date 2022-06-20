@@ -1,7 +1,7 @@
 const { I } = inject();
 module.exports = {
   fields: {
-    emailaddress: '#emailAddress',
+    emailaddress: '#applicantEmailAddress',
   },
   async emailAddress() {
     await I.wait(2);
