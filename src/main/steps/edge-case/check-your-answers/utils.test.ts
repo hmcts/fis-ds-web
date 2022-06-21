@@ -3,7 +3,7 @@ import { mockUserCase1, mockUserCase2, mockUserCase3 } from '../../../../test/un
 //mockUserCase2, mockUserCase3
 
 import { enContent } from './content';
-import { ApplicantSummaryList } from './utils';
+import { AdditonalFormSummary, ApplicantSummaryList, UploadFormSummary } from './utils';
 /**AdditonalFormSummary UploadFormSummary   */
 
 describe('upload-addition-documents > check-your-answers', () => {
@@ -281,12 +281,85 @@ describe('upload-addition-documents > named owner and both > named owner > check
               key: { text: 'Contact number of the person named on the application' },
               value: { text: '012345678910' },
             },
+            {
+              actions: {
+                items: [
+                  {
+                    href: '/contact-details',
+                    text: 'change',
+                    visuallyHiddenText: 'Contact number of the person named on the application',
+                  },
+                ],
+              },
+              key: { text: 'Contact number of the person named on the application' },
+              value: { text: '012345678910' },
+            },
           ],
           title: 'Applicant details',
         },
       },
     ])('return correct summary list items when %#', ({ userCase, expected }) => {
       expect(ApplicantSummaryList(enContent, userCase)).not.toBe(expected);
+    });
+  });
+});
+
+describe('Addtional Form Summar> check-your-answers', () => {
+  describe('applicationSummaryList', () => {
+    test.each([
+      {
+        userCase: [],
+        expected: {
+          rows: [
+            {
+              actions: {
+                items: [
+                  {
+                    href: '/full-name',
+                    text: 'change',
+                    visuallyHiddenText: 'Subject’s name',
+                  },
+                ],
+              },
+              key: { text: 'Subject’s name' },
+              value: { text: 'Joe Bob' },
+            },
+          ],
+          title: 'Applicant details',
+        },
+      },
+    ])('return correct summary list items when %#', ({ userCase, expected }) => {
+      expect(AdditonalFormSummary(enContent, userCase)).not.toBe(expected);
+    });
+  });
+});
+
+describe('Form Summar > check-your-answers', () => {
+  describe('applicationSummaryList', () => {
+    test.each([
+      {
+        userCase: [],
+        expected: {
+          rows: [
+            {
+              actions: {
+                items: [
+                  {
+                    href: '/full-name',
+                    text: 'change',
+                    visuallyHiddenText: 'Subject’s name',
+                  },
+                ],
+              },
+              key: { text: 'Subject’s name' },
+              value: { text: 'Joe Bob' },
+            },
+          ],
+          title: 'Applicant details',
+        },
+      },
+    ])('return correct summary list items when %#', ({ userCase, expected }) => {
+      expect(UploadFormSummary(enContent, userCase)).not.toBe(expected);
     });
   });
 });

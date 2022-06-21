@@ -57,3 +57,11 @@ export const mockUserCase3 = {
   applicantFirstNames: 'Foe',
   applicantLastNames: 'Bob',
 } as unknown as any;
+
+export const mockAdditionalDocument = {
+  id: '1',
+} as unknown as any;
+
+export const mockUploadDocument = {
+  id: '1',
+} as unknown as any;
