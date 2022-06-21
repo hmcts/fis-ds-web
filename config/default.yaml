@@ -44,7 +44,7 @@ appInsights:
 documentUpload:
   validation:
     totaldocuments: 5
-    totalAdditionalDocuments: 10    
+    totalAdditionalDocuments: 20    
     sizeInKB: 20000000  
 queryParamsforApp:
   query:
