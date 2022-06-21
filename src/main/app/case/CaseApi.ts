@@ -28,17 +28,6 @@ export class CaseApi {
 
   /**
    *
-   * @param req
-   * @param userDetails
-   * @param formData
-   * @returns
-   */
-  public async getOrCreateCaseNew(req: AppRequest, userDetails: UserDetails): Promise<CaseWithId> {
-    return this.createCaseNew(req, userDetails);
-  }
-
-  /**
-   *
    * @param caseId
    * @returns
    */
@@ -56,7 +45,6 @@ export class CaseApi {
    * @returns
    */
   public async updateCase(req: AppRequest, userDetails: UserDetails): Promise<any> {
-    console.log(CaseApi.name + 'Calling backend api update case');
     Axios.defaults.headers.put['Content-Type'] = 'application/json';
     Axios.defaults.headers.put['Authorization'] = 'Bearer ' + userDetails.accessToken;
     try {
@@ -64,7 +52,7 @@ export class CaseApi {
         throw new Error('Error in updating case, case id is missing');
       }
       const url: string = config.get('services.case.url');
-      const res: AxiosResponse<createCaseResponse> = await Axios.put(
+      const res: AxiosResponse<CreateCaseResponse> = await Axios.put(
         url + req.session.userCase.id + '/update',
         mapCaseData(req),
         {
@@ -90,10 +78,9 @@ export class CaseApi {
    */
   public async createCaseNew(req: AppRequest, userDetails: UserDetails): Promise<any> {
     try {
-      console.log(CaseApi.name + 'Calling backend api create case');
       const url: string = config.get('services.case.url');
       const headers = { 'Content-Type': 'application/json', Authorization: 'Bearer ' + userDetails.accessToken };
-      const res: AxiosResponse<createCaseResponse> = await Axios.post(url + 'create', mapCaseData(req), { headers });
+      const res: AxiosResponse<CreateCaseResponse> = await Axios.post(url + 'create', mapCaseData(req), { headers });
       if (res.status === 200) {
         req.session.userCase.id = res.data.id;
         return { id: res.data.id };
@@ -186,7 +173,7 @@ export const getCaseApi = (userDetails: UserDetails, logger: LoggerInstance): Ca
   );
 };
 
-interface createCaseResponse {
+interface CreateCaseResponse {
   status: string;
   id: string;
 }
