@@ -5,14 +5,14 @@ import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 
 export const form: FormContent = {
   fields: {
-    homePhoneNumber: {
+    applicantHomeNumber: {
       type: 'text',
       classes: 'govuk-input',
       label: hl => hl.homePhoneLabel,
       hint: hh => hh.homePhoneHint,
       validator: (value, formData) => {
         const hasHomePhoneNumberEntered = (value as string[])?.length && (value as string) !== '[]';
-        const hasMobilePhoneNumberEntered = formData.mobilePhoneNumber && !!formData.mobilePhoneNumber?.length;
+        const hasMobilePhoneNumberEntered = formData.applicantPhoneNumber && !!formData.applicantPhoneNumber?.length;
 
         if (!hasHomePhoneNumberEntered && !hasMobilePhoneNumberEntered) {
           return 'atleastOneRequired';
@@ -20,14 +20,14 @@ export const form: FormContent = {
         return isPhoneNoValid(value);
       },
     },
-    mobilePhoneNumber: {
+    applicantPhoneNumber: {
       type: 'text',
       classes: 'govuk-input',
       label: ml => ml.mobilePhoneLabel,
       hint: mh => mh.mobilePhoneHint,
       validator: (value, formData) => {
         const hasMobilePhoneNumberEntered = (value as string[])?.length && (value as string) !== '[]';
-        const hasHomePhoneNumberEntered = formData.homePhoneNumber && !!formData.homePhoneNumber?.length;
+        const hasHomePhoneNumberEntered = formData.applicantHomeNumber && !!formData.applicantHomeNumber?.length;
 
         if (!hasHomePhoneNumberEntered && !hasMobilePhoneNumberEntered) {
           return 'atleastOneRequired';

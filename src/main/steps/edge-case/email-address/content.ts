@@ -6,7 +6,7 @@ import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 
 export const form: FormContent = {
   fields: {
-    emailAddress: {
+    applicantEmailAddress: {
       type: 'text',
       classes: 'govuk-input',
       label: l => l.label,

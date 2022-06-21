@@ -17,12 +17,12 @@
     },
     "errors":{
         "en": {
-            "emailAddress": {
+            "applicantEmailAddress": {
                 "invalid": "Every email address consists of 3 elements: local-part, @ symbol (pronounced as “at”), and a domain name"
             }
         },
         "cy": {
-            "emailAddress": {
+            "applicantEmailAddress": {
                 "invalid": "Every email address consists of 3 elements: local-part, @ symbol (pronounced as “at”), and a domain name (Welsh)"
             }
         }

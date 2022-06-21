@@ -4,7 +4,7 @@ jest.mock('uuid', () => ({
 }));
 
 import { Case } from './case';
-import { fields, toApiDate, toApiFormat } from './to-api-format';
+import { toApiDate, toApiFormat } from './to-api-format';
 
 describe('to-api-format', () => {
   test('handles invalid data correctly', async () => {
@@ -18,18 +18,12 @@ describe('to-api-format', () => {
   });
 });
 
-describe('toApiDate', () => {
-  test('handles invalid data correctly', async () => {
-    const date = new Date();
-    const parseddate = date.getFullYear + '-' + date.getMonth + '-' + date.getDay;
-    const apiFormatDate = toApiDate(parseddate);
-    expect(apiFormatDate).not.toEqual('2020-12-12');
-  });
+test('should convert date of birth format to backend api format', async () => {
+  const dateFormat = toApiDate({ day: '20', month: '1', year: '2000' });
+  expect(dateFormat).toMatch('2000-01-20');
 });
 
-describe('ToApiConverters', () => {
-  test('ToApiConverters - Converting to api data', async () => {
-    const toAPIEnteries = fields;
-    expect(toAPIEnteries.hasOwnProperty('applicantDateOfBirth')).toBe(true);
-  });
+test('if date is null then check for empty value', async () => {
+  const dateFormat = toApiDate({ day: '', month: '1', year: '2000' });
+  expect(dateFormat).toMatch('');
 });
