@@ -38,15 +38,15 @@ describe('Email Address', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const emailAddress = fields.emailAddress;
-    expect(emailAddress.classes).toBe('govuk-input');
-    expect((emailAddress.label as Function)(generatedContent)).toBe(
+    const applicantEmailAddress = fields.applicantEmailAddress;
+    expect(applicantEmailAddress.classes).toBe('govuk-input');
+    expect((applicantEmailAddress.label as Function)(generatedContent)).toBe(
       'What is the email address of the person named on the application?'
     );
-    expect((emailAddress.hint as Function)(generatedContent)).toBe('Email Address');
-    expect(emailAddress.type).toBe('text');
+    expect((applicantEmailAddress.hint as Function)(generatedContent)).toBe('Email Address');
+    expect(applicantEmailAddress.type).toBe('text');
 
-    const emailAddressOptions = fields.emailAddress as FormOptions;
+    const emailAddressOptions = fields.applicantEmailAddress as FormOptions;
     expect(emailAddressOptions.values[0].value).toBe(EmailAddress.EMAIL_ADDRESS);
     expect((emailAddressOptions.values[0].label as Function)(generatedContent)).toBe('Insert email address');
     expect((emailAddressOptions.validator as Function)('test@gmail.com')).toBe(undefined);
