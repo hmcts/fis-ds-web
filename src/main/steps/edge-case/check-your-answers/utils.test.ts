@@ -308,7 +308,7 @@ describe('Addtional Form Summar> check-your-answers', () => {
   describe('applicationSummaryList', () => {
     test.each([
       {
-        userCase: [],
+        userCase: [{ fileName: 'a.txt' }, { fileName: 'b.txt' }],
         expected: {
           rows: [
             {
@@ -338,7 +338,7 @@ describe('Form Summary > check-your-answers', () => {
   describe('applicationSummaryList', () => {
     test.each([
       {
-        userCase: [],
+        userCase: [{ fileName: 'a.txt' }, { fileName: 'b.txt' }],
         expected: {
           rows: [
             {
