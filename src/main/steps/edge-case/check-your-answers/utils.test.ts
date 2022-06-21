@@ -3,7 +3,7 @@ import { mockUserCase1, mockUserCase2, mockUserCase3 } from '../../../../test/un
 //mockUserCase2, mockUserCase3
 
 import { enContent } from './content';
-import { AdditonalFormSummary, ApplicantSummaryList, UploadFormSummary } from './utils';
+import { AdditonalFormSummary, ApplicantSummaryList, UploadFormSummary, UserRole } from './utils';
 /**AdditonalFormSummary UploadFormSummary   */
 
 describe('upload-addition-documents > check-your-answers', () => {
@@ -334,7 +334,7 @@ describe('Addtional Form Summar> check-your-answers', () => {
   });
 });
 
-describe('Form Summar > check-your-answers', () => {
+describe('Form Summary > check-your-answers', () => {
   describe('applicationSummaryList', () => {
     test.each([
       {
@@ -360,6 +360,36 @@ describe('Form Summar > check-your-answers', () => {
       },
     ])('return correct summary list items when %#', ({ userCase, expected }) => {
       expect(UploadFormSummary(enContent, userCase)).not.toBe(expected);
+    });
+  });
+});
+
+describe('Form Summary-user-role > check-your-answers', () => {
+  describe('User role', () => {
+    test.each([
+      {
+        userCase: mockUserCase1,
+        expected: {
+          rows: [
+            {
+              actions: {
+                items: [
+                  {
+                    href: '/user-role',
+                    text: 'change',
+                    visuallyHiddenText: 'Are you named as the applicant on the application form you are submitting?',
+                  },
+                ],
+              },
+              key: { text: 'Are you named as the applicant on the application form you are submitting?' },
+              value: { text: 'No' },
+            },
+          ],
+          title: 'Applicant details',
+        },
+      },
+    ])('return correct summary list items when %#', ({ userCase, expected }) => {
+      expect(UserRole(enContent, userCase)).not.toBe(expected);
     });
   });
 });
