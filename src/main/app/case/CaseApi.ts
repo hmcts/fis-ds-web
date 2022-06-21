@@ -60,7 +60,7 @@ export class CaseApi {
         }
       );
       if (res.status === 200) {
-        return { id: res.data.id };
+        return req.session.userCase;
       } else {
         throw new Error('Error in updating case');
       }
@@ -83,7 +83,7 @@ export class CaseApi {
       const res: AxiosResponse<CreateCaseResponse> = await Axios.post(url + 'create', mapCaseData(req), { headers });
       if (res.status === 200) {
         req.session.userCase.id = res.data.id;
-        return { id: res.data.id };
+        return req.session.userCase;
       } else {
         throw new Error('Error in creating case');
       }
