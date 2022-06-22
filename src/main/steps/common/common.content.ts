@@ -187,17 +187,19 @@ export const generatePageContent = ({
   language,
   pageContent,
   userCase,
+  uploadedDocuments,
+  AddDocuments,
   userEmail,
   addresses = [],
-  // eligibility,
   fee,
 }: {
   language: Language;
   pageContent?: TranslationFn;
   userCase?: Partial<CaseWithId>;
+  uploadedDocuments?: any;
+  AddDocuments?: any;
   userEmail?: string;
   addresses?: [];
-  // eligibility?: Eligibility;
   fee?: Fee;
 }): PageContent => {
   const commonTranslations: typeof en = language === 'en' ? en : cy;
@@ -209,6 +211,8 @@ export const generatePageContent = ({
     serviceName,
     language,
     userCase,
+    uploadedDocuments,
+    AddDocuments,
     userEmail,
     contactEmail,
     addresses,
@@ -233,7 +237,7 @@ export type CommonContent = typeof en & {
   pageContent?: TranslationFn;
   userCase?: Partial<CaseWithId>;
   uploadedDocuments?: any;
-  addtionalDocuments?: any;
+  AddDocuments?: any;
   userEmail?: string;
   contactEmail?: string;
   referenceNumber?: string;

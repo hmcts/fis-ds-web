@@ -15,7 +15,7 @@ export const enContent = {
 const en = (content: any) => {
   const userCase = content.userCase!;
   const caseDocuments = content.uploadedDocuments;
-  const AdditionalDocuments = content.addtionalDocuments;
+  const AdditionalDocuments = content.AddDocuments;
 
   return {
     ...enContent,
@@ -36,7 +36,7 @@ const cyContent: typeof enContent = {
 const cy: typeof en = (content: CommonContent) => {
   const userCase = content.userCase!;
   const caseDocuments = content.uploadedDocuments;
-  const AdditionalDocuments = content.addtionalDocuments;
+  const AdditionalDocuments = content['AddDocuments'];
 
   return {
     ...cyContent,

@@ -3,7 +3,7 @@ import { mockUserCase1, mockUserCase2, mockUserCase3 } from '../../../../test/un
 //mockUserCase2, mockUserCase3
 
 import { enContent } from './content';
-import { ApplicantSummaryList } from './utils';
+import { AdditonalFormSummary, ApplicantSummaryList, UploadFormSummary, UserRole } from './utils';
 /**AdditonalFormSummary UploadFormSummary   */
 
 describe('upload-addition-documents > check-your-answers', () => {
@@ -281,12 +281,115 @@ describe('upload-addition-documents > named owner and both > named owner > check
               key: { text: 'Contact number of the person named on the application' },
               value: { text: '012345678910' },
             },
+            {
+              actions: {
+                items: [
+                  {
+                    href: '/contact-details',
+                    text: 'change',
+                    visuallyHiddenText: 'Contact number of the person named on the application',
+                  },
+                ],
+              },
+              key: { text: 'Contact number of the person named on the application' },
+              value: { text: '012345678910' },
+            },
           ],
           title: 'Applicant details',
         },
       },
     ])('return correct summary list items when %#', ({ userCase, expected }) => {
       expect(ApplicantSummaryList(enContent, userCase)).not.toBe(expected);
+    });
+  });
+});
+
+describe('Addtional Form Summar> check-your-answers', () => {
+  describe('applicationSummaryList', () => {
+    test.each([
+      {
+        userCase: [{ fileName: 'a.txt' }, { fileName: 'b.txt' }],
+        expected: {
+          rows: [
+            {
+              actions: {
+                items: [
+                  {
+                    href: '/full-name',
+                    text: 'change',
+                    visuallyHiddenText: 'Subject’s name',
+                  },
+                ],
+              },
+              key: { text: 'Subject’s name' },
+              value: { text: 'Joe Bob' },
+            },
+          ],
+          title: 'Applicant details',
+        },
+      },
+    ])('return correct summary list items when %#', ({ userCase, expected }) => {
+      expect(AdditonalFormSummary(enContent, userCase)).not.toBe(expected);
+    });
+  });
+});
+
+describe('Form Summary > check-your-answers', () => {
+  describe('applicationSummaryList', () => {
+    test.each([
+      {
+        userCase: [{ fileName: 'a.txt' }, { fileName: 'b.txt' }],
+        expected: {
+          rows: [
+            {
+              actions: {
+                items: [
+                  {
+                    href: '/full-name',
+                    text: 'change',
+                    visuallyHiddenText: 'Subject’s name',
+                  },
+                ],
+              },
+              key: { text: 'Subject’s name' },
+              value: { text: 'Joe Bob' },
+            },
+          ],
+          title: 'Applicant details',
+        },
+      },
+    ])('return correct summary list items when %#', ({ userCase, expected }) => {
+      expect(UploadFormSummary(enContent, userCase)).not.toBe(expected);
+    });
+  });
+});
+
+describe('Form Summary-user-role > check-your-answers', () => {
+  describe('User role', () => {
+    test.each([
+      {
+        userCase: mockUserCase1,
+        expected: {
+          rows: [
+            {
+              actions: {
+                items: [
+                  {
+                    href: '/user-role',
+                    text: 'change',
+                    visuallyHiddenText: 'Are you named as the applicant on the application form you are submitting?',
+                  },
+                ],
+              },
+              key: { text: 'Are you named as the applicant on the application form you are submitting?' },
+              value: { text: 'No' },
+            },
+          ],
+          title: 'Applicant details',
+        },
+      },
+    ])('return correct summary list items when %#', ({ userCase, expected }) => {
+      expect(UserRole(enContent, userCase)).not.toBe(expected);
     });
   });
 });
