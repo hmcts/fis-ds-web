@@ -1,4 +1,4 @@
-import Axios, { AxiosError, AxiosInstance } from 'axios';
+import Axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import config from 'config';
 import { LoggerInstance } from 'winston';
 
@@ -8,7 +8,7 @@ import { AppRequest, UserDetails } from '../controller/AppRequest';
 import { Case, CaseWithId } from './case';
 import { CaseAssignedUserRoles } from './case-roles';
 import { CaseData } from './definition';
-import { toApiFormat } from './to-api-format';
+import { toApiDate, toApiFormat } from './to-api-format';
 
 export class CaseApi {
   /**
@@ -28,21 +28,6 @@ export class CaseApi {
 
   /**
    *
-   * @param req
-   * @param userDetails
-   * @param formData
-   * @returns
-   */
-  public async getOrCreateCaseNew(
-    req: AppRequest,
-    userDetails: UserDetails,
-    formData: Partial<Case>
-  ): Promise<CaseWithId> {
-    return this.createCaseNew(req, userDetails, formData);
-  }
-
-  /**
-   *
    * @param caseId
    * @returns
    */
@@ -56,14 +41,56 @@ export class CaseApi {
    *
    * @param req
    * @param userDetails
-   * @param formData
+   * @param  formData
    * @returns
    */
-
-  public async createCaseNew(req: AppRequest, userDetails: UserDetails, formData: Partial<Case>): Promise<any> {
-    //***** this part need to be implemented on creating a new case  */
-    console.log({ case: req.session.userCase, userDetails, formData });
-    return req.session.userCase;
+  public async updateCase(req: AppRequest, userDetails: UserDetails): Promise<any> {
+    Axios.defaults.headers.put['Content-Type'] = 'application/json';
+    Axios.defaults.headers.put['Authorization'] = 'Bearer ' + userDetails.accessToken;
+    try {
+      if (req.session.userCase.id === '') {
+        throw new Error('Error in updating case, case id is missing');
+      }
+      const url: string = config.get('services.case.url');
+      const res: AxiosResponse<CreateCaseResponse> = await Axios.put(
+        url + req.session.userCase.id + '/update',
+        mapCaseData(req),
+        {
+          params: { event: 'UPDATE' },
+        }
+      );
+      if (res.status === 200) {
+        return { id: res.data.id };
+      } else {
+        throw new Error('Error in updating case');
+      }
+    } catch (err) {
+      this.logError(err);
+      throw new Error('Error in updating case');
+    }
+  }
+  /**
+   *
+   * @param req
+   * @param userDetails
+   * @param  formData
+   * @returns
+   */
+  public async createCaseNew(req: AppRequest, userDetails: UserDetails): Promise<any> {
+    try {
+      const url: string = config.get('services.case.url');
+      const headers = { 'Content-Type': 'application/json', Authorization: 'Bearer ' + userDetails.accessToken };
+      const res: AxiosResponse<CreateCaseResponse> = await Axios.post(url + 'create', mapCaseData(req), { headers });
+      if (res.status === 200) {
+        req.session.userCase.id = res.data.id;
+        return { id: res.data.id };
+      } else {
+        throw new Error('Error in creating case');
+      }
+    } catch (err) {
+      this.logError(err);
+      throw new Error('Error in creating case');
+    }
   }
 
   /**
@@ -144,4 +171,26 @@ export const getCaseApi = (userDetails: UserDetails, logger: LoggerInstance): Ca
     }),
     logger
   );
+};
+
+interface CreateCaseResponse {
+  status: string;
+  id: string;
+}
+
+export const mapCaseData = (req: AppRequest): any => {
+  const data = {
+    applicantFirstName: req.session.userCase.applicantFirstName,
+    applicantLastName: req.session.userCase.applicantLastName,
+    applicantDateOfBirth: toApiDate(req.session.userCase.applicantDateOfBirth),
+    applicantEmailAddress: req.session.userCase.applicantEmailAddress,
+    applicantPhoneNumber: req.session.userCase.applicantPhoneNumber,
+    applicantHomeNumber: req.session.userCase.applicantHomeNumber,
+    applicantAddress1: req.session.userCase.applicantAddress1,
+    applicantAddress2: req.session.userCase.applicantAddress2,
+    applicantAddressTown: req.session.userCase.applicantAddressTown,
+    applicantAddressCountry: 'United Kingdom',
+    applicantAddressPostCode: req.session.userCase.applicantAddressPostcode,
+  };
+  return data;
 };

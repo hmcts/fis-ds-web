@@ -2,7 +2,9 @@ import { AnyObject } from '../controller/PostController';
 
 import { CaseData } from './definition';
 
-export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>> = {};
+export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>> = {
+  applicantDateOfBirth: 'applicantDateOfBirth',
+};
 
 export function formatCase<InputFormat, OutputFormat>(fields: FieldFormats, data: InputFormat): OutputFormat {
   const result = {};
@@ -33,10 +35,8 @@ export interface Case {
   applicantAddress1: string;
   applicantAddress2: string;
   applicantAddressTown: string;
-  mobilePhoneNumber: string;
-  homePhoneNumber: string;
   applicantAddressCountry: any;
-  applicantAddressPostCode: any;
+  applicantAddressPostcode: any;
 }
 
 export interface CaseWithId extends Case {

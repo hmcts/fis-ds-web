@@ -1,5 +1,5 @@
-import { Case, CaseDate, /**Checkbox**/ formFieldsToCaseMapping, formatCase } from './case';
-import { CaseData /**YesOrNo**/ } from './definition';
+import { Case, CaseDate, formFieldsToCaseMapping, formatCase } from './case';
+import { CaseData } from './definition';
 
 export type OrNull<T> = { [K in keyof T]: T[K] | null };
 
@@ -7,15 +7,11 @@ type ToApiConverters = Partial<Record<keyof Case, string | ((data: Case) => OrNu
 
 export const fields: ToApiConverters = {
   ...formFieldsToCaseMapping,
-
-  applicantDateOfBirth: data => ({
-    applicantDateOfBirth: toApiDate(data.applicantDateOfBirth),
-  }),
 };
 
 export const toApiFormat = (data: Partial<Case>): CaseData => formatCase(fields, data);
 
-export const toApiDate = (date: CaseDate | any | undefined): string => {
+export const toApiDate = (date: CaseDate | undefined): string => {
   if (!date?.year || !date?.month || !date?.day) {
     return '';
   }

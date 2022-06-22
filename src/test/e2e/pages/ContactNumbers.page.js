@@ -2,8 +2,8 @@ const { I } = inject();
 
 module.exports = {
   fields: {
-    homenumber: 'input[id$="homePhoneNumber"]',
-    mobilenumber: 'input[id$="mobilePhoneNumber"]'
+    homenumber: 'input[id$="applicantHomeNumber"]',
+    mobilenumber: 'input[id$="applicantPhoneNumber"]'
   },
     EnterHomeAndMobileNo( homeNumber , mobileNumber ) {
         I.waitForText('Enter your home phone number');

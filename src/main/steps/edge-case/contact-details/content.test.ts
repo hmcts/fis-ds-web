@@ -84,11 +84,11 @@ describe('contact-number-content', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const mobilePhoneNumberOption = fields.mobilePhoneNumber as FormOptions;
+    const mobilePhoneNumberOption = fields.applicantPhoneNumber as FormOptions;
     expect((mobilePhoneNumberOption.label as Function)(generatedContent)).toBe(enContent.mobilePhoneLabel);
     expect((mobilePhoneNumberOption.validator as Function)(null, mobilePhoneNumberOption)).toBe('atleastOneRequired');
     expect((mobilePhoneNumberOption.hint as Function)(generatedContent)).toBe(enContent.mobilePhoneHint);
-    const homePhoneNumberOption = fields.homePhoneNumber as FormOptions;
+    const homePhoneNumberOption = fields.applicantHomeNumber as FormOptions;
     expect((homePhoneNumberOption.label as Function)(generatedContent)).toBe(enContent.homePhoneLabel);
     expect((homePhoneNumberOption.validator as Function)(null, homePhoneNumberOption)).toBe('atleastOneRequired');
     expect((homePhoneNumberOption.hint as Function)(generatedContent)).toBe(enContent.homePhoneHint);

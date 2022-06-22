@@ -15,8 +15,7 @@ services:
     systemUsername: 'dummy_user'
     systemPassword: 'dummy_password'
   case:
-    #url: 'http://ccd-data-store-api-adoption-cos-api-pr-84.service.core-compute-preview.internal'
-    url: 'http://ccd-data-store-api-aat.service.core-compute-aat.internal'
+    url: 'http://fis-cos-api-pr-72.service.core-compute-preview.internal/case/dss-orchestration/'
   postcodeLookup:
     url: 'https://api.os.uk/search/places/v1'
     token: 'NEED TO INSERT SECRET'
@@ -28,7 +27,7 @@ services:
     url: 'http://fis-cos-api-pr-72.service.core-compute-preview.internal' 
     uploadSizeinMB: 30
   RPE_TOKEN:
-    url: 'http://rpe-service-auth-provider-aat.service.core-compute-aat.internal'     
+    url: 'http://rpe-service-auth-provider-aat.service.core-compute-aat.internal'
 health:
   timeout: 5000
   deadline: 15000
