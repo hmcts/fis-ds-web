@@ -96,7 +96,7 @@ export const ApplicantSummaryList = (
   const SummaryData = [
     {
       key: keys.fullName,
-      value: userCase['applicantFirstNames'] + ' ' + userCase['applicantLastNames'],
+      value: userCase['applicantFirstName'] + ' ' + userCase['applicantLastName'],
       changeUrl: Urls['FULL_NAME'],
     },
     {
@@ -116,17 +116,17 @@ export const ApplicantSummaryList = (
     },
     {
       key: keys.namedPersonEmail,
-      value: userCase['emailAddress'],
+      value: userCase['applicantEmailAddress'],
       changeUrl: Urls['EMAIL_ADDRESS'],
     },
     {
       key: keys.namedPersonTel,
-      value: userCase['homePhoneNumber'],
+      value: userCase['applicantHomeNumber'],
       changeUrl: Urls['CONTACT_DETAILS'],
     },
     {
       key: keys.namedPersonMob,
-      value: userCase['mobilePhoneNumber'],
+      value: userCase['applicantPhoneNumber'],
       changeUrl: Urls['CONTACT_DETAILS'],
     },
   ];
