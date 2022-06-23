@@ -184,6 +184,36 @@
   <section>
     <h2 class="govuk-heading-m">{{ changeCookiesHeading }}</h2>
     <form class="cookie-preferences-form js-show">
+
+      {% set cookiesAnalytics = cookiePrefrences['analytics'] %}
+    
+
+      {% set AnalyticsData =  []  %}
+
+      {% if  cookiesAnalytics == 'on'%}
+      {% set AnalyticsData = [{
+            value: 'on',
+            text: useAnalyticsCookies,
+            checked: true
+          },
+          {
+            value: 'off',
+            text: doNotUseAnalyticsCookies
+          }] 
+      %}
+      {%else%}
+       {% set AnalyticsData = [{
+            value: 'on',
+            text: useAnalyticsCookies
+          },
+          {
+            value: 'off',
+            text: doNotUseAnalyticsCookies,
+            checked: true
+          }] %}
+      {%endif%}
+
+
       {{ govukRadios({
         classes: 'govuk-radios',
         idPrefix: 'analytics',
@@ -194,18 +224,39 @@
             classes: "govuk-fieldset__legend--s"
           }
         },
-        items: [
-          {
-            value: 'on',
-            text: useAnalyticsCookies
-          },
-          {
-            value: 'off',
-            text: doNotUseAnalyticsCookies,
-            checked: true
-          }
-        ]
+        items: AnalyticsData
       }) }}
+
+
+
+    {% set cookiesApm = cookiePrefrences['apm'] %}
+
+      {% set APMData =  []%}
+
+    {% if  cookiesApm == 'on'%}
+          {% set APMData = [{
+                value: 'on',
+                text: useApmCookies,
+                checked: true
+              },
+              {
+                value: 'off',
+                text: doNotUseApmCookies
+              }] 
+          %}
+          {%else%}
+          {% set APMData = [{
+                value: 'on',
+                text: useApmCookies
+              },
+              {
+                value: 'off',
+                text: doNotUseApmCookies,
+                checked: true
+              }] %}
+      {%endif%}
+
+
       {{ govukRadios({
         classes: 'govuk-radios',
         idPrefix: 'apm',
@@ -216,17 +267,7 @@
             classes: "govuk-fieldset__legend--s"
           }
         },
-        items: [
-          {
-            value: 'on',
-            text: useApmCookies
-          },
-          {
-            value: 'off',
-            text: doNotUseApmCookies,
-            checked: true
-          }
-        ]
+        items: APMData
       }) }}
       {{ govukButton({
         text: save

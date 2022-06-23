@@ -60,17 +60,25 @@ export class GetController {
       cookieAPM: req.query.hasOwnProperty('apm'),
     };
 
+    /** Cookies  */
+    const cookiesForPrefrences = req.cookies.hasOwnProperty('web-cookie-preferences')
+      ? JSON.parse(req.cookies['web-cookie-preferences'])
+      : {
+          analytics: 'off',
+          apm: 'off',
+        };
+
     const checkConditions = Object.values(RedirectConditions).includes(true);
     if (!checkConditions) {
       res.render(this.view, {
         ...content,
         uploadedDocuments: req.session['caseDocuments'],
         addtionalDocuments: req.session['AddtionalCaseDocuments'],
+        cookiePrefrences: cookiesForPrefrences,
         sessionErrors,
         FileErrors,
         htmlLang: language,
         isDraft: req.session?.userCase?.state ? req.session.userCase.state === '' : true,
-        // getNextIncompleteStepUrl: () => getNextIncompleteStepUrl(req),
       });
     }
   }
