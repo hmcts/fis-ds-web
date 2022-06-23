@@ -8,11 +8,10 @@ import { LanguageToggle } from '../../modules/i18n';
 import { CommonContent, Language, generatePageContent } from '../../steps/common/common.content';
 import { FIS_COS_API_BASE_URL } from '../../steps/common/constants/apiConstants';
 import * as Urls from '../../steps/urls';
-import { ADDITIONAL_DOCUMENTS_UPLOAD, UPLOAD_YOUR_DOCUMENTS } from '../../steps/urls';
+import { ADDITIONAL_DOCUMENTS_UPLOAD, COOKIES, UPLOAD_YOUR_DOCUMENTS } from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
 
 import { AppRequest } from './AppRequest';
-
 export type PageContent = Record<string, unknown>;
 export type TranslationFn = (content: CommonContent) => PageContent;
 
@@ -23,6 +22,8 @@ export class GetController {
 
   public async get(req: AppRequest, res: Response): Promise<void> {
     console.log('usercase session --->', req.session.userCase);
+
+    this.CookiePrefrencesChanger(req, res);
 
     if (res.locals.isError || res.headersSent) {
       // If there's an async error, it will have already rendered an error page upstream,
@@ -50,13 +51,13 @@ export class GetController {
       req.session.fileErrors = [];
     }
 
-    console.log({ caseData: req.session['userCase'] });
-
     this.documentDeleteManager(req, res);
     const RedirectConditions = {
       query: req.query.hasOwnProperty('query'),
       documentId: req.query.hasOwnProperty('docId'),
       documentType: req.query.hasOwnProperty('documentType'),
+      cookieAnalytics: req.query.hasOwnProperty('analytics'),
+      cookieAPM: req.query.hasOwnProperty('apm'),
     };
 
     const checkConditions = Object.values(RedirectConditions).includes(true);
@@ -124,6 +125,56 @@ export class GetController {
     });
   }
 
+  /**Cookies prefrences saver */
+
+  public CookiePrefrencesChanger = (req: AppRequest, res: Response): void => {
+    //?analytics=off&apm=off
+    if (req.query.hasOwnProperty('analytics') && req.query.hasOwnProperty('apm')) {
+      let cookieExpiryDuration = Number(config.get('cookies.expiryTime'));
+      const TimeInADay = 24 * 60 * 60 * 1000;
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      cookieExpiryDuration = cookieExpiryDuration * TimeInADay; //cookie time in milliseconds
+      const CookiePreferences = {
+        analytics: '',
+        apm: '',
+      };
+      if (req.query.hasOwnProperty('analytics')) {
+        switch (req.query['analytics']) {
+          case 'off':
+            CookiePreferences['analytics'] = 'off';
+            break;
+
+          case 'on':
+            CookiePreferences['analytics'] = 'on';
+            break;
+
+          default:
+            CookiePreferences['analytics'] = 'off';
+        }
+      }
+      if (req.query.hasOwnProperty('apm')) {
+        switch (req.query['apm']) {
+          case 'off':
+            CookiePreferences['apm'] = 'off';
+            break;
+
+          case 'on':
+            CookiePreferences['apm'] = 'on';
+            break;
+
+          default:
+            CookiePreferences['apm'] = 'off';
+        }
+      }
+      const CookieValue = JSON.stringify(CookiePreferences);
+      res.cookie('web-cookie-preferences', CookieValue, {
+        maxAge: cookieExpiryDuration,
+        httpOnly: true,
+      });
+      res.redirect(COOKIES);
+    }
+  };
+
   public async documentDeleteManager(req: AppRequest, res: Response): Promise<void> {
     if (
       req.query.hasOwnProperty('query') &&
@@ -147,7 +198,8 @@ export class GetController {
           case 'applicationform': {
             try {
               const baseURL = `/doc/dss-orhestration/${docId}/delete`;
-              await DOCUMENT_DELETEMANAGER.delete(baseURL);
+              const data = await DOCUMENT_DELETEMANAGER.delete(baseURL);
+              console.log({ status: data.status, query: req.query });
               const sessionObjectOfApplicationDocuments = req.session['caseDocuments'].filter(document => {
                 const { documentId } = document;
                 return documentId !== docId;
