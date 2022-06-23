@@ -198,14 +198,12 @@ export class GetController {
           case 'applicationform': {
             try {
               const baseURL = `/doc/dss-orhestration/${docId}/delete`;
-              const data = await DOCUMENT_DELETEMANAGER.delete(baseURL);
-              console.log({ status: data.status, query: req.query });
+              await DOCUMENT_DELETEMANAGER.delete(baseURL);
               const sessionObjectOfApplicationDocuments = req.session['caseDocuments'].filter(document => {
                 const { documentId } = document;
                 return documentId !== docId;
               });
               req.session['caseDocuments'] = sessionObjectOfApplicationDocuments;
-              console.log({ caseDocument: req.session['caseDocuments'] });
               this.saveSessionAndRedirect(req, res, () => {
                 res.redirect(UPLOAD_YOUR_DOCUMENTS);
               });
@@ -225,7 +223,6 @@ export class GetController {
                 return documentId !== docId;
               });
               req.session['AddtionalCaseDocuments'] = sessionObjectOfAdditionalDocuments;
-              console.log({ AddtionalDocuments: req.session['AddtionalCaseDocuments'] });
               this.saveSessionAndRedirect(req, res, () => {
                 res.redirect(ADDITIONAL_DOCUMENTS_UPLOAD);
               });
