@@ -21,12 +21,12 @@
     "en": {
     "SIZE_ERROR": "File size exceeds 20Mb. Please upload a file that is less than 20Mb",
     "FORMAT_ERROR": "This service only accepts files in the formats - Ms Word, Ms Excel, PDF, JPG, GIF, PNG, TXT, RTF",
-    "TOTAL_FILES_EXCEED_ERROR": "You can upload 10 files only. Please delete one of the uploaded files and retry"
+    "TOTAL_FILES_EXCEED_ERROR": "You can upload 20 files only. Please delete one of the uploaded files and retry"
     },
     "cy": {
     "SIZE_ERROR": "File size exceeds 20Mb. Please upload a file that is less than 20Mb - welsh",
     "FORMAT_ERROR": "This service only accepts files in the formats - Ms Word, Ms Excel, PDF, JPG, GIF, PNG, TXT, RTF - welsh",
-    "TOTAL_FILES_EXCEED_ERROR": "You can upload 10 files only. Please delete one of the uploaded files and retry - welsh"
+    "TOTAL_FILES_EXCEED_ERROR": "You can upload 20 files only. Please delete one of the uploaded files and retry - welsh"
     }
     }
     }
