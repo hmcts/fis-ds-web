@@ -3,7 +3,7 @@ import { CommonContent, generatePageContent } from '../../common/common.content'
 
 import { generateContent } from './content';
 
-jest.mock('../../app/form/validation');
+jest.mock('../../../app/form/validation');
 
 const en = {
   title: 'Cookies',
