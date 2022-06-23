@@ -4,6 +4,7 @@ import {
   CHECK_YOUR_ANSWERS,
   CONTACT_DETAILS,
   CONTACT_PREFERENCES,
+  COOKIES,
   DATE_OF_BIRTH,
   EMAIL_ADDRESS,
   FIND_ADDRESS,
@@ -85,5 +86,9 @@ export const edgecaseSequence: Step[] = [
   {
     url: USER_ROLE,
     getNextStep: () => FULL_NAME,
+  },
+  {
+    url: COOKIES,
+    getNextStep: () => USER_ROLE,
   },
 ];

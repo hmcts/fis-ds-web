@@ -29,6 +29,7 @@ export const UPLOAD_YOUR_DOCUMENTS: PageLink = '/upload-your-documents';
 export const CONTACT_PREFERENCES: PageLink = '/contact-preferences';
 export const CHECK_YOUR_ANSWERS: PageLink = '/check-your-answers';
 export const STATEMENT_OF_TRUTH: PageLink = '/statement-of-truth';
+export const COOKIES: PageLink = '/cookies';
 
 export const CHECK_JURISDICTION: PageLink = '/check-jurisdiction';
 export const WHERE_YOUR_LIVES_ARE_BASED_URL: PageLink = '/where-your-lives-are-based';
