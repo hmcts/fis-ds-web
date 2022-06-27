@@ -3,8 +3,8 @@ var assert = require('assert');
 
 module.exports = {
   fields: {
-    ApplyingForSomeone: 'input[id$="applyingForSelf-2"]',
-    ApplyingForYourself: 'input[id$="applyingForSelf"]'
+    ApplyingForSomeone: 'input[id$="namedApplicant-2"]',
+    ApplyingForYourself: 'input[id$="namedApplicant"]'
   },
   async DetermineApplicant(applyingForSomeone) {
 
