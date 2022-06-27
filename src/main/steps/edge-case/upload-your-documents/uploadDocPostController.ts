@@ -14,6 +14,7 @@ import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 import { FIS_COS_API_BASE_URL } from '../../../steps/common/constants/apiConstants';
 const logger = Logger.getLogger('uploadDocumentPostController');
 import { ADDITIONAL_DOCUMENTS_UPLOAD, UPLOAD_YOUR_DOCUMENTS } from '../../urls';
+//import {mapCaseData} from '../../../app/case/CaseApi';
 
 /**
  * ****** File Extensions Types are being check
@@ -202,7 +203,6 @@ export default class UploadDocumentController extends PostController<AnyObject> 
       maxBodyLength: Infinity,
     });
   };
-
   /**
    *
    * @param req
