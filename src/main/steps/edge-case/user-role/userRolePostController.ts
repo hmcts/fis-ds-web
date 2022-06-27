@@ -21,8 +21,9 @@ export default class UserRolePostController extends PostController<AnyObject> {
 
     req.session.errors = form.getErrors(formData);
 
-    if (YesOrNo.YES === req.body.applyingForSelf) {
-      req.session.userCase.namedApplicant = true;
+    Object.assign(req.session.userCase, formData);
+
+    if (YesOrNo.YES === req.body.namedApplicant) {
 
       const applicantFirstName = req.session.userCase.applicantFirstName;
 
@@ -33,7 +34,6 @@ export default class UserRolePostController extends PostController<AnyObject> {
       }
       this.redirect(req, res, req.session.errors?.length ? req.url : DATE_OF_BIRTH);
     } else {
-      req.session.userCase.namedApplicant = false;
       req.session.userCase.applicantFirstName = '';
       req.session.userCase.applicantLastName = '';
       req.session.userCase.applicantEmailAddress = '';

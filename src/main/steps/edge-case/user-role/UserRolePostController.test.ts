@@ -15,10 +15,10 @@ describe('UserRolePostController', () => {
   });
 
   test('Should redirect back to the current page with the form data on errors', async () => {
-    const errors = [{ errorType: 'required', propertyName: 'applyingForSelf' }];
+    const errors = [{ errorType: 'required', propertyName: 'namedApplicant' }];
     const mockForm = {
       fields: {
-        applyingForSelf: {
+        namedApplicant: {
           type: 'radios',
           values: [
             { label: l => l.no, value: YesOrNo.YES },
@@ -45,7 +45,7 @@ describe('UserRolePostController', () => {
   test('Should redirect to the date of birth page when yes radio button selected', async () => {
     const mockForm = {
       fields: {
-        applyingForSelf: {
+        namedApplicant: {
           type: 'radios',
           values: [
             { label: l => l.no, value: YesOrNo.YES },
@@ -60,7 +60,7 @@ describe('UserRolePostController', () => {
     };
     const controller = new UserRolePostController(mockForm.fields);
 
-    const body = { applyingForSelf: 'Yes' };
+    const body = { namedApplicant: 'Yes' };
 
     const req = mockRequest({ body });
     const res = mockResponse();
@@ -73,7 +73,7 @@ describe('UserRolePostController', () => {
   test('Should redirect to full name page when no radio button selected', async () => {
     const mockForm = {
       fields: {
-        applyingForSelf: {
+        namedApplicant: {
           type: 'radios',
           values: [
             { label: l => l.no, value: YesOrNo.YES },
@@ -88,7 +88,7 @@ describe('UserRolePostController', () => {
     };
     const controller = new UserRolePostController(mockForm.fields);
 
-    const body = { applyingForSelf: 'No' };
+    const body = { namedApplicant: 'No' };
 
     const req = mockRequest({ body });
     const res = mockResponse();
