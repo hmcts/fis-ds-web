@@ -24,7 +24,6 @@ export default class UserRolePostController extends PostController<AnyObject> {
     Object.assign(req.session.userCase, formData);
 
     if (YesOrNo.YES === req.body.namedApplicant) {
-
       const applicantFirstName = req.session.userCase.applicantFirstName;
 
       if (applicantFirstName === undefined) {
