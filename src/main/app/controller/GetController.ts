@@ -175,9 +175,11 @@ export class GetController {
         }
       }
       const CookieValue = JSON.stringify(CookiePreferences);
+
       res.cookie('web-cookie-preferences', CookieValue, {
         maxAge: cookieExpiryDuration,
         httpOnly: true,
+        encode: String,
       });
       res.redirect(COOKIES);
     }
