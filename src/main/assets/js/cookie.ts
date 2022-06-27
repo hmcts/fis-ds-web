@@ -46,7 +46,7 @@ function cookiePreferencesUpdated(cookieStatus) {
 }
 
 cookieManager.init({
-  'user-preference-cookie-name': 'adoption-web-cookie-preferences',
+  'user-preference-cookie-name': 'web-cookie-preferences',
   'user-preference-saved-callback': cookiePreferencesUpdated,
   'preference-form-id': 'cm-preference-form',
   'preference-form-saved-callback': preferenceFormSaved,
@@ -61,7 +61,7 @@ cookieManager.init({
     {
       'category-name': 'essential',
       optional: false,
-      cookies: ['adoption-web-cookie-preferences', '_oauth2_proxy', 'ajs_user_id', 'ajs_group_id', 'ajs_anonymous_id'],
+      cookies: ['web-cookie-preferences', '_oauth2_proxy', 'ajs_user_id', 'ajs_group_id', 'ajs_anonymous_id'],
     },
     {
       'category-name': 'analytics',

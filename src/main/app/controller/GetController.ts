@@ -44,6 +44,7 @@ export class GetController {
       addresses,
     });
 
+    console.log({ cookieMessage: req.session.cookieStorageMessage });
     const sessionErrors = req.session?.errors || [];
     const FileErrors = req.session.fileErrors || [];
     if (req.session?.errors || req.session.fileErrors) {
@@ -80,6 +81,7 @@ export class GetController {
         htmlLang: language,
         isDraft: req.session?.userCase?.state ? req.session.userCase.state === '' : true,
       });
+      req.session['cookieStorageMessage'] = false;
     }
   }
 
@@ -181,6 +183,7 @@ export class GetController {
         httpOnly: true,
         encode: String,
       });
+      req.session['cookieStorageMessage'] = true;
       res.redirect(COOKIES);
     }
   };

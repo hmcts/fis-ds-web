@@ -31,6 +31,7 @@ export interface AppSession extends Session {
   fileErrors: any[];
   addresses: [];
   returnUrl?: string;
+  cookieStorageMessage?: boolean;
 }
 
 export interface UserDetails {
