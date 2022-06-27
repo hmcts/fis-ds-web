@@ -6,7 +6,26 @@ const cookieBanner = qs('#cm-cookie-banner');
 const cookieBannerDecision = cookieBanner?.querySelector('.govuk-cookie-banner__decision') as HTMLInputElement;
 const cookieBannerConfirmation = cookieBanner?.querySelector('.govuk-cookie-banner__confirmation') as HTMLInputElement;
 
+function getCookie(cname) {
+  const cookies = Object.fromEntries(
+    document.cookie.split(/; /).map(c => {
+      const [key, v] = c.split('=', 2);
+      return [key, decodeURIComponent(v)];
+    })
+  );
+  return cookies[cname] || '';
+}
+
+function setCookie(key, value, expiry) {
+  const expires = new Date();
+  expires.setTime(expires.getTime() + expiry * 24 * 60 * 60 * 1000);
+  document.cookie = key + '=' + value + ';expires=' + expires.toUTCString();
+}
+
 function cookieBannerAccept() {
+  const getCookieFromBrowser = getCookie('web-cookie-preferences');
+  setCookie('web-cookie-preferences', getCookieFromBrowser, 365);
+
   const confirmationMessage = cookieBannerConfirmation?.querySelector('p') as HTMLInputElement;
   confirmationMessage.innerHTML = 'You’ve accepted additional cookies. ' + confirmationMessage.innerHTML;
 }
