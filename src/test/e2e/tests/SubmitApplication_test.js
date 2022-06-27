@@ -1,6 +1,6 @@
 const ContactPreferencePage = require("../pages/ContactPreference.page");
 
-Feature('Create application @e2e-tests').retry(1);
+Feature('Create application @e2e-tests @cross-browser').retry(1);
 
 Scenario(
   'Create full application and submit',
