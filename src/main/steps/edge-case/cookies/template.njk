@@ -4,7 +4,8 @@
 {% extends "common/page.njk" %}
 
 {% block page_content %}
-  <div class="cookie-preference-success">
+{% if cookieMessage == true%}
+  <div class="cookie-preference-success-s" style="display: block;">
     <div class="success-message" aria-labelledby="success-title" role="alert" tabindex="-1">
       <h2 class="govuk-heading-m">
         {{ cookiesSaved }}
@@ -15,6 +16,8 @@
       <a class="govuk-link" href="/">{{ goToHomepage }}</a>
     </div>
   </div>
+{%endif%}
+
   <section>
     <h1 class="govuk-heading-l">{{ title }}</h1>
     <p class="govuk-body">{{ paragraph1 | safe }}</p>

@@ -34,6 +34,23 @@ export class GetController {
     const language = this.getPreferredLanguage(req) as Language;
     const addresses = req.session?.addresses;
 
+    const sessionErrors = req.session?.errors || [];
+    const FileErrors = req.session.fileErrors || [];
+    if (req.session?.errors || req.session.fileErrors) {
+      req.session.errors = undefined;
+      req.session.fileErrors = [];
+    }
+    /**
+     *
+     *                      This util allows to delete document
+     *                      the params it uses is @req and @res
+     *                      This is uses generatePageContent Instance of the this GetController class
+     *                      All page contents save for generating page data
+     *                      the page content loads up all Page data
+     *      ************************************ ************************************
+     *      ************************************  ************************************
+     *
+     */
     const content = generatePageContent({
       language,
       pageContent: this.content,
@@ -44,24 +61,38 @@ export class GetController {
       addresses,
     });
 
-    console.log({ cookieMessage: req.session.cookieStorageMessage });
-    const sessionErrors = req.session?.errors || [];
-    const FileErrors = req.session.fileErrors || [];
-    if (req.session?.errors || req.session.fileErrors) {
-      req.session.errors = undefined;
-      req.session.fileErrors = [];
-    }
-
+    /**
+     *
+     *                      This util allows to delete document
+     *                      the params it uses is @req and @res
+     *                      This is uses @documentDeleteManager Instance of the this GetController class
+     *      ************************************ ************************************
+     *      ************************************  ************************************
+     *
+     */
     this.documentDeleteManager(req, res);
     const RedirectConditions = {
+      /*************************************** query @query  ***************************/
       query: req.query.hasOwnProperty('query'),
+      /*************************************** query @documentId  ***************************/
       documentId: req.query.hasOwnProperty('docId'),
+      /*************************************** query @documentType  ***************************/
       documentType: req.query.hasOwnProperty('documentType'),
+      /*************************************** query @analytics for monitoring and performance ***************************/
       cookieAnalytics: req.query.hasOwnProperty('analytics'),
+      /*************************************** query  @apm for monitoring and performance  ***************************/
       cookieAPM: req.query.hasOwnProperty('apm'),
     };
 
-    /** Cookies  */
+    /**
+     *
+     *                      This util allows to delete document
+     *                      the params it uses is @web-cookie-preferences
+     *                      This is used to check for current cookiesPreferences
+     *      ************************************ ************************************
+     *      ************************************  ************************************
+     *
+     */
     const cookiesForPrefrences = req.cookies.hasOwnProperty('web-cookie-preferences')
       ? JSON.parse(req.cookies['web-cookie-preferences'])
       : {
@@ -69,19 +100,45 @@ export class GetController {
           apm: 'off',
         };
 
+    /**
+     *
+     *                      This util allows to delete document
+     *                      the params it uses is @web-cookie-preferences
+     *                      This is used to check for current cookiesPreferences
+     *      ************************************ ************************************
+     *      ************************************  ************************************
+     *
+     */
+    let PageRenderableContents = {
+      ...content,
+      uploadedDocuments: req.session['caseDocuments'],
+      addtionalDocuments: req.session['AddtionalCaseDocuments'],
+      cookiePrefrences: cookiesForPrefrences,
+      sessionErrors,
+      cookieMessage: false,
+      FileErrors,
+      htmlLang: language,
+      isDraft: req.session?.userCase?.state ? req.session.userCase.state === '' : true,
+    };
+
+    /**
+     *
+     *                      This util allows saved cookies to have redirect after successfully saving
+     *                      the params it uses is @web-cookie-preferences
+     *                      This is used to check for current cookiesPreferences
+     *      ************************************ ************************************
+     *      ************************************  ************************************
+     *
+     */
+    const CookieWithSaveQuery = COOKIES + '?togglesaveCookie=true';
+    const checkforCookieUrlAndQuery = req.url === CookieWithSaveQuery;
+    if (checkforCookieUrlAndQuery) {
+      PageRenderableContents = { ...PageRenderableContents, cookieMessage: true };
+    }
+
     const checkConditions = Object.values(RedirectConditions).includes(true);
     if (!checkConditions) {
-      res.render(this.view, {
-        ...content,
-        uploadedDocuments: req.session['caseDocuments'],
-        addtionalDocuments: req.session['AddtionalCaseDocuments'],
-        cookiePrefrences: cookiesForPrefrences,
-        sessionErrors,
-        FileErrors,
-        htmlLang: language,
-        isDraft: req.session?.userCase?.state ? req.session.userCase.state === '' : true,
-      });
-      req.session['cookieStorageMessage'] = false;
+      res.render(this.view, PageRenderableContents);
     }
   }
 
@@ -180,11 +237,11 @@ export class GetController {
 
       res.cookie('web-cookie-preferences', CookieValue, {
         maxAge: cookieExpiryDuration,
-        httpOnly: true,
+        httpOnly: false,
         encode: String,
       });
-      req.session['cookieStorageMessage'] = true;
-      res.redirect(COOKIES);
+      const RedirectURL = COOKIES + '?togglesaveCookie=true';
+      res.redirect(RedirectURL);
     }
   };
 

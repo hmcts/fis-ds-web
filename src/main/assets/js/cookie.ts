@@ -23,11 +23,10 @@ function setCookie(key, value, expiry) {
 }
 
 function cookieBannerAccept() {
-  const getCookieFromBrowser = getCookie('web-cookie-preferences');
-  setCookie('web-cookie-preferences', getCookieFromBrowser, 365);
-
   const confirmationMessage = cookieBannerConfirmation?.querySelector('p') as HTMLInputElement;
   confirmationMessage.innerHTML = 'You’ve accepted additional cookies. ' + confirmationMessage.innerHTML;
+  const getCookieFromBrowser = getCookie('web-cookie-preferences');
+  setCookie('web-cookie-preferences', getCookieFromBrowser, 365);
 }
 
 function cookieBannerReject() {
