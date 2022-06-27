@@ -8,6 +8,7 @@ import { isFieldFilledIn } from '../../../app/form/validation';
 import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 import * as steps from '../../../steps';
 import { CHECK_YOUR_ANSWERS } from '../../../steps/urls';
+import { FIS_COS_API_BASE_URL } from '../../common/constants/apiConstants';
 
 import UploadDocumentController, { FileMimeType, FileUploadBaseURL, FileValidations } from './uploadDocPostController';
 
@@ -96,7 +97,7 @@ describe('document format validation', () => {
 
 describe('The url must match the config url', () => {
   it('must match baseURl', () => {
-    expect(FileUploadBaseURL).toBe(config.get('services.documentManagement.url'));
+    expect(FileUploadBaseURL).toBe(config.get(FIS_COS_API_BASE_URL));
   });
 });
 
