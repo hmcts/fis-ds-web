@@ -14,8 +14,8 @@ services:
     clientSecret: 'NEED TO INSERT SECRET'
     systemUsername: 'dummy_user'
     systemPassword: 'dummy_password'
-  case:
-    url: 'http://fis-cos-api-pr-79.service.core-compute-preview.internal/case/dss-orchestration/'
+  fis:
+    url: 'http://fis-cos-api-pr-79.service.core-compute-preview.internal'
   postcodeLookup:
     url: 'https://api.os.uk/search/places/v1'
     token: 'NEED TO INSERT SECRET'

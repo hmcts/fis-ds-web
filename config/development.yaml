@@ -7,8 +7,8 @@ services:
     url: 'http://rpe-service-auth-provider-aat.service.core-compute-aat.internal'
     microservice: 'ds_ui'
     secret: 'NEED TO INSERT SECRET'
-  case:
-    url: 'http://fis-cos-api-pr-79.service.core-compute-preview.internal/case/dss-orchestration/'
+  fis:
+    url: 'http://fis-cos-api-pr-79.service.core-compute-preview.internal'
   postcodeLookup:
     url: 'https://api.os.uk/search/places/v1'
     token: 'NEED TO INSERT SECRET'

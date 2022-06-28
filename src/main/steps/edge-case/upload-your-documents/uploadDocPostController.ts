@@ -5,6 +5,7 @@ import config from 'config';
 import { Response } from 'express';
 import FormData from 'form-data';
 
+// eslint-disable-next-line import/namespace
 import { mapCaseData } from '../../../app/case/CaseApi';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
@@ -143,7 +144,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
   async PostDocumentUploader(req: AppRequest<AnyObject>, res: Response): Promise<void> {
     if (req.session.hasOwnProperty('caseDocuments')) {
       const CaseId = req.session.userCase['id'];
-      const baseURL = `/case/dss-orchestration/${CaseId}/update?event=UPDATE`;
+      const baseURL = '/case/dss-orchestration/' + CaseId + '/update?event=UPDATE';
       const Headers = {
         Authorization: `Bearer ${req.session.user['accessToken']}`,
       };
@@ -163,21 +164,16 @@ export default class UploadDocumentController extends PostController<AnyObject> 
         });
         const CaseData = mapCaseData(req);
         const responseBody = { ...CaseData, applicantApplicationFormDocuments: MappedRequestCaseDocuments };
-        res.json(responseBody);
         const requestData = await this.UploadDocumentInstance(AttachFileToCaseBaseURL, Headers).put(
           baseURL,
           responseBody
         );
-
-        res.json(requestData);
-        // res.redirect(ADDITIONAL_DOCUMENTS_UPLOAD);
+        console.log(requestData);
+        res.redirect(ADDITIONAL_DOCUMENTS_UPLOAD);
       } catch (error) {
-        res.json({ error, responseBody: req.session.userCase });
         console.log(error);
       }
     }
-
-    res.redirect(ADDITIONAL_DOCUMENTS_UPLOAD);
   }
 
   public UploadDocumentInstance = (BASEURL: string, header: AxiosRequestHeaders): AxiosInstance => {
@@ -243,7 +239,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
             };
             try {
               const RequestDocument = await this.UploadDocumentInstance(FileUploadBaseURL, Headers).post(
-                '/doc/dss-orhestration/upload',
+                `/doc/dss-orhestration/upload?caseTypeOfApplication=${req.session['edgecaseType']}`,
                 formData,
                 {
                   headers: {
