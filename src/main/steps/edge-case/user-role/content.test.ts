@@ -51,16 +51,16 @@ describe('role-type content', () => {
     expect(generatedContent.errors).toEqual(cyContent.errors);
   });
 
-  test('should contain applyingForSelf field', () => {
+  test('should contain namedApplicant field', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const applyingForSelfField = fields.applyingForSelf as FormOptions;
-    expect(applyingForSelfField.type).toBe('radios');
-    expect(applyingForSelfField.classes).toBe('govuk-radios');
-    expect((applyingForSelfField.label as Function)(generatedContent)).toBe(enContent.label);
-    expect((applyingForSelfField.values[0].label as Function)(generatedContent)).toBe(enContent.one);
-    expect((applyingForSelfField.values[1].label as Function)(generatedContent)).toBe(enContent.two);
+    const namedApplicantField = fields.namedApplicant as FormOptions;
+    expect(namedApplicantField.type).toBe('radios');
+    expect(namedApplicantField.classes).toBe('govuk-radios');
+    expect((namedApplicantField.label as Function)(generatedContent)).toBe(enContent.label);
+    expect((namedApplicantField.values[0].label as Function)(generatedContent)).toBe(enContent.one);
+    expect((namedApplicantField.values[1].label as Function)(generatedContent)).toBe(enContent.two);
   });
 
   test('should contain continue button', () => {

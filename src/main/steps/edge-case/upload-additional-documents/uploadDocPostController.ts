@@ -9,6 +9,7 @@ import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { FormFields, FormFieldsFn } from '../../../app/form/Form';
 import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
+import { FIS_COS_API_BASE_URL } from '../../../steps/common/constants/apiConstants';
 const logger = Logger.getLogger('uploadDocumentPostController');
 import { ADDITIONAL_DOCUMENTS_UPLOAD, CHECK_YOUR_ANSWERS } from '../../urls';
 
@@ -59,7 +60,7 @@ type FileUploadErrorTranslatables = {
   TOTAL_FILES_EXCEED_ERROR?: string;
 };
 
-export const FileUploadBaseURL: URL_OF_FILE = config.get('services.documentManagement.url');
+export const FileUploadBaseURL: URL_OF_FILE = config.get(FIS_COS_API_BASE_URL);
 
 /**
  * @FileHandler

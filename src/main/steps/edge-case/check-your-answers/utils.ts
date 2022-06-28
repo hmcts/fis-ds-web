@@ -1,5 +1,6 @@
 import { getFormattedDate } from '../../../app/case/answers/formatDate';
 import { CaseWithId } from '../../../app/case/case';
+import { YesOrNo } from '../../../app/case/definition';
 import { getFormattedAddress } from '../../../app/case/formatter/address';
 import { PageContent } from '../../../app/controller/GetController';
 import * as Urls from '../../../steps/urls';
@@ -175,7 +176,7 @@ export const UserRole = (
   userCase: Partial<CaseWithId>
 ): SummaryList | undefined => {
   const isNamedApplicant =
-    userCase['namedApplicant'] === true ? 'Yes' : 'No - I am sending an application for someone else.';
+    userCase['namedApplicant'] === YesOrNo.YES ? 'Yes' : 'No - I am sending an application for someone else.';
 
   const SummaryData = [
     {

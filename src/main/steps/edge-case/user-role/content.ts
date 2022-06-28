@@ -9,7 +9,7 @@ const USER_ROLE = 'user-role';
 export const form: FormContent = {
   fields: () => {
     return {
-      applyingForSelf: {
+      namedApplicant: {
         type: 'radios',
         classes: 'govuk-radios',
         label: l => l.label,

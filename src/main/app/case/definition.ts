@@ -88,7 +88,7 @@ export const enum ContactDetails {
 
 export interface CaseData {
   caseID: string;
-  namedApplicant: boolean;
+  namedApplicant: YesOrNo;
   applicantFirstName: string;
   applicantLastName: string;
   applicantDateOfBirth: string;

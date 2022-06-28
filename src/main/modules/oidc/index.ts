@@ -4,7 +4,7 @@ import { Application, NextFunction, Response } from 'express';
 import { getRedirectUrl, getUserDetails } from '../../app/auth/user/oidc';
 import { getCaseApi } from '../../app/case/CaseApi';
 import { AppRequest } from '../../app/controller/AppRequest';
-import { CALLBACK_URL, ELIGIBILITY_URL, SIGN_IN_URL, SIGN_OUT_URL, USER_ROLE } from '../../steps/urls';
+import { CALLBACK_URL, SIGN_IN_URL, SIGN_OUT_URL, USER_ROLE } from '../../steps/urls';
 
 //TODO remove applicant2 related stuff
 /**
@@ -36,9 +36,6 @@ export class OidcMiddleware {
 
     app.use(
       errorHandler(async (req: AppRequest, res: Response, next: NextFunction) => {
-        if (req.path.startsWith(ELIGIBILITY_URL)) {
-          return next();
-        }
         if (req.session?.user) {
           res.locals.isLoggedIn = true;
           req.locals.api = getCaseApi(req.session.user, req.locals.logger);
