@@ -162,7 +162,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
           };
         });
         const CaseData = mapCaseData(req);
-        const responseBody = { ...CaseData, applicantApplicationFormDocuments: MappedRequestCaseDocuments };
+        const responseBody = { ...CaseData, applicantAdditionalDocuments: MappedRequestCaseDocuments };
         const requestData = await this.UploadDocumentInstance(AttachFileToCaseBaseURL, Headers).put(
           baseURL,
           responseBody
