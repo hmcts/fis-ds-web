@@ -194,10 +194,13 @@ interface CreateCaseResponse {
 }
 
 export const mapCaseData = (req: AppRequest): any => {
-  return {
+  const data = {
+    namedApplicant: req.session.userCase.namedApplicant,
+    caseTypeOfApplication: req.session['edgecaseType'],
     applicantFirstName: req.session.userCase.applicantFirstName,
     applicantLastName: req.session.userCase.applicantLastName,
     applicantDateOfBirth: toApiDate(req.session.userCase.applicantDateOfBirth),
+    applicantContactPreference: req.session.userCase['contactPreferenceType'],
     applicantEmailAddress: req.session.userCase.applicantEmailAddress,
     applicantPhoneNumber: req.session.userCase.applicantPhoneNumber,
     applicantHomeNumber: req.session.userCase.applicantHomeNumber,
@@ -207,4 +210,5 @@ export const mapCaseData = (req: AppRequest): any => {
     applicantAddressCountry: 'United Kingdom',
     applicantAddressPostCode: req.session.userCase.applicantAddressPostcode,
   };
+  return data;
 };

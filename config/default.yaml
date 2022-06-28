@@ -14,14 +14,15 @@ services:
     clientSecret: 'NEED TO INSERT SECRET'
     systemUsername: 'dummy_user'
     systemPassword: 'dummy_password'
-  fis:
-    url: 'http://fis-cos-api-pr-72.service.core-compute-preview.internal'
+  case:
+    url: 'http://fis-cos-api-pr-79.service.core-compute-preview.internal/case/dss-orchestration/'
   postcodeLookup:
     url: 'https://api.os.uk/search/places/v1'
     token: 'NEED TO INSERT SECRET'
   hmctsHomePage:
     url: 'https://www.gov.uk/government/organisations/hm-courts-and-tribunals-service'
   documentManagement:
+    url: 'http://fis-cos-api-pr-79.service.core-compute-preview.internal' 
     uploadSizeinMB: 30
   RPE_TOKEN:
     url: 'http://rpe-service-auth-provider-aat.service.core-compute-aat.internal'

@@ -5,6 +5,7 @@ import config from 'config';
 import { Response } from 'express';
 import FormData from 'form-data';
 
+import { mapCaseData } from '../../../app/case/CaseApi';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { FormFields, FormFieldsFn } from '../../../app/form/Form';
@@ -63,6 +64,7 @@ type FileUploadErrorTranslatables = {
 
 export const FileUploadBaseURL: URL_OF_FILE = config.get(FIS_COS_API_BASE_URL);
 
+export const AttachFileToCaseBaseURL: URL_OF_FILE = config.get('services.documentManagement.url');
 /**
  * @FileHandler
  */
@@ -139,9 +141,40 @@ export default class UploadDocumentController extends PostController<AnyObject> 
   }
 
   async PostDocumentUploader(req: AppRequest<AnyObject>, res: Response): Promise<void> {
-    const CaseDocument: any[] = [];
     if (req.session.hasOwnProperty('caseDocuments')) {
-      console.log(CaseDocument);
+      const CaseId = req.session.userCase['id'];
+      const baseURL = `/case/dss-orchestration/${CaseId}/update?event=UPDATE`;
+      const Headers = {
+        Authorization: `Bearer ${req.session.user['accessToken']}`,
+      };
+      try {
+        const MappedRequestCaseDocuments = req.session['caseDocuments'].map(document => {
+          const { url, fileName, documentId, binaryUrl } = document;
+          return {
+            id: documentId,
+            value: {
+              documentLink: {
+                document_url: url,
+                document_filename: fileName,
+                document_binary_url: binaryUrl,
+              },
+            },
+          };
+        });
+        const CaseData = mapCaseData(req);
+        const responseBody = { ...CaseData, applicantApplicationFormDocuments: MappedRequestCaseDocuments };
+        res.json(responseBody);
+        const requestData = await this.UploadDocumentInstance(AttachFileToCaseBaseURL, Headers).put(
+          baseURL,
+          responseBody
+        );
+
+        res.json(requestData);
+        // res.redirect(ADDITIONAL_DOCUMENTS_UPLOAD);
+      } catch (error) {
+        res.json({ error, responseBody: req.session.userCase });
+        console.log(error);
+      }
     }
 
     res.redirect(ADDITIONAL_DOCUMENTS_UPLOAD);
