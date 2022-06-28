@@ -148,6 +148,20 @@ export default class UploadDocumentController extends PostController<AnyObject> 
         Authorization: `Bearer ${req.session.user['accessToken']}`,
       };
       try {
+        const MappedUploadRequestCaseDocuments = req.session['caseDocuments'].map(document => {
+          const { url, fileName, documentId, binaryUrl } = document;
+          return {
+            id: documentId,
+            value: {
+              documentLink: {
+                document_url: url,
+                document_filename: fileName,
+                document_binary_url: binaryUrl,
+              },
+            },
+          };
+        });
+
         const MappedRequestCaseDocuments = req.session['AddtionalCaseDocuments'].map(document => {
           const { url, fileName, documentId, binaryUrl } = document;
           return {
@@ -162,12 +176,13 @@ export default class UploadDocumentController extends PostController<AnyObject> 
           };
         });
         const CaseData = mapCaseData(req);
-        const responseBody = { ...CaseData, applicantAdditionalDocuments: MappedRequestCaseDocuments };
-        const requestData = await this.UploadDocumentInstance(AttachFileToCaseBaseURL, Headers).put(
-          baseURL,
-          responseBody
-        );
-        console.log(requestData);
+        const responseBody = {
+          ...CaseData,
+          applicantAdditionalDocuments: MappedRequestCaseDocuments,
+          applicantApplicationFormDocuments: MappedUploadRequestCaseDocuments,
+        };
+
+        await this.UploadDocumentInstance(AttachFileToCaseBaseURL, Headers).put(baseURL, responseBody);
         res.redirect(CHECK_YOUR_ANSWERS);
       } catch (error) {
         console.log(error);
