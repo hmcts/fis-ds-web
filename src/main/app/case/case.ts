@@ -1,6 +1,6 @@
 import { AnyObject } from '../controller/PostController';
 
-import { CaseData } from './definition';
+import { CaseData, YesOrNo } from './definition';
 
 export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>> = {
   applicantDateOfBirth: 'applicantDateOfBirth',
@@ -25,7 +25,7 @@ export type FieldFormats = Record<string, string | ((AnyObject) => AnyObject)>;
 /***@caseData */
 export interface Case {
   /*********All information related to the Case */
-  namedApplicant: boolean;
+  namedApplicant: YesOrNo;
   applicantFirstName: string;
   applicantLastName: string;
   applicantDateOfBirth: CaseDate;

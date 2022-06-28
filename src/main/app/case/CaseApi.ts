@@ -2,6 +2,17 @@ import Axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import config from 'config';
 import { LoggerInstance } from 'winston';
 
+import {
+  APPLICATION_JSON,
+  AUTHORIZATION,
+  BEARER,
+  CONTENT_TYPE,
+  CONTEXT_PATH,
+  CREATE_API_PATH,
+  FIS_COS_API_BASE_URL,
+  UPDATE_API_PATH,
+} from '../../steps/common/constants/apiConstants';
+import { EMPTY, FORWARD_SLASH, SPACE } from '../../steps/common/constants/commonConstants';
 import { getServiceAuthToken } from '../auth/service/get-service-auth-token';
 import { AppRequest, UserDetails } from '../controller/AppRequest';
 
@@ -45,15 +56,15 @@ export class CaseApi {
    * @returns
    */
   public async updateCase(req: AppRequest, userDetails: UserDetails): Promise<any> {
-    Axios.defaults.headers.put['Content-Type'] = 'application/json';
-    Axios.defaults.headers.put['Authorization'] = 'Bearer ' + userDetails.accessToken;
+    Axios.defaults.headers.put[CONTENT_TYPE] = APPLICATION_JSON;
+    Axios.defaults.headers.put[AUTHORIZATION] = BEARER + SPACE + userDetails.accessToken;
     try {
-      if (req.session.userCase.id === '') {
+      if (req.session.userCase.id === EMPTY) {
         throw new Error('Error in updating case, case id is missing');
       }
-      const url: string = config.get('services.case.url');
+      const url: string = config.get(FIS_COS_API_BASE_URL);
       const res: AxiosResponse<CreateCaseResponse> = await Axios.put(
-        url + req.session.userCase.id + '/update',
+        url + CONTEXT_PATH + FORWARD_SLASH + req.session.userCase.id + UPDATE_API_PATH,
         mapCaseData(req),
         {
           params: { event: 'UPDATE' },
@@ -78,9 +89,13 @@ export class CaseApi {
    */
   public async createCaseNew(req: AppRequest, userDetails: UserDetails): Promise<any> {
     try {
-      const url: string = config.get('services.case.url');
-      const headers = { 'Content-Type': 'application/json', Authorization: 'Bearer ' + userDetails.accessToken };
-      const res: AxiosResponse<CreateCaseResponse> = await Axios.post(url + 'create', mapCaseData(req), { headers });
+      const url: string = config.get(FIS_COS_API_BASE_URL);
+      const headers = { CONTENT_TYPE: APPLICATION_JSON, Authorization: BEARER + SPACE + userDetails.accessToken };
+      const res: AxiosResponse<CreateCaseResponse> = await Axios.post(
+        url + CONTEXT_PATH + CREATE_API_PATH,
+        mapCaseData(req),
+        { headers }
+      );
       if (res.status === 200) {
         req.session.userCase.id = res.data.id;
         return req.session.userCase;
@@ -160,7 +175,7 @@ export class CaseApi {
 export const getCaseApi = (userDetails: UserDetails, logger: LoggerInstance): CaseApi => {
   return new CaseApi(
     Axios.create({
-      baseURL: config.get('services.case.url'),
+      baseURL: config.get('services.fis.url'),
       headers: {
         Authorization: 'Bearer ' + userDetails.accessToken,
         ServiceAuthorization: getServiceAuthToken(),
@@ -179,7 +194,7 @@ interface CreateCaseResponse {
 }
 
 export const mapCaseData = (req: AppRequest): any => {
-  const data = {
+  return {
     applicantFirstName: req.session.userCase.applicantFirstName,
     applicantLastName: req.session.userCase.applicantLastName,
     applicantDateOfBirth: toApiDate(req.session.userCase.applicantDateOfBirth),
@@ -192,5 +207,4 @@ export const mapCaseData = (req: AppRequest): any => {
     applicantAddressCountry: 'United Kingdom',
     applicantAddressPostCode: req.session.userCase.applicantAddressPostcode,
   };
-  return data;
 };

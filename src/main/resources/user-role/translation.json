@@ -17,12 +17,12 @@
     },
     "errors":{
         "en": {
-            "applyingForSelf": {
+            "namedApplicant": {
                 "required": "Please select an answer before you can proceed further"
             }
         },
         "cy": {
-            "applyingForSelf": {
+            "namedApplicant": {
                 "required": "Please select an answer before you can proceed further (in welsh)"
             }
         }
