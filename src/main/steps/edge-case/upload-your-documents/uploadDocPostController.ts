@@ -5,6 +5,8 @@ import config from 'config';
 import { Response } from 'express';
 import FormData from 'form-data';
 
+// eslint-disable-next-line import/namespace
+import { mapCaseData } from '../../../app/case/CaseApi';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { FormFields, FormFieldsFn } from '../../../app/form/Form';
@@ -63,6 +65,7 @@ type FileUploadErrorTranslatables = {
 
 export const FileUploadBaseURL: URL_OF_FILE = config.get(FIS_COS_API_BASE_URL);
 
+export const AttachFileToCaseBaseURL: URL_OF_FILE = config.get('services.documentManagement.url');
 /**
  * @FileHandler
  */
@@ -139,12 +142,56 @@ export default class UploadDocumentController extends PostController<AnyObject> 
   }
 
   async PostDocumentUploader(req: AppRequest<AnyObject>, res: Response): Promise<void> {
-    const CaseDocument: any[] = [];
     if (req.session.hasOwnProperty('caseDocuments')) {
-      console.log(CaseDocument);
-    }
+      const CaseId = req.session.userCase['id'];
+      const baseURL = '/case/dss-orchestration/' + CaseId + '/update?event=UPDATE';
+      const Headers = {
+        Authorization: `Bearer ${req.session.user['accessToken']}`,
+      };
+      try {
+        const MappedRequestCaseDocuments = req.session['caseDocuments'].map(document => {
+          const { url, fileName, documentId, binaryUrl } = document;
+          return {
+            id: documentId,
+            value: {
+              documentLink: {
+                document_url: url,
+                document_filename: fileName,
+                document_binary_url: binaryUrl,
+              },
+            },
+          };
+        });
 
-    res.redirect(ADDITIONAL_DOCUMENTS_UPLOAD);
+        let AdditionalDocuments = [];
+        if (req.session.AddtionalCaseDocuments !== undefined) {
+          AdditionalDocuments = req.session['AddtionalCaseDocuments'].map(document => {
+            // eslint-disable-next-line @typescript-eslint/no-shadow
+            const { url, fileName, documentId, binaryUrl } = document;
+            return {
+              id: documentId,
+              value: {
+                documentLink: {
+                  document_url: url,
+                  document_filename: fileName,
+                  document_binary_url: binaryUrl,
+                },
+              },
+            };
+          });
+        }
+        const CaseData = mapCaseData(req);
+        const responseBody = {
+          ...CaseData,
+          applicantApplicationFormDocuments: MappedRequestCaseDocuments,
+          applicantAdditionalDocuments: AdditionalDocuments,
+        };
+        await this.UploadDocumentInstance(AttachFileToCaseBaseURL, Headers).put(baseURL, responseBody);
+        res.redirect(ADDITIONAL_DOCUMENTS_UPLOAD);
+      } catch (error) {
+        console.log(error);
+      }
+    }
   }
 
   public UploadDocumentInstance = (BASEURL: string, header: AxiosRequestHeaders): AxiosInstance => {
@@ -210,7 +257,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
             };
             try {
               const RequestDocument = await this.UploadDocumentInstance(FileUploadBaseURL, Headers).post(
-                '/doc/dss-orhestration/upload',
+                `/doc/dss-orhestration/upload?caseTypeOfApplication=${req.session['edgecaseType']}`,
                 formData,
                 {
                   headers: {

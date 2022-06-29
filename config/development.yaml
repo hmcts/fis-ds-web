@@ -8,7 +8,7 @@ services:
     microservice: 'ds_ui'
     secret: 'NEED TO INSERT SECRET'
   fis:
-    url: 'http://fis-cos-api-pr-72.service.core-compute-preview.internal'
+    url: 'http://fis-cos-api-pr-80.service.core-compute-preview.internal'
   postcodeLookup:
     url: 'https://api.os.uk/search/places/v1'
     token: 'NEED TO INSERT SECRET'
@@ -17,6 +17,7 @@ services:
   hmctsHomePage:
     url: 'https://www.gov.uk/government/organisations/hm-courts-and-tribunals-service'
   documentManagement:
+    url: 'http://fis-cos-api-pr-80.service.core-compute-preview.internal'  
     uploadSizeinMB: 30
   RPE_TOKEN:
     url: 'http://rpe-service-auth-provider-aat.service.core-compute-aat.internal'
