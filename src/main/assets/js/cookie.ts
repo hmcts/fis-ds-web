@@ -32,6 +32,8 @@ function cookieBannerAccept() {
 function cookieBannerReject() {
   const confirmationMessage = cookieBannerConfirmation?.querySelector('p') as HTMLInputElement;
   confirmationMessage.innerHTML = 'You’ve rejected additional cookies. ' + confirmationMessage.innerHTML;
+  const rejectedCookies = decodeURIComponent(JSON.stringify({ analytics: 'off', apm: 'off' }));
+  setCookie('ds-web-cookie-preferences', rejectedCookies, 365);
 }
 
 function cookieBannerSaved() {
