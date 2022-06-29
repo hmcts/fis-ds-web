@@ -162,8 +162,30 @@ export default class UploadDocumentController extends PostController<AnyObject> 
             },
           };
         });
+
+        let AdditionalDocuments = [];
+        if (req.session.AddtionalCaseDocuments !== undefined) {
+          AdditionalDocuments = req.session['AddtionalCaseDocuments'].map(document => {
+            // eslint-disable-next-line @typescript-eslint/no-shadow
+            const { url, fileName, documentId, binaryUrl } = document;
+            return {
+              id: documentId,
+              value: {
+                documentLink: {
+                  document_url: url,
+                  document_filename: fileName,
+                  document_binary_url: binaryUrl,
+                },
+              },
+            };
+          });
+        }
         const CaseData = mapCaseData(req);
-        const responseBody = { ...CaseData, applicantApplicationFormDocuments: MappedRequestCaseDocuments };
+        const responseBody = {
+          ...CaseData,
+          applicantApplicationFormDocuments: MappedRequestCaseDocuments,
+          applicantAdditionalDocuments: AdditionalDocuments,
+        };
         await this.UploadDocumentInstance(AttachFileToCaseBaseURL, Headers).put(baseURL, responseBody);
         res.redirect(ADDITIONAL_DOCUMENTS_UPLOAD);
       } catch (error) {

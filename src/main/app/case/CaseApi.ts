@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 import Axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import config from 'config';
 import { LoggerInstance } from 'winston';
@@ -63,9 +64,42 @@ export class CaseApi {
         throw new Error('Error in updating case, case id is missing');
       }
       const url: string = config.get(FIS_COS_API_BASE_URL);
+      const AdditionalDocuments = req.session['AddtionalCaseDocuments'].map(document => {
+        // eslint-disable-next-line @typescript-eslint/no-shadow
+        const { url, fileName, documentId, binaryUrl } = document;
+        return {
+          id: documentId,
+          value: {
+            documentLink: {
+              document_url: url,
+              document_filename: fileName,
+              document_binary_url: binaryUrl,
+            },
+          },
+        };
+      });
+      const CaseDocuments = req.session['caseDocuments'].map(document => {
+        const { url, fileName, documentId, binaryUrl } = document;
+        return {
+          id: documentId,
+          value: {
+            documentLink: {
+              document_url: url,
+              document_filename: fileName,
+              document_binary_url: binaryUrl,
+            },
+          },
+        };
+      });
+
+      const data = {
+        ...mapCaseData(req),
+        applicantAdditionalDocuments: AdditionalDocuments,
+        applicantApplicationFormDocuments: CaseDocuments,
+      };
       const res: AxiosResponse<CreateCaseResponse> = await Axios.put(
         url + CONTEXT_PATH + FORWARD_SLASH + req.session.userCase.id + UPDATE_API_PATH,
-        mapCaseData(req),
+        data,
         {
           params: { event: 'UPDATE' },
         }
