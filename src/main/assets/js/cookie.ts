@@ -25,8 +25,8 @@ function setCookie(key, value, expiry) {
 function cookieBannerAccept() {
   const confirmationMessage = cookieBannerConfirmation?.querySelector('p') as HTMLInputElement;
   confirmationMessage.innerHTML = 'You’ve accepted additional cookies. ' + confirmationMessage.innerHTML;
-  const getCookieFromBrowser = getCookie('web-cookie-preferences');
-  setCookie('web-cookie-preferences', getCookieFromBrowser, 365);
+  const getCookieFromBrowser = getCookie('ds-web-cookie-preferences');
+  setCookie('ds-web-cookie-preferences', getCookieFromBrowser, 365);
 }
 
 function cookieBannerReject() {
@@ -64,7 +64,7 @@ function cookiePreferencesUpdated(cookieStatus) {
 }
 
 cookieManager.init({
-  'user-preference-cookie-name': 'web-cookie-preferences',
+  'user-preference-cookie-name': 'ds-web-cookie-preferences',
   'user-preference-saved-callback': cookiePreferencesUpdated,
   'preference-form-id': 'cm-preference-form',
   'preference-form-saved-callback': preferenceFormSaved,
@@ -79,7 +79,7 @@ cookieManager.init({
     {
       'category-name': 'essential',
       optional: false,
-      cookies: ['web-cookie-preferences', '_oauth2_proxy', 'ajs_user_id', 'ajs_group_id', 'ajs_anonymous_id'],
+      cookies: ['ds-web-cookie-preferences', '_oauth2_proxy', 'ajs_user_id', 'ajs_group_id', 'ajs_anonymous_id'],
     },
     {
       'category-name': 'analytics',
