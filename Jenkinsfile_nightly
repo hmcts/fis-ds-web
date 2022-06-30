@@ -12,6 +12,11 @@ def type = "nodejs"
 def product = "fis"
 def component = "ds-web"
 
+// SAUCELABS config - configured on Jenkins
+env.SAUCE_USERNAME = 'username'
+env.SAUCE_ACCESS_KEY = 'privatekey'
+env.SAUCE_TUNNEL_IDENTIFIER = 'reformtunnel'
+
 def yarnBuilder = new uk.gov.hmcts.contino.YarnBuilder(this)
 
 static Map<String, Object> secret(String secretName, String envVariable) {
@@ -36,9 +41,36 @@ def pipelineConf = new AppPipelineConfig()
 pipelineConf.vaultSecrets = secrets
 
 withNightlyPipeline(type, product, component) {
-
+  env.TEST_URL = "https://fis-ds-web.aat.platform.hmcts.net/"
   env.DS_UI = params.FRONTEND_URL
-//   after('test') {
-//     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'coverage/**/*'
-//   }
+  enableCrossBrowserTest(['chrome','microsoft'])
+  enableFullFunctionalTest(120)
+  loadVaultSecrets(secrets)
+  //  enablePactAs([ AppPipelineDsl.PactRoles.CONSUMER ])
+  //  enableFortifyScan()
+  //  enableSecurityScan()
+
+after('test') {
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'coverage/**/*'
+  }
+
+  before('crossBrowserTest') {
+
+  }
+
+  after('crossBrowserTest') {
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
+  }
+
+  before('fullFunctionalTest') {
+    env.PARALLEL_CHUNKS = params.FUNCTIONAL_TESTS_WORKERS
+  }
+
+  after('fullFunctionalTest') {
+    archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
+  }
+
+  after('fortify-scan') {
+    steps.archiveArtifacts allowEmptyArchive: true, artifacts: '**/Fortify Scan/**/*'
+  }
 }
