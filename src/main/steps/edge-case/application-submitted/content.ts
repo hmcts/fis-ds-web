@@ -9,7 +9,6 @@ export const generateContent: TranslationFn = content => {
   const Translations = resourceLoader.getFileContents().translations;
 
   const en = () => {
-    console.log('userCase:' + content.userCase?.id);
     const caseId = content.userCase?.id?.toString().replace(/.{4}/g, '$&-').substring(0, 19);
     return {
       ...Translations.en,
