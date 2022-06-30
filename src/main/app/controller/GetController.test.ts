@@ -25,6 +25,13 @@ describe('GetController', () => {
     const res = mockResponse();
     await controller.get(req, res);
 
+    const requestWithCookiesParams = req;
+    requestWithCookiesParams.query = {
+      analytics: 'off',
+      apm: 'off',
+    };
+    await controller.CookiePrefrencesChanger(requestWithCookiesParams, res);
+
     /*expect(res.render).toBeCalledWith('page', {
       ...defaultViewArgs,
       language: 'en',

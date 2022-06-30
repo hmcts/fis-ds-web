@@ -6,14 +6,34 @@ const cookieBanner = qs('#cm-cookie-banner');
 const cookieBannerDecision = cookieBanner?.querySelector('.govuk-cookie-banner__decision') as HTMLInputElement;
 const cookieBannerConfirmation = cookieBanner?.querySelector('.govuk-cookie-banner__confirmation') as HTMLInputElement;
 
+function getCookie(cname) {
+  const cookies = Object.fromEntries(
+    document.cookie.split(/; /).map(c => {
+      const [key, v] = c.split('=', 2);
+      return [key, decodeURIComponent(v)];
+    })
+  );
+  return cookies[cname] || '';
+}
+
+function setCookie(key, value, expiry) {
+  const expires = new Date();
+  expires.setTime(expires.getTime() + expiry * 24 * 60 * 60 * 1000);
+  document.cookie = key + '=' + value + ';expires=' + expires.toUTCString();
+}
+
 function cookieBannerAccept() {
   const confirmationMessage = cookieBannerConfirmation?.querySelector('p') as HTMLInputElement;
   confirmationMessage.innerHTML = 'You’ve accepted additional cookies. ' + confirmationMessage.innerHTML;
+  const getCookieFromBrowser = getCookie('ds-web-cookie-preferences');
+  setCookie('ds-web-cookie-preferences', getCookieFromBrowser, 365);
 }
 
 function cookieBannerReject() {
   const confirmationMessage = cookieBannerConfirmation?.querySelector('p') as HTMLInputElement;
   confirmationMessage.innerHTML = 'You’ve rejected additional cookies. ' + confirmationMessage.innerHTML;
+  const rejectedCookies = decodeURIComponent(JSON.stringify({ analytics: 'off', apm: 'off' }));
+  setCookie('ds-web-cookie-preferences', rejectedCookies, 365);
 }
 
 function cookieBannerSaved() {
@@ -46,7 +66,7 @@ function cookiePreferencesUpdated(cookieStatus) {
 }
 
 cookieManager.init({
-  'user-preference-cookie-name': 'adoption-web-cookie-preferences',
+  'user-preference-cookie-name': 'ds-web-cookie-preferences',
   'user-preference-saved-callback': cookiePreferencesUpdated,
   'preference-form-id': 'cm-preference-form',
   'preference-form-saved-callback': preferenceFormSaved,
@@ -61,7 +81,7 @@ cookieManager.init({
     {
       'category-name': 'essential',
       optional: false,
-      cookies: ['adoption-web-cookie-preferences', '_oauth2_proxy', 'ajs_user_id', 'ajs_group_id', 'ajs_anonymous_id'],
+      cookies: ['ds-web-cookie-preferences', '_oauth2_proxy', 'ajs_user_id', 'ajs_group_id', 'ajs_anonymous_id'],
     },
     {
       'category-name': 'analytics',

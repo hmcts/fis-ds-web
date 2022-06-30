@@ -48,3 +48,5 @@ queryParamsforApp:
     FMP: 'FMPO'
     RLAD: 'RELADOP'
     FGM: 'FGM'
+cookies: 
+  expiryTime: 365
