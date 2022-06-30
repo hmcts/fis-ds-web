@@ -110,7 +110,7 @@ export class GetController {
      *      ************************************  ************************************
      *
      */
-    let PageRenderableContents = {
+    let pageRenderableContents = {
       ...content,
       uploadedDocuments: req.session['caseDocuments'],
       addtionalDocuments: req.session['AddtionalCaseDocuments'],
@@ -134,12 +134,12 @@ export class GetController {
     const CookieWithSaveQuery = COOKIES + '?togglesaveCookie=true';
     const checkforCookieUrlAndQuery = req.url === CookieWithSaveQuery;
     if (checkforCookieUrlAndQuery) {
-      PageRenderableContents = { ...PageRenderableContents, cookieMessage: true };
+      pageRenderableContents = { ...pageRenderableContents, cookieMessage: true };
     }
 
     const checkConditions = Object.values(RedirectConditions).includes(true);
     if (!checkConditions) {
-      res.render(this.view, PageRenderableContents);
+      res.render(this.view, pageRenderableContents);
     }
   }
 
