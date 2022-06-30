@@ -7,6 +7,7 @@ import Negotiator from 'negotiator';
 import { LanguageToggle } from '../../modules/i18n';
 import { CommonContent, Language, generatePageContent } from '../../steps/common/common.content';
 import { FIS_COS_API_BASE_URL } from '../../steps/common/constants/apiConstants';
+import { TOGGLE_SWITCH } from '../../steps/common/constants/commonConstants';
 import * as Urls from '../../steps/urls';
 import { ADDITIONAL_DOCUMENTS_UPLOAD, COOKIES, UPLOAD_YOUR_DOCUMENTS } from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
@@ -207,35 +208,35 @@ export class GetController {
       };
       if (req.query.hasOwnProperty('analytics')) {
         switch (req.query['analytics']) {
-          case 'off':
-            CookiePreferences['analytics'] = 'off';
+          case TOGGLE_SWITCH.OFF:
+            CookiePreferences['analytics'] = TOGGLE_SWITCH.OFF;
             break;
 
-          case 'on':
-            CookiePreferences['analytics'] = 'on';
+          case TOGGLE_SWITCH.ON:
+            CookiePreferences['analytics'] = TOGGLE_SWITCH.ON;
             break;
 
           default:
-            CookiePreferences['analytics'] = 'off';
+            CookiePreferences['analytics'] = TOGGLE_SWITCH.OFF;
         }
       }
       if (req.query.hasOwnProperty('apm')) {
         switch (req.query['apm']) {
-          case 'off':
-            CookiePreferences['apm'] = 'off';
+          case TOGGLE_SWITCH.OFF:
+            CookiePreferences['apm'] = TOGGLE_SWITCH.OFF;
             break;
 
-          case 'on':
-            CookiePreferences['apm'] = 'on';
+          case TOGGLE_SWITCH.ON:
+            CookiePreferences['apm'] = TOGGLE_SWITCH.ON;
             break;
 
           default:
-            CookiePreferences['apm'] = 'off';
+            CookiePreferences['apm'] = TOGGLE_SWITCH.OFF;
         }
       }
-      const CookieValue = JSON.stringify(CookiePreferences);
+      const cookieValue = JSON.stringify(CookiePreferences);
 
-      res.cookie('ds-web-cookie-preferences', CookieValue, {
+      res.cookie('ds-web-cookie-preferences', cookieValue, {
         maxAge: cookieExpiryDuration,
         httpOnly: false,
         encode: String,
