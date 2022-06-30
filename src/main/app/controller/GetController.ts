@@ -131,8 +131,8 @@ export class GetController {
      *      ************************************  ************************************
      *
      */
-    const CookieWithSaveQuery = COOKIES + '?togglesaveCookie=true';
-    const checkforCookieUrlAndQuery = req.url === CookieWithSaveQuery;
+    const cookieWithSaveQuery = COOKIES + '?togglesaveCookie=true';
+    const checkforCookieUrlAndQuery = req.url === cookieWithSaveQuery;
     if (checkforCookieUrlAndQuery) {
       pageRenderableContents = { ...pageRenderableContents, cookieMessage: true };
     }
