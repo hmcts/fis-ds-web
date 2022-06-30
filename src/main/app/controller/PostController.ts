@@ -12,7 +12,9 @@ import { ValidationError } from '../form/validation';
 import { AppRequest } from './AppRequest';
 
 enum noHitToSaveAndContinue {
-  CITIZEN_HOME_URL = '/citizen-home',
+  DATE_OF_BIRTH = '/date-of-birth',
+  CONTACT_PREFERENCES = '/contact-preferences',
+  EMAIL_ADDRESS = '/email-address',
 }
 
 @autobind
@@ -156,12 +158,10 @@ export class PostController<T extends AnyObject> {
   public getEventName(req: AppRequest): string {
     let eventName;
     if (req.originalUrl === CONTACT_DETAILS && this.isBlank(req)) {
-      console.log('creating new case event');
       eventName = CITIZEN_CREATE;
     } else if (req.originalUrl === CONTACT_DETAILS || req.originalUrl === STATEMENT_OF_TRUTH) {
       eventName = CITIZEN_UPDATE;
     }
-    console.log('event is => ' + eventName);
     return eventName;
   }
 
