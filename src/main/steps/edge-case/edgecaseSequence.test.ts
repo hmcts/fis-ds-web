@@ -19,7 +19,7 @@ import { edgecaseSequence } from './edgecaseSequence';
 
 describe('Sequence must match respective path', () => {
   test('must match the path', () => {
-    expect(edgecaseSequence).toHaveLength(15);
+    expect(edgecaseSequence).toHaveLength(16);
 
     expect(edgecaseSequence[0].url).toBe(USER_ROLE);
     expect(edgecaseSequence[0].getNextStep({})).toBe(FULL_NAME);
