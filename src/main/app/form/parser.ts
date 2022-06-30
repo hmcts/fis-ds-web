@@ -20,7 +20,7 @@ type CheckboxParser = (isSavingAndSigningOut: boolean) => ([key, field]: [string
 export const setupCheckboxParser: CheckboxParser =
   isSavingAndSigningOut =>
   ([key, field]) => {
-    if ((field as FormOptions)?.type === 'checkboxes') {
+    if ((field as FormOptions)?.type === 'checkboxes' && key !== 'applicantStatementOfTruth') {
       field.parser = formData => {
         const checkbox = formData[key] ?? [];
         let checkboxValues;

@@ -7,11 +7,11 @@ const STATEMENT_OF_TRUTH_TRANSLATION_FILE = 'statement-of-truth';
 
 export const form: FormContent = {
   fields: {
-    statementOfTruth: {
+    applicantStatementOfTruth: {
       type: 'checkboxes',
       classes: 'govuk-checkboxes',
       label: l => l.label,
-      values: [{ label: l => l.statementOfTruthLabel }],
+      values: [{ label: l => l.statementOfTruthLabel, value: 'Yes' }],
       validator: isFieldFilledIn,
     },
     confirmStatement: {
