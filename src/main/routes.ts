@@ -13,13 +13,12 @@ import { CSRF_TOKEN_ERROR_URL, HOME_URL, KEEP_ALIVE_URL, TIMED_OUT_URL } from '.
 
 export class Routes {
   /**
-   *
-   * @param app
+   * It enables the routes for the application
+   * @param {Application} app - Application - the express application
    */
   public enableFor(app: Application): void {
     const { errorHandler } = app.locals;
     const errorController = new ErrorController();
-
     app.get(CSRF_TOKEN_ERROR_URL, errorHandler(errorController.CSRFTokenError));
     app.get(HOME_URL, errorHandler(new HomeGetController().get));
     app.get(TIMED_OUT_URL, errorHandler(new TimedOutGetController().get));
