@@ -1,3 +1,12 @@
+/* The above code is importing the following:
+- autobind from 'autobind-decorator'
+- axios, { AxiosInstance } from 'axios'
+- config from 'config'
+- { Response } from 'express'
+- Negotiator from 'negotiator'
+- { LanguageToggle } from '../../modules/i18n'
+- { CommonContent, Language, generatePageContent } from '../../steps/common/common.content'
+- { FIS_COS_API_BASE_ */
 import autobind from 'autobind-decorator';
 import axios, { AxiosInstance } from 'axios';
 import config from 'config';
@@ -13,14 +22,22 @@ import { ADDITIONAL_DOCUMENTS_UPLOAD, COOKIES, UPLOAD_YOUR_DOCUMENTS } from '../
 import { Case, CaseWithId } from '../case/case';
 
 import { AppRequest } from './AppRequest';
+
 export type PageContent = Record<string, unknown>;
 export type TranslationFn = (content: CommonContent) => PageContent;
 
 export type AsyncTranslationFn = any;
 @autobind
+/* It's a class that is used to render the page content and also to delete documents from the session */
 export class GetController {
   constructor(protected readonly view: string, protected readonly content: TranslationFn) {}
 
+  /**
+   * This function is used to render the page content and also to delete documents from the session
+   * @param {AppRequest} req - AppRequest, res: Response
+   * @param {Response} res - Response - the response object
+   * @returns The return is a promise that resolves to a void.
+   */
   public async get(req: AppRequest, res: Response): Promise<void> {
     console.log('usercase session --->', req.session.userCase);
 
@@ -143,23 +160,32 @@ export class GetController {
     }
   }
 
+  /**
+   * If the user has selected a language, use that. If not, use the language saved in the session. If
+   * not, use the browser's default language
+   * @param {AppRequest} req - AppRequest - This is the request object that is passed to the middleware.
+   * @returns The language that the user has selected.
+   */
   private getPreferredLanguage(req: AppRequest) {
     // User selected language
     const requestedLanguage = req.query['lng'] as string;
     if (LanguageToggle.supportedLanguages.includes(requestedLanguage)) {
       return requestedLanguage;
     }
-
     // Saved session language
     if (req.session?.lang) {
       return req.session.lang;
     }
-
     // Browsers default language
     const negotiator = new Negotiator(req);
     return negotiator.language(LanguageToggle.supportedLanguages) || 'en';
   }
 
+  /**
+   * If the returnUrl query parameter is set, and it's a valid URL, then set the returnUrl session
+   * variable to the value of the returnUrl query parameter
+   * @param {AppRequest} req - AppRequest - this is the request object that is passed to the controller.
+   */
   public parseAndSetReturnUrl(req: AppRequest): void {
     if (req.query.returnUrl) {
       if (Object.values(Urls).find(item => item === `${req.query.returnUrl}`)) {
@@ -168,6 +194,14 @@ export class GetController {
     }
   }
 
+  /**
+   * It saves the form data to the case, and returns the updated case
+   * @param {AppRequest} req - AppRequest - this is the request object that is passed to the controller.
+   * It contains the session, the locals and the body.
+   * @param formData - The data that will be sent to the API.
+   * @param {string} eventName - The name of the event to trigger.
+   * @returns The case with the id
+   */
   public async save(req: AppRequest, formData: Partial<Case>, eventName: string): Promise<CaseWithId> {
     try {
       return await req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
@@ -179,7 +213,14 @@ export class GetController {
     }
   }
 
-  //eslint-disable-next-line @typescript-eslint/ban-types
+  /**
+   * It saves the session and then redirects the user to the same page
+   * @param {AppRequest} req - AppRequest - This is the request object that is passed to the route
+   * handler.
+   * @param {Response} res - Response - The response object from the Express framework.
+   * @param {Function} [callback] - A function to call after the session is saved.
+   */
+  // eslint-disable-next-line @typescript-eslint/ban-types
   public saveSessionAndRedirect(req: AppRequest, res: Response, callback?: Function): void {
     req.session.save(err => {
       if (err) {
@@ -192,8 +233,12 @@ export class GetController {
       }
     });
   }
-
-  /**Cookies prefrences saver */
+  /**
+   *
+   * @param {AppRequest} req - AppRequest - This is the request object that is passed to the route
+   * handler.
+   * @param {Response} res - Response - The response object from the Express framework.
+   */
 
   public CookiePrefrencesChanger = (req: AppRequest, res: Response): void => {
     //?analytics=off&apm=off
@@ -246,6 +291,11 @@ export class GetController {
     }
   };
 
+  /**
+   * It deletes a document from the session and from the database
+   * @param {AppRequest} req - AppRequest - this is the request object that is passed to the controller.
+   * @param {Response} res - Response - The response object
+   */
   public async documentDeleteManager(req: AppRequest, res: Response): Promise<void> {
     if (
       req.query.hasOwnProperty('query') &&
@@ -308,6 +358,11 @@ export class GetController {
     }
   }
 
+  /**
+   * > This function returns the name of the event that will be emitted when the request is completed
+   * @param {AppRequest} req - The request object
+   * @returns The event name.
+   */
   //eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected getEventName(req: AppRequest): string {
     return '';
