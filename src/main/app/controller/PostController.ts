@@ -26,8 +26,6 @@ export class PostController<T extends AnyObject> {
     const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase) : this.fields;
     const form = new Form(fields);
 
-    console.log(req.body);
-
     const { saveAndSignOut, saveBeforeSessionTimeout, _csrf, ...formData } = form.getParsedBody(req.body);
 
     if (req.body.saveAndSignOut) {
