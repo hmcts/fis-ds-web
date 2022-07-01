@@ -3,6 +3,7 @@ import Axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import config from 'config';
 import { LoggerInstance } from 'winston';
 
+/* Importing the constants from the apiConstants file. */
 import {
   APPLICATION_JSON,
   AUTHORIZATION,
@@ -44,18 +45,6 @@ export class CaseApi {
   public async getOrCreateCase(): Promise<any> {
     return { id: '', state: 'FIS' };
   }
-  /**
-   * "Get a case or create a new one if it doesn't exist."
-   *
-   * The function is asynchronous, so it returns a promise. The promise resolves to an object with two
-   * properties: id and state
-   * @returns An object with an id and state property.
-   */
-  public async getCaseById(): Promise<CaseWithId> {
-    return new Promise(() => {
-      null;
-    });
-  }
 
   /**
    * It updates the case in the CCD database
@@ -64,16 +53,27 @@ export class CaseApi {
    * @returns The case id
    */
   public async updateCase(req: AppRequest, userDetails: UserDetails): Promise<any> {
+    /* Setting the headers for the PUT request. */
     Axios.defaults.headers.put[CONTENT_TYPE] = APPLICATION_JSON;
     Axios.defaults.headers.put[AUTHORIZATION] = BEARER + SPACE + userDetails.accessToken;
     try {
+      /* Checking if the case id is missing. If it is missing, it throws an error. */
       if (req.session.userCase.id === EMPTY) {
         throw new Error('Error in updating case, case id is missing');
       }
       const url: string = config.get(FIS_COS_API_BASE_URL);
+      /* Mapping the session data to the API data structure. */
       const AdditionalDocuments = req.session['AddtionalCaseDocuments'].map(document => {
         // eslint-disable-next-line @typescript-eslint/no-shadow
+        /* Destructuring the document object. */
         const { url, fileName, documentId, binaryUrl } = document;
+        /* Returning an object with the following properties:
+       id
+       value
+       documentLink
+       document_url
+       document_filename
+       document_binary_url */
         return {
           id: documentId,
           value: {
@@ -85,8 +85,17 @@ export class CaseApi {
           },
         };
       });
+      /* Mapping the session data to the API data structure. */
       const CaseDocuments = req.session['caseDocuments'].map(document => {
+        /* Destructuring the document object. */
         const { url, fileName, documentId, binaryUrl } = document;
+        /* Returning an object with the following properties:
+        id
+        value
+        documentLink
+        document_url
+        document_filename
+        document_binary_url */
         return {
           id: documentId,
           value: {
@@ -99,11 +108,14 @@ export class CaseApi {
         };
       });
 
+      /* Creating a new object with the properties of the mapCaseData object and the
+     AdditionalDocuments and CaseDocuments objects. */
       const data = {
         ...mapCaseData(req),
         applicantAdditionalDocuments: AdditionalDocuments,
         applicantApplicationFormDocuments: CaseDocuments,
       };
+      /* Making a PUT request to the API. */
       const res: AxiosResponse<CreateCaseResponse> = await Axios.put(
         url + CONTEXT_PATH + FORWARD_SLASH + req.session.userCase.id + UPDATE_API_PATH,
         data,
@@ -112,6 +124,7 @@ export class CaseApi {
         }
       );
       if (res.status === 200) {
+        /* Returning the userCase object from the session. */
         return req.session.userCase;
       } else {
         throw new Error('Error in updating case');
@@ -131,13 +144,17 @@ export class CaseApi {
    */
   public async createCaseNew(req: AppRequest, userDetails: UserDetails): Promise<any> {
     try {
+      /* Getting the base URL of the API from the config file. */
       const url: string = config.get(FIS_COS_API_BASE_URL);
       const headers = { CONTENT_TYPE: APPLICATION_JSON, Authorization: BEARER + SPACE + userDetails.accessToken };
       const res: AxiosResponse<CreateCaseResponse> = await Axios.post(
         url + CONTEXT_PATH + CREATE_API_PATH,
+        /* Mapping the session data to the API data structure. */
         mapCaseData(req),
         { headers }
       );
+      /* Checking the status of the response. If the status is 200, it is setting the case id in the
+     session. */
       if (res.status === 200) {
         req.session.userCase.id = res.data.id;
         return req.session.userCase;
@@ -145,6 +162,7 @@ export class CaseApi {
         throw new Error('Error in creating case');
       }
     } catch (err) {
+      /* Logging the error and throwing an error. */
       this.logError(err);
       throw new Error('Error in creating case');
     }
@@ -158,6 +176,7 @@ export class CaseApi {
    */
 
   public async getCaseUserRoles(caseId: string, userId: string): Promise<CaseAssignedUserRoles> {
+    /* Fetching the roles of a user in a case. */
     try {
       const response = await this.axios.get<CaseAssignedUserRoles>(`case-users?case_ids=${caseId}&user_ids=${userId}`);
       return response.data;
