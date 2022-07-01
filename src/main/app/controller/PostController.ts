@@ -3,9 +3,9 @@ import config from 'config';
 import { Response } from 'express';
 
 import { getNextStepUrl } from '../../steps';
-import { CONTACT_DETAILS, SAVE_AND_SIGN_OUT, STATEMENT_OF_TRUTH } from '../../steps/urls';
+import { CONTACT_DETAILS, STATEMENT_OF_TRUTH } from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
-import { CITIZEN_CREATE, CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE } from '../case/definition';
+import { CITIZEN_CREATE, CITIZEN_UPDATE } from '../case/definition';
 import { Form, FormFields, FormFieldsFn } from '../form/Form';
 import { ValidationError } from '../form/validation';
 
@@ -30,24 +30,13 @@ export class PostController<T extends AnyObject> {
 
     const { saveAndSignOut, saveBeforeSessionTimeout, _csrf, ...formData } = form.getParsedBody(req.body);
 
-    if (req.body.saveAndSignOut) {
-      await this.saveAndSignOut(req, res, formData);
-    } else if (req.body.saveBeforeSessionTimeout) {
+    if (req.body.saveBeforeSessionTimeout) {
       await this.saveBeforeSessionTimeout(req, res, formData);
     } else if (req.body.cancel) {
       await this.cancel(req, res);
     } else {
       await this.saveAndContinue(req, res, form, formData);
     }
-  }
-
-  private async saveAndSignOut(req: AppRequest<T>, res: Response, formData: Partial<Case>): Promise<void> {
-    try {
-      await this.save(req, formData, CITIZEN_SAVE_AND_CLOSE);
-    } catch {
-      // ignore
-    }
-    res.redirect(SAVE_AND_SIGN_OUT);
   }
 
   private async saveBeforeSessionTimeout(req: AppRequest<T>, res: Response, formData: Partial<Case>): Promise<void> {
