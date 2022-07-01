@@ -43,7 +43,7 @@ pipelineConf.vaultSecrets = secrets
 withNightlyPipeline(type, product, component) {
   env.TEST_URL = "https://fis-ds-web.aat.platform.hmcts.net/?edgecaseType=FMP"
   env.DS_UI = params.FRONTEND_URL
-  enableCrossBrowserTest(['chrome','microsoft'])
+  enableCrossBrowserTest()
   //enableFullFunctionalTest(120)
   loadVaultSecrets(secrets)
   //  enablePactAs([ AppPipelineDsl.PactRoles.CONSUMER ])
