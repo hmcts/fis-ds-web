@@ -64,7 +64,7 @@ export const generatePageContent = ({
 };
 
 const getServiceName = (translations: typeof en): string => {
-  return capitalize(translations.applyForAdoption);
+  return capitalize(translations.applyFordss);
 };
 
 export type CommonContent = typeof en & {

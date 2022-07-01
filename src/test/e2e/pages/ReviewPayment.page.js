@@ -16,15 +16,15 @@ module.exports = {
     I.see('The application court fees total £0.')
     }
     
-    else if (I.see('Paying your International adoption application court fees')) {
+    else if (I.see('Paying your International dss application court fees')) {
     I.see('The application court fees total £183.');
     }
 
-    else if (I.see('Paying your Relinquished adoption application court fees')) {
+    else if (I.see('Paying your Relinquished dss application court fees')) {
     I.see('The application court fees total £183.');
     }
 
-    else if (I.see('Paying your Stepparent Adoption application court fees')) {
+    else if (I.see('Paying your Stepparent dss application court fees')) {
     I.see('The application court fees total £183.');
     }
 

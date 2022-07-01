@@ -9,7 +9,7 @@ Scenario(
     landingPage,
     familypage,
     applytoapplicantpage,
-    adoptionpage,
+    dsspage,
     contactdetails,
     dateofbirth,
     addresswithpostcode,

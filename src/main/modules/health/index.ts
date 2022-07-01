@@ -32,7 +32,7 @@ export class HealthCheck {
           }
         : {}),
       buildInfo: {
-        name: 'adoption-web',
+        name: 'dss-web',
         host: os.hostname(),
         uptime: process.uptime(),
       },
