@@ -10,7 +10,7 @@ import * as steps from '../../../steps';
 import { ADDITIONAL_DOCUMENTS_UPLOAD } from '../../../steps/urls';
 import { FIS_COS_API_BASE_URL } from '../../common/constants/apiConstants';
 
-import UploadDocumentController, { FileMimeType, FileValidations, FIS_COS_API_URL } from './uploadDocPostController';
+import UploadDocumentController, { FIS_COS_API_URL, FileMimeType, FileValidations } from './uploadDocPostController';
 
 const getNextStepUrlMock = jest.spyOn(steps, 'getNextStepUrl');
 
