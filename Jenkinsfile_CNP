@@ -70,7 +70,7 @@ withPipeline(type, product, component) {
   }
 
   before('functionalTest:aat') {
-    env.ADOP_WEB_URL = "https://fis-ds-web-staging.service.core-compute-aat.internal/"
+    env.ADOP_WEB_URL = "https://fis-ds-web-staging.service.core-compute-aat.internal/?edgecaseType=FMP"
   }
 
   after('functionalTest:aat') {
