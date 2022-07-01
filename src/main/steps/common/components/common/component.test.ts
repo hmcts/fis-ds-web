@@ -9,7 +9,7 @@ const fieldName = 'birthFatherNameOnCertificate';
 const enContent = {
   section: 'Section',
   label: "Is the birth father's name on the birth certificate?",
-  hint: "Ask the adoption agency or social worker if you're not sure.",
+  hint: "Ask the dss agency or social worker if you're not sure.",
   yes: 'Yes',
   no: 'No',
   unsure: 'Not sure',
@@ -20,7 +20,7 @@ const enContent = {
 const cyContent = {
   section: 'Section (in Welsh)',
   label: "Is the birth father's name on the birth certificate? (in Welsh)",
-  hint: "Ask the adoption agency or social worker if you're not sure. (in Welsh)",
+  hint: "Ask the dss agency or social worker if you're not sure. (in Welsh)",
   yes: 'Yes (in Welsh)',
   no: 'No (in Welsh)',
   unsure: 'Not sure (in Welsh)',
