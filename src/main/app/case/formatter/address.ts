@@ -1,10 +1,12 @@
 import { Case } from '../case';
 
+/**
+ * It takes a partial object of type Case and returns a string
+ * @param data - Partial<Case>
+ * @returns A string
+ */
 export const getFormattedAddress = (data: Partial<Case>): string => {
   let address: string[] = [];
-
-  console.log('Date in format address --->', data);
-
   address.push(data['applicantAddress1'] || '');
   address.push(data['applicantAddress2'] || '');
   address.push(data['applicantAddress3'] || '');
@@ -16,5 +18,6 @@ export const getFormattedAddress = (data: Partial<Case>): string => {
   //remove empty items
   address = address.filter(item => !!item);
 
+  /* Joining the array with a <br> tag. */
   return address.join('<br>');
 };
