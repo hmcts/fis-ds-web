@@ -15,12 +15,12 @@
     },
     "errors": {
       "en": {
-        "statementOfTruth": {
+        "applicantStatementOfTruth": {
           "required" : "Please accept the Statement of Truth to continue"
         }
       },
       "cy": {
-        "statementOfTruth": {
+        "applicantStatementOfTruth": {
           "required" : "Please accept the Statement of Truth to continue (in Welsh)"
         }
       }

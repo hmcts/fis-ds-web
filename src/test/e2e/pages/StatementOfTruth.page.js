@@ -1,7 +1,7 @@
 const { I } = inject();
 const config = require('../config.js');
 module.exports = {
-    statementoftruth: 'input[id$="statementOfTruth"]',
+    statementoftruth: 'input[id$="applicantStatementOfTruth"]',
   
 
 async statementOfTruth() {

@@ -21,6 +21,7 @@ Scenario(
     additiondocumentpage,
     emailaddresspage,
     checkyouranswerspage,
+    thankyoupage,
     contactnumber
   }) => {
     await landingPage.seeTheLandingPage();
@@ -36,5 +37,6 @@ Scenario(
     await additiondocumentpage.uploadDocumentsSection();
     await checkyouranswerspage.checkyouranswers();
     await statementoftruth.statementOfTruth();
+    await thankyoupage.applicationsubmission();
   }
 );

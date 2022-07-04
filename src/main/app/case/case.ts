@@ -26,6 +26,7 @@ export type FieldFormats = Record<string, string | ((AnyObject) => AnyObject)>;
 export interface Case {
   /*********All information related to the Case */
   namedApplicant: YesOrNo;
+  caseTypeOfApplication: string;
   applicantFirstName: string;
   applicantLastName: string;
   applicantDateOfBirth: CaseDate;
@@ -37,6 +38,7 @@ export interface Case {
   applicantAddressTown: string;
   applicantAddressCountry: any;
   applicantAddressPostcode: any;
+  applicantStatementOfTruth: string;
 }
 
 export interface CaseWithId extends Case {

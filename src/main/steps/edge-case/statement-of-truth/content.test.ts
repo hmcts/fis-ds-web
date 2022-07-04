@@ -61,7 +61,7 @@ describe('statement-of-truth', () => {
   /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
   test('should contain Statement of Truth fields', () => {
     generatedContent = generateContent(commonContent);
-    const field = fields.statementOfTruth as FormOptions;
+    const field = fields.applicantStatementOfTruth as FormOptions;
     expect(field.type).toBe('checkboxes');
     expect(field.classes).toBe('govuk-checkboxes');
     expect((field.label as Function)(generatedContent)).toBe(enContent.label);

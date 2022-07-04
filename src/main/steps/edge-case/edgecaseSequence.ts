@@ -1,6 +1,7 @@
 import { Sections, Step } from '../constants';
 import {
   ADDITIONAL_DOCUMENTS_UPLOAD,
+  APPLICATION_SUBMITTED,
   CHECK_YOUR_ANSWERS,
   CONTACT_DETAILS,
   CONTACT_PREFERENCES,
@@ -80,6 +81,11 @@ export const edgecaseSequence: Step[] = [
   },
   {
     url: STATEMENT_OF_TRUTH,
+    showInSection: Sections.AboutEdgeCase,
+    getNextStep: () => APPLICATION_SUBMITTED,
+  },
+  {
+    url: APPLICATION_SUBMITTED,
     showInSection: Sections.AboutEdgeCase,
     getNextStep: () => USER_ROLE,
   },

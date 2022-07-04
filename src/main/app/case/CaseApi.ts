@@ -19,7 +19,7 @@ import { AppRequest, UserDetails } from '../controller/AppRequest';
 
 import { Case, CaseWithId } from './case';
 import { CaseAssignedUserRoles } from './case-roles';
-import { CaseData } from './definition';
+import { CaseData, YesOrNo } from './definition';
 import { toApiDate, toApiFormat } from './to-api-format';
 
 export class CaseApi {
@@ -243,6 +243,15 @@ export const mapCaseData = (req: AppRequest): any => {
     applicantAddressTown: req.session.userCase.applicantAddressTown,
     applicantAddressCountry: 'United Kingdom',
     applicantAddressPostCode: req.session.userCase.applicantAddressPostcode,
+    applicantStatementOfTruth: checkboxConverter(req.session.userCase.applicantStatementOfTruth),
   };
   return data;
+};
+
+const checkboxConverter = (value: string | undefined) => {
+  if (value === YesOrNo.YES) {
+    return YesOrNo.YES;
+  } else {
+    return YesOrNo.NO;
+  }
 };
