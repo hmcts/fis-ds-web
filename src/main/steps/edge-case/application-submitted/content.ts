@@ -9,19 +9,17 @@ export const generateContent: TranslationFn = content => {
   const Translations = resourceLoader.getFileContents().translations;
 
   const en = () => {
-    const caseId = content.userCase?.id?.toString().replace(/.{4}/g, '$&-').substring(0, 19);
+    const caseId = content.userCase?.id?.toString().replace(/.{4}/g, '$& - ').substring(0, 25);
     return {
       ...Translations.en,
-      line1: `An email has been sent to ${content.userCase?.applicantEmailAddress} that explains what will happen next.`,
-      referenceNumber: `Your reference number is:<br><strong>${caseId}</strong>`,
+      referenceNumber: `<font size="5">Your reference number is:</font><br><strong>${caseId}</strong>`,
     };
   };
   const cy = () => {
     const caseId = content.userCase?.id?.toString().replace(/.{4}/g, '$&-').substring(0, 19);
     return {
       ...Translations.cy,
-      line1: `An email has been sent to ${content.userCase?.applicantEmailAddress} that explains what will happen next. (in welsh)`,
-      referenceNumber: `Your reference number is:<br><strong>${caseId}</strong> (in welsh)`,
+      referenceNumber: `<font size="5">Your reference number is: (in welsh)</font><br><strong>${caseId}</strong>`,
     };
   };
 
