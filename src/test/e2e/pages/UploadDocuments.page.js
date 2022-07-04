@@ -10,7 +10,8 @@ module.exports = {
 async uploadDocumentsSection() {
     await I.waitForText("Upload application form", 30);
     await I.attachFile(this.fields.uploadFileButton, config.testPdfFile);
-    await I.wait(3);
+    await I.click(this.fields.fileUploadedOption);
+    await I.wait(5);
     I.click('Continue')
   },
 };

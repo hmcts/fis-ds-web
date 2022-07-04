@@ -11,6 +11,8 @@ async uploadDocumentsSection() {
     await I.waitForText("Additional Documents", 30);
     await I.attachFile(this.fields.uploadFileButton, config.testPdfFile);
     await I.wait(3);
+    await I.click(this.fields.fileUploadedOption);
+    await I.wait(5);
     //await I.retry(3).waitForElement(this.fields.uploadProgressBar, 30);
     //await I.wait(3);
    // await I.retry(3).waitForElement(this.fields.fileUploadedOption, 30);

@@ -92,7 +92,8 @@ const setupConfig = {
     config: './src/test/e2e/config.js',
     I: './src/test/e2e/actors/main.js',
     landingPage: './src/test/e2e/pages/LandingPage.js',
-    loginPage: './src/test/e2e/pages/login.page.js'
+    loginPage: './src/test/e2e/pages/login.page.js',
+    
   },
   mocha: {
     reporterOptions: {
