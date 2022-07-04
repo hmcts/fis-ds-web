@@ -1,10 +1,9 @@
 const { I } = inject();
-const config = require('../config.js');
 
 module.exports = {
-
+    fields: {
     caseID: '.govuk-panel__body strong',
-
+    },
 async applicationsubmission() {
     await I.waitForText("Application Submitted", 30);
     await I.wait(3);
