@@ -84,7 +84,8 @@ exports.config = {
     additiondocumentpage: './src/test/e2e/pages/AdditionalDocuments.page.js',
     emailaddresspage: './src/test/e2e/pages/EmailAddress.page.js',
     contactnumber: './src/test/e2e/pages/ContactNumbers.page.js',
-    checkyouranswerspage: './src/test/e2e/pages/CheckYourAnswers.page.js'
+    checkyouranswerspage: './src/test/e2e/pages/CheckYourAnswers.page.js',
+    thankyoupage: './src/test/e2e/pages/ThankYou.page.js'
   },
   plugins: {
     retryFailedStep: {
