@@ -5,7 +5,7 @@ module.exports = {
     caseID: '.govuk-panel__body strong',
     },
 async applicationsubmission() {
-    await I.waitForText("Application Submitted", 30);
+    await I.waitForText("Application submitted", 30);
     await I.wait(3);
     await I.see('Your reference number is:');
     await I.wait(3);
