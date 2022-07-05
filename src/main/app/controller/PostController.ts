@@ -1,11 +1,3 @@
-/* Importing the autobind-decorator, the Response object from the express module, the getNextStepUrl
-function from the steps module, the CONTACT_DETAILS constant from the urls module, the Case and
-CaseWithId interfaces from the case module, the CITIZEN_CREATE and CITIZEN_UPDATE constants from the
-definition module, the Form, FormFields and FormFieldsFn interfaces from the Form module, the
-ValidationError interface from the validation module, and the AppRequest interface from the
-AppRequest module. */
-/**
- */
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 

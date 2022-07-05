@@ -1,12 +1,3 @@
-/* The above code is importing the following:
-- autobind from 'autobind-decorator'
-- axios, { AxiosInstance } from 'axios'
-- config from 'config'
-- { Response } from 'express'
-- Negotiator from 'negotiator'
-- { LanguageToggle } from '../../modules/i18n'
-- { CommonContent, Language, generatePageContent } from '../../steps/common/common.content'
-- { FIS_COS_API_BASE_ */
 import autobind from 'autobind-decorator';
 import axios, { AxiosInstance } from 'axios';
 import config from 'config';
@@ -58,17 +49,8 @@ export class GetController {
       req.session.errors = undefined;
       req.session.fileErrors = [];
     }
-    /**
-     *
-     *                      This util allows to delete document
-     *                      the params it uses is @req and @res
-     *                      This is uses generatePageContent Instance of the this GetController class
-     *                      All page contents save for generating page data
-     *                      the page content loads up all Page data
-     *      ************************************ ************************************
-     *      ************************************  ************************************
-     *
-     */
+
+    /* Generating the page content for the page. */
     const content = generatePageContent({
       language,
       pageContent: this.content,
@@ -79,15 +61,6 @@ export class GetController {
       addresses,
     });
 
-    /**
-     *
-     *                      This util allows to delete document
-     *                      the params it uses is @req and @res
-     *                      This is uses @documentDeleteManager Instance of the this GetController class
-     *      ************************************ ************************************
-     *      ************************************  ************************************
-     *
-     */
     this.documentDeleteManager(req, res);
     const RedirectConditions = {
       /*************************************** query @query  ***************************/
@@ -102,15 +75,6 @@ export class GetController {
       cookieAPM: req.query.hasOwnProperty('apm'),
     };
 
-    /**
-     *
-     *                      This util allows to delete document
-     *                      the params it uses is @ds-web-cookie-preferences
-     *                      This is used to check for current cookiesPreferences
-     *      ************************************ ************************************
-     *      ************************************  ************************************
-     *
-     */
     const cookiesForPrefrences = req.cookies.hasOwnProperty('ds-web-cookie-preferences')
       ? JSON.parse(req.cookies['ds-web-cookie-preferences'])
       : {
@@ -118,15 +82,9 @@ export class GetController {
           apm: 'off',
         };
 
-    /**
-     *
-     *                      This util allows to delete document
-     *                      the params it uses is @ds-web-cookie-preferences
-     *                      This is used to check for current cookiesPreferences
-     *      ************************************ ************************************
-     *      ************************************  ************************************
-     *
-     */
+    /* The above code is creating a new object called pageRenderableContents. It is taking the content
+object and adding the uploadedDocuments, addtionalDocuments, cookiePrefrences, sessionErrors,
+cookieMessage, FileErrors, htmlLang, and isDraft properties to it. */
     let pageRenderableContents = {
       ...content,
       uploadedDocuments: req.session['caseDocuments'],
@@ -139,22 +97,16 @@ export class GetController {
       isDraft: req.session?.userCase?.state ? req.session.userCase.state === '' : true,
     };
 
-    /**
-     *
-     *                      This util allows saved cookies to have redirect after successfully saving
-     *                      the params it uses is @ds-web-cookie-preferences
-     *                      This is used to check for current cookiesPreferences
-     *      ************************************ ************************************
-     *      ************************************  ************************************
-     *
-     */
     const cookieWithSaveQuery = COOKIES + '?togglesaveCookie=true';
     const checkforCookieUrlAndQuery = req.url === cookieWithSaveQuery;
+    /* Checking if the cookieMessage is true and if it is, it will add it to the pageRenderableContents
+  object. */
     if (checkforCookieUrlAndQuery) {
       pageRenderableContents = { ...pageRenderableContents, cookieMessage: true };
     }
 
     const checkConditions = Object.values(RedirectConditions).includes(true);
+    /* Checking if the conditions are met. If they are not met, it will render the view. */
     if (!checkConditions) {
       res.render(this.view, pageRenderableContents);
     }
