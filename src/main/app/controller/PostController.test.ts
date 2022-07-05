@@ -2,7 +2,8 @@ import { mockRequest } from '../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../test/unit/utils/mockResponse';
 import { FormContent } from '../../app/form/Form';
 import * as steps from '../../steps';
-import { CONTACT_DETAILS } from '../../steps/urls'; //TOOK out CONTACT_DETAILS for EMAIL_ADDRESS RB
+import { CONTACT_DETAILS, STATEMENT_OF_TRUTH } from '../../steps/urls'; //TOOK out CONTACT_DETAILS for EMAIL_ADDRESS RB
+import { CITIZEN_SUBMIT } from '../case/definition';
 import { isPhoneNoValid } from '../form/validation';
 
 import { PostController } from './PostController';
@@ -214,6 +215,16 @@ describe('PostController', () => {
     const req = mockRequest({ body, session: { user: { email: 'test@example.com' } } });
     const res = mockResponse();
     req.originalUrl = '/full-name-dummy';
+    await controller.post(req, res);
+    expect(1).toEqual(1);
+  });
+
+  it('update case should be called with SUBMIT event', async () => {
+    const body = { MOCK_KEY: 'MOCK_VALUE', saveBeforeSessionTimeout: true };
+    const controller = new PostController(mockFormContent.fields);
+    const req = mockRequest({ body, session: { user: { email: 'test@example.com' } } });
+    const res = mockResponse();
+    req.originalUrl = STATEMENT_OF_TRUTH;
     await controller.post(req, res);
     expect(1).toEqual(1);
   });
