@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 
-import { Case, CaseWithId } from '../app/case/case';
+import { Case } from '../app/case/case';
 import { AppRequest } from '../app/controller/AppRequest';
 import { TranslationFn } from '../app/controller/GetController';
 import { Form, FormContent } from '../app/form/Form';
@@ -26,63 +26,6 @@ const stepForms: Record<string, Form> = {};
     }
   }
 });
-
-/**
- * It takes a step, checks if it has a form, if it does it checks if the form is complete, if it is it
- * moves on to the next step, if it isn't it returns the current step
- * @param {CaseWithId} data - CaseWithId - this is the data that's been entered into the form
- * @param {Step} step - Step,
- * @param {Step[]} sequence - Step[]
- * @param [removeExcluded=false] - This is a boolean value that determines whether or not to remove the
- * excluded steps from the sequence.
- * @param {Step[]} checkedSteps - Step[] = []
- * @returns The next step in the sequence.
- */
-const getNextIncompleteStep = (
-  data: CaseWithId,
-  step: Step,
-  sequence: Step[],
-  removeExcluded = false,
-  checkedSteps: Step[] = []
-): string => {
-  const stepForm = stepForms[step.url];
-  // if this step has a form
-  if (stepForm !== undefined) {
-    // and that form has errors
-    // if (!stepForm.isComplete(data) || stepForm.getErrors(data).length > 0)
-    if (!stepForm.isComplete(data)) {
-      // go to that step
-      return removeExcluded && checkedSteps.length && step.excludeFromContinueApplication
-        ? checkedSteps[checkedSteps.length - 1].url
-        : step.url;
-    } else {
-      // if there are no errors go to the next page and work out what to do
-      const nextStepUrl = step.getNextStep(data);
-      const nextStep = sequence.find(s => s.url === nextStepUrl);
-
-      /* Returning the next step in the sequence. */
-      return nextStep
-        ? getNextIncompleteStep(data, nextStep, sequence, removeExcluded, checkedSteps.concat(step))
-        : USER_ROLE;
-    }
-  }
-  // if the page has no form then ask it where to go
-  return step.getNextStep(data);
-};
-
-/**
- * It takes a request object, gets the user's sequence, gets the next incomplete step, and returns the
- * url of that step
- * @param {AppRequest} req - AppRequest - this is the request object that is passed to the controller.
- * @returns The url and queryString variables.
- */
-export const getNextIncompleteStepUrl = (req: AppRequest): string => {
-  const { queryString } = getPathAndQueryString(req);
-  const sequence = getUserSequence();
-  const url = getNextIncompleteStep(req.session.userCase, sequence[0], sequence, true);
-  /* Returning the url and queryString variables. */
-  return `${url}${queryString}`;
-};
 
 /**
  * It takes a request and a case object and returns the next step in the sequence
@@ -113,14 +56,6 @@ const getPathAndQueryString = (req: AppRequest): { path: string; queryString: st
   const queryString = searchParams ? `?${searchParams}` : '';
   /* Returning an object with two properties: path and queryString. */
   return { path, queryString };
-};
-
-/**
- * This function returns the edgecaseSequence variable.
- * @returns The function getUserSequence is being returned.
- */
-const getUserSequence = () => {
-  return edgecaseSequence;
 };
 
 /**

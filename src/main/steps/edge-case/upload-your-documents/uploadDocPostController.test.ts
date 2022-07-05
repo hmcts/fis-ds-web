@@ -225,6 +225,9 @@ describe('checking for the redirect of post document upload', () => {
     ];
 
     await postingcontroller.PostDocumentUploader(req, res);
+    const requestWithDocument: any = req;
+    requestWithDocument['body'].documentUploadProceed = true;
+    await postingcontroller.post(req, res);
     expect(res.redirect).not.toHaveBeenCalledWith(ADDITIONAL_DOCUMENTS_UPLOAD);
   });
 
