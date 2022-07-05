@@ -19,6 +19,11 @@ const cy: typeof en = {
   ...Translations.cy,
 };
 
+/**
+ * It takes a bunch of stuff and returns a bunch of stuff
+ * @param  - language - the language of the page
+ * @returns An object with the following properties:
+ */
 export const generatePageContent = ({
   language,
   pageContent,

@@ -18,6 +18,10 @@ export const form: FormContent = {
   },
 };
 
+/**
+ * It takes a content object, which contains a language property, and returns a translation object
+ * @returns A function that returns an object.
+ */
 export const generateContent: TranslationFn = content => {
   const resourceLoader = new ResourceReader();
   resourceLoader.Loader('upload-your-documents');
