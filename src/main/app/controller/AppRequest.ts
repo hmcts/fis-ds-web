@@ -23,6 +23,7 @@ export interface AppSession extends Session {
   caseDocuments: any;
   AddtionalCaseDocuments: any;
   postDocs: any;
+  cookieMessage: boolean;
   user: UserDetails;
   userCase: CaseWithId;
   eligibility: Eligibility;
@@ -31,6 +32,7 @@ export interface AppSession extends Session {
   fileErrors: any[];
   addresses: [];
   returnUrl?: string;
+  cookieStorageMessage?: boolean;
 }
 
 export interface UserDetails {

@@ -100,6 +100,7 @@ export interface CaseData {
   applicantAddressTown: string;
   applicantAddressCountry: any;
   applicantAddressPostCode: any;
+  applicantStatementOfTruth: YesOrNo;
 }
 
 export interface StatusHistoriesItem {

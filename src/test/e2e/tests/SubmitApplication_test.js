@@ -1,6 +1,6 @@
 const ContactPreferencePage = require("../pages/ContactPreference.page");
 
-Feature('Create application @e2e-tests').retry(1);
+Feature('Create application @e2e-tests @cross-browser').retry(1);
 
 Scenario(
   'Create full application and submit',
@@ -9,7 +9,7 @@ Scenario(
     landingPage,
     familypage,
     applytoapplicantpage,
-    adoptionpage,
+    dsspage,
     contactdetails,
     dateofbirth,
     addresswithpostcode,
@@ -21,6 +21,7 @@ Scenario(
     additiondocumentpage,
     emailaddresspage,
     checkyouranswerspage,
+    thankyoupage,
     contactnumber
   }) => {
     await landingPage.seeTheLandingPage();
@@ -36,5 +37,6 @@ Scenario(
     await additiondocumentpage.uploadDocumentsSection();
     await checkyouranswerspage.checkyouranswers();
     await statementoftruth.statementOfTruth();
+    await thankyoupage.applicationsubmission();
   }
 );

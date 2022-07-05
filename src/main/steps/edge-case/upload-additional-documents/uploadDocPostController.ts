@@ -4,6 +4,7 @@ import axios, { AxiosInstance, AxiosRequestHeaders } from 'axios';
 import config from 'config';
 import { Response } from 'express';
 import FormData from 'form-data';
+import { isNull } from 'lodash';
 
 import { mapCaseData } from '../../../app/case/CaseApi';
 import { AppRequest } from '../../../app/controller/AppRequest';
@@ -59,11 +60,10 @@ type FileUploadErrorTranslatables = {
   FORMAT_ERROR?: string;
   SIZE_ERROR?: string;
   TOTAL_FILES_EXCEED_ERROR?: string;
+  NO_FILE_UPLOAD_ERROR?: string;
 };
 
-export const FileUploadBaseURL: URL_OF_FILE = config.get(FIS_COS_API_BASE_URL);
-
-export const AttachFileToCaseBaseURL: URL_OF_FILE = config.get(FIS_COS_API_BASE_URL);
+export const FIS_COS_API_URL: URL_OF_FILE = config.get(FIS_COS_API_BASE_URL);
 
 /**
  * @FileHandler
@@ -182,7 +182,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
           applicantApplicationFormDocuments: MappedUploadRequestCaseDocuments,
         };
 
-        await this.UploadDocumentInstance(AttachFileToCaseBaseURL, Headers).put(baseURL, responseBody);
+        await this.UploadDocumentInstance(FIS_COS_API_URL, Headers).put(baseURL, responseBody);
         res.redirect(CHECK_YOUR_ANSWERS);
       } catch (error) {
         console.log(error);
@@ -198,6 +198,15 @@ export default class UploadDocumentController extends PostController<AnyObject> 
       maxBodyLength: Infinity,
     });
   };
+
+  private uploadFileError(req: AppRequest<AnyObject>, res: Response<any, Record<string, any>>, errorMessage?: string) {
+    req.session.fileErrors.push({
+      text: errorMessage,
+      href: '#',
+    });
+
+    this.redirect(req, res, ADDITIONAL_DOCUMENTS_UPLOAD);
+  }
 
   /**
    *
@@ -223,78 +232,85 @@ export default class UploadDocumentController extends PostController<AnyObject> 
        */
       this.PostDocumentUploader(req, res);
     } else {
-      if (TotalUploadDocuments < Number(config.get('documentUpload.validation.totalAdditionalDocuments'))) {
-        if (!req.session.hasOwnProperty('errors')) {
-          req.session['errors'] = [];
-        }
+      const { files }: AppRequest<AnyObject> = req;
 
-        const { files }: AppRequest<AnyObject> = req;
-        const { documents }: any = files;
-
-        const checkIfMultipleFiles: boolean = Array.isArray(documents);
-
-        // making sure single file is uploaded
-        if (!checkIfMultipleFiles) {
-          const validateMimeType: boolean = FileValidations.formatValidation(documents.mimetype);
-          const validateFileSize: boolean = FileValidations.sizeValidation(documents.size);
-          const formData: FormData = new FormData();
-          if (validateMimeType && validateFileSize) {
-            formData.append('file', documents.data, {
-              contentType: documents.mimetype,
-              filename: documents.name,
-            });
-            const formHeaders = formData.getHeaders();
-            /**
-             * @RequestHeaders
-             */
-            const Headers = {
-              Authorization: `Bearer ${req.session.user['accessToken']}`,
-            };
-            try {
-              const RequestDocument = await this.UploadDocumentInstance(FileUploadBaseURL, Headers).post(
-                `/doc/dss-orhestration/upload?caseTypeOfApplication=${req.session['edgecaseType']}`,
-                formData,
-                {
-                  headers: {
-                    ...formHeaders,
-                  },
-                }
-              );
-
-              const uploadedDocument = RequestDocument.data.document;
-              req.session['AddtionalCaseDocuments'].push(uploadedDocument);
-              req.session['errors'] = undefined;
-              this.redirect(req, res, ADDITIONAL_DOCUMENTS_UPLOAD);
-            } catch (error) {
-              logger.error(error);
-            }
-          } else {
-            const FormattedError: any[] = [];
-            if (!validateFileSize) {
-              FormattedError.push({
-                text: FileValidations.ResourceReaderContents(req).SIZE_ERROR,
-                href: '#',
-              });
-            }
-            if (!validateMimeType) {
-              FormattedError.push({
-                text: FileValidations.ResourceReaderContents(req).FORMAT_ERROR,
-                href: '#',
-              });
-            }
-
-            req.session.fileErrors.push(...FormattedError);
-
-            this.redirect(req, res, ADDITIONAL_DOCUMENTS_UPLOAD);
-          }
-        }
+      if (isNull(files)) {
+        console.log('no file is selected');
+        const errorMessage = FileValidations.ResourceReaderContents(req).NO_FILE_UPLOAD_ERROR;
+        this.uploadFileError(req, res, errorMessage);
       } else {
-        req.session.fileErrors.push({
-          text: FileValidations.ResourceReaderContents(req).TOTAL_FILES_EXCEED_ERROR,
-          href: '#',
-        });
+        if (TotalUploadDocuments < Number(config.get('documentUpload.validation.totalAdditionalDocuments'))) {
+          if (!req.session.hasOwnProperty('errors')) {
+            req.session['errors'] = [];
+          }
 
-        this.redirect(req, res, ADDITIONAL_DOCUMENTS_UPLOAD);
+          const { documents }: any = files;
+
+          const checkIfMultipleFiles: boolean = Array.isArray(documents);
+
+          // making sure single file is uploaded
+          if (!checkIfMultipleFiles) {
+            const validateMimeType: boolean = FileValidations.formatValidation(documents.mimetype);
+            const validateFileSize: boolean = FileValidations.sizeValidation(documents.size);
+            const formData: FormData = new FormData();
+            if (validateMimeType && validateFileSize) {
+              formData.append('file', documents.data, {
+                contentType: documents.mimetype,
+                filename: documents.name,
+              });
+              const formHeaders = formData.getHeaders();
+              /**
+               * @RequestHeaders
+               */
+              const Headers = {
+                Authorization: `Bearer ${req.session.user['accessToken']}`,
+              };
+              try {
+                const RequestDocument = await this.UploadDocumentInstance(FIS_COS_API_URL, Headers).post(
+                  `/doc/dss-orhestration/upload?caseTypeOfApplication=${req.session['edgecaseType']}`,
+                  formData,
+                  {
+                    headers: {
+                      ...formHeaders,
+                    },
+                  }
+                );
+
+                const uploadedDocument = RequestDocument.data.document;
+                req.session['AddtionalCaseDocuments'].push(uploadedDocument);
+                req.session['errors'] = undefined;
+                this.redirect(req, res, ADDITIONAL_DOCUMENTS_UPLOAD);
+              } catch (error) {
+                logger.error(error);
+              }
+            } else {
+              const FormattedError: any[] = [];
+              if (!validateFileSize) {
+                FormattedError.push({
+                  text: FileValidations.ResourceReaderContents(req).SIZE_ERROR,
+                  href: '#',
+                });
+              }
+              if (!validateMimeType) {
+                FormattedError.push({
+                  text: FileValidations.ResourceReaderContents(req).FORMAT_ERROR,
+                  href: '#',
+                });
+              }
+
+              req.session.fileErrors.push(...FormattedError);
+
+              this.redirect(req, res, ADDITIONAL_DOCUMENTS_UPLOAD);
+            }
+          }
+        } else {
+          req.session.fileErrors.push({
+            text: FileValidations.ResourceReaderContents(req).TOTAL_FILES_EXCEED_ERROR,
+            href: '#',
+          });
+
+          this.redirect(req, res, ADDITIONAL_DOCUMENTS_UPLOAD);
+        }
       }
     }
   }

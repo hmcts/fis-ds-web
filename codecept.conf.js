@@ -71,7 +71,7 @@ exports.config = {
     loginPage: './src/test/e2e/pages/login.page.js',
     landingPage: './src/test/e2e/pages/LandingPage.js',
     familypage: './src/test/e2e/pages/Family.page.js',
-    adoptionpage: './src/test/e2e/pages/Adoption.page.js',
+    dsspage: './src/test/e2e/pages/dss.page.js',
     applytoapplicantpage: './src/test/e2e/pages/ApplytoApplicant.page.js',
     contactdetails: './src/test/e2e/pages/Contactdetails.page.js',
     addresswithpostcode: './src/test/e2e/pages/AddressWithPostCode.page.js',
@@ -84,7 +84,8 @@ exports.config = {
     additiondocumentpage: './src/test/e2e/pages/AdditionalDocuments.page.js',
     emailaddresspage: './src/test/e2e/pages/EmailAddress.page.js',
     contactnumber: './src/test/e2e/pages/ContactNumbers.page.js',
-    checkyouranswerspage: './src/test/e2e/pages/CheckYourAnswers.page.js'
+    checkyouranswerspage: './src/test/e2e/pages/CheckYourAnswers.page.js',
+    thankyoupage: './src/test/e2e/pages/ThankYou.page.js'
   },
   plugins: {
     retryFailedStep: {

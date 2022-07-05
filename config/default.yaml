@@ -22,7 +22,6 @@ services:
   hmctsHomePage:
     url: 'https://www.gov.uk/government/organisations/hm-courts-and-tribunals-service'
   documentManagement:
-    url: 'http://fis-cos-api-pr-80.service.core-compute-preview.internal' 
     uploadSizeinMB: 30
   RPE_TOKEN:
     url: 'http://rpe-service-auth-provider-aat.service.core-compute-aat.internal'
@@ -48,3 +47,5 @@ queryParamsforApp:
     FMP: 'FMPO'
     RLAD: 'RELADOP'
     FGM: 'FGM'
+cookies: 
+  expiryTime: 365

@@ -4,6 +4,7 @@ import axios, { AxiosInstance, AxiosRequestHeaders } from 'axios';
 import config from 'config';
 import { Response } from 'express';
 import FormData from 'form-data';
+import { isNull } from 'lodash';
 
 // eslint-disable-next-line import/namespace
 import { mapCaseData } from '../../../app/case/CaseApi';
@@ -14,6 +15,7 @@ import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 import { FIS_COS_API_BASE_URL } from '../../../steps/common/constants/apiConstants';
 const logger = Logger.getLogger('uploadDocumentPostController');
 import { ADDITIONAL_DOCUMENTS_UPLOAD, UPLOAD_YOUR_DOCUMENTS } from '../../urls';
+//import {mapCaseData} from '../../../app/case/CaseApi';
 
 /**
  * ****** File Extensions Types are being check
@@ -61,11 +63,12 @@ type FileUploadErrorTranslatables = {
   FORMAT_ERROR?: string;
   SIZE_ERROR?: string;
   TOTAL_FILES_EXCEED_ERROR?: string;
+  CONTINUE_WITHOUT_UPLOAD_ERROR?: string;
+  NO_FILE_UPLOAD_ERROR?: string;
 };
 
-export const FileUploadBaseURL: URL_OF_FILE = config.get(FIS_COS_API_BASE_URL);
+export const FIS_COS_API_URL: URL_OF_FILE = config.get(FIS_COS_API_BASE_URL);
 
-export const AttachFileToCaseBaseURL: URL_OF_FILE = config.get('services.documentManagement.url');
 /**
  * @FileHandler
  */
@@ -90,6 +93,7 @@ export class FileValidations {
    * @returns
    */
 
+  /* This is a static method which is used to get the error messages from the resource file. */
   static ResourceReaderContents = (req: AppRequest<AnyObject>): FileUploadErrorTranslatables => {
     let SystemContent: any | FileUploadErrorTranslatables = {};
     const SystemLangauge = req.session['lang'];
@@ -141,32 +145,26 @@ export default class UploadDocumentController extends PostController<AnyObject> 
     super(fields);
   }
 
+  /**
+   * This function is used to upload the documents to the case
+   * @param req - AppRequest<AnyObject>
+   * @param {Response} res - Response - this is the response object that will be sent back to the user.
+   */
   async PostDocumentUploader(req: AppRequest<AnyObject>, res: Response): Promise<void> {
     if (req.session.hasOwnProperty('caseDocuments')) {
-      const CaseId = req.session.userCase['id'];
-      const baseURL = '/case/dss-orchestration/' + CaseId + '/update?event=UPDATE';
-      const Headers = {
-        Authorization: `Bearer ${req.session.user['accessToken']}`,
-      };
-      try {
-        const MappedRequestCaseDocuments = req.session['caseDocuments'].map(document => {
-          const { url, fileName, documentId, binaryUrl } = document;
-          return {
-            id: documentId,
-            value: {
-              documentLink: {
-                document_url: url,
-                document_filename: fileName,
-                document_binary_url: binaryUrl,
-              },
-            },
-          };
-        });
+      const TotalUploadDocuments = req.session.caseDocuments.length;
 
-        let AdditionalDocuments = [];
-        if (req.session.AddtionalCaseDocuments !== undefined) {
-          AdditionalDocuments = req.session['AddtionalCaseDocuments'].map(document => {
-            // eslint-disable-next-line @typescript-eslint/no-shadow
+      if (TotalUploadDocuments === 0) {
+        const errorMessage = FileValidations.ResourceReaderContents(req).CONTINUE_WITHOUT_UPLOAD_ERROR;
+        this.uploadFileError(req, res, errorMessage);
+      } else {
+        const CaseId = req.session.userCase['id'];
+        const baseURL = '/case/dss-orchestration/' + CaseId + '/update?event=UPDATE';
+        const Headers = {
+          Authorization: `Bearer ${req.session.user['accessToken']}`,
+        };
+        try {
+          const MappedRequestCaseDocuments = req.session['caseDocuments'].map(document => {
             const { url, fileName, documentId, binaryUrl } = document;
             return {
               id: documentId,
@@ -179,22 +177,41 @@ export default class UploadDocumentController extends PostController<AnyObject> 
               },
             };
           });
+
+          let AdditionalDocuments = [];
+          if (req.session.AddtionalCaseDocuments !== undefined) {
+            AdditionalDocuments = req.session['AddtionalCaseDocuments'].map(document => {
+              // eslint-disable-next-line @typescript-eslint/no-shadow
+              const { url, fileName, documentId, binaryUrl } = document;
+              return {
+                id: documentId,
+                value: {
+                  documentLink: {
+                    document_url: url,
+                    document_filename: fileName,
+                    document_binary_url: binaryUrl,
+                  },
+                },
+              };
+            });
+          }
+          const CaseData = mapCaseData(req);
+          const responseBody = {
+            ...CaseData,
+            applicantApplicationFormDocuments: MappedRequestCaseDocuments,
+            applicantAdditionalDocuments: AdditionalDocuments,
+          };
+          await this.UploadDocumentInstance(FIS_COS_API_URL, Headers).put(baseURL, responseBody);
+          res.redirect(ADDITIONAL_DOCUMENTS_UPLOAD);
+        } catch (error) {
+          console.log(error);
         }
-        const CaseData = mapCaseData(req);
-        const responseBody = {
-          ...CaseData,
-          applicantApplicationFormDocuments: MappedRequestCaseDocuments,
-          applicantAdditionalDocuments: AdditionalDocuments,
-        };
-        await this.UploadDocumentInstance(AttachFileToCaseBaseURL, Headers).put(baseURL, responseBody);
-        res.redirect(ADDITIONAL_DOCUMENTS_UPLOAD);
-      } catch (error) {
-        console.log(error);
       }
     }
   }
 
   public UploadDocumentInstance = (BASEURL: string, header: AxiosRequestHeaders): AxiosInstance => {
+    /* This is used to create an instance of the axios. */
     return axios.create({
       baseURL: BASEURL,
       headers: header,
@@ -203,10 +220,22 @@ export default class UploadDocumentController extends PostController<AnyObject> 
     });
   };
 
+  private uploadFileError(req: AppRequest<AnyObject>, res: Response<any, Record<string, any>>, errorMessage?: string) {
+    req.session.fileErrors.push({
+      text: errorMessage,
+      href: '#',
+    });
+
+    this.redirect(req, res, UPLOAD_YOUR_DOCUMENTS);
+  }
+
   /**
-   *
-   * @param req
-   * @param res
+   * The function checks if the user has uploaded the maximum number of documents allowed, if not, it
+   * checks if the file uploaded is of the correct format and size, if it is, it uploads the file to the
+   * server and redirects the user to the upload your documents page, if not, it redirects the user to
+   * the upload your documents page with an error message
+   * @param req - AppRequest<AnyObject>
+   * @param {Response} res - Response - The response object
    */
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
     const { documentUploadProceed } = req.body;
@@ -216,9 +245,9 @@ export default class UploadDocumentController extends PostController<AnyObject> 
     let TotalUploadDocuments = 0;
     if (!req.session.hasOwnProperty('caseDocuments')) {
       req.session['caseDocuments'] = [];
-      TotalUploadDocuments = 0;
     } else {
       TotalUploadDocuments = req.session['caseDocuments'].length;
+      req.session['errors'] = [];
     }
 
     if (documentUploadProceed) {
@@ -227,80 +256,86 @@ export default class UploadDocumentController extends PostController<AnyObject> 
        */
       this.PostDocumentUploader(req, res);
     } else {
-      if (TotalUploadDocuments < Number(config.get('documentUpload.validation.totaldocuments'))) {
-        if (!req.session.hasOwnProperty('errors')) {
-          req.session['errors'] = [];
-        }
+      const { files }: AppRequest<AnyObject> = req;
 
-        const { files }: AppRequest<AnyObject> = req;
-        const { documents }: any = files;
-
-        const checkIfMultipleFiles: boolean = Array.isArray(documents);
-
-        // making sure single file is uploaded
-        if (!checkIfMultipleFiles) {
-          console.log({ mimetype: documents.mimetype });
-          const validateMimeType: boolean = FileValidations.formatValidation(documents.mimetype);
-          const validateFileSize: boolean = FileValidations.sizeValidation(documents.size);
-          const formData: FormData = new FormData();
-          if (validateMimeType && validateFileSize) {
-            formData.append('file', documents.data, {
-              contentType: documents.mimetype,
-              filename: documents.name,
-            });
-            const formHeaders = formData.getHeaders();
-            /**
-             * @RequestHeaders
-             */
-            const Headers = {
-              Authorization: `Bearer ${req.session.user['accessToken']}`,
-            };
-            try {
-              const RequestDocument = await this.UploadDocumentInstance(FileUploadBaseURL, Headers).post(
-                `/doc/dss-orhestration/upload?caseTypeOfApplication=${req.session['edgecaseType']}`,
-                formData,
-                {
-                  headers: {
-                    ...formHeaders,
-                  },
-                }
-              );
-
-              const uploadedDocument = RequestDocument.data.document;
-              req.session['caseDocuments'].push(uploadedDocument);
-              req.session['errors'] = undefined;
-              this.redirect(req, res, UPLOAD_YOUR_DOCUMENTS);
-            } catch (error) {
-              logger.error(error);
-            }
-          } else {
-            const FormattedError: any[] = [];
-            if (!validateFileSize) {
-              FormattedError.push({
-                text: FileValidations.ResourceReaderContents(req).SIZE_ERROR,
-                href: '#',
-              });
-            }
-
-            if (!validateMimeType) {
-              FormattedError.push({
-                text: FileValidations.ResourceReaderContents(req).FORMAT_ERROR,
-                href: '#',
-              });
-            }
-
-            req.session.fileErrors.push(...FormattedError);
-
-            this.redirect(req, res, UPLOAD_YOUR_DOCUMENTS);
-          }
-        }
+      if (isNull(files)) {
+        const errorMessage = FileValidations.ResourceReaderContents(req).NO_FILE_UPLOAD_ERROR;
+        this.uploadFileError(req, res, errorMessage);
       } else {
-        req.session.fileErrors.push({
-          text: FileValidations.ResourceReaderContents(req).TOTAL_FILES_EXCEED_ERROR,
-          href: '#',
-        });
+        if (TotalUploadDocuments < Number(config.get('documentUpload.validation.totaldocuments'))) {
+          if (!req.session.hasOwnProperty('errors')) {
+            req.session['errors'] = [];
+          }
 
-        this.redirect(req, res, UPLOAD_YOUR_DOCUMENTS);
+          const { documents }: any = files;
+
+          const checkIfMultipleFiles: boolean = Array.isArray(documents);
+
+          // making sure single file is uploaded
+          if (!checkIfMultipleFiles) {
+            console.log({ mimetype: documents.mimetype });
+            const validateMimeType: boolean = FileValidations.formatValidation(documents.mimetype);
+            const validateFileSize: boolean = FileValidations.sizeValidation(documents.size);
+            const formData: FormData = new FormData();
+            if (validateMimeType && validateFileSize) {
+              formData.append('file', documents.data, {
+                contentType: documents.mimetype,
+                filename: documents.name,
+              });
+              const formHeaders = formData.getHeaders();
+              /**
+               * @RequestHeaders
+               */
+              const Headers = {
+                Authorization: `Bearer ${req.session.user['accessToken']}`,
+              };
+              try {
+                const RequestDocument = await this.UploadDocumentInstance(FIS_COS_API_URL, Headers).post(
+                  `/doc/dss-orhestration/upload?caseTypeOfApplication=${req.session['edgecaseType']}`,
+                  formData,
+                  {
+                    headers: {
+                      ...formHeaders,
+                    },
+                  }
+                );
+
+                const uploadedDocument = RequestDocument.data.document;
+                req.session['caseDocuments'].push(uploadedDocument);
+                req.session['errors'] = undefined;
+                this.redirect(req, res, UPLOAD_YOUR_DOCUMENTS);
+              } catch (error) {
+                logger.error(error);
+              }
+            } else {
+              const FormattedError: any[] = [];
+              if (!validateFileSize) {
+                FormattedError.push({
+                  text: FileValidations.ResourceReaderContents(req).SIZE_ERROR,
+                  href: '#',
+                });
+              }
+
+              if (!validateMimeType) {
+                FormattedError.push({
+                  text: FileValidations.ResourceReaderContents(req).FORMAT_ERROR,
+                  href: '#',
+                });
+              }
+
+              req.session.fileErrors.push(...FormattedError);
+
+              this.redirect(req, res, UPLOAD_YOUR_DOCUMENTS);
+            }
+          }
+        } else {
+          req.session.fileErrors.push({
+            text: FileValidations.ResourceReaderContents(req).TOTAL_FILES_EXCEED_ERROR,
+            href: '#',
+          });
+
+          this.redirect(req, res, UPLOAD_YOUR_DOCUMENTS);
+        }
       }
     }
   }

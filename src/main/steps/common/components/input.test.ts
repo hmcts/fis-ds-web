@@ -11,7 +11,7 @@ const fieldName = 'birthFatherOccupation';
 const enContent = {
   section: 'Section',
   label: "What is the occupation of the child's birth father?",
-  hint: "Ask the adoption agency or social worker if you’re not sure. If the occupation is not known, you can type 'unknown'.",
+  hint: "Ask the dss agency or social worker if you’re not sure. If the occupation is not known, you can type 'unknown'.",
   errors: {
     [fieldName]: {
       required: 'Enter an occupation',

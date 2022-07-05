@@ -1,5 +1,6 @@
 import {
   ADDITIONAL_DOCUMENTS_UPLOAD,
+  APPLICATION_SUBMITTED,
   CHECK_YOUR_ANSWERS,
   CONTACT_DETAILS,
   CONTACT_PREFERENCES,
@@ -18,7 +19,7 @@ import { edgecaseSequence } from './edgecaseSequence';
 
 describe('Sequence must match respective path', () => {
   test('must match the path', () => {
-    expect(edgecaseSequence).toHaveLength(14);
+    expect(edgecaseSequence).toHaveLength(16);
 
     expect(edgecaseSequence[0].url).toBe(USER_ROLE);
     expect(edgecaseSequence[0].getNextStep({})).toBe(FULL_NAME);
@@ -58,5 +59,8 @@ describe('Sequence must match respective path', () => {
 
     expect(edgecaseSequence[11].url).toBe(CHECK_YOUR_ANSWERS);
     expect(edgecaseSequence[11].getNextStep({})).toBe(STATEMENT_OF_TRUTH);
+
+    expect(edgecaseSequence[12].url).toBe(STATEMENT_OF_TRUTH);
+    expect(edgecaseSequence[12].getNextStep({})).toBe(APPLICATION_SUBMITTED);
   });
 });
