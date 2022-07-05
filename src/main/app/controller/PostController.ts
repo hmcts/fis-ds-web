@@ -97,27 +97,6 @@ export class PostController<T extends AnyObject> {
   }
 
   /**
-   * It takes a request, a form data object, and an event name, and then it tries to trigger an event on
-   * the case, and if it fails, it adds an error to the session
-   * @param req - AppRequest<T> - this is the request object that is passed to the controller. It
-   * contains the session, the locals and the body.
-   * @param formData - The data that is being submitted from the form
-   * @param {string} eventName - The name of the event to trigger.
-   * @returns The userCase is being returned.
-   */
-  protected async save(req: AppRequest<T>, formData: Partial<Case>, eventName: string): Promise<CaseWithId> {
-    try {
-      console.log('Update Existing Case');
-      req.session.userCase = await req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
-    } catch (err) {
-      req.locals.logger.error('Error saving', err);
-      req.session.errors = req.session.errors || [];
-      req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
-    }
-    return req.session.userCase;
-  }
-
-  /**
    * It updates the case in the database and returns the updated case
    * @param req - AppRequest<T>
    * @returns The userCase is being returned.

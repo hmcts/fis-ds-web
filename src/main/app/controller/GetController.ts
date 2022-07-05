@@ -10,7 +10,6 @@ import { FIS_COS_API_BASE_URL } from '../../steps/common/constants/apiConstants'
 import { TOGGLE_SWITCH } from '../../steps/common/constants/commonConstants';
 import * as Urls from '../../steps/urls';
 import { ADDITIONAL_DOCUMENTS_UPLOAD, COOKIES, UPLOAD_YOUR_DOCUMENTS } from '../../steps/urls';
-import { Case, CaseWithId } from '../case/case';
 
 import { AppRequest } from './AppRequest';
 
@@ -143,25 +142,6 @@ cookieMessage, FileErrors, htmlLang, and isDraft properties to it. */
       if (Object.values(Urls).find(item => item === `${req.query.returnUrl}`)) {
         req.session.returnUrl = `${req.query.returnUrl}`;
       }
-    }
-  }
-
-  /**
-   * It saves the form data to the case, and returns the updated case
-   * @param {AppRequest} req - AppRequest - this is the request object that is passed to the controller.
-   * It contains the session, the locals and the body.
-   * @param formData - The data that will be sent to the API.
-   * @param {string} eventName - The name of the event to trigger.
-   * @returns The case with the id
-   */
-  public async save(req: AppRequest, formData: Partial<Case>, eventName: string): Promise<CaseWithId> {
-    try {
-      return await req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
-    } catch (err) {
-      req.locals.logger.error('Error saving', err);
-      req.session.errors = req.session.errors || [];
-      req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
-      return req.session.userCase;
     }
   }
 
@@ -308,15 +288,5 @@ cookieMessage, FileErrors, htmlLang, and isDraft properties to it. */
         }
       }
     }
-  }
-
-  /**
-   * > This function returns the name of the event that will be emitted when the request is completed
-   * @param {AppRequest} req - The request object
-   * @returns The event name.
-   */
-  //eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected getEventName(req: AppRequest): string {
-    return '';
   }
 }

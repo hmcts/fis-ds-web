@@ -18,10 +18,9 @@ import { EMPTY, FORWARD_SLASH, SPACE } from '../../steps/common/constants/common
 import { getServiceAuthToken } from '../auth/service/get-service-auth-token';
 import { AppRequest, UserDetails } from '../controller/AppRequest';
 
-import { Case, CaseWithId } from './case';
 import { CaseAssignedUserRoles } from './case-roles';
-import { CaseData, YesOrNo } from './definition';
-import { toApiDate, toApiFormat } from './to-api-format';
+import { YesOrNo } from './definition';
+import { toApiDate } from './to-api-format';
 
 /* It's a class that contains a bunch of static methods that make HTTP requests to the Case API. */
 export class CaseApi {
@@ -131,7 +130,6 @@ export class CaseApi {
       }
     } catch (err) {
       this.logError(err);
-      throw new Error('Error in updating case');
     }
   }
 
@@ -164,7 +162,6 @@ export class CaseApi {
     } catch (err) {
       /* Logging the error and throwing an error. */
       this.logError(err);
-      throw new Error('Error in creating case');
     }
   }
 
@@ -182,34 +179,8 @@ export class CaseApi {
       return response.data;
     } catch (err) {
       this.logError(err);
-      throw new Error('Case roles could not be fetched.');
+      return err;
     }
-  }
-
-  /**
-   * It sends an event to a case
-   * @param {string} caseId - The case ID of the case you want to send the event to.
-   * @param data - This is the data that you want to send to the case.
-   * @param {string} eventName - The name of the event you want to send.
-   * @returns A promise that resolves to a CaseWithId
-   */
-  private async sendEvent(caseId: string, data: Partial<CaseData>, eventName: string): Promise<CaseWithId> {
-    console.log({ caseId, data, eventName });
-    return new Promise(() => {
-      null;
-    });
-  }
-
-  /**
-   * It takes a case ID, a partial case, and an event name, and returns a case with an ID
-   * @param {string} caseId - The ID of the case you want to trigger the event on.
-   * @param userData - This is the data that you want to send to the API.
-   * @param {string} eventName - The name of the event you want to trigger.
-   * @returns A CaseWithId object
-   */
-  public async triggerEvent(caseId: string, userData: Partial<Case>, eventName: string): Promise<CaseWithId> {
-    const data = toApiFormat(userData);
-    return this.sendEvent(caseId, data, eventName);
   }
 
   /* Logging the error. */
@@ -219,9 +190,9 @@ export class CaseApi {
       this.logger.error(`API Error ${error.config.method} ${error.config.url} ${error.response.status}`);
       this.logger.info('Response: ', error.response.data);
     } else if (error.request) {
-      this.logger.error(`API Error ${error.config.method} ${error.config.url}`);
+      // this.logger.error(`API Error ${error.config.method} ${error.config.url}`);
     } else {
-      this.logger.error('API Error', error.message);
+      // this.logger.error('API Error', error.message);
     }
   }
 }
