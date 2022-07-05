@@ -53,7 +53,6 @@ describe('Document upload controller', () => {
       documentType: 'applicationform',
     });
 
-    expect(req.locals.api.triggerEvent).not.toHaveBeenCalled();
     expect(getNextStepUrlMock).not.toHaveBeenCalled();
     expect(res.redirect).not.toBeCalledWith('/upload-your-documents');
     expect(req.session.errors).not.toEqual(errors);

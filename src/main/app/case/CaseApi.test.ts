@@ -26,7 +26,7 @@ test('create api test', async () => {
 });
 
 // eslint-disable-next-line jest/expect-expect
- test('create a new case', async () => {
+test('create a new case', async () => {
   const req = mockRequest();
   const returnOfMappCaseata = mapCaseData(req);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -43,6 +43,7 @@ test('create api test', async () => {
 // eslint-disable-next-line jest/expect-expect
 test('update a case', async () => {
   const req = mockRequest();
+  req.session.userCase.id = '123';
   const returnOfMappCaseata = mapCaseData(req);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const dummyUserDetails = {
@@ -52,6 +53,7 @@ test('update a case', async () => {
     givenName: 'test',
     familyName: 'test',
   };
+
   await CaseAPIInstance.updateCase(returnOfMappCaseata, dummyUserDetails);
 });
 
