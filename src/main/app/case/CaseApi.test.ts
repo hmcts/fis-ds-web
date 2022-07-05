@@ -4,6 +4,7 @@ import axios from 'axios';
 import { mockRequest } from '../../../test/unit/utils/mockRequest';
 
 import { CaseApi, mapCaseData } from './CaseApi';
+import { CITIZEN_UPDATE } from './definition';
 
 jest.mock('axios');
 
@@ -54,7 +55,7 @@ test('update a case', async () => {
     familyName: 'test',
   };
 
-  await CaseAPIInstance.updateCase(returnOfMappCaseata, dummyUserDetails);
+  await CaseAPIInstance.updateCase(returnOfMappCaseata, dummyUserDetails, CITIZEN_UPDATE);
 });
 
 test('should return stored value for usercase in session', () => {
