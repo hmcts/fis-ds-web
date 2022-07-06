@@ -42,7 +42,7 @@ pipelineConf.vaultSecrets = secrets
 
 withNightlyPipeline(type, product, component) {
   env.TEST_URL = "https://fis-ds-web.aat.platform.hmcts.net/?edgecaseType=FMP"
-  env.DS_UI = "https://fis-ds-web.aat.platform.hmcts.net/?edgecaseType=FMP"
+  env.DS_UI_URL = "https://fis-ds-web.aat.platform.hmcts.net/?edgecaseType=FMP"
   enableCrossBrowserTest(['chrome','microsoft'])
   //enableFullFunctionalTest(120)
   loadVaultSecrets(secrets)
@@ -57,20 +57,7 @@ after('test') {
   before('crossBrowserTest') {
 
   }
-
   after('crossBrowserTest') {
     steps.archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
-  }
-
-  before('fullFunctionalTest') {
-    env.PARALLEL_CHUNKS = params.FUNCTIONAL_TESTS_WORKERS
-  }
-
-  after('fullFunctionalTest') {
-    archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
-  }
-
-  after('fortify-scan') {
-    steps.archiveArtifacts allowEmptyArchive: true, artifacts: '**/Fortify Scan/**/*'
   }
 }
