@@ -11,16 +11,16 @@ const EN = 'en';
 const enContent = {
   continue: 'Continue',
   serviceName: 'Email Address',
-  label: 'What is the email address of the person named on the application?',
-  hint: 'Email Address',
+  label: 'What is the email address of the named applicant?',
+  hint: 'This should be a secure and private email',
   emailAddress: 'Insert email address',
 };
 
 const cyContent = {
   continue: 'Continue (Welsh)',
   serviceName: 'Email Address (Welsh)',
-  label: 'What is the email address of the person named on the application? (Welsh)',
-  hint: 'Email Address',
+  label: 'What is the email address of the named applicant? (Welsh)',
+  hint: 'This should be a secure and private email',
   emailAddress: 'Insert email address (Welsh)',
 };
 
@@ -41,9 +41,11 @@ describe('Email Address', () => {
     const applicantEmailAddress = fields.applicantEmailAddress;
     expect(applicantEmailAddress.classes).toBe('govuk-input');
     expect((applicantEmailAddress.label as Function)(generatedContent)).toBe(
-      'What is the email address of the person named on the application?'
+      'What is the email address of the named applicant?'
     );
-    expect((applicantEmailAddress.hint as Function)(generatedContent)).toBe('Email Address');
+    expect((applicantEmailAddress.hint as Function)(generatedContent)).toBe(
+      'This should be a secure and private email'
+    );
     expect(applicantEmailAddress.type).toBe('text');
 
     const emailAddressOptions = fields.applicantEmailAddress as FormOptions;

@@ -1,5 +1,6 @@
 {% extends "authless-templates.njk" %}
 {% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
+{% from "govuk/components/warning-text/macro.njk" import govukWarningText %}
 
 
 {% block header %}
@@ -31,7 +32,13 @@
 
 {% block content %}
 
+{{ govukWarningText({
+  text: "You cannot save the progress for the application. So it is important you have everything you need before you get started ",
+  iconFallbackText: "Warning"
+}) }}
+
 {{languagetext}}
+
 <h1 class="govuk-heading-l">{{content['heading']}}</h1>
 <p class="govuk-body-l">{{content['body'] | safe}}</p>
 

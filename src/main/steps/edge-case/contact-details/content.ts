@@ -8,8 +8,7 @@ export const form: FormContent = {
     applicantHomeNumber: {
       type: 'text',
       classes: 'govuk-input',
-      label: hl => hl.homePhoneLabel,
-      hint: hh => hh.homePhoneHint,
+      label: l2 => l2.homePhoneLabel,
       validator: (value, formData) => {
         const hasHomePhoneNumberEntered = (value as string[])?.length && (value as string) !== '[]';
         const hasMobilePhoneNumberEntered = formData.applicantPhoneNumber && !!formData.applicantPhoneNumber?.length;
@@ -24,7 +23,6 @@ export const form: FormContent = {
       type: 'text',
       classes: 'govuk-input',
       label: ml => ml.mobilePhoneLabel,
-      hint: mh => mh.mobilePhoneHint,
       validator: (value, formData) => {
         const hasMobilePhoneNumberEntered = (value as string[])?.length && (value as string) !== '[]';
         const hasHomePhoneNumberEntered = formData.applicantHomeNumber && !!formData.applicantHomeNumber?.length;

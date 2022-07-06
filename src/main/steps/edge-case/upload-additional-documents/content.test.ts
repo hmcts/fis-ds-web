@@ -9,21 +9,25 @@ jest.mock('../../../app/form/validation');
 const EN = 'en';
 
 const enContent = {
-  serviceName: 'document upload',
+  serviceName: 'Document upload',
   title: 'Additional Documents',
   youNeed: 'Please upload any additional documents that should accompany this application(s) form(s).',
   youNeed2: 'Examples of additional documents can be found on the application form',
   youNeed3: 'Please upload each document separately by using the “upload another file” button',
-  uploadButton: '+ upload another file',
+  youNeed4:
+    'You can post or email your documents to the court. Copies of certificates must be certified, which means they must be signed and dated by a professional person such as a solicitor or doctor.',
+  uploadButton: 'Upload',
 };
 
 const cyContent = {
-  serviceName: 'document upload - (Whelsh)',
+  serviceName: 'Document upload - (Whelsh)',
   title: 'Additional Documents - (Whelsh)',
   youNeed: 'Please upload any additional documents that should accompany this application(s) form(s). - (Whelsh)',
   youNeed2: 'Examples of additional documents can be found on the application form - (Whelsh)',
   youNeed3: 'Please upload each document separately by using the “upload another file” button - (Whelsh)',
-  uploadButton: '+ upload another file (Whelsh)',
+  youNeed4:
+    'You can post or email your documents to the court. Copies of certificates must be certified, which means they must be signed and dated by a professional person such as a solicitor or doctor. - (Whelsh)',
+  uploadButton: 'Upload',
 };
 
 const commonContent = { language: EN } as CommonContent;

@@ -1,22 +1,22 @@
 {
     "translations": {
         "en": {
-            "continue": "Save and Continue",
+            "continue": "Continue",
             "serviceName": "Contact Number",
-            "homePhoneLabel": "Enter your home phone number",
-            "mobilePhoneLabel": "Enter your mobile phone number",
-            "homePhoneHint": "Home Phone",
-            "mobilePhoneHint": "Mobile Phone",
+            "title":"What is the contact number of the named applicant?",
+            "line1":"This can be the number of a trusted friend if the applicant does not have a private number",
+            "homePhoneLabel": "Home Phone",
+            "mobilePhoneLabel": "Mobile Phone",
             "homePhone": "Enter home phone number",
             "mobilePhone": "Enter mobile phone number"
         },
         "cy": {
-            "continue": "Save and Continue (Welsh)",
+            "continue": "Continue (Welsh)",
             "serviceName": "Contact Number (Welsh)",
-            "homePhoneLabel": "Enter your home phone number (Welsh)",
-            "mobilePhoneLabel": "Enter your mobile phone number (Welsh)",
-            "homePhoneHint": "Home Phone (Welsh)",
-            "mobilePhoneHint": "Mobile Phone (Welsh)",
+            "title":"What is the contact number of the named applicant? (Welsh)",
+            "line1":"This can be the number of a trusted friend if the applicant does not have a private number (Welsh)",
+            "homePhoneLabel": "Home Phone (Welsh)",
+            "mobilePhoneLabel": "Mobile Phone (Welsh)",
             "homePhone": "Enter home phone number (Welsh)",
             "mobilePhone": "Enter mobile phone number (Welsh)"
         }
