@@ -51,7 +51,7 @@ export class CaseApi {
    * @param {UserDetails} userDetails - UserDetails
    * @returns The case id
    */
-  public async updateCase(req: AppRequest, userDetails: UserDetails): Promise<any> {
+  public async updateCase(req: AppRequest, userDetails: UserDetails, eventName: string): Promise<any> {
     /* Setting the headers for the PUT request. */
     Axios.defaults.headers.put[CONTENT_TYPE] = APPLICATION_JSON;
     Axios.defaults.headers.put[AUTHORIZATION] = BEARER + SPACE + userDetails.accessToken;
@@ -119,7 +119,7 @@ export class CaseApi {
         url + CONTEXT_PATH + FORWARD_SLASH + req.session.userCase.id + UPDATE_API_PATH,
         data,
         {
-          params: { event: 'UPDATE' },
+          params: { event: eventName },
         }
       );
       if (res.status === 200) {

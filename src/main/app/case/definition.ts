@@ -252,5 +252,6 @@ export const enum HttpStatus {
 }
 
 export const CITIZEN_SAVE_AND_CLOSE = 'citizen-save-and-close';
-export const CITIZEN_UPDATE = 'citizen-update-application';
-export const CITIZEN_CREATE = 'citizen-create-application';
+export const CITIZEN_UPDATE = 'UPDATE';
+export const CITIZEN_CREATE = 'CREATE';
+export const CITIZEN_SUBMIT = 'SUBMIT';
