@@ -33,6 +33,7 @@ export interface AppSession extends Session {
   addresses: [];
   returnUrl?: string;
   cookieStorageMessage?: boolean;
+  questions: Question[];
 }
 
 export interface UserDetails {
@@ -52,4 +53,11 @@ export interface Eligibility {
   marriedEligible?: string;
   livedUKEligible?: string;
   under21Eligible?: string;
+}
+
+export interface Question {
+  case_type_id: string;
+  question_text: string;
+  answer_field_type: object;
+  answer_field: string;
 }
