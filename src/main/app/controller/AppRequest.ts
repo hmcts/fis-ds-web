@@ -55,9 +55,9 @@ export interface Eligibility {
   under21Eligible?: string;
 }
 
-export interface Question {
+export type Question = {
   case_type_id: string;
   question_text: string;
-  answer_field_type: object;
+  answer_field_type: any;
   answer_field: string;
-}
+};

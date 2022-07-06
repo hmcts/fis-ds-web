@@ -145,12 +145,9 @@ export class CaseApi {
   public async retreiveCCDDef(req: AppRequest): Promise<any> {
     try {
       const headers = {
-        Accept: '*/*',
-        Authorization:
-          'Bearer eyJ0eXAiOiJKV1QiLCJraWQiOiIxZXIwV1J3Z0lPVEFGb2pFNHJDL2ZiZUt1M0k9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiJmcHJsX2Nhc2V3b3JrZXJfY291cnRhZG1AbWFpbGluYXRvci5jb20iLCJjdHMiOiJPQVVUSDJfU1RBVEVMRVNTX0dSQU5UIiwiYXV0aF9sZXZlbCI6MCwiYXVkaXRUcmFja2luZ0lkIjoiOTE5Zjk3ZDktM2Q4Mi00MzhjLThiNWEtYTdlYjY3MGIxYmFkLTEzMzQ1MjQ0OSIsImlzcyI6Imh0dHBzOi8vZm9yZ2Vyb2NrLWFtLnNlcnZpY2UuY29yZS1jb21wdXRlLWlkYW0tYWF0Mi5pbnRlcm5hbDo4NDQzL29wZW5hbS9vYXV0aDIvcmVhbG1zL3Jvb3QvcmVhbG1zL2htY3RzIiwidG9rZW5OYW1lIjoiYWNjZXNzX3Rva2VuIiwidG9rZW5fdHlwZSI6IkJlYXJlciIsImF1dGhHcmFudElkIjoiTzFVdHRzV1JtOG1OUEcyVDBSWGdRMmdpMk0wIiwiYXVkIjoieHVpd2ViYXBwIiwibmJmIjoxNjU3MTAwNzIwLCJncmFudF90eXBlIjoiYXV0aG9yaXphdGlvbl9jb2RlIiwic2NvcGUiOlsib3BlbmlkIiwicHJvZmlsZSIsInJvbGVzIiwiY3JlYXRlLXVzZXIiLCJtYW5hZ2UtdXNlciIsInNlYXJjaC11c2VyIl0sImF1dGhfdGltZSI6MTY1NzEwMDcyMCwicmVhbG0iOiIvaG1jdHMiLCJleHAiOjE2NTcxMjk1MjAsImlhdCI6MTY1NzEwMDcyMCwiZXhwaXJlc19pbiI6Mjg4MDAsImp0aSI6IlRFYWZsdmlEUTR2NjJMdnFXaDNYZkhPSWxubyJ9.YqFEBPq0XxE1SO1mWafnsx8ChcUDv88fEw4-VG6dZ1w6HSs7d1ohuyKn7SNbRBZDQfB3krXP-T2Vt-H7YWrh8r-3I1wAL8X51VhXszy-2-vgMvMXjykXwF5IOC1zD28_I9kP6jrQuTqidTk40PcXStz2ooHCn3Fv7bI_lR9F3E6mogB6ssaodU4MzplZksx9SxzndF5BcFPnjfPT3lhCitukWNAikwDQcztZ9g1buN-KL-lcZdfju5Dtvl8TOxAjenVkXIYOESKYRYV0LUaS9G3l2JtZd-N5ytFAAw7zqF6q80jYyYRDjxjS4wL1gTO-2RtgoOldXD-n4BKKP5xoCg',
+        Authorization: `Bearer ${req.session.user.accessToken}`,
         ServiceAuthorization:
           'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjY2RfZ3ciLCJleHAiOjE2NTcxMTUxOTV9.6AMggSWfsFn1g4N1Fny1QTstyJaeWWJlXGbilSgf3ZgKlFau_glewhU9HUcstuJW3xyyHsjnP859KfpLqJkscw',
-        Connection: 'keep-alive',
       };
       const res: AxiosResponse<CCDResponse> = await Axios.get(
         'https://ccd-definition-store-prl-ccd-definitions-pr-451.service.core-compute-preview.internal/api/display/challenge-questions/case-type/PRLAPPS/question-groups/PrlChallengeQuestion',
@@ -252,22 +249,22 @@ export const getCaseApi = (userDetails: UserDetails, logger: LoggerInstance): Ca
   );
 };
 
-interface CreateCaseResponse {
+type CreateCaseResponse = {
   status: string;
   id: string;
-}
+};
 
-interface CCDResponse {
+type CCDResponse = {
   status: string;
   questions: Question[];
+};
 
-}
-interface Question {
+type Question = {
   case_type_id: string;
   question_text: string;
-  answer_field_type: object;
+  answer_field_type: any;
   answer_field: string;
-}
+};
 
 export const mapCaseData = (req: AppRequest): any => {
   const data = {
