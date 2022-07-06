@@ -93,7 +93,7 @@ export class PostController<T extends AnyObject> {
   async retreiveCCDDef1(req: AppRequest<T>): Promise<CaseWithId | PromiseLike<CaseWithId>> {
     try {
       console.log('Create Case New');
-      req.session.userCase = await req.locals.api.retreiveCCDDef(req);
+      req.session.userCase = await req.locals.api.RetreiveCCDDef(req);
     } catch (err) {
       req.locals.logger.error('Error saving', err);
       req.session.errors = req.session.errors || [];

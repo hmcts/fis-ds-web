@@ -142,20 +142,33 @@ export class CaseApi {
     }
   }
 
-  public async retreiveCCDDef(req: AppRequest): Promise<any> {
+  public async RetreiveCCDDef(req: AppRequest): Promise<any> {
     try {
-      const headers = {
+      const ServiceURL = 'http://rpe-service-auth-provider-aat.service.core-compute-aat.internal/testing-support/lease';
+      const AxiosInstance = Axios.create({
+        baseURL: ServiceURL,
+        headers: {
+          microservice: 'ccd_gw',
+          'Content-Type': 'application/json',
+        },
+      });
+      const getServiceToken = await AxiosInstance.post('/', {});
+      console.log(getServiceToken.data);
+      const CCDAPIHeader = {
         Authorization: `Bearer ${req.session.user.accessToken}`,
-        ServiceAuthorization:
-          'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjY2RfZ3ciLCJleHAiOjE2NTcxMTUxOTV9.6AMggSWfsFn1g4N1Fny1QTstyJaeWWJlXGbilSgf3ZgKlFau_glewhU9HUcstuJW3xyyHsjnP859KfpLqJkscw',
+        ServiceAuthorization: getServiceToken.data,
       };
-      const res: AxiosResponse<CCDResponse> = await Axios.get(
-        'https://ccd-definition-store-prl-ccd-definitions-pr-451.service.core-compute-preview.internal/api/display/challenge-questions/case-type/PRLAPPS/question-groups/PrlChallengeQuestion',
-        { headers }
-      );
+      const BaseURLForCCDData =
+        'https://ccd-definition-store-prl-ccd-definitions-pr-451.service.core-compute-preview.internal/api/display/challenge-questions/case-type/PRLAPPS/question-groups/PrlChallengeQuestion';
+
+      const CCDAxiosInstance = Axios.create({
+        baseURL: BaseURLForCCDData,
+        headers: { ...CCDAPIHeader },
+      });
+      const res: AxiosResponse<CCDResponse> = await CCDAxiosInstance.get('');
       if (res.status === 200) {
         console.log('hiii');
-        console.log(res.data.questions[1].answer_field_type);
+        console.log({ dataFromCCD: res.data.questions[1].answer_field_type });
         req.session.questions = res.data.questions;
         return req.session.questions;
       } else {

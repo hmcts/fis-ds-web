@@ -31,6 +31,8 @@ export class GetController {
       // so we don't want to call render again
       return;
     }
+    const CCDdefData = await req.locals.api.RetreiveCCDDef(req);
+    console.log({ ccd: CCDdefData.data });
 
     const language = this.getPreferredLanguage(req) as Language;
     const addresses = req.session?.addresses;
