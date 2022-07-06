@@ -34,8 +34,6 @@ export class GetController {
     this.CookiePrefrencesChanger(req, res);
 
     if (res.locals.isError || res.headersSent) {
-      // If there's an async error, it will have already rendered an error page upstream,
-      // so we don't want to call render again
       return;
     }
 
@@ -81,7 +79,7 @@ export class GetController {
           apm: 'off',
         };
 
-    /* The above code is creating a new object called pageRenderableContents. It is taking the content
+    /* The below code is creating a new object called pageRenderableContents. It is taking the content
 object and adding the uploadedDocuments, addtionalDocuments, cookiePrefrences, sessionErrors,
 cookieMessage, FileErrors, htmlLang, and isDraft properties to it. */
     let pageRenderableContents = {
@@ -105,7 +103,6 @@ cookieMessage, FileErrors, htmlLang, and isDraft properties to it. */
     }
 
     const checkConditions = Object.values(RedirectConditions).includes(true);
-    /* Checking if the conditions are met. If they are not met, it will render the view. */
     if (!checkConditions) {
       res.render(this.view, pageRenderableContents);
     }

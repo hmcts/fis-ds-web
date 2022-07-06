@@ -1,7 +1,6 @@
 import { capitalize } from 'lodash';
 
 import { CaseWithId } from '../../app/case/case';
-import { Fee } from '../../app/case/definition';
 import { Eligibility } from '../../app/controller/AppRequest';
 import { PageContent, TranslationFn } from '../../app/controller/GetController';
 import { ResourceReader } from '../../modules/resourcereader/ResourceReader';
@@ -32,7 +31,6 @@ export const generatePageContent = ({
   AddDocuments,
   userEmail,
   addresses = [],
-  fee,
 }: {
   language: Language;
   pageContent?: TranslationFn;
@@ -41,7 +39,6 @@ export const generatePageContent = ({
   AddDocuments?: any;
   userEmail?: string;
   addresses?: [];
-  fee?: Fee;
 }): PageContent => {
   const commonTranslations: typeof en = language === 'en' ? en : cy;
   const serviceName = getServiceName(commonTranslations);
@@ -57,8 +54,6 @@ export const generatePageContent = ({
     userEmail,
     contactEmail,
     addresses,
-    // eligibility,
-    fee,
   };
 
   if (pageContent) {
@@ -85,7 +80,6 @@ export type CommonContent = typeof en & {
   //eslint-disable-next-line @typescript-eslint/no-explicit-any
   addresses?: any[];
   eligibility?: Eligibility;
-  fee?: Fee;
 };
 
 export type Language = 'en' | 'cy';

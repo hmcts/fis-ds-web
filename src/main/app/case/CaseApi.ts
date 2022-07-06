@@ -19,7 +19,7 @@ import { getServiceAuthToken } from '../auth/service/get-service-auth-token';
 import { AppRequest, UserDetails } from '../controller/AppRequest';
 
 import { CaseAssignedUserRoles } from './case-roles';
-import { YesOrNo } from './definition';
+import { YesOrNo, getOrCreateCaseType } from './definition';
 import { toApiDate } from './to-api-format';
 
 /* It's a class that contains a bunch of static methods that make HTTP requests to the Case API. */
@@ -41,8 +41,8 @@ export class CaseApi {
    * @returns An object with an id and state property.
    */
 
-  public async getOrCreateCase(): Promise<any> {
-    return { id: '', state: 'FIS' };
+  public getOrCreateCase(): getOrCreateCaseType {
+    return { id: '' };
   }
 
   /**
