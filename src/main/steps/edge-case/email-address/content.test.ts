@@ -1,51 +1,54 @@
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { EmailAddress } from '../../../app/case/definition';
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
+import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 import { CommonContent } from '../../common/common.content';
 
 import { generateContent } from './content';
 
+const resourceLoader = new ResourceReader();
+resourceLoader.Loader('email-address');
+const translations = resourceLoader.getFileContents().translations;
+const errors = resourceLoader.getFileContents().errors;
+
 jest.mock('../../../app/form/validation');
 
-const EN = 'en';
 const enContent = {
-  continue: 'Continue',
-  serviceName: 'Email Address',
-  label: 'What is the email address of the named applicant?',
-  hint: 'This should be a secure and private email',
-  emailAddress: 'Insert email address',
+  ...translations.en,
+  errors: {
+    ...errors.en,
+  },
 };
 
 const cyContent = {
-  continue: 'Continue (Welsh)',
-  serviceName: 'Email Address (Welsh)',
-  label: 'What is the email address of the named applicant? (Welsh)',
-  hint: 'This should be a secure and private email',
-  emailAddress: 'Insert email address (Welsh)',
+  ...translations.cy,
+  errors: {
+    ...errors.cy,
+  },
 };
 
-const commonContent = { language: EN } as CommonContent;
+const EN = 'en';
+//const CY = 'cy';
+
+const CommonContent = { language: EN } as CommonContent;
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
 describe('Email Address', () => {
   it('should return the correct content for language = en', () => {
-    languageAssertions('en', enContent, () => generateContent(commonContent));
+    languageAssertions('en', enContent, () => generateContent(CommonContent));
   });
 
+  //const commonContent = { language: CY } as CommonContent;
   it('should return the correct content for language = cy', () => {
-    languageAssertions('cy', cyContent, () => generateContent({ ...commonContent, language: 'cy' }));
+    languageAssertions('cy', cyContent, () => generateContent({ ...CommonContent, language: 'cy' }));
   });
   it('should have an email input text field', () => {
-    const generatedContent = generateContent(commonContent);
+    const generatedContent = generateContent(CommonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
     const applicantEmailAddress = fields.applicantEmailAddress;
     expect(applicantEmailAddress.classes).toBe('govuk-input');
-    expect((applicantEmailAddress.label as Function)(generatedContent)).toBe(
-      'What is the email address of the named applicant?'
-    );
-    expect((applicantEmailAddress.hint as Function)(generatedContent)).toBe(
-      'This should be a secure and private email'
-    );
+    //expect((applicantEmailAddress.label as Function)(generatedContent)).toBe(enContent.label);
+    expect((applicantEmailAddress.hint as Function)(generatedContent)).toBe(enContent.hint);
     expect(applicantEmailAddress.type).toBe('text');
 
     const emailAddressOptions = fields.applicantEmailAddress as FormOptions;
@@ -56,9 +59,9 @@ describe('Email Address', () => {
   });
 
   test('should contain submit button', () => {
-    const generatedContent = generateContent(commonContent);
+    const generatedContent = generateContent(CommonContent);
     const form = generatedContent.form as FormContent;
 
-    expect((form.submit.text as Function)(generateContent({ ...commonContent, language: EN }))).toBe('Continue');
+    expect((form.submit.text as Function)(generateContent({ ...CommonContent, language: EN }))).toBe('Continue');
   });
 });
