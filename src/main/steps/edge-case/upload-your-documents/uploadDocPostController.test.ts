@@ -53,7 +53,6 @@ describe('Document upload controller', () => {
       documentType: 'applicationform',
     });
 
-    expect(req.locals.api.triggerEvent).not.toHaveBeenCalled();
     expect(getNextStepUrlMock).not.toHaveBeenCalled();
     expect(res.redirect).not.toBeCalledWith('/upload-your-documents');
     expect(req.session.errors).not.toEqual(errors);
@@ -226,6 +225,9 @@ describe('checking for the redirect of post document upload', () => {
     ];
 
     await postingcontroller.PostDocumentUploader(req, res);
+    const requestWithDocument: any = req;
+    requestWithDocument['body'].documentUploadProceed = true;
+    await postingcontroller.post(req, res);
     expect(res.redirect).not.toHaveBeenCalledWith(ADDITIONAL_DOCUMENTS_UPLOAD);
   });
 

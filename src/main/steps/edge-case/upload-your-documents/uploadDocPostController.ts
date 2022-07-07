@@ -93,6 +93,7 @@ export class FileValidations {
    * @returns
    */
 
+  /* This is a static method which is used to get the error messages from the resource file. */
   static ResourceReaderContents = (req: AppRequest<AnyObject>): FileUploadErrorTranslatables => {
     let SystemContent: any | FileUploadErrorTranslatables = {};
     const SystemLangauge = req.session['lang'];
@@ -144,6 +145,11 @@ export default class UploadDocumentController extends PostController<AnyObject> 
     super(fields);
   }
 
+  /**
+   * This function is used to upload the documents to the case
+   * @param req - AppRequest<AnyObject>
+   * @param {Response} res - Response - this is the response object that will be sent back to the user.
+   */
   async PostDocumentUploader(req: AppRequest<AnyObject>, res: Response): Promise<void> {
     if (req.session.hasOwnProperty('caseDocuments')) {
       const TotalUploadDocuments = req.session.caseDocuments.length;
@@ -205,6 +211,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
   }
 
   public UploadDocumentInstance = (BASEURL: string, header: AxiosRequestHeaders): AxiosInstance => {
+    /* This is used to create an instance of the axios. */
     return axios.create({
       baseURL: BASEURL,
       headers: header,
@@ -223,9 +230,12 @@ export default class UploadDocumentController extends PostController<AnyObject> 
   }
 
   /**
-   *
-   * @param req
-   * @param res
+   * The function checks if the user has uploaded the maximum number of documents allowed, if not, it
+   * checks if the file uploaded is of the correct format and size, if it is, it uploads the file to the
+   * server and redirects the user to the upload your documents page, if not, it redirects the user to
+   * the upload your documents page with an error message
+   * @param req - AppRequest<AnyObject>
+   * @param {Response} res - Response - The response object
    */
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
     const { documentUploadProceed } = req.body;

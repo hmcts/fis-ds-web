@@ -10,25 +10,30 @@ import { FIS_COS_API_BASE_URL } from '../../steps/common/constants/apiConstants'
 import { TOGGLE_SWITCH } from '../../steps/common/constants/commonConstants';
 import * as Urls from '../../steps/urls';
 import { ADDITIONAL_DOCUMENTS_UPLOAD, COOKIES, UPLOAD_YOUR_DOCUMENTS } from '../../steps/urls';
-import { Case, CaseWithId } from '../case/case';
 
 import { AppRequest } from './AppRequest';
+
 export type PageContent = Record<string, unknown>;
 export type TranslationFn = (content: CommonContent) => PageContent;
 
 export type AsyncTranslationFn = any;
 @autobind
+/* It's a class that is used to render the page content and also to delete documents from the session */
 export class GetController {
   constructor(protected readonly view: string, protected readonly content: TranslationFn) {}
 
+  /**
+   * This function is used to render the page content and also to delete documents from the session
+   * @param {AppRequest} req - AppRequest, res: Response
+   * @param {Response} res - Response - the response object
+   * @returns The return is a promise that resolves to a void.
+   */
   public async get(req: AppRequest, res: Response): Promise<void> {
     console.log('usercase session --->', req.session.userCase);
 
     this.CookiePrefrencesChanger(req, res);
 
     if (res.locals.isError || res.headersSent) {
-      // If there's an async error, it will have already rendered an error page upstream,
-      // so we don't want to call render again
       return;
     }
 
@@ -41,17 +46,8 @@ export class GetController {
       req.session.errors = undefined;
       req.session.fileErrors = [];
     }
-    /**
-     *
-     *                      This util allows to delete document
-     *                      the params it uses is @req and @res
-     *                      This is uses generatePageContent Instance of the this GetController class
-     *                      All page contents save for generating page data
-     *                      the page content loads up all Page data
-     *      ************************************ ************************************
-     *      ************************************  ************************************
-     *
-     */
+
+    /* Generating the page content for the page. */
     const content = generatePageContent({
       language,
       pageContent: this.content,
@@ -62,15 +58,6 @@ export class GetController {
       addresses,
     });
 
-    /**
-     *
-     *                      This util allows to delete document
-     *                      the params it uses is @req and @res
-     *                      This is uses @documentDeleteManager Instance of the this GetController class
-     *      ************************************ ************************************
-     *      ************************************  ************************************
-     *
-     */
     this.documentDeleteManager(req, res);
     const RedirectConditions = {
       /*************************************** query @query  ***************************/
@@ -85,15 +72,6 @@ export class GetController {
       cookieAPM: req.query.hasOwnProperty('apm'),
     };
 
-    /**
-     *
-     *                      This util allows to delete document
-     *                      the params it uses is @ds-web-cookie-preferences
-     *                      This is used to check for current cookiesPreferences
-     *      ************************************ ************************************
-     *      ************************************  ************************************
-     *
-     */
     const cookiesForPrefrences = req.cookies.hasOwnProperty('ds-web-cookie-preferences')
       ? JSON.parse(req.cookies['ds-web-cookie-preferences'])
       : {
@@ -101,15 +79,9 @@ export class GetController {
           apm: 'off',
         };
 
-    /**
-     *
-     *                      This util allows to delete document
-     *                      the params it uses is @ds-web-cookie-preferences
-     *                      This is used to check for current cookiesPreferences
-     *      ************************************ ************************************
-     *      ************************************  ************************************
-     *
-     */
+    /* The below code is creating a new object called pageRenderableContents. It is taking the content
+object and adding the uploadedDocuments, addtionalDocuments, cookiePrefrences, sessionErrors,
+cookieMessage, FileErrors, htmlLang, and isDraft properties to it. */
     let pageRenderableContents = {
       ...content,
       uploadedDocuments: req.session['caseDocuments'],
@@ -122,17 +94,10 @@ export class GetController {
       isDraft: req.session?.userCase?.state ? req.session.userCase.state === '' : true,
     };
 
-    /**
-     *
-     *                      This util allows saved cookies to have redirect after successfully saving
-     *                      the params it uses is @ds-web-cookie-preferences
-     *                      This is used to check for current cookiesPreferences
-     *      ************************************ ************************************
-     *      ************************************  ************************************
-     *
-     */
     const cookieWithSaveQuery = COOKIES + '?togglesaveCookie=true';
     const checkforCookieUrlAndQuery = req.url === cookieWithSaveQuery;
+    /* Checking if the cookieMessage is true and if it is, it will add it to the pageRenderableContents
+  object. */
     if (checkforCookieUrlAndQuery) {
       pageRenderableContents = { ...pageRenderableContents, cookieMessage: true };
     }
@@ -143,23 +108,32 @@ export class GetController {
     }
   }
 
+  /**
+   * If the user has selected a language, use that. If not, use the language saved in the session. If
+   * not, use the browser's default language
+   * @param {AppRequest} req - AppRequest - This is the request object that is passed to the middleware.
+   * @returns The language that the user has selected.
+   */
   private getPreferredLanguage(req: AppRequest) {
     // User selected language
     const requestedLanguage = req.query['lng'] as string;
     if (LanguageToggle.supportedLanguages.includes(requestedLanguage)) {
       return requestedLanguage;
     }
-
     // Saved session language
     if (req.session?.lang) {
       return req.session.lang;
     }
-
     // Browsers default language
     const negotiator = new Negotiator(req);
     return negotiator.language(LanguageToggle.supportedLanguages) || 'en';
   }
 
+  /**
+   * If the returnUrl query parameter is set, and it's a valid URL, then set the returnUrl session
+   * variable to the value of the returnUrl query parameter
+   * @param {AppRequest} req - AppRequest - this is the request object that is passed to the controller.
+   */
   public parseAndSetReturnUrl(req: AppRequest): void {
     if (req.query.returnUrl) {
       if (Object.values(Urls).find(item => item === `${req.query.returnUrl}`)) {
@@ -168,18 +142,14 @@ export class GetController {
     }
   }
 
-  public async save(req: AppRequest, formData: Partial<Case>, eventName: string): Promise<CaseWithId> {
-    try {
-      return await req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
-    } catch (err) {
-      req.locals.logger.error('Error saving', err);
-      req.session.errors = req.session.errors || [];
-      req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
-      return req.session.userCase;
-    }
-  }
-
-  //eslint-disable-next-line @typescript-eslint/ban-types
+  /**
+   * It saves the session and then redirects the user to the same page
+   * @param {AppRequest} req - AppRequest - This is the request object that is passed to the route
+   * handler.
+   * @param {Response} res - Response - The response object from the Express framework.
+   * @param {Function} [callback] - A function to call after the session is saved.
+   */
+  // eslint-disable-next-line @typescript-eslint/ban-types
   public saveSessionAndRedirect(req: AppRequest, res: Response, callback?: Function): void {
     req.session.save(err => {
       if (err) {
@@ -192,8 +162,12 @@ export class GetController {
       }
     });
   }
-
-  /**Cookies prefrences saver */
+  /**
+   *
+   * @param {AppRequest} req - AppRequest - This is the request object that is passed to the route
+   * handler.
+   * @param {Response} res - Response - The response object from the Express framework.
+   */
 
   public CookiePrefrencesChanger = (req: AppRequest, res: Response): void => {
     //?analytics=off&apm=off
@@ -246,6 +220,11 @@ export class GetController {
     }
   };
 
+  /**
+   * It deletes a document from the session and from the database
+   * @param {AppRequest} req - AppRequest - this is the request object that is passed to the controller.
+   * @param {Response} res - Response - The response object
+   */
   public async documentDeleteManager(req: AppRequest, res: Response): Promise<void> {
     if (
       req.query.hasOwnProperty('query') &&
@@ -306,10 +285,5 @@ export class GetController {
         }
       }
     }
-  }
-
-  //eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected getEventName(req: AppRequest): string {
-    return '';
   }
 }
