@@ -6,7 +6,6 @@ import { CONTACT_DETAILS, STATEMENT_OF_TRUTH } from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
 import { CITIZEN_CREATE, CITIZEN_UPDATE } from '../case/definition';
 import { Form, FormFields, FormFieldsFn } from '../form/Form';
-import { ValidationError } from '../form/validation';
 
 import { AppRequest } from './AppRequest';
 
@@ -51,7 +50,6 @@ export class PostController<T extends AnyObject> {
   private async saveAndContinue(req: AppRequest<T>, res: Response, form: Form, formData: Partial<Case>): Promise<void> {
     Object.assign(req.session.userCase, formData);
     req.session.errors = form.getErrors(formData);
-    this.filterErrorsForSaveAsDraft(req);
     if (req.session?.user && req.session.errors.length === 0) {
       if (!(Object.values(noHitToSaveAndContinue) as string[]).includes(req.originalUrl)) {
         const eventName = this.getEventName(req);
@@ -79,21 +77,6 @@ export class PostController<T extends AnyObject> {
       req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
     }
     return req.session.userCase;
-  }
-
-  /**
-   * It filters out the errors that are not required or not selected
-   * @param req - AppRequest<T>
-   */
-
-  protected filterErrorsForSaveAsDraft(req: AppRequest<T>): void {
-    if (req.body.saveAsDraft) {
-      // skip empty field errors in case of save as draft
-      req.session.errors = req.session.errors!.filter(
-        item => item.errorType !== ValidationError.REQUIRED && item.errorType !== ValidationError.NOT_SELECTED // &&
-        //item.errorType !== ValidationError.NOT_UPLOADED
-      );
-    }
   }
 
   /**
