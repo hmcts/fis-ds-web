@@ -4,7 +4,7 @@
             "continue": "Continue",
             "serviceName": "Contact preferences",
             "label": "Where should we send emails about this application?",
-            "hint": "We will only email important updates",
+            "hint": "We will only email important updates.",
             "accountOwner": "The account owner",
             "namedPerson": "The person named on this application",
             "bothReceiveEmail": "Both the account owner and the person named on this application"
@@ -13,7 +13,7 @@
             "continue": "Continue (in welsh)",
             "serviceName": "Contact preferences (in Welsh)",
             "label": "Where should we send emails about this application? (in Welsh)",
-            "hint": "We will only email important updates (in Welsh)",
+            "hint": "We will only email important updates. (in Welsh)",
             "accountOwner": "The account owner (in Welsh)",
             "namedPerson": "The person named on this application (in Welsh)",
             "bothReceiveEmail": "Both the account owner and the person named on this application (in Welsh)"
