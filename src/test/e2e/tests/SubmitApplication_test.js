@@ -1,28 +1,24 @@
 const ContactPreferencePage = require("../pages/ContactPreference.page");
 
-Feature('Create application @e2e-tests @cross-browser').retry(1);
+Feature('Create application @e2e-tests').retry(1);
 
 Scenario(
   'Create full application and submit',
   async ({
     loginPage,
     landingPage,
-    familypage,
     applytoapplicantpage,
-    adoptionpage,
-    contactdetails,
     dateofbirth,
     addresswithpostcode,
     uploadfilepage,
-    reviewpaymentpage,
     determineapplicantrole,
     statementoftruth,
     contactpreferencepage,
     additiondocumentpage,
     emailaddresspage,
     checkyouranswerspage,
+    contactnumber,
     thankyoupage,
-    contactnumber
   }) => {
     await landingPage.seeTheLandingPage();
     await loginPage.SignInUser();
