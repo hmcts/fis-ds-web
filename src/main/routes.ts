@@ -6,11 +6,27 @@ import { GetController } from './app/controller/GetController';
 import { PostController } from './app/controller/PostController';
 import { KeepAliveController } from './app/keepalive/KeepAliveController';
 import { stepsWithContent } from './steps';
+import { AccessibilityStatementGetController } from './steps/accessibility-statement/get';
+import { ContactUsGetController } from './steps/contact-us/get';
+import { CookiesGetController } from './steps/cookies/get';
 import { ErrorController } from './steps/error/error.controller';
 import { HomeGetController } from './steps/home/get';
+import { PrivacyPolicyGetController } from './steps/privacy-policy/get';
 import { SaveSignOutGetController } from './steps/save-sign-out/get';
+import { TermsAndConditionsGetController } from './steps/terms-and-conditions/get';
 import { TimedOutGetController } from './steps/timed-out/get';
-import { CSRF_TOKEN_ERROR_URL, HOME_URL, KEEP_ALIVE_URL, SAVE_AND_SIGN_OUT, TIMED_OUT_URL } from './steps/urls';
+import {
+  ACCESSIBILITY_STATEMENT,
+  CONTACT_US,
+  COOKIES,
+  CSRF_TOKEN_ERROR_URL,
+  HOME_URL,
+  KEEP_ALIVE_URL,
+  PRIVACY_POLICY,
+  SAVE_AND_SIGN_OUT,
+  TERMS_AND_CONDITIONS,
+  TIMED_OUT_URL,
+} from './steps/urls';
 
 export class Routes {
   /**
@@ -25,6 +41,11 @@ export class Routes {
     app.get(HOME_URL, errorHandler(new HomeGetController().get));
     app.get(SAVE_AND_SIGN_OUT, errorHandler(new SaveSignOutGetController().get));
     app.get(TIMED_OUT_URL, errorHandler(new TimedOutGetController().get));
+    app.get(COOKIES, errorHandler(new CookiesGetController().get));
+    app.get(PRIVACY_POLICY, errorHandler(new PrivacyPolicyGetController().get));
+    app.get(TERMS_AND_CONDITIONS, errorHandler(new TermsAndConditionsGetController().get));
+    app.get(ACCESSIBILITY_STATEMENT, errorHandler(new AccessibilityStatementGetController().get));
+    app.get(CONTACT_US, errorHandler(new ContactUsGetController().get));
 
     for (const step of stepsWithContent) {
       const files = fs.readdirSync(`${step.stepDir}`);

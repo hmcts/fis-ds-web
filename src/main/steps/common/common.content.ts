@@ -37,6 +37,7 @@ const en = {
   cookies: 'Cookies',
   privacyPolicy: 'Privacy policy',
   termsAndConditions: 'Terms and conditions',
+  contactUs: 'Contact Us',
   marriage: 'marriage',
   divorce: 'divorce',
   civilPartnership: 'civil partnership',
