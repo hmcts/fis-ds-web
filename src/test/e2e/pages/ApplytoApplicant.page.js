@@ -1,4 +1,5 @@
 const { I } = inject();
+const ApplicantNameDetails = require('../fixtures/content/ApplicantName_content');
 
 module.exports = {
   fields: {
@@ -7,11 +8,12 @@ module.exports = {
   },
 
  applicantFullnames() {
-    I.waitForText("Who is the person named on this application?");
-    I.fillField(this.fields.firstnames, 'Marie');
-    I.fillField(this.fields.lastnames, 'Stopes');
+    I.waitForText(ApplicantNameDetails.pageTitle);
+    I.waitForText(ApplicantNameDetails.hintText);
+    I.fillField(this.fields.firstnames, ApplicantNameDetails.firstnames);
+    I.fillField(this.fields.lastnames, ApplicantNameDetails.lastnames);
     I.wait('2');
-    I.click('Continue');
+    I.click(ApplicantNameDetails.button);
     I.wait('2');
     }
 };

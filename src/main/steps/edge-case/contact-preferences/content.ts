@@ -12,6 +12,7 @@ export const form: FormContent = {
       type: 'radios',
       classes: 'govuk-radios',
       label: l => l.label,
+      hint: h => h.hint,
       values: [
         { label: l => l.accountOwner, value: ContactPreference.ACCOUNT_OWNER },
         {

@@ -1,4 +1,5 @@
 const { I } = inject();
+const ContactNumberDetails = require('../fixtures/content/ContactNumber_content');
 
 module.exports = {
   fields: {
@@ -6,11 +7,11 @@ module.exports = {
     mobilenumber: 'input[id$="applicantPhoneNumber"]'
   },
     EnterHomeAndMobileNo( homeNumber , mobileNumber ) {
-        I.waitForText('Enter your home phone number');
-        I.waitForText('Enter your mobile phone number');
+        I.waitForText(ContactNumberDetails.pageTitle , 30);
+        I.waitForText(ContactNumberDetails.hinttext);
         I.fillField(this.fields.homenumber, homeNumber );
         I.fillField(this.fields.mobilenumber, mobileNumber );
-        I.click('Save and Continue')
+        I.click(ContactNumberDetails.button);
         I.wait(5);
     },
 };

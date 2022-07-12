@@ -75,9 +75,7 @@ describe('contact-number-content', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
 
-    expect((form.submit.text as Function)(generateContent({ ...commonContent, language: EN }))).toBe(
-      'Save and Continue'
-    );
+    expect((form.submit.text as Function)(generateContent({ ...commonContent, language: EN }))).toBe('Continue');
   });
 
   test('should call validation function', () => {
@@ -87,10 +85,8 @@ describe('contact-number-content', () => {
     const mobilePhoneNumberOption = fields.applicantPhoneNumber as FormOptions;
     expect((mobilePhoneNumberOption.label as Function)(generatedContent)).toBe(enContent.mobilePhoneLabel);
     expect((mobilePhoneNumberOption.validator as Function)(null, mobilePhoneNumberOption)).toBe('atleastOneRequired');
-    expect((mobilePhoneNumberOption.hint as Function)(generatedContent)).toBe(enContent.mobilePhoneHint);
     const homePhoneNumberOption = fields.applicantHomeNumber as FormOptions;
     expect((homePhoneNumberOption.label as Function)(generatedContent)).toBe(enContent.homePhoneLabel);
     expect((homePhoneNumberOption.validator as Function)(null, homePhoneNumberOption)).toBe('atleastOneRequired');
-    expect((homePhoneNumberOption.hint as Function)(generatedContent)).toBe(enContent.homePhoneHint);
   });
 });
