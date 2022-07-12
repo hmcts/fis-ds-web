@@ -16,13 +16,6 @@ describe('CookiesGetController', () => {
     await controller.get(req, res);
 
     expect(res.render).toBeCalledWith(expect.anything(), {
-      FileErrors: [],
-      cookieMessage: false,
-      addtionalDocuments: undefined,
-      cookiePrefrences: {
-        analytics: 'off',
-        apm: 'off',
-      },
       ...generatePageContent({
         language,
         pageContent: generateContent,

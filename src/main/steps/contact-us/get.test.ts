@@ -18,12 +18,6 @@ describe('ContactUsGetController', () => {
     expect(res.render).toBeCalledWith(
       expect.anything(),
       expect.objectContaining({
-        cookieMessage: false,
-        addtionalDocuments: undefined,
-        cookiePrefrences: {
-          analytics: 'off',
-          apm: 'off',
-        },
         ...generatePageContent({
           language,
           pageContent: generateContent,
