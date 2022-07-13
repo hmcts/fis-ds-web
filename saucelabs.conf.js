@@ -10,7 +10,7 @@ const browser = process.env.SAUCELABS_BROWSER || 'chrome';
 const defaultSauceOptions = {
   username: process.env.SAUCE_USERNAME,
   accessKey: process.env.SAUCE_ACCESS_KEY,
-  tunnelIdentifier: process.env.TUNNEL_IDENTIFIER || 'reformtunnel',
+  //tunnelIdentifier: process.env.TUNNEL_IDENTIFIER || 'reformtunnel',
   acceptSslCerts: true,
   tags: ['DSS WEB'],
   maxDuration: 3000,

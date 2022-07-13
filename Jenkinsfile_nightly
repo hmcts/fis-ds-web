@@ -15,7 +15,7 @@ def component = "ds-web"
 // SAUCELABS config - configured on Jenkins
 env.SAUCE_USERNAME = 'username'
 env.SAUCE_ACCESS_KEY = 'privatekey'
-env.SAUCE_TUNNEL_IDENTIFIER = 'reformtunnel'
+//env.SAUCE_TUNNEL_IDENTIFIER = 'reformtunnel'
 
 def yarnBuilder = new uk.gov.hmcts.contino.YarnBuilder(this)
 
