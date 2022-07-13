@@ -1,7 +1,7 @@
 import { TranslationFn } from '../../app/controller/GetController';
 
 const en = {
-  title: 'Adoption',
+  title: 'document submission service',
   email: 'Email',
   emailAddress:
     'Email us at <a href="mailto:adoptionproject@justice.gov.uk" class="govuk-link">adoptionproject@justice.gov.uk.</a>',
