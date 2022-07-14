@@ -31,6 +31,10 @@ export const CHECK_YOUR_ANSWERS: PageLink = '/check-your-answers';
 export const STATEMENT_OF_TRUTH: PageLink = '/statement-of-truth';
 export const APPLICATION_SUBMITTED: PageLink = '/application-submitted';
 export const COOKIES: PageLink = '/cookies';
+export const PRIVACY_POLICY: PageLink = '/privacy-policy';
+export const ACCESSIBILITY_STATEMENT: PageLink = '/accessibility-statement';
+export const TERMS_AND_CONDITIONS: PageLink = '/terms-and-conditions';
+export const CONTACT_US: PageLink = '/contact-us';
 
 export const CHECK_JURISDICTION: PageLink = '/check-jurisdiction';
 export const WHERE_YOUR_LIVES_ARE_BASED_URL: PageLink = '/where-your-lives-are-based';
