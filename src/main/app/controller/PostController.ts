@@ -5,7 +5,7 @@ import { Response } from 'express';
 import { getNextStepUrl } from '../../steps';
 import { CONTACT_DETAILS, SAVE_AND_SIGN_OUT, STATEMENT_OF_TRUTH } from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
-import { CITIZEN_CREATE, CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE } from '../case/definition';
+import { CITIZEN_CREATE, CITIZEN_SAVE_AND_CLOSE, CITIZEN_SUBMIT, CITIZEN_UPDATE } from '../case/definition';
 import { Form, FormFields, FormFieldsFn } from '../form/Form';
 import { ValidationError } from '../form/validation';
 
@@ -68,8 +68,8 @@ export class PostController<T extends AnyObject> {
         const eventName = this.getEventName(req);
         if (eventName === CITIZEN_CREATE) {
           req.session.userCase = await this.createCase(req);
-        } else if (eventName === CITIZEN_UPDATE) {
-          req.session.userCase = await this.updateCase(req);
+        } else if (eventName === CITIZEN_UPDATE || eventName === CITIZEN_SUBMIT) {
+          req.session.userCase = await this.updateCase(req, eventName);
         }
       }
     }
@@ -115,10 +115,10 @@ export class PostController<T extends AnyObject> {
     return req.session.userCase;
   }
 
-  protected async updateCase(req: AppRequest<T>): Promise<CaseWithId> {
+  protected async updateCase(req: AppRequest<T>, eventName: string): Promise<CaseWithId> {
     try {
       console.log('Update Existing Case');
-      req.session.userCase = await req.locals.api.updateCase(req, req.session.user);
+      req.session.userCase = await req.locals.api.updateCase(req, req.session.user, eventName);
     } catch (err) {
       req.locals.logger.error('Error saving', err);
       req.session.errors = req.session.errors || [];
@@ -158,8 +158,10 @@ export class PostController<T extends AnyObject> {
     if (req.originalUrl === CONTACT_DETAILS && this.isBlank(req)) {
       console.log('creating new case event');
       eventName = CITIZEN_CREATE;
-    } else if (req.originalUrl === CONTACT_DETAILS || req.originalUrl === STATEMENT_OF_TRUTH) {
+    } else if (req.originalUrl === CONTACT_DETAILS) {
       eventName = CITIZEN_UPDATE;
+    } else if (req.originalUrl === STATEMENT_OF_TRUTH) {
+      eventName = CITIZEN_SUBMIT;
     }
     console.log('event is => ' + eventName);
     return eventName;

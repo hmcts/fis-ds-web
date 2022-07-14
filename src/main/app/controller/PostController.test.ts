@@ -218,6 +218,16 @@ describe('PostController', () => {
     expect(1).toEqual(1);
   });
 
+  it('should test CITIZEN_SUBMIT', async () => {
+    const body = { MOCK_KEY: 'MOCK_VALUE', saveBeforeSessionTimeout: true };
+    const controller = new PostController(mockFormContent.fields);
+    const req = mockRequest({ body, session: { user: { email: 'test@example.com' } } });
+    const res = mockResponse();
+    req.originalUrl = '/statement-of-truth';
+    await controller.post(req, res);
+    expect(1).toEqual(1);
+  });
+
   it('get the event name from the request - CITIZEN_CREATE', async () => {
     const body = { MOCK_KEY: 'MOCK_VALUE', saveBeforeSessionTimeout: true };
     const controller = new PostController(mockFormContent.fields);
