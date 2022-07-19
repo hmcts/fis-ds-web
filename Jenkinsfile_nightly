@@ -52,7 +52,7 @@ withNightlyPipeline(type, product, component) {
   env.TEST_URL = "https://fis-ds-web.aat.platform.hmcts.net/?edgecaseType=FMP"
   env.DS_UI_URL = params.FRONTEND_URL
   enableCrossBrowserTest(60)
-  enableFullFunctionalTest(120)
+  //enableFullFunctionalTest(120)
   loadVaultSecrets(secrets)
   //  enablePactAs([ AppPipelineDsl.PactRoles.CONSUMER ])
   //  enableFortifyScan()
