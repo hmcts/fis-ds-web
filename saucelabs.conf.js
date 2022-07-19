@@ -126,12 +126,6 @@ const setupConfig = {
     firefox: {
       browsers: getBrowserConfig('firefox'),
     },
-    safari: {
-      browsers: getBrowserConfig('safari'),
-    },
-    safari: {
-      browsers: getBrowserConfig('webkit'),
-    },
   },
   name: 'DSS FrontEnd Cross-Browser Tests',
 };
