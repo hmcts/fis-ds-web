@@ -138,6 +138,6 @@ in [health.ts](src/main/routes/health.ts) file. Make sure you adjust it correctl
 In particular, remember to replace the sample check with checks specific to your frontend app,
 e.g. the ones verifying the state of each service it depends on.
 
-## License
+### License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
