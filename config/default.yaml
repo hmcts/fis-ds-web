@@ -15,7 +15,7 @@ services:
     systemUsername: 'dummy_user'
     systemPassword: 'dummy_password'
   fis:
-    url: 'http://fis-cos-api-pr-80.service.core-compute-preview.internal'
+    url: 'https://fis-cos-api-pr-80.service.core-compute-preview.internal'
   postcodeLookup:
     url: 'https://api.os.uk/search/places/v1'
     token: 'NEED TO INSERT SECRET'
@@ -40,12 +40,12 @@ appInsights:
 documentUpload:
   validation:
     totaldocuments: 5
-    totalAdditionalDocuments: 20    
-    sizeInKB: 20000000  
+    totalAdditionalDocuments: 20
+    sizeInKB: 20000000
 queryParamsforApp:
   query:
     FMP: 'FMPO'
     RLAD: 'RELADOP'
     FGM: 'FGM'
-cookies: 
+cookies:
   expiryTime: 365
