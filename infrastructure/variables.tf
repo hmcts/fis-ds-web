@@ -3,7 +3,7 @@ variable "product" {}
 variable "component" {}
 
 variable "raw_product" {
-  default = "fis"
+  default = "fis-kv"
 }
 
 variable "microservice" {
