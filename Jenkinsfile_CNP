@@ -5,7 +5,7 @@
 import uk.gov.hmcts.contino.AppPipelineConfig
 
 def type = "nodejs"
-def product = "fis-kv"
+def product = "fis"
 def component = "ds-web"
 
 static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
