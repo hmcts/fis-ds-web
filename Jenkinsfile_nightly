@@ -34,7 +34,7 @@ static Map<String, Object> secret(String secretName, String envVariable) {
 }
 
 def secrets = [
-  'fis-${env}'    :[
+  'fis-kv-${env}'    :[
     secret('idam-ui-secret', 'IDAM_SECRET'),
     secret('idam-system-user-password', 'TEST_PASSWORD'),
     secret('citizen-user', 'CITIZEN_USERNAME'),
