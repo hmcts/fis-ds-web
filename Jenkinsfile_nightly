@@ -15,7 +15,7 @@ parameters([
 import uk.gov.hmcts.contino.AppPipelineConfig
 
 def type = "nodejs"
-def product = "fis"
+def product = "fis-kv"
 def component = "ds-web"
 
 // SAUCELABS config - configured on Jenkins
