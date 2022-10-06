@@ -15,7 +15,7 @@ nodejs:
     REDIS_HOST: 'fis-ds-web-session-storage-{{ .Values.global.environment }}.redis.cache.windows.net'
 
   keyVaults:
-    fis:
+    fis-kv:
       secrets:
         - idam-ui-secret
         - idam-system-user-name
