@@ -15,7 +15,7 @@ services:
     systemUsername: 'dummy_user'
     systemPassword: 'dummy_password'
   fis:
-    url: 'https://fis-cos-api-pr-80.service.core-compute-preview.internal'
+    url: 'https://fis-cos-api-pr-111.service.core-compute-preview.internal'
   postcodeLookup:
     url: 'https://api.os.uk/search/places/v1'
     token: 'NEED TO INSERT SECRET'
