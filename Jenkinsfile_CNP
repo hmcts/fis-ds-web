@@ -18,7 +18,7 @@ static LinkedHashMap<String, Object> secret(String secretName, String envVar) {
 }
 
 def secrets = [
-  'fis-${env}': [
+  'fis-kv-${env}': [
     secret('idam-ui-secret', 'IDAM_SECRET'),
     secret('citizen-user', 'CITIZEN_USERNAME'),
     secret('citizen-password', 'CITIZEN_PASSWORD')

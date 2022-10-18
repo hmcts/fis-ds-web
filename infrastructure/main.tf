@@ -22,7 +22,7 @@ module "fis-ds-web-session-storage" {
 }
 
 data "azurerm_key_vault" "fis_key_vault" {
-  name = local.vaultName
+  name = "fis-kv-${var.env}"
   resource_group_name = "${var.raw_product}-${var.env}"
 }
 
