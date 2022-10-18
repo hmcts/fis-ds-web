@@ -9,14 +9,14 @@ export class PropertiesVolume {
   enableFor(app: Application): void {
     if (!app.locals.developmentMode) {
       propertiesVolume.addTo(config);
-      this.setSecret('secrets.fis.AppInsightsInstrumentationKey', 'appInsights.instrumentationKey');
-      this.setSecret('secrets.fis.idam-ui-secret', 'services.idam.clientSecret');
-      this.setSecret('secrets.fis.idam-system-user-name', 'services.idam.systemUsername');
-      this.setSecret('secrets.fis.idam-system-user-password', 'services.idam.systemPassword');
-      this.setSecret('secrets.fis.redis-access-key', 'session.redis.key');
-      this.setSecret('secrets.fis.redis-access-key', 'session.secret');
-      this.setSecret('secrets.fis.s2s-secret', 'services.authProvider.secret');
-      this.setSecret('secrets.fis.postcode-lookup-token', 'services.postcodeLookup.token');
+      this.setSecret('secrets.fis-kv.AppInsightsInstrumentationKey', 'appInsights.instrumentationKey');
+      this.setSecret('secrets.fis-kv.idam-ui-secret', 'services.idam.clientSecret');
+      this.setSecret('secrets.fis-kv.idam-system-user-name', 'services.idam.systemUsername');
+      this.setSecret('secrets.fis-kv.idam-system-user-password', 'services.idam.systemPassword');
+      this.setSecret('secrets.fis-kv.redis-access-key', 'session.redis.key');
+      this.setSecret('secrets.fis-kv.redis-access-key', 'session.secret');
+      this.setSecret('secrets.fis-kv.s2s-secret', 'services.authProvider.secret');
+      this.setSecret('secrets.fis-kv.postcode-lookup-token', 'services.postcodeLookup.token');
       // this.setSecret('secrets.ds.adoption-pcq-token', 'services.equalityAndDiversity.tokenKey');
     } else {
       this.setLocalSecret('idam-ui-secret', 'services.idam.clientSecret');
@@ -39,7 +39,7 @@ export class PropertiesVolume {
    * Load a secret from the AAT vault using azure cli
    */
   private setLocalSecret(secret: string, toPath: string): void {
-    const result = execSync(`az keyvault secret show --vault-name fis-aat -o tsv --query value --name ${secret}`);
+    const result = execSync(`az keyvault secret show --vault-name fis-kv-aat -o tsv --query value --name ${secret}`);
     set(config, toPath, result.toString().replace('\n', ''));
   }
 }
