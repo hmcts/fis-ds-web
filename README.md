@@ -14,6 +14,7 @@ Running the application requires the following tools to be installed in your env
 
 Install dependencies by executing the following command:
 
+
 ```bash
 $ yarn install
 ```
