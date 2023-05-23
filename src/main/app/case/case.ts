@@ -1,6 +1,5 @@
 import { AnyObject } from '../controller/PostController';
-
-import { CaseData, YesOrNo } from './definition';
+import { Applicant, CaseData, YesOrNo } from './definition';
 
 export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>> = {
   applicantDateOfBirth: 'applicantDateOfBirth',
@@ -21,25 +20,6 @@ export function formatCase<InputFormat, OutputFormat>(fields: FieldFormats, data
 }
 
 export type FieldFormats = Record<string, string | ((AnyObject) => AnyObject)>;
-
-/***@caseData */
-export interface Case {
-  /*********All information related to the Case */
-  namedApplicant: YesOrNo;
-  caseTypeOfApplication: string;
-  applicantFirstName: string;
-  applicantLastName: string;
-  applicantDateOfBirth: CaseDate;
-  applicantEmailAddress: string;
-  applicantPhoneNumber: string;
-  applicantHomeNumber: string;
-  applicantAddress1: string;
-  applicantAddress2: string;
-  applicantAddressTown: string;
-  applicantAddressCountry: any;
-  applicantAddressPostcode: any;
-  applicantStatementOfTruth: string;
-}
 
 export interface CaseWithId extends Case {
   id: string;
@@ -82,4 +62,23 @@ export enum FieldPrefix {
   BIRTH_FATHER = 'birthFather',
   BIRTH_MOTHER = 'birthMother',
   OTHER_PARENT = 'otherParent',
+}
+
+
+export interface Case {
+  applicants?: Applicant[];
+  caseTypeOfApplication?: string;
+  namedApplicant: YesOrNo;
+  applicantFirstName: string;
+  applicantLastName: string;
+  applicantDateOfBirth: CaseDate;
+  applicantEmailAddress: string;
+  applicantPhoneNumber: string;
+  applicantHomeNumber: string;
+  applicantAddress1: string;
+  applicantAddress2: string;
+  applicantAddressTown: string;
+  applicantAddressCountry: any;
+  applicantAddressPostcode: any;
+  applicantStatementOfTruth: string;
 }

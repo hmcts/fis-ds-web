@@ -43,7 +43,7 @@
       {%if uploadedDocuments.length >0 %}
       {% for file in uploadedDocuments %}
         <li class="uploadedFile govuk-!-padding-top-2 govuk-!-padding-bottom-3 govuk-section-break govuk-section-break--visible">
-          {{ file.fileName }} 
+          {{ file.document_filename }} 
           {% set documentId = file.documentId%}
           <a href="/upload-your-documents?query=delete&docId={{documentId}}&documentType=applicationform" class="govuk-link--no-visited-state float-right ">{{ delete }}</a>
         </li>

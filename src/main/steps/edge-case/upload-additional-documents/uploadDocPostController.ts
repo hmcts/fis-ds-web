@@ -14,6 +14,8 @@ import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 import { FIS_COS_API_BASE_URL } from '../../../steps/common/constants/apiConstants';
 const logger = Logger.getLogger('uploadDocumentPostController');
 import { ADDITIONAL_DOCUMENTS_UPLOAD, CHECK_YOUR_ANSWERS } from '../../urls';
+import https from 'https';
+import { getServiceAuthToken } from '../../../app/auth/service/get-service-auth-token';
 
 /**
  * ****** File Extensions Types are being check
@@ -143,37 +145,38 @@ export default class UploadDocumentController extends PostController<AnyObject> 
   async PostDocumentUploader(req: AppRequest<AnyObject>, res: Response): Promise<void> {
     if (req.session.hasOwnProperty('AddtionalCaseDocuments')) {
       const CaseId = req.session.userCase['id'];
-      const baseURL = '/case/dss-orchestration/' + CaseId + '/update?event=UPDATE';
+      const baseURL = '/' + CaseId + '/citizen-case-update/update-dss-case';
       const Headers = {
         Authorization: `Bearer ${req.session.user['accessToken']}`,
+        ServiceAuthorization: 'Bearer ' + getServiceAuthToken(),
       };
       try {
         const MappedUploadRequestCaseDocuments = req.session['caseDocuments'].map(document => {
-          const { url, fileName, documentId, binaryUrl } = document;
-          return {
-            id: documentId,
-            value: {
-              documentLink: {
-                document_url: url,
-                document_filename: fileName,
-                document_binary_url: binaryUrl,
-              },
+          const { document_url, document_filename, document_binary_url } = document;
+        return {
+          id: document_url.substring(document_url.lastIndexOf('/')+1),
+          value: {
+            documentLink: {
+              document_url: document_url,
+              document_filename: document_filename,
+              document_binary_url: document_binary_url,
             },
-          };
+          },
+        };
         });
 
         const MappedRequestCaseDocuments = req.session['AddtionalCaseDocuments'].map(document => {
-          const { url, fileName, documentId, binaryUrl } = document;
-          return {
-            id: documentId,
-            value: {
-              documentLink: {
-                document_url: url,
-                document_filename: fileName,
-                document_binary_url: binaryUrl,
-              },
+          const { document_url, document_filename, document_binary_url } = document;
+        return {
+          id: document_url.substring(document_url.lastIndexOf('/')+1),
+          value: {
+            documentLink: {
+              document_url: document_url,
+              document_filename: document_filename,
+              document_binary_url: document_binary_url,
             },
-          };
+          },
+        };
         });
         const CaseData = mapCaseData(req);
         const responseBody = {
@@ -182,7 +185,13 @@ export default class UploadDocumentController extends PostController<AnyObject> 
           applicantApplicationFormDocuments: MappedUploadRequestCaseDocuments,
         };
 
-        await this.UploadDocumentInstance(FIS_COS_API_URL, Headers).put(baseURL, responseBody);
+        await this.UploadDocumentInstance('https://prl-cos-pr-1400.preview.platform.hmcts.net', Headers,
+          ).post(baseURL, responseBody, {
+          
+            httpsAgent: new https.Agent({ rejectUnauthorized: false }),
+             maxContentLength: Infinity,
+             maxBodyLength: Infinity,
+           });
         res.redirect(CHECK_YOUR_ANSWERS);
       } catch (error) {
         console.log(error);
@@ -264,15 +273,18 @@ export default class UploadDocumentController extends PostController<AnyObject> 
                */
               const Headers = {
                 Authorization: `Bearer ${req.session.user['accessToken']}`,
+                ServiceAuthorization: 'Bearer ' + getServiceAuthToken(),
               };
               try {
-                const RequestDocument = await this.UploadDocumentInstance(FIS_COS_API_URL, Headers).post(
-                  `/doc/dss-orhestration/upload?caseTypeOfApplication=${req.session['edgecaseType']}`,
+                const RequestDocument = await this.UploadDocumentInstance('https://prl-cos-pr-1400.preview.platform.hmcts.net', Headers).post(
+                  '/upload-citizen-document',
                   formData,
                   {
                     headers: {
+                     
                       ...formHeaders,
                     },
+                    httpsAgent: new https.Agent({ rejectUnauthorized: false }),
                   }
                 );
 
