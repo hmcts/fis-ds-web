@@ -148,7 +148,7 @@ export const UploadFormSummary = (
   console.log(uploadedDocuments);
   const ListOfUploadedDocuments = uploadedDocuments
     .map((document): string => {
-      return document.fileName + '';
+      return document.document_filename + '';
     })
     .toString()
     .split(',')
@@ -200,7 +200,7 @@ export const AdditonalFormSummary = (
   AddDocuments: Partial<any>
 ): SummaryList | undefined => {
   const ListOfAdditionalDocuments = AddDocuments.map((document): string => {
-    return document.fileName + '';
+    return document.document_filename + '';
   })
     .toString()
     .split(',')
