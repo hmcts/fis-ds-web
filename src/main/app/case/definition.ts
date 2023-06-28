@@ -255,3 +255,18 @@ export const CITIZEN_SAVE_AND_CLOSE = 'citizen-save-and-close';
 export const CITIZEN_UPDATE = 'UPDATE';
 export const CITIZEN_CREATE = 'CREATE';
 export const CITIZEN_SUBMIT = 'SUBMIT';
+
+export const enum DSS_CASE_EVENT {
+  DSS_CASE_SUBMIT = 'citizen-dss-case-submit',
+}
+
+export const enum CASE_TYPE_OF_APPLICATION {
+  C100 = 'C100',
+  FL401 = 'FL401',
+}
+
+export const enum TYPE_OF_APPLICATION {
+  FGM_FMPO = 'FGMFMPO',
+  SPECIAL_GUARD_PARENTAGE = 'SGDOP',
+  PARENTAL_ORDERS = 'PO',
+}
