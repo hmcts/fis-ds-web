@@ -9,6 +9,7 @@ import FormData from 'form-data';
 import { isNull } from 'lodash';
 
 import { mapCaseData } from '../../../app/case/CaseApi';
+import { DSS_CASE_EVENT } from '../../../app/case/definition';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { FormFields, FormFieldsFn } from '../../../app/form/Form';
@@ -146,7 +147,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
   async PostDocumentUploader(req: AppRequest<AnyObject>, res: Response): Promise<void> {
     if (req.session.hasOwnProperty('AddtionalCaseDocuments')) {
       const CaseId = req.session.userCase['id'];
-      const baseURL = '/' + CaseId + '/citizen-case-update/update-dss-case';
+      const baseURL = '/' + CaseId + `/${DSS_CASE_EVENT.UPDATE_CASE}/update-dss-case`;
       try {
         const MappedUploadRequestCaseDocuments = req.session['caseDocuments'].map(document => {
           const { document_url, document_filename, document_binary_url } = document;
