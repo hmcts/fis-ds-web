@@ -17,6 +17,7 @@ export const form: FormContent = {
         values: [
           { label: l => l.one, value: YesOrNo.YES },
           { label: l => l.two, value: YesOrNo.NO },
+          { label: l => l.three, value: YesOrNo.NO },
         ],
         validator: isFieldFilledIn,
       },
