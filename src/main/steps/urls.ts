@@ -44,3 +44,4 @@ export const JURISDICTION_MAY_NOT_BE_ABLE_TO: PageLink = '/you-may-not-be-able-t
 export const JURISDICTION_CONNECTION_SUMMARY: PageLink = '/connection-summary';
 export const PAY_AND_SUBMIT: PageLink = '/pay-and-submit';
 export const ELIGIBILITY_URL: PageLink = '/eligibility';
+export const TYPE_OF_APPLICATION_URL: PageLink = '/type-of-application';

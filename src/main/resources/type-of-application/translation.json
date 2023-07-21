@@ -1,0 +1,32 @@
+{
+    "translations": {
+        "en": {
+            "continue": "Continue",
+            "serviceName": "Capture type of application",
+            "label": "Please select type of application",
+            "one": "FGM/FMPO",
+            "two": "Special Guardianship/Declaration of Parentage",
+            "three": "Parental orders"
+        },
+        "cy": {
+            "continue": "Continue (in welsh)",
+            "serviceName": "Capture type of application (in welsh)",
+            "label": "Are you applying for yourself or someone else? (in welsh)",
+            "one": "FGM/FMPO (in welsh)",
+            "two": "Special Guardianship/Declaration of Parentage (in welsh)",
+            "three": "Parental orders (in welsh)"
+        }
+    },
+    "errors":{
+        "en": {
+            "typeOfApplication": {
+                "required": "Please select a type of application"
+            }
+        },
+        "cy": {
+            "typeOfApplication": {
+                "required": "Please select a type of application (in welsh)"
+            }
+        }
+    }
+}

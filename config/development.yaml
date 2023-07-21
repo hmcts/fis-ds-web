@@ -7,8 +7,6 @@ services:
     url: 'http://rpe-service-auth-provider-aat.service.core-compute-aat.internal'
     microservice: 'ds_ui'
     secret: 'NEED TO INSERT SECRET'
-  fis:
-    url: 'https://fis-cos-api-pr-111.service.core-compute-preview.internal'
   postcodeLookup:
     url: 'https://api.os.uk/search/places/v1'
     token: 'NEED TO INSERT SECRET'
@@ -20,6 +18,8 @@ services:
     uploadSizeinMB: 30
   RPE_TOKEN:
     url: 'http://rpe-service-auth-provider-aat.service.core-compute-aat.internal'
+  cos:
+    url: 'https://prl-cos-pr-1485.preview.platform.hmcts.net'
 health:
   timeout: 5000
   deadline: 15000
