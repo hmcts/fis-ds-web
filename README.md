@@ -33,7 +33,7 @@ $ yarn start
 
 The applications's home page will be available at https://localhost:4000
 
-### Running with Docker
+#### Running with Docker
 
 Create docker image:
 
