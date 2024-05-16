@@ -258,6 +258,7 @@ export const CITIZEN_SUBMIT = 'SUBMIT';
 
 export const enum DSS_CASE_EVENT {
   DSS_CASE_SUBMIT = 'citizen-dss-case-submit',
+  UPDATE_CASE = 'citizen-case-update',
 }
 
 export const enum CASE_TYPE_OF_APPLICATION {

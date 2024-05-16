@@ -48,6 +48,7 @@ describe('role-type content', () => {
     expect(generatedContent.serviceName).toEqual(cyContent.serviceName);
     expect(generatedContent.one).toEqual(cyContent.one);
     expect(generatedContent.two).toEqual(cyContent.two);
+    expect(generatedContent.three).toEqual(cyContent.three);
     expect(generatedContent.errors).toEqual(cyContent.errors);
   });
 
@@ -61,6 +62,7 @@ describe('role-type content', () => {
     expect((namedApplicantField.label as Function)(generatedContent)).toBe(enContent.label);
     expect((namedApplicantField.values[0].label as Function)(generatedContent)).toBe(enContent.one);
     expect((namedApplicantField.values[1].label as Function)(generatedContent)).toBe(enContent.two);
+    expect((namedApplicantField.values[2].label as Function)(generatedContent)).toBe(enContent.three);
   });
 
   test('should contain continue button', () => {

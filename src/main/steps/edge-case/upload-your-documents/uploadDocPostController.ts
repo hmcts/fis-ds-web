@@ -10,6 +10,7 @@ import { isNull } from 'lodash';
 
 // eslint-disable-next-line import/namespace
 import { mapCaseData } from '../../../app/case/CaseApi';
+import { DSS_CASE_EVENT } from '../../../app/case/definition';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { FormFields, FormFieldsFn } from '../../../app/form/Form';
@@ -157,7 +158,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
         this.uploadFileError(req, res, errorMessage);
       } else {
         const CaseId = req.session.userCase['id'];
-        const baseURL = '/' + CaseId + '/citizen-case-update/update-dss-case';
+        const baseURL = '/' + CaseId + `/${DSS_CASE_EVENT.UPDATE_CASE}/update-dss-case`;
         try {
           const MappedRequestCaseDocuments = req.session['caseDocuments'].map(document => {
             const { document_url, document_filename, document_binary_url } = document;

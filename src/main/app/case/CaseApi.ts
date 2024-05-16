@@ -11,7 +11,14 @@ import { AppRequest, UserDetails } from '../controller/AppRequest';
 
 import { Case, CaseWithId } from './case';
 import { CaseAssignedUserRoles } from './case-roles';
-import { CASE_TYPE_OF_APPLICATION, CaseData, DSS_CASE_EVENT, TYPE_OF_APPLICATION, YesOrNo } from './definition';
+import {
+  CASE_TYPE_OF_APPLICATION,
+  CITIZEN_SUBMIT,
+  CaseData,
+  DSS_CASE_EVENT,
+  TYPE_OF_APPLICATION,
+  YesOrNo,
+} from './definition';
 import { toApiDate, toApiFormat } from './to-api-format';
 
 export class CaseApi {
@@ -49,7 +56,6 @@ export class CaseApi {
    * @returns
    */
   public async updateCase(req: AppRequest, eventName: string): Promise<any> {
-    console.log(eventName);
     try {
       if (req.session.userCase.id === EMPTY) {
         throw new Error('Error in updating case, case id is missing');
@@ -82,14 +88,14 @@ export class CaseApi {
           },
         };
       });
-
+      const event = eventName === CITIZEN_SUBMIT ? DSS_CASE_EVENT.DSS_CASE_SUBMIT : DSS_CASE_EVENT.UPDATE_CASE;
       const data = {
         ...mapCaseData(req),
         applicantAdditionalDocuments: AdditionalDocuments,
         applicantApplicationFormDocuments: CaseDocuments,
       };
       const response = await this.axios.post<CreateCaseResponse>(
-        `${req.session.userCase.id}/${DSS_CASE_EVENT.DSS_CASE_SUBMIT}/update-dss-case`,
+        `${req.session.userCase.id}/${event}/update-dss-case`,
         data,
         {
           httpsAgent: new https.Agent({ rejectUnauthorized: false }),
@@ -133,6 +139,7 @@ export class CaseApi {
         maxBodyLength: Infinity,
       });
       req.session.userCase.id = response.data.id;
+      req.session.userCase.caseTypeOfApplication = response.data.caseTypeOfApplication;
       return req.session.userCase;
     } catch (err) {
       this.logError(err);
