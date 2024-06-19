@@ -1,6 +1,6 @@
 import { AnyObject } from '../controller/PostController';
 
-import { Applicant, CaseData, YesOrNo } from './definition';
+import { Applicant, CaseData, TYPE_OF_APPLICATION, YesOrNo } from './definition';
 
 export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>> = {
   applicantDateOfBirth: 'applicantDateOfBirth',
@@ -68,7 +68,7 @@ export enum FieldPrefix {
 export interface Case {
   applicants?: Applicant[];
   caseTypeOfApplication?: string;
-  typeOfApplication?: string;
+  typeOfApplication?: TYPE_OF_APPLICATION;
   namedApplicant: YesOrNo;
   applicantFirstName: string;
   applicantLastName: string;
