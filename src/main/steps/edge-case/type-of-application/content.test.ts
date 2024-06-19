@@ -37,9 +37,9 @@ describe('role-type content', () => {
     expect(generatedContent.continue).toEqual(enContent.continue);
     expect(generatedContent.label).toEqual(enContent.label);
     expect(generatedContent.serviceName).toEqual(enContent.serviceName);
-    expect(generatedContent.one).toEqual(enContent.one);
-    expect(generatedContent.two).toEqual(enContent.two);
-    expect(generatedContent.three).toEqual(enContent.three);
+    expect(generatedContent.fgm).toEqual(enContent.fgm);
+    expect(generatedContent.fmpo).toEqual(enContent.fmpo);
+    expect(generatedContent.sg).toEqual(enContent.sg);
     expect(generatedContent.errors).toEqual(enContent.errors);
   });
 
@@ -48,9 +48,9 @@ describe('role-type content', () => {
     expect(generatedContent.continue).toEqual(cyContent.continue);
     expect(generatedContent.label).toEqual(cyContent.label);
     expect(generatedContent.serviceName).toEqual(cyContent.serviceName);
-    expect(generatedContent.one).toEqual(cyContent.one);
-    expect(generatedContent.two).toEqual(cyContent.two);
-    expect(generatedContent.three).toEqual(cyContent.three);
+    expect(generatedContent.fgm).toEqual(cyContent.fgm);
+    expect(generatedContent.fmpo).toEqual(cyContent.fmpo);
+    expect(generatedContent.sg).toEqual(cyContent.sg);
     expect(generatedContent.errors).toEqual(cyContent.errors);
   });
 
@@ -62,9 +62,9 @@ describe('role-type content', () => {
     expect(typeOfApplication.type).toBe('radios');
     expect(typeOfApplication.classes).toBe('govuk-radios');
     expect((typeOfApplication.label as Function)(generatedContent)).toBe(enContent.label);
-    expect((typeOfApplication.values[0].label as Function)(generatedContent)).toBe(enContent.one);
-    expect((typeOfApplication.values[1].label as Function)(generatedContent)).toBe(enContent.two);
-    expect((typeOfApplication.values[2].label as Function)(generatedContent)).toBe(enContent.three);
+    expect((typeOfApplication.values[0].label as Function)(generatedContent)).toBe(enContent.fgm);
+    expect((typeOfApplication.values[1].label as Function)(generatedContent)).toBe(enContent.fmpo);
+    expect((typeOfApplication.values[2].label as Function)(generatedContent)).toBe(enContent.sg);
   });
 
   test('should contain continue button', () => {
