@@ -1,6 +1,6 @@
-import * as cookieManager from '@hmcts/cookie-manager';
+import cookieManager from '@hmcts/cookie-manager';
 
-import { qs } from './selectors';
+/*import { qs } from './selectors';
 
 const cookieBanner = qs('#cm-cookie-banner');
 const cookieBannerDecision = cookieBanner?.querySelector('.govuk-cookie-banner__decision') as HTMLInputElement;
@@ -63,33 +63,25 @@ function cookiePreferencesUpdated(cookieStatus) {
       dtrum.disableSessionReplay();
     }
   }
-}
+}*/
 
 cookieManager.init({
-  'user-preference-cookie-name': 'ds-web-cookie-preferences',
-  'user-preference-saved-callback': cookiePreferencesUpdated,
-  'preference-form-id': 'cm-preference-form',
-  'preference-form-saved-callback': preferenceFormSaved,
-  'set-checkboxes-in-preference-form': true,
-  'cookie-banner-id': 'cm-cookie-banner',
-  'cookie-banner-visible-on-page-with-preference-form': false,
-  'cookie-banner-reject-callback': cookieBannerReject,
-  'cookie-banner-accept-callback': cookieBannerAccept,
-  'cookie-banner-saved-callback': cookieBannerSaved,
-  'cookie-banner-auto-hide': false,
-  'cookie-manifest': [
+  userPreferences: {
+    cookieName: 'ds-web-cookie-preferences',
+  },
+  cookieManifest: [
     {
-      'category-name': 'essential',
+      categoryName: 'essential',
       optional: false,
       cookies: ['ds-web-cookie-preferences', '_oauth2_proxy', 'ajs_user_id', 'ajs_group_id', 'ajs_anonymous_id'],
     },
     {
-      'category-name': 'analytics',
+      categoryName: 'analytics',
       optional: true,
       cookies: ['_ga', '_gid'],
     },
     {
-      'category-name': 'apm',
+      categoryName: 'apm',
       optional: true,
       cookies: ['dtCookie', 'dtLatC', 'dtPC', 'dtSa', 'rxVisitor', 'rxvt'],
     },
