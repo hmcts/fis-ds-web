@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
@@ -7,7 +8,7 @@ import { AnyObject, PostController } from '../controller/PostController';
 import { Form, FormFields, FormFieldsFn } from '../form/Form';
 
 @autobind
-export default class SelectAddressPostControllerBase extends PostController<AnyObject> {
+export class SelectAddressPostControllerBase extends PostController<AnyObject> {
   constructor(protected readonly fields: FormFields | FormFieldsFn, protected readonly fieldPrefix: FieldPrefix) {
     super(fields);
   }
@@ -48,3 +49,4 @@ export default class SelectAddressPostControllerBase extends PostController<AnyO
     this.redirect(req, res);
   }
 }
+export default SelectAddressPostControllerBase;

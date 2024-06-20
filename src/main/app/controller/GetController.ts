@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import autobind from 'autobind-decorator';
 import axios, { AxiosInstance } from 'axios';
 import config from 'config';

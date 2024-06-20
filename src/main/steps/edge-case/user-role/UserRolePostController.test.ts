@@ -38,7 +38,7 @@ describe('UserRolePostController', () => {
     await controller.post(req, res);
 
     expect(getNextStepUrlMock).not.toHaveBeenCalled();
-    expect(res.redirect).toBeCalledWith(req.path);
+    expect(res.redirect).toHaveBeenCalledWith(req.path);
     expect(req.session.errors).toEqual(errors);
   });
 
@@ -67,7 +67,7 @@ describe('UserRolePostController', () => {
     await controller.post(req, res);
 
     expect(getNextStepUrlMock).not.toHaveBeenCalled();
-    expect(res.redirect).toBeCalledWith(DATE_OF_BIRTH);
+    expect(res.redirect).toHaveBeenCalledWith(DATE_OF_BIRTH);
   });
 
   test('Should redirect to full name page when no radio button selected', async () => {
@@ -95,6 +95,6 @@ describe('UserRolePostController', () => {
     await controller.post(req, res);
 
     expect(getNextStepUrlMock).not.toHaveBeenCalled();
-    expect(res.redirect).toBeCalledWith(FULL_NAME);
+    expect(res.redirect).toHaveBeenCalledWith(FULL_NAME);
   });
 });
