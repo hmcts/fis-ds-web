@@ -1,14 +1,14 @@
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 import { CommonContent } from '../../common/common.content';
-import { TYPE_OF_APPLICATION_URL } from '../../urls';
+import { SELECT_COURT } from '../../urls';
 
 import { generateContent } from './content';
 
 jest.mock('../../../app/form/validation');
 
 const resourceLoader = new ResourceReader();
-resourceLoader.Loader(TYPE_OF_APPLICATION_URL);
+resourceLoader.Loader(SELECT_COURT);
 const translations = resourceLoader.getFileContents().translations;
 const errors = resourceLoader.getFileContents().errors;
 
@@ -58,13 +58,8 @@ describe('role-type content', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const typeOfApplication = fields.typeOfApplication as FormOptions;
-    expect(typeOfApplication.type).toBe('radios');
-    expect(typeOfApplication.classes).toBe('govuk-radios');
-    expect((typeOfApplication.label as Function)(generatedContent)).toBe(enContent.label);
-    expect((typeOfApplication.values[0].label as Function)(generatedContent)).toBe(enContent.one);
-    expect((typeOfApplication.values[1].label as Function)(generatedContent)).toBe(enContent.two);
-    expect((typeOfApplication.values[2].label as Function)(generatedContent)).toBe(enContent.three);
+    const selectedCourt = fields.selectedCourt as FormOptions;
+    expect((selectedCourt.label as Function)(generatedContent)).toBe(enContent.label);
   });
 
   test('should contain continue button', () => {

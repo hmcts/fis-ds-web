@@ -23,6 +23,7 @@
               "uploadDocuments": "List of forms uploaded (Application form)",
               "additionalDocuments": "List of Documents uploaded (supporting documents)",
               "typeOfApplication": "Type of application",
+              "selectedCourt": "Select court",
               "FGMFMPO": "FGM/FMPO",
               "SGDOP": "Special Guardianship/Declaration of Parentage",
               "PO": "Parental orders"
@@ -51,6 +52,7 @@
               "uploadDocuments": "List of forms uploaded (Application form) - welsh",
               "additionalDocuments": "List of Documents uploaded (supporting documents) - welsh",
               "typeOfApplication": "Type of application - welsh",
+              "selectedCourt": "Select court - welsh",
               "FGMFMPO": "FGM/FMPO - welsh",
               "SGDOP": "Special Guardianship/Declaration of Parentage - welsh",
               "PO": "Parental orders - welsh"
