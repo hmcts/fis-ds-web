@@ -24,9 +24,11 @@
               "additionalDocuments": "List of Documents uploaded (supporting documents)",
               "typeOfApplication": "Type of application",
               "selectedCourt": "Select court",
-              "FGMFMPO": "FGM/FMPO",
-              "SGDOP": "Special Guardianship/Declaration of Parentage",
-              "PO": "Parental orders"
+              "FGM": "FGM - FGM001 and FGM006 if a third party is submitting this application",
+              "FMPO": "FMPO - FL401a and FL430 if a third party is submitting this application", 
+              "SG": "Special Guardianship - form C1/form C13A",
+              "DOP": "Declaration of Parentege - form C63",
+              "PO": "Parental orders - form C51"
             }
         },
         "cy": {
@@ -53,9 +55,11 @@
               "additionalDocuments": "List of Documents uploaded (supporting documents) - welsh",
               "typeOfApplication": "Type of application - welsh",
               "selectedCourt": "Select court - welsh",
-              "FGMFMPO": "FGM/FMPO - welsh",
-              "SGDOP": "Special Guardianship/Declaration of Parentage - welsh",
-              "PO": "Parental orders - welsh"
+              "FGM": "FGM - FGM001 and FGM006 if a third party is submitting this application -welsh",
+              "FMPO": "FMPO - FL401a and FL430 if a third party is submitting this application -welsh", 
+              "SG": "Special Guardianship - form C1/form C13A -welsh",
+              "DOP": "Declaration of Parentege - form C63 -welsh",
+              "PO": "Parental orders - form C51 -welsh"
             }
         }
     }

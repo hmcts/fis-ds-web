@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import autobind from 'autobind-decorator';
 import config from 'config';
 import { Response } from 'express';

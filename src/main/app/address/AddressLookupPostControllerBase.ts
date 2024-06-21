@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
@@ -8,7 +9,7 @@ import { Form, FormFields, FormFieldsFn } from '../form/Form';
 import { Address, getAddressesFromPostcode } from '../postcode/postcode-lookup-api';
 
 @autobind
-export default class AddressLookupPostControllerBase extends PostController<AnyObject> {
+export class AddressLookupPostControllerBase extends PostController<AnyObject> {
   constructor(protected readonly fields: FormFields | FormFieldsFn, protected readonly fieldPrefix: FieldPrefix) {
     super(fields);
   }
@@ -73,3 +74,4 @@ export default class AddressLookupPostControllerBase extends PostController<AnyO
     return null;
   }
 }
+export default AddressLookupPostControllerBase;

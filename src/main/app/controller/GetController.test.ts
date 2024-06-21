@@ -297,8 +297,8 @@ describe('GetController', () => {
       const req = mockRequest();
       const res = mockResponse();
       controller.saveSessionAndRedirect(req, res);
-      expect(req.session.save).toBeCalled();
-      expect(res.redirect).toBeCalledWith('/request');
+      expect(req.session.save).toHaveBeenCalled();
+      expect(res.redirect).toHaveBeenCalledWith('/request');
     });
 
     test('should throw an error and not redirect when session can not be saved', () => {
@@ -315,7 +315,7 @@ describe('GetController', () => {
         //eslint-disable-next-line jest/no-conditional-expect
         expect(err).toBe('MOCK_ERROR');
       }
-      expect(res.redirect).not.toBeCalledWith('/request');
+      expect(res.redirect).not.toHaveBeenCalledWith('/request');
     });
   });
 });
