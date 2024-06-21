@@ -134,8 +134,7 @@ export class CaseApi {
     };
 
     try {
-      const response = await this.axios.post<CreateCaseResponse>('/case/create',
-         data, {
+      const response = await this.axios.post<CreateCaseResponse>('/case/create', data, {
         httpsAgent: new https.Agent({ rejectUnauthorized: false }),
         maxContentLength: Infinity,
         maxBodyLength: Infinity,

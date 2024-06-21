@@ -115,7 +115,7 @@ export interface StatusHistoriesItem {
 export interface CourtListOptions {
   epmsId: string;
   site_name: string;
-  court_name: string
+  court_name: string;
 }
 
 export type DateAsString = string;

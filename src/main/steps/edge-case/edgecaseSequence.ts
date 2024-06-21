@@ -1,4 +1,4 @@
-
+import { TYPE_OF_APPLICATION } from '../../app/case/definition';
 import { Sections, Step } from '../constants';
 import {
   ADDITIONAL_DOCUMENTS_UPLOAD,
@@ -13,13 +13,12 @@ import {
   FULL_NAME,
   MANUAL_ADDRESS,
   SELECT_ADDRESS,
+  SELECT_COURT,
   STATEMENT_OF_TRUTH,
   TYPE_OF_APPLICATION_URL,
   UPLOAD_YOUR_DOCUMENTS,
   USER_ROLE,
-  SELECT_COURT,
 } from '../urls';
-import { TYPE_OF_APPLICATION } from '../../app/case/definition';
 export const edgecaseSequence: Step[] = [
   {
     url: TYPE_OF_APPLICATION_URL,
@@ -70,9 +69,10 @@ export const edgecaseSequence: Step[] = [
   {
     url: CONTACT_DETAILS,
     showInSection: Sections.AboutEdgeCase,
-    getNextStep: data => (data.typeOfApplication === TYPE_OF_APPLICATION.FGM || data.typeOfApplication === TYPE_OF_APPLICATION.FMPO
-      ? SELECT_COURT : UPLOAD_YOUR_DOCUMENTS
-    ),
+    getNextStep: data =>
+      data.typeOfApplication === TYPE_OF_APPLICATION.FGM || data.typeOfApplication === TYPE_OF_APPLICATION.FMPO
+        ? SELECT_COURT
+        : UPLOAD_YOUR_DOCUMENTS,
   },
   {
     url: SELECT_COURT,
@@ -113,4 +113,3 @@ export const edgecaseSequence: Step[] = [
     getNextStep: () => USER_ROLE,
   },
 ];
-

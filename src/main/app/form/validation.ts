@@ -195,4 +195,4 @@ export const isValidOption: Validator = value => {
   if ((value as string)?.trim() === '') {
     return ValidationError.NOT_SELECTED;
   }
-}
+};
