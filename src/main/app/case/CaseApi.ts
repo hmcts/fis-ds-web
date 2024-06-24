@@ -15,6 +15,7 @@ import {
   CASE_TYPE_OF_APPLICATION,
   CITIZEN_SUBMIT,
   CaseData,
+  CourtListOptions,
   DSS_CASE_EVENT,
   TYPE_OF_APPLICATION,
   YesOrNo,
@@ -161,6 +162,33 @@ export class CaseApi {
     } catch (err) {
       this.logError(err);
       throw new Error('Case roles could not be fetched.');
+    }
+  }
+
+  /**
+   *
+   * @returns
+   */
+  public async getCourtList(): Promise<CourtListOptions[]> {
+    try {
+      // const response = await this.axios.get(`/get-edge-case/court-list`);
+      const jsonData: CourtListOptions[] = [
+        {
+          epmsId: '231596',
+          site_name: 'Birmingham Civil and Family Justice Centre',
+          court_name: 'Birmingham Civil And Family Justice Centre',
+        },
+        {
+          epmsId: '88516',
+          site_name: 'Bradford Combined Court Centre',
+          court_name: 'Bradford Combined Court Centre',
+        },
+      ];
+      console.log('Retrieved court list', jsonData);
+      return jsonData;
+    } catch (err) {
+      this.logError(err);
+      throw new Error('court list could not be fetched.');
     }
   }
 
