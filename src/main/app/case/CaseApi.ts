@@ -21,6 +21,7 @@ import {
   YesOrNo,
 } from './definition';
 import { toApiDate, toApiFormat } from './to-api-format';
+import { response } from 'express';
 
 export class CaseApi {
   /**
@@ -171,19 +172,8 @@ export class CaseApi {
    */
   public async getCourtList(): Promise<CourtListOptions[]> {
     try {
-      // const response = await this.axios.get(`/get-edge-case/court-list`);
-      const jsonData: CourtListOptions[] = [
-        {
-          epmsId: '231596',
-          site_name: 'Birmingham Civil and Family Justice Centre',
-          court_name: 'Birmingham Civil And Family Justice Centre',
-        },
-        {
-          epmsId: '88516',
-          site_name: 'Bradford Combined Court Centre',
-          court_name: 'Bradford Combined Court Centre',
-        },
-      ];
+      const response = await this.axios.get(`/get-edge-case/court-list`);
+      const jsonData: CourtListOptions[] = response.data
       console.log('Retrieved court list', jsonData);
       return jsonData;
     } catch (err) {
