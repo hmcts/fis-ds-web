@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "engines": {
-    "node": ">=18.19.0"
+    "node": ">=16.20.2"
   },
   "scripts": {
     "prepare": "husky install",
@@ -33,7 +33,7 @@
   "dependencies": {
     "@hmcts/cookie-manager": "^1.0.0",
     "@hmcts/frontend": "^0.0.50-alpha",
-    "@hmcts/nodejs-healthcheck": "^1.8.0",
+    "@hmcts/nodejs-healthcheck": "^1.8.3",
     "@hmcts/nodejs-logging": "^4.0.2",
     "@hmcts/properties-volume": "^0.0.14",
     "@types/autobind-decorator": "^2.1.0",

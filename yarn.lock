@@ -1919,7 +1919,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hmcts/nodejs-healthcheck@npm:^1.8.0":
+"@hmcts/nodejs-healthcheck@npm:^1.8.3":
   version: 1.8.5
   resolution: "@hmcts/nodejs-healthcheck@npm:1.8.5"
   dependencies:
@@ -8018,7 +8018,7 @@ __metadata:
     "@babel/preset-env": ^7.18.2
     "@hmcts/cookie-manager": ^1.0.0
     "@hmcts/frontend": ^0.0.50-alpha
-    "@hmcts/nodejs-healthcheck": ^1.8.0
+    "@hmcts/nodejs-healthcheck": ^1.8.3
     "@hmcts/nodejs-logging": ^4.0.2
     "@hmcts/properties-volume": ^0.0.14
     "@types/autobind-decorator": ^2.1.0
