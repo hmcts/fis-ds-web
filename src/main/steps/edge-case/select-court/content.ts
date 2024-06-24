@@ -1,14 +1,20 @@
 import { CourtListOptions } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
-import { FormContent, FormFieldsFn } from '../../../app/form/Form';
+import { FormContent, FormFields, FormFieldsFn } from '../../../app/form/Form';
 import { isValidOption } from '../../../app/form/validation';
 import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
-import { courtList } from '../EdgeCaseCourtListController';
-
-const courtListOptions: CourtListOptions[] = courtList;
+import { EdgeCaseCourtListController } from './EdgeCaseCourtListController';
+import { CaseWithId } from '../../../app/case/case';
+import { AppRequest } from '../../../app/controller/AppRequest';
 
 export const form: FormContent = {
-  fields: () => {
+   
+   fields: (userCase: Partial<CaseWithId>, req: AppRequest) : FormFields  => {
+    const edgeCaseCourtService = new EdgeCaseCourtListController();
+    edgeCaseCourtService.initializeContent(req);
+    const courtListArray : CourtListOptions [] = edgeCaseCourtService.getCourtListData();
+    let courtListData: CourtListOptions[] = courtListArray;
+    console.log('--> ', courtListData);
     return {
       selectedCourt: {
         type: 'select',
@@ -16,7 +22,7 @@ export const form: FormContent = {
         labelSize: null,
         validator: isValidOption,
         options: () => {
-          const courtListItemOption = courtListOptions
+          const courtListItemOption = courtListData
             .filter(courtItem => courtItem?.site_name !== null && courtItem?.site_name !== 'Royal Courts of Justice')
             .map(option => {
               const value = `${option.epmsId}`;
@@ -34,7 +40,7 @@ export const form: FormContent = {
             selected: false,
           });
 
-          return courtList as [];
+          return courtListItemOption as [];
         },
       },
     };
@@ -74,6 +80,6 @@ export const generateContent: TranslationFn = content => {
   const translationContent = languages[content.language]();
   return {
     ...translationContent,
-    form: { ...form, fields: (form.fields as FormFieldsFn)(content.userCase || {}) },
+    form: { ...form, fields: (form.fields as FormFieldsFn)(content.userCase || {}, content.additionalData?.req)},
   };
 };

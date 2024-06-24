@@ -20,13 +20,13 @@
     "errors":{
         "en": {
             "selectedCourt": {
-                "required": "Please select court"
+                "notSelected": "Please select court"
             }
         },
         "cy": {
             "selectedCourt": {
-                "required": "Please select court (in welsh)"
+                "notSelected": "Please select court (in welsh)"
             }
-        }
+        } 
     }
 }

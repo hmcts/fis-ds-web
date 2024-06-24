@@ -21,7 +21,6 @@ import {
   YesOrNo,
 } from './definition';
 import { toApiDate, toApiFormat } from './to-api-format';
-import { response } from 'express';
 
 export class CaseApi {
   /**
@@ -172,9 +171,8 @@ export class CaseApi {
    */
   public async getCourtList(): Promise<CourtListOptions[]> {
     try {
-      const response = await this.axios.get(`/get-edge-case/court-list`);
-      const jsonData: CourtListOptions[] = response.data
-      console.log('Retrieved court list', jsonData);
+      const response = await this.axios.get('/get-edge-case/court-list');
+      const jsonData: CourtListOptions[] = response.data;
       return jsonData;
     } catch (err) {
       this.logError(err);
