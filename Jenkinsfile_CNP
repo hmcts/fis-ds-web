@@ -42,7 +42,7 @@ withPipeline(type, product, component) {
   syncBranchesWithMaster(branchesToSync)
   loadVaultSecrets(secrets)
 
-  after('build') {
+  afterSuccess('build') {
     yarnBuilder.yarn('build')
   }
   before('functionalTest:preview') {
