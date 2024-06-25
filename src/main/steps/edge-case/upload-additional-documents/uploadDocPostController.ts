@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Logger } from '@hmcts/nodejs-logging';
 import autobind from 'autobind-decorator';
 import axios, { AxiosInstance, AxiosRequestHeaders } from 'axios';

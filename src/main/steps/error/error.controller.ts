@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import autobind from 'autobind-decorator';
 import { AxiosError, AxiosResponse } from 'axios';
 import { Response } from 'express';
