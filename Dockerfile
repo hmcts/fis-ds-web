@@ -1,13 +1,23 @@
-FROM hmctspublic.azurecr.io/base/node:18-alpine as base
-USER hmcts
-COPY --chown=hmcts:hmcts package.json yarn.lock ./
-COPY /definitions/private-law/xlsx /
-ADD ./config "/config"
-RUN yarn install --production && yarn cache clean
-COPY index.js ./
-ENV NODE_CONFIG_DIR="/config"
-CMD ["yarn", "start"]
-EXPOSE 3000
-
-HEALTHCHECK --interval=30s --timeout=15s --start-period=60s --retries=3 \
-    CMD wget -q --spider localhost:3000/health || exit 1
+# ---- Base image ----
+  FROM hmctspublic.azurecr.io/base/node:18-alpine as base
+  COPY --chown=hmcts:hmcts . .
+  RUN yarn install --production \
+    && yarn cache clean
+  
+  # ---- Build image ----
+  FROM base as build
+  
+  USER root
+  # Remove when switched to dart-sass
+  RUN apk add --update --no-cache python3
+  USER hmcts
+  
+  RUN PUPPETEER_SKIP_DOWNLOAD=true yarn install && yarn build:prod
+  
+  # ---- Runtime image ----
+  FROM base as runtime
+  RUN rm -rf webpack/ webpack.config.js
+  COPY --from=build $WORKDIR/src/main ./src/main
+  # TODO: expose the right port for your application
+  EXPOSE 3001
+  
