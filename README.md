@@ -1,6 +1,6 @@
 # fis-ds-web
 
-## Getting Started
+### Getting Started
 
 ### Prerequisites
 
