@@ -273,3 +273,8 @@ export const enum TYPE_OF_APPLICATION {
   DECLARATION_OF_PARENTEGE = 'DOP',
   PARENTAL_ORDERS = 'PO',
 }
+
+export const enum Environment {
+  PRODUCTION = 'production',
+  DEVELOPMENT = 'development',
+}

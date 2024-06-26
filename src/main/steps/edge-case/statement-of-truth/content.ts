@@ -21,7 +21,7 @@ export const form: FormContent = {
   },
   submit: {
     classes: 'govuk-!-margin-top-5',
-    text: s => s.continue,
+    text: s => s.continueC100,
   },
 };
 

@@ -10,6 +10,8 @@ import { AccessibilityStatementGetController } from './steps/accessibility-state
 import { ContactUsGetController } from './steps/contact-us/get';
 import { ErrorController } from './steps/error/error.controller';
 import { HomeGetController } from './steps/home/get';
+import { PaymentHandler, PaymentValidationHandler } from './modules/payments/paymentController';
+import { Environment } from './app/case/definition';
 import { PrivacyPolicyGetController } from './steps/privacy-policy/get';
 import { SaveSignOutGetController } from './steps/save-sign-out/get';
 import { TermsAndConditionsGetController } from './steps/terms-and-conditions/get';
@@ -24,6 +26,8 @@ import {
   SAVE_AND_SIGN_OUT,
   TERMS_AND_CONDITIONS,
   TIMED_OUT_URL,
+  PAYMENT_GATEWAY_ENTRY_URL,
+  PAYMENT_RETURN_URL_CALLBACK,
 } from './steps/urls';
 
 export class Routes {
@@ -70,5 +74,16 @@ export class Routes {
      */
 
     app.use(errorController.notFound as unknown as RequestHandler);
+
+     /**
+     * @Payment_Handler
+     */
+     app.get(PAYMENT_GATEWAY_ENTRY_URL, errorHandler(PaymentHandler));
+     app.get(PAYMENT_RETURN_URL_CALLBACK, errorHandler(PaymentValidationHandler));
+     if (app.locals.ENV !== Environment.PRODUCTION) {
+       app.get('/api/v1/session', (req, res) => {
+         res.json(req.session);
+       });
+     }
   }
 }
