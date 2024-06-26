@@ -5,7 +5,7 @@ import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 
 const STATEMENT_OF_TRUTH_TRANSLATION_FILE = 'statement-of-truth';
 
-export const form: FormContent = {
+export const formC100: FormContent = {
   fields: {
     applicantStatementOfTruth: {
       type: 'checkboxes',
@@ -25,7 +25,28 @@ export const form: FormContent = {
   },
 };
 
-export const generateContent: TranslationFn = content => {
+export const formFl401: FormContent = {
+  fields: {
+    applicantStatementOfTruth: {
+      type: 'checkboxes',
+      classes: 'govuk-checkboxes',
+      label: l => l.label,
+      values: [{ label: l => l.statementOfTruthLabel, value: 'Yes' }],
+      validator: isFieldFilledIn,
+    },
+    confirmStatement: {
+      type: 'label',
+      label: l => l.confirmStatement,
+    },
+  },
+  submit: {
+    classes: 'govuk-!-margin-top-5',
+    text: s => s.continueFl401,
+  },
+};
+
+export const generateContent: TranslationFn  = content  => {
+  const caseData = content.userCase;
   const resourceLoader = new ResourceReader();
   resourceLoader.Loader(STATEMENT_OF_TRUTH_TRANSLATION_FILE);
   const Translations = resourceLoader.getFileContents().translations;
@@ -53,8 +74,16 @@ export const generateContent: TranslationFn = content => {
     cy,
   };
   const translations = languages[content.language]();
+  if (caseData?.typeOfApplication?.match("FGM") 
+    || caseData?.typeOfApplication?.match("FMPO")) {
   return {
     ...translations,
-    form: { ...form },
+    form: { ...formFl401 },
   };
+} else {
+  return {
+    ...translations,
+    form: { ...formC100 },
+  };
+}
 };
