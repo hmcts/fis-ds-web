@@ -4,7 +4,7 @@ import { Application, NextFunction, Response } from 'express';
 import { getRedirectUrl, getUserDetails } from '../../app/auth/user/oidc';
 import { getCaseApi } from '../../app/case/CaseApi';
 import { AppRequest } from '../../app/controller/AppRequest';
-import { CALLBACK_URL, SIGN_IN_URL, SIGN_OUT_URL, TYPE_OF_APPLICATION_URL } from '../../steps/urls';
+import { CALLBACK_URL, SIGN_IN_URL, SIGN_OUT_URL, TYPE_OF_APPLICATION_URL, APPLICATION_SUBMITTED, SAFEGUARD_EXCLUDE_URLS } from '../../steps/urls';
 
 //TODO remove applicant2 related stuff
 /**
@@ -40,8 +40,16 @@ export class OidcMiddleware {
           res.locals.isLoggedIn = true;
           req.locals.api = getCaseApi(req.session.user, req.locals.logger);
           req.session.userCase = req.session.userCase || (await req.locals.api.getOrCreateCase());
-          return next();
-        }
+
+          if (req.session.userCase) {
+            if (
+              SAFEGUARD_EXCLUDE_URLS.some(_url => req.path.startsWith(_url))
+            ) {
+              return res.redirect(APPLICATION_SUBMITTED);
+            }
+              return req.session.save(next);
+            }
+          }
         res.redirect(SIGN_IN_URL);
       })
     );

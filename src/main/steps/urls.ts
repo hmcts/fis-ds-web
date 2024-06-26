@@ -50,3 +50,7 @@ export const TYPE_OF_APPLICATION_URL: PageLink = '/type-of-application';
 export const PAYMENT_GATEWAY_ENTRY_URL: PageLink = '/payments/gateway';
 export const PAYMENT_RETURN_URL: PageLink = '/payment/reciever/callback';
 export const PAYMENT_RETURN_URL_CALLBACK: PageLink = `${PAYMENT_RETURN_URL}/:paymentId/:status`;
+
+export const SAFEGUARD_EXCLUDE_URLS = [
+    PAYMENT_RETURN_URL
+  ];
