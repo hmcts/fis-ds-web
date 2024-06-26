@@ -18,6 +18,25 @@ export interface AppRequest<T = Partial<Case>> extends Request {
 }
 
 export interface AppSession extends Session {
+  paymentSuccessDetails?: {
+    amount: string;
+    reference: string;
+    ccd_case_number: string;
+    case_reference: string;
+    channel: string;
+    method: string;
+    status: string;
+    external_reference: string;
+    payment_group_reference: string;
+  };
+  paymentDetails?: {
+    payment_reference: string;
+    date_created: string;
+    external_reference: string;
+    next_url: string;
+    status: string;
+    serviceRequestReference: string;
+  };
   csrfSecret: string;
   rpeToken: any;
   caseDocuments: any;
@@ -26,6 +45,7 @@ export interface AppSession extends Session {
   cookieMessage: boolean;
   user: UserDetails;
   userCase: CaseWithId;
+  paymentError: boolean;
   eligibility: Eligibility;
   lang: string | undefined;
   errors: FormError[] | undefined;

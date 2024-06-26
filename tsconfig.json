@@ -1,26 +1,26 @@
 {
-  "compilerOptions": {
-    "outDir": "./dist/",
-    "module": "commonjs",
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "target": "ES2020",
-    "strict": true,
-    "noImplicitAny": false,
-    "noImplicitThis": false,
-    "resolveJsonModule": true,
-    "moduleResolution": "node",
-    "noUnusedLocals": true,
-    "experimentalDecorators": true,
-    "useUnknownInCatchVariables": false,
-    "skipLibCheck": true,
-    "lib": ["es2020", "dom", "dom.iterable"],
-    "baseUrl": "src/main",
-    "paths": {
-      "router/*": ["router/*"],
-      "routes/*": ["routes/*"]
+    "compilerOptions": {
+      "outDir": "./dist/",
+      "module": "commonjs",
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "target": "ES2020",
+      "strict": true,
+      "noImplicitAny": false,
+      "noImplicitThis": false,
+      "resolveJsonModule": true,
+      "moduleResolution": "node",
+      "noUnusedLocals": true,
+      "experimentalDecorators": true,
+      "useUnknownInCatchVariables": false,
+      "skipLibCheck": true,
+      "lib": ["es2020", "dom", "dom.iterable"],
+      "baseUrl": "src/main",
+      "paths": {
+        "router/*": ["router/*"],
+        "routes/*": ["routes/*"]
+      },
+      "typeRoots": ["./node_modules/@types"]
     },
-    "typeRoots": ["./node_modules/@types"]
-  },
-  "exclude": ["**/*.test.ts", "**/codecept.conf.ts", "**/__mocks__/*"]
-}
+    "exclude": ["**/*.test.ts", "**/codecept.conf.ts", "**/__mocks__/*"]
+  }
