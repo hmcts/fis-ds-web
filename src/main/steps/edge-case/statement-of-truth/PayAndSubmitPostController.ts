@@ -5,7 +5,8 @@ import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { Form, FormFields, FormFieldsFn } from '../../../app/form/Form';
 import { PaymentHandler } from '../../../modules/payments/paymentController';
-import { CHECK_YOUR_ANSWERS } from '../../urls';
+import { CHECK_YOUR_ANSWERS, APPLICATION_SUBMITTED } from '../../urls';
+import { getCaseApi } from '../../../app/case/CaseApi';
 
 @autobind
 export default class PayAndSubmitPostController extends PostController<AnyObject> {
@@ -14,7 +15,16 @@ export default class PayAndSubmitPostController extends PostController<AnyObject
   }
 
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
+    req.locals.api = getCaseApi(req.session.user, req.locals.logger);
+    req.session.userCase = req.session.userCase || (await req.locals.api.getOrCreateCase())
+    const caseData = req.session.userCase = req.session.userCase || (await req.locals.api.getOrCreateCase());
+
     try {
+      if (caseData?.typeOfApplication?.match("FGM") 
+        || caseData?.typeOfApplication?.match("FMPO")) {
+          return super.redirect(req, res, APPLICATION_SUBMITTED);
+      }
+
       req.session.paymentError = false;
       const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase) : this.fields;
       const form = new Form(fields);

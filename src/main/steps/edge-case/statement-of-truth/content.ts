@@ -25,7 +25,7 @@ export const formC100: FormContent = {
   },
 };
 
-export const formFl401: FormContent = {
+export const form: FormContent = {
   fields: {
     applicantStatementOfTruth: {
       type: 'checkboxes',
@@ -78,7 +78,7 @@ export const generateContent: TranslationFn  = content  => {
     || caseData?.typeOfApplication?.match("FMPO")) {
   return {
     ...translations,
-    form: { ...formFl401 },
+    form: { ...form },
   };
 } else {
   return {

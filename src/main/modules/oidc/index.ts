@@ -50,8 +50,7 @@ export class OidcMiddleware {
               return req.session.save(next);
             }
           }
-        res.redirect(SIGN_IN_URL);
-      })
-    );
-  }
-}
+          res.redirect(SIGN_IN_URL);
+        }));
+      }
+    }
