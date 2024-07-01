@@ -8,9 +8,6 @@ RUN yarn install --production \
 FROM base as build
 USER hmcts
 
-RUN apk add --update --no-cache python3
-USER root
-
 RUN PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=true yarn install && yarn build:prod
 
 # ---- Runtime image ----
