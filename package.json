@@ -151,5 +151,11 @@
     "webpack-dev-middleware": "^5.3.0",
     "webpack-node-externals": "^3.0.0"
   },
+  "resolutions": {
+    "ip": "^2.0.1",
+    "tough-cookie": "^4.1.4",
+    "debug": "^4.3.5",
+    "tar": "^6.2.1"
+  },
   "packageManager": "yarn@3.5.0"
 }
