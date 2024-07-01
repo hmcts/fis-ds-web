@@ -28,5 +28,3 @@ public/
 output/
 
 coverage
-/.yarn/cache/
-/.yarn/install-state.gz
