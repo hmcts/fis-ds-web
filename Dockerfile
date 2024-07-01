@@ -6,6 +6,7 @@ RUN yarn install --production \
 
 # ---- Build image ----
 FROM base as build
+USER hmcts
 RUN PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=true yarn install && yarn build:prod
 
 # ---- Runtime image ----
