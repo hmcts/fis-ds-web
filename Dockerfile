@@ -10,7 +10,7 @@ COPY --chown=hmcts:hmcts . .
 # ---- Build image ----
 FROM base as build
 
-RUN yarn install && \
+RUN PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=true yarn install && \
     yarn build:prod && \
     rm -rf webpack/ webpack.config.js
 
