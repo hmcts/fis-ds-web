@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=18.17.1"
   },
   "scripts": {
     "prepare": "husky install",
@@ -150,5 +150,12 @@
     "webpack-cli": "^4.9.2",
     "webpack-dev-middleware": "^5.3.0",
     "webpack-node-externals": "^3.0.0"
-  }
+  },
+  "resolutions": {
+    "ip": "^2.0.1",
+    "tough-cookie": "^4.1.4",
+    "debug": "^4.3.5",
+    "tar": "^6.2.1"
+  },
+  "packageManager": "yarn@3.5.0"
 }
