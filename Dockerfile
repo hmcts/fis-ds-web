@@ -7,7 +7,7 @@ USER hmcts
 
 COPY --chown=hmcts:hmcts . .
 RUN yarn workspaces focus --all --production \
-  && yarn cache clean
+ && yarn cache clean
 
 # ---- Build image ----
 FROM base as build
