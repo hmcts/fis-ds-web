@@ -6,15 +6,14 @@ RUN corepack enable
 USER hmcts
 
 COPY --chown=hmcts:hmcts . .
-RUN yarn workspaces focus --production \
-  && yarn cache clean
 
 # ---- Build image ----
 FROM base as build
 
 RUN PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=true yarn install && \
     yarn build:prod && \
-    rm -rf webpack/ webpack.config.js
+    rm -rf webpack/ webpack.config.js && \
+    yarn cache clean
 
 # ---- Runtime image ----
 FROM base as runtime
