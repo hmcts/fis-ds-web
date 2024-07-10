@@ -1,3 +1,5 @@
+security:
+  referrerPolicy: 'origin'
 services:
   authProvider:
     url: SERVICE_AUTH_PROVIDER_URL
