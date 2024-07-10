@@ -1,7 +1,7 @@
 import * as path from 'path';
 
 import * as bodyParser from 'body-parser';
-import config from 'config';
+import config = require('config');
 import express, { RequestHandler } from 'express';
 import favicon from 'serve-favicon';
 import toobusy from 'toobusy-js';
