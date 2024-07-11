@@ -123,5 +123,6 @@
     "webpack": "^5.67.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-middleware": "^5.3.0"
-  }
+  },
+  "packageManager": "yarn@3.8.1"
 }
