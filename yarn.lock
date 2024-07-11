@@ -1981,6 +1981,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@playwright/test@npm:1.37.0":
+  version: 1.37.0
+  resolution: "@playwright/test@npm:1.37.0"
+  dependencies:
+    "@types/node": "*"
+    fsevents: 2.3.2
+    playwright-core: 1.37.0
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  bin:
+    playwright: cli.js
+  checksum: 59ccc519396c5cd66ba27bfc821b6a6483a9a426824eedb85cbd05b1cfb817f62bc1e1d893878582cf88af441a8a45aa83e678ab1d3145b54838c7c2e917b8a2
+  languageName: node
+  linkType: hard
+
 "@polka/url@npm:^0.5.0":
   version: 0.5.0
   resolution: "@polka/url@npm:0.5.0"
@@ -2455,6 +2471,41 @@ __metadata:
   dependencies:
     "@sinonjs/commons": ^1.7.0
   checksum: 09b5a158ce013a6c37613258bad79ca4efeb99b1f59c41c73cca36cac00b258aefcf46eeea970fccf06b989414d86fe9f54c1102272c0c3bdd51a313cea80949
+  languageName: node
+  linkType: hard
+
+"@stryker-mutator/api@npm:5.6.1":
+  version: 5.6.1
+  resolution: "@stryker-mutator/api@npm:5.6.1"
+  dependencies:
+    mutation-testing-metrics: 1.7.8
+    mutation-testing-report-schema: 1.7.8
+    tslib: ~2.3.0
+  checksum: 6a00cb56228b86e432adffff6fd586747a0f730b25ac6557f7a0ce92c0ba0bcbceba7aa0f7d9876d273c8b98df6f2b6a7bf4c43dffc0eee3da905724cc780400
+  languageName: node
+  linkType: hard
+
+"@stryker-mutator/jest-runner@npm:^5.3.0":
+  version: 5.6.1
+  resolution: "@stryker-mutator/jest-runner@npm:5.6.1"
+  dependencies:
+    "@stryker-mutator/api": 5.6.1
+    "@stryker-mutator/util": 5.6.1
+    semver: ~7.3.5
+    tslib: ~2.3.0
+  peerDependencies:
+    "@stryker-mutator/core": ~5.6.0
+    jest: ">= 22.0.0"
+  checksum: bb9555451f2096854d4f80e3d584c7a39d491542a6e8512f3784802a1c0fdeaf563679b71704bffa3e2ce9da9be71ee2283d102abbebc4dd7294b548f508a70f
+  languageName: node
+  linkType: hard
+
+"@stryker-mutator/util@npm:5.6.1":
+  version: 5.6.1
+  resolution: "@stryker-mutator/util@npm:5.6.1"
+  dependencies:
+    lodash.flatmap: ~4.5.0
+  checksum: 7b0fef72c9b81cc15dbc1a3ce2a3a6c49d08fb325e33fa08a0306dbf1f7bac42bbedeab8098013e45ac57a1d95e35f65725cc51772bdabc6e5bb168522d060e3
   languageName: node
   linkType: hard
 
@@ -6505,6 +6556,8 @@ __metadata:
     "@hmcts/frontend": ^0.0.50-alpha
     "@hmcts/nodejs-healthcheck": ^1.8.0
     "@hmcts/properties-volume": ^0.0.13
+    "@playwright/test": 1.37.0
+    "@stryker-mutator/jest-runner": ^5.3.0
     "@types/autobind-decorator": ^2.1.0
     "@types/config": ^0.0.41
     "@types/connect-redis": ^0.0.18
@@ -6558,6 +6611,7 @@ __metadata:
     govuk-frontend: ^4.7.0
     helmet: ^4.6.0
     html-webpack-plugin: ^5.5.0
+    html_codesniffer: ~2.5.1
     http-status-codes: ^2.2.0
     husky: ^7.0.4
     jest: ^27.5.1
@@ -6575,6 +6629,7 @@ __metadata:
     npm-run-all: ^4.1.5
     nunjucks: ^3.2.3
     otplib: ^12.0.1
+    playwright: 1.37.0
     prettier: ^2.5.1
     redis: ^3.1.2
     sass-loader: ^12.4.0
@@ -7986,12 +8041,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fsevents@npm:2.3.2":
+  version: 2.3.2
+  resolution: "fsevents@npm:2.3.2"
+  dependencies:
+    node-gyp: latest
+  checksum: 97ade64e75091afee5265e6956cb72ba34db7819b4c3e94c431d4be2b19b8bb7a2d4116da417950c3425f17c8fe693d25e20212cac583ac1521ad066b77ae31f
+  conditions: os=darwin
+  languageName: node
+  linkType: hard
+
 "fsevents@npm:^2.3.2, fsevents@npm:~2.3.2":
   version: 2.3.3
   resolution: "fsevents@npm:2.3.3"
   dependencies:
     node-gyp: latest
   checksum: 11e6ea6fea15e42461fc55b4b0e4a0a3c654faa567f1877dbd353f39156f69def97a69936d1746619d656c4b93de2238bf731f6085a03a50cabf287c9d024317
+  conditions: os=darwin
+  languageName: node
+  linkType: hard
+
+"fsevents@patch:fsevents@2.3.2#~builtin<compat/fsevents>":
+  version: 2.3.2
+  resolution: "fsevents@patch:fsevents@npm%3A2.3.2#~builtin<compat/fsevents>::version=2.3.2&hash=df0bf1"
+  dependencies:
+    node-gyp: latest
   conditions: os=darwin
   languageName: node
   linkType: hard
@@ -8633,6 +8707,13 @@ __metadata:
     webpack:
       optional: true
   checksum: 32a6e41da538e798fd0be476637d7611a5e8a98a3508f031996e9eb27804dcdc282cb01f847cf5d066f21b49cfb8e21627fcf977ffd0c9bea81cf80e5a65070d
+  languageName: node
+  linkType: hard
+
+"html_codesniffer@npm:~2.5.1":
+  version: 2.5.1
+  resolution: "html_codesniffer@npm:2.5.1"
+  checksum: f93fcda96a3145af5e5f0da71df4e5236f8078ee0c4d3236a48d780faf31c030d7e3297f9e1982198d2d45054f20ff8de56d97f72d2dd56c9f5eb8f45dd05c8a
   languageName: node
   linkType: hard
 
@@ -10707,6 +10788,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash.flatmap@npm:~4.5.0":
+  version: 4.5.0
+  resolution: "lodash.flatmap@npm:4.5.0"
+  checksum: c01a47d32e99f8fce75409f0a4a9bd12fbb2d3a46519a0dde14deedb1e527b5ddccc2bf997705c67bdecb915f47749e8a9ffefa7a91c41f0c448e06348ec81c7
+  languageName: node
+  linkType: hard
+
 "lodash.memoize@npm:4.x":
   version: 4.1.2
   resolution: "lodash.memoize@npm:4.1.2"
@@ -11774,6 +11862,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mutation-testing-metrics@npm:1.7.8":
+  version: 1.7.8
+  resolution: "mutation-testing-metrics@npm:1.7.8"
+  dependencies:
+    mutation-testing-report-schema: 1.7.8
+  checksum: d4bcd05597ef821d11105cba6945a591da038cd9cb3b99c8b858007f0a9737c9999e0332fe4225e202521643aa71a4b535644fcbfaf295a5cecc16e3df91e7c7
+  languageName: node
+  linkType: hard
+
+"mutation-testing-report-schema@npm:1.7.8":
+  version: 1.7.8
+  resolution: "mutation-testing-report-schema@npm:1.7.8"
+  checksum: 6e3b3def81983ecf4f9c9a8e93e5c8b4af75ebde204a4312566bc9f49da27435aa75921e4246b356a5d95c0ebf619d0f79bea739ce40c487390e91a7c102754b
+  languageName: node
+  linkType: hard
+
 "mute-stream@npm:0.0.7":
   version: 0.0.7
   resolution: "mute-stream@npm:0.0.7"
@@ -12797,6 +12901,26 @@ __metadata:
   dependencies:
     find-up: ^4.0.0
   checksum: 9863e3f35132bf99ae1636d31ff1e1e3501251d480336edb1c211133c8d58906bed80f154a1d723652df1fda91e01c7442c2eeaf9dc83157c7ae89087e43c8d6
+  languageName: node
+  linkType: hard
+
+"playwright-core@npm:1.37.0":
+  version: 1.37.0
+  resolution: "playwright-core@npm:1.37.0"
+  bin:
+    playwright-core: cli.js
+  checksum: be91857b1bb56890b3929ed8cd529f5f5abe4b748f709abc8dbe5b0ee4c0e158247c3958fbccec6a52394dafe4619bc0e69c93d1b129a71b31ab3697771e4c5a
+  languageName: node
+  linkType: hard
+
+"playwright@npm:1.37.0":
+  version: 1.37.0
+  resolution: "playwright@npm:1.37.0"
+  dependencies:
+    playwright-core: 1.37.0
+  bin:
+    playwright: cli.js
+  checksum: f07d1d69e4a13db428cb45af0e2cd5697cb490c7139e399adfc5702b547f741b6411b6442a9c91c0b39f374e0cb466b742de0b15490872a771ab8bdc68e767c5
   languageName: node
   linkType: hard
 
@@ -14063,6 +14187,17 @@ __metadata:
   bin:
     semver: bin/semver.js
   checksum: 272c11bf8d083274ef79fe40a81c55c184dff84dd58e3c325299d0927ba48cece1f020793d138382b85f89bab5002a35a5ba59a3a68a7eebbb597eb733838778
+  languageName: node
+  linkType: hard
+
+"semver@npm:~7.3.5":
+  version: 7.3.8
+  resolution: "semver@npm:7.3.8"
+  dependencies:
+    lru-cache: ^6.0.0
+  bin:
+    semver: bin/semver.js
+  checksum: ba9c7cbbf2b7884696523450a61fee1a09930d888b7a8d7579025ad93d459b2d1949ee5bbfeb188b2be5f4ac163544c5e98491ad6152df34154feebc2cc337c1
   languageName: node
   linkType: hard
 
@@ -15445,6 +15580,13 @@ __metadata:
   version: 2.6.3
   resolution: "tslib@npm:2.6.3"
   checksum: 74fce0e100f1ebd95b8995fbbd0e6c91bdd8f4c35c00d4da62e285a3363aaa534de40a80db30ecfd388ed7c313c42d930ee0eaf108e8114214b180eec3dbe6f5
+  languageName: node
+  linkType: hard
+
+"tslib@npm:~2.3.0":
+  version: 2.3.1
+  resolution: "tslib@npm:2.3.1"
+  checksum: de17a98d4614481f7fcb5cd53ffc1aaf8654313be0291e1bfaee4b4bb31a20494b7d218ff2e15017883e8ea9626599b3b0e0229c18383ba9dce89da2adf15cb9
   languageName: node
   linkType: hard
 
