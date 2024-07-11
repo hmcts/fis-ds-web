@@ -251,6 +251,11 @@ export const enum HttpStatus {
   NETWORK_AUTHENTICATION_REQUIRED = 'NETWORK_AUTHENTICATION_REQUIRED',
 }
 
+export const enum Environment {
+  PRODUCTION = 'production',
+  DEVELOPMENT = 'development',
+}
+
 export const CITIZEN_SAVE_AND_CLOSE = 'citizen-save-and-close';
 export const CITIZEN_UPDATE = 'UPDATE';
 export const CITIZEN_CREATE = 'CREATE';
