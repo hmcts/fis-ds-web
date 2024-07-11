@@ -1,5 +1,7 @@
 nodejs:
-  applicationPort: 4000
+  applicationPort: 3001
+  readinessDelay: 130
+  livenessDelay: 130
   aadIdentityName: fis
   ingressHost: fis-ds-web.{{ .Values.global.environment }}.platform.hmcts.net
   image: 'hmctspublic.azurecr.io/fis/ds-web:latest'
