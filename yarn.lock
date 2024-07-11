@@ -1332,7 +1332,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hmcts/nodejs-logging@npm:^3.0.0, @hmcts/nodejs-logging@npm:^3.0.4":
+"@hmcts/nodejs-logging@npm:^3.0.0":
   version: 3.0.4
   resolution: "@hmcts/nodejs-logging@npm:3.0.4"
   dependencies:
@@ -6504,7 +6504,6 @@ __metadata:
     "@hmcts/cookie-manager": ^0.0.4
     "@hmcts/frontend": ^0.0.50-alpha
     "@hmcts/nodejs-healthcheck": ^1.8.0
-    "@hmcts/nodejs-logging": ^3.0.4
     "@hmcts/properties-volume": ^0.0.13
     "@types/autobind-decorator": ^2.1.0
     "@types/config": ^0.0.41
