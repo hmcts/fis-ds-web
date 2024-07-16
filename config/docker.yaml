@@ -1,3 +1,5 @@
+security:
+  referrerPolicy: 'origin'
 services:
   idam:
     authorizationURL: 'http://localhost:3501/login'

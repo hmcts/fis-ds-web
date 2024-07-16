@@ -17,7 +17,7 @@ describe('KeepAliveController', () => {
   test('should redirect to login if user object is missing', async () => {
     req = mockRequest({ session: { user: undefined } });
     await keepAliveController.get(req, res);
-    expect(res.redirect).toBeCalledWith(SIGN_OUT_URL);
+    expect(res.redirect).toHaveBeenCalledWith(SIGN_OUT_URL);
   });
 
   test('should reset cookie expiry', async () => {
