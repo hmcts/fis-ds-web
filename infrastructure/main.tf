@@ -3,8 +3,14 @@ provider "azurerm" {
 }
 
 locals {
-  vaultName = "${var.product}-${var.env}"
+  vaultName = "${var.product}-kv-${var.env}"
 }
+
+data "azurerm_key_vault" "key_vault" {
+  name                = local.vaultName
+  resource_group_name = "${var.product}-${var.env}"
+}
+
 
 data "azurerm_subnet" "core_infra_redis_subnet" {
   name                 = "core-infra-subnet-1-${var.env}"
