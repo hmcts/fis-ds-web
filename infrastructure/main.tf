@@ -1,5 +1,5 @@
 provider "azurerm" {
- features {}
+  features {}
 }
 
 locals {
@@ -9,11 +9,11 @@ locals {
 data "azurerm_subnet" "core_infra_redis_subnet" {
   name                 = "core-infra-subnet-1-${var.env}"
   virtual_network_name = "core-infra-vnet-${var.env}"
-  resource_group_name = "core-infra-${var.env}"
+  resource_group_name  = "core-infra-${var.env}"
 }
 
 data "azurerm_key_vault" "fis_key_vault" {
-  name = "fis-kv-${var.env}"
+  name                = "fis-kv-${var.env}"
   resource_group_name = "${var.raw_product}-${var.env}"
 }
 
@@ -34,18 +34,18 @@ resource "azurerm_key_vault_secret" "s2s-secret" {
 }
 
 data "azurerm_key_vault_secret" "idam-ui-secret" {
-  name = "idam-ui-secret"
-  key_vault_id = "${data.azurerm_key_vault.fis_key_vault.id}"
+  name         = "idam-ui-secret"
+  key_vault_id = data.azurerm_key_vault.fis_key_vault.id
 }
 
 data "azurerm_key_vault_secret" "idam-system-user-name" {
-  name = "idam-system-user-name"
-  key_vault_id = "${data.azurerm_key_vault.fis_key_vault.id}"
+  name         = "idam-system-user-name"
+  key_vault_id = data.azurerm_key_vault.fis_key_vault.id
 }
 
 data "azurerm_key_vault_secret" "idam-system-user-password" {
-  name = "idam-system-user-password"
-  key_vault_id = "${data.azurerm_key_vault.fis_key_vault.id}"
+  name         = "idam-system-user-password"
+  key_vault_id = data.azurerm_key_vault.fis_key_vault.id
 }
 
 module "dss-create-case-session-storage" {
