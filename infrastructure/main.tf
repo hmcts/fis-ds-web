@@ -64,7 +64,7 @@ module "dss-create-case-session-storage" {
 
 }
 
-resource "azurerm_key_vault_secret" "redis_access_key" {
+resource "azurerm_key_vault_secret" "redis_access_key_dss_create_case" {
   name         = "redis-access-key-dss-create-case"
   value        = module.dss-create-case-session-storage.access_key
   key_vault_id = data.azurerm_key_vault.key_vault.id
