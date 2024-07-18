@@ -1,16 +1,18 @@
 nodejs:
+  image: 'hmctspublic.azurecr.io/fis/ds-web:latest'
   applicationPort: 3001
   readinessDelay: 130
   livenessDelay: 130
+  autoscaling: # Default is false
+    enabled: true
+    maxReplicas: 2 # Required setting
+    targetCPUUtilizationPercentage: 80 # Default is 80% target CPU utilization
   aadIdentityName: fis
   ingressHost: fis-ds-web.{{ .Values.global.environment }}.platform.hmcts.net
-  image: 'hmctspublic.azurecr.io/fis/ds-web:latest'
-
   environment:
     NODE_ENV: production
     REFORM_TEAM: fis
     REFORM_SERVICE_NAME: fis-ds-web
-    NODE_TLS_REJECT_UNAUTHORIZED: 0
     SERVICE_AUTH_PROVIDER_URL: 'http://rpe-service-auth-provider-{{ .Values.global.environment }}.service.core-compute-{{ .Values.global.environment }}.internal'
     IDAM_WEB_URL: 'https://idam-web-public.{{ .Values.global.environment }}.platform.hmcts.net/login'
     IDAM_API_URL: 'https://idam-api.{{ .Values.global.environment }}.platform.hmcts.net/o/token'
@@ -27,3 +29,5 @@ nodejs:
         - s2s-secret
         - AppInsightsInstrumentationKey
         - postcode-lookup-token
+idam-pr:
+  enabled: false
