@@ -21,7 +21,6 @@ nodejs:
 
   keyVaults:
     fis-kv:
-      resourceGroup: fis
       secrets:
         - idam-ui-secret
         - idam-system-user-name
