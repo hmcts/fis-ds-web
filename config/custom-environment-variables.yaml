@@ -18,6 +18,8 @@ services:
   equalityAndDiversity:
     url: EQUALITY_URL
     tokenKey: PCQ_TOKEN
+  fis:
+    url: FIS_COS_API
 port: PORT
 session:
   redis:
