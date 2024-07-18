@@ -9,7 +9,7 @@ let token;
 export const getTokenFromApi = (): void => {
   logger.info('Refreshing service auth token');
 
-  const url: string = config.get('services.authProvider.url') + '/lease';
+  const url: string = config.get('services.authProvider.url') + '/testing-support/lease';
   logger.info('url is ');
   logger.info(url);
   const microservice: string = config.get('services.authProvider.microservice');
