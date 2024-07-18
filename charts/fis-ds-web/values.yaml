@@ -8,7 +8,7 @@ nodejs:
     maxReplicas: 2 # Required setting
     targetCPUUtilizationPercentage: 80 # Default is 80% target CPU utilization
   aadIdentityName: fis
-  ingressHost: fis-ds-web.{{ .Values.global.environment }}.platform.hmcts.net
+  ingressHost: dss.{{ .Values.global.environment }}.platform.hmcts.net
   environment:
     NODE_ENV: production
     REFORM_TEAM: fis
