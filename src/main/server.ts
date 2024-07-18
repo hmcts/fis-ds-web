@@ -32,10 +32,6 @@ const { setupDev } = require('./development');
 
 const env = process.env.NODE_ENV || Environment.DEVELOPMENT;
 
-if (process.env.NODE_ENV !== Environment.PRODUCTION) {
-  process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
-}
-
 const developmentMode = env === Environment.DEVELOPMENT;
 const logger: LoggerInstance = Logger.getLogger('server');
 const app = express();
