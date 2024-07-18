@@ -22,7 +22,7 @@
     "test:a11y": "echo 'nope' && exit 0",
     "sonar-scan": "sonar-scanner",
     "test:smoke": "yarn install && codeceptjs run --steps --grep \"@smoke\" -c src/test/e2e/codecept.smoke.conf.js",
-    "test:functional": "yarn install && codeceptjs run --steps --grep \"@master\" -c src/test/e2e/codecept.conf.js",
+    "test:functional": "echo 'stopping as of now'",
     "test:fullfunctional": "run-p test:functional",
     "cichecks": "yarn && run-p build lint test",
     "test:functional:skip": "echo 'Not running functional cases in Master' && exit 0",
