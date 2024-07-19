@@ -1,23 +1,23 @@
-import { YesOrNo } from '../../../app/case/definition';
+import { TYPE_OF_APPLICATION } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFieldsFn } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 
-const USER_ROLE = 'user-role';
-
 export const form: FormContent = {
   fields: () => {
     return {
-      namedApplicant: {
+      typeOfApplication: {
         type: 'radios',
         classes: 'govuk-radios',
         label: l => l.label,
         selected: false,
         values: [
-          { label: l => l.one, value: YesOrNo.YES },
-          { label: l => l.two, value: YesOrNo.NO },
-          { label: l => l.three, value: YesOrNo.NO },
+          { label: l => l.fgm, value: TYPE_OF_APPLICATION.FGM },
+          { label: l => l.fmpo, value: TYPE_OF_APPLICATION.FMPO },
+          { label: l => l.sg, value: TYPE_OF_APPLICATION.SPECIAL_GUARDIANSHIP },
+          { label: l => l.dop, value: TYPE_OF_APPLICATION.DECLARATION_OF_PARENTEGE },
+          { label: l => l.po, value: TYPE_OF_APPLICATION.PARENTAL_ORDERS },
         ],
         validator: isFieldFilledIn,
       },
@@ -30,7 +30,7 @@ export const form: FormContent = {
 
 export const generateContent: TranslationFn = content => {
   const resourceLoader = new ResourceReader();
-  resourceLoader.Loader(USER_ROLE);
+  resourceLoader.Loader('type-of-application');
   const translations = resourceLoader.getFileContents().translations;
   const errors = resourceLoader.getFileContents().errors;
 

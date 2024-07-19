@@ -20,6 +20,7 @@ services:
     uploadSizeinMB: 30
   RPE_TOKEN:
     url: 'http://rpe-service-auth-provider-aat.service.core-compute-aat.internal'
+    
 health:
   timeout: 5000
   deadline: 15000

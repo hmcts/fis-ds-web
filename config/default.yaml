@@ -14,8 +14,6 @@ services:
     clientSecret: 'NEED TO INSERT SECRET'
     systemUsername: 'dummy_user'
     systemPassword: 'dummy_password'
-  fis:
-    url: 'https://fis-cos-api-pr-111.service.core-compute-preview.internal'
   postcodeLookup:
     url: 'https://api.os.uk/search/places/v1'
     token: 'NEED TO INSERT SECRET'
@@ -25,6 +23,8 @@ services:
     uploadSizeinMB: 30
   RPE_TOKEN:
     url: 'http://rpe-service-auth-provider-aat.service.core-compute-aat.internal'
+  cos:
+    url: 'http://prl-cos-aat.service.core-compute-aat.internal'
 health:
   timeout: 5000
   deadline: 15000

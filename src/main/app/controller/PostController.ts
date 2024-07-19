@@ -80,7 +80,7 @@ export class PostController<T extends AnyObject> {
   async createCase(req: AppRequest<T>): Promise<CaseWithId | PromiseLike<CaseWithId>> {
     try {
       console.log('Create Case New');
-      req.session.userCase = await req.locals.api.createCaseNew(req, req.session.user);
+      req.session.userCase = await req.locals.api.createCaseNew(req);
     } catch (err) {
       req.locals.logger.error('Error saving', err);
       req.session.errors = req.session.errors || [];
@@ -119,7 +119,7 @@ export class PostController<T extends AnyObject> {
   protected async updateCase(req: AppRequest<T>, eventName: string): Promise<CaseWithId> {
     try {
       console.log('Update Existing Case');
-      req.session.userCase = await req.locals.api.updateCase(req, req.session.user, eventName);
+      req.session.userCase = await req.locals.api.updateCase(req, eventName);
     } catch (err) {
       req.locals.logger.error('Error saving', err);
       req.session.errors = req.session.errors || [];

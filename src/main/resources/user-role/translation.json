@@ -5,14 +5,16 @@
             "serviceName": "Determine user's role",
             "label": "Are you applying for yourself or someone else?",
             "one": " I am applying for myself",
-            "two": " I am applying for someone else"
+            "two": " I am applying for someone else",
+            "three": "I am a court staff"
         },
         "cy": {
             "continue": "Continue",
             "serviceName": "Determine user's role (in welsh)",
             "label": "Are you applying for yourself or someone else? (in welsh)",
             "one": "I am applying for myself (in welsh)",
-            "two": "I am applying for someone else (in welsh)"
+            "two": "I am applying for someone else (in welsh)",
+            "three": "I am a court staff (in welsh)"
         }
     },
     "errors":{

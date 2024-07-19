@@ -148,7 +148,7 @@ export const UploadFormSummary = (
   console.log(uploadedDocuments);
   const ListOfUploadedDocuments = uploadedDocuments
     .map((document): string => {
-      return document.fileName + '';
+      return document.document_filename + '';
     })
     .toString()
     .split(',')
@@ -200,7 +200,7 @@ export const AdditonalFormSummary = (
   AddDocuments: Partial<any>
 ): SummaryList | undefined => {
   const ListOfAdditionalDocuments = AddDocuments.map((document): string => {
-    return document.fileName + '';
+    return document.document_filename + '';
   })
     .toString()
     .split(',')
@@ -218,6 +218,30 @@ export const AdditonalFormSummary = (
 
   return {
     title: 'List of Documents uploaded  ',
+    rows: getSectionSummaryList(SummaryData, content),
+  };
+};
+
+/* eslint-disable import/namespace */
+export const TypeOfApplication = (
+  { sectionTitles, keys, ...content }: SummaryListContent,
+  userCase: Partial<CaseWithId>
+): SummaryList | undefined => {
+  const typeOfApplication = userCase['typeOfApplication'] as string;
+  const typeOfApplicationValue = keys[typeOfApplication];
+
+  const SummaryData = [
+    {
+      key: keys.typeOfApplication,
+      value: typeOfApplicationValue,
+      changeUrl: Urls['TYPE_OF_APPLICATION_URL'],
+    },
+  ];
+
+  /** Removes entry in @summarydata if user is not a named user */
+
+  return {
+    title: keys.typeOfApplication,
     rows: getSectionSummaryList(SummaryData, content),
   };
 };

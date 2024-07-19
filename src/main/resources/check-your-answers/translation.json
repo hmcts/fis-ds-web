@@ -21,7 +21,13 @@
               "namedPersonMob": "Enter your mobile phone number",
               "namedPersonTel": "Enter your home phone number",
               "uploadDocuments": "List of forms uploaded (Application form)",
-              "additionalDocuments": "List of Documents uploaded (supporting documents)"
+              "additionalDocuments": "List of Documents uploaded (supporting documents)",
+              "typeOfApplication": "Type of application",
+              "FGM": "FGM - FGM001 and FGM006 if a third party is submitting this application",
+              "FMPO": "FMPO - FL401a and FL430 if a third party is submitting this application", 
+              "SG": "Special Guardianship - form C1/form C13A",
+              "DOP": "Declaration of Parentege - form C63",
+              "PO": "Parental orders - form C51"
             }
         },
         "cy": {
@@ -45,7 +51,13 @@
               "namedPersonMob": "Enter your mobile phone number - welsh",
               "namedPersonTel": "Enter your home phone number - welsh",
               "uploadDocuments": "List of forms uploaded (Application form) - welsh",
-              "additionalDocuments": "List of Documents uploaded (supporting documents) - welsh"
+              "additionalDocuments": "List of Documents uploaded (supporting documents) - welsh",
+              "typeOfApplication": "Type of application - welsh",
+              "FGM": "FGM - FGM001 and FGM006 if a third party is submitting this application -welsh",
+              "FMPO": "FMPO - FL401a and FL430 if a third party is submitting this application -welsh", 
+              "SG": "Special Guardianship - form C1/form C13A -welsh",
+              "DOP": "Declaration of Parentege - form C63 -welsh",
+              "PO": "Parental orders - form C51 -welsh"
             }
         }
     }
