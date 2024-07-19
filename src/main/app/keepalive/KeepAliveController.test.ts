@@ -35,7 +35,7 @@ describe('KeepAliveController', () => {
   test('should end the response', async () => {
     req = mockRequest({ session: { cookie: {} } });
     await keepAliveController.get(req, res);
-    expect(res.end).toBeCalled();
+    expect(res.end).toHaveBeenCalled();
   });
 
   describe('when there is an error in saving session', () => {

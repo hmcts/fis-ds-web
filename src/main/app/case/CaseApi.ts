@@ -126,10 +126,11 @@ export class CaseApi {
   public async createCaseNew(req: AppRequest): Promise<any> {
     const data = {
       edgeCaseTypeOfApplication: req.session.userCase.typeOfApplication,
-      caseTypeOfApplication:
-        req.session.userCase.typeOfApplication === TYPE_OF_APPLICATION.FGM_FMPO
-          ? CASE_TYPE_OF_APPLICATION.FL401
-          : CASE_TYPE_OF_APPLICATION.C100,
+      caseTypeOfApplication: [TYPE_OF_APPLICATION.FGM, TYPE_OF_APPLICATION.FMPO].includes(
+        req.session.userCase.typeOfApplication!
+      )
+        ? CASE_TYPE_OF_APPLICATION.FL401
+        : CASE_TYPE_OF_APPLICATION.C100,
     };
 
     try {

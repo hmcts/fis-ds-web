@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import https from 'https';
 
 import { Logger } from '@hmcts/nodejs-logging';

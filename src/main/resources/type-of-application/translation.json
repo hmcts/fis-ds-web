@@ -3,18 +3,22 @@
         "en": {
             "continue": "Continue",
             "serviceName": "Capture type of application",
-            "label": "Please select type of application",
-            "one": "FGM/FMPO",
-            "two": "Special Guardianship/Declaration of Parentage",
-            "three": "Parental orders"
+            "label": "What type of application do you want to submit?",
+            "fgm":"FGM - FGM001 and FGM006 if a third party is submitting this application",
+            "fmpo":"FMPO - FL401a and FL430 if a third party is submitting this application", 
+            "sg":"Special Guardianship - form C1/form C13A",
+            "dop":"Declaration of Parentege - form C63",
+            "po":"Parental orders - form C51"
         },
         "cy": {
             "continue": "Continue (in welsh)",
             "serviceName": "Capture type of application (in welsh)",
-            "label": "Are you applying for yourself or someone else? (in welsh)",
-            "one": "FGM/FMPO (in welsh)",
-            "two": "Special Guardianship/Declaration of Parentage (in welsh)",
-            "three": "Parental orders (in welsh)"
+            "label": "What type of application do you want to submit? (in welsh)",
+            "fgm":"FGM - FGM001 and FGM006 if a third party is submitting this application (in welsh)",
+            "fmpo":"FMPO - FL401a and FL430 if a third party is submitting this application (in welsh)", 
+            "sg":"Special Guardianship - form C1/form C13A (in welsh)",
+            "dop":"Declaration of Parentege - form C63 (in welsh)",
+            "po":"Parental orders - form C51 (in welsh)"
         }
     },
     "errors":{
