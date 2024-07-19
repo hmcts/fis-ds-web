@@ -19,7 +19,7 @@ describe('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith(USER_ROLE);
+    expect(res.redirect).toHaveBeenCalledWith(USER_ROLE);
   });
 
   test('redirects to the check your answers page for existing users', () => {
@@ -33,7 +33,7 @@ describe('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith(USER_ROLE);
+    expect(res.redirect).toHaveBeenCalledWith(USER_ROLE);
   });
 
   test('redirects to application sent for review page for applicant 1 users in awaitingApplicant2 state', () => {
@@ -48,7 +48,7 @@ describe('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith(USER_ROLE);
+    expect(res.redirect).toHaveBeenCalledWith(USER_ROLE);
   });
 
   test('redirects to confirmation page for applicant 1 users in applicant2Approved state', () => {
@@ -63,7 +63,7 @@ describe('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith(USER_ROLE);
+    expect(res.redirect).toHaveBeenCalledWith(USER_ROLE);
   });
 
   test('redirects to application submitted page for applicant 1 users in submitted state', () => {
@@ -78,7 +78,7 @@ describe('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith(USER_ROLE);
+    expect(res.redirect).toHaveBeenCalledWith(USER_ROLE);
   });
 
   test('redirects to the check your answers page for applicant 1 users in awaitingApplicant1Response state', () => {
@@ -93,7 +93,7 @@ describe('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith(USER_ROLE);
+    expect(res.redirect).toHaveBeenCalledWith(USER_ROLE);
   });
 
   test('redirects to the pay your fee page for applicant 1 users for sole application in awaitingPayment state', () => {
@@ -108,7 +108,7 @@ describe('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith(USER_ROLE);
+    expect(res.redirect).toHaveBeenCalledWith(USER_ROLE);
   });
 
   test('redirects to the hub page for applicant 1 users in holding state', () => {
@@ -123,6 +123,6 @@ describe('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toBeCalledWith(USER_ROLE);
+    expect(res.redirect).toHaveBeenCalledWith(USER_ROLE);
   });
 });

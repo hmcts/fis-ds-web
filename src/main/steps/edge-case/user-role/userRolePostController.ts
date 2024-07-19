@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
@@ -8,7 +9,7 @@ import { Form, FormFields, FormFieldsFn } from '../../../app/form/Form';
 import { DATE_OF_BIRTH, FULL_NAME } from '../../urls';
 
 @autobind
-export default class UserRolePostController extends PostController<AnyObject> {
+export class UserRolePostController extends PostController<AnyObject> {
   constructor(protected readonly fields: FormFields | FormFieldsFn) {
     super(fields);
   }
@@ -37,3 +38,5 @@ export default class UserRolePostController extends PostController<AnyObject> {
     }
   }
 }
+
+export default UserRolePostController;

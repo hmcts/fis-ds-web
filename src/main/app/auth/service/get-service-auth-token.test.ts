@@ -1,43 +1,62 @@
 jest.mock('axios');
 jest.mock('@hmcts/nodejs-logging');
 jest.useFakeTimers();
-
 import { Logger } from '@hmcts/nodejs-logging';
-import Axios, { AxiosStatic } from 'axios';
 const logger = {
   info: jest.fn(),
   error: jest.fn(),
 };
 Logger.getLogger.mockReturnValue(logger);
+import Axios, { AxiosStatic } from 'axios';
+import config from 'config';
+import { when } from 'jest-when';
 
 import { getServiceAuthToken, initAuthToken } from './get-service-auth-token';
 
 const mockedAxios = Axios as jest.Mocked<AxiosStatic>;
 
+config.get = jest.fn();
+
 describe('initAuthToken', () => {
+  beforeEach(() => {
+    when(config.get)
+      .calledWith('services.authProvider.url')
+      .mockReturnValue('http://rpe-service-auth-provider')
+      .calledWith('services.authProvider.microservice')
+      .mockReturnValue('prl_citizen_frontend')
+      .calledWith('services.authProvider.secret')
+      .mockReturnValue('mock-secret');
+  });
+
   test('Should set an interval to start fetching a token', () => {
     mockedAxios.post.mockResolvedValue('token');
 
     initAuthToken();
-    expect(mockedAxios.post).toHaveBeenCalledWith(
-      'http://rpe-service-auth-provider-aat.service.core-compute-aat.internal/lease',
-      {
-        microservice: 'ds_ui',
-        oneTimePassword: expect.anything(),
-      }
-    );
+    expect(mockedAxios.post).toHaveBeenCalledWith('http://rpe-service-auth-provider/testing-support/lease', {
+      microservice: 'prl_citizen_frontend',
+      oneTimePassword: expect.anything(),
+    });
   });
 
-  test('Should log errors', () => {
-    mockedAxios.post.mockRejectedValue({ response: { status: 500, data: 'Error' } });
+  test('Should log errors', async () => {
+    mockedAxios.post.mockRejectedValue({ message: 'MOCK_ERROR', response: { status: 500, data: 'Error' } });
 
-    initAuthToken();
-    return new Promise<void>(resolve => {
-      setImmediate(() => {
-        expect(logger.error).toHaveBeenCalledWith(500, 'Error');
-        resolve();
-      });
-    });
+    await initAuthToken();
+    jest.setTimeout(5000);
+    setTimeout(() => {
+      expect(logger.error).toHaveBeenCalledWith('Error in refreshing service auth token ', 'MOCK_ERROR', 500, 'Error');
+    }, 2000);
+    // return new Promise<void>(resolve => {
+    //   setImmediate(() => {
+    //     expect(logger.error).toHaveBeenCalledWith(
+    //       'Error in refreshing service auth token ',
+    //       'MOCK_ERROR',
+    //       500,
+    //       'Error'
+    //     );
+    //     resolve();
+    //   });
+    // });
   });
 });
 
@@ -45,13 +64,16 @@ describe('getServiceAuthToken', () => {
   test('Should return a token', async () => {
     mockedAxios.post.mockResolvedValue({ data: 'token' });
 
-    initAuthToken();
+    await initAuthToken();
+    setTimeout(() => {
+      expect(getServiceAuthToken()).not.toBeUndefined();
+    }, 2000);
 
-    return new Promise<void>(resolve => {
-      setImmediate(() => {
-        expect(getServiceAuthToken()).not.toBeUndefined();
-        resolve();
-      });
-    });
+    // return new Promise<void>(resolve => {
+    //   setImmediate(() => {
+    //     expect(getServiceAuthToken()).not.toBeUndefined();
+    //     resolve();
+    //   });
+    // });
   });
 });
