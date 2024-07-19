@@ -77,7 +77,7 @@ const en = {
   howWeTestedNVDA: 'NVDA tool',
   howWeTestedColourContrast: 'Colour contrast analyser tool for validating contrast ratio’s',
   howWeTestedVoiceOver: 'VoiceOver',
-  howWeTestedE2E: 'End-to-end testing for all GDS browsers for keyboard use.',
+  howWeTestedE2E: 'e2e testing for all GDS browsers for keyboard use.',
   improvingAccessibility: 'What we’re doing to improve accessibility',
   statementCommitted:
     'We’re committed to ensuring our services are accessible to all our customers and that they comply with level AA of the Web Content Accessibility Guidelines – WCAG 2.1.',
