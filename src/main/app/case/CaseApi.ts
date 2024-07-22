@@ -20,6 +20,7 @@ import {
   YesOrNo,
 } from './definition';
 import { toApiDate, toApiFormat } from './to-api-format';
+import { log } from 'console';
 
 export class CaseApi {
   /**
@@ -124,6 +125,8 @@ export class CaseApi {
    * @returns
    */
   public async createCaseNew(req: AppRequest): Promise<any> {
+    this.logger.info('services.cos.url');
+    this.logger.info(config.get('services.cos.url'));
     const data = {
       edgeCaseTypeOfApplication: req.session.userCase.typeOfApplication,
       caseTypeOfApplication: [TYPE_OF_APPLICATION.FGM, TYPE_OF_APPLICATION.FMPO].includes(

@@ -11,6 +11,8 @@ services:
     clientSecret: IDAM_SECRET
   case:
     url: CCD_URL
+  cos:
+    url: FIS_COS_API
   payments:
     url: PAYMENTS_API_URL
   feeLookup:
