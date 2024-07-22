@@ -20,7 +20,6 @@ import {
   YesOrNo,
 } from './definition';
 import { toApiDate, toApiFormat } from './to-api-format';
-import { log } from 'console';
 
 export class CaseApi {
   /**
