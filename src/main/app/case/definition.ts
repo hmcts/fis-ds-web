@@ -112,6 +112,12 @@ export interface StatusHistoriesItem {
   error_message: string;
 }
 
+export interface CourtListOptions {
+  epmsId: string;
+  site_name: string;
+  court_name: string;
+}
+
 export type DateAsString = string;
 
 export const enum FieldType {

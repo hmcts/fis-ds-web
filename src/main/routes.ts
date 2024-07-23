@@ -22,6 +22,7 @@ import {
   KEEP_ALIVE_URL,
   PRIVACY_POLICY,
   SAVE_AND_SIGN_OUT,
+  //SELECT_COURT,
   TERMS_AND_CONDITIONS,
   TIMED_OUT_URL,
 } from './steps/urls';
@@ -37,6 +38,7 @@ export class Routes {
 
     app.get(CSRF_TOKEN_ERROR_URL, errorHandler(errorController.CSRFTokenError));
     app.get(HOME_URL, errorHandler(new HomeGetController().get));
+    //app.get(SELECT_COURT, errorHandler(new EdgeCaseCourtListController().get));
     app.get(SAVE_AND_SIGN_OUT, errorHandler(new SaveSignOutGetController().get));
     app.get(TIMED_OUT_URL, errorHandler(new TimedOutGetController().get));
     app.get(PRIVACY_POLICY, errorHandler(new PrivacyPolicyGetController().get));
