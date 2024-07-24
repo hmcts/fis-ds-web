@@ -19,7 +19,7 @@ services:
   RPE_TOKEN:
     url: 'http://rpe-service-auth-provider-aat.service.core-compute-aat.internal'
   cos:
-    url: 'https://prl-cos-pr-1485.preview.platform.hmcts.net'
+    url: 'https://prl-cos-pr-2487.preview.platform.hmcts.net'
 health:
   timeout: 5000
   deadline: 15000
