@@ -5,8 +5,9 @@ import { CheckPaymentStatusApi, PaymentTaskResolver } from './paymentApi';
 import { PaymentHelper } from './paymentHelper';
 import { APPLICATION_SUBMITTED, PAY_YOUR_FEE } from '../../../steps/urls';
 import { AppRequest } from '../../../app/controller/AppRequest';
-import { CASE_EVENT, PaymentErrorContext } from '../../../app/case/definition';
+import { CASE_EVENT, PaymentErrorContext, TYPE_OF_APPLICATION } from '../../../app/case/definition';
 import { Case } from '../../../app/case/case';
+import { getEnumKeyByValue } from '../util';
 const SUCCESS = 'Success';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -24,7 +25,8 @@ export const PaymentHandler = async (req: AppRequest, res: Response) => {
       ServiceAuthorization,
       id,
       returnUrL,
-      hwfRefNumber as string
+      hwfRefNumber as string,
+      getEnumKeyByValue(TYPE_OF_APPLICATION, req.session.userCase.typeOfApplication),
     );
     const response = await paymentCreator.getPaymentCredentails();
 
