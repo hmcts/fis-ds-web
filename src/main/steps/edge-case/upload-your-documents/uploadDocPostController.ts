@@ -2,6 +2,7 @@
 import https from 'https';
 
 import { Logger } from '@hmcts/nodejs-logging';
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import autobind from 'autobind-decorator';
 import axios, { AxiosInstance, AxiosRequestHeaders } from 'axios';
 import config from 'config';

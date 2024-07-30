@@ -124,6 +124,8 @@ export class CaseApi {
    * @returns
    */
   public async createCaseNew(req: AppRequest): Promise<any> {
+    this.logger.info('services.cos.url');
+    this.logger.info(config.get('services.cos.url'));
     const data = {
       edgeCaseTypeOfApplication: req.session.userCase.typeOfApplication,
       applicantCaseName: req.session.userCase.applicantFirstName + req.session.userCase.applicantLastName,
