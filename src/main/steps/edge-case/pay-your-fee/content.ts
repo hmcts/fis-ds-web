@@ -1,26 +1,17 @@
-import { TYPE_OF_APPLICATION } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
-import { FormContent, FormFieldsFn } from '../../../app/form/Form';
-import { isFieldFilledIn } from '../../../app/form/validation';
+import { FormContent, FormFields, FormFieldsFn } from '../../../app/form/Form';
 import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
+import { form as paymentSubmissionForm, generateContent as paymentGenerateContent } from '../../common/components/payment-submit';
+export * from './routeGuard';
+
+const fullNameFormFields = paymentSubmissionForm.fields as FormFields;
+
+const PAY_YOUR_FEE_FILE = 'pay-your-fee';
 
 export const form: FormContent = {
   fields: () => {
     return {
-      typeOfApplication: {
-        type: 'radios',
-        classes: 'govuk-radios',
-        label: l => l.label,
-        selected: false,
-        values: [
-          { label: l => l.fgm, value: TYPE_OF_APPLICATION.FGM },
-          { label: l => l.fmpo, value: TYPE_OF_APPLICATION.FMPO },
-          { label: l => l.sg, value: TYPE_OF_APPLICATION.SPECIAL_GUARDIANSHIP_ORDER },
-          { label: l => l.dop, value: TYPE_OF_APPLICATION.DECLARATION_OF_PARENTAGE },
-          { label: l => l.po, value: TYPE_OF_APPLICATION.PARENTAL_ORDER },
-        ],
-        validator: isFieldFilledIn,
-      },
+      hwfPaymentSelection: fullNameFormFields.hwfFields
     };
   },
   submit: {
@@ -30,7 +21,7 @@ export const form: FormContent = {
 
 export const generateContent: TranslationFn = content => {
   const resourceLoader = new ResourceReader();
-  resourceLoader.Loader('type-of-application');
+  resourceLoader.Loader(PAY_YOUR_FEE_FILE);
   const translations = resourceLoader.getFileContents().translations;
   const errors = resourceLoader.getFileContents().errors;
 
@@ -56,7 +47,9 @@ export const generateContent: TranslationFn = content => {
     cy,
   };
   const translationContent = languages[content.language]();
+  const paymentContent = paymentGenerateContent(content);
   return {
+    ...paymentContent,
     ...translationContent,
     form: { ...form, fields: (form.fields as FormFieldsFn)(content.userCase || {}) },
   };
