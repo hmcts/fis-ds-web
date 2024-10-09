@@ -128,6 +128,7 @@ export class CaseApi {
     this.logger.info(config.get('services.cos.url'));
     const data = {
       edgeCaseTypeOfApplication: req.session.userCase.typeOfApplication,
+      applicantCaseName: req.session.userCase.applicantFirstName + req.session.userCase.applicantLastName,
       caseTypeOfApplication: [TYPE_OF_APPLICATION.FGM, TYPE_OF_APPLICATION.FMPO].includes(
         req.session.userCase.typeOfApplication!
       )
@@ -272,6 +273,8 @@ export const mapCaseData = (req: AppRequest): any => {
     applicantAddressCountry: 'United Kingdom',
     applicantAddressPostCode: req.session.userCase.applicantAddressPostcode,
     applicantStatementOfTruth: checkboxConverter(req.session.userCase.applicantStatementOfTruth),
+    paymentServiceRequestReferenceNumber: req.session.userCase.paymentDetails?.serviceRequestReference,
+    paymentReferenceNumber: req.session.userCase.paymentDetails?.payment_reference,
   };
   return data;
 };
