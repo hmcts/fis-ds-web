@@ -46,6 +46,7 @@ export const JURISDICTION_CONNECTION_SUMMARY: PageLink = '/connection-summary';
 export const PAY_AND_SUBMIT: PageLink = '/pay-and-submit';
 export const ELIGIBILITY_URL: PageLink = '/eligibility';
 export const TYPE_OF_APPLICATION_URL: PageLink = '/type-of-application';
+export const SELECT_COURT: PageLink = '/select-court';
 
 /** @Edge case  Payment Handler*/
 export const PAYMENT_GATEWAY_ENTRY_URL: PageLink = '/payments/gateway';

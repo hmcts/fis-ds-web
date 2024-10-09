@@ -15,6 +15,7 @@ import {
   CASE_TYPE_OF_APPLICATION,
   CITIZEN_SUBMIT,
   CaseData,
+  CourtListOptions,
   DSS_CASE_EVENT,
   TYPE_OF_APPLICATION,
   YesOrNo,
@@ -169,6 +170,21 @@ export class CaseApi {
 
   /**
    *
+   * @returns
+   */
+  public async getCourtList(): Promise<CourtListOptions[]> {
+    try {
+      const response = await this.axios.get('/get-edge-case/court-list');
+      const jsonData: CourtListOptions[] = response.data;
+      return jsonData;
+    } catch (err) {
+      this.logError(err);
+      throw new Error('court list could not be fetched.');
+    }
+  }
+
+  /**
+   *
    * @param caseId
    * @param data
    * @param eventName
@@ -273,6 +289,7 @@ export const mapCaseData = (req: AppRequest): any => {
     applicantAddressCountry: 'United Kingdom',
     applicantAddressPostCode: req.session.userCase.applicantAddressPostcode,
     applicantStatementOfTruth: checkboxConverter(req.session.userCase.applicantStatementOfTruth),
+    selectedCourt: req.session.userCase.selectedCourt,
     paymentServiceRequestReferenceNumber: req.session.userCase.paymentDetails?.serviceRequestReference,
     paymentReferenceNumber: req.session.userCase.paymentDetails?.payment_reference,
   };

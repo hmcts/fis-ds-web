@@ -88,6 +88,7 @@ export interface Case {
   applicants?: Applicant[];
   caseTypeOfApplication?: string;
   typeOfApplication?: TYPE_OF_APPLICATION;
+  selectedCourt?: string;
   namedApplicant: YesOrNo;
   applicantFirstName: string;
   applicantLastName: string;
