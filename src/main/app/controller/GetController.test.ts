@@ -32,7 +32,7 @@ describe('GetController', () => {
     };
     await controller.CookiePrefrencesChanger(requestWithCookiesParams, res);
 
-    /*expect(res.render).toBeCalledWith('page', {
+    /*expect(res.render).toHaveBeenCalledWith('page', {
       ...defaultViewArgs,
       language: 'en',
       serviceName: 'Apply for a service"',
@@ -51,7 +51,7 @@ describe('GetController', () => {
     const res = mockResponse();
     await controller.get(req, res);
 
-    /*expect(res.render).toBeCalledWith('page', {
+    /*expect(res.render).toHaveBeenCalledWith('page', {
       ...defaultViewArgs,
       isDraft: false,
     });*/
@@ -121,7 +121,7 @@ describe('GetController', () => {
       req.session.lang = language;
       await controller.get(req, res);
 
-      /*expect(res.render).toBeCalledWith('page', {
+      /*expect(res.render).toHaveBeenCalledWith('page', {
         ...defaultViewArgs,
         ...generatePageContent({ language, pageContent: generateContent, userEmail }),
         text: 'welsh',
@@ -143,7 +143,7 @@ describe('GetController', () => {
       //req.query.lng = language;
       await controller.get(req, res);
 
-      /*expect(res.render).toBeCalledWith('page', {
+      /*expect(res.render).toHaveBeenCalledWith('page', {
         ...defaultViewArgs,
         ...generatePageContent({ language, pageContent: generateContent, userEmail }),
         text: 'welsh',
@@ -165,7 +165,7 @@ describe('GetController', () => {
       //req.query.lng = language;
       await controller.get(req, res);
 
-      /*expect(res.render).toBeCalledWith('page', {
+      /*expect(res.render).toHaveBeenCalledWith('page', {
         ...defaultViewArgs,
         ...generatePageContent({ language, pageContent: generateContent, userEmail }),
         text: 'english',
@@ -208,7 +208,7 @@ describe('GetController', () => {
     const res = mockResponse();
     await controller.get(req, res);
 
-    /*expect(res.render).toBeCalledWith('page', {
+    /*expect(res.render).toHaveBeenCalledWith('page', {
       ...defaultViewArgs,
       userCase: {
         id: '1234',
@@ -238,7 +238,7 @@ describe('GetController', () => {
         isAmendableStates: true,
         userEmail,
       });
-      expect(res.render).toBeCalledWith('page', {
+      expect(res.render).toHaveBeenCalledWith('page', {
         ...defaultViewArgs,
         isDraft: true,
         userCase: req.session.userCase,
@@ -297,7 +297,7 @@ describe('GetController', () => {
       const req = mockRequest();
       const res = mockResponse();
       controller.saveSessionAndRedirect(req, res);
-      expect(req.session.save).toHaveBeenCalled();
+      expect(req.session.save).toBeCalled();
       expect(res.redirect).toHaveBeenCalledWith('/request');
     });
 

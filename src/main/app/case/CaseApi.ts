@@ -125,6 +125,8 @@ export class CaseApi {
    * @returns
    */
   public async createCaseNew(req: AppRequest): Promise<any> {
+    this.logger.info('services.cos.url');
+    this.logger.info(config.get('services.cos.url'));
     const data = {
       edgeCaseTypeOfApplication: req.session.userCase.typeOfApplication,
       caseTypeOfApplication: [TYPE_OF_APPLICATION.FGM, TYPE_OF_APPLICATION.FMPO].includes(
@@ -212,10 +214,12 @@ export class CaseApi {
    */
   private logError(error: AxiosError) {
     if (error.response) {
-      this.logger.error(`API Error ${error.config.method} ${error.config.url} ${error.response.status}`);
+      this.logger.error(
+        `API Error ${error.response.config.method} ${error.response.config.url} ${error.response.status}`
+      );
       this.logger.info('Response: ', error.response.data);
     } else if (error.request) {
-      this.logger.error(`API Error ${error.config.method} ${error.config.url}`);
+      this.logger.error(`API Error ${error.request.config.method} ${error.request.config.url}`);
     } else {
       this.logger.error('API Error', error.message);
     }

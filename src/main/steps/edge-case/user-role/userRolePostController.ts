@@ -38,4 +38,5 @@ export class UserRolePostController extends PostController<AnyObject> {
     }
   }
 }
+
 export default UserRolePostController;

@@ -11,4 +11,5 @@ export class SelectAddressPostController extends SelectAddressPostControllerBase
     super(fields, FieldPrefix.APPLICANT);
   }
 }
+
 export default SelectAddressPostController;

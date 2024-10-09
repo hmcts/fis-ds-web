@@ -49,4 +49,5 @@ export class SelectAddressPostControllerBase extends PostController<AnyObject> {
     this.redirect(req, res);
   }
 }
+
 export default SelectAddressPostControllerBase;

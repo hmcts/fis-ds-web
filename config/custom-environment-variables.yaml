@@ -1,3 +1,5 @@
+security:
+  referrerPolicy: 'origin'
 services:
   authProvider:
     url: SERVICE_AUTH_PROVIDER_URL
@@ -9,6 +11,8 @@ services:
     clientSecret: IDAM_SECRET
   case:
     url: CCD_URL
+  cos:
+    url: FIS_COS_API
   payments:
     url: PAYMENTS_API_URL
   feeLookup:
@@ -16,6 +20,8 @@ services:
   equalityAndDiversity:
     url: EQUALITY_URL
     tokenKey: PCQ_TOKEN
+  fis:
+    url: FIS_COS_API
 port: PORT
 session:
   redis:

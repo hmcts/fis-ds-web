@@ -11,4 +11,5 @@ export class AddressLookupPostController extends AddressLookupPostControllerBase
     super(fields, FieldPrefix.APPLICANT);
   }
 }
+
 export default AddressLookupPostController;

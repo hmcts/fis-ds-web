@@ -74,4 +74,5 @@ export class AddressLookupPostControllerBase extends PostController<AnyObject> {
     return null;
   }
 }
+
 export default AddressLookupPostControllerBase;
