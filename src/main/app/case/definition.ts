@@ -1,3 +1,5 @@
+import { State } from "./CaseApi";
+
 export interface Address {
   AddressLine1: string;
   AddressLine2: string;
@@ -24,6 +26,15 @@ export interface Document {
   document_url: string;
   document_filename: string;
   document_binary_url: string;
+}
+
+export interface DocumentReference {
+  id: string;
+  value: {
+      document_url: string;
+      document_filename: string;
+      document_binary_url: string;
+  };
 }
 
 export interface DynamicList {
@@ -63,20 +74,9 @@ export interface CaseNote {
 }
 
 export interface Applicant {
-  applicantFirstName: string;
-  applicantLastName: string;
-  applicantEmailAddress: string;
-  applicantDateOfBirth: DateAsString;
-  applicantPhoneNumber: string;
-  applicantHomeNumber: string;
-  PhoneNumber: string;
-  applicantAddress1: string;
-  applicantAddress2: string;
-  applicantAddressTown: string;
-  applicantAddressCountry: string;
-  applicantAddressPostCode: string;
+  id: string;
+  value: PartyDetails;
 }
-
 export interface Application {
   applicantStatementOfTruth: YesOrNo;
 }
@@ -87,20 +87,70 @@ export const enum ContactDetails {
 }
 
 export interface CaseData {
-  caseID: string;
-  namedApplicant: YesOrNo;
-  applicantFirstName: string;
-  applicantLastName: string;
-  applicantDateOfBirth: string;
-  applicantEmailAddress: string;
-  applicantPhoneNumber: string;
-  applicantHomeNumber: string;
-  applicantAddress1: string;
-  applicantAddress2: string;
-  applicantAddressTown: string;
-  applicantAddressCountry: any;
-  applicantAddressPostCode: any;
-  applicantStatementOfTruth: YesOrNo;
+  id: string;
+  state: State;
+  createdDate: string;
+  lastModifiedDate: string;
+  applicantCaseName: string;
+  applicants: Applicant[];
+  applicantsFL401: PartyDetails;
+  edgeCaseTypeOfApplication: TYPE_OF_APPLICATION;
+  caseTypeOfApplication: CASE_TYPE_OF_APPLICATION;
+  caseCreatedBy: string;
+  dssUploadedDocuments: DocumentReference[];
+  dssUploadedAdditionalDocuments: DocumentReference[];
+}
+
+export interface PartyDetails {
+  email: string;
+  gender: string;
+  address: Address;
+  dxNumber: string;
+  landline: string;
+  lastName: string;
+  firstName: string;
+  dateOfBirth: string;
+  otherGender: string;
+  phoneNumber: string;
+  placeOfBirth: string;
+  previousName: string;
+  sendSignUpLink: string;
+  solicitorEmail: string;
+  isAddressUnknown: string;
+  isDateOfBirthKnown: string;
+  solicitorReference: string;
+  solicitorTelephone: string;
+  isPlaceOfBirthKnown: string;
+  isDateOfBirthUnknown: string;
+  isAddressConfidential: string;
+  isCurrentAddressKnown: string;
+  relationshipToChildren: string;
+  representativeLastName: string;
+  representativeFirstName: string;
+  canYouProvidePhoneNumber: string;
+  canYouProvideEmailAddress: string;
+  isAtAddressLessThan5Years: string;
+  isPhoneNumberConfidential: string;
+  isEmailAddressConfidential: string;
+  respondentLivedWithApplicant: string;
+  doTheyHaveLegalRepresentation: string;
+  addressLivedLessThan5YearsDetails: string;
+  otherPersonRelationshipToChildren: string[];
+  isAtAddressLessThan5YearsWithDontKnow: string;
+  response: Response;
+  user: User;
+  contactPreferences?: ContactPreference | null;
+  isRemoveLegalRepresentativeRequested?: YesOrNo;
+  partyId: string;
+  liveInRefuge: YesOrNo;
+  refugeConfidentialityC8Form?: Document | null;
+}
+
+export interface User {
+  email: string;
+  idamId: string;
+  solicitorRepresented?: string;
+  pcqId?: string;
 }
 
 export interface StatusHistoriesItem {
@@ -302,3 +352,10 @@ export const enum CASE_EVENT {
   DELETE_CASE = 'deleteApplication',
   CASE_SUBMIT_WITH_HWF = 'citizenCaseSubmitWithHWF',
 }
+
+export type UploadDocument = {
+  id: string;
+  value: {
+    documentLink: Document;
+  };
+};

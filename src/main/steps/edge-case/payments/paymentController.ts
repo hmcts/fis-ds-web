@@ -26,7 +26,7 @@ export const PaymentHandler = async (req: AppRequest, res: Response) => {
       id,
       returnUrL,
       hwfRefNumber as string,
-      getEnumKeyByValue(TYPE_OF_APPLICATION, req.session.userCase.typeOfApplication),
+      getEnumKeyByValue(TYPE_OF_APPLICATION, req.session.userCase.edgeCaseTypeOfApplication),
     );
     const response = await paymentCreator.getPaymentCredentails();
 
@@ -123,7 +123,7 @@ export async function submitCase(
 ): Promise<void> {
   try {
     req.session.paymentError = { hasError: false, errorContext: null };
-    const updatedCase = await req.locals.api.updateCase(req, caseEvent);
+    const updatedCase = await req.locals.api.updateCase(req.session.userCase, caseEvent);
     //update final document in session for download on confirmation
     console.log('updated case {}', updatedCase);
     //save & redirect to confirmation page

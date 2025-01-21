@@ -24,6 +24,7 @@ import {
   PAYMENT_RETURN_URL_CALLBACK,
   PRIVACY_POLICY,
   SAVE_AND_SIGN_OUT,
+  SESSION,
   //SELECT_COURT,
   TERMS_AND_CONDITIONS,
   TIMED_OUT_URL,
@@ -42,13 +43,15 @@ export class Routes {
 
     app.get(CSRF_TOKEN_ERROR_URL, errorHandler(errorController.CSRFTokenError));
     app.get(HOME_URL, errorHandler(new HomeGetController().get));
-    //app.get(SELECT_COURT, errorHandler(new EdgeCaseCourtListController().get));
     app.get(SAVE_AND_SIGN_OUT, errorHandler(new SaveSignOutGetController().get));
     app.get(TIMED_OUT_URL, errorHandler(new TimedOutGetController().get));
     app.get(PRIVACY_POLICY, errorHandler(new PrivacyPolicyGetController().get));
     app.get(TERMS_AND_CONDITIONS, errorHandler(new TermsAndConditionsGetController().get));
     app.get(ACCESSIBILITY_STATEMENT, errorHandler(new AccessibilityStatementGetController().get));
     app.get(CONTACT_US, errorHandler(new ContactUsGetController().get));
+    app.get(SESSION, (req, res)=>{
+      res.json(req.session);
+    });
 
     for (const step of stepsWithContent) {
       const files = fs.readdirSync(`${step.stepDir}`);

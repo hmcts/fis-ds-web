@@ -58,7 +58,7 @@ describe('role-type content', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const typeOfApplication = fields.typeOfApplication as FormOptions;
+    const typeOfApplication = fields.edgeCaseTypeOfApplication as FormOptions;
     expect(typeOfApplication.type).toBe('radios');
     expect(typeOfApplication.classes).toBe('govuk-radios');
     expect((typeOfApplication.label as Function)(generatedContent)).toBe(enContent.label);

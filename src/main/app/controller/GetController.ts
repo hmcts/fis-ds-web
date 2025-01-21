@@ -58,8 +58,8 @@ export class GetController {
       pageContent: this.content,
       userCase: req.session.userCase,
       userEmail: req.session?.user?.email,
-      uploadedDocuments: req.session['caseDocuments'],
-      AddDocuments: req.session['AddtionalCaseDocuments'],
+      uploadedDocuments: req.session.userCase['caseDocuments'],
+      AddDocuments: req.session.userCase['AddtionalCaseDocuments'],
       addresses,
       additionalData: {
         req,

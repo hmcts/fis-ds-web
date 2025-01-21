@@ -1,20 +1,13 @@
-import { CourtListOptions } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFields, FormFieldsFn } from '../../../app/form/Form';
 import { isValidOption } from '../../../app/form/validation';
 import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
-import { EdgeCaseCourtListController } from './EdgeCaseCourtListController';
 import { CaseWithId } from '../../../app/case/case';
 import { AppRequest } from '../../../app/controller/AppRequest';
+export * from './routeGuard';
 
 export const form: FormContent = {
-   
-   fields: (userCase: Partial<CaseWithId>, req: AppRequest) : FormFields  => {
-    const edgeCaseCourtService = new EdgeCaseCourtListController();
-    edgeCaseCourtService.initializeContent(req);
-    const courtListArray : CourtListOptions [] = edgeCaseCourtService.getCourtListData();
-    let courtListData: CourtListOptions[] = courtListArray;
-    console.log('--> ', courtListData);
+  fields: (userCase: Partial<CaseWithId>, req: AppRequest): FormFields => {
     return {
       selectedCourt: {
         type: 'select',
@@ -22,25 +15,21 @@ export const form: FormContent = {
         labelSize: null,
         validator: isValidOption,
         options: () => {
-          const courtListItemOption = courtListData
-            .filter(courtItem => courtItem?.site_name !== null && courtItem?.site_name !== 'Royal Courts of Justice')
-            .map(option => {
-              const value = `${option.epmsId}`;
+          const courts: { text: string; value: string; selected: boolean }[] = [...userCase.availableCourts!].map(
+            court => ({
+              value: court.id,
+              text: court.name,
+              selected: userCase?.selectedCourt?.value === court.id ? true : false,
+            })
+          );
 
-              return {
-                value,
-                text: `${option.court_name}`,
-                selected: false,
-              };
-            });
-
-          courtListItemOption.unshift({
-            value: '',
+          courts?.unshift({
             text: '-- Select a value --',
+            value: '',
             selected: false,
           });
 
-          return courtListItemOption as [];
+          return courts as [];
         },
       },
     };
@@ -53,33 +42,13 @@ export const form: FormContent = {
 export const generateContent: TranslationFn = content => {
   const resourceLoader = new ResourceReader();
   resourceLoader.Loader('select-court');
-  const translations = resourceLoader.getFileContents().translations;
-  const errors = resourceLoader.getFileContents().errors;
+  const translations = resourceLoader.getFileContents();
 
-  const en = () => {
-    return {
-      ...translations.en,
-      errors: {
-        ...errors.en,
-      },
-    };
-  };
-  const cy = () => {
-    return {
-      ...translations.cy,
-      errors: {
-        ...errors.cy,
-      },
-    };
-  };
-
-  const languages = {
-    en,
-    cy,
-  };
-  const translationContent = languages[content.language]();
   return {
-    ...translationContent,
-    form: { ...form, fields: (form.fields as FormFieldsFn)(content.userCase || {}, content.additionalData?.req)},
+    ...translations?.translations?.[content.language],
+    errors: {
+      ...translations?.errors?.[content.language],
+    },
+    form: { ...form, fields: (form.fields as FormFieldsFn)(content.userCase || {}, content.additionalData?.req) },
   };
 };

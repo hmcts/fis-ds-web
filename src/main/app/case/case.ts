@@ -1,10 +1,15 @@
 import { AnyObject } from '../controller/PostController';
 
-import { Applicant, CaseData, TYPE_OF_APPLICATION, YesOrNo } from './definition';
+import {
+  CASE_TYPE_OF_APPLICATION,
+  CaseData,
+  ContactPreference,
+  Document,
+  TYPE_OF_APPLICATION,
+  YesOrNo,
+} from './definition';
 
-export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>> = {
-  applicantDateOfBirth: 'applicantDateOfBirth',
-};
+export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>> = {};
 
 export function formatCase<InputFormat, OutputFormat>(fields: FieldFormats, data: InputFormat): OutputFormat {
   const result = {};
@@ -85,11 +90,11 @@ export enum FieldPrefix {
 }
 
 export interface Case {
-  applicants?: Applicant[];
-  caseTypeOfApplication?: string;
-  typeOfApplication?: TYPE_OF_APPLICATION;
-  selectedCourt?: string;
+  id: string;
+  caseTypeOfApplication: CASE_TYPE_OF_APPLICATION;
+  edgeCaseTypeOfApplication: TYPE_OF_APPLICATION;
   namedApplicant: YesOrNo;
+  contactPreferenceType: ContactPreference;
   applicantFirstName: string;
   applicantLastName: string;
   applicantDateOfBirth: CaseDate;
@@ -99,11 +104,16 @@ export interface Case {
   applicantAddress1: string;
   applicantAddress2: string;
   applicantAddressTown: string;
-  applicantAddressCountry: any;
-  applicantAddressPostcode: any;
-  applicantStatementOfTruth: string;
+  applicantAddressCountry: string;
+  applicantAddressPostcode: string;
+  availableCourts: { id: string; name: string }[];
+  selectedCourt: { value: string; text: string };
+  hwfPaymentSelection: YesOrNo;
   helpWithFeesReferenceNumber?: string;
-  applicantCaseName?: string;
-  hwfPaymentSelection?: YesOrNo;
-  applicationFee?: string;
+  applicantStatementOfTruth: YesOrNo;
+  applicationFee: string;
+  applicantApplicationFormDocuments: Document[];
+  applicantAdditionalDocuments: Document[];
+  caseDocuments: Document[];
+  AddtionalCaseDocuments: Document[];
 }
