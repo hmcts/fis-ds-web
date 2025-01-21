@@ -1,0 +1,48 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import autobind from 'autobind-decorator';
+import { Response } from 'express';
+import { AnyObject, PostController } from '../../../app/controller/PostController';
+import { AppRequest } from '../../../app/controller/AppRequest';
+import { FormFields, FormFieldsFn, Form } from '../../../app/form/Form';
+import { GENERIC_ERROR_PAGE } from '../../../steps/urls';
+import { CITIZEN_UPDATE } from '../../../app/case/definition';
+
+@autobind
+export default class ContactDetailsPostController extends PostController<AnyObject> {
+  constructor(protected readonly fields: FormFields | FormFieldsFn) {
+    super(fields);
+  }
+
+  public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
+    const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase, req) : this.fields;
+    const form = new Form(fields);
+
+    const { saveAndContinue, _csrf, ...formData } = form.getParsedBody(req.body);
+
+    if (saveAndContinue) {
+      Object.assign(req.session.userCase, {
+        applicantHomeNumber: formData.applicantHomeNumber,
+        applicantPhoneNumber: formData.applicantPhoneNumber,
+      });
+      req.session.errors = form.getErrors(formData);
+
+      if (req.session.errors.length) {
+        return super.redirect(req, res);
+      }
+
+      try {
+        if (!req.session?.userCase?.id) {
+          Object.assign(req.session.userCase, await req.locals.api.createCase(req.session.userCase));
+        }
+        Object.assign(req.session.userCase, await req.locals.api.updateCase(req.session.userCase, CITIZEN_UPDATE));
+      } catch (err) {
+        req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
+      } finally {
+        super.redirect(req, res);
+      }
+      return;
+    }
+
+    return res.redirect(GENERIC_ERROR_PAGE);
+  }
+}

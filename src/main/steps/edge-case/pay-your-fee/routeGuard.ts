@@ -17,7 +17,7 @@ export const routeGuard = {
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const retriveFeeAmount = async (req: AppRequest<Partial<Case>>, next: NextFunction) => {
   try {
-    const applicationFee = (await getApplicationFee(req.session.user,req.session.userCase?.typeOfApplication, req.locals.logger)).feeAmount;
+    const applicationFee = (await getApplicationFee(req.session.user,req.session.userCase?.edgeCaseTypeOfApplication, req.locals.logger)).feeAmount;
 
     req.session.userCase = {
       ...(req.session.userCase ?? {}),

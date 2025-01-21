@@ -1,26 +1,23 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 import https from 'https';
 
-import Axios, { AxiosError, AxiosInstance } from 'axios';
+import Axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import config from 'config';
 import { LoggerInstance } from 'winston';
 
-import { EMPTY } from '../../steps/common/constants/commonConstants';
 import { getServiceAuthToken } from '../auth/service/get-service-auth-token';
 import { AppRequest, UserDetails } from '../controller/AppRequest';
 
 import { Case, CaseWithId } from './case';
 import { CaseAssignedUserRoles } from './case-roles';
 import {
-  CASE_TYPE_OF_APPLICATION,
   CITIZEN_SUBMIT,
   CaseData,
   CourtListOptions,
   DSS_CASE_EVENT,
-  TYPE_OF_APPLICATION,
-  YesOrNo,
 } from './definition';
 import { toApiDate, toApiFormat } from './to-api-format';
+import {  prepareCaseRequestData, CreateCaseResponse, prepareUpdateCaseRequestData, mapCreateCaseResponseData, mapUpdateCaseResponseData, UpdateCaseRequest, UpdateCaseResponse } from './api-utility';
 
 export class CaseApi {
   /**
@@ -51,71 +48,32 @@ export class CaseApi {
 
   /**
    *
-   * @param req
-   * @param userDetails
-   * @param  formData
+   * @param userCase
    * @returns
    */
-  public async updateCase(req: AppRequest, eventName: string): Promise<any> {
+  public async createCase(userCase: CaseWithId): Promise<CreateCaseResponse> {
     try {
-      if (req.session.userCase.id === EMPTY) {
-        throw new Error('Error in updating case, case id is missing');
+      if (!userCase?.edgeCaseTypeOfApplication) {
+        throw new Error('createCase - error in creating case. case type is missing.');
       }
 
-      const AdditionalDocuments = req.session['AddtionalCaseDocuments'].map(document => {
-        // eslint-disable-next-line @typescript-eslint/no-shadow
-        const { document_url, document_filename, document_binary_url } = document;
-        return {
-          id: document_url.substring(document_url.lastIndexOf('/') + 1),
-          value: {
-            documentLink: {
-              document_url,
-              document_filename,
-              document_binary_url,
-            },
-          },
-        };
+      const request = prepareCaseRequestData(userCase)
+      const response = await this.axios.post<CreateCaseResponse, AxiosResponse<CaseData>>('/case/create', request, {
+        httpsAgent: new https.Agent({ rejectUnauthorized: false }),
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
       });
-      const CaseDocuments = req.session['caseDocuments'].map(document => {
-        const { document_url, document_filename, document_binary_url } = document;
-        return {
-          id: document_url.substring(document_url.lastIndexOf('/') + 1),
-          value: {
-            documentLink: {
-              document_url,
-              document_filename,
-              document_binary_url,
-            },
-          },
-        };
-      });
-      const event = eventName === CITIZEN_SUBMIT ? DSS_CASE_EVENT.DSS_CASE_SUBMIT : DSS_CASE_EVENT.UPDATE_CASE;
-      const data = {
-        ...mapCaseData(req),
-        applicantAdditionalDocuments: AdditionalDocuments,
-        applicantApplicationFormDocuments: CaseDocuments,
-      };
-      const response = await this.axios.post<CreateCaseResponse>(
-        `${req.session.userCase.id}/${event}/update-dss-case`,
-        data,
-        {
-          httpsAgent: new https.Agent({ rejectUnauthorized: false }),
-          maxContentLength: Infinity,
-          maxBodyLength: Infinity,
-        }
-      );
 
       if (response.status === 200) {
-        req.session.userCase.id = response.data.id;
-        return req.session.userCase;
-      } else {
-        throw new Error('Error in creating case');
+        return mapCreateCaseResponseData(response.data);
       }
+      throw new Error('createCase - error in creating case. case could not be created.');
     } catch (err) {
       this.logError(err);
-      throw new Error('Error in updating case');
+      throw new Error('createCase - error in creating case. case could not be created.');
     }
   }
+
 
   /**
    *
@@ -124,31 +82,31 @@ export class CaseApi {
    * @param  formData
    * @returns
    */
-  public async createCaseNew(req: AppRequest): Promise<any> {
-    this.logger.info('services.cos.url');
-    this.logger.info(config.get('services.cos.url'));
-    const data = {
-      edgeCaseTypeOfApplication: req.session.userCase.typeOfApplication,
-      applicantCaseName: req.session.userCase.applicantFirstName + req.session.userCase.applicantLastName,
-      caseTypeOfApplication: [TYPE_OF_APPLICATION.FGM, TYPE_OF_APPLICATION.FMPO].includes(
-        req.session.userCase.typeOfApplication!
-      )
-        ? CASE_TYPE_OF_APPLICATION.FL401
-        : CASE_TYPE_OF_APPLICATION.C100,
-    };
-
+  public async updateCase(userCase: CaseWithId, eventName: string): Promise<UpdateCaseResponse> {
     try {
-      const response = await this.axios.post<CreateCaseResponse>('/case/create', data, {
-        httpsAgent: new https.Agent({ rejectUnauthorized: false }),
-        maxContentLength: Infinity,
-        maxBodyLength: Infinity,
-      });
-      req.session.userCase.id = response.data.id;
-      req.session.userCase.caseTypeOfApplication = response.data.caseTypeOfApplication;
-      return req.session.userCase;
+      if (!userCase?.id) {
+        throw new Error('updateCase - error in updating case. case id is missing.');
+      }
+
+      const event = eventName === CITIZEN_SUBMIT ? DSS_CASE_EVENT.DSS_CASE_SUBMIT : DSS_CASE_EVENT.UPDATE_CASE;
+
+      const response = await this.axios.post<UpdateCaseRequest, AxiosResponse<CaseData>>(
+        `${userCase.id}/${event}/update-dss-case`,
+        prepareUpdateCaseRequestData(userCase),
+        {
+          httpsAgent: new https.Agent({ rejectUnauthorized: false }),
+          maxContentLength: Infinity,
+          maxBodyLength: Infinity,
+        }
+      );
+
+      if (response.status === 200) {
+        return mapUpdateCaseResponseData(response.data);
+      }
+      throw new Error('updateCase - error in updating case. case could not be updated.');
     } catch (err) {
       this.logError(err);
-      throw new Error('Case could not be created.');
+      throw new Error('updateCase - error in updating case. case could not be updated.');
     }
   }
 
@@ -175,11 +133,10 @@ export class CaseApi {
   public async getCourtList(): Promise<CourtListOptions[]> {
     try {
       const response = await this.axios.get('/get-edge-case/court-list');
-      const jsonData: CourtListOptions[] = response.data;
-      return jsonData;
+      return response.data;
     } catch (err) {
       this.logError(err);
-      throw new Error('court list could not be fetched.');
+      throw new Error('getCourtList - court list could not be fetched.');
     }
   }
 
@@ -261,15 +218,6 @@ export const enum State {
   CASE_DELETED = 'REQUESTED_FOR_DELETION',
 }
 
-interface CreateCaseResponse {
-  status: string;
-  id: string;
-  caseTypeOfApplication: string;
-  c100RebuildReturnUrl: string;
-  state: State;
-  noOfDaysRemainingToSubmitCase: string;
-}
-
 export const mapCaseData = (req: AppRequest): any => {
   const data = {
     // applicants: req.session.userCase.applicants[0],
@@ -288,7 +236,7 @@ export const mapCaseData = (req: AppRequest): any => {
     applicantAddressTown: req.session.userCase.applicantAddressTown,
     applicantAddressCountry: 'United Kingdom',
     applicantAddressPostCode: req.session.userCase.applicantAddressPostcode,
-    applicantStatementOfTruth: checkboxConverter(req.session.userCase.applicantStatementOfTruth),
+    applicantStatementOfTruth: req.session.userCase.applicantStatementOfTruth,
     selectedCourt: req.session.userCase.selectedCourt,
     paymentServiceRequestReferenceNumber: req.session.userCase.paymentDetails?.serviceRequestReference,
     paymentReferenceNumber: req.session.userCase.paymentDetails?.payment_reference,
@@ -296,10 +244,3 @@ export const mapCaseData = (req: AppRequest): any => {
   return data;
 };
 
-const checkboxConverter = (value: string | undefined) => {
-  if (value === YesOrNo.YES) {
-    return YesOrNo.YES;
-  } else {
-    return YesOrNo.NO;
-  }
-};

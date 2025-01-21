@@ -6,7 +6,7 @@ import { AnyObject, PostController } from '../../../app/controller/PostControlle
 import { Form, FormFields, FormFieldsFn } from '../../../app/form/Form';
 import { HELP_WITH_FEE, PAY_YOUR_FEE } from '../../../steps/urls';
 import { PaymentHandler } from '../payments/paymentController';
-import { YesOrNo } from 'app/case/definition';
+import { YesOrNo } from '../../../app/case/definition';
 
 @autobind
 export default class PayAndSubmitPostController  extends PostController<AnyObject> {
@@ -17,7 +17,7 @@ export default class PayAndSubmitPostController  extends PostController<AnyObjec
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
     try {
 
-        const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase) : this.fields;
+        const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase, req) : this.fields;
         const form = new Form(fields);
         const { ...formData } = form.getParsedBody(req.body);
         req.session.errors = form.getErrors(formData);

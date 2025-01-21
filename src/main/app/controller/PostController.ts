@@ -6,15 +6,15 @@ import { Response } from 'express';
 import { getNextStepUrl } from '../../steps';
 import { CONTACT_DETAILS, SAVE_AND_SIGN_OUT} from '../../steps/urls';
 import { Case, CaseWithId } from '../case/case';
-import { CITIZEN_CREATE, CITIZEN_SAVE_AND_CLOSE, CITIZEN_SUBMIT, CITIZEN_UPDATE } from '../case/definition';
+import { CITIZEN_CREATE, CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE } from '../case/definition';
 import { Form, FormFields, FormFieldsFn } from '../form/Form';
 import { ValidationError } from '../form/validation';
 
 import { AppRequest } from './AppRequest';
 
-enum noHitToSaveAndContinue {
+/*enum noHitToSaveAndContinue {
   CITIZEN_HOME_URL = '/citizen-home',
-}
+}*/
 
 @autobind
 export class PostController<T extends AnyObject> {
@@ -64,29 +64,18 @@ export class PostController<T extends AnyObject> {
 
     this.filterErrorsForSaveAsDraft(req);
 
-    if (req.session?.user && req.session.errors.length === 0) {
+    /*if (req.session?.user && req.session.errors.length === 0) {
       if (!(Object.values(noHitToSaveAndContinue) as string[]).includes(req.originalUrl)) {
         const eventName = this.getEventName(req);
         if (eventName === CITIZEN_CREATE) {
           req.session.userCase = await this.createCase(req);
         } else if (eventName === CITIZEN_UPDATE || eventName === CITIZEN_SUBMIT) {
-          req.session.userCase = await this.updateCase(req, eventName);
+          //req.session.userCase = await this.updateCase(req, eventName);
         }
       }
-    }
+    }*/
 
     this.redirect(req, res);
-  }
-  async createCase(req: AppRequest<T>): Promise<CaseWithId | PromiseLike<CaseWithId>> {
-    try {
-      console.log('Create Case New');
-      req.session.userCase = await req.locals.api.createCaseNew(req);
-    } catch (err) {
-      req.locals.logger.error('Error saving', err);
-      req.session.errors = req.session.errors || [];
-      req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
-    }
-    return req.session.userCase;
   }
 
   private async cancel(req: AppRequest<T>, res: Response): Promise<void> {
@@ -108,18 +97,6 @@ export class PostController<T extends AnyObject> {
     try {
       console.log('Update Existing Case');
       req.session.userCase = await req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
-    } catch (err) {
-      req.locals.logger.error('Error saving', err);
-      req.session.errors = req.session.errors || [];
-      req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
-    }
-    return req.session.userCase;
-  }
-
-  protected async updateCase(req: AppRequest<T>, eventName: string): Promise<CaseWithId> {
-    try {
-      console.log('Update Existing Case');
-      req.session.userCase = await req.locals.api.updateCase(req, eventName);
     } catch (err) {
       req.locals.logger.error('Error saving', err);
       req.session.errors = req.session.errors || [];

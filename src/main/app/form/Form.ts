@@ -197,6 +197,7 @@ export type FormError = {
 interface CaseWithFormData extends CaseWithId {
   _csrf: string;
   saveAndSignOut?: string;
+  saveAndContinue?: boolean;
   saveBeforeSessionTimeout?: string;
   sendToApplicant2ForReview?: string;
   addAnotherName?: string;

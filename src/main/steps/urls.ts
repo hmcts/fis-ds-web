@@ -8,6 +8,8 @@ export const SAVE_AND_SIGN_OUT: PageLink = '/save-and-sign-out';
 export const TIMED_OUT_URL: PageLink = '/timed-out';
 export const KEEP_ALIVE_URL: PageLink = '/keep-alive';
 export const CSRF_TOKEN_ERROR_URL: PageLink = '/csrf-token-error';
+export const GENERIC_ERROR_PAGE: PageLink = '/error';
+export const SESSION: PageLink = '/api/session';
 
 export const DOCUMENT_UPLOAD_URL: PageLink = '/document-manager';
 

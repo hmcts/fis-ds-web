@@ -73,7 +73,7 @@ export const edgecaseSequence: Step[] = [
     url: CONTACT_DETAILS,
     showInSection: Sections.AboutEdgeCase,
     getNextStep: data =>
-      data.typeOfApplication === TYPE_OF_APPLICATION.FGM || data.typeOfApplication === TYPE_OF_APPLICATION.FMPO
+      [TYPE_OF_APPLICATION.FGM, TYPE_OF_APPLICATION.FMPO].includes(data.edgeCaseTypeOfApplication!)
         ? SELECT_COURT
         : UPLOAD_YOUR_DOCUMENTS,
   },
@@ -97,7 +97,7 @@ export const edgecaseSequence: Step[] = [
     showInSection: Sections.AboutEdgeCase,
     getNextStep: () => STATEMENT_OF_TRUTH,
   },
-  { 
+  {
     url: STATEMENT_OF_TRUTH,
     showInSection: Sections.AboutEdgeCase,
     getNextStep: () => PAY_YOUR_FEE,

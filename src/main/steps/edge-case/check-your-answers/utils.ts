@@ -227,7 +227,7 @@ export const TypeOfApplication = (
   { sectionTitles, keys, ...content }: SummaryListContent,
   userCase: Partial<CaseWithId>
 ): SummaryList | undefined => {
-  const typeOfApplication = userCase['typeOfApplication'] as string;
+  const typeOfApplication = userCase?.edgeCaseTypeOfApplication as string;
   const typeOfApplicationValue = keys[typeOfApplication];
 
   const SummaryData = [
