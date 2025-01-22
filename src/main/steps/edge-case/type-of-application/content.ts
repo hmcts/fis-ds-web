@@ -3,11 +3,12 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFieldsFn } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
+export * from './routeGuard';
 
 export const form: FormContent = {
   fields: () => {
     return {
-      typeOfApplication: {
+      edgeCaseTypeOfApplication: {
         type: 'radios',
         classes: 'govuk-radios',
         label: l => l.label,
@@ -31,33 +32,13 @@ export const form: FormContent = {
 export const generateContent: TranslationFn = content => {
   const resourceLoader = new ResourceReader();
   resourceLoader.Loader('type-of-application');
-  const translations = resourceLoader.getFileContents().translations;
-  const errors = resourceLoader.getFileContents().errors;
+  const translations = resourceLoader.getFileContents();
 
-  const en = () => {
-    return {
-      ...translations.en,
-      errors: {
-        ...errors.en,
-      },
-    };
-  };
-  const cy = () => {
-    return {
-      ...translations.cy,
-      errors: {
-        ...errors.cy,
-      },
-    };
-  };
-
-  const languages = {
-    en,
-    cy,
-  };
-  const translationContent = languages[content.language]();
   return {
-    ...translationContent,
+    ...translations?.translations?.[content.language],
+    errors: {
+      ...translations?.errors?.[content.language],
+    },
     form: { ...form, fields: (form.fields as FormFieldsFn)(content.userCase || {}, content.additionalData?.req) },
   };
 };

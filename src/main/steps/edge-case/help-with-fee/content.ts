@@ -1,15 +1,10 @@
 import { TranslationFn } from '../../../app/controller/GetController';
-import { FormContent, FormFieldsFn } from '../../../app/form/Form';
+import { FormContent } from '../../../app/form/Form';
 import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 import { generateContent as fullNameGenerateContent } from '../../common/components/full-name';
 
-const HELP_WITH_FEE_FILE = 'help-with-fee';
-
 export const form: FormContent = {
-  fields: () => {
-    return {
-    };
-  },
+  fields: {},
   submit: {
     text: l => l.continue,
   },
@@ -17,7 +12,7 @@ export const form: FormContent = {
 
 export const generateContent: TranslationFn = content => {
   const resourceLoader = new ResourceReader();
-  resourceLoader.Loader(HELP_WITH_FEE_FILE);
+  resourceLoader.Loader('help-with-fee');
   const translations = resourceLoader.getFileContents().translations;
 
   const en = () => {
@@ -40,6 +35,6 @@ export const generateContent: TranslationFn = content => {
   return {
     ...fullNameContent,
     ...translationContent,
-    form: { ...form, fields: (form.fields as FormFieldsFn)(content.userCase || {}) },
+    form,
   };
 };
