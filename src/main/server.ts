@@ -25,6 +25,7 @@ import { SessionStorage } from './modules/session';
 import { TooBusy } from './modules/too-busy';
 import { Webpack } from './modules/webpack';
 import { Routes } from './routes';
+import { PublicRoutes } from './routes/authless/routes';
 
 const { Logger } = require('@hmcts/nodejs-logging');
 
@@ -38,7 +39,8 @@ const app = express();
 app.locals.ENV = env;
 app.enable('trust proxy');
 app.locals.developmentMode = process.env.NODE_ENV !== Environment.PRODUCTION;
-app.use(favicon(path.join(__dirname, '/public/assets/images/favicon.ico')));
+new PublicRoutes().enableFor(app);
+app.use(favicon(path.join(__dirname, '/public/assets/images/favicon.ico')) as unknown as string);
 app.use(bodyParser.json() as RequestHandler);
 app.use(bodyParser.urlencoded({ extended: false }) as RequestHandler);
 app.use(express.static(path.join(__dirname, 'public')));
