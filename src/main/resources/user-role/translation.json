@@ -6,7 +6,7 @@
             "label": "Are you applying for yourself or someone else?",
             "one": " I am applying for myself",
             "two": " I am applying for someone else",
-            "three": "I am a court staff"
+            "three": "I am a member of court staff"
         },
         "cy": {
             "continue": "Continue",
@@ -14,7 +14,7 @@
             "label": "Are you applying for yourself or someone else? (in welsh)",
             "one": "I am applying for myself (in welsh)",
             "two": "I am applying for someone else (in welsh)",
-            "three": "I am a court staff (in welsh)"
+            "three": "I am a member of court staff (in welsh)"
         }
     },
     "errors":{
