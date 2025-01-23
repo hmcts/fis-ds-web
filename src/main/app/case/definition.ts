@@ -1,4 +1,4 @@
-import { State } from "./CaseApi";
+import { State } from './CaseApi';
 
 export interface Address {
   AddressLine1: string;
@@ -28,12 +28,25 @@ export interface Document {
   document_binary_url: string;
 }
 
+export interface DocumentUploadResponse {
+  status: string;
+  document: DocumentResponse;
+}
+
+export type DocumentResponse = {
+  document_url: string;
+  document_binary_url: string;
+  document_filename: string;
+  document_hash: string;
+  document_creation_date: string;
+};
+
 export interface DocumentReference {
   id: string;
   value: {
-      document_url: string;
-      document_filename: string;
-      document_binary_url: string;
+    document_url: string;
+    document_filename: string;
+    document_binary_url: string;
   };
 }
 
@@ -359,3 +372,8 @@ export type UploadDocument = {
     documentLink: Document;
   };
 };
+
+export enum UploadDocumentContext {
+  UPLOAD_YOUR_DOCUMENTS = 'upload-your-documents',
+  UPLOAD_ADDITIONAL_DOCUMENTS = 'upload-additional-documents',
+}

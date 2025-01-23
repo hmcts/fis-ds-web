@@ -1,14 +1,16 @@
 import * as fs from 'fs';
 
+import { NextFunction } from 'express';
+
 import { Case, CaseWithId } from '../app/case/case';
 import { AppRequest } from '../app/controller/AppRequest';
 import { TranslationFn } from '../app/controller/GetController';
 import { Form, FormContent } from '../app/form/Form';
 
+import { parseUrl } from './common/url-parser';
 import { Step } from './constants';
 import { edgecaseSequence } from './edge-case/edgecaseSequence';
 import { EDGE_CASE_URL, TYPE_OF_APPLICATION_URL } from './urls';
-import { NextFunction } from 'express';
 
 const stepForms: Record<string, Form> = {};
 
@@ -116,7 +118,8 @@ const getStepsWithContent = (sequence: Step[], subDir = ''): StepWithContent[] =
 
   const results: StepWithContent[] = [];
   for (const step of sequence) {
-    const stepDir = `${dir}${step.url.startsWith(subDir) ? step.url : `${subDir}${step.url}`}`;
+    const { url } = parseUrl(step.url);
+    const stepDir = `${dir}${url.startsWith(subDir) ? url : `${subDir}${url}`}`;
     const { content, view } = getStepFiles(stepDir);
     results.push({ stepDir, ...step, ...content, view });
   }

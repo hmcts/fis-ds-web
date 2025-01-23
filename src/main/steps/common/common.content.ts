@@ -193,7 +193,7 @@ export const generatePageContent = ({
   pageContent,
   userCase,
   uploadedDocuments,
-  AddDocuments,
+  addDocuments,
   userEmail,
   addresses = [],
   additionalData,
@@ -203,7 +203,7 @@ export const generatePageContent = ({
   pageContent?: TranslationFn;
   userCase?: Partial<CaseWithId>;
   uploadedDocuments?: any;
-  AddDocuments?: any;
+  addDocuments?: any;
   userEmail?: string;
   addresses?: [];
   additionalData?: CommonContentAdditionalData;
@@ -219,7 +219,7 @@ export const generatePageContent = ({
     language,
     userCase,
     uploadedDocuments,
-    AddDocuments,
+    addDocuments,
     userEmail,
     contactEmail,
     addresses,
@@ -245,7 +245,7 @@ export type CommonContent = typeof en & {
   pageContent?: TranslationFn;
   userCase?: Partial<CaseWithId>;
   uploadedDocuments?: any;
-  AddDocuments?: any;
+  addDocuments?: any;
   userEmail?: string;
   contactEmail?: string;
   referenceNumber?: string;
