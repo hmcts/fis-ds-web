@@ -19,7 +19,7 @@ export const form: FormContent = {
             court => ({
               value: court.id,
               text: court.name,
-              selected: userCase?.selectedCourt?.value === court.id ? true : false,
+              selected: userCase?.selectedCourt?.value === court.id,
             })
           );
 
