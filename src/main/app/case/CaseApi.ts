@@ -3,21 +3,25 @@ import https from 'https';
 
 import Axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import config from 'config';
+import FormData from 'form-data';
 import { LoggerInstance } from 'winston';
 
 import { getServiceAuthToken } from '../auth/service/get-service-auth-token';
 import { AppRequest, UserDetails } from '../controller/AppRequest';
 
+import {
+  CreateCaseResponse,
+  UpdateCaseRequest,
+  UpdateCaseResponse,
+  mapCreateCaseResponseData,
+  mapUpdateCaseResponseData,
+  prepareCaseRequestData,
+  prepareUpdateCaseRequestData,
+} from './api-utility';
 import { Case, CaseWithId } from './case';
 import { CaseAssignedUserRoles } from './case-roles';
-import {
-  CITIZEN_SUBMIT,
-  CaseData,
-  CourtListOptions,
-  DSS_CASE_EVENT,
-} from './definition';
+import { CITIZEN_SUBMIT, CaseData, CourtListOptions, DSS_CASE_EVENT, DocumentUploadResponse } from './definition';
 import { toApiDate, toApiFormat } from './to-api-format';
-import {  prepareCaseRequestData, CreateCaseResponse, prepareUpdateCaseRequestData, mapCreateCaseResponseData, mapUpdateCaseResponseData, UpdateCaseRequest, UpdateCaseResponse } from './api-utility';
 
 export class CaseApi {
   /**
@@ -57,7 +61,7 @@ export class CaseApi {
         throw new Error('createCase - error in creating case. case type is missing.');
       }
 
-      const request = prepareCaseRequestData(userCase)
+      const request = prepareCaseRequestData(userCase);
       const response = await this.axios.post<CreateCaseResponse, AxiosResponse<CaseData>>('/case/create', request, {
         httpsAgent: new https.Agent({ rejectUnauthorized: false }),
         maxContentLength: Infinity,
@@ -73,7 +77,6 @@ export class CaseApi {
       throw new Error('createCase - error in creating case. case could not be created.');
     }
   }
-
 
   /**
    *
@@ -182,6 +185,39 @@ export class CaseApi {
       this.logger.error('API Error', error.message);
     }
   }
+
+  public async uploadDocument(formdata: FormData): Promise<DocumentUploadResponse> {
+    try {
+      const response = await this.axios.post<DocumentUploadResponse>('/upload-citizen-document', formdata, {
+        headers: {
+          ...formdata.getHeaders(),
+        },
+        maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+      });
+
+      if (response.status === 200) {
+        return { document: response.data.document, status: response.data.status };
+      }
+      throw new Error('Document could not be uploaded.');
+    } catch (err) {
+      this.logError(err);
+      throw new Error('Document could not be uploaded.');
+    }
+  }
+
+  public async deleteDocument(docId: string): Promise<void> {
+    try {
+      const response = await this.axios.delete<void>(`/${docId}/delete`);
+      if (response.status === 200) {
+        return;
+      }
+      throw new Error('Document could not be deleted.');
+    } catch (err) {
+      this.logError(err);
+      throw new Error('Document could not be deleted.');
+    }
+  }
 }
 
 /**
@@ -243,4 +279,3 @@ export const mapCaseData = (req: AppRequest): any => {
   };
   return data;
 };
-

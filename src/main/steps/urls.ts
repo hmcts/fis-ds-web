@@ -13,7 +13,7 @@ export const SESSION: PageLink = '/api/session';
 
 export const DOCUMENT_UPLOAD_URL: PageLink = '/document-manager';
 
-export const ADDITIONAL_DOCUMENTS_UPLOAD: PageLink = '/upload-additional-documents';
+export const ADDITIONAL_DOCUMENTS_UPLOAD: PageLink = '/upload/upload-additional-documents/:removeFileId?';
 export const TASK_LIST_URL: PageLink = '/task-list';
 
 export const APPLYING_WITH_URL: PageLink = '/applying-with';
@@ -27,8 +27,8 @@ export const EMAIL_ADDRESS: PageLink = '/email-address';
 export const MANUAL_ADDRESS: PageLink = '/address/manual';
 export const CONTACT_DETAILS: PageLink = '/contact-details';
 export const PAY_YOUR_FEE: PageLink = '/pay-your-fee';
-export const HELP_WITH_FEE: PageLink = '/help-with-fee'
-export const UPLOAD_YOUR_DOCUMENTS: PageLink = '/upload-your-documents';
+export const HELP_WITH_FEE: PageLink = '/help-with-fee';
+export const UPLOAD_YOUR_DOCUMENTS: PageLink = '/upload/upload-your-documents/:removeFileId?';
 export const CONTACT_PREFERENCES: PageLink = '/contact-preferences';
 export const CHECK_YOUR_ANSWERS: PageLink = '/check-your-answers';
 export const STATEMENT_OF_TRUTH: PageLink = '/statement-of-truth';

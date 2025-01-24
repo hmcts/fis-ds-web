@@ -1,17 +1,18 @@
+import _ from 'lodash';
+
+import { State } from './CaseApi';
 import { CaseDate, CaseWithId } from './case';
 import {
-  Document,
-  TYPE_OF_APPLICATION,
   CASE_TYPE_OF_APPLICATION,
-  YesOrNo,
-  ContactPreference,
   CaseData,
-  PartyDetails,
+  ContactPreference,
+  Document,
   DocumentReference,
+  PartyDetails,
+  TYPE_OF_APPLICATION,
+  YesOrNo,
 } from './definition';
 import { toApiDate, toDate } from './to-api-format';
-import { State } from './CaseApi';
-import _ from 'lodash';
 
 export const prepareCaseRequestData = (userCase: CaseWithId): CreateCaseRequest => {
   return {
@@ -84,24 +85,6 @@ export const mapUpdateCaseResponseData = (response: CaseData): UpdateCaseRespons
     applicantAdditionalDocuments: response.dssUploadedAdditionalDocuments.map((document: DocumentReference) => ({
       ...document.value,
     })),
-    caseDocuments: [
-      {
-        document_url:
-          'http://dm-store-aat.service.core-compute-aat.internal/documents/ed798bd9-16a2-41e0-b2a8-f2c1aa25395a',
-        document_binary_url:
-          'http://dm-store-aat.service.core-compute-aat.internal/documents/ed798bd9-16a2-41e0-b2a8-f2c1aa25395a/binary',
-        document_filename: 'Test email.docx',
-      },
-    ],
-    AddtionalCaseDocuments: [
-      {
-        document_url:
-          'http://dm-store-aat.service.core-compute-aat.internal/documents/ed798bd9-16a2-41e0-b2a8-f2c1aa25395a',
-        document_binary_url:
-          'http://dm-store-aat.service.core-compute-aat.internal/documents/ed798bd9-16a2-41e0-b2a8-f2c1aa25395a/binary',
-        document_filename: 'Test email additional.docx',
-      },
-    ],
   };
 };
 
@@ -160,6 +143,4 @@ export interface UpdateCaseResponse extends CreateCaseResponse {
   applicantAddressPostcode: string;
   applicantApplicationFormDocuments: Document[];
   applicantAdditionalDocuments: Document[];
-  caseDocuments: Document[];
-  AddtionalCaseDocuments: Document[];
 }

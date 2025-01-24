@@ -14,8 +14,8 @@ export const enContent = {
 
 const en = (content: any) => {
   const userCase = content.userCase!;
-  const caseDocuments = content.uploadedDocuments;
-  const AdditionalDocuments = content.AddDocuments;
+  const caseDocuments = userCase.applicantApplicationFormDocuments;
+  const additionalDocuments = userCase.applicantAdditionalDocuments;
 
   return {
     ...enContent,
@@ -24,8 +24,8 @@ const en = (content: any) => {
       TypeOfApplication(enContent, userCase),
       UserRole(enContent, userCase),
       ApplicantSummaryList(enContent, userCase),
-      UploadFormSummary(enContent, caseDocuments),
-      AdditonalFormSummary(enContent, AdditionalDocuments),
+      UploadFormSummary(enContent, caseDocuments!),
+      AdditonalFormSummary(enContent, additionalDocuments!),
     ],
   };
 };
@@ -36,18 +36,18 @@ const cyContent: typeof enContent = {
 
 const cy: typeof en = (content: CommonContent) => {
   const userCase = content.userCase!;
-  const caseDocuments = content.uploadedDocuments;
-  const AdditionalDocuments = content['AddDocuments'];
+  const caseDocuments = userCase.applicantApplicationFormDocuments;
+  const additionalDocuments = userCase.applicantAdditionalDocuments;
 
   return {
     ...cyContent,
     language: content.language,
     sections: [
       TypeOfApplication(cyContent, userCase),
-      UserRole(enContent, userCase),
+      UserRole(cyContent, userCase),
       ApplicantSummaryList(cyContent, userCase),
-      UploadFormSummary(enContent, caseDocuments),
-      AdditonalFormSummary(enContent, AdditionalDocuments),
+      UploadFormSummary(cyContent, caseDocuments!),
+      AdditonalFormSummary(cyContent, additionalDocuments!),
     ],
   };
 };

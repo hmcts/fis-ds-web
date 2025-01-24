@@ -2,10 +2,10 @@ import { Request } from 'express';
 import { Session } from 'express-session';
 import type { LoggerInstance } from 'winston';
 
+import { PaymentError } from '../../app/case/definition';
 import { CaseApi } from '../case/CaseApi';
 import { Case, CaseWithId } from '../case/case';
 import { FormError } from '../form/Form';
-import { PaymentError } from 'app/case/definition';
 
 export interface AppRequest<T = Partial<Case>> extends Request {
   session: AppSession;
@@ -21,8 +21,6 @@ export interface AppRequest<T = Partial<Case>> extends Request {
 export interface AppSession extends Session {
   csrfSecret: string;
   rpeToken: any;
-  caseDocuments: any;
-  AddtionalCaseDocuments: any;
   postDocs: any;
   cookieMessage: boolean;
   user: UserDetails;
@@ -30,7 +28,6 @@ export interface AppSession extends Session {
   eligibility: Eligibility;
   lang: string | undefined;
   errors: FormError[] | undefined;
-  fileErrors: any[];
   addresses: [];
   returnUrl?: string;
   cookieStorageMessage?: boolean;

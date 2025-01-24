@@ -3,6 +3,7 @@ import { CaseWithId } from '../../../app/case/case';
 import { YesOrNo } from '../../../app/case/definition';
 import { getFormattedAddress } from '../../../app/case/formatter/address';
 import { PageContent } from '../../../app/controller/GetController';
+import { parseUrl } from '../../../steps/common/url-parser';
 import * as Urls from '../../../steps/urls';
 
 interface GovUkNunjucksSummary {
@@ -158,7 +159,7 @@ export const UploadFormSummary = (
     {
       key: keys.uploadDocuments,
       value: ListOfUploadedDocuments,
-      changeUrl: Urls['UPLOAD_YOUR_DOCUMENTS'],
+      changeUrl: parseUrl(Urls['UPLOAD_YOUR_DOCUMENTS']).url,
     },
   ];
 
@@ -197,11 +198,12 @@ export const UserRole = (
 /* eslint-disable import/namespace */
 export const AdditonalFormSummary = (
   { sectionTitles, keys, ...content }: SummaryListContent,
-  AddDocuments: Partial<any>
+  addDocuments: Partial<any>
 ): SummaryList | undefined => {
-  const ListOfAdditionalDocuments = AddDocuments.map((document): string => {
-    return document.document_filename + '';
-  })
+  const ListOfAdditionalDocuments = addDocuments
+    .map((document): string => {
+      return document.document_filename + '';
+    })
     .toString()
     .split(',')
     .join('<div class="govuk-!-margin-top-3"></div>');
@@ -210,7 +212,7 @@ export const AdditonalFormSummary = (
     {
       key: keys.additionalDocuments,
       value: ListOfAdditionalDocuments,
-      changeUrl: Urls['ADDITIONAL_DOCUMENTS_UPLOAD'],
+      changeUrl: parseUrl(Urls['ADDITIONAL_DOCUMENTS_UPLOAD']).url,
     },
   ];
 

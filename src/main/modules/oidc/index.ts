@@ -1,12 +1,12 @@
 import config from 'config';
 import { Application, NextFunction, Response } from 'express';
+import _ from 'lodash';
 
 import { getRedirectUrl, getUserDetails } from '../../app/auth/user/oidc';
 import { getCaseApi } from '../../app/case/CaseApi';
-import { CALLBACK_URL, SIGN_IN_URL, SIGN_OUT_URL, TYPE_OF_APPLICATION_URL } from '../../steps/urls';
-import _ from 'lodash';
-import { AppRequest } from '../../app/controller/AppRequest';
 import { CaseWithId } from '../../app/case/case';
+import { AppRequest } from '../../app/controller/AppRequest';
+import { CALLBACK_URL, SIGN_IN_URL, SIGN_OUT_URL, TYPE_OF_APPLICATION_URL } from '../../steps/urls';
 
 //TODO remove applicant2 related stuff
 /**
@@ -64,6 +64,9 @@ export class OidcMiddleware {
     }
     if (!req.session?.applicationSettings) {
       req.session.applicationSettings = {};
+    }
+    if (!req.session.hasOwnProperty('errors')) {
+      req.session.errors = [];
     }
     req.session.save(next);
   }

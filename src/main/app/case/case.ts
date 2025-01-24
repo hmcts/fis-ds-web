@@ -114,6 +114,4 @@ export interface Case {
   applicationFee: string;
   applicantApplicationFormDocuments: Document[];
   applicantAdditionalDocuments: Document[];
-  caseDocuments: Document[];
-  AddtionalCaseDocuments: Document[];
 }
