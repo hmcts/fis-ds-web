@@ -9,9 +9,7 @@ export const routeGuard = {
   get: async (req: AppRequest, res: Response, next: NextFunction) => {
     try {
       if (
-        ![TYPE_OF_APPLICATION.FGM, TYPE_OF_APPLICATION.FMPO].includes(
-          req.session.userCase?.edgeCaseTypeOfApplication as TYPE_OF_APPLICATION
-        )
+        ![TYPE_OF_APPLICATION.FGM, TYPE_OF_APPLICATION.FMPO].includes(req.session.userCase?.edgeCaseTypeOfApplication)
       ) {
         res.redirect(GENERIC_ERROR_PAGE);
       }
@@ -22,12 +20,14 @@ export const routeGuard = {
         res.redirect(GENERIC_ERROR_PAGE);
       }
 
-      req.session.userCase.availableCourts = courts
-        .filter(court => court?.site_name && !['', null, 'Royal Courts of Justice'].includes(court.site_name))
-        .map(court => ({
-          id: court.epmsId,
-          name: court.court_name,
-        }));
+      Object.assign(req.session.applicationSettings, {
+        availableCourts: courts
+          .filter(court => court?.site_name && !['', null, 'Royal Courts of Justice'].includes(court.site_name))
+          .map(court => ({
+            id: court.epmsId,
+            name: court.court_name,
+          })),
+      });
       req.session.save(next);
     } catch {
       res.redirect(GENERIC_ERROR_PAGE);

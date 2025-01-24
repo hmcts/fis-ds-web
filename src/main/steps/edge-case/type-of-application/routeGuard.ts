@@ -6,10 +6,13 @@ import { AppRequest } from '../../../app/controller/AppRequest';
 export const routeGuard = {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   post: async (req: AppRequest, res: Response, next: NextFunction) => {
-    req.session.userCase = {
-      edgeCaseTypeOfApplication: req.body.edgeCaseTypeOfApplication,
-    } as CaseWithId;
+    if (req.body?.edgeCaseTypeOfApplication !== req.session?.userCase?.edgeCaseTypeOfApplication) {
+      req.session.userCase = {
+        edgeCaseTypeOfApplication: req.body.edgeCaseTypeOfApplication,
+      } as CaseWithId;
 
-    req.session.save(next);
+      return req.session.save(next);
+    }
+    next();
   },
 };

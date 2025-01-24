@@ -32,7 +32,7 @@ export interface AppSession extends Session {
   returnUrl?: string;
   cookieStorageMessage?: boolean;
   paymentError: PaymentError;
-  applicationSettings?: Record<string, any>;
+  applicationSettings: Record<string, any>;
 }
 
 export interface UserDetails {

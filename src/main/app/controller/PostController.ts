@@ -61,20 +61,7 @@ export class PostController<T extends AnyObject> {
   private async saveAndContinue(req: AppRequest<T>, res: Response, form: Form, formData: Partial<Case>): Promise<void> {
     Object.assign(req.session.userCase, formData);
     req.session.errors = form.getErrors(formData);
-
     this.filterErrorsForSaveAsDraft(req);
-
-    /*if (req.session?.user && req.session.errors.length === 0) {
-      if (!(Object.values(noHitToSaveAndContinue) as string[]).includes(req.originalUrl)) {
-        const eventName = this.getEventName(req);
-        if (eventName === CITIZEN_CREATE) {
-          req.session.userCase = await this.createCase(req);
-        } else if (eventName === CITIZEN_UPDATE || eventName === CITIZEN_SUBMIT) {
-          //req.session.userCase = await this.updateCase(req, eventName);
-        }
-      }
-    }*/
-
     this.redirect(req, res);
   }
 
