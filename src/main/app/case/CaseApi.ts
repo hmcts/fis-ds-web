@@ -195,7 +195,11 @@ export class CaseApi {
         maxContentLength: Infinity,
         maxBodyLength: Infinity,
       });
-      return { document: response.data.document, status: response.data.status };
+
+      if (response.status === 200) {
+        return { document: response.data.document, status: response.data.status };
+      }
+      throw new Error('Document could not be uploaded.');
     } catch (err) {
       this.logError(err);
       throw new Error('Document could not be uploaded.');
@@ -204,7 +208,11 @@ export class CaseApi {
 
   public async deleteDocument(docId: string): Promise<void> {
     try {
-      await this.axios.delete<void>(`/${docId}/delete`);
+      const response = await this.axios.delete<void>(`/${docId}/delete`);
+      if (response.status === 200) {
+        return;
+      }
+      throw new Error('Document could not be deleted.');
     } catch (err) {
       this.logError(err);
       throw new Error('Document could not be deleted.');

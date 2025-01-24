@@ -8,22 +8,9 @@ import { UploadDocumentContext } from '../../../app/case/definition';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject } from '../../../app/controller/PostController';
 import { FormError } from '../../../app/form/Form';
+import { fileMimeType } from '../../../steps/common/constants/commonConstants';
 import { parseUrl } from '../../../steps/common/url-parser';
 import { ADDITIONAL_DOCUMENTS_UPLOAD, UPLOAD_YOUR_DOCUMENTS } from '../../../steps/urls';
-
-const fileMimeType: Partial<Record<string, string>> = {
-  doc: 'application/msword',
-  docx: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-  pdf: 'application/pdf',
-  png: 'image/png',
-  xls: 'application/vnd.ms-excel',
-  xlsx: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-  jpg: 'image/jpeg',
-  txt: 'text/plain',
-  rtf: 'application/rtf',
-  rtf2: 'text/rtf',
-  gif: 'image/gif',
-};
 
 const sizeValidation = (fileSize: number): boolean => {
   return fileSize <= Number(config.get('documentUpload.validation.sizeInKB'));
@@ -45,32 +32,22 @@ const getDocumentType = (context: UploadDocumentContext): string => {
     : 'applicantApplicationFormDocuments';
 };
 
-export const handleDocumentUpload = async (
-  req: AppRequest,
-  res: Response,
+const getUploadedDocumentError = (
+  errorPropertyName: string,
+  files:
+    | {
+        [fieldname: string]: Express.Multer.File[];
+      }
+    | Express.Multer.File[]
+    | undefined,
   uploadedDocumentCount: number,
   context: UploadDocumentContext
-): Promise<void> => {
-  const { files }: AppRequest<AnyObject> = req;
-  const redirectUrl =
-    context === UploadDocumentContext.UPLOAD_ADDITIONAL_DOCUMENTS
-      ? parseUrl(ADDITIONAL_DOCUMENTS_UPLOAD).url
-      : parseUrl(UPLOAD_YOUR_DOCUMENTS).url;
-  req.session.errors = [];
-  const uploadPropertyName = getPropertyName(context);
-
-  if (!req.session.hasOwnProperty('errors')) {
-    req.session['errors'] = [];
-  }
-
+): FormError | null => {
+  let errorType;
   if (_.isNull(files)) {
-    req.session.errors.push({
-      errorType: 'noFileUploadError',
-      propertyName: uploadPropertyName,
-    });
-    req.session.save(() => res.redirect(redirectUrl));
-  } else {
-    if (
+    errorType = 'noFileUploadError';
+  } else if (
+    !(
       uploadedDocumentCount <
       Number(
         config.get(
@@ -79,64 +56,69 @@ export const handleDocumentUpload = async (
             : 'documentUpload.validation.totaldocuments'
         )
       )
-    ) {
-      const documents: any = files?.[uploadPropertyName];
-      if (!_.isArray(documents)) {
-        const validateMimeType: boolean = formatValidation(documents.mimetype);
-        const validateFileSize: boolean = sizeValidation(documents.size);
-        const formData: FormData = new FormData();
+    )
+  ) {
+    errorType = 'totalFilesExceededError';
+  } else if (!formatValidation(files?.[errorPropertyName].mimetype)) {
+    errorType = 'formatError';
+  } else if (!sizeValidation(files?.[errorPropertyName].size)) {
+    errorType = 'sizeError';
+  } else {
+    return null;
+  }
 
-        if (validateMimeType && validateFileSize) {
-          formData.append('file', documents.data, {
-            contentType: documents.mimetype,
-            filename: documents.name,
-          });
+  return { errorType, propertyName: errorPropertyName };
+};
 
-          try {
-            const requestDocument = await getCaseApi(req.session.user, req.locals.logger).uploadDocument(formData);
-            req.session.userCase[getDocumentType(context)].push(requestDocument.document);
-            req.session['errors'] = [];
-            req.session.save(() => res.redirect(redirectUrl));
-          } catch (error) {
-            req.session.errors.push({
-              errorType: 'uploadError',
-              propertyName: uploadPropertyName,
-            });
-            req.locals.logger.error(error);
-            req.session.save(() => res.redirect(redirectUrl));
-          }
-        } else {
-          const formattedError: FormError[] = [];
-          if (!validateFileSize) {
-            formattedError.push({
-              errorType: 'sizeError',
-              propertyName: uploadPropertyName,
-            });
-          }
+export const handleDocumentUpload = async (
+  req: AppRequest,
+  res: Response,
+  context: UploadDocumentContext
+): Promise<void> => {
+  const { files }: AppRequest<AnyObject> = req;
+  const redirectUrl =
+    context === UploadDocumentContext.UPLOAD_ADDITIONAL_DOCUMENTS
+      ? parseUrl(ADDITIONAL_DOCUMENTS_UPLOAD).url
+      : parseUrl(UPLOAD_YOUR_DOCUMENTS).url;
+  const uploadPropertyName = getPropertyName(context);
+  const documentType = getDocumentType(context);
 
-          if (!validateMimeType) {
-            formattedError.push({
-              errorType: 'formatError',
-              propertyName: uploadPropertyName,
-            });
-          }
-
-          req.session.errors.push(...formattedError);
-          req.session.save(() => res.redirect(redirectUrl));
-        }
-      }
-    } else {
-      req.session.errors.push({
-        errorType: 'totalFilesExceededError',
-        propertyName: uploadPropertyName,
+  const uploadDocumentError = getUploadedDocumentError(
+    uploadPropertyName,
+    files,
+    req.session.userCase[documentType].length,
+    context
+  );
+  if (!_.isEmpty(uploadDocumentError)) {
+    req.session.errors?.push(uploadDocumentError);
+    req.session.save(() => res.redirect(redirectUrl));
+  } else {
+    const documents: any = files?.[uploadPropertyName];
+    if (!_.isArray(documents)) {
+      const formData: FormData = new FormData();
+      formData.append('file', documents.data, {
+        contentType: documents.mimetype,
+        filename: documents.name,
       });
 
-      req.session.save(() => res.redirect(redirectUrl));
+      try {
+        const requestDocument = await getCaseApi(req.session.user, req.locals.logger).uploadDocument(formData);
+        req.session.userCase[documentType].push(requestDocument.document);
+        req.session['errors'] = [];
+        req.session.save(() => res.redirect(redirectUrl));
+      } catch (error) {
+        req.session.errors?.push({
+          errorType: 'uploadError',
+          propertyName: uploadPropertyName,
+        });
+        req.locals.logger.error(error);
+        req.session.save(() => res.redirect(redirectUrl));
+      }
     }
   }
 };
 
-export const deleteDocument = async (
+export const deleteDocumentAndRedirect = async (
   req: AppRequest,
   res: Response,
   removeId: string,

@@ -19,14 +19,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
 
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
     const { saveAndContinue } = req.body;
-    let totalUploadDocuments = 0;
     req.session.errors = [];
-
-    if (!req.session.userCase.hasOwnProperty('applicantApplicationFormDocuments')) {
-      req.session.userCase.applicantApplicationFormDocuments = [];
-    } else {
-      totalUploadDocuments = req.session.userCase.applicantApplicationFormDocuments.length;
-    }
 
     if (saveAndContinue) {
       if (req.session.userCase.applicantApplicationFormDocuments.length === 0) {
@@ -41,7 +34,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
         this.redirect(req, res, parseUrl(ADDITIONAL_DOCUMENTS_UPLOAD).url);
       }
     } else {
-      handleDocumentUpload(req, res, totalUploadDocuments, UploadDocumentContext.UPLOAD_YOUR_DOCUMENTS);
+      handleDocumentUpload(req, res, UploadDocumentContext.UPLOAD_YOUR_DOCUMENTS);
     }
   }
 }

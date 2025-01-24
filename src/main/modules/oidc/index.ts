@@ -3,9 +3,9 @@ import { Application, NextFunction, Response } from 'express';
 
 import { getRedirectUrl, getUserDetails } from '../../app/auth/user/oidc';
 import { getCaseApi } from '../../app/case/CaseApi';
+import { CaseWithId } from '../../app/case/case';
 import { AppRequest } from '../../app/controller/AppRequest';
 import { CALLBACK_URL, SIGN_IN_URL, SIGN_OUT_URL, TYPE_OF_APPLICATION_URL } from '../../steps/urls';
-import { CaseWithId } from 'app/case/case';
 
 //TODO remove applicant2 related stuff
 /**
@@ -45,6 +45,9 @@ export class OidcMiddleware {
           req.locals.api = getCaseApi(req.session.user, req.locals.logger);
           if (!req.session?.userCase) {
             req.session.userCase = {} as CaseWithId;
+          }
+          if (!req.session.hasOwnProperty('errors')) {
+            req.session.errors = [];
           }
           //req.session.userCase = req.session.userCase || (await req.locals.api.getOrCreateCase());
           return next();

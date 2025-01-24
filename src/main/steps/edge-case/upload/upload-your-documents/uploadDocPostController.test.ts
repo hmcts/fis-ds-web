@@ -72,6 +72,7 @@ describe('document upload > upload your documents > post controller', () => {
 
   test('post should add error to session if continue without document', async () => {
     req.body.saveAndContinue = true;
+    req.session.userCase.applicantApplicationFormDocuments = [];
     await postController.post(req, res);
 
     expect(req.session.errors).toEqual([

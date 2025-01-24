@@ -3,7 +3,7 @@ import { mockResponse } from '../../../../test/unit/utils/mockResponse';
 import { CaseApi } from '../../../app/case/CaseApi';
 import { UploadDocumentContext } from '../../../app/case/definition';
 
-import { deleteDocument, handleDocumentUpload } from './utils';
+import { deleteDocumentAndRedirect, handleDocumentUpload } from './utils';
 
 const uploadDocumentMock = jest.spyOn(CaseApi.prototype, 'uploadDocument');
 const deleteDocumentMock = jest.spyOn(CaseApi.prototype, 'deleteDocument');
@@ -14,6 +14,7 @@ describe('document upload > utils', () => {
 
   beforeEach(() => {
     req = mockRequest();
+    req.session.errors = [];
     res = mockResponse();
     jest.clearAllMocks();
   });
@@ -33,7 +34,7 @@ describe('document upload > utils', () => {
         },
       });
 
-      await handleDocumentUpload(req, res, 1, UploadDocumentContext.UPLOAD_YOUR_DOCUMENTS);
+      await handleDocumentUpload(req, res, UploadDocumentContext.UPLOAD_YOUR_DOCUMENTS);
       expect(req.session.save).toHaveBeenCalled();
       expect(res.redirect).toHaveBeenCalledWith('/upload/upload-your-documents');
       expect(req.session.userCase.applicantApplicationFormDocuments).toStrictEqual([
@@ -61,7 +62,7 @@ describe('document upload > utils', () => {
         },
       });
 
-      await handleDocumentUpload(req, res, 1, UploadDocumentContext.UPLOAD_ADDITIONAL_DOCUMENTS);
+      await handleDocumentUpload(req, res, UploadDocumentContext.UPLOAD_ADDITIONAL_DOCUMENTS);
       expect(req.session.save).toHaveBeenCalled();
       expect(res.redirect).toHaveBeenCalledWith('/upload/upload-additional-documents');
       expect(req.session.userCase.applicantAdditionalDocuments).toStrictEqual([
@@ -77,7 +78,8 @@ describe('document upload > utils', () => {
 
     test('should add error to session when no files uploaded', async () => {
       req.files = null;
-      await handleDocumentUpload(req, res, 1, UploadDocumentContext.UPLOAD_YOUR_DOCUMENTS);
+      req.session.userCase.applicantApplicationFormDocuments = [];
+      await handleDocumentUpload(req, res, UploadDocumentContext.UPLOAD_YOUR_DOCUMENTS);
       expect(req.session.save).toHaveBeenCalled();
       expect(res.redirect).toHaveBeenCalledWith('/upload/upload-your-documents');
       expect(req.session.errors).toStrictEqual([
@@ -89,8 +91,9 @@ describe('document upload > utils', () => {
     });
 
     test('should add error to session when file type is invalid', async () => {
+      req.session.userCase.applicantApplicationFormDocuments = [];
       req.files = { applicationUpload: { name: 'test.jpg', data: '', mimetype: 'mp3', size: '123' } };
-      await handleDocumentUpload(req, res, 1, UploadDocumentContext.UPLOAD_YOUR_DOCUMENTS);
+      await handleDocumentUpload(req, res, UploadDocumentContext.UPLOAD_YOUR_DOCUMENTS);
       expect(req.session.save).toHaveBeenCalled();
       expect(res.redirect).toHaveBeenCalledWith('/upload/upload-your-documents');
       expect(req.session.errors).toStrictEqual([
@@ -103,7 +106,8 @@ describe('document upload > utils', () => {
 
     test('should add error to session when file is too large', async () => {
       req.files = { applicationUpload: { name: 'test.jpg', data: '', mimetype: 'image/jpeg', size: '12345678910' } };
-      await handleDocumentUpload(req, res, 1, UploadDocumentContext.UPLOAD_YOUR_DOCUMENTS);
+      req.session.userCase.applicantApplicationFormDocuments = [{ document_url: 'test2/1234' }];
+      await handleDocumentUpload(req, res, UploadDocumentContext.UPLOAD_YOUR_DOCUMENTS);
       expect(req.session.save).toHaveBeenCalled();
       expect(res.redirect).toHaveBeenCalledWith('/upload/upload-your-documents');
       expect(req.session.errors).toStrictEqual([
@@ -116,7 +120,14 @@ describe('document upload > utils', () => {
 
     test('should add error to session when too many files uploaded', async () => {
       req.files = { applicationUpload: { name: 'test.jpg', data: '', mimetype: 'image/jpeg', size: '123' } };
-      await handleDocumentUpload(req, res, 6, UploadDocumentContext.UPLOAD_YOUR_DOCUMENTS);
+      req.session.userCase.applicantApplicationFormDocuments = [
+        { document_url: 'test1/1234' },
+        { document_url: 'test2/1234' },
+        { document_url: 'test3/1234' },
+        { document_url: 'test4/1234' },
+        { document_url: 'test5/1234' },
+      ];
+      await handleDocumentUpload(req, res, UploadDocumentContext.UPLOAD_YOUR_DOCUMENTS);
       expect(req.session.save).toHaveBeenCalled();
       expect(res.redirect).toHaveBeenCalledWith('/upload/upload-your-documents');
       expect(req.session.errors).toStrictEqual([
@@ -128,9 +139,10 @@ describe('document upload > utils', () => {
     });
 
     test('should add error to session when error uploading document', async () => {
+      req.session.userCase.applicantApplicationFormDocuments = [{ document_url: 'test2/1234' }];
       req.files = { applicationUpload: { name: 'test.jpg', data: '', mimetype: 'image/jpeg', size: '123' } };
       uploadDocumentMock.mockRejectedValue({ status: 'Failure' });
-      await handleDocumentUpload(req, res, 1, UploadDocumentContext.UPLOAD_YOUR_DOCUMENTS);
+      await handleDocumentUpload(req, res, UploadDocumentContext.UPLOAD_YOUR_DOCUMENTS);
       expect(req.session.save).toHaveBeenCalled();
       expect(res.redirect).toHaveBeenCalledWith('/upload/upload-your-documents');
       expect(req.session.errors).toStrictEqual([
@@ -142,7 +154,7 @@ describe('document upload > utils', () => {
     });
   });
 
-  describe('deleteDocument', () => {
+  describe('deleteDocumentAndRedirect', () => {
     test('should delete document from session', async () => {
       req.session.userCase.applicantApplicationFormDocuments = [
         {
@@ -157,7 +169,7 @@ describe('document upload > utils', () => {
         },
       ];
       deleteDocumentMock.mockResolvedValue();
-      await deleteDocument(req, res, '1234', UploadDocumentContext.UPLOAD_YOUR_DOCUMENTS);
+      await deleteDocumentAndRedirect(req, res, '1234', UploadDocumentContext.UPLOAD_YOUR_DOCUMENTS);
       expect(req.session.save).toHaveBeenCalled();
       expect(res.redirect).toHaveBeenCalledWith('/upload/upload-your-documents');
       expect(req.session.userCase.applicantApplicationFormDocuments).toStrictEqual([
@@ -183,7 +195,7 @@ describe('document upload > utils', () => {
         },
       ];
       deleteDocumentMock.mockResolvedValue();
-      await deleteDocument(req, res, '1234', UploadDocumentContext.UPLOAD_ADDITIONAL_DOCUMENTS);
+      await deleteDocumentAndRedirect(req, res, '1234', UploadDocumentContext.UPLOAD_ADDITIONAL_DOCUMENTS);
       expect(req.session.save).toHaveBeenCalled();
       expect(res.redirect).toHaveBeenCalledWith('/upload/upload-additional-documents');
       expect(req.session.userCase.applicantAdditionalDocuments).toStrictEqual([
@@ -209,7 +221,7 @@ describe('document upload > utils', () => {
         },
       ];
       deleteDocumentMock.mockRejectedValueOnce({ status: 'Failure' });
-      await deleteDocument(req, res, '1234', UploadDocumentContext.UPLOAD_YOUR_DOCUMENTS);
+      await deleteDocumentAndRedirect(req, res, '1234', UploadDocumentContext.UPLOAD_YOUR_DOCUMENTS);
       expect(req.session.save).toHaveBeenCalled();
       expect(res.redirect).toHaveBeenCalledWith('/upload/upload-your-documents');
       expect(req.session.errors).toStrictEqual([

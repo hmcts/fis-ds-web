@@ -17,21 +17,13 @@ export default class UploadAdditionalDocumentPostController extends PostControll
 
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
     const { saveAndContinue } = req.body;
-
-    let totalUploadDocuments = 0;
     req.session.errors = [];
-
-    if (!req.session.userCase.hasOwnProperty('applicantAdditionalDocuments')) {
-      req.session.userCase.applicantAdditionalDocuments = [];
-    } else {
-      totalUploadDocuments = req.session.userCase.applicantAdditionalDocuments.length;
-    }
 
     if (saveAndContinue) {
       Object.assign(req.session.userCase, await req.locals.api.updateCase(req.session.userCase, CITIZEN_UPDATE));
       this.redirect(req, res, CHECK_YOUR_ANSWERS);
     } else {
-      handleDocumentUpload(req, res, totalUploadDocuments, UploadDocumentContext.UPLOAD_ADDITIONAL_DOCUMENTS);
+      handleDocumentUpload(req, res, UploadDocumentContext.UPLOAD_ADDITIONAL_DOCUMENTS);
     }
   }
 }

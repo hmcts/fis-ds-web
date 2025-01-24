@@ -17,24 +17,7 @@ export const form: FormContent = {
 
 export const generateContent: TranslationFn = content => {
   const resourceLoader = loadResources('upload-your-documents');
-  const loadedTranslations = resourceLoader.getFileContents().translations;
-
-  const en = () => {
-    return {
-      ...loadedTranslations.en,
-    };
-  };
-  const cy = () => {
-    return {
-      ...loadedTranslations.cy,
-    };
-  };
-
-  const languages = {
-    en,
-    cy,
-  };
-  const translations = languages[content.language]();
+  const translations = resourceLoader.getFileContents().translations[content.language];
   const uploadedDocuments = content.userCase?.applicantApplicationFormDocuments?.map(uploadedDocument => {
     return {
       filename: uploadedDocument.document_filename,
