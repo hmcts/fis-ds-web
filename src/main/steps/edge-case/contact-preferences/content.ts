@@ -18,8 +18,7 @@ export const form: FormContent = {
         {
           label: l => l.namedPerson,
           value: ContactPreference.NAMED_PERSON,
-        },
-        { label: l => l.bothReceiveEmail, value: ContactPreference.BOTH_RECEIVE },
+        }
       ],
       validator: isFieldFilledIn,
     },

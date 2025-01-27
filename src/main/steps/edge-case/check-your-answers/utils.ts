@@ -87,8 +87,6 @@ export const ApplicantSummaryList = (
       perference = 'The person named on this application';
     } else if (userCase['contactPreferenceType'] === 'ACCOUNT_OWNER') {
       perference = 'The account owner';
-    } else if (userCase['contactPreferenceType'] === 'BOTH_RECEIVE') {
-      perference = 'Both the account owner and the person named on this application';
     } else {
       perference = '';
     }
