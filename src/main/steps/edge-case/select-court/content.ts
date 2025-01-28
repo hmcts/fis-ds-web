@@ -1,9 +1,9 @@
+import { CaseWithId } from '../../../app/case/case';
+import { AppRequest } from '../../../app/controller/AppRequest';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFields, FormFieldsFn } from '../../../app/form/Form';
 import { isValidOption } from '../../../app/form/validation';
 import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
-import { CaseWithId } from '../../../app/case/case';
-import { AppRequest } from '../../../app/controller/AppRequest';
 export * from './routeGuard';
 
 export const form: FormContent = {

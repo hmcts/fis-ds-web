@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
-import { AnyObject, PostController } from '../../../app/controller/PostController';
-import { AppRequest } from '../../../app/controller/AppRequest';
-import { FormFields, FormFieldsFn, Form } from '../../../app/form/Form';
-import { GENERIC_ERROR_PAGE } from '../../../steps/urls';
+
 import { CITIZEN_UPDATE } from '../../../app/case/definition';
+import { AppRequest } from '../../../app/controller/AppRequest';
+import { AnyObject, PostController } from '../../../app/controller/PostController';
+import { Form, FormFields, FormFieldsFn } from '../../../app/form/Form';
+import { GENERIC_ERROR_PAGE } from '../../../steps/urls';
 
 @autobind
 export default class ContactDetailsPostController extends PostController<AnyObject> {

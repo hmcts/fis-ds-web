@@ -5,7 +5,7 @@ import { isFieldFilledIn } from '../../../app/form/validation';
 import * as steps from '../../../steps';
 import { DATE_OF_BIRTH, FULL_NAME } from '../../urls';
 
-import UserRolePostController from './userRolePostController';
+import { UserRolePostController } from './userRolePostController';
 
 const getNextStepUrlMock = jest.spyOn(steps, 'getNextStepUrl');
 

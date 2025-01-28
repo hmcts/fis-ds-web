@@ -1,8 +1,8 @@
-import { AppSession } from 'app/controller/AppRequest';
 import { getFormattedDate } from '../../../app/case/answers/formatDate';
 import { CaseWithId } from '../../../app/case/case';
 import { YesOrNo } from '../../../app/case/definition';
 import { getFormattedAddress } from '../../../app/case/formatter/address';
+import { AppSession } from '../../../app/controller/AppRequest';
 import { PageContent } from '../../../app/controller/GetController';
 import { parseUrl } from '../../../steps/common/url-parser';
 import * as Urls from '../../../steps/urls';

@@ -35,6 +35,11 @@ export class GetController {
     const addresses = req.session?.addresses;
 
     const sessionErrors = req.session?.errors || [];
+
+    if (req.session?.errors) {
+      req.session.errors = undefined;
+    }
+
     /**
      *
      *                      This util allows to delete document
@@ -106,6 +111,7 @@ export class GetController {
       addtionalDocuments: req.session.userCase.applicantAdditionalDocuments,
       cookiePrefrences: cookiesForPrefrences,
       sessionErrors,
+      paymentError: req.session.paymentError,
       cookieMessage: false,
       htmlLang: language,
       isDraft: req.session?.userCase?.state ? req.session.userCase.state === '' : true,
