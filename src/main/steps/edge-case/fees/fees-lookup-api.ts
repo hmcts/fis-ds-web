@@ -3,8 +3,8 @@ import config from 'config';
 import { LoggerInstance } from 'winston';
 
 import { getServiceAuthToken } from '../../../app/auth/service/get-service-auth-token';
-import { UserDetails } from '../../../app/controller/AppRequest';
 import { TYPE_OF_APPLICATION } from '../../../app/case/definition';
+import { UserDetails } from '../../../app/controller/AppRequest';
 import { getEnumKeyByValue } from '../util';
 
 export const getApplicationFee = async (

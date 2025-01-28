@@ -18,7 +18,7 @@ export const form: FormContent = {
         {
           label: l => l.namedPerson,
           value: ContactPreference.NAMED_PERSON,
-        }
+        },
       ],
       validator: isFieldFilledIn,
     },

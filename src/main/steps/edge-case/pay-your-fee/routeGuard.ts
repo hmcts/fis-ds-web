@@ -24,7 +24,7 @@ const retriveFeeAmount = async (req: AppRequest<Partial<Case>>, next: NextFuncti
     const applicationFee = (
       await getApplicationFee(req.session.user, req.session.userCase?.edgeCaseTypeOfApplication, req.locals.logger)
     )?.feeAmount;
-    
+
     if (applicationFee) {
       req.session.userCase = {
         ...(req.session.userCase ?? {}),

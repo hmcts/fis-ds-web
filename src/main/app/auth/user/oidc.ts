@@ -31,7 +31,7 @@ export const getUserDetails = async (
     if (response.status !== 200) {
       throw new Error(`Failed to get user details: ${response.status} ${response.statusText}`);
     }
-    
+
     return {
       accessToken: response.data.access_token,
       id: jwt.uid,

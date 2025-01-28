@@ -20,7 +20,7 @@ export default class UploadDocumentController extends PostController<AnyObject> 
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
     const { saveAndContinue, uploadFile } = req.body;
     req.session.errors = [];
-    
+
     if (uploadFile) {
       return handleDocumentUpload(req, res, UploadDocumentContext.UPLOAD_YOUR_DOCUMENTS);
     }

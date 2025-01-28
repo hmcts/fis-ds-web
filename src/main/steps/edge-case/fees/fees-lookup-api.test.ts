@@ -1,8 +1,8 @@
 import { LoggerInstance } from 'winston';
 
-import { UserDetails } from '../controller/AppRequest';
+import { UserDetails } from '../../../app/controller/AppRequest';
 
-import { getC100ApplicationFee } from './fees-lookup-api';
+import { getApplicationFee } from './fees-lookup-api';
 
 jest.mock('axios');
 
@@ -26,13 +26,13 @@ describe('getC100ApplicationFee', () => {
     };
 
     try {
-      await getC100ApplicationFee(userDetails, mockLogger);
+      await getApplicationFee(userDetails, 'PO', mockLogger);
     } catch (err) {
       //eslint-disable-next-line jest/no-conditional-expect
-      expect(err.message).toBe('Error occured, C100 application fee could not be fetched. - getC100ApplicationFee');
+      expect(err.message).toBe('Error occured, fee could not be fetched. - getApplicationFee');
       //eslint-disable-next-line jest/no-conditional-expect
-      await expect(getC100ApplicationFee(userDetails, mockLogger)).rejects.toThrow(
-        'Error occured, C100 application fee could not be fetched. - getC100ApplicationFee'
+      await expect(getApplicationFee(userDetails, 'PO', mockLogger)).rejects.toThrow(
+        'Error occured, fee could not be fetched. - getApplicationFee'
       );
       //eslint-disable-next-line jest/no-conditional-expect
       expect(mockLogger.error).toHaveBeenCalled();

@@ -1,4 +1,4 @@
-import { CaseWithId } from 'app/case/case';
+import { CaseWithId } from '../../../app/case/case';
 import { TYPE_OF_APPLICATION, YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFieldsFn } from '../../../app/form/Form';
@@ -22,7 +22,13 @@ export const form: FormContent = {
       validator: isFieldFilledIn,
     };
 
-    if ([TYPE_OF_APPLICATION.PARENTAL_ORDER, TYPE_OF_APPLICATION.DECLARATION_OF_PARENTAGE, TYPE_OF_APPLICATION.SPECIAL_GUARDIANSHIP_ORDER].includes(caseData.edgeCaseTypeOfApplication!)) {
+    if (
+      [
+        TYPE_OF_APPLICATION.PARENTAL_ORDER,
+        TYPE_OF_APPLICATION.DECLARATION_OF_PARENTAGE,
+        TYPE_OF_APPLICATION.SPECIAL_GUARDIANSHIP_ORDER,
+      ].includes(caseData.edgeCaseTypeOfApplication!)
+    ) {
       fieldConfig.values.splice(1, 1);
     }
 

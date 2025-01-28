@@ -5,9 +5,10 @@ import { Application, RequestHandler } from 'express';
 import { GetController } from './app/controller/GetController';
 import { PostController } from './app/controller/PostController';
 import { KeepAliveController } from './app/keepalive/KeepAliveController';
-import { stepsWithContent, StepWithContent } from './steps';
+import { StepWithContent, stepsWithContent } from './steps';
 import { AccessibilityStatementGetController } from './steps/accessibility-statement/get';
 import { ContactUsGetController } from './steps/contact-us/get';
+import { PaymentHandler, PaymentValidationHandler } from './steps/edge-case/payments/paymentController';
 import { ErrorController } from './steps/error/error.controller';
 import { HomeGetController } from './steps/home/get';
 import { PrivacyPolicyGetController } from './steps/privacy-policy/get';
@@ -28,9 +29,7 @@ import {
   //SELECT_COURT,
   TERMS_AND_CONDITIONS,
   TIMED_OUT_URL,
-  
 } from './steps/urls';
-import { PaymentHandler, PaymentValidationHandler } from './steps/edge-case/payments/paymentController';
 
 export class Routes {
   /**
@@ -49,7 +48,7 @@ export class Routes {
     app.get(TERMS_AND_CONDITIONS, errorHandler(new TermsAndConditionsGetController().get));
     app.get(ACCESSIBILITY_STATEMENT, errorHandler(new AccessibilityStatementGetController().get));
     app.get(CONTACT_US, errorHandler(new ContactUsGetController().get));
-    app.get(SESSION, (req, res)=>{
+    app.get(SESSION, (req, res) => {
       res.json(req.session);
     });
 
@@ -61,25 +60,25 @@ export class Routes {
         ? require(`${step.stepDir}/${getControllerFileName}`).default
         : GetController;
 
-        if (step && getController) {
-          app.get(
-            step.url,
-            this.routeGuard.bind(this, step, 'get'),
-            errorHandler(new getController(step.view, step.generateContent).get)
-          );
-        }
+      if (step && getController) {
+        app.get(
+          step.url,
+          this.routeGuard.bind(this, step, 'get'),
+          errorHandler(new getController(step.view, step.generateContent).get)
+        );
+      }
 
       if (step.form) {
         const postControllerFileName = files.find(item => /post/i.test(item) && !/test/i.test(item));
         const postController = postControllerFileName
           ? require(`${step.stepDir}/${postControllerFileName}`).default
           : PostController;
-          app.post(
-            step.url,
-            // eslint-disable-next-line prettier/prettier
+        app.post(
+          step.url,
+          // eslint-disable-next-line prettier/prettier
             this.routeGuard.bind(this, step, 'post'),
-            errorHandler(new postController(step.form.fields).post)
-          );
+          errorHandler(new postController(step.form.fields).post)
+        );
       }
     }
 
@@ -88,8 +87,8 @@ export class Routes {
     /**
      * @Payment_Handler
      */
-        app.get(PAYMENT_GATEWAY_ENTRY_URL, errorHandler(PaymentHandler));
-        app.get(PAYMENT_RETURN_URL_CALLBACK, errorHandler(PaymentValidationHandler));
+    app.get(PAYMENT_GATEWAY_ENTRY_URL, errorHandler(PaymentHandler));
+    app.get(PAYMENT_RETURN_URL_CALLBACK, errorHandler(PaymentValidationHandler));
     /**
      * @POST_ROUTES
      */

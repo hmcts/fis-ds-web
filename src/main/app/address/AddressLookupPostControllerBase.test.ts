@@ -22,7 +22,7 @@ import { mockRequest } from '../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../test/unit/utils/mockResponse';
 import { FieldPrefix } from '../case/case';
 
-import AddressLookupPostControllerBase from './AddressLookupPostControllerBase';
+import { AddressLookupPostControllerBase } from './AddressLookupPostControllerBase';
 
 describe('AddressLookupPostControllerBase', () => {
   let req;

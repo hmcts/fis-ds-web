@@ -1,7 +1,7 @@
 import { NextFunction, Response } from 'express';
 
-import { AppRequest } from '../../../app/controller/AppRequest';
 import { TYPE_OF_APPLICATION } from '../../../app/case/definition';
+import { AppRequest } from '../../../app/controller/AppRequest';
 import { GENERIC_ERROR_PAGE } from '../../../steps/urls';
 
 export const routeGuard = {
