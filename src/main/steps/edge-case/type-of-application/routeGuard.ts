@@ -7,8 +7,18 @@ export const routeGuard = {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   post: async (req: AppRequest, res: Response, next: NextFunction) => {
     if (req.body?.edgeCaseTypeOfApplication !== req.session?.userCase?.edgeCaseTypeOfApplication) {
-      req.session.userCase = {
+      const caseData = {
         edgeCaseTypeOfApplication: req.body.edgeCaseTypeOfApplication,
+      };
+
+      if (req.session.userCase?.id) {
+        Object.assign(caseData, {
+          id: req.session.userCase.id,
+        });
+      }
+
+      req.session.userCase = {
+        ...caseData,
       } as CaseWithId;
 
       return req.session.save(next);

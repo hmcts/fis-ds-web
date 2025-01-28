@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
@@ -23,7 +24,7 @@ const en = (content: any) => {
     sections: [
       TypeOfApplication(enContent, userCase),
       UserRole(enContent, userCase),
-      ApplicantSummaryList(enContent, userCase),
+      ApplicantSummaryList(enContent, _.get(content, 'additionalData.req.session')),
       UploadFormSummary(enContent, caseDocuments!),
       AdditonalFormSummary(enContent, additionalDocuments!),
     ],
@@ -45,7 +46,7 @@ const cy: typeof en = (content: CommonContent) => {
     sections: [
       TypeOfApplication(cyContent, userCase),
       UserRole(cyContent, userCase),
-      ApplicantSummaryList(cyContent, userCase),
+      ApplicantSummaryList(cyContent, _.get(content, 'additionalData.req.session')),
       UploadFormSummary(cyContent, caseDocuments!),
       AdditonalFormSummary(cyContent, additionalDocuments!),
     ],

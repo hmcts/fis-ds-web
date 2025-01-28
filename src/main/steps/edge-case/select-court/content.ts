@@ -9,24 +9,22 @@ export * from './routeGuard';
 export const form: FormContent = {
   fields: (userCase: Partial<CaseWithId>, req: AppRequest): FormFields => {
     return {
-      selectedCourt: {
+      selectedCourtId: {
         type: 'select',
         label: l => l.label,
         labelSize: null,
         validator: isValidOption,
         options: () => {
-          const courts: { text: string; value: string; selected: boolean }[] = [...userCase.availableCourts!].map(
-            court => ({
-              value: court.id,
-              text: court.name,
-              selected: userCase?.selectedCourt?.value === court.id,
-            })
-          );
+          const courts = [...req.session.applicationSettings.availableCourts].map(court => ({
+            value: court.id,
+            text: court.name,
+            selected: userCase?.selectedCourtId === court.id,
+          }));
 
           courts?.unshift({
             text: '-- Select a value --',
             value: '',
-            selected: false,
+            selected: !userCase?.selectedCourtId,
           });
 
           return courts as [];

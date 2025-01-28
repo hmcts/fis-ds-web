@@ -1,3 +1,4 @@
+import { AppSession } from 'app/controller/AppRequest';
 import { getFormattedDate } from '../../../app/case/answers/formatDate';
 import { CaseWithId } from '../../../app/case/case';
 import { YesOrNo } from '../../../app/case/definition';
@@ -75,17 +76,18 @@ const getSectionSummaryList = (rows: SummaryListRow[], content: PageContent): Go
 /* eslint-disable import/namespace */
 export const ApplicantSummaryList = (
   { sectionTitles, keys, ...content }: SummaryListContent,
-  userCase: Partial<CaseWithId>
+  session: AppSession
 ): SummaryList | undefined => {
-  console.log('usercase in check your answer -->', userCase);
+  const caseData = session.userCase;
+  console.log('usercase in check your answer -->', caseData);
   const sectionTitle = sectionTitles.applicantDetails;
-  console.log('Address in util userCase --->', userCase);
+  console.log('Address in util userCase --->', caseData);
 
   const UserContactPreferences = function () {
     let perference = '';
-    if (userCase['contactPreferenceType'] === 'NAMED_PERSON') {
+    if (caseData['contactPreferenceType'] === 'NAMED_PERSON') {
       perference = 'The person named on this application';
-    } else if (userCase['contactPreferenceType'] === 'ACCOUNT_OWNER') {
+    } else if (caseData['contactPreferenceType'] === 'ACCOUNT_OWNER') {
       perference = 'The account owner';
     } else {
       perference = '';
@@ -93,20 +95,24 @@ export const ApplicantSummaryList = (
     return perference;
   };
 
+  const courtDetails = caseData.selectedCourtId
+    ? session.applicationSettings?.availableCourts?.find(court => court.id === caseData.selectedCourtId)
+    : null;
+
   const SummaryData = [
     {
       key: keys.fullName,
-      value: userCase['applicantFirstName'] + ' ' + userCase['applicantLastName'],
+      value: caseData['applicantFirstName'] + ' ' + caseData['applicantLastName'],
       changeUrl: Urls['FULL_NAME'],
     },
     {
       key: keys.dateOfBirth,
-      value: getFormattedDate(userCase['applicantDateOfBirth'], content.language),
+      value: getFormattedDate(caseData['applicantDateOfBirth'], content.language),
       changeUrl: Urls['DATE_OF_BIRTH'],
     },
     {
       key: keys.address,
-      valueHtml: getFormattedAddress(userCase),
+      valueHtml: getFormattedAddress(caseData),
       changeUrl: Urls['MANUAL_ADDRESS'],
     },
     {
@@ -116,21 +122,28 @@ export const ApplicantSummaryList = (
     },
     {
       key: keys.namedPersonEmail,
-      value: userCase['applicantEmailAddress'],
+      value: caseData['applicantEmailAddress'],
       changeUrl: Urls['EMAIL_ADDRESS'],
     },
     {
       key: keys.namedPersonTel,
-      value: userCase['applicantHomeNumber'],
+      value: caseData['applicantHomeNumber'],
       changeUrl: Urls['CONTACT_DETAILS'],
     },
     {
       key: keys.namedPersonMob,
-      value: userCase['applicantPhoneNumber'],
+      value: caseData['applicantPhoneNumber'],
       changeUrl: Urls['CONTACT_DETAILS'],
     },
   ];
 
+  if (courtDetails) {
+    SummaryData.push({
+      key: keys.selectedCourt,
+      value: courtDetails.name,
+      changeUrl: Urls['SELECT_COURT'],
+    });
+  }
   /** Removes entry in @summarydata if user is not a named user */
 
   return {
