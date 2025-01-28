@@ -106,6 +106,7 @@ export class GetController {
       addtionalDocuments: req.session.userCase.applicantAdditionalDocuments,
       cookiePrefrences: cookiesForPrefrences,
       sessionErrors,
+      paymentError: req.session.paymentError,
       cookieMessage: false,
       htmlLang: language,
       isDraft: req.session?.userCase?.state ? req.session.userCase.state === '' : true,

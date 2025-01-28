@@ -1,13 +1,14 @@
 import config from 'config';
 import { Response } from 'express';
 
+import { CASE_EVENT, PaymentErrorContext, TYPE_OF_APPLICATION } from '../../../app/case/definition';
+import { AppRequest } from '../../../app/controller/AppRequest';
+import { applyParms } from '../../../steps/common/url-parser';
+import { APPLICATION_SUBMITTED, CREATE_PAYMENT, GET_PAYMENT_STATUS, PAY_YOUR_FEE } from '../../../steps/urls';
+import { getEnumKeyByValue } from '../util';
+
 import { CheckPaymentStatusApi, PaymentTaskResolver } from './paymentApi';
 import { PaymentHelper } from './paymentHelper';
-import { APPLICATION_SUBMITTED, PAY_YOUR_FEE } from '../../../steps/urls';
-import { AppRequest } from '../../../app/controller/AppRequest';
-import { CASE_EVENT, PaymentErrorContext, TYPE_OF_APPLICATION } from '../../../app/case/definition';
-import { Case } from '../../../app/case/case';
-import { getEnumKeyByValue } from '../util';
 const SUCCESS = 'Success';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -16,8 +17,7 @@ export const PaymentHandler = async (req: AppRequest, res: Response) => {
     const paymentHelperTranspiler = await new PaymentHelper().SystemCredentailsToApiData(req);
     const { Authorization, ServiceAuthorization, returnUrL, id, hwfRefNumber } = paymentHelperTranspiler;
     const paymentApiEndpoint = config.get('services.cos.url');
-    const createPaymentEndpoint = '/fees-and-payment-apis/create-payment';
-    const baseURL = paymentApiEndpoint + createPaymentEndpoint;
+    const baseURL = paymentApiEndpoint + CREATE_PAYMENT;
 
     const paymentCreator = new PaymentTaskResolver(
       baseURL,
@@ -26,7 +26,7 @@ export const PaymentHandler = async (req: AppRequest, res: Response) => {
       id,
       returnUrL,
       hwfRefNumber as string,
-      getEnumKeyByValue(TYPE_OF_APPLICATION, req.session.userCase.edgeCaseTypeOfApplication),
+      getEnumKeyByValue(TYPE_OF_APPLICATION, req.session.userCase.edgeCaseTypeOfApplication)
     );
     const response = await paymentCreator.getPaymentCredentails();
 
@@ -38,26 +38,17 @@ export const PaymentHandler = async (req: AppRequest, res: Response) => {
       submitCase(
         req,
         res,
-        req.session.userCase.id!,
-        req.session.userCase,
-        req.originalUrl,
+
         CASE_EVENT.CASE_SUBMIT_WITH_HWF
       );
     } else if (response?.serviceRequestReference && response?.payment_reference && response?.status === SUCCESS) {
       //previous payment is success, retry submit case with 'citizen-case-submit' & reidrect confirmation page
-      submitCase(
-        req,
-        res,
-        req.session.userCase.id!,
-        req.session.userCase,
-        req.originalUrl,
-        CASE_EVENT.CASE_SUBMIT
-      );
+      submitCase(req, res, CASE_EVENT.CASE_SUBMIT);
     } else if (response['next_url']) {
       //redirect to gov pay for making payment
       res.redirect(response['next_url']);
     } else {
-      //redirect to check your answers with error
+      //redirect to payment with error
       populateError(
         req,
         res,
@@ -83,9 +74,13 @@ export const PaymentValidationHandler = async (req: AppRequest, res: Response) =
   } else {
     try {
       const { id } = req.session.userCase;
+      const paymentReference = req.session.userCase?.paymentDetails?.payment_reference;
       const PaymentURL =
         config.get('services.cos.url') +
-        `/fees-and-payment-apis/retrievePaymentStatus/${req.session.userCase?.paymentDetails?.['payment_reference']}/${id}`;
+        applyParms(GET_PAYMENT_STATUS, {
+          paymentReference: paymentReference!,
+          caseId: id,
+        });
       const paymentHelperTranspiler = await new PaymentHelper().SystemCredentailsToApiData(req);
       const { Authorization, ServiceAuthorization } = paymentHelperTranspiler;
       const checkPayment = await new CheckPaymentStatusApi(PaymentURL, Authorization, ServiceAuthorization)
@@ -95,14 +90,7 @@ export const PaymentValidationHandler = async (req: AppRequest, res: Response) =
       if (paymentStatus && paymentStatus === SUCCESS) {
         req.session.userCase.paymentSuccessDetails = checkPayment['data'];
         //Invoke update case with 'citizen-case-submit' event & reidrect confirmation page
-        submitCase(
-          req,
-          res,
-          req.session.userCase.id!,
-          req.session.userCase,
-          req.originalUrl,
-          CASE_EVENT.CASE_SUBMIT
-        );
+        submitCase(req, res, CASE_EVENT.CASE_SUBMIT);
       } else {
         populateError(req, res, 'Error in retreive payment status', PaymentErrorContext.PAYMENT_UNSUCCESSFUL);
       }
@@ -113,19 +101,10 @@ export const PaymentValidationHandler = async (req: AppRequest, res: Response) =
   }
 };
 
-export async function submitCase(
-  req: AppRequest,
-  res: Response,
-  caseId: string,
-  caseData: Partial<Case>,
-  returnUrl: string,
-  caseEvent: CASE_EVENT
-): Promise<void> {
+export async function submitCase(req: AppRequest, res: Response, caseEvent: CASE_EVENT): Promise<void> {
   try {
     req.session.paymentError = { hasError: false, errorContext: null };
-    const updatedCase = await req.locals.api.updateCase(req.session.userCase, caseEvent);
-    //update final document in session for download on confirmation
-    console.log('updated case {}', updatedCase);
+    await req.locals.api.updateCase(req.session.userCase, caseEvent);
     //save & redirect to confirmation page
     req.session.save(() => {
       res.redirect(APPLICATION_SUBMITTED);

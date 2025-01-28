@@ -1,14 +1,35 @@
 {% extends "common/template.njk" %}
+{% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
 {% block page_content %}
-<h1 class="govuk-heading-xl govuk-!-margin-bottom-7">{{title}}</h1>
-<p class="govuk-body">{{ paragraph1 }} {{ userCase.applicationFee }} {{paragraph2}}</p>
-<p class="govuk-body">{{ line2 }}</p>
-<a href= "/payments/gateway" class="govuk-button">{{payAndSubmitButton}}</a>
-<br/>
-<p class="govuk-body">{{ paragraph3 }} {{ userCase.applicationFee }} {{paragraph4}}</p>
-<ul class="govuk-list govuk-list--bullet">
+  {% if paymentError.hasError === true %}
+    {{ govukErrorSummary({
+        titleText: errors.paymentError.title,
+        errorList: [
+        {
+            text: errors.paymentError[paymentError.errorContext],
+            href:"#payAndSubmit"
+        }
+        ]
+    }) }}
+  {% endif %}
+
+  <h1 class="govuk-heading-xl govuk-!-margin-bottom-7">{{title}}</h1>
+  <p class="govuk-body">{{ paragraph1 }}{{ userCase.applicationFee }}{{paragraph2}}</p>
+  <p class="govuk-body">{{ line2 }}</p>
+  {{ govukButton({
+    text: payAndSubmitButton,
+    type: "submit",
+    href: paymentUrl,
+    name: "payAndSubmit",
+    id: "payAndSubmit"  
+  }) }}
+  <br/>
+  <p class="govuk-body">{{ paragraph3 }}{{ userCase.applicationFee }}{{paragraph4}}</p>
+  <ul class="govuk-list govuk-list--bullet">
     <li>{{reason1}}</li>
     <li>{{reason2}}</li>
     <li>{{reason3}}</li>
-</ul>
+  </ul>
 {% endblock %}

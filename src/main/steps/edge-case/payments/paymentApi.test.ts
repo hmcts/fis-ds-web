@@ -45,7 +45,8 @@ describe('PaymentTaskResolver class testing', () => {
       mockServiceToken,
       dummyCaseID,
       dummyreturnUrl,
-      hwfRefNumber
+      hwfRefNumber,
+      'PO'
     );
     const fetchData = await InstanceOfPaymentSystemAPIInstance.getPaymentCredentails();
     //due to credential failure it must fail;
