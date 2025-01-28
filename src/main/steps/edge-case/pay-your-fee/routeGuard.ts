@@ -10,20 +10,26 @@ export const routeGuard = {
     try {
       await retriveFeeAmount(req, next);
     } catch {
-      console.log("failed to fetch fee details");
+      console.log('failed to fetch fee details');
     }
   },
 };
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const retriveFeeAmount = async (req: AppRequest<Partial<Case>>, next: NextFunction) => {
   try {
-    const applicationFee = (await getApplicationFee(req.session.user,req.session.userCase?.edgeCaseTypeOfApplication, req.locals.logger)).feeAmount;
+    const applicationFee = (
+      await getApplicationFee(req.session.user, req.session.userCase?.edgeCaseTypeOfApplication, req.locals.logger)
+    )?.feeAmount;
+    
+    if (applicationFee) {
+      req.session.userCase = {
+        ...(req.session.userCase ?? {}),
+        applicationFee,
+      };
+      return req.session.save(next);
+    }
 
-    req.session.userCase = {
-      ...(req.session.userCase ?? {}),
-      applicationFee,
-    };
-    req.session.save(next);
+    next();
   } catch {
     req.session.save(next);
   }

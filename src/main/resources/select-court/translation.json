@@ -19,12 +19,12 @@
     },
     "errors":{
         "en": {
-            "selectedCourt": {
+            "selectedCourtId": {
                 "notSelected": "Please select court"
             }
         },
         "cy": {
-            "selectedCourt": {
+            "selectedCourtId": {
                 "notSelected": "Please select court (in welsh)"
             }
         } 
