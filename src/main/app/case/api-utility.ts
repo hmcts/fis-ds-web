@@ -54,8 +54,8 @@ export const prepareUpdateCaseRequestData = (userCase: CaseWithId): UpdateCaseRe
     applicantAddress2: userCase?.applicantAddress2,
     applicantAddressTown: userCase?.applicantAddressTown,
     applicantAddressCountry: 'United Kingdom',
+    selectedCourt: userCase.selectedCourtId ?? '',
     applicantAddressPostcode: userCase?.applicantAddressPostcode,
-    selectedCourt: userCase?.selectedCourt,
     applicantApplicationFormDocuments: userCase?.applicantApplicationFormDocuments ?? [],
     applicantAdditionalDocuments: userCase?.applicantAdditionalDocuments ?? [],
     applicantStatementOfTruth: userCase?.applicantStatementOfTruth,
@@ -120,7 +120,7 @@ export interface UpdateCaseRequest {
   applicantAddressTown: string;
   applicantAddressCountry: string;
   applicantAddressPostcode: string;
-  selectedCourt?: { value: string; text: string };
+  selectedCourt?: string;
   applicantApplicationFormDocuments: Document[] | [];
   applicantAdditionalDocuments: Document[] | [];
   paymentServiceRequestReferenceNumber?: string;

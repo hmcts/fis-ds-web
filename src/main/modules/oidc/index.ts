@@ -65,7 +65,7 @@ export class OidcMiddleware {
     if (!req.session?.applicationSettings) {
       req.session.applicationSettings = {};
     }
-    if (!req.session.hasOwnProperty('errors')) {
+    if (!req.session?.errors) {
       req.session.errors = [];
     }
     req.session.save(next);

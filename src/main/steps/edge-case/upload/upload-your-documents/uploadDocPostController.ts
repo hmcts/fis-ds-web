@@ -8,7 +8,7 @@ import { AppRequest } from '../../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../../app/controller/PostController';
 import { FormFields, FormFieldsFn } from '../../../../app/form/Form';
 import { parseUrl } from '../../../../steps/common/url-parser';
-import { ADDITIONAL_DOCUMENTS_UPLOAD, UPLOAD_YOUR_DOCUMENTS } from '../../../urls';
+import { ADDITIONAL_DOCUMENTS_UPLOAD, GENERIC_ERROR_PAGE, UPLOAD_YOUR_DOCUMENTS } from '../../../urls';
 import { handleDocumentUpload } from '../utils';
 
 @autobind
@@ -18,23 +18,27 @@ export default class UploadDocumentController extends PostController<AnyObject> 
   }
 
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
-    const { saveAndContinue } = req.body;
+    const { saveAndContinue, uploadFile } = req.body;
     req.session.errors = [];
+    
+    if (uploadFile) {
+      return handleDocumentUpload(req, res, UploadDocumentContext.UPLOAD_YOUR_DOCUMENTS);
+    }
 
     if (saveAndContinue) {
-      if (req.session.userCase.applicantApplicationFormDocuments.length === 0) {
+      if (!req.session.userCase?.applicantApplicationFormDocuments?.length) {
         req.session.errors.push({
           errorType: 'continueWithoutUploadError',
           propertyName: 'applicationUpload',
         });
 
-        this.redirect(req, res, parseUrl(UPLOAD_YOUR_DOCUMENTS).url);
-      } else {
-        Object.assign(req.session.userCase, await req.locals.api.updateCase(req.session.userCase, CITIZEN_UPDATE));
-        this.redirect(req, res, parseUrl(ADDITIONAL_DOCUMENTS_UPLOAD).url);
+        return this.redirect(req, res, parseUrl(UPLOAD_YOUR_DOCUMENTS).url);
       }
-    } else {
-      handleDocumentUpload(req, res, UploadDocumentContext.UPLOAD_YOUR_DOCUMENTS);
+
+      Object.assign(req.session.userCase, await req.locals.api.updateCase(req.session.userCase, CITIZEN_UPDATE));
+      return this.redirect(req, res, parseUrl(ADDITIONAL_DOCUMENTS_UPLOAD).url);
     }
+
+    res.redirect(GENERIC_ERROR_PAGE);
   }
 }

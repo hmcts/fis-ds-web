@@ -107,7 +107,7 @@ export interface Case {
   applicantAddressCountry: string;
   applicantAddressPostcode: string;
   availableCourts: { id: string; name: string }[];
-  selectedCourt: { value: string; text: string };
+  selectedCourtId: string;
   hwfPaymentSelection: YesOrNo;
   helpWithFeesReferenceNumber?: string;
   applicantStatementOfTruth: YesOrNo;
