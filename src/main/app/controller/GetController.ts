@@ -35,6 +35,11 @@ export class GetController {
     const addresses = req.session?.addresses;
 
     const sessionErrors = req.session?.errors || [];
+
+    if (req.session?.errors) {
+      req.session.errors = undefined;
+    }
+
     /**
      *
      *                      This util allows to delete document
