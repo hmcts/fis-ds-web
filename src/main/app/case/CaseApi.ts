@@ -7,7 +7,7 @@ import FormData from 'form-data';
 import { LoggerInstance } from 'winston';
 
 import { getServiceAuthToken } from '../auth/service/get-service-auth-token';
-import { AppRequest, UserDetails } from '../controller/AppRequest';
+import { UserDetails } from '../controller/AppRequest';
 
 import {
   CreateCaseResponse,
@@ -21,7 +21,7 @@ import {
 import { Case, CaseWithId } from './case';
 import { CaseAssignedUserRoles } from './case-roles';
 import { CITIZEN_SUBMIT, CaseData, CourtListOptions, DSS_CASE_EVENT, DocumentUploadResponse } from './definition';
-import { toApiDate, toApiFormat } from './to-api-format';
+import { toApiFormat } from './to-api-format';
 
 export class CaseApi {
   /**
@@ -253,29 +253,3 @@ export const enum State {
   CASE_WITHDRAWN = 'CASE_WITHDRAWN',
   CASE_DELETED = 'REQUESTED_FOR_DELETION',
 }
-
-export const mapCaseData = (req: AppRequest): any => {
-  const data = {
-    // applicants: req.session.userCase.applicants[0],
-
-    namedApplicant: req.session.userCase.namedApplicant,
-    caseTypeOfApplication: req.session['edgecaseType'],
-    applicantFirstName: req.session.userCase.applicantFirstName,
-    applicantLastName: req.session.userCase.applicantLastName,
-    applicantDateOfBirth: toApiDate(req.session.userCase.applicantDateOfBirth),
-    applicantContactPreference: req.session.userCase['contactPreferenceType'],
-    applicantEmailAddress: req.session.userCase.applicantEmailAddress,
-    applicantPhoneNumber: req.session.userCase.applicantPhoneNumber,
-    applicantHomeNumber: req.session.userCase.applicantHomeNumber,
-    applicantAddress1: req.session.userCase.applicantAddress1,
-    applicantAddress2: req.session.userCase.applicantAddress2,
-    applicantAddressTown: req.session.userCase.applicantAddressTown,
-    applicantAddressCountry: 'United Kingdom',
-    applicantAddressPostCode: req.session.userCase.applicantAddressPostcode,
-    applicantStatementOfTruth: req.session.userCase.applicantStatementOfTruth,
-    selectedCourt: req.session.userCase.selectedCourt,
-    paymentServiceRequestReferenceNumber: req.session.userCase.paymentDetails?.serviceRequestReference,
-    paymentReferenceNumber: req.session.userCase.paymentDetails?.payment_reference,
-  };
-  return data;
-};

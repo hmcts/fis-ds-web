@@ -6,7 +6,7 @@ import { CITIZEN_UPDATE, UploadDocumentContext } from '../../../../app/case/defi
 import { AppRequest } from '../../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../../app/controller/PostController';
 import { FormFields, FormFieldsFn } from '../../../../app/form/Form';
-import { CHECK_YOUR_ANSWERS } from '../../../urls';
+import { CHECK_YOUR_ANSWERS, GENERIC_ERROR_PAGE } from '../../../urls';
 import { handleDocumentUpload } from '../utils';
 
 @autobind
@@ -16,14 +16,18 @@ export default class UploadAdditionalDocumentPostController extends PostControll
   }
 
   public async post(req: AppRequest<AnyObject>, res: Response): Promise<void> {
-    const { saveAndContinue } = req.body;
+    const { saveAndContinue, uploadFile } = req.body;
     req.session.errors = [];
+
+    if (uploadFile) {
+      return handleDocumentUpload(req, res, UploadDocumentContext.UPLOAD_ADDITIONAL_DOCUMENTS);
+    }
 
     if (saveAndContinue) {
       Object.assign(req.session.userCase, await req.locals.api.updateCase(req.session.userCase, CITIZEN_UPDATE));
-      this.redirect(req, res, CHECK_YOUR_ANSWERS);
-    } else {
-      handleDocumentUpload(req, res, UploadDocumentContext.UPLOAD_ADDITIONAL_DOCUMENTS);
+      return this.redirect(req, res, CHECK_YOUR_ANSWERS);
     }
+
+    res.redirect(GENERIC_ERROR_PAGE);
   }
 }

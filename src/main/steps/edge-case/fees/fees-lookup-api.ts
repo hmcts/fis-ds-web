@@ -11,7 +11,7 @@ export const getApplicationFee = async (
   userDetails: UserDetails,
   applicationType: string | undefined,
   logger: LoggerInstance
-): Promise<FeesResponse> => {
+): Promise<FeesResponse | void> => {
   try {
     const app_type = getEnumKeyByValue(TYPE_OF_APPLICATION, applicationType);
     console.log(app_type);
@@ -23,10 +23,13 @@ export const getApplicationFee = async (
         'Content-Type': 'application/json',
       },
     });
-    return response.data;
+
+    if (response.status === 200 || !response.data?.errorRetrievingResponse) {
+      return response.data;
+    }
   } catch (err) {
     logger.error(err.message);
-    throw new Error('Error occured, C100 application fee could not be fetched. - getApplicationFee');
+    throw new Error('Error occured, fee could not be fetched. - getApplicationFee');
   }
 };
 
