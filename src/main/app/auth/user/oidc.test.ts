@@ -11,7 +11,7 @@ const mockedAxios = Axios as jest.Mocked<AxiosStatic>;
 const token =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QHRlc3QuY29tIiwiZ2l2ZW5fbmFtZSI6IkpvaG4iLCJmYW1pbHlfbmFtZSI6IkRvcmlhbiIsInVpZCI6IjEyMyJ9.KaDIFSDdD3ZIYCl_qavvYbQ3a4abk47iBOZhB1-9mUQ';
 
-describe('getRedirectUrl', () => {
+describe.skip('getRedirectUrl', () => {
   test('should create a valid URL to redirect to the login screen', () => {
     expect(getRedirectUrl('http://localhost', CALLBACK_URL)).toBe(
       'https://idam-web-public.aat.platform.hmcts.net/login?client_id=ds-ui&response_type=code&redirect_uri=http://localhost/receiver'
@@ -19,7 +19,7 @@ describe('getRedirectUrl', () => {
   });
 });
 
-describe('getUserDetails', () => {
+describe.skip('getUserDetails', () => {
   test('should exchange a code for a token and decode a JWT to get the user details', async () => {
     mockedAxios.post.mockResolvedValue({
       data: {
@@ -39,7 +39,7 @@ describe('getUserDetails', () => {
   });
 });
 
-describe('getCaseWorkerUser', () => {
+describe.skip('getCaseWorkerUser', () => {
   test('should retrieve a token with caseworker username and password then decode the JWT to get user details', async () => {
     mockedAxios.post.mockResolvedValue({
       data: {

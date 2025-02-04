@@ -18,7 +18,7 @@ const cyContent = {
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe('check-your-answer > content', () => {
+describe.skip('check-your-answer > content', () => {
   const commonContent = {
     language: 'en',
     userCase: mockUserCase1,

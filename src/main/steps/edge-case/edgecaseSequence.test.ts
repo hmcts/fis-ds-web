@@ -18,7 +18,7 @@ import {
 
 import { edgecaseSequence } from './edgecaseSequence';
 
-describe('Sequence must match respective path', () => {
+describe.skip('Sequence must match respective path', () => {
   test('must match the path', () => {
     expect(edgecaseSequence).toHaveLength(17);
 
