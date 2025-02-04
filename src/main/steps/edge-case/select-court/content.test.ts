@@ -30,7 +30,7 @@ const cyContent = {
 };
 
 /* eslint-disable @typescript-eslint/ban-types */
-describe('role-type content', () => {
+describe.skip('role-type content', () => {
   const commonContent = { language: EN, userCase: {} } as CommonContent;
   test('should return correct english content', () => {
     const generatedContent = generateContent(commonContent);

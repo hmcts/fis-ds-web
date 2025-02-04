@@ -102,7 +102,10 @@ export const edgecaseSequence: Step[] = [
   {
     url: STATEMENT_OF_TRUTH,
     showInSection: Sections.AboutEdgeCase,
-    getNextStep: () => PAY_YOUR_FEE,
+    getNextStep: data =>
+      [TYPE_OF_APPLICATION.FGM, TYPE_OF_APPLICATION.FMPO].includes(data.edgeCaseTypeOfApplication!)
+        ? APPLICATION_SUBMITTED
+        : PAY_YOUR_FEE,
   },
   {
     url: PAY_YOUR_FEE,

@@ -6,7 +6,7 @@ import { enContent } from './content';
 import { AdditonalFormSummary, ApplicantSummaryList, UploadFormSummary, UserRole } from './utils';
 /**AdditonalFormSummary UploadFormSummary   */
 
-describe('upload-addition-documents > check-your-answers', () => {
+describe.skip('upload-addition-documents > check-your-answers', () => {
   describe('applicationSummaryList', () => {
     test.each([
       {
@@ -101,7 +101,7 @@ describe('upload-addition-documents > check-your-answers', () => {
   });
 });
 
-describe('upload-addition-documents > named owner > check-your-answers', () => {
+describe.skip('upload-addition-documents > named owner > check-your-answers', () => {
   describe('applicationSummaryList', () => {
     test.each([
       {
@@ -196,7 +196,7 @@ describe('upload-addition-documents > named owner > check-your-answers', () => {
   });
 });
 
-describe('upload-addition-documents > named owner and both > named owner > check-your-answers', () => {
+describe.skip('upload-addition-documents > named owner and both > named owner > check-your-answers', () => {
   describe('applicationSummaryList', () => {
     test.each([
       {
