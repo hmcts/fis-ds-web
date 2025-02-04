@@ -2690,7 +2690,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/express-serve-static-core@npm:*, @types/express-serve-static-core@npm:^4.17.33":
+"@types/express-serve-static-core@npm:*":
   version: 4.19.5
   resolution: "@types/express-serve-static-core@npm:4.19.5"
   dependencies:
@@ -2702,21 +2702,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/express-session@npm:*":
+"@types/express-serve-static-core@npm:^4.17.33":
+  version: 4.19.6
+  resolution: "@types/express-serve-static-core@npm:4.19.6"
+  dependencies:
+    "@types/node": "*"
+    "@types/qs": "*"
+    "@types/range-parser": "*"
+    "@types/send": "*"
+  checksum: b0576eddc2d25ccdf10e68ba09598b87a4d7b2ad04a81dc847cb39fe56beb0b6a5cc017b1e00aa0060cb3b38e700384ce96d291a116a0f1e54895564a104aae9
+  languageName: node
+  linkType: hard
+
+"@types/express-session@npm:*, @types/express-session@npm:^1.18.1":
   version: 1.18.1
   resolution: "@types/express-session@npm:1.18.1"
   dependencies:
     "@types/express": "*"
   checksum: 380ddcbbc6a64686deafd4e2831c636d11a3252f051ebb4c49649abfab5ddf69c2b31e4ff97a2961cb02ef8c616feaa7ecaa4ad7b7f028c25d88fbfa437fb455
-  languageName: node
-  linkType: hard
-
-"@types/express-session@npm:^1.17.4":
-  version: 1.18.0
-  resolution: "@types/express-session@npm:1.18.0"
-  dependencies:
-    "@types/express": "*"
-  checksum: f624bc956d223eda618dc3ee5908cfc91d5cf67252aa83e667c1260b96c2d2ac302407d57d2a57b29728a21bf521f09c6409da5e727509c01a2b50d7a012f0a1
   languageName: node
   linkType: hard
 
@@ -5776,7 +5779,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cross-spawn@npm:7.0.3, cross-spawn@npm:^7.0.0, cross-spawn@npm:^7.0.2, cross-spawn@npm:^7.0.3":
+"cross-spawn@npm:7.0.3":
   version: 7.0.3
   resolution: "cross-spawn@npm:7.0.3"
   dependencies:
@@ -5798,15 +5801,26 @@ __metadata:
   linkType: hard
 
 "cross-spawn@npm:^6.0.5":
-  version: 6.0.5
-  resolution: "cross-spawn@npm:6.0.5"
+  version: 6.0.6
+  resolution: "cross-spawn@npm:6.0.6"
   dependencies:
     nice-try: ^1.0.4
     path-key: ^2.0.1
     semver: ^5.5.0
     shebang-command: ^1.2.0
     which: ^1.2.9
-  checksum: f893bb0d96cd3d5751d04e67145bdddf25f99449531a72e82dcbbd42796bbc8268c1076c6b3ea51d4d455839902804b94bc45dfb37ecbb32ea8e54a6741c3ab9
+  checksum: a6e2e5b04a0e0f806c1df45f92cd079b65f95fbe5a7650ee1ab60318c33a6c156a8a2f8b6898f57764f7363ec599a0625e9855dfa78d52d2d73dbd32eb11c25e
+  languageName: node
+  linkType: hard
+
+"cross-spawn@npm:^7.0.0, cross-spawn@npm:^7.0.2, cross-spawn@npm:^7.0.3":
+  version: 7.0.6
+  resolution: "cross-spawn@npm:7.0.6"
+  dependencies:
+    path-key: ^3.1.0
+    shebang-command: ^2.0.0
+    which: ^2.0.1
+  checksum: 8d306efacaf6f3f60e0224c287664093fa9185680b2d195852ba9a863f85d02dcc737094c6e512175f8ee0161f9b87c73c6826034c2422e39de7d6569cf4503b
   languageName: node
   linkType: hard
 
@@ -6519,8 +6533,8 @@ __metadata:
     "@types/connect-redis": ^0.0.18
     "@types/cookie-parser": ^1.4.2
     "@types/csurf": ^1.11.2
-    "@types/express": ^4.17.13
-    "@types/express-session": ^1.17.4
+    "@types/express": ^4.17.21
+    "@types/express-session": ^1.18.1
     "@types/jest": ^27.5.0
     "@types/lodash": ^4.14.178
     "@types/mocha": ^10.0.7
