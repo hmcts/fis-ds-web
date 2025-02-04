@@ -3,16 +3,24 @@
 {% from "govuk/components/file-upload/macro.njk" import govukFileUpload %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
 {% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+{% from "govuk/components/warning-text/macro.njk" import govukWarningText %}
 {% from "common/fileupload/macro.njk" import fileUpload with context %}
 
 {% extends "common/page.njk" %}
 
 {% block page_content %}
   <h1 class="govuk-heading-l">{{ title }}</h1>
+
+  {% if edgeCaseTypeOfApplication == "FGM" or edgeCaseTypeOfApplication == "FMPO" %}
+    {{ govukWarningText({
+  text: submitAdditionalForm,
+  iconFallbackText: "Warning"
+}) }}
+  {% endif %}
   <p class="govuk-body">{{ youNeed }}</p>
   <p class="govuk-body">{{ youNeed2 }}</p>
   <p class="govuk-body">{{ youNeed3 }}</p>
-  <p class="govuk-body">{{ youNeed4 }}</p>
+  <p class="govuk-body">{{ downloadC8Form | safe }}</p>
 
   <p class="govuk-body">{{ uploadDescription }}</p>
 

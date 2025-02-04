@@ -18,11 +18,7 @@ export const prepareCaseRequestData = (userCase: CaseWithId): CreateCaseRequest 
   return {
     edgeCaseTypeOfApplication: userCase.edgeCaseTypeOfApplication,
     applicantCaseName: `${userCase.applicantFirstName} ${userCase.applicantLastName}`,
-    caseTypeOfApplication: [TYPE_OF_APPLICATION.FGM, TYPE_OF_APPLICATION.FMPO].includes(
-      userCase.edgeCaseTypeOfApplication
-    )
-      ? CASE_TYPE_OF_APPLICATION.FL401
-      : CASE_TYPE_OF_APPLICATION.C100,
+    caseTypeOfApplication: getCaseType(userCase?.edgeCaseTypeOfApplication),
   };
 };
 
@@ -42,7 +38,7 @@ export const prepareUpdateCaseRequestData = (userCase: CaseWithId): UpdateCaseRe
   return {
     edgeCaseTypeOfApplication: userCase?.edgeCaseTypeOfApplication,
     namedApplicant: userCase?.namedApplicant,
-    caseTypeOfApplication: userCase?.caseTypeOfApplication,
+    caseTypeOfApplication: getCaseType(userCase?.edgeCaseTypeOfApplication),
     applicantFirstName: userCase?.applicantFirstName,
     applicantLastName: userCase?.applicantLastName,
     applicantDateOfBirth: toApiDate(userCase?.applicantDateOfBirth),
@@ -86,6 +82,12 @@ export const mapUpdateCaseResponseData = (response: CaseData): UpdateCaseRespons
       ...document.value,
     })),
   };
+};
+
+const getCaseType = (edgeCaseTypeOfApplication: TYPE_OF_APPLICATION): CASE_TYPE_OF_APPLICATION => {
+  return [TYPE_OF_APPLICATION.FGM, TYPE_OF_APPLICATION.FMPO].includes(edgeCaseTypeOfApplication)
+    ? CASE_TYPE_OF_APPLICATION.FL401
+    : CASE_TYPE_OF_APPLICATION.C100;
 };
 
 export type CreateCaseRequest = {

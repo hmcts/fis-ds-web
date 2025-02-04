@@ -14,7 +14,7 @@ export const form: FormContent = {
         label: l => l.label,
         labelSize: null,
         validator: isValidOption,
-        options: () => {
+        options: (l) => {
           const courts = [...req.session.applicationSettings.availableCourts].map(court => ({
             value: court.id,
             text: court.name,
@@ -22,7 +22,7 @@ export const form: FormContent = {
           }));
 
           courts?.unshift({
-            text: '-- Select a value --',
+            text: l.selectACourt,
             value: '',
             selected: !userCase?.selectedCourtId,
           });
@@ -41,12 +41,13 @@ export const generateContent: TranslationFn = content => {
   const resourceLoader = new ResourceReader();
   resourceLoader.Loader('select-court');
   const translations = resourceLoader.getFileContents();
+  const fields = (form.fields as FormFieldsFn)(content.userCase || {}, content.additionalData?.req);
 
   return {
     ...translations?.translations?.[content.language],
     errors: {
       ...translations?.errors?.[content.language],
     },
-    form: { ...form, fields: (form.fields as FormFieldsFn)(content.userCase || {}, content.additionalData?.req) },
+    form: { ...form, fields },
   };
 };
