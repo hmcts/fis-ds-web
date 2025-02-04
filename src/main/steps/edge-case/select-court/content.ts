@@ -14,7 +14,7 @@ export const form: FormContent = {
         label: l => l.label,
         labelSize: null,
         validator: isValidOption,
-        options: (l) => {
+        options: l => {
           const courts = [...req.session.applicationSettings.availableCourts].map(court => ({
             value: court.id,
             text: court.name,
