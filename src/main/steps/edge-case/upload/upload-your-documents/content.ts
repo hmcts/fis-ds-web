@@ -29,6 +29,7 @@ export const generateContent: TranslationFn = content => {
 
   return {
     ...translations,
+    edgeCaseTypeOfApplication: content.userCase?.edgeCaseTypeOfApplication,
     form,
     fileUploadConfig: {
       labelText: translations.uploadFileHeading,

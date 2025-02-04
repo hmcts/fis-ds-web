@@ -3,10 +3,11 @@
     "en": {
       "serviceName": "Application upload",
       "title": "Upload application form",
+      "submitAdditionalForm": "Submit additional form if you are not the applicant",
       "youNeed": "Please upload the application form that you have already completed.",
-      "youNeed2": "If you are not the person name on the application, you must need to complete an additional form to ask for permission to apply on behalf of someone else.",
+      "youNeed2": "If you are not the person name on the application, you need to complete an additional form to ask for permission to apply on behalf of someone else.",
       "youNeed3": "You may also need to upload a confidentiality form if you need the details of the person named on the application to be kept confidential.",
-      "youNeed4": "You can post or email your documents to the court. Copies of certificates must be certified, which means they must be signed and dated by a professional person such as a solicitor or doctor.",
+      "downloadC8Form": "If you have not already downloaded the C8 form, you can download it by clicking <a class='govuk-link' href='https://www.gov.uk/government/publications/form-c8-confidential-contact-details-family-procedure-rules-2010-rule-291' target='_blank'> here (opens in a new tab)</a>",
       "uploadDescription": "Please upload all required forms below.",
       "uploadRequirement": [
         "File formats: MS Word, MS Excel, PDF, JPG, GIF, PNG, TXT, RTF",
@@ -32,10 +33,11 @@
     "cy": {
       "serviceName": "Application upload - (Whelsh)",
       "title": "Upload application form - (Whelsh)",
+      "submitAdditionalForm": "Submit additional form if you are not the applicant- (Welsh)",
       "youNeed": "Please upload the application form that you have already completed. - (Whelsh)",
       "youNeed2": "If you are not the person name on the application, you must need to complete an additional form to ask for permission to apply on behalf of someone else. - (Whelsh)",
       "youNeed3": "You may also need to upload a confidentiality form if you need the details of the person named on the application to be kept confidential. - (Whelsh)",
-      "youNeed4": "You can post or email your documents to the court. Copies of certificates must be certified, which means they must be signed and dated by a professional person such as a solicitor or doctor. - (Whelsh)",
+      "downloadC8Form": "If you have not already downloaded the C8 form, you can download it by clicking <a class='govuk-link' href='https://www.gov.uk/government/publications/form-c8-confidential-contact-details-family-procedure-rules-2010-rule-291' target='_blank'> here (opens in a new tab)</a> - (Welsh)",
       "uploadDescription": "Please upload all required forms below. - (Whelsh)",
       "uploadRequirement": [
         "File formats: MS Word, MS Excel, PDF, JPG, GIF, PNG, TXT, RTF (welsh)",

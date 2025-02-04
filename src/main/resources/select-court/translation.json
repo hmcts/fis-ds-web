@@ -1,6 +1,7 @@
 {
     "translations": {
         "en": {
+            "selectACourt": "-- Select a value --",
             "continue": "Continue",
             "serviceName": "Capture court details for application",
             "title": "Capture court details for application",
@@ -9,6 +10,7 @@
             "selectCourtDropdownDefaultLabel": "-- Select a value --"
         },
         "cy": {
+            "selectACourt": "-- Select a value -- (in welsh)",
             "continue": "Continue (in welsh)",
             "serviceName": "Capture court details for application (in welsh)",
             "title": "Capture court details for application (in welsh)",
