@@ -128,5 +128,8 @@
     "webpack-cli": "^5.1.4",
     "webpack-dev-middleware": "^5.3.0"
   },
+  "resolutions": {
+    "@types/express": "^4.17.13"
+  },
   "packageManager": "yarn@3.8.1"
 }
