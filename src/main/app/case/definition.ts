@@ -82,7 +82,7 @@ export interface OrderSummary {
 
 export interface CaseNote {
   author: string;
-  date: DateAsString;
+  date: string;
   note: string;
 }
 
@@ -180,8 +180,6 @@ export interface CourtListOptions {
   site_name: string;
   court_name: string;
 }
-
-export type DateAsString = string;
 
 export const enum FieldType {
   Unspecified = 'Unspecified',

@@ -47,14 +47,12 @@ const getUploadedDocumentError = (
   if (_.isNull(files)) {
     errorType = 'noFileUploadError';
   } else if (
-    !(
-      uploadedDocumentCount <
-      Number(
-        config.get(
-          context === UploadDocumentContext.UPLOAD_ADDITIONAL_DOCUMENTS
-            ? 'documentUpload.validation.totalAdditionalDocuments'
-            : 'documentUpload.validation.totaldocuments'
-        )
+    uploadedDocumentCount >=
+    Number(
+      config.get(
+        context === UploadDocumentContext.UPLOAD_ADDITIONAL_DOCUMENTS
+          ? 'documentUpload.validation.totalAdditionalDocuments'
+          : 'documentUpload.validation.totaldocuments'
       )
     )
   ) {

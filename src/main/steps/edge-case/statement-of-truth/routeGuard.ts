@@ -16,7 +16,7 @@ export const routeGuard = {
         TYPE_OF_APPLICATION.DECLARATION_OF_PARENTAGE,
         TYPE_OF_APPLICATION.PARENTAL_ORDER,
         TYPE_OF_APPLICATION.SPECIAL_GUARDIANSHIP_ORDER,
-      ].includes(typeOfApplication!)
+      ].includes(typeOfApplication)
     ) {
       return next();
     }

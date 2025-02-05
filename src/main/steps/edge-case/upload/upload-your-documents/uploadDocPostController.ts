@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
-import _ from 'lodash';
 
 import { CITIZEN_UPDATE, UploadDocumentContext } from '../../../../app/case/definition';
 import { AppRequest } from '../../../../app/controller/AppRequest';
