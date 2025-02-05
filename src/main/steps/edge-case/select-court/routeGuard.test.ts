@@ -11,6 +11,7 @@ import { routeGuard } from './routeGuard';
 jest.mock('axios');
 
 const mockedAxios = axios as jest.Mocked<typeof axios>;
+mockedAxios.create = jest.fn(() => mockedAxios);
 
 describe('selectcourt Route Guard', () => {
   test('Should not render the page when the guard validation fails', async () => {
@@ -62,15 +63,15 @@ describe('selectcourt Route Guard', () => {
   //     //   },
   //     // });
 
-  //     const updateCaserMock = jest.spyOn(CaseApi.prototype, 'getCourtList');
-  //     updateCaserMock.mockResolvedValueOnce([{epmsId: "x",
+  //    // const updateCaserMock = jest.spyOn(CaseApi.prototype, 'getCourtList');
+  //     mockedAxios.get.mockResolvedValueOnce([{epmsId: "x",
   //         site_name: "y",
   //         court_name: "z"
   //       }])
   //     const next = jest.fn();
   //     await routeGuard.get(req, res, next);
   //     // expect(req.session.userCase.c100ApplicationFees).toBe('232');
-  //     expect(next).toHaveBeenCalled();
+  //     expect(next).not.toHaveBeenCalled();
   //   });
 
   test('Should render error page when the guard validation fails', async () => {

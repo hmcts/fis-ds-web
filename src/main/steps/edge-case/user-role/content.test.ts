@@ -67,7 +67,7 @@ describe('role-type content', () => {
 
   test('should contain continue button', () => {
     const generatedContent = generateContent(commonContent);
-    expect(generatedContent.continue).toEqual(enContent.continue);
+    expect(generatedContent.submit).toEqual(enContent.saveAndContinue);
   });
 });
 /* eslint-enable @typescript-eslint/ban-types */

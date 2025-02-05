@@ -64,7 +64,7 @@ describe('Applicant > full-name', () => {
   });
 
   test('should contain continue button', () => {
-    expect(generatedContent.continue).toEqual(enContent.continue);
+    expect(generatedContent.submit).toEqual(enContent.saveAndContinue);
   });
 });
 /* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
