@@ -18,12 +18,52 @@ const cyContent = {
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
-describe.skip('check-your-answer > content', () => {
+describe('check-your-answer > content', () => {
   const commonContent = {
     language: 'en',
-    userCase: mockUserCase1,
+    userCase: {
+      ...mockUserCase1,
+      applicantApplicationFormDocuments: [
+        {
+          document_url: 'string',
+          document_filename: 'string',
+          document_binary_url: 'string',
+        },
+      ],
+      applicantAdditionalDocuments: [
+        {
+          document_url: 'string',
+          document_filename: 'string',
+          document_binary_url: 'string',
+        },
+      ],
+    },
     uploadedDocuments: [],
     AddDocuments: [],
+    additionalData: {
+      req: {
+        session: {
+          userCase: {
+            ...mockUserCase1,
+            selectedCourtId: '',
+            applicantApplicationFormDocuments: [
+              {
+                document_url: 'string',
+                document_filename: 'string',
+                document_binary_url: 'string',
+              },
+            ],
+            applicantAdditionalDocuments: [
+              {
+                document_url: 'string',
+                document_filename: 'string',
+                document_binary_url: 'string',
+              },
+            ],
+          },
+        },
+      },
+    },
   } as unknown as CommonContent;
 
   // eslint-disable-next-line jest/expect-expect
@@ -33,10 +73,9 @@ describe.skip('check-your-answer > content', () => {
 
   // eslint-disable-next-line jest/expect-expect
   test('should return correct welsh content', () => {
-    languageAssertions('en', cyContent, () =>
+    languageAssertions('cy', cyContent, () =>
       generateContent({
         ...commonContent,
-        userCase: { ...mockUserCase1, applyingWith: '' },
         language: 'cy',
       })
     );

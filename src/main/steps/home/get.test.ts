@@ -1,10 +1,10 @@
 import { mockRequest } from '../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../test/unit/utils/mockResponse';
-import { USER_ROLE } from '../urls';
+import { TYPE_OF_APPLICATION_URL } from '../urls';
 
 import { HomeGetController } from './get';
 
-describe.skip('HomeGetController', () => {
+describe('HomeGetController', () => {
   const controller = new HomeGetController();
 
   test('redirects to the first question for new users', () => {
@@ -19,7 +19,7 @@ describe.skip('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toHaveBeenCalledWith(USER_ROLE);
+    expect(res.redirect).toHaveBeenCalledWith(TYPE_OF_APPLICATION_URL);
   });
 
   test('redirects to the check your answers page for existing users', () => {
@@ -33,7 +33,7 @@ describe.skip('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toHaveBeenCalledWith(USER_ROLE);
+    expect(res.redirect).toHaveBeenCalledWith(TYPE_OF_APPLICATION_URL);
   });
 
   test('redirects to application sent for review page for applicant 1 users in awaitingApplicant2 state', () => {
@@ -48,7 +48,7 @@ describe.skip('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toHaveBeenCalledWith(USER_ROLE);
+    expect(res.redirect).toHaveBeenCalledWith(TYPE_OF_APPLICATION_URL);
   });
 
   test('redirects to confirmation page for applicant 1 users in applicant2Approved state', () => {
@@ -63,7 +63,7 @@ describe.skip('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toHaveBeenCalledWith(USER_ROLE);
+    expect(res.redirect).toHaveBeenCalledWith(TYPE_OF_APPLICATION_URL);
   });
 
   test('redirects to application submitted page for applicant 1 users in submitted state', () => {
@@ -78,7 +78,7 @@ describe.skip('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toHaveBeenCalledWith(USER_ROLE);
+    expect(res.redirect).toHaveBeenCalledWith(TYPE_OF_APPLICATION_URL);
   });
 
   test('redirects to the check your answers page for applicant 1 users in awaitingApplicant1Response state', () => {
@@ -93,7 +93,7 @@ describe.skip('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toHaveBeenCalledWith(USER_ROLE);
+    expect(res.redirect).toHaveBeenCalledWith(TYPE_OF_APPLICATION_URL);
   });
 
   test('redirects to the pay your fee page for applicant 1 users for sole application in awaitingPayment state', () => {
@@ -108,7 +108,7 @@ describe.skip('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toHaveBeenCalledWith(USER_ROLE);
+    expect(res.redirect).toHaveBeenCalledWith(TYPE_OF_APPLICATION_URL);
   });
 
   test('redirects to the hub page for applicant 1 users in holding state', () => {
@@ -123,6 +123,6 @@ describe.skip('HomeGetController', () => {
     const res = mockResponse();
     controller.get(req, res);
 
-    expect(res.redirect).toHaveBeenCalledWith(USER_ROLE);
+    expect(res.redirect).toHaveBeenCalledWith(TYPE_OF_APPLICATION_URL);
   });
 });
