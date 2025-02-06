@@ -1,3 +1,4 @@
+import { TYPE_OF_APPLICATION } from '../../../app/case/definition';
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 import { CommonContent } from '../../common/common.content';
@@ -30,7 +31,8 @@ const cyContent = {
 
 /* eslint-disable @typescript-eslint/ban-types */
 describe('role-type content', () => {
-  const commonContent = { language: EN, userCase: {} } as CommonContent;
+  const commonContent = { language: EN, userCase: {edgeCaseTypeOfApplication:TYPE_OF_APPLICATION.PARENTAL_ORDER} } as CommonContent;
+  const commonContent1 = { language: EN, userCase: {} } as CommonContent;
   test('should return correct english content', () => {
     const generatedContent = generateContent(commonContent);
     expect(generatedContent.continue).toEqual(enContent.continue);
@@ -61,8 +63,17 @@ describe('role-type content', () => {
     expect(namedApplicantField.classes).toBe('govuk-radios');
     expect((namedApplicantField.label as Function)(generatedContent)).toBe(enContent.label);
     expect((namedApplicantField.values[0].label as Function)(generatedContent)).toBe(enContent.one);
-    expect((namedApplicantField.values[1].label as Function)(generatedContent)).toBe(enContent.two);
-    expect((namedApplicantField.values[2].label as Function)(generatedContent)).toBe(enContent.three);
+    expect((namedApplicantField.values[1].label as Function)(generatedContent)).toBe(enContent.three);
+    const generatedContent1 = generateContent(commonContent1);
+    const form1 = generatedContent1.form as FormContent;
+    const fields1 = form1.fields as FormFields;
+    const namedApplicantField1 = fields1.namedApplicant as FormOptions;
+    expect(namedApplicantField1.type).toBe('radios');
+    expect(namedApplicantField1.classes).toBe('govuk-radios');
+    expect((namedApplicantField1.label as Function)(generatedContent)).toBe(enContent.label);
+    expect((namedApplicantField1.values[0].label as Function)(generatedContent)).toBe(enContent.one);
+    expect((namedApplicantField1.values[1].label as Function)(generatedContent)).toBe(enContent.two);
+    expect((namedApplicantField1.values[2].label as Function)(generatedContent)).toBe(enContent.three);
   });
 
   test('should contain continue button', () => {
