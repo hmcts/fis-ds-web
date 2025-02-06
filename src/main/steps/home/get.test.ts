@@ -1,6 +1,7 @@
 import { mockRequest } from '../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../test/unit/utils/mockResponse';
-import { TYPE_OF_APPLICATION_URL } from '../urls';
+import { UserDetails } from '../../app/controller/AppRequest';
+import { HOME_URL, TYPE_OF_APPLICATION_URL } from '../urls';
 
 import { HomeGetController } from './get';
 
@@ -79,6 +80,20 @@ describe('HomeGetController', () => {
     controller.get(req, res);
 
     expect(res.redirect).toHaveBeenCalledWith(TYPE_OF_APPLICATION_URL);
+  });
+  test('redirects to home page', () => {
+    const req = mockRequest({
+      session: {
+        user: {
+          id: '123',
+        },
+      },
+    });
+    req.session.user = undefined as unknown as UserDetails;
+    const res = mockResponse();
+    controller.get(req, res);
+
+    expect(res.redirect).toHaveBeenCalledWith(HOME_URL);
   });
 
   test('redirects to the check your answers page for applicant 1 users in awaitingApplicant1Response state', () => {
