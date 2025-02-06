@@ -78,6 +78,10 @@ describe('applicant > address > select > content', () => {
   test('should contain continue button', () => {
     const form = generatedContent.form as FormContent;
     expect((form.submit.text as Function)(generatedContent)).toEqual('Continue');
+    const commonContent1 = { language: EN, userCase: { applicantAddress1: '123' } } as CommonContent;
+    const generatedContent1 = generateContent(commonContent1);
+    const form1 = generatedContent1.form as FormContent;
+    expect((form1.submit.text as Function)(generatedContent1)).toEqual('Continue');
   });
 });
 /* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
