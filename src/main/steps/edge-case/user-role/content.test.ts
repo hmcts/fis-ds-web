@@ -31,7 +31,10 @@ const cyContent = {
 
 /* eslint-disable @typescript-eslint/ban-types */
 describe('role-type content', () => {
-  const commonContent = { language: EN, userCase: {edgeCaseTypeOfApplication:TYPE_OF_APPLICATION.PARENTAL_ORDER} } as CommonContent;
+  const commonContent = {
+    language: EN,
+    userCase: { edgeCaseTypeOfApplication: TYPE_OF_APPLICATION.PARENTAL_ORDER },
+  } as CommonContent;
   const commonContent1 = { language: EN, userCase: {} } as CommonContent;
   test('should return correct english content', () => {
     const generatedContent = generateContent(commonContent);
