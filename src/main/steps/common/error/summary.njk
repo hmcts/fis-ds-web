@@ -7,6 +7,10 @@
       {% set errorList = (errorList.push({
         text: errorSaving
       }), errorList) %}
+    {% elif item.errorType === 'errorFetchingFee' %}
+      {% set errorList = (errorList.push({
+        text: errorFetchingFee
+      }), errorList) %}
     {% else %}
       {% set errorList = (errorList.push({
         href: '#' + item.propertyName,

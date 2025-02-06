@@ -12,6 +12,7 @@ export const routeGuard = {
     }
 
     try {
+      req.session.errors = req.session.errors?.filter((error) => error.errorType !== 'errorFetchingFee');
       await retriveFeeAmount(req, next);
     } catch {
       console.log('failed to fetch fee details');
@@ -22,19 +23,18 @@ export const routeGuard = {
 const retriveFeeAmount = async (req: AppRequest<Partial<Case>>, next: NextFunction) => {
   try {
     const applicationFee = (
-      await getApplicationFee(req.session.user, req.session.userCase?.edgeCaseTypeOfApplication, req.locals.logger)
+      await getApplicationFee(req.session.user, req.session.userCase.edgeCaseTypeOfApplication, req.locals.logger)
     )?.feeAmount;
 
     if (applicationFee) {
-      req.session.userCase = {
-        ...(req.session.userCase ?? {}),
-        applicationFee,
-      };
+      Object.assign(req.session.userCase, { applicationFee });
       return req.session.save(next);
     }
 
     next();
   } catch {
+    req.session.paymentError = { hasError: false, errorContext: null };
+    req.session.errors = [{ errorType: 'errorFetchingFee', propertyName: '*' }];
     req.session.save(next);
   }
 };
