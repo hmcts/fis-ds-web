@@ -1,4 +1,4 @@
-import { FormFields } from '../../../../app/form/Form';
+import { FormContent, FormFields } from '../../../../app/form/Form';
 import { ResourceReader } from '../../../../modules/resourcereader/ResourceReader';
 import { CommonContent } from '../../../common/common.content';
 import {
@@ -76,7 +76,8 @@ describe('applicant > address > select > content', () => {
   });
 
   test('should contain continue button', () => {
-    expect(generatedContent.submit).toEqual(enContent.saveAndContinue);
+    const form = generatedContent.form as FormContent;
+    expect((form.submit.text as Function)(generatedContent)).toEqual('Continue');
   });
 });
 /* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */

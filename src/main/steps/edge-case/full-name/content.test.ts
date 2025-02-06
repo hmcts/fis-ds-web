@@ -64,7 +64,7 @@ describe('Applicant > full-name', () => {
   });
 
   test('should contain continue button', () => {
-    expect(generatedContent.submit).toEqual(enContent.saveAndContinue);
+    expect((form.submit.text as Function)(generatedContent)).toEqual('Continue');
   });
 });
 /* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
