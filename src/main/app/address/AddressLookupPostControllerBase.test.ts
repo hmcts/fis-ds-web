@@ -21,6 +21,7 @@ jest.mock('../../steps', () => {
 import { mockRequest } from '../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../test/unit/utils/mockResponse';
 import { FieldPrefix } from '../case/case';
+import { FormFields, FormFieldsFn } from '../form/Form';
 
 import { AddressLookupPostControllerBase } from './AddressLookupPostControllerBase';
 
@@ -28,11 +29,14 @@ describe('AddressLookupPostControllerBase', () => {
   let req;
   let res;
   let controller;
+  let controller1;
 
   beforeEach(() => {
     req = mockRequest({ session: { userCase: { email: 'test@example.com' } } });
     res = mockResponse();
-    controller = new AddressLookupPostControllerBase({}, FieldPrefix.APPLICANT);
+
+    controller = new AddressLookupPostControllerBase({} as FormFields, FieldPrefix.APPLICANT);
+    controller1 = new AddressLookupPostControllerBase({} as FormFieldsFn, FieldPrefix.APPLICANT);
   });
 
   describe('when there are no form errors', () => {
@@ -49,6 +53,11 @@ describe('AddressLookupPostControllerBase', () => {
 
     test('should call getAddressesFromPostcode', async () => {
       await controller.post(req, res);
+      expect(mockGetAddressesFromPostcode).toHaveBeenCalledWith('MOCK_POSTCODE', req.locals.logger);
+      expect(req.session.addresses).toEqual([{ MOCK_KEY: 'MOCK_VALUE' }]);
+    });
+    test('should call getAddressesFromPostcode1', async () => {
+      await controller1.post(req, res);
       expect(mockGetAddressesFromPostcode).toHaveBeenCalledWith('MOCK_POSTCODE', req.locals.logger);
       expect(req.session.addresses).toEqual([{ MOCK_KEY: 'MOCK_VALUE' }]);
     });
