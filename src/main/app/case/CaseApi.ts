@@ -135,7 +135,7 @@ export class CaseApi {
    */
   public async getCourtList(): Promise<CourtListOptions[]> {
     try {
-      const response = await this.axios.get('/get-edge-case/court-list');
+      const response = await this.axios.get('/edge-case/court-list');
       return response.data;
     } catch (err) {
       this.logError(err);

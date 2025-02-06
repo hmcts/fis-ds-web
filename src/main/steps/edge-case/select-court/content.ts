@@ -1,3 +1,4 @@
+import { CourtListOptions } from '../../../app/case/definition';
 import { CaseWithId } from '../../../app/case/case';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { TranslationFn } from '../../../app/controller/GetController';
@@ -15,10 +16,10 @@ export const form: FormContent = {
         labelSize: null,
         validator: isValidOption,
         options: l => {
-          const courts = [...req.session.applicationSettings.availableCourts].map(court => ({
-            value: court.id,
-            text: court.name,
-            selected: userCase?.selectedCourtId === court.id,
+          const courts = [...req.session.applicationSettings.availableCourts].map((court: CourtListOptions) => ({
+            value: court.epimms_id,
+            text: court.court_name,
+            selected: userCase?.selectedCourtId === court.court_name,
           }));
 
           courts?.unshift({
