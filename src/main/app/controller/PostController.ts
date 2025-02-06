@@ -1,12 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import autobind from 'autobind-decorator';
 import config from 'config';
 import { Response } from 'express';
 
 import { getNextStepUrl } from '../../steps';
-import { CONTACT_DETAILS, SAVE_AND_SIGN_OUT } from '../../steps/urls';
-import { Case, CaseWithId } from '../case/case';
-import { CITIZEN_CREATE, CITIZEN_SAVE_AND_CLOSE, CITIZEN_UPDATE } from '../case/definition';
+import { CONTACT_DETAILS } from '../../steps/urls';
+import { Case } from '../case/case';
+import { CITIZEN_CREATE, CITIZEN_UPDATE } from '../case/definition';
 import { Form, FormFields, FormFieldsFn } from '../form/Form';
 import { ValidationError } from '../form/validation';
 
@@ -23,35 +22,13 @@ export class PostController<T extends AnyObject> {
     const fields = typeof this.fields === 'function' ? this.fields(req.session.userCase, req) : this.fields;
     const form = new Form(fields);
 
-    const { saveAndSignOut, saveBeforeSessionTimeout, _csrf, ...formData } = form.getParsedBody(req.body);
+    const { _csrf, ...formData } = form.getParsedBody(req.body);
 
-    if (req.body.saveAndSignOut) {
-      await this.saveAndSignOut(req, res, formData);
-    } else if (req.body.saveBeforeSessionTimeout) {
-      await this.saveBeforeSessionTimeout(req, res, formData);
-    } else if (req.body.cancel) {
+    if (req.body.cancel) {
       await this.cancel(req, res);
     } else {
       await this.saveAndContinue(req, res, form, formData);
     }
-  }
-
-  private async saveAndSignOut(req: AppRequest<T>, res: Response, formData: Partial<Case>): Promise<void> {
-    try {
-      await this.save(req, formData, CITIZEN_SAVE_AND_CLOSE);
-    } catch {
-      // ignore
-    }
-    res.redirect(SAVE_AND_SIGN_OUT);
-  }
-
-  private async saveBeforeSessionTimeout(req: AppRequest<T>, res: Response, formData: Partial<Case>): Promise<void> {
-    try {
-      await this.save(req, formData, this.getEventName(req));
-    } catch {
-      // ignore
-    }
-    res.end();
   }
 
   private async saveAndContinue(req: AppRequest<T>, res: Response, form: Form, formData: Partial<Case>): Promise<void> {
@@ -74,18 +51,6 @@ export class PostController<T extends AnyObject> {
         //item.errorType !== ValidationError.NOT_UPLOADED
       );
     }
-  }
-
-  protected async save(req: AppRequest<T>, formData: Partial<Case>, eventName: string): Promise<CaseWithId> {
-    try {
-      console.log('Update Existing Case');
-      req.session.userCase = await req.locals.api.triggerEvent(req.session.userCase.id, formData, eventName);
-    } catch (err) {
-      req.locals.logger.error('Error saving', err);
-      req.session.errors = req.session.errors || [];
-      req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
-    }
-    return req.session.userCase;
   }
 
   public redirect(req: AppRequest<T>, res: Response, nextUrl?: string): void {

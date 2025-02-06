@@ -18,10 +18,9 @@ import {
   prepareCaseRequestData,
   prepareUpdateCaseRequestData,
 } from './api-utility';
-import { Case, CaseWithId } from './case';
+import { CaseWithId } from './case';
 import { CaseAssignedUserRoles } from './case-roles';
 import { CITIZEN_SUBMIT, CaseData, CourtListOptions, DSS_CASE_EVENT, DocumentUploadResponse } from './definition';
-import { toApiFormat } from './to-api-format';
 
 export class CaseApi {
   /**
@@ -37,17 +36,6 @@ export class CaseApi {
    */
   public async getOrCreateCase(): Promise<any> {
     return { id: '', state: 'FIS' };
-  }
-
-  /**
-   *
-   * @param caseId
-   * @returns
-   */
-  public async getCaseById(): Promise<CaseWithId> {
-    return new Promise(() => {
-      null;
-    });
   }
 
   /**
@@ -141,32 +129,6 @@ export class CaseApi {
       this.logError(err);
       throw new Error('getCourtList - court list could not be fetched.');
     }
-  }
-
-  /**
-   *
-   * @param caseId
-   * @param data
-   * @param eventName
-   * @returns
-   */
-  private async sendEvent(caseId: string, data: Partial<CaseData>, eventName: string): Promise<CaseWithId> {
-    console.log({ caseId, data, eventName });
-    return new Promise(() => {
-      null;
-    });
-  }
-
-  /**
-   *
-   * @param caseId
-   * @param userData
-   * @param eventName
-   * @returns
-   */
-  public async triggerEvent(caseId: string, userData: Partial<Case>, eventName: string): Promise<CaseWithId> {
-    const data = toApiFormat(userData);
-    return this.sendEvent(caseId, data, eventName);
   }
 
   /**

@@ -14,7 +14,7 @@ export class Form {
     const fields = checkFields || this.fields;
 
     const parsedBody = Object.entries(fields)
-      .map(setupCheckboxParser(!!body.saveAndSignOut))
+      .map(setupCheckboxParser())
       .filter(([, field]) => typeof field?.parser === 'function')
       .flatMap(([key, field]) => {
         const parsed = field.parser?.(body);
@@ -199,9 +199,7 @@ export type FormError = {
 
 interface CaseWithFormData extends CaseWithId {
   _csrf: string;
-  saveAndSignOut?: string;
   saveAndContinue?: boolean;
-  saveBeforeSessionTimeout?: string;
   sendToApplicant2ForReview?: string;
   addAnotherName?: string;
   addAnotherNameHidden?: string;
