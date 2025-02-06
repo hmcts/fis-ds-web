@@ -19,7 +19,6 @@ import {
   prepareUpdateCaseRequestData,
 } from './api-utility';
 import { Case, CaseWithId } from './case';
-import { CaseAssignedUserRoles } from './case-roles';
 import { CITIZEN_SUBMIT, CaseData, CourtListOptions, DSS_CASE_EVENT, DocumentUploadResponse } from './definition';
 import { toApiFormat } from './to-api-format';
 
@@ -30,25 +29,6 @@ export class CaseApi {
    * @param logger
    */
   constructor(private readonly axios: AxiosInstance, private readonly logger: LoggerInstance) {}
-
-  /**
-   *
-   * @returns
-   */
-  public async getOrCreateCase(): Promise<any> {
-    return { id: '', state: 'FIS' };
-  }
-
-  /**
-   *
-   * @param caseId
-   * @returns
-   */
-  public async getCaseById(): Promise<CaseWithId> {
-    return new Promise(() => {
-      null;
-    });
-  }
 
   /**
    *
@@ -110,22 +90,6 @@ export class CaseApi {
     } catch (err) {
       this.logError(err);
       throw new Error('updateCase - error in updating case. case could not be updated.');
-    }
-  }
-
-  /**
-   *
-   * @param caseId
-   * @param userId
-   * @returns
-   */
-  public async getCaseUserRoles(caseId: string, userId: string): Promise<CaseAssignedUserRoles> {
-    try {
-      const response = await this.axios.get<CaseAssignedUserRoles>(`case-users?case_ids=${caseId}&user_ids=${userId}`);
-      return response.data;
-    } catch (err) {
-      this.logError(err);
-      throw new Error('Case roles could not be fetched.');
     }
   }
 
