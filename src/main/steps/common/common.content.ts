@@ -24,6 +24,8 @@ const en = {
   required: 'You have not answered the question. You need to select an answer before continuing.',
   notAnswered: 'You have not answered the question.',
   errorSaving: 'Sorry, we’re having technical problems saving your application. Please try again in a few minutes.',
+  errorFetchingFee:
+    'Sorry, we’re having technical problems getting the fee information for your application. Please try again in a few minutes.',
   errorSendingInvite:
     'Sorry, we’re having technical problems sending your application for review. Please try again in a few minutes.',
   ogl: 'All content is available under the <a class="govuk-link" href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence v3.0</a>, except where otherwise stated',
@@ -132,6 +134,8 @@ const cy: typeof en = {
   notAnswered: 'Nid ydych wedi ateb y cwestiwn.',
   errorSaving:
     "Mae'n ddrwg gennym, rydym yn cael problemau technegol wrth geisio cadw eich cais. Rhowch gynnig arall arni mewn ychydig funudau.",
+  errorFetchingFee:
+    'Sorry, we’re having technical problems getting the fee information for your application. Please try again in a few minutes. (welsh)',
   ogl: 'Mae’r holl gynnwys ar gael o dan <a class="govuk-link" href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license" >Drwydded Agored y Llywodraeth f3.0</a>, oni nodir fel arall',
   errorSummaryHeading: 'There is a problem (in welsh)',
   saveAsDraft: 'Save as draft (in welsh)',

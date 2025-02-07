@@ -13,7 +13,6 @@ export interface Address {
 export enum ContactPreference {
   ACCOUNT_OWNER = 'ACCOUNT_OWNER',
   NAMED_PERSON = 'NAMED_PERSON',
-  BOTH_RECEIVE = 'BOTH_RECEIVE',
 }
 
 export type AddressUK = Address;
@@ -112,8 +111,8 @@ export interface CaseData {
   caseCreatedBy: string;
   dssUploadedDocuments: DocumentReference[];
   dssUploadedAdditionalDocuments: DocumentReference[];
+  dssCaseData: string;
 }
-
 export interface PartyDetails {
   email: string;
   gender: string;
@@ -176,7 +175,7 @@ export interface StatusHistoriesItem {
 }
 
 export interface CourtListOptions {
-  epmsId: string;
+  epimms_id: string;
   site_name: string;
   court_name: string;
 }
@@ -324,9 +323,9 @@ export const enum Environment {
 }
 
 export const CITIZEN_SAVE_AND_CLOSE = 'citizen-save-and-close';
-export const CITIZEN_UPDATE = 'UPDATE';
+export const CITIZEN_UPDATE = 'updateDssEdgeCase';
 export const CITIZEN_CREATE = 'CREATE';
-export const CITIZEN_SUBMIT = 'SUBMIT';
+export const CITIZEN_SUBMIT = 'submitDssEdgeCase';
 
 export const enum DSS_CASE_EVENT {
   DSS_CASE_SUBMIT = 'citizen-dss-case-submit',

@@ -16,7 +16,11 @@ const cyContent = translations['cy'];
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
 describe('pay your fee > content', () => {
-  const commonContent = { language: 'en', userCase: {} } as CommonContent;
+  const commonContent = {
+    language: 'en',
+    userCase: {},
+    additionalData: { req: { session: { errors: [] } } },
+  } as unknown as CommonContent;
   let generatedContent;
   let form;
   let fields;

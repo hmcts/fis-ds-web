@@ -21,12 +21,7 @@ export const routeGuard = {
       }
 
       Object.assign(req.session.applicationSettings, {
-        availableCourts: courts
-          .filter(court => court?.site_name && !['', null, 'Royal Courts of Justice'].includes(court.site_name))
-          .map(court => ({
-            id: court.epmsId,
-            name: court.court_name,
-          })),
+        availableCourts: courts,
       });
       req.session.save(next);
     } catch {

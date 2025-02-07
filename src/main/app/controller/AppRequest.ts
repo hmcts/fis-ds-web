@@ -27,7 +27,7 @@ export interface AppSession extends Session {
   userCase: CaseWithId;
   eligibility: Eligibility;
   lang: string | undefined;
-  errors: FormError[] | undefined;
+  errors: FormError[];
   addresses: [];
   returnUrl?: string;
   cookieStorageMessage?: boolean;

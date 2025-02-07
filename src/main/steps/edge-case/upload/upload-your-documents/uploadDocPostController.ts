@@ -1,7 +1,7 @@
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
-import { CITIZEN_UPDATE, UploadDocumentContext } from '../../../../app/case/definition';
+import { UploadDocumentContext } from '../../../../app/case/definition';
 import { AppRequest } from '../../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../../app/controller/PostController';
 import { FormFields, FormFieldsFn } from '../../../../app/form/Form';
@@ -33,7 +33,6 @@ export default class UploadDocumentController extends PostController<AnyObject> 
         return this.redirect(req, res, parseUrl(UPLOAD_YOUR_DOCUMENTS).url);
       }
 
-      Object.assign(req.session.userCase, await req.locals.api.updateCase(req.session.userCase, CITIZEN_UPDATE));
       return this.redirect(req, res, parseUrl(ADDITIONAL_DOCUMENTS_UPLOAD).url);
     }
 
