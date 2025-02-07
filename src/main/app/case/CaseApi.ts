@@ -20,7 +20,13 @@ import {
 } from './api-utility';
 import { CaseWithId } from './case';
 import { CaseAssignedUserRoles } from './case-roles';
-import { CITIZEN_SUBMIT, CaseData, CourtListOptions, DSS_CASE_EVENT, DocumentUploadResponse } from './definition';
+import {
+  CaseData,
+  CourtListOptions,
+  DocumentUploadResponse,
+} from './definition';
+import { toApiFormat } from './to-api-format';
+
 
 export class CaseApi {
   /**
@@ -79,10 +85,8 @@ export class CaseApi {
         throw new Error('updateCase - error in updating case. case id is missing.');
       }
 
-      const event = eventName === CITIZEN_SUBMIT ? DSS_CASE_EVENT.DSS_CASE_SUBMIT : DSS_CASE_EVENT.UPDATE_CASE;
-
       const response = await this.axios.post<UpdateCaseRequest, AxiosResponse<CaseData>>(
-        `${userCase.id}/${event}/update-dss-case`,
+        `${userCase.id}/${eventName}/update-dss-case`,
         prepareUpdateCaseRequestData(userCase),
         {
           httpsAgent: new https.Agent({ rejectUnauthorized: false }),
