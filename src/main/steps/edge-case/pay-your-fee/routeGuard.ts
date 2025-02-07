@@ -12,7 +12,7 @@ export const routeGuard = {
     }
 
     try {
-      req.session.errors = req.session.errors?.filter((error) => error.errorType !== 'errorFetchingFee');
+      req.session.errors = req.session.errors?.filter(error => error.errorType !== 'errorFetchingFee');
       await retriveFeeAmount(req, next);
     } catch {
       console.log('failed to fetch fee details');

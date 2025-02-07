@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { State } from './CaseApi';
 import { Case, CaseDate, CaseWithId } from './case';
 import {

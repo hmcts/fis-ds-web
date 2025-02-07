@@ -1,6 +1,6 @@
 import { AnyObject } from '../controller/PostController';
-import { State } from './CaseApi';
 
+import { State } from './CaseApi';
 import {
   CASE_TYPE_OF_APPLICATION,
   CaseData,

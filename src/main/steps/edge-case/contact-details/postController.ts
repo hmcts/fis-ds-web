@@ -2,12 +2,12 @@
 import autobind from 'autobind-decorator';
 import { Response } from 'express';
 
+import { CaseWithId } from '../../../app/case/case';
 import { CITIZEN_UPDATE } from '../../../app/case/definition';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { Form, FormFields, FormFieldsFn } from '../../../app/form/Form';
 import { GENERIC_ERROR_PAGE } from '../../../steps/urls';
-import { CaseWithId } from '../../../app/case/case';
 
 @autobind
 export default class ContactDetailsPostController extends PostController<AnyObject> {
@@ -35,7 +35,7 @@ export default class ContactDetailsPostController extends PostController<AnyObje
       try {
         if (!req.session?.userCase?.id) {
           Object.assign(req.session.userCase, await req.locals.api.createCase(req.session.userCase));
-          req.session.userCase = await req.locals.api.updateCase(req.session.userCase, CITIZEN_UPDATE) as CaseWithId;
+          req.session.userCase = (await req.locals.api.updateCase(req.session.userCase, CITIZEN_UPDATE)) as CaseWithId;
         }
       } catch (err) {
         req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });

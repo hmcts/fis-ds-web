@@ -1,5 +1,5 @@
-import { CourtListOptions } from '../../../app/case/definition';
 import { CaseWithId } from '../../../app/case/case';
+import { CourtListOptions } from '../../../app/case/definition';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFields, FormFieldsFn } from '../../../app/form/Form';

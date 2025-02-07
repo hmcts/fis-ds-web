@@ -1,5 +1,6 @@
 import { LoggerInstance } from 'winston';
 
+import { TYPE_OF_APPLICATION } from '../../../app/case/definition';
 import { UserDetails } from '../../../app/controller/AppRequest';
 
 import { getApplicationFee } from './fees-lookup-api';
@@ -26,12 +27,12 @@ describe('getC100ApplicationFee', () => {
     };
 
     try {
-      await getApplicationFee(userDetails, 'PO', mockLogger);
+      await getApplicationFee(userDetails, 'PO' as TYPE_OF_APPLICATION, mockLogger);
     } catch (err) {
       //eslint-disable-next-line jest/no-conditional-expect
       expect(err.message).toBe('Error occured, fee could not be fetched. - getApplicationFee');
       //eslint-disable-next-line jest/no-conditional-expect
-      await expect(getApplicationFee(userDetails, 'PO', mockLogger)).rejects.toThrow(
+      await expect(getApplicationFee(userDetails, 'PO' as TYPE_OF_APPLICATION, mockLogger)).rejects.toThrow(
         'Error occured, fee could not be fetched. - getApplicationFee'
       );
       //eslint-disable-next-line jest/no-conditional-expect
