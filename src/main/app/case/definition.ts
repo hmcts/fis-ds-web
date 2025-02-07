@@ -325,13 +325,13 @@ export const enum Environment {
 }
 
 export const CITIZEN_SAVE_AND_CLOSE = 'citizen-save-and-close';
-export const CITIZEN_UPDATE = 'updateDssEdgeCase';
+export const CITIZEN_UPDATE = 'UPDATE';
 export const CITIZEN_CREATE = 'CREATE';
-export const CITIZEN_SUBMIT = 'submitDssEdgeCase';
+export const CITIZEN_SUBMIT = 'SUBMIT';
 
 export const enum DSS_CASE_EVENT {
-  DSS_CASE_SUBMIT = 'citizen-dss-case-submit',
-  UPDATE_CASE = 'citizen-case-update',
+  DSS_CASE_SUBMIT = 'submitDssEdgeCase',
+  UPDATE_CASE = 'updateDssEdgeCase',
 }
 
 export const enum CASE_TYPE_OF_APPLICATION {
