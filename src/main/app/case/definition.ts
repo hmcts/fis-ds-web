@@ -328,10 +328,11 @@ export const CITIZEN_SAVE_AND_CLOSE = 'citizen-save-and-close';
 export const CITIZEN_UPDATE = 'UPDATE';
 export const CITIZEN_CREATE = 'CREATE';
 export const CITIZEN_SUBMIT = 'SUBMIT';
-
-export const enum DSS_CASE_EVENT {
-  DSS_CASE_SUBMIT = 'submitDssEdgeCase',
+export const enum CASE_EVENT {
   UPDATE_CASE = 'updateDssEdgeCase',
+  SUBMIT_CA_CASE = 'submitDssCaEdgeCase',
+  SUBMIT_CA_CASE_WITH_HWF = 'submitDssCaEdgeCaseWithHwf',
+  SUBMIT_DA_CASE = 'submitDssDaEdgeCase',
 }
 
 export const enum CASE_TYPE_OF_APPLICATION {
@@ -356,13 +357,6 @@ export enum PaymentErrorContext {
   DEFAULT_PAYMENT_ERROR = 'defaultPaymentError',
   PAYMENT_UNSUCCESSFUL = 'paymentUnsuccessful',
   APPLICATION_NOT_SUBMITTED = 'applicationNotSubmitted',
-}
-
-export const enum CASE_EVENT {
-  CASE_UPDATE = 'citizen-case-update',
-  CASE_SUBMIT = 'citizen-case-submit',
-  DELETE_CASE = 'deleteApplication',
-  CASE_SUBMIT_WITH_HWF = 'citizenCaseSubmitWithHWF',
 }
 
 export type UploadDocument = {
