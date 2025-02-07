@@ -20,11 +20,7 @@ import {
 } from './api-utility';
 import { Case, CaseWithId } from './case';
 import { CaseAssignedUserRoles } from './case-roles';
-import {
-  CaseData,
-  CourtListOptions,
-  DocumentUploadResponse,
-} from './definition';
+import { CaseData, CourtListOptions, DocumentUploadResponse } from './definition';
 import { toApiFormat } from './to-api-format';
 
 export class CaseApi {
