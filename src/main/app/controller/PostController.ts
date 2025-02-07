@@ -46,7 +46,7 @@ export class PostController<T extends AnyObject> {
   protected filterErrorsForSaveAsDraft(req: AppRequest<T>): void {
     if (req.body.saveAsDraft) {
       // skip empty field errors in case of save as draft
-      req.session.errors = req.session.errors!.filter(
+      req.session.errors = req.session.errors.filter(
         item => item.errorType !== ValidationError.REQUIRED && item.errorType !== ValidationError.NOT_SELECTED // &&
         //item.errorType !== ValidationError.NOT_UPLOADED
       );
