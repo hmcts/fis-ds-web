@@ -35,11 +35,7 @@ export const PaymentHandler = async (req: AppRequest, res: Response) => {
     //if help with fees opted then submit case & redirect to confirmation page
     if (hwfRefNumber && response?.serviceRequestReference) {
       //help with fess, submit case without payment
-      submitCase(
-        req,
-        res,
-        CASE_EVENT.SUBMIT_CA_CASE_WITH_HWF
-      );
+      submitCase(req, res, CASE_EVENT.SUBMIT_CA_CASE_WITH_HWF);
     } else if (response?.serviceRequestReference && response?.payment_reference && response?.status === SUCCESS) {
       //previous payment is success, retry submit case with 'citizen-case-submit' & reidrect confirmation page
       submitCase(req, res, CASE_EVENT.SUBMIT_CA_CASE);

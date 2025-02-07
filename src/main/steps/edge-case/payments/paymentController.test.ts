@@ -239,7 +239,7 @@ describe('PaymentValidationHandler', () => {
   });
 
   test('expecting submitCase Controller', async () => {
-    await submitCase(req, res, CASE_EVENT.CASE_SUBMIT);
+    await submitCase(req, res, CASE_EVENT.SUBMIT_CA_CASE);
     expect(res.send).toHaveBeenCalledTimes(0);
     expect(res.render).toHaveBeenCalledTimes(0);
     expect(res.redirect).toHaveBeenCalledWith('/application-submitted');

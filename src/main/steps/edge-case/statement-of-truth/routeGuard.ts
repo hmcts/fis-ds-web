@@ -5,6 +5,7 @@ import { AppRequest } from '../../../app/controller/AppRequest';
 import { STATEMENT_OF_TRUTH } from '../../../steps/urls';
 
 export const routeGuard = {
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   post: async (req: AppRequest, res: Response, next: NextFunction) => {
     const caseData = req.session.userCase;
     const typeOfApplication = caseData?.edgeCaseTypeOfApplication;
@@ -25,7 +26,6 @@ export const routeGuard = {
         });
       }
     }
-    
     next();
   },
 };

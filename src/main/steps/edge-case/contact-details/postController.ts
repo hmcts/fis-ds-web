@@ -35,7 +35,10 @@ export default class ContactDetailsPostController extends PostController<AnyObje
       try {
         if (!req.session?.userCase?.id) {
           Object.assign(req.session.userCase, await req.locals.api.createCase(req.session.userCase));
-          req.session.userCase = (await req.locals.api.updateCase(req.session.userCase, CASE_EVENT.UPDATE_CASE)) as CaseWithId;
+          req.session.userCase = (await req.locals.api.updateCase(
+            req.session.userCase,
+            CASE_EVENT.UPDATE_CASE
+          )) as CaseWithId;
         }
       } catch (err) {
         req.session.errors.push({ errorType: 'errorSaving', propertyName: '*' });
