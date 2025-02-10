@@ -1,6 +1,6 @@
 import { YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
-import { FormContent } from '../../../app/form/Form';
+import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { interpolate } from '../../../steps/common/string-parser';
 import { PAYMENT_GATEWAY_ENTRY_URL } from '../../../steps/urls';
@@ -46,6 +46,13 @@ export const generateContent: TranslationFn = content => {
   const resourceLoader = loadResources(PAY_YOUR_FEE_FILE);
   const translations = resourceLoader.getFileContents().translations[content.language];
   const caseId = content.userCase?.id;
+  const appRequest = content.additionalData?.req;
+  const hasFeeError = appRequest.session.errors.find(error => error.errorType === 'errorFetchingFee');
+
+  form.submit.disabled = hasFeeError;
+  ((form.fields as FormFields).hwfPaymentSelection as FormOptions).values.forEach(value => {
+    value.disabled = hasFeeError;
+  });
 
   return {
     ...translations,
@@ -60,5 +67,6 @@ export const generateContent: TranslationFn = content => {
     },
     form,
     paymentUrl: PAYMENT_GATEWAY_ENTRY_URL,
+    hasFeeError,
   };
 };
