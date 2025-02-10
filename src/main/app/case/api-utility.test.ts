@@ -102,9 +102,10 @@ describe('api-utility', () => {
     });
   });
   test('prepareUpdateCaseRequestData', () => {
-    expect(prepareUpdateCaseRequestData(data)).toStrictEqual(
-      {dssCaseData: "{\"edgeCaseTypeOfApplication\":\"FMPO\",\"namedApplicant\":\"\",\"caseTypeOfApplication\":\"FL401\",\"applicantFirstName\":\"y\",\"applicantLastName\":\"z\",\"applicantDateOfBirth\":{\"day\":\"01\",\"month\":\"01\",\"year\":\"2000\"},\"contactPreference\":\"\",\"applicantEmailAddress\":\"\",\"applicantPhoneNumber\":\"\",\"applicantHomeNumber\":\"\",\"applicantAddress1\":\"\",\"applicantAddress2\":\"\",\"applicantAddressTown\":\"\",\"applicantAddressCountry\":\"United Kingdom\",\"selectedCourtId\":\"\",\"applicantAddressPostcode\":\"\",\"applicantApplicationFormDocuments\":[],\"applicantAdditionalDocuments\":[],\"applicantStatementOfTruth\":\"\",\"paymentServiceRequestReferenceNumber\":\"\",\"paymentReferenceNumber\":\"\"}"
-  });
+    expect(prepareUpdateCaseRequestData(data)).toStrictEqual({
+      dssCaseData:
+        '{"edgeCaseTypeOfApplication":"FMPO","namedApplicant":"","caseTypeOfApplication":"FL401","applicantFirstName":"y","applicantLastName":"z","applicantDateOfBirth":{"day":"01","month":"01","year":"2000"},"contactPreference":"","applicantEmailAddress":"","applicantPhoneNumber":"","applicantHomeNumber":"","applicantAddress1":"","applicantAddress2":"","applicantAddressTown":"","applicantAddressCountry":"United Kingdom","selectedCourtId":"","applicantAddressPostcode":"","applicantApplicationFormDocuments":[],"applicantAdditionalDocuments":[],"applicantStatementOfTruth":"","paymentServiceRequestReferenceNumber":"","paymentReferenceNumber":""}',
+    });
   });
   test('mapUpdateCaseResponseData', () => {
     expect(mapUpdateCaseResponseData(data)).toStrictEqual({
@@ -127,15 +128,15 @@ describe('api-utility', () => {
       applicantDateOfBirth: undefined,
       applicantEmailAddress: undefined,
       caseCreatedBy: '',
-      applicantHomeNumber:undefined,
-      applicantStatementOfTruth:undefined,
-      contactPreferenceType:undefined,
-      helpWithFeesReferenceNumber:undefined,
-      hwfPaymentSelection:undefined,
-      namedApplicant:undefined,
-      paymentReferenceNumber:undefined,
-      paymentServiceRequestReferenceNumber:undefined,
-      selectedCourtId:undefined,
+      applicantHomeNumber: undefined,
+      applicantStatementOfTruth: undefined,
+      contactPreferenceType: undefined,
+      helpWithFeesReferenceNumber: undefined,
+      hwfPaymentSelection: undefined,
+      namedApplicant: undefined,
+      paymentReferenceNumber: undefined,
+      paymentServiceRequestReferenceNumber: undefined,
+      selectedCourtId: undefined,
     });
   });
 });
