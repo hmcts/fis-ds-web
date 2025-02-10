@@ -102,29 +102,9 @@ describe('api-utility', () => {
     });
   });
   test('prepareUpdateCaseRequestData', () => {
-    expect(prepareUpdateCaseRequestData(data)).toStrictEqual({
-      applicantAdditionalDocuments: [],
-      applicantAddress1: '',
-      applicantAddress2: '',
-      applicantAddressCountry: 'United Kingdom',
-      applicantAddressPostcode: '',
-      applicantAddressTown: '',
-      applicantApplicationFormDocuments: [],
-      applicantContactPreference: '',
-      applicantDateOfBirth: '2000-01-01',
-      applicantEmailAddress: '',
-      applicantFirstName: 'y',
-      applicantHomeNumber: '',
-      applicantLastName: 'z',
-      applicantPhoneNumber: '',
-      applicantStatementOfTruth: '',
-      caseTypeOfApplication: 'FL401',
-      edgeCaseTypeOfApplication: 'FMPO',
-      namedApplicant: '',
-      paymentReferenceNumber: '',
-      paymentServiceRequestReferenceNumber: '',
-      selectedCourt: '',
-    });
+    expect(prepareUpdateCaseRequestData(data)).toStrictEqual(
+      {dssCaseData: "{\"edgeCaseTypeOfApplication\":\"FMPO\",\"namedApplicant\":\"\",\"caseTypeOfApplication\":\"FL401\",\"applicantFirstName\":\"y\",\"applicantLastName\":\"z\",\"applicantDateOfBirth\":{\"day\":\"01\",\"month\":\"01\",\"year\":\"2000\"},\"contactPreference\":\"\",\"applicantEmailAddress\":\"\",\"applicantPhoneNumber\":\"\",\"applicantHomeNumber\":\"\",\"applicantAddress1\":\"\",\"applicantAddress2\":\"\",\"applicantAddressTown\":\"\",\"applicantAddressCountry\":\"United Kingdom\",\"selectedCourtId\":\"\",\"applicantAddressPostcode\":\"\",\"applicantApplicationFormDocuments\":[],\"applicantAdditionalDocuments\":[],\"applicantStatementOfTruth\":\"\",\"paymentServiceRequestReferenceNumber\":\"\",\"paymentReferenceNumber\":\"\"}"
+  });
   });
   test('mapUpdateCaseResponseData', () => {
     expect(mapUpdateCaseResponseData(data)).toStrictEqual({
@@ -133,36 +113,29 @@ describe('api-utility', () => {
       applicantAddressCountry: undefined,
       applicantAddressPostcode: undefined,
       applicantAddressTown: undefined,
-      applicantApplicationFormDocuments: [
-        {
-          document_url: 'string',
-          document_filename: 'string',
-          document_binary_url: 'string',
-        },
-      ],
+      applicantApplicationFormDocuments: undefined,
       applicantFirstName: undefined,
       applicantLastName: undefined,
       applicantPhoneNumber: undefined,
       caseTypeOfApplication: '',
       edgeCaseTypeOfApplication: 'FMPO',
-      applicantAdditionalDocuments: [
-        {
-          document_url: 'string',
-          document_filename: 'string',
-          document_binary_url: 'string',
-        },
-      ],
+      applicantAdditionalDocuments: undefined,
       id: '1',
       lastModifiedDate: '',
       state: '',
       applicantCaseName: '',
-      applicantDateOfBirth: {
-        day: '',
-        month: '',
-        year: '',
-      },
+      applicantDateOfBirth: undefined,
       applicantEmailAddress: undefined,
       caseCreatedBy: '',
+      applicantHomeNumber:undefined,
+      applicantStatementOfTruth:undefined,
+      contactPreferenceType:undefined,
+      helpWithFeesReferenceNumber:undefined,
+      hwfPaymentSelection:undefined,
+      namedApplicant:undefined,
+      paymentReferenceNumber:undefined,
+      paymentServiceRequestReferenceNumber:undefined,
+      selectedCourtId:undefined,
     });
   });
 });

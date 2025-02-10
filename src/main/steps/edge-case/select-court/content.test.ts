@@ -64,8 +64,8 @@ describe('role-type content', () => {
             applicationSettings: {
               availableCourts: [
                 {
-                  id: '',
-                  name: '',
+                  epimms_id: '',
+                  court_name: '',
                 },
               ],
             },
