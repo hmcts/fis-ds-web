@@ -27,7 +27,13 @@ export class Helmet {
   }
 
   private setContentSecurityPolicy(app: express.Express): void {
-    const scriptSrc = [self,...tagManager, googleAnalyticsDomain,analyticsGoogleDomain, "'sha256-+6WnXIl4mbFTCARd8N3COQmT3bJJmo32N8q8ZSQAIcU='"];
+    const scriptSrc = [
+      self,
+      ...tagManager,
+      googleAnalyticsDomain,
+      analyticsGoogleDomain,
+      "'sha256-+6WnXIl4mbFTCARd8N3COQmT3bJJmo32N8q8ZSQAIcU='",
+    ];
 
     if (app.locals.developmentMode) {
       scriptSrc.push("'unsafe-eval'");
@@ -36,11 +42,10 @@ export class Helmet {
     app.use(
       helmet.contentSecurityPolicy({
         directives: {
-          connectSrc: [self,analyticsGoogleDomain],
+          connectSrc: [self, analyticsGoogleDomain],
           defaultSrc: ["'none'"],
           fontSrc: [self, 'data:'],
-          imgSrc: [self, googleAnalyticsDomain,"https://*.google-analytics.com",
-          "https://*.googletagmanager.com"],
+          imgSrc: [self, googleAnalyticsDomain, 'https://*.google-analytics.com', 'https://*.googletagmanager.com'],
           objectSrc: [self],
           scriptSrc,
           styleSrc: [self],

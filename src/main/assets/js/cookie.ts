@@ -41,7 +41,7 @@ cookieManager.init({
     },
     {
       categoryName: 'analytics',
-      cookies: ['_ga', '_gid','_gat_UA-'],
+      cookies: ['_ga', '_gid', '_gat_UA-'],
     },
     {
       categoryName: 'apm',
