@@ -5,17 +5,14 @@ import { LoggerInstance } from 'winston';
 import { getServiceAuthToken } from '../../../app/auth/service/get-service-auth-token';
 import { TYPE_OF_APPLICATION } from '../../../app/case/definition';
 import { UserDetails } from '../../../app/controller/AppRequest';
-import { getEnumKeyByValue } from '../util';
 
 export const getApplicationFee = async (
   userDetails: UserDetails,
-  applicationType: string | undefined,
+  edgeCaseApplicationType: TYPE_OF_APPLICATION,
   logger: LoggerInstance
 ): Promise<FeesResponse | void> => {
   try {
-    const app_type = getEnumKeyByValue(TYPE_OF_APPLICATION, applicationType);
-    console.log(app_type);
-    const url: string = config.get('services.cos.url') + `/fees-and-payment-apis/${app_type}`;
+    const url: string = config.get('services.cos.url') + `/fees-and-payment-apis/getFee/${edgeCaseApplicationType}`;
     const response = await axios.get<FeesResponse>(url, {
       headers: {
         Authorization: 'Bearer ' + userDetails.accessToken,

@@ -87,7 +87,7 @@ export class Routes {
     /**
      * @Payment_Handler
      */
-    app.get(PAYMENT_GATEWAY_ENTRY_URL, errorHandler(PaymentHandler));
+    app.post(PAYMENT_GATEWAY_ENTRY_URL, errorHandler(PaymentHandler));
     app.get(PAYMENT_RETURN_URL_CALLBACK, errorHandler(PaymentValidationHandler));
     /**
      * @POST_ROUTES

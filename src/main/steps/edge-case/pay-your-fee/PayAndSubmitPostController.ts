@@ -21,7 +21,7 @@ export default class PayAndSubmitPostController extends PostController<AnyObject
       const form = new Form(fields);
       const { ...formData } = form.getParsedBody(req.body);
       req.session.errors = form.getErrors(formData);
-      if (req.session.errors && req.session.errors.length) {
+      if (req.session.errors.length) {
         return super.redirect(req, res, PAY_YOUR_FEE);
       } else if (formData.hwfPaymentSelection === YesOrNo.YES) {
         return super.redirect(req, res, HELP_WITH_FEE);

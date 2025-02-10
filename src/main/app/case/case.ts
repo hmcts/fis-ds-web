@@ -1,5 +1,6 @@
 import { AnyObject } from '../controller/PostController';
 
+import { State } from './CaseApi';
 import {
   CASE_TYPE_OF_APPLICATION,
   CaseData,
@@ -29,7 +30,7 @@ export type FieldFormats = Record<string, string | ((AnyObject) => AnyObject)>;
 
 export interface CaseWithId extends Case {
   id: string;
-  state: any;
+  state: State;
   paymentDetails?: {
     payment_reference: string;
     date_created: string;
@@ -90,9 +91,8 @@ export enum FieldPrefix {
 }
 
 export interface Case {
-  id: string;
-  caseTypeOfApplication: CASE_TYPE_OF_APPLICATION;
   edgeCaseTypeOfApplication: TYPE_OF_APPLICATION;
+  caseTypeOfApplication: CASE_TYPE_OF_APPLICATION;
   namedApplicant: YesOrNo;
   contactPreferenceType: ContactPreference;
   applicantFirstName: string;
@@ -106,12 +106,16 @@ export interface Case {
   applicantAddressTown: string;
   applicantAddressCountry: string;
   applicantAddressPostcode: string;
-  availableCourts: { id: string; name: string }[];
-  selectedCourtId: string;
-  hwfPaymentSelection: YesOrNo;
+  selectedCourtId?: string;
+  applicantApplicationFormDocuments: Document[] | [];
+  applicantAdditionalDocuments: Document[] | [];
+  paymentServiceRequestReferenceNumber?: string;
+  paymentReferenceNumber?: string;
   helpWithFeesReferenceNumber?: string;
+  hwfPaymentSelection?: YesOrNo;
   applicantStatementOfTruth: YesOrNo;
-  applicationFee: string;
-  applicantApplicationFormDocuments: Document[];
-  applicantAdditionalDocuments: Document[];
+  applicantCaseName: string;
+  lastModifiedDate: string;
+  caseCreatedBy: string;
+  applicationFee?: string;
 }

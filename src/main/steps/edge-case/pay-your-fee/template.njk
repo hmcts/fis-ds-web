@@ -18,13 +18,16 @@
   <h1 class="govuk-heading-xl govuk-!-margin-bottom-7">{{title}}</h1>
   <p class="govuk-body">{{ paragraph1 }}{{ userCase.applicationFee }}{{paragraph2}}</p>
   <p class="govuk-body">{{ line2 }}</p>
-  {{ govukButton({
+
+  <form action="{{paymentUrl}}?_csrf={{ csrfToken }}" method="post">
+    {{ govukButton({
     text: payAndSubmitButton,
     type: "submit",
-    href: paymentUrl,
     name: "payAndSubmit",
-    id: "payAndSubmit"  
-  }) }}
+    id: "payAndSubmit",
+    disabled: hasFeeError    
+    }) }}
+  </form>
   <br/>
   <p class="govuk-body">{{ paragraph3 }}{{ userCase.applicationFee }}{{paragraph4}}</p>
   <ul class="govuk-list govuk-list--bullet">
