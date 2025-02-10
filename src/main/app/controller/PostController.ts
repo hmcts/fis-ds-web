@@ -12,10 +12,6 @@ import { ValidationError } from '../form/validation';
 
 import { AppRequest } from './AppRequest';
 
-/*enum noHitToSaveAndContinue {
-  CITIZEN_HOME_URL = '/citizen-home',
-}*/
-
 @autobind
 export class PostController<T extends AnyObject> {
   constructor(protected readonly fields: FormFields | FormFieldsFn) {}

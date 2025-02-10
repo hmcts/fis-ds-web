@@ -19,7 +19,7 @@ import {
   prepareUpdateCaseRequestData,
 } from './api-utility';
 import { Case, CaseWithId } from './case';
-import { CITIZEN_SUBMIT, CaseData, CourtListOptions, DSS_CASE_EVENT, DocumentUploadResponse } from './definition';
+import { CaseData, CourtListOptions, DocumentUploadResponse } from './definition';
 import { toApiFormat } from './to-api-format';
 
 export class CaseApi {
@@ -71,10 +71,8 @@ export class CaseApi {
         throw new Error('updateCase - error in updating case. case id is missing.');
       }
 
-      const event = eventName === CITIZEN_SUBMIT ? DSS_CASE_EVENT.DSS_CASE_SUBMIT : DSS_CASE_EVENT.UPDATE_CASE;
-
       const response = await this.axios.post<UpdateCaseRequest, AxiosResponse<CaseData>>(
-        `${userCase.id}/${event}/update-dss-case`,
+        `${userCase.id}/${eventName}/update-dss-case`,
         prepareUpdateCaseRequestData(userCase),
         {
           httpsAgent: new https.Agent({ rejectUnauthorized: false }),
@@ -99,7 +97,7 @@ export class CaseApi {
    */
   public async getCourtList(): Promise<CourtListOptions[]> {
     try {
-      const response = await this.axios.get('/get-edge-case/court-list');
+      const response = await this.axios.get('/edge-case/court-list');
       return response.data;
     } catch (err) {
       this.logError(err);

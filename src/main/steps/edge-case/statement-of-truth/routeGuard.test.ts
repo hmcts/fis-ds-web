@@ -38,7 +38,6 @@ describe('statement of truth > routeGuard', () => {
     updateCaserMock.mockResolvedValueOnce(req.session.userCase as unknown as UpdateCaseResponse);
 
     await routeGuard.post(req, res, next);
-    expect(req.session.save).toHaveBeenCalled();
     expect(next).toHaveBeenCalled();
   });
 

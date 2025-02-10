@@ -35,15 +35,10 @@ export const PaymentHandler = async (req: AppRequest, res: Response) => {
     //if help with fees opted then submit case & redirect to confirmation page
     if (hwfRefNumber && response?.serviceRequestReference) {
       //help with fess, submit case without payment
-      submitCase(
-        req,
-        res,
-
-        CASE_EVENT.CASE_SUBMIT_WITH_HWF
-      );
+      submitCase(req, res, CASE_EVENT.SUBMIT_CA_CASE_WITH_HWF);
     } else if (response?.serviceRequestReference && response?.payment_reference && response?.status === SUCCESS) {
       //previous payment is success, retry submit case with 'citizen-case-submit' & reidrect confirmation page
-      submitCase(req, res, CASE_EVENT.CASE_SUBMIT);
+      submitCase(req, res, CASE_EVENT.SUBMIT_CA_CASE);
     } else if (response['next_url']) {
       //redirect to gov pay for making payment
       res.redirect(response['next_url']);
@@ -90,7 +85,7 @@ export const PaymentValidationHandler = async (req: AppRequest, res: Response) =
       if (paymentStatus && paymentStatus === SUCCESS) {
         req.session.userCase.paymentSuccessDetails = checkPayment['data'];
         //Invoke update case with 'citizen-case-submit' event & reidrect confirmation page
-        submitCase(req, res, CASE_EVENT.CASE_SUBMIT);
+        submitCase(req, res, CASE_EVENT.SUBMIT_CA_CASE);
       } else {
         populateError(req, res, 'Error in retreive payment status', PaymentErrorContext.PAYMENT_UNSUCCESSFUL);
       }
@@ -101,10 +96,10 @@ export const PaymentValidationHandler = async (req: AppRequest, res: Response) =
   }
 };
 
-export async function submitCase(req: AppRequest, res: Response, caseEvent: CASE_EVENT): Promise<void> {
+export async function submitCase(req: AppRequest, res: Response, eventName: CASE_EVENT): Promise<void> {
   try {
     req.session.paymentError = { hasError: false, errorContext: null };
-    await req.locals.api.updateCase(req.session.userCase, caseEvent);
+    await req.locals.api.updateCase(req.session.userCase, eventName);
     //save & redirect to confirmation page
     req.session.save(() => {
       res.redirect(APPLICATION_SUBMITTED);

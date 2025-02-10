@@ -123,14 +123,17 @@ export interface FormContent {
   submit: {
     text: Label;
     classes?: string;
+    disabled?: boolean;
   };
   saveAsDraft?: {
     text: Label;
     classes?: string;
+    disabled?: boolean;
   };
   cancel?: {
     text: Label;
     classes?: string;
+    disabled?: boolean;
   };
   fields: FormFields | FormFieldsFn;
 }
