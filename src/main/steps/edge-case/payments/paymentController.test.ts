@@ -39,6 +39,7 @@ describe('PaymentHandler', () => {
   test('Should submit case with hwfRefNumber', async () => {
     req.session.userCase.helpWithFeesReferenceNumber = 'HWF-123';
     req.session.userCase.edgeCaseTypeOfApplication = 'PO' as TYPE_OF_APPLICATION;
+    req.body.saveAndContinue = true;
     const paymentDetailsRequestBody = {
       payment_reference: 'a',
       date_created: 'b',
@@ -52,8 +53,12 @@ describe('PaymentHandler', () => {
         ...paymentDetailsRequestBody,
       },
     });
-    updateCaserMock.mockResolvedValue({ applicantFirstName: 'test' } as unknown as UpdateCaseResponse);
+    req.locals.api.updateCase = jest.fn().mockResolvedValue({
+      ...req.session.userCase,
+      paymentDetails: paymentDetailsRequestBody,
+    } as unknown as UpdateCaseResponse);
     await PaymentHandler(req, res);
+    await new Promise(process.nextTick);
     expect(req.session.save).toHaveBeenCalled();
     expect(req.session.paymentError).toStrictEqual({ hasError: false, errorContext: null });
     expect(req.session.userCase.paymentDetails).toStrictEqual(paymentDetailsRequestBody);
@@ -62,6 +67,8 @@ describe('PaymentHandler', () => {
 
   test('Should submit case for previous successful payment', async () => {
     req.session.userCase.edgeCaseTypeOfApplication = 'PO' as TYPE_OF_APPLICATION;
+    req.session.userCase.helpWithFeesReferenceNumber = 'HWF-123';
+    req.session.userCase.hwfPaymentSelection = 'No';
     const paymentDetailsRequestBody = {
       payment_reference: 'a',
       date_created: 'b',
@@ -75,12 +82,21 @@ describe('PaymentHandler', () => {
         ...paymentDetailsRequestBody,
       },
     });
-    updateCaserMock.mockResolvedValue({ applicantFirstName: 'test' } as unknown as UpdateCaseResponse);
+    req.locals.api.updateCase = jest.fn().mockResolvedValue({
+      ...req.session.userCase,
+      hwfPaymentSelection: undefined,
+      helpWithFeesReferenceNumber: undefined,
+      paymentDetails: paymentDetailsRequestBody,
+    } as unknown as UpdateCaseResponse);
     await PaymentHandler(req, res);
+    await new Promise(process.nextTick);
+
     expect(req.session.save).toHaveBeenCalled();
     expect(req.session.paymentError).toStrictEqual({ hasError: false, errorContext: null });
     expect(req.session.userCase.paymentDetails).toStrictEqual(paymentDetailsRequestBody);
     expect(res.redirect).toHaveBeenCalledWith('/application-submitted');
+    expect(req.session.userCase.hwfPaymentSelection).toBeUndefined();
+    expect(req.session.userCase.helpWithFeesReferenceNumber).toBeUndefined();
   });
 
   test('Should redirect to gov pay if next url present and payment not successful', async () => {
@@ -119,9 +135,13 @@ describe('PaymentHandler', () => {
         ...paymentDetailsRequestBody,
       },
     });
+    req.session.errors = [];
     await PaymentHandler(req, res);
+    await new Promise(process.nextTick);
+
     expect(req.session.save).toHaveBeenCalled();
-    expect(req.session.paymentError).toStrictEqual({ hasError: true, errorContext: 'defaultPaymentError' });
+    expect(req.session.errors).toStrictEqual([{ errorType: 'errorPaymentRedirect', propertyName: '*' }]);
+    expect(req.session.paymentError).toBeUndefined();
     expect(res.redirect).toHaveBeenCalledWith('/pay-your-fee');
   });
 

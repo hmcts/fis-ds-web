@@ -3,8 +3,6 @@ import { Case } from '../case';
 export const getFormattedAddress = (data: Partial<Case>): string => {
   let address: string[] = [];
 
-  console.log('Date in format address --->', data);
-
   address.push(data['applicantAddress1'] || '');
   address.push(data['applicantAddress2'] || '');
   address.push(data['applicantAddress3'] || '');

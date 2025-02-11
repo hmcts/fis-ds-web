@@ -3,9 +3,7 @@ import config from 'config';
 import { Response } from 'express';
 
 import { getNextStepUrl } from '../../steps';
-import { CONTACT_DETAILS } from '../../steps/urls';
 import { Case } from '../case/case';
-import { CITIZEN_CREATE, CITIZEN_UPDATE } from '../case/definition';
 import { Form, FormFields, FormFieldsFn } from '../form/Form';
 import { ValidationError } from '../form/validation';
 
@@ -64,39 +62,6 @@ export class PostController<T extends AnyObject> {
       }
       res.redirect(nextUrl!);
     });
-  }
-
-  // method to check if there is a returnUrl in session and
-  // it is one of the allowed redirects from current page
-  public checkReturnUrlAndRedirect(req: AppRequest<T>, res: Response, allowedReturnUrls: string[]): void {
-    const returnUrl = req.session.returnUrl;
-    if (returnUrl && allowedReturnUrls.includes(returnUrl)) {
-      req.session.returnUrl = undefined;
-      this.redirect(req, res, returnUrl);
-    } else {
-      this.redirect(req, res);
-    }
-  }
-
-  //eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public getEventName(req: AppRequest): string {
-    let eventName;
-    if (req.originalUrl === CONTACT_DETAILS && this.isBlank(req)) {
-      console.log('creating new case event');
-      eventName = CITIZEN_CREATE;
-    } else if (req.originalUrl === CONTACT_DETAILS) {
-      eventName = CITIZEN_UPDATE;
-    }
-
-    console.log('event is => ' + eventName);
-    return eventName;
-  }
-
-  private isBlank(req: AppRequest<Partial<Case>>) {
-    console.log('inside isBlank() case id is => ' + req.session.userCase.id);
-    if (req.session.userCase.id === null || req.session.userCase.id === undefined || req.session.userCase.id === '') {
-      return true;
-    }
   }
 }
 

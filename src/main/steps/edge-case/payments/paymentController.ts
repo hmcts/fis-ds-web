@@ -1,6 +1,7 @@
 import config from 'config';
 import { Response } from 'express';
 
+import { CaseWithId } from '../../../app/case/case';
 import { CASE_EVENT, PaymentErrorContext, TYPE_OF_APPLICATION } from '../../../app/case/definition';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { applyParms } from '../../../steps/common/url-parser';
@@ -14,6 +15,11 @@ const SUCCESS = 'Success';
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const PaymentHandler = async (req: AppRequest, res: Response) => {
   try {
+    if (!req.body['saveAndContinue']) {
+      delete req.session.userCase.helpWithFeesReferenceNumber;
+      delete req.session.userCase.hwfPaymentSelection;
+    }
+
     const paymentHelperTranspiler = await new PaymentHelper().SystemCredentailsToApiData(req);
     const { Authorization, ServiceAuthorization, returnUrL, id, hwfRefNumber } = paymentHelperTranspiler;
     const paymentApiEndpoint = config.get('services.cos.url');
@@ -44,12 +50,11 @@ export const PaymentHandler = async (req: AppRequest, res: Response) => {
       res.redirect(response['next_url']);
     } else {
       //redirect to payment with error
-      populateError(
-        req,
-        res,
-        'Error in create service request/payment reference',
-        PaymentErrorContext.DEFAULT_PAYMENT_ERROR
-      );
+      req.locals.logger.error('Error in create service request/payment reference');
+      req.session.errors.push({ errorType: 'errorPaymentRedirect', propertyName: '*' });
+      req.session.save(() => {
+        res.redirect(PAY_YOUR_FEE);
+      });
     }
   } catch (e) {
     req.locals.logger.error(e);
@@ -99,7 +104,7 @@ export const PaymentValidationHandler = async (req: AppRequest, res: Response) =
 export async function submitCase(req: AppRequest, res: Response, eventName: CASE_EVENT): Promise<void> {
   try {
     req.session.paymentError = { hasError: false, errorContext: null };
-    await req.locals.api.updateCase(req.session.userCase, eventName);
+    req.session.userCase = (await req.locals.api.updateCase(req.session.userCase, eventName)) as CaseWithId;
     //save & redirect to confirmation page
     req.session.save(() => {
       res.redirect(APPLICATION_SUBMITTED);

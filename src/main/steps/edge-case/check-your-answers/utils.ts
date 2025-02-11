@@ -79,9 +79,7 @@ export const ApplicantSummaryList = (
   session: AppSession
 ): SummaryList | undefined => {
   const caseData = session.userCase;
-  console.log('usercase in check your answer -->', caseData);
   const sectionTitle = sectionTitles.applicantDetails;
-  console.log('Address in util userCase --->', caseData);
 
   const UserContactPreferences = function () {
     let perference = '';
@@ -157,7 +155,6 @@ export const UploadFormSummary = (
   { sectionTitles, keys, ...content }: SummaryListContent,
   uploadedDocuments: Partial<any>
 ): SummaryList | undefined => {
-  console.log(uploadedDocuments);
   const ListOfUploadedDocuments = uploadedDocuments
     .map((document): string => {
       return document.document_filename + '';

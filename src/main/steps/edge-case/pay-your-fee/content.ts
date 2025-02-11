@@ -48,10 +48,12 @@ export const generateContent: TranslationFn = content => {
   const caseId = content.userCase?.id;
   const appRequest = content.additionalData?.req;
   const hasFeeError = appRequest.session.errors.find(error => error.errorType === 'errorFetchingFee');
+  const isPaymentSuccessful = content.userCase?.paymentSuccessDetails?.status === 'Success';
+  const disableForm = hasFeeError || isPaymentSuccessful;
 
-  form.submit.disabled = hasFeeError;
+  form.submit.disabled = disableForm;
   ((form.fields as FormFields).hwfPaymentSelection as FormOptions).values.forEach(value => {
-    value.disabled = hasFeeError;
+    value.disabled = disableForm;
   });
 
   return {

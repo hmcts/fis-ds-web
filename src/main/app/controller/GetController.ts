@@ -18,8 +18,6 @@ export class GetController {
   constructor(protected readonly view: string, protected readonly content: TranslationFn) {}
 
   public async get(req: AppRequest, res: Response): Promise<void> {
-    console.log('usercase session --->', req.session.userCase);
-
     this.CookiePrefrencesChanger(req, res);
 
     if (res.locals.isError || res.headersSent) {
@@ -59,6 +57,10 @@ export class GetController {
         },
       },
     });
+
+    if (req.session?.errors) {
+      req.session.errors = [];
+    }
 
     const RedirectConditions = {
       /*************************************** query @query  ***************************/
@@ -108,6 +110,8 @@ export class GetController {
       cookieMessage: false,
       htmlLang: language,
     };
+
+    req.session.paymentError = { hasError: false, errorContext: null };
 
     /**
      *

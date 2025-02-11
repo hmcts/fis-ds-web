@@ -3,7 +3,6 @@ import { mockResponse } from '../../../test/unit/utils/mockResponse';
 import { FormContent } from '../../app/form/Form';
 import * as steps from '../../steps';
 import { CONTACT_DETAILS } from '../../steps/urls'; //TOOK out CONTACT_DETAILS for EMAIL_ADDRESS RB
-import { isPhoneNoValid } from '../form/validation';
 
 import { PostController } from './PostController';
 
@@ -17,32 +16,6 @@ describe('PostController', () => {
   const mockFormContent = {
     fields: {},
   } as unknown as FormContent;
-
-  test('Should redirect back to the current page with the form data on errors', async () => {
-    const body = { applicant1PhoneNumber: 'invalid phone number' };
-    const mockPhoneNumberFormContent = {
-      fields: {
-        applicant1PhoneNumber: {
-          type: 'tel',
-          validator: isPhoneNoValid,
-        },
-      },
-    } as unknown as FormContent;
-    const controller = new PostController(mockPhoneNumberFormContent.fields);
-
-    const req = mockRequest({ body });
-    const res = mockResponse();
-    await controller.post(req, res);
-    expect(1).toEqual(1);
-
-    const redirectRequest = mockRequest({});
-    controller.checkReturnUrlAndRedirect(redirectRequest, res, []);
-
-    const getEventNameRequest = mockRequest({});
-    getEventNameRequest.originalUrl = CONTACT_DETAILS;
-    controller.getEventName(getEventNameRequest);
-    controller.redirect(redirectRequest, res, '');
-  });
 
   test('Should redirect to the next page if the form is valid', async () => {
     getNextStepUrlMock.mockReturnValue('/next-step-url');

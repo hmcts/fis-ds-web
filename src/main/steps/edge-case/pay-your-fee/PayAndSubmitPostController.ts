@@ -24,8 +24,10 @@ export default class PayAndSubmitPostController extends PostController<AnyObject
       if (req.session.errors.length) {
         return super.redirect(req, res, PAY_YOUR_FEE);
       } else if (formData.hwfPaymentSelection === YesOrNo.YES) {
+        delete req.session.userCase.helpWithFeesReferenceNumber;
         return super.redirect(req, res, HELP_WITH_FEE);
       }
+
       req.session.userCase.helpWithFeesReferenceNumber = formData.helpWithFeesReferenceNumber;
       this.handlePayment(req, res);
     } catch (e) {
