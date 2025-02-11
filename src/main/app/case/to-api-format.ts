@@ -1,4 +1,3 @@
-import dayjs from 'dayjs';
 
 import { Case, CaseDate, formFieldsToCaseMapping, formatCase } from './case';
 import { CaseData } from './definition';
@@ -20,12 +19,3 @@ export const toApiDate = (date: CaseDate | undefined): string => {
   return date.year + '-' + date.month.padStart(2, '0') + '-' + date.day.padStart(2, '0');
 };
 
-export const toDate = (date: string): CaseDate => {
-  return date
-    ? {
-        day: dayjs(date).format('DD'),
-        month: dayjs(date).format('MM'),
-        year: dayjs(date).format('YYYY'),
-      }
-    : { day: '', month: '', year: '' };
-};
