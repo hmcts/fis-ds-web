@@ -52,17 +52,17 @@ describe('role-type content', () => {
     expect(generatedContent.errors).toEqual(cyContent.errors);
   });
 
-  test('should contain namedApplicant field', () => {
+  test('should contain whomYouAreApplying field', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const namedApplicantField = fields.namedApplicant as FormOptions;
-    expect(namedApplicantField.type).toBe('radios');
-    expect(namedApplicantField.classes).toBe('govuk-radios');
-    expect((namedApplicantField.label as Function)(generatedContent)).toBe(enContent.label);
-    expect((namedApplicantField.values[0].label as Function)(generatedContent)).toBe(enContent.one);
-    expect((namedApplicantField.values[1].label as Function)(generatedContent)).toBe(enContent.two);
-    expect((namedApplicantField.values[2].label as Function)(generatedContent)).toBe(enContent.three);
+    const whomYouAreApplyingField = fields.whomYouAreApplying as FormOptions;
+    expect(whomYouAreApplyingField.type).toBe('radios');
+    expect(whomYouAreApplyingField.classes).toBe('govuk-radios');
+    expect((whomYouAreApplyingField.label as Function)(generatedContent)).toBe(enContent.label);
+    expect((whomYouAreApplyingField.values[0].label as Function)(generatedContent)).toBe(enContent.self);
+    expect((whomYouAreApplyingField.values[1].label as Function)(generatedContent)).toBe(enContent.forSomeone);
+    expect((whomYouAreApplyingField.values[2].label as Function)(generatedContent)).toBe(enContent.forCourtStaff);
   });
 
   test('should contain continue button', () => {
