@@ -6,6 +6,7 @@ import {
   ContactPreference,
   Document,
   TYPE_OF_APPLICATION,
+  UserRole,
   YesOrNo,
 } from './definition';
 
@@ -33,7 +34,8 @@ export const prepareUpdateCaseRequestData = (userCase: CaseWithId): UpdateCaseRe
   return {
     dssCaseData: JSON.stringify({
       edgeCaseTypeOfApplication: userCase?.edgeCaseTypeOfApplication,
-      namedApplicant: userCase?.namedApplicant,
+      whomYouAreApplying: userCase?.whomYouAreApplying,
+      namedApplicant: userCase?.whomYouAreApplying === UserRole.SELF ? YesOrNo.YES : YesOrNo.NO,
       caseTypeOfApplication: getCaseType(userCase?.edgeCaseTypeOfApplication),
       applicantFirstName: userCase?.applicantFirstName,
       applicantLastName: userCase?.applicantLastName,
@@ -73,6 +75,7 @@ export const mapUpdateCaseResponseData = (response: CaseData): UpdateCaseRespons
     applicantAddressTown: applicationData?.applicantAddressTown,
     applicantAddressCountry: applicationData?.applicantAddressCountry,
     applicantAddressPostcode: applicationData?.applicantAddressPostcode,
+    whomYouAreApplying: applicationData.whomYouAreApplying,
     namedApplicant: applicationData.namedApplicant,
     contactPreferenceType: applicationData.contactPreferenceType,
     applicantApplicationFormDocuments: applicationData.applicantApplicationFormDocuments,
@@ -112,6 +115,7 @@ export interface UpdateCaseRequest {
   dssCaseData: string; // JSON string of Case properties
 }
 export interface UpdateCaseResponse extends CreateCaseResponse {
+  whomYouAreApplying: UserRole;
   namedApplicant: YesOrNo;
   applicantFirstName: string;
   applicantLastName: string;

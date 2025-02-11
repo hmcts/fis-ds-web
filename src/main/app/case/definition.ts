@@ -15,6 +15,11 @@ export enum ContactPreference {
   NAMED_PERSON = 'NAMED_PERSON',
 }
 
+export enum UserRole {
+  SELF = 'self',
+  FOR_SOMEONE = 'forSomeone',
+  COURT_STAFF = 'forCourtStaff',
+}
 export type AddressUK = Address;
 
 export interface CaseLink {
