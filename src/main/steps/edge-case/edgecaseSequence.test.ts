@@ -1,3 +1,5 @@
+import { CaseWithId } from '../../app/case/case';
+import { TYPE_OF_APPLICATION } from '../../app/case/definition';
 import {
   ADDITIONAL_DOCUMENTS_UPLOAD,
   CHECK_YOUR_ANSWERS,
@@ -50,6 +52,11 @@ describe('Sequence must match respective path', () => {
 
     expect(edgecaseSequence[9].url).toBe(CONTACT_DETAILS);
     expect(edgecaseSequence[9].getNextStep({})).toBe('/upload/upload-your-documents');
+    expect(
+      edgecaseSequence[9].getNextStep({
+        edgeCaseTypeOfApplication: TYPE_OF_APPLICATION.FMPO,
+      } as Partial<CaseWithId>)
+    ).toBe('/select-court');
 
     expect(edgecaseSequence[10].url).toBe('/select-court');
     expect(edgecaseSequence[10].getNextStep({})).toBe('/upload/upload-your-documents');
@@ -65,6 +72,11 @@ describe('Sequence must match respective path', () => {
 
     expect(edgecaseSequence[14].url).toBe(STATEMENT_OF_TRUTH);
     expect(edgecaseSequence[14].getNextStep({})).toBe('/pay-your-fee');
+    expect(
+      edgecaseSequence[14].getNextStep({
+        edgeCaseTypeOfApplication: TYPE_OF_APPLICATION.FMPO,
+      } as Partial<CaseWithId>)
+    ).toBe('/application-submitted');
 
     expect(edgecaseSequence[15].url).toBe('/pay-your-fee');
     expect(edgecaseSequence[15].getNextStep({})).toBe('/help-with-fee');
@@ -72,7 +84,13 @@ describe('Sequence must match respective path', () => {
     expect(edgecaseSequence[16].url).toBe('/help-with-fee');
     expect(edgecaseSequence[16].getNextStep({})).toBe('/logout');
 
-    expect(edgecaseSequence[16].url).toBe('/help-with-fee');
-    expect(edgecaseSequence[16].getNextStep({})).toBe('/logout');
+    expect(edgecaseSequence[17].url).toBe('/application-submitted');
+    expect(edgecaseSequence[17].getNextStep({})).toBe('/type-of-application');
+
+    expect(edgecaseSequence[18].url).toBe('/user-role');
+    expect(edgecaseSequence[18].getNextStep({})).toBe('/full-name');
+
+    expect(edgecaseSequence[19].url).toBe('/cookies');
+    expect(edgecaseSequence[19].getNextStep({})).toBe('/user-role');
   });
 });

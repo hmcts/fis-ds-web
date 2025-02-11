@@ -21,7 +21,7 @@ jest.mock('../../steps', () => {
 import { mockRequest } from '../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../test/unit/utils/mockResponse';
 import { FieldPrefix } from '../case/case';
-import { FormFields, FormFieldsFn } from '../form/Form';
+import { FormContent, FormFields, FormFieldsFn } from '../form/Form';
 
 import { AddressLookupPostControllerBase } from './AddressLookupPostControllerBase';
 
@@ -34,9 +34,23 @@ describe('AddressLookupPostControllerBase', () => {
   beforeEach(() => {
     req = mockRequest({ session: { userCase: { email: 'test@example.com' } } });
     res = mockResponse();
+    const mockFieldFnForm: FormContent = {
+      fields: () => ({
+        customQuestion: {
+          label: 'custom',
+          type: 'text',
+        },
+      }),
+      submit: {
+        text: l => l.continue,
+      },
+      saveAsDraft: {
+        text: l => l.saveAsDraft,
+      },
+    };
 
     controller = new AddressLookupPostControllerBase({} as FormFields, FieldPrefix.APPLICANT);
-    controller1 = new AddressLookupPostControllerBase({} as FormFieldsFn, FieldPrefix.APPLICANT);
+    controller1 = new AddressLookupPostControllerBase(mockFieldFnForm.fields as FormFieldsFn, FieldPrefix.APPLICANT);
   });
 
   describe('when there are no form errors', () => {
