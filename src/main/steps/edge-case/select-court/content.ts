@@ -19,7 +19,7 @@ export const form: FormContent = {
           const courts = [...req.session.applicationSettings.availableCourts].map((court: CourtListOptions) => ({
             value: court.epimms_id,
             text: court.court_name,
-            selected: userCase?.selectedCourtId === court.court_name,
+            selected: userCase?.selectedCourtId === court.epimms_id,
           }));
 
           courts?.unshift({

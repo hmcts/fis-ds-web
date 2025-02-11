@@ -1,6 +1,6 @@
 import { getFormattedDate } from '../../../app/case/answers/formatDate';
 import { CaseWithId } from '../../../app/case/case';
-import { YesOrNo } from '../../../app/case/definition';
+import { ContactPreference } from '../../../app/case/definition';
 import { getFormattedAddress } from '../../../app/case/formatter/address';
 import { AppSession } from '../../../app/controller/AppRequest';
 import { PageContent } from '../../../app/controller/GetController';
@@ -76,72 +76,61 @@ const getSectionSummaryList = (rows: SummaryListRow[], content: PageContent): Go
 /* eslint-disable import/namespace */
 export const ApplicantSummaryList = (
   { sectionTitles, keys, ...content }: SummaryListContent,
-  session: AppSession
+  session: AppSession,
+  language: string
 ): SummaryList | undefined => {
   const caseData = session.userCase;
-  console.log('usercase in check your answer -->', caseData);
   const sectionTitle = sectionTitles.applicantDetails;
-  console.log('Address in util userCase --->', caseData);
-
-  const UserContactPreferences = function () {
-    let perference = '';
-    if (caseData['contactPreferenceType'] === 'NAMED_PERSON') {
-      perference = 'The person named on this application';
-    } else if (caseData['contactPreferenceType'] === 'ACCOUNT_OWNER') {
-      perference = 'The account owner';
-    } else {
-      perference = '';
-    }
-    return perference;
-  };
-
   const courtDetails = caseData.selectedCourtId
-    ? session.applicationSettings?.availableCourts?.find(court => court.id === caseData.selectedCourtId)
+    ? session.applicationSettings?.availableCourts?.find(court => court.epimms_id === caseData.selectedCourtId)
     : null;
 
   const SummaryData = [
     {
       key: keys.fullName,
-      value: caseData['applicantFirstName'] + ' ' + caseData['applicantLastName'],
-      changeUrl: Urls['FULL_NAME'],
+      value: `${caseData.applicantFirstName} ${caseData.applicantLastName}`,
+      changeUrl: Urls.FULL_NAME,
     },
     {
       key: keys.dateOfBirth,
-      value: getFormattedDate(caseData['applicantDateOfBirth'], content.language),
-      changeUrl: Urls['DATE_OF_BIRTH'],
+      value: getFormattedDate(caseData.applicantDateOfBirth, language),
+      changeUrl: Urls.DATE_OF_BIRTH,
     },
     {
       key: keys.address,
       valueHtml: getFormattedAddress(caseData),
-      changeUrl: Urls['MANUAL_ADDRESS'],
+      changeUrl: Urls.FIND_ADDRESS,
     },
     {
       key: keys.recievingEmail,
-      value: UserContactPreferences(),
-      changeUrl: Urls['CONTACT_PREFERENCES'],
+      value:
+        caseData.contactPreferenceType === ContactPreference.ACCOUNT_OWNER
+          ? keys['emailToAccountOwner']
+          : keys['emailToNamedPerson'],
+      changeUrl: Urls.CONTACT_PREFERENCES,
     },
     {
       key: keys.namedPersonEmail,
-      value: caseData['applicantEmailAddress'],
-      changeUrl: Urls['EMAIL_ADDRESS'],
+      value: caseData.applicantEmailAddress,
+      changeUrl: Urls.EMAIL_ADDRESS,
     },
     {
       key: keys.namedPersonTel,
-      value: caseData['applicantHomeNumber'],
-      changeUrl: Urls['CONTACT_DETAILS'],
+      value: caseData.applicantHomeNumber,
+      changeUrl: Urls.CONTACT_DETAILS,
     },
     {
       key: keys.namedPersonMob,
-      value: caseData['applicantPhoneNumber'],
-      changeUrl: Urls['CONTACT_DETAILS'],
+      value: caseData.applicantPhoneNumber,
+      changeUrl: Urls.CONTACT_DETAILS,
     },
   ];
 
   if (courtDetails) {
     SummaryData.push({
       key: keys.selectedCourt,
-      value: courtDetails.name,
-      changeUrl: Urls['SELECT_COURT'],
+      value: courtDetails.court_name,
+      changeUrl: Urls.SELECT_COURT,
     });
   }
   /** Removes entry in @summarydata if user is not a named user */
@@ -169,7 +158,7 @@ export const UploadFormSummary = (
   const SummaryData = [
     {
       key: keys.uploadDocuments,
-      value: ListOfUploadedDocuments,
+      valueHtml: ListOfUploadedDocuments,
       changeUrl: parseUrl(Urls['UPLOAD_YOUR_DOCUMENTS']).url,
     },
   ];
@@ -187,14 +176,11 @@ export const UserRole = (
   { sectionTitles, keys, ...content }: SummaryListContent,
   userCase: Partial<CaseWithId>
 ): SummaryList | undefined => {
-  const isNamedApplicant =
-    userCase['namedApplicant'] === YesOrNo.YES ? 'Yes' : 'No - I am sending an application for someone else.';
-
   const SummaryData = [
     {
       key: keys['user-role'],
-      value: isNamedApplicant,
-      changeUrl: Urls['USER_ROLE'],
+      value: userCase.whomYouAreApplying ? keys[userCase.whomYouAreApplying] : '',
+      changeUrl: Urls.USER_ROLE,
     },
   ];
 
@@ -222,7 +208,7 @@ export const AdditonalFormSummary = (
   const SummaryData = [
     {
       key: keys.additionalDocuments,
-      value: ListOfAdditionalDocuments,
+      valueHtml: ListOfAdditionalDocuments,
       changeUrl: parseUrl(Urls['ADDITIONAL_DOCUMENTS_UPLOAD']).url,
     },
   ];
