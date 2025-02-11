@@ -1,3 +1,4 @@
+import { FormContent } from '../../../app/form/Form';
 import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 import { CommonContent } from '../../common/common.content';
 
@@ -15,8 +16,10 @@ const cyContent = translations['cy'];
 describe('help-with-fees > content', () => {
   const commonContent = { language: 'en', userCase: {} } as CommonContent;
   let generatedContent;
+  let form;
   beforeEach(() => {
     generatedContent = generateContent(commonContent);
+        form = generatedContent.form as FormContent;
   });
 
   test('should return correct english content', () => {
@@ -31,7 +34,7 @@ describe('help-with-fees > content', () => {
   });
 
   test('should contain continue button', () => {
-    expect(generatedContent.continue).toEqual(enContent.continue);
+    expect((form.submit.text as Function)(generatedContent)).toEqual('Save and sign out');
   });
 });
 /* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
