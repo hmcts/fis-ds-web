@@ -1,14 +1,13 @@
 import * as express from 'express';
 import { Express, RequestHandler } from 'express';
 import helmet = require('helmet');
-
 export interface HelmetConfig {
   referrerPolicy: string;
 }
 
 const googleAnalyticsDomain = '*.google-analytics.com';
-const tagManager = '*.googletagmanager.com';
-
+const analyticsGoogleDomain = '*.analytics.google.com';
+const tagManager = ['*.googletagmanager.com', 'https://tagmanager.google.com'];
 const self = "'self'";
 
 /**
@@ -28,9 +27,11 @@ export class Helmet {
   private setContentSecurityPolicy(app: express.Express): void {
     const scriptSrc = [
       self,
-      tagManager,
+      ...tagManager,
       googleAnalyticsDomain,
+      analyticsGoogleDomain,
       "'sha256-+6WnXIl4mbFTCARd8N3COQmT3bJJmo32N8q8ZSQAIcU='",
+      "'sha256-lg82qnssXQTmdgC5xYHfamViQpkPqLnisEzL22H+Eso='"
     ];
 
     if (app.locals.developmentMode) {
@@ -40,13 +41,13 @@ export class Helmet {
     app.use(
       helmet.contentSecurityPolicy({
         directives: {
-          connectSrc: [self, googleAnalyticsDomain],
+          connectSrc: [self, googleAnalyticsDomain, analyticsGoogleDomain],
           defaultSrc: ["'none'"],
           fontSrc: [self, 'data:'],
-          imgSrc: [self, googleAnalyticsDomain, 'https://*.google-analytics.com', 'https://*.googletagmanager.com'],
+          imgSrc: [self, ...tagManager, googleAnalyticsDomain, analyticsGoogleDomain],
           objectSrc: [self],
           scriptSrc,
-          styleSrc: [self],
+          styleSrc: [self, ...tagManager],
         },
       }) as RequestHandler
     );
