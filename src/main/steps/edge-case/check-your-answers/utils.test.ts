@@ -96,7 +96,7 @@ describe.skip('upload-addition-documents > check-your-answers', () => {
         },
       },
     ])('return correct summary list items when %#', ({ userCase, expected }) => {
-      expect(ApplicantSummaryList(enContent, userCase)).not.toBe(expected);
+      expect(ApplicantSummaryList(enContent, userCase, 'en')).not.toBe(expected);
     });
   });
 });
@@ -191,7 +191,7 @@ describe.skip('upload-addition-documents > named owner > check-your-answers', ()
         },
       },
     ])('return correct summary list items when %#', ({ userCase, expected }) => {
-      expect(ApplicantSummaryList(enContent, userCase)).not.toBe(expected);
+      expect(ApplicantSummaryList(enContent, userCase, 'en')).not.toBe(expected);
     });
   });
 });
@@ -299,7 +299,7 @@ describe.skip('upload-addition-documents > named owner and both > named owner > 
         },
       },
     ])('return correct summary list items when %#', ({ userCase, expected }) => {
-      expect(ApplicantSummaryList(enContent, userCase)).not.toBe(expected);
+      expect(ApplicantSummaryList(enContent, userCase, 'en')).not.toBe(expected);
     });
   });
 });

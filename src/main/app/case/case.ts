@@ -7,6 +7,7 @@ import {
   ContactPreference,
   Document,
   TYPE_OF_APPLICATION,
+  UserRole,
   YesOrNo,
 } from './definition';
 
@@ -93,6 +94,7 @@ export enum FieldPrefix {
 export interface Case {
   edgeCaseTypeOfApplication: TYPE_OF_APPLICATION;
   caseTypeOfApplication: CASE_TYPE_OF_APPLICATION;
+  whomYouAreApplying: UserRole;
   namedApplicant: YesOrNo;
   contactPreferenceType: ContactPreference;
   applicantFirstName: string;
