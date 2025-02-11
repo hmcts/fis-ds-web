@@ -19,7 +19,7 @@ describe('help-with-fees > content', () => {
   let form;
   beforeEach(() => {
     generatedContent = generateContent(commonContent);
-        form = generatedContent.form as FormContent;
+    form = generatedContent.form as FormContent;
   });
 
   test('should return correct english content', () => {

@@ -33,7 +33,7 @@ describe('applicant > address > select > content', () => {
 
   beforeEach(() => {
     generatedContent = generateContent(commonContent);
-    delete commonContent1.userCase
+    delete commonContent1.userCase;
     generatedContentWithoutUsercase = generateContent(commonContent1);
     form1 = generatedContentWithoutUsercase.form as FormContent;
   });
@@ -68,17 +68,14 @@ describe('applicant > address > select > content', () => {
   });
 
   it('should have applicantSelectAddress label when language: en', () => {
-    const commonContent1 = { language: EN, userCase: {} } as CommonContent;
-
-    const generatedContent1 = generateContent(commonContent1);
-    expect(generatedContent1.section).toBe(enContent.section);
+    expect(generatedContent.section).toBe(enContent.section);
   });
 
   it('should have applicantSelectAddress label when language: cy', () => {
-    const commonContent1 = { language: CY, userCase: {} } as CommonContent;
+    const commonContentCy = { language: CY, userCase: {} } as CommonContent;
 
-    const generatedContent1 = generateContent(commonContent1);
-    expect(generatedContent1.section).toBe(cyContent.section);
+    const generatedContentCy = generateContent(commonContentCy);
+    expect(generatedContentCy.section).toBe(cyContent.section);
   });
 
   test('should contain continue button', () => {

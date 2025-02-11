@@ -44,7 +44,7 @@ describe('Applicant > full-name', () => {
     generatedContent = generateContent(commonContent);
     form = generatedContent.form as FormContent;
     fields = form.fields as FormFields;
-    delete commonContent1.userCase
+    delete commonContent1.userCase;
     generatedContent1 = generateContent(commonContent1);
     form1 = generatedContent1.form as FormContent;
     fields1 = form1.fields as FormFieldsFn;
@@ -79,6 +79,5 @@ describe('Applicant > full-name', () => {
   test('should contain continue button1', () => {
     expect((form1.submit.text as Function)(generatedContent1)).toEqual('Continue');
   });
-
 });
 /* eslint-enable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
