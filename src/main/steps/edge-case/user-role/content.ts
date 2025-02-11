@@ -1,10 +1,9 @@
 import { CaseWithId } from '../../../app/case/case';
-import { TYPE_OF_APPLICATION, YesOrNo } from '../../../app/case/definition';
+import { TYPE_OF_APPLICATION, UserRole } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFieldsFn } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
-
 const USER_ROLE = 'user-role';
 
 export const form: FormContent = {
@@ -15,9 +14,9 @@ export const form: FormContent = {
       label: l => l.label,
       selected: false,
       values: [
-        { label: l => l.one, value: YesOrNo.YES },
-        { label: l => l.two, value: YesOrNo.NO },
-        { label: l => l.three, value: YesOrNo.NO },
+        { label: l => l.self, value: UserRole.SELF },
+        { label: l => l.forSomeone, value: UserRole.FOR_SOMEONE },
+        { label: l => l.forCourtStaff, value: UserRole.COURT_STAFF },
       ],
       validator: isFieldFilledIn,
     };
@@ -33,7 +32,7 @@ export const form: FormContent = {
     }
 
     return {
-      namedApplicant: fieldConfig,
+      whomYouAreApplying: fieldConfig,
     };
   },
   submit: {
