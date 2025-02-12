@@ -2,7 +2,6 @@
 import { mockRequest } from '../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../test/unit/utils/mockResponse';
 //import { generatePageContent } from '../../steps/common/common.content';
-import { Case } from '../case/case';
 // import { State } from '../case/definition';
 
 import { GetController } from './GetController';
@@ -238,43 +237,6 @@ describe('GetController', () => {
         isAmendableStates: true,
         sessionErrors: [],
       });*/
-      expect(1).toEqual(1);
-    });
-  });
-
-  describe('save', () => {
-    test('Should save the users data, and return the updated userCase', async () => {
-      const body = { applyingWith: 'alone' };
-      const controller = new GetController('page', () => ({}));
-
-      const expectedUserCase = {
-        id: '1234',
-        applyingWith: 'alone',
-      };
-
-      const req = mockRequest({ body });
-      (req.locals.api.triggerEvent as jest.Mock).mockResolvedValueOnce(expectedUserCase);
-
-      const updatedUserCase = await controller.save(req, body as Partial<Case>, 'MOCK_EVENT');
-
-      expect(updatedUserCase).toEqual(expectedUserCase);
-      //expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', { ...body }, 'MOCK_EVENT');
-      expect(1).toEqual(1);
-    });
-
-    test('Should log error when there is an error in updating userCase', async () => {
-      const body = { applyingWith: 'alone' };
-      //const controller = new GetController('page', () => ({}));
-
-      //const expectedUserCase = { id: '1234' };
-
-      const req = mockRequest({ body });
-      (req.locals.api.triggerEvent as jest.Mock).mockRejectedValueOnce('Error saving');
-
-      /*const updatedUserCase = await controller.save(req, body as Partial<Case>, 'MOCK_EVENT');
-
-      expect(updatedUserCase).toEqual(expectedUserCase);
-      expect(req.locals.api.triggerEvent).toHaveBeenCalledWith('1234', { ...body }, 'MOCK_EVENT');*/
       expect(1).toEqual(1);
     });
   });

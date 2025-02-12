@@ -18,10 +18,8 @@ import {
   prepareCaseRequestData,
   prepareUpdateCaseRequestData,
 } from './api-utility';
-import { Case, CaseWithId } from './case';
-import { CaseAssignedUserRoles } from './case-roles';
+import { CaseWithId } from './case';
 import { CaseData, CourtListOptions, DocumentUploadResponse } from './definition';
-import { toApiFormat } from './to-api-format';
 
 export class CaseApi {
   /**
@@ -30,25 +28,6 @@ export class CaseApi {
    * @param logger
    */
   constructor(private readonly axios: AxiosInstance, private readonly logger: LoggerInstance) {}
-
-  /**
-   *
-   * @returns
-   */
-  public async getOrCreateCase(): Promise<any> {
-    return { id: '', state: 'FIS' };
-  }
-
-  /**
-   *
-   * @param caseId
-   * @returns
-   */
-  public async getCaseById(): Promise<CaseWithId> {
-    return new Promise(() => {
-      null;
-    });
-  }
 
   /**
    *
@@ -113,22 +92,6 @@ export class CaseApi {
 
   /**
    *
-   * @param caseId
-   * @param userId
-   * @returns
-   */
-  public async getCaseUserRoles(caseId: string, userId: string): Promise<CaseAssignedUserRoles> {
-    try {
-      const response = await this.axios.get<CaseAssignedUserRoles>(`case-users?case_ids=${caseId}&user_ids=${userId}`);
-      return response.data;
-    } catch (err) {
-      this.logError(err);
-      throw new Error('Case roles could not be fetched.');
-    }
-  }
-
-  /**
-   *
    * @returns
    */
   public async getCourtList(): Promise<CourtListOptions[]> {
@@ -148,24 +111,6 @@ export class CaseApi {
    * @param eventName
    * @returns
    */
-  private async sendEvent(caseId: string, data: Partial<CaseData>, eventName: string): Promise<CaseWithId> {
-    console.log({ caseId, data, eventName });
-    return new Promise(() => {
-      null;
-    });
-  }
-
-  /**
-   *
-   * @param caseId
-   * @param userData
-   * @param eventName
-   * @returns
-   */
-  public async triggerEvent(caseId: string, userData: Partial<Case>, eventName: string): Promise<CaseWithId> {
-    const data = toApiFormat(userData);
-    return this.sendEvent(caseId, data, eventName);
-  }
 
   /**
    *

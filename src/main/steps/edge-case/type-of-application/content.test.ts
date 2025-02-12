@@ -65,11 +65,13 @@ describe('role-type content', () => {
     expect((typeOfApplication.values[0].label as Function)(generatedContent)).toBe(enContent.fgm);
     expect((typeOfApplication.values[1].label as Function)(generatedContent)).toBe(enContent.fmpo);
     expect((typeOfApplication.values[2].label as Function)(generatedContent)).toBe(enContent.sg);
+    expect((typeOfApplication.values[3].label as Function)(generatedContent)).toBe(enContent.dop);
+    expect((typeOfApplication.values[4].label as Function)(generatedContent)).toBe(enContent.po);
   });
 
   test('should contain continue button', () => {
     const generatedContent = generateContent(commonContent);
-    expect(generatedContent.continue).toEqual(enContent.continue);
+    expect(generatedContent.submit).toEqual(enContent.saveAndContinue);
   });
 });
 /* eslint-enable @typescript-eslint/ban-types */
