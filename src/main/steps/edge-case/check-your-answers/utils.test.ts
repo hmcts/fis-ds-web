@@ -114,7 +114,7 @@ describe('upload-addition-documents > check-your-answers', () => {
         },
       },
     ])('return correct summary list items when %#', ({ req, expected }) => {
-      expect(ApplicantSummaryList(enContent, req.session as AppSession)).not.toBe(expected);
+      expect(ApplicantSummaryList(enContent, req.session as AppSession, 'en')).not.toBe(expected);
     });
   });
 });
@@ -215,7 +215,7 @@ describe('upload-addition-documents > named owner > check-your-answers', () => {
         },
       },
     ])('return correct summary list items when %#', ({ session, expected }) => {
-      expect(ApplicantSummaryList(enContent, session as AppSession)).not.toBe(expected);
+      expect(ApplicantSummaryList(enContent, session as AppSession, 'en')).not.toBe(expected);
     });
   });
 });
@@ -328,7 +328,7 @@ describe('upload-addition-documents > named owner and both > named owner > check
         },
       },
     ])('return correct summary list items when %#', ({ session, expected }) => {
-      expect(ApplicantSummaryList(enContent, session as AppSession)).not.toBe(expected);
+      expect(ApplicantSummaryList(enContent, session as AppSession, 'en')).not.toBe(expected);
     });
   });
 });

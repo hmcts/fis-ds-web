@@ -14,7 +14,7 @@ export const enContent = {
   ...Translations.en,
 };
 
-const en = (content: any) => {
+const en = (content: CommonContent) => {
   const userCase = content.userCase!;
   const caseDocuments = userCase.applicantApplicationFormDocuments;
   const additionalDocuments = userCase.applicantAdditionalDocuments;

@@ -106,14 +106,6 @@ export class CaseApi {
 
   /**
    *
-   * @param caseId
-   * @param data
-   * @param eventName
-   * @returns
-   */
-
-  /**
-   *
    * @param error
    */
   private logError(error: AxiosError) {

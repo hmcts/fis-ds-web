@@ -146,7 +146,6 @@ export const UploadFormSummary = (
   { sectionTitles, keys, ...content }: SummaryListContent,
   uploadedDocuments: Partial<any>
 ): SummaryList | undefined => {
-  console.log(uploadedDocuments);
   const ListOfUploadedDocuments = uploadedDocuments
     .map((document): string => {
       return document.document_filename + '';

@@ -31,7 +31,7 @@ export class Helmet {
       googleAnalyticsDomain,
       analyticsGoogleDomain,
       "'sha256-+6WnXIl4mbFTCARd8N3COQmT3bJJmo32N8q8ZSQAIcU='",
-      "'sha256-lg82qnssXQTmdgC5xYHfamViQpkPqLnisEzL22H+Eso='"
+      "'sha256-lg82qnssXQTmdgC5xYHfamViQpkPqLnisEzL22H+Eso='",
     ];
 
     if (app.locals.developmentMode) {

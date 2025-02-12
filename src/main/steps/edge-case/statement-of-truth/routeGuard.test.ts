@@ -56,4 +56,23 @@ describe('statement of truth > routeGuard', () => {
     expect(req.session.paymentError).toStrictEqual({ hasError: true, errorContext: 'applicationNotSubmitted' });
     expect(res.redirect).toHaveBeenCalledWith('/statement-of-truth');
   });
+
+  describe('get', () => {
+    test('should redirect to type of application if case is submitted', async () => {
+      const req = mockRequest({ session: { userCase: { state: 'SUBMITTED_PAID' } } });
+      const res = mockResponse();
+      const next = jest.fn();
+      await routeGuard.get(req, res, next);
+      expect(next).not.toHaveBeenCalled();
+      expect(res.redirect).toHaveBeenCalledWith('/type-of-application');
+    });
+
+    test('should call next if case is not submitted', async () => {
+      const req = mockRequest({ session: { userCase: { state: 'AWAITING_SUBMISSION_TO_HMCTS' } } });
+      const res = mockResponse();
+      const next = jest.fn();
+      await routeGuard.get(req, res, next);
+      expect(next).toHaveBeenCalled();
+    });
+  });
 });

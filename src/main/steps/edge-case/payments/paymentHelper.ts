@@ -22,7 +22,7 @@ export class PaymentHelper {
     let token = '';
     id = id + '';
     try {
-      const ServiceAuthToken = await getServiceAuthToken();
+      const ServiceAuthToken = getServiceAuthToken();
       token = ServiceAuthToken;
     } catch (error) {
       req.locals.logger.error(error);

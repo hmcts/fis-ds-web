@@ -75,4 +75,15 @@ describe('pay your fee > content', () => {
   test('should contain continue button', () => {
     expect(generatedContent.continue).toEqual(enContent.continue);
   });
+
+  test('should disable form when fee error present', () => {
+    generatedContent = generateContent({
+      ...commonContent,
+      language: 'en',
+      additionalData: { req: { session: { errors: [{ errorType: 'errorFetchingFee', propertyName: '*' }] } } },
+    });
+    expect(generatedContent.hasFeeError).toBeTruthy();
+    expect(generatedContent.form.submit.disabled).toBeTruthy();
+    expect(generatedContent.form.fields.hwfPaymentSelection.values[0].disabled).toBeTruthy();
+  });
 });

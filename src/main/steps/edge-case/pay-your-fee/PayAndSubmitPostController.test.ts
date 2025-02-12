@@ -63,11 +63,12 @@ describe('pay-your-fee > pay and submit post controller', () => {
   test('should redirect to hwf page if hwfPaymentSelection is yes', async () => {
     req.session.userCase.edgeCaseTypeOfApplication = 'PO' as TYPE_OF_APPLICATION;
     req.body.hwfPaymentSelection = 'Yes';
-
+    req.session.userCase.helpWithFeesReferenceNumber = 'HWF-123';
     await controller.post(req, res);
 
     expect(req.session.save).toHaveBeenCalled();
     expect(req.session.paymentError).toStrictEqual({ hasError: false, errorContext: null });
+    expect(req.session.userCase.helpWithFeesReferenceNumber).toBeUndefined();
     expect(res.redirect).toHaveBeenCalledWith('/help-with-fee');
   });
 
