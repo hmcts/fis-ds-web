@@ -41,12 +41,10 @@ cookieManager.init({
     },
     {
       categoryName: 'analytics',
-      optional: true,
-      cookies: ['_ga', '_gid'],
+      cookies: ['_ga', '_gid', '_gat_UA-'],
     },
     {
       categoryName: 'apm',
-      optional: true,
       cookies: ['dtCookie', 'dtLatC', 'dtPC', 'dtSa', 'rxVisitor', 'rxvt'],
     },
   ],

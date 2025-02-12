@@ -7,7 +7,7 @@ import UploadAdditionalDocumentPostController from './uploadAdditionalDocumentPo
 const uploadDocumentMock = jest.spyOn(CaseApi.prototype, 'uploadDocument');
 const updateCaseMock = jest.spyOn(CaseApi.prototype, 'updateCase');
 
-describe.skip('document upload > upload additional documents > post controller', () => {
+describe('document upload > upload additional documents > post controller', () => {
   let postController;
   let req;
   let res;
@@ -21,6 +21,7 @@ describe.skip('document upload > upload additional documents > post controller',
 
   test('post should upload documents to session', async () => {
     req.body.saveAndContinue = false;
+    req.body.uploadFile = { name: 'test.jpg', data: '', mimetype: 'image/jpeg', size: '123' };
     req.files = { additionalApplicationUpload: { name: 'test.jpg', data: '', mimetype: 'image/jpeg', size: '123' } };
     req.session.userCase.applicantAdditionalDocuments = [];
     uploadDocumentMock.mockResolvedValue({

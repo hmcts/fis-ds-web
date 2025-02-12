@@ -1,4 +1,4 @@
-import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
+import { FormContent, FormFields, FormInput } from '../../../app/form/Form';
 import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 import { CommonContent } from '../../common/common.content';
 import { SELECT_COURT } from '../../urls';
@@ -30,8 +30,8 @@ const cyContent = {
 };
 
 /* eslint-disable @typescript-eslint/ban-types */
-describe.skip('role-type content', () => {
-  const commonContent = { language: EN, userCase: {} } as CommonContent;
+describe('role-type content', () => {
+  let commonContent = { language: EN, userCase: {} } as CommonContent;
   test('should return correct english content', () => {
     const generatedContent = generateContent(commonContent);
     expect(generatedContent.continue).toEqual(enContent.continue);
@@ -55,16 +55,44 @@ describe.skip('role-type content', () => {
   });
 
   test('should contain namedApplicant field', () => {
+    //commonContent.additionalData!.req.session.userCase.hearingCollection = undefined;
+    commonContent = {
+      ...commonContent,
+      additionalData: {
+        req: {
+          session: {
+            applicationSettings: {
+              availableCourts: [
+                {
+                  epimms_id: '',
+                  court_name: '',
+                },
+              ],
+            },
+          },
+        },
+      },
+    };
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const selectedCourt = fields.selectedCourt as FormOptions;
+    const selectedCourt = fields.selectedCourtId as FormInput;
+    expect((selectedCourt.label as Function)(generatedContent)).toBe(enContent.label);
+    expect((selectedCourt.options as Function)(generatedContent)).toStrictEqual([
+      {
+        selected: true,
+        text: '-- Select a value --',
+        value: '',
+      },
+      { selected: false, text: '', value: '' },
+    ]);
     expect((selectedCourt.label as Function)(generatedContent)).toBe(enContent.label);
   });
 
   test('should contain continue button', () => {
     const generatedContent = generateContent(commonContent);
-    expect(generatedContent.continue).toEqual(enContent.continue);
+    const form = generatedContent.form as FormContent;
+    expect((form?.submit?.text as Function)(generatedContent)).toBe(enContent.continue);
   });
 });
 /* eslint-enable @typescript-eslint/ban-types */

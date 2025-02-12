@@ -1,6 +1,7 @@
 import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
-import { UserRole } from '../../../app/case/definition';
+import { YesOrNo } from '../../../app/case/definition';
+import { FormFieldsFn } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import * as steps from '../../../steps';
 import { DATE_OF_BIRTH, FULL_NAME } from '../../urls';
@@ -72,8 +73,8 @@ describe('UserRolePostController', () => {
 
   test('Should redirect to full name page when for someone radio button selected', async () => {
     const mockForm = {
-      fields: {
-        whomYouAreApplying: {
+      fields: () => ({
+        namedApplicant: {
           type: 'radios',
           values: [
             { label: l => l.self, value: UserRole.SELF },
@@ -82,12 +83,12 @@ describe('UserRolePostController', () => {
           ],
           validator: isFieldFilledIn,
         },
-      },
+      }),
       submit: {
         text: l => l.continue,
       },
     };
-    const controller = new UserRolePostController(mockForm.fields);
+    const controller = new UserRolePostController(mockForm.fields as FormFieldsFn);
 
     const body = { whomYouAreApplying: 'forSomeone' };
 

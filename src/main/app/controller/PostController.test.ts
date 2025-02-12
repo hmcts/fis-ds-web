@@ -166,6 +166,58 @@ describe('PostController', () => {
     expect(1).toEqual(1);
   });
 
+  test('whether the citizen update call is made with the expected user data', async () => {
+    getNextStepUrlMock.mockReturnValue('/next-step-url');
+    const body = { MOCK_KEY: 'MOCK_VALUE' };
+    const controller = new PostController(mockFormContent.fields);
+
+    const expectedUserCase = {
+      id: '1234',
+      MOCK_KEY: 'MOCK_VALUE',
+    };
+
+    const req = mockRequest({ body });
+    const res = mockResponse();
+    await controller.post(req, res);
+
+    expect(req.session.userCase).toEqual(expectedUserCase);
+    expect(getNextStepUrlMock).toHaveBeenCalledWith(req, expectedUserCase);
+    expect(res.redirect).toHaveBeenCalledWith('/next-step-url');
+    expect(req.session.errors).toStrictEqual([]);
+  });
+
+  // test('Should save the users data and end response for session timeout', async () => {
+  //   const body = { MOCK_KEY: 'MOCK_VALUE', saveBeforeSessionTimeout: true };
+  //   const controller = new PostController(mockFormContent.fields);
+
+  //   const req = mockRequest({ body });
+  //   const res = mockResponse();
+  //   await controller.post(req, res);
+  //   expect(res.end).toHaveBeenCalled();
+  // });
+
+  test('whether the citizen update api call is made with correct user details fistname lastname update caseid', async () => {
+    getNextStepUrlMock.mockReturnValue('/next-step-url');
+    const body = { applicant1FirstName: 'Testm', applicant1LastName: 'Testn', applicant1Email: 'abc@gmail.com' };
+    const controller = new PostController(mockFormContent.fields);
+
+    const expectedUserCase = {
+      id: '1234',
+      applicant1FirstName: 'Testm',
+      applicant1LastName: 'Testn',
+      applicant1Email: 'abc@gmail.com',
+    };
+
+    const req = mockRequest({ body });
+    const res = mockResponse();
+    await controller.post(req, res);
+
+    expect(req.session.userCase).toEqual(expectedUserCase);
+    expect(getNextStepUrlMock).toHaveBeenCalledWith(req, expectedUserCase);
+    expect(res.redirect).toHaveBeenCalledWith('/next-step-url');
+    expect(req.session.errors).toStrictEqual([]);
+  });
+
   test('whether NO calls are made to server when valid input data is given', async () => {
     getNextStepUrlMock.mockReturnValue('/next-step-url');
     const body = {

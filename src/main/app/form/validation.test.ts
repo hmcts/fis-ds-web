@@ -18,6 +18,7 @@ import {
   isTextAreaValid,
   isValidAccessCode,
   isValidCaseReference,
+  isValidOption,
 } from './validation';
 
 describe('Validation', () => {
@@ -340,5 +341,11 @@ describe('isTextAreaValid()', () => {
       'abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz098765432109876543212345abcdefghijklmnopqrstquvxyz0987654321098765432123450abcdefghijklmnopqrstuvwxyz0987654321000000000000000000000000000000';
 
     expect(isTextAreaValid(value)).toStrictEqual('invalid');
+  });
+
+  test('Should check if isValidOption', async () => {
+    const value = '';
+
+    expect(isValidOption(value)).toStrictEqual('notSelected');
   });
 });
