@@ -1,6 +1,6 @@
 import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
-import { YesOrNo } from '../../../app/case/definition';
+import { UserRole } from '../../../app/case/definition';
 import { FormFieldsFn } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
 import * as steps from '../../../steps';
@@ -74,7 +74,7 @@ describe('UserRolePostController', () => {
   test('Should redirect to full name page when for someone radio button selected', async () => {
     const mockForm = {
       fields: () => ({
-        namedApplicant: {
+        whomYouAreApplying: {
           type: 'radios',
           values: [
             { label: l => l.self, value: UserRole.SELF },

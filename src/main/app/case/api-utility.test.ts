@@ -104,7 +104,7 @@ describe('api-utility', () => {
   test('prepareUpdateCaseRequestData', () => {
     expect(prepareUpdateCaseRequestData(data)).toStrictEqual({
       dssCaseData:
-        '{"edgeCaseTypeOfApplication":"FMPO","namedApplicant":"","caseTypeOfApplication":"FL401","applicantFirstName":"y","applicantLastName":"z","applicantDateOfBirth":{"day":"01","month":"01","year":"2000"},"contactPreference":"","applicantEmailAddress":"","applicantPhoneNumber":"","applicantHomeNumber":"","applicantAddress1":"","applicantAddress2":"","applicantAddressTown":"","applicantAddressCountry":"United Kingdom","selectedCourtId":"","applicantAddressPostcode":"","applicantApplicationFormDocuments":[],"applicantAdditionalDocuments":[],"applicantStatementOfTruth":"","paymentServiceRequestReferenceNumber":"","paymentReferenceNumber":""}',
+        '{"edgeCaseTypeOfApplication":"FMPO","namedApplicant":"No","caseTypeOfApplication":"FL401","applicantFirstName":"y","applicantLastName":"z","applicantDateOfBirth":{"day":"01","month":"01","year":"2000"},"contactPreference":"","applicantEmailAddress":"","applicantPhoneNumber":"","applicantHomeNumber":"","applicantAddress1":"","applicantAddress2":"","applicantAddressTown":"","applicantAddressCountry":"United Kingdom","selectedCourtId":"","applicantAddressPostcode":"","applicantApplicationFormDocuments":[],"applicantAdditionalDocuments":[],"applicantStatementOfTruth":"","paymentServiceRequestReferenceNumber":"","paymentReferenceNumber":""}',
     });
   });
   test('mapUpdateCaseResponseData', () => {
@@ -137,6 +137,7 @@ describe('api-utility', () => {
       paymentReferenceNumber: undefined,
       paymentServiceRequestReferenceNumber: undefined,
       selectedCourtId: undefined,
+      whomYouAreApplying: undefined,
     });
   });
 });
