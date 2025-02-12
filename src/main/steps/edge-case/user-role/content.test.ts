@@ -57,7 +57,7 @@ describe('role-type content', () => {
     expect(generatedContent.errors).toEqual(cyContent.errors);
   });
 
-  test('should contain namedApplicant field', () => {
+  test('should contain whomYouAreApplying field', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
