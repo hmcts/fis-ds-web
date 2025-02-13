@@ -55,6 +55,7 @@ export const prepareUpdateCaseRequestData = (userCase: CaseWithId): UpdateCaseRe
       applicantStatementOfTruth: userCase?.applicantStatementOfTruth,
       paymentServiceRequestReferenceNumber: userCase?.paymentDetails?.serviceRequestReference,
       paymentReferenceNumber: userCase?.paymentDetails?.payment_reference,
+      helpWithFeesReferenceNumber: userCase?.helpWithFeesReferenceNumber,
     }),
   };
 };
