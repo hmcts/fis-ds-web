@@ -6832,6 +6832,7 @@ __metadata:
     webpack: "npm:^5.67.0"
     webpack-cli: "npm:^5.1.4"
     webpack-dev-middleware: "npm:^5.3.0"
+    winston: "npm:^2.4.7"
   languageName: unknown
   linkType: soft
 
@@ -16335,7 +16336,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"winston@npm:^2.4.5":
+"winston@npm:^2.4.5, winston@npm:^2.4.7":
   version: 2.4.7
   resolution: "winston@npm:2.4.7"
   dependencies:
