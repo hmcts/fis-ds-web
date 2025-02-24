@@ -102,7 +102,6 @@ export interface Case {
   applicantDateOfBirth: CaseDate;
   applicantEmailAddress: string;
   applicantPhoneNumber: string;
-  applicantHomeNumber: string;
   applicantAddress1: string;
   applicantAddress2: string;
   applicantAddressTown: string;

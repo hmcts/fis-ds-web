@@ -43,7 +43,6 @@ export const prepareUpdateCaseRequestData = (userCase: CaseWithId): UpdateCaseRe
       contactPreference: userCase?.contactPreferenceType,
       applicantEmailAddress: userCase?.applicantEmailAddress,
       applicantPhoneNumber: userCase?.applicantPhoneNumber,
-      applicantHomeNumber: userCase?.applicantHomeNumber,
       applicantAddress1: userCase?.applicantAddress1,
       applicantAddress2: userCase?.applicantAddress2,
       applicantAddressTown: userCase?.applicantAddressTown,
@@ -70,7 +69,6 @@ export const mapUpdateCaseResponseData = (response: CaseData): UpdateCaseRespons
     applicantDateOfBirth: applicationData?.applicantDateOfBirth,
     applicantEmailAddress: applicationData?.applicantEmailAddress,
     applicantPhoneNumber: applicationData?.applicantPhoneNumber,
-    applicantHomeNumber: applicationData.applicantHomeNumber,
     applicantAddress1: applicationData?.applicantAddress1,
     applicantAddress2: applicationData?.applicantAddress2,
     applicantAddressTown: applicationData?.applicantAddressTown,
@@ -124,7 +122,6 @@ export interface UpdateCaseResponse extends CreateCaseResponse {
   contactPreferenceType: ContactPreference;
   applicantEmailAddress: string;
   applicantPhoneNumber: string;
-  applicantHomeNumber: string;
   applicantAddress1: string;
   applicantAddress2: string;
   applicantAddressTown: string;

@@ -115,11 +115,6 @@ export const ApplicantSummaryList = (
       changeUrl: Urls.EMAIL_ADDRESS,
     },
     {
-      key: keys.namedPersonTel,
-      value: caseData.applicantHomeNumber,
-      changeUrl: Urls.CONTACT_DETAILS,
-    },
-    {
       key: keys.namedPersonMob,
       value: caseData.applicantPhoneNumber,
       changeUrl: Urls.CONTACT_DETAILS,

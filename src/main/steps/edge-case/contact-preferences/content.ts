@@ -6,6 +6,8 @@ import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 
 const CONTACT_PREFERENCES_TRANSLATION_FILE = 'contact-preferences';
 
+export * from './routeGuard';
+
 export const form: FormContent = {
   fields: {
     contactPreferenceType: {

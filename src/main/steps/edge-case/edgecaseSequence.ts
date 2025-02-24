@@ -1,4 +1,5 @@
-import { TYPE_OF_APPLICATION } from '../../app/case/definition';
+import { CaseWithId } from '../../app/case/case';
+import { TYPE_OF_APPLICATION, UserRole } from '../../app/case/definition';
 import { parseUrl } from '../../steps/common/url-parser';
 import { Sections, Step } from '../constants';
 import {
@@ -54,12 +55,14 @@ export const edgecaseSequence: Step[] = [
   {
     url: SELECT_ADDRESS,
     showInSection: Sections.AboutEdgeCase,
-    getNextStep: () => CONTACT_PREFERENCES,
+    getNextStep: (caseData: Partial<CaseWithId>) =>
+      caseData.whomYouAreApplying === UserRole.SELF ? EMAIL_ADDRESS : CONTACT_PREFERENCES,
   },
   {
     url: MANUAL_ADDRESS,
     showInSection: Sections.AboutEdgeCase,
-    getNextStep: () => CONTACT_PREFERENCES,
+    getNextStep: (caseData: Partial<CaseWithId>) =>
+      caseData.whomYouAreApplying === UserRole.SELF ? EMAIL_ADDRESS : CONTACT_PREFERENCES,
   },
   {
     url: CONTACT_PREFERENCES,
