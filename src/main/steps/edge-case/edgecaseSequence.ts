@@ -1,5 +1,4 @@
-import { CaseWithId } from '../../app/case/case';
-import { TYPE_OF_APPLICATION, UserRole } from '../../app/case/definition';
+import { TYPE_OF_APPLICATION } from '../../app/case/definition';
 import { parseUrl } from '../../steps/common/url-parser';
 import { Sections, Step } from '../constants';
 import {
@@ -7,7 +6,6 @@ import {
   APPLICATION_SUBMITTED,
   CHECK_YOUR_ANSWERS,
   CONTACT_DETAILS,
-  CONTACT_PREFERENCES,
   COOKIES,
   DATE_OF_BIRTH,
   EMAIL_ADDRESS,
@@ -29,7 +27,10 @@ export const edgecaseSequence: Step[] = [
   {
     url: TYPE_OF_APPLICATION_URL,
     showInSection: Sections.AboutEdgeCase,
-    getNextStep: () => USER_ROLE,
+    getNextStep: data =>
+      [TYPE_OF_APPLICATION.FGM, TYPE_OF_APPLICATION.FMPO].includes(data.edgeCaseTypeOfApplication!)
+        ? USER_ROLE
+        : DATE_OF_BIRTH,
   },
   {
     url: USER_ROLE,
@@ -55,17 +56,10 @@ export const edgecaseSequence: Step[] = [
   {
     url: SELECT_ADDRESS,
     showInSection: Sections.AboutEdgeCase,
-    getNextStep: (caseData: Partial<CaseWithId>) =>
-      caseData.whomYouAreApplying === UserRole.SELF ? EMAIL_ADDRESS : CONTACT_PREFERENCES,
+    getNextStep: () => EMAIL_ADDRESS,
   },
   {
     url: MANUAL_ADDRESS,
-    showInSection: Sections.AboutEdgeCase,
-    getNextStep: (caseData: Partial<CaseWithId>) =>
-      caseData.whomYouAreApplying === UserRole.SELF ? EMAIL_ADDRESS : CONTACT_PREFERENCES,
-  },
-  {
-    url: CONTACT_PREFERENCES,
     showInSection: Sections.AboutEdgeCase,
     getNextStep: () => EMAIL_ADDRESS,
   },

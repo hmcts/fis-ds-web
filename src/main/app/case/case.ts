@@ -1,15 +1,7 @@
 import { AnyObject } from '../controller/PostController';
 
 import { State } from './CaseApi';
-import {
-  CASE_TYPE_OF_APPLICATION,
-  CaseData,
-  ContactPreference,
-  Document,
-  TYPE_OF_APPLICATION,
-  UserRole,
-  YesOrNo,
-} from './definition';
+import { CASE_TYPE_OF_APPLICATION, CaseData, Document, TYPE_OF_APPLICATION, UserRole, YesOrNo } from './definition';
 
 export const formFieldsToCaseMapping: Partial<Record<keyof Case, keyof CaseData>> = {};
 
@@ -96,7 +88,6 @@ export interface Case {
   caseTypeOfApplication: CASE_TYPE_OF_APPLICATION;
   whomYouAreApplying: UserRole;
   namedApplicant: YesOrNo;
-  contactPreferenceType: ContactPreference;
   applicantFirstName: string;
   applicantLastName: string;
   applicantDateOfBirth: CaseDate;

@@ -1,14 +1,6 @@
 import { State } from './CaseApi';
 import { Case, CaseDate, CaseWithId } from './case';
-import {
-  CASE_TYPE_OF_APPLICATION,
-  CaseData,
-  ContactPreference,
-  Document,
-  TYPE_OF_APPLICATION,
-  UserRole,
-  YesOrNo,
-} from './definition';
+import { CASE_TYPE_OF_APPLICATION, CaseData, Document, TYPE_OF_APPLICATION, UserRole, YesOrNo } from './definition';
 
 export const prepareCaseRequestData = (userCase: CaseWithId): CreateCaseRequest => {
   return {
@@ -40,7 +32,6 @@ export const prepareUpdateCaseRequestData = (userCase: CaseWithId): UpdateCaseRe
       applicantFirstName: userCase?.applicantFirstName,
       applicantLastName: userCase?.applicantLastName,
       applicantDateOfBirth: userCase?.applicantDateOfBirth,
-      contactPreference: userCase?.contactPreferenceType,
       applicantEmailAddress: userCase?.applicantEmailAddress,
       applicantPhoneNumber: userCase?.applicantPhoneNumber,
       applicantAddress1: userCase?.applicantAddress1,
@@ -76,7 +67,6 @@ export const mapUpdateCaseResponseData = (response: CaseData): UpdateCaseRespons
     applicantAddressPostcode: applicationData?.applicantAddressPostcode,
     whomYouAreApplying: applicationData.whomYouAreApplying,
     namedApplicant: applicationData.namedApplicant,
-    contactPreferenceType: applicationData.contactPreferenceType,
     applicantApplicationFormDocuments: applicationData.applicantApplicationFormDocuments,
     applicantAdditionalDocuments: applicationData.applicantAdditionalDocuments,
     selectedCourtId: applicationData.selectedCourtId,
@@ -119,7 +109,6 @@ export interface UpdateCaseResponse extends CreateCaseResponse {
   applicantFirstName: string;
   applicantLastName: string;
   applicantDateOfBirth: CaseDate;
-  contactPreferenceType: ContactPreference;
   applicantEmailAddress: string;
   applicantPhoneNumber: string;
   applicantAddress1: string;
