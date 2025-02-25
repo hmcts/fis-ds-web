@@ -1,3 +1,5 @@
+import { isFGMOrFMPOCase } from '../../steps/edge-case/util';
+
 import { State } from './CaseApi';
 import { Case, CaseDate, CaseWithId } from './case';
 import { CASE_TYPE_OF_APPLICATION, CaseData, Document, TYPE_OF_APPLICATION, UserRole, YesOrNo } from './definition';
@@ -79,9 +81,7 @@ export const mapUpdateCaseResponseData = (response: CaseData): UpdateCaseRespons
 };
 
 const getCaseType = (edgeCaseTypeOfApplication: TYPE_OF_APPLICATION): CASE_TYPE_OF_APPLICATION => {
-  return [TYPE_OF_APPLICATION.FGM, TYPE_OF_APPLICATION.FMPO].includes(edgeCaseTypeOfApplication)
-    ? CASE_TYPE_OF_APPLICATION.FL401
-    : CASE_TYPE_OF_APPLICATION.C100;
+  return isFGMOrFMPOCase(edgeCaseTypeOfApplication) ? CASE_TYPE_OF_APPLICATION.FL401 : CASE_TYPE_OF_APPLICATION.C100;
 };
 
 export type CreateCaseRequest = {

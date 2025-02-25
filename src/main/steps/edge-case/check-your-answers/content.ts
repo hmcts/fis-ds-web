@@ -1,10 +1,10 @@
 import _ from 'lodash';
 
-import { TYPE_OF_APPLICATION } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 import { CommonContent } from '../../../steps/common/common.content';
+import { isFGMOrFMPOCase } from '../util';
 
 import { AdditonalFormSummary, ApplicantSummaryList, TypeOfApplication, UploadFormSummary, UserRole } from './utils';
 const resourceLoader = new ResourceReader();
@@ -21,7 +21,7 @@ const en = (content: CommonContent) => {
   const additionalDocuments = userCase.applicantAdditionalDocuments;
   const sections = [TypeOfApplication(enContent, userCase)];
 
-  if ([TYPE_OF_APPLICATION.FGM, TYPE_OF_APPLICATION.FMPO].includes(userCase.edgeCaseTypeOfApplication!)) {
+  if (isFGMOrFMPOCase(userCase.edgeCaseTypeOfApplication!)) {
     sections.push(UserRole(enContent, userCase));
   }
 
@@ -52,7 +52,7 @@ const cy: typeof en = (content: CommonContent) => {
 
   const sections = [TypeOfApplication(cyContent, userCase)];
 
-  if ([TYPE_OF_APPLICATION.FGM, TYPE_OF_APPLICATION.FMPO].includes(userCase.edgeCaseTypeOfApplication!)) {
+  if (isFGMOrFMPOCase(userCase.edgeCaseTypeOfApplication!)) {
     sections.push(UserRole(cyContent, userCase));
   }
 

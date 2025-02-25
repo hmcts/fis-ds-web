@@ -1,8 +1,7 @@
-import { TYPE_OF_APPLICATION } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
-import { loadResources } from '../util';
+import { isFGMOrFMPOCase, loadResources } from '../util';
 
 export * from './routeGuard';
 
@@ -35,7 +34,7 @@ export const generateContent: TranslationFn = content => {
 
   return {
     ...translations,
-    submit: [TYPE_OF_APPLICATION.FGM, TYPE_OF_APPLICATION.FMPO].includes(typeOfApplication!)
+    submit: isFGMOrFMPOCase(typeOfApplication!)
       ? translations.submitApplication
       : translations.continue ?? translations.continue,
     form,
