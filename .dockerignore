@@ -6,7 +6,8 @@
 
 !package.json
 !yarn.lock
-
+!.yarn/**
+!.yarnrc.yml
 !tsconfig.json
 !webpack/**
 !src/main/**
