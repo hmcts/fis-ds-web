@@ -26,8 +26,7 @@ exports.config = {
         minTimeout: 2000
       },
       autoDelay: { enabled: true }
-    },
-    DONT_FAIL_ON_EMPTY_RUN: true,
+    }
   };
   
   
