@@ -3,15 +3,15 @@
         "en": {
             "continue": "Continue",
             "serviceName": "Email Address",
-            "label": "What is the email address of the named applicant?",
+            "label": "What is the email address of the applicant?",
             "hint": "This should be a secure and private email.</br>This is where notifications about the application will be sent to.",
             "emailAddress": "Insert email address"
         },
         "cy": {
             "continue": "Continue (Welsh)",
             "serviceName": "Email Address (Welsh)",
-            "label": "What is the email address of the named applicant? (Welsh)",
-            "hint": "This should be a secure and private email.</br>This is where notifications about the application will be sent to.",
+            "label": "What is the email address of the applicant? (Welsh)",
+            "hint": "This should be a secure and private email.</br>This is where notifications about the application will be sent to. (welsh)",
             "emailAddress": "Insert email address (Welsh)"
         }
     },

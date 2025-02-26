@@ -4,6 +4,7 @@ import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 import { CommonContent } from '../../../steps/common/common.content';
+import { isFGMOrFMPOCase } from '../util';
 
 import { AdditonalFormSummary, ApplicantSummaryList, TypeOfApplication, UploadFormSummary, UserRole } from './utils';
 const resourceLoader = new ResourceReader();
@@ -18,12 +19,13 @@ const en = (content: CommonContent) => {
   const userCase = content.userCase!;
   const caseDocuments = userCase.applicantApplicationFormDocuments;
   const additionalDocuments = userCase.applicantAdditionalDocuments;
-  const sections = [
-    TypeOfApplication(enContent, userCase),
-    UserRole(enContent, userCase),
-    ApplicantSummaryList(enContent, _.get(content, 'additionalData.req.session'), content.language),
-  ];
+  const sections = [TypeOfApplication(enContent, userCase)];
 
+  if (isFGMOrFMPOCase(userCase.edgeCaseTypeOfApplication!)) {
+    sections.push(UserRole(enContent, userCase));
+  }
+
+  sections.push(ApplicantSummaryList(enContent, _.get(content, 'additionalData.req.session'), content.language));
   if (caseDocuments?.length) {
     sections.push(UploadFormSummary(enContent, caseDocuments));
   }
@@ -48,12 +50,13 @@ const cy: typeof en = (content: CommonContent) => {
   const caseDocuments = userCase.applicantApplicationFormDocuments;
   const additionalDocuments = userCase.applicantAdditionalDocuments;
 
-  const sections = [
-    TypeOfApplication(cyContent, userCase),
-    UserRole(cyContent, userCase),
-    ApplicantSummaryList(cyContent, _.get(content, 'additionalData.req.session'), content.language),
-  ];
+  const sections = [TypeOfApplication(cyContent, userCase)];
 
+  if (isFGMOrFMPOCase(userCase.edgeCaseTypeOfApplication!)) {
+    sections.push(UserRole(cyContent, userCase));
+  }
+
+  sections.push(ApplicantSummaryList(cyContent, _.get(content, 'additionalData.req.session'), content.language));
   if (caseDocuments?.length) {
     sections.push(UploadFormSummary(cyContent, caseDocuments));
   }

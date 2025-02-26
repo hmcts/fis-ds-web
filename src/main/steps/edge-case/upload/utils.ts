@@ -84,7 +84,7 @@ export const handleDocumentUpload = async (
   const uploadDocumentError = getUploadedDocumentError(
     uploadPropertyName,
     files,
-    req.session.userCase[documentType].length,
+    req.session.userCase[documentType]?.length,
     context
   );
   if (!_.isEmpty(uploadDocumentError)) {

@@ -29,7 +29,6 @@ export const CONTACT_DETAILS: PageLink = '/contact-details';
 export const PAY_YOUR_FEE: PageLink = '/pay-your-fee';
 export const HELP_WITH_FEE: PageLink = '/help-with-fee';
 export const UPLOAD_YOUR_DOCUMENTS: PageLink = '/upload/upload-your-documents/:removeFileId?';
-export const CONTACT_PREFERENCES: PageLink = '/contact-preferences';
 export const CHECK_YOUR_ANSWERS: PageLink = '/check-your-answers';
 export const STATEMENT_OF_TRUTH: PageLink = '/statement-of-truth';
 export const APPLICATION_SUBMITTED: PageLink = '/application-submitted';

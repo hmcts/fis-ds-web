@@ -5,12 +5,11 @@
             "bannerStart": "This is a new service – your",
             "bannerLink": "feedback",
             "bannerEnd": "will help us to improve it.",
-            "warning":"You cannot save the progress for the application. So it is important you have everything you need before you get started",
-            "heading": "Submit an application to HM Courts and Tribunal Services",
+            "warning": "You cannot save the progress for the application so it is important you have everything you need before you get started.",
+            "heading": "Submit an application to HM Courts and Tribunals Services",
             "body": "Use this service to upload and submit a completed application.",
             "subHeading":"Before you start",
             "subBody":[
-                "You cannot save your progress so it is important you have everything you need before you start.",
                 "You might need to upload supporting documents with your completed application.",
                 "Some applications may ask for a fee, so make sure you have your payment details ready.",
                 "You will be asked a few simple questions. You can review the answers to these questions before you submit them with your application."
@@ -22,12 +21,11 @@
             "bannerStart": "This is a new service – your(welsh)",
             "bannerLink": "feedback(welsh)",
             "bannerEnd": "will help us to improve it.(welsh)",
-            "warning":"You cannot save the progress for the application. So it is important you have everything you need before you get started(welsh)",
-            "heading": "Submit an application to HM Courts and Tribunal Services(welsh)",
+            "warning": "You cannot save the progress for the application so it is important you have everything you need before you get started (welsh)",
+            "heading": "Submit an application to HM Courts and Tribunals Services(welsh)",
             "body": "Use this service to upload and submit a completed application.(welsh)",
             "subHeading":"Before you start(welsh)",
             "subBody":[
-                "You cannot save your progress so it is important you have everything you need before you start.(welsh)",
                 "You might need to upload supporting documents with your completed application.(welsh)",
                 "Some applications may ask for a fee, so make sure you have your payment details ready.(welsh)",
                 "You will be asked a few simple questions. You can review the answers to these questions before you submit them with your application.(welsh)"

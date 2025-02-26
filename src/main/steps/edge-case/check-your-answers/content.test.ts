@@ -1,5 +1,6 @@
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { mockUserCase1 } from '../../../../test/unit/utils/mockUserCase';
+import { CaseWithId } from '../../../app/case/case';
 import { FormContent } from '../../../app/form/Form';
 import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 import { CommonContent, generatePageContent } from '../../common/common.content';
@@ -80,6 +81,59 @@ describe('check-your-answer > content', () => {
       })
     );
   });
+
+  test('should contain correct english sections for FGM/FMPO cases', () => {
+    const generatedContent = generateContent({
+      ...commonContent,
+      userCase: { edgeCaseTypeOfApplication: 'FGM', whomYouAreApplying: 'self' } as CaseWithId,
+    });
+    expect(generatedContent.sections).toContainEqual({
+      rows: [
+        {
+          actions: {
+            items: [
+              {
+                href: '/user-role',
+                text: 'change',
+                visuallyHiddenText: 'Are you named as the applicant on the application form you are submitting? ',
+              },
+            ],
+          },
+          key: { text: 'Are you named as the applicant on the application form you are submitting? ' },
+          value: { text: 'I am applying for myself' },
+        },
+      ],
+      title: 'Determine User’s Role',
+    });
+  });
+
+  test('should contain correct welsh sections for FGM/FMPO cases', () => {
+    const generatedContent = generateContent({
+      ...commonContent,
+      language: 'cy',
+      userCase: { edgeCaseTypeOfApplication: 'FGM', whomYouAreApplying: 'self' } as CaseWithId,
+    });
+    expect(generatedContent.sections).toContainEqual({
+      rows: [
+        {
+          actions: {
+            items: [
+              {
+                href: '/user-role',
+                text: 'change - welsh',
+                visuallyHiddenText:
+                  'Are you named as the applicant on the application form you are submitting? - welsh ',
+              },
+            ],
+          },
+          key: { text: 'Are you named as the applicant on the application form you are submitting? - welsh ' },
+          value: { text: 'I am applying for myself -welsh' },
+        },
+      ],
+      title: 'Determine User’s Role',
+    });
+  });
+
   test('should contain submit button', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;

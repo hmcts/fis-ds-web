@@ -1,5 +1,6 @@
 import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
+import { CreateCaseResponse, UpdateCaseResponse } from '../../../app/case/api-utility';
 import { YesOrNo } from '../../../app/case/definition';
 import { FormContent } from '../../../app/form/Form';
 import { CommonContent } from '../../common/common.content';
@@ -108,7 +109,6 @@ describe('ContactDetailsPostController Post Controller', () => {
 
     expect(res.redirect).toHaveBeenCalled();
     expect(req.session.userCase).toStrictEqual({
-      applicantHomeNumber: undefined,
       applicantPhoneNumber: undefined,
       firstName: 'Bob',
       lastName: 'Silly',
@@ -164,5 +164,64 @@ describe('ContactDetailsPostController Post Controller', () => {
         telephoneNumber: '012345678',
       },
     });
+  });
+
+  test('should create and update case', async () => {
+    const req = mockRequest({
+      body: {
+        saveAndContinue: true,
+      },
+      session: {
+        userCase: {
+          edgeCaseTypeOfApplication: 'FMPO',
+          applicantFirstName: 'test',
+          applicantLastName: 'last',
+        },
+      },
+    });
+    const res = mockResponse();
+    req.locals.api.createCase = jest.fn().mockResolvedValue({
+      ...req.session.userCase,
+    } as unknown as CreateCaseResponse);
+    req.locals.api.updateCase = jest.fn().mockResolvedValue({
+      ...req.session.userCase,
+    } as unknown as UpdateCaseResponse);
+
+    const controller = new ContactDetailsPostController({});
+    await controller.post(req, res);
+
+    expect(req.session.applicationSettings.isCaseCreated).toBe(true);
+    expect(res.redirect).toHaveBeenCalled();
+    expect(req.session.errors).toStrictEqual([]);
+  });
+
+  test('should update case', async () => {
+    const req = mockRequest({
+      body: {
+        saveAndContinue: true,
+      },
+      session: {
+        applicationSettings: {
+          isCaseCreated: true,
+        },
+        userCase: {
+          edgeCaseTypeOfApplication: 'FMPO',
+          applicantFirstName: 'test',
+          applicantLastName: 'last',
+          id: '123',
+        },
+      },
+    });
+    const res = mockResponse();
+    req.locals.api.updateCase = jest.fn().mockResolvedValue({
+      ...req.session.userCase,
+    } as unknown as UpdateCaseResponse);
+
+    const controller = new ContactDetailsPostController({});
+    await controller.post(req, res);
+
+    expect(req.session.applicationSettings.isCaseCreated).toBe(true);
+    expect(res.redirect).toHaveBeenCalled();
+    expect(req.session.errors).toStrictEqual([]);
   });
 });
