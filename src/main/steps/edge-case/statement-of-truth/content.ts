@@ -1,3 +1,6 @@
+import _ from 'lodash';
+
+import { YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
@@ -30,13 +33,16 @@ export const form: FormContent = {
 export const generateContent: TranslationFn = content => {
   const resourceLoader = loadResources(STATEMENT_OF_TRUTH_TRANSLATION_FILE);
   const translations = resourceLoader.getFileContents().translations[content.language];
-  const typeOfApplication = content.userCase?.edgeCaseTypeOfApplication;
+  const userCase = content.userCase;
+  const typeOfApplication = userCase?.edgeCaseTypeOfApplication;
 
   return {
     ...translations,
-    submit: isFGMOrFMPOCase(typeOfApplication!)
-      ? translations.submitApplication
-      : translations.continue ?? translations.continue,
+    submit:
+      isFGMOrFMPOCase(typeOfApplication!) ||
+      (userCase?.hwfPaymentSelection === YesOrNo.YES && !_.isEmpty(userCase?.helpWithFeesReferenceNumber))
+        ? translations.submitApplication
+        : translations.continue ?? translations.continue,
     form,
   };
 };

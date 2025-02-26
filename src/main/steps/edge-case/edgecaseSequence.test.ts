@@ -20,7 +20,7 @@ import { edgecaseSequence } from './edgecaseSequence';
 
 describe('Sequence must match respective path', () => {
   test('must match the path', () => {
-    expect(edgecaseSequence).toHaveLength(19);
+    expect(edgecaseSequence).toHaveLength(20);
 
     expect(edgecaseSequence[0].url).toBe(TYPE_OF_APPLICATION_URL);
     expect(edgecaseSequence[0].getNextStep({})).toBe(DATE_OF_BIRTH);
@@ -70,30 +70,41 @@ describe('Sequence must match respective path', () => {
     expect(edgecaseSequence[11].url).toBe(ADDITIONAL_DOCUMENTS_UPLOAD);
     expect(edgecaseSequence[11].getNextStep({})).toBe(CHECK_YOUR_ANSWERS);
 
-    expect(edgecaseSequence[12].url).toBe(CHECK_YOUR_ANSWERS);
-    expect(edgecaseSequence[12].getNextStep({})).toBe(STATEMENT_OF_TRUTH);
+    expect(edgecaseSequence[12].url).toBe('/help-with-fees/need-help-with-fees');
+    expect(edgecaseSequence[12].getNextStep({})).toBe(CHECK_YOUR_ANSWERS);
+    expect(edgecaseSequence[12].url).toBe('/help-with-fees/need-help-with-fees');
+    expect(edgecaseSequence[12].getNextStep({ hwfPaymentSelection: 'Yes' } as CaseWithId)).toBe(
+      '/help-with-fees/fees-applied'
+    );
 
-    expect(edgecaseSequence[13].url).toBe(STATEMENT_OF_TRUTH);
-    expect(edgecaseSequence[13].getNextStep({})).toBe('/pay-your-fee');
+    expect(edgecaseSequence[13].url).toBe('/help-with-fees/fees-applied');
+    expect(edgecaseSequence[13].getNextStep({})).toBe(CHECK_YOUR_ANSWERS);
+    expect(edgecaseSequence[13].url).toBe('/help-with-fees/fees-applied');
+    expect(edgecaseSequence[13].getNextStep({ feesAppliedDetails: 'No' } as CaseWithId)).toBe(
+      '/help-with-fees/need-help-with-fees'
+    );
+
+    expect(edgecaseSequence[14].url).toBe(CHECK_YOUR_ANSWERS);
+    expect(edgecaseSequence[14].getNextStep({})).toBe(STATEMENT_OF_TRUTH);
+
+    expect(edgecaseSequence[15].url).toBe(STATEMENT_OF_TRUTH);
+    expect(edgecaseSequence[15].getNextStep({})).toBe('/pay-your-fee');
     expect(
-      edgecaseSequence[13].getNextStep({
+      edgecaseSequence[15].getNextStep({
         edgeCaseTypeOfApplication: TYPE_OF_APPLICATION.FMPO,
       } as Partial<CaseWithId>)
     ).toBe('/application-submitted');
 
-    expect(edgecaseSequence[14].url).toBe('/pay-your-fee');
-    expect(edgecaseSequence[14].getNextStep({})).toBe('/help-with-fee');
+    expect(edgecaseSequence[16].url).toBe('/pay-your-fee');
+    expect(edgecaseSequence[16].getNextStep({})).toBe('/pay-your-fee');
 
-    expect(edgecaseSequence[15].url).toBe('/help-with-fee');
-    expect(edgecaseSequence[15].getNextStep({})).toBe('/logout');
+    expect(edgecaseSequence[17].url).toBe('/application-submitted');
+    expect(edgecaseSequence[17].getNextStep({})).toBe('/type-of-application');
 
-    expect(edgecaseSequence[16].url).toBe('/application-submitted');
-    expect(edgecaseSequence[16].getNextStep({})).toBe('/type-of-application');
+    expect(edgecaseSequence[18].url).toBe('/user-role');
+    expect(edgecaseSequence[18].getNextStep({})).toBe('/full-name');
 
-    expect(edgecaseSequence[17].url).toBe('/user-role');
-    expect(edgecaseSequence[17].getNextStep({})).toBe('/full-name');
-
-    expect(edgecaseSequence[18].url).toBe('/cookies');
-    expect(edgecaseSequence[18].getNextStep({})).toBe('/user-role');
+    expect(edgecaseSequence[19].url).toBe('/cookies');
+    expect(edgecaseSequence[19].getNextStep({})).toBe('/user-role');
   });
 });

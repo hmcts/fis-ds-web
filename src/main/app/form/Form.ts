@@ -185,6 +185,8 @@ export interface FormInput {
   open?: boolean;
   options?: DropdownOptionsLookup;
   disabled?: boolean;
+  textAndHtml?: Label;
+  href?: string;
 }
 
 function isFormOptions(field: FormField): field is FormOptions {

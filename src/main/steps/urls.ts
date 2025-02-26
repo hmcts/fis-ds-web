@@ -27,7 +27,6 @@ export const EMAIL_ADDRESS: PageLink = '/email-address';
 export const MANUAL_ADDRESS: PageLink = '/address/manual';
 export const CONTACT_DETAILS: PageLink = '/contact-details';
 export const PAY_YOUR_FEE: PageLink = '/pay-your-fee';
-export const HELP_WITH_FEE: PageLink = '/help-with-fee';
 export const UPLOAD_YOUR_DOCUMENTS: PageLink = '/upload/upload-your-documents/:removeFileId?';
 export const CHECK_YOUR_ANSWERS: PageLink = '/check-your-answers';
 export const STATEMENT_OF_TRUTH: PageLink = '/statement-of-truth';
@@ -37,6 +36,8 @@ export const PRIVACY_POLICY: PageLink = '/privacy-policy';
 export const ACCESSIBILITY_STATEMENT: PageLink = '/accessibility-statement';
 export const TERMS_AND_CONDITIONS: PageLink = '/terms-and-conditions';
 export const CONTACT_US: PageLink = '/contact-us';
+export const NEED_HELP_WITH_FEES = '/help-with-fees/need-help-with-fees';
+export const HELP_WITH_FEES_APPLIED = '/help-with-fees/fees-applied';
 
 export const CHECK_JURISDICTION: PageLink = '/check-jurisdiction';
 export const WHERE_YOUR_LIVES_ARE_BASED_URL: PageLink = '/where-your-lives-are-based';

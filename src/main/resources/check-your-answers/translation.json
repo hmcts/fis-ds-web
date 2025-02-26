@@ -30,7 +30,10 @@
               "self": "I am applying for myself",
               "forSomeone": "I am applying for someone else",
                "emailToAccountOwner": "The account owner",
-              "emailToNamedPerson": "The person named on this application"
+              "emailToNamedPerson": "The person named on this application",
+              "needHelpWithFees": "Do you need help with paying the fee for this application?",
+              "hwfReferenceNumber": "Enter your help with fees reference number",
+              "helpWithFees": "Help with Fees"
             }
         },
         "cy": {
@@ -63,7 +66,10 @@
               "self": "I am applying for myself -welsh",
               "forSomeone": "I am applying for someone else -welsh",
               "emailToAccountOwner": "The account owner -welsh",
-              "emailToNamedPerson": "The person named on this application -welsh"
+              "emailToNamedPerson": "The person named on this application -welsh",
+              "needHelpWithFees": "A ydych angen help i dalu’r ffi am wneud y cais hwn?",
+              "hwfReferenceNumber": "Rhowch eich cyfeirnod help i dalu ffioedd",
+              "helpWithFees": "Help i dalu ffioedd"
             }
         }
     }

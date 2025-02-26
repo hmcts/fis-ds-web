@@ -1,5 +1,6 @@
 import { getFormattedDate } from '../../../app/case/answers/formatDate';
 import { CaseWithId } from '../../../app/case/case';
+import { YesOrNo } from '../../../app/case/definition';
 import { getFormattedAddress } from '../../../app/case/formatter/address';
 import { AppSession } from '../../../app/controller/AppRequest';
 import { PageContent } from '../../../app/controller/GetController';
@@ -174,6 +175,32 @@ export const UserRole = (
   return {
     title: 'Determine User’s Role',
     rows: getSectionSummaryList(SummaryData, content),
+  };
+};
+
+export const hwfSection = (
+  { sectionTitles, keys, ...content }: SummaryListContent,
+  userCase: Partial<CaseWithId>
+): SummaryList | undefined => {
+  const summaryData: SummaryListRow[] = [];
+
+  summaryData.push({
+    key: keys['needHelpWithFees'],
+    value: userCase.hwfPaymentSelection,
+    changeUrl: Urls.NEED_HELP_WITH_FEES,
+  });
+
+  if (userCase.hwfPaymentSelection === YesOrNo.YES) {
+    summaryData.push({
+      key: keys['hwfReferenceNumber'],
+      value: userCase.helpWithFeesReferenceNumber,
+      changeUrl: Urls.HELP_WITH_FEES_APPLIED,
+    });
+  }
+
+  return {
+    title: keys.helpWithFees,
+    rows: getSectionSummaryList(summaryData, content),
   };
 };
 

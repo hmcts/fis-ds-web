@@ -119,6 +119,7 @@ describe('api-utility', () => {
       applicantPhoneNumber: undefined,
       caseTypeOfApplication: '',
       edgeCaseTypeOfApplication: 'FMPO',
+      feesAppliedDetails: undefined,
       applicantAdditionalDocuments: undefined,
       id: '1',
       lastModifiedDate: '',

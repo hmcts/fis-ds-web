@@ -76,6 +76,7 @@ export const mapUpdateCaseResponseData = (response: CaseData): UpdateCaseRespons
     paymentReferenceNumber: applicationData.paymentReferenceNumber,
     helpWithFeesReferenceNumber: applicationData.helpWithFeesReferenceNumber,
     hwfPaymentSelection: applicationData.hwfPaymentSelection,
+    feesAppliedDetails: applicationData.feesAppliedDetails,
     applicantStatementOfTruth: applicationData.applicantStatementOfTruth,
   };
 };
@@ -123,5 +124,6 @@ export interface UpdateCaseResponse extends CreateCaseResponse {
   paymentReferenceNumber?: string;
   helpWithFeesReferenceNumber?: string;
   hwfPaymentSelection?: YesOrNo;
+  feesAppliedDetails?: YesOrNo;
   applicantStatementOfTruth?: YesOrNo;
 }
