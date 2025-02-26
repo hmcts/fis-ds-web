@@ -18,21 +18,21 @@
             "button": "Start now"
         },
         "cy": {
-            "serviceTitle": "Getting Started(welsh)",
-            "bannerStart": "This is a new service – your(welsh)",
+            "serviceTitle": "Cychwyn arni",
+            "bannerStart": "Mae hwn yn wasanaeth newydd - bydd",
             "bannerLink": "feedback(welsh)",
-            "bannerEnd": "will help us to improve it.(welsh)",
-            "warning":"You cannot save the progress for the application. So it is important you have everything you need before you get started(welsh)",
-            "heading": "Submit an application to HM Courts and Tribunal Services(welsh)",
-            "body": "Use this service to upload and submit a completed application.(welsh)",
-            "subHeading":"Before you start(welsh)",
+            "bannerEnd": "eich adborth yn ein helpu ni i'w wella",
+            "warning":"Ni allwch gadw eich cynnydd felly mae’n bwysig bod gennych popeth rydych ei angen cyn i chi ddechrau.",
+            "heading": "Cyflwyno cais i Wasanaeth Llysoedd a Thribiwnlysoedd EF",
+            "body": "Defnyddiwch y gwasanaeth hwn i uwchlwytho a chyflwyno cais wedi’i gwblhau.",
+            "subHeading":"Cyn i chi ddechrau",
             "subBody":[
-                "You cannot save your progress so it is important you have everything you need before you start.(welsh)",
-                "You might need to upload supporting documents with your completed application.(welsh)",
-                "Some applications may ask for a fee, so make sure you have your payment details ready.(welsh)",
-                "You will be asked a few simple questions. You can review the answers to these questions before you submit them with your application.(welsh)"
+                "Ni allwch gadw eich cynnydd felly mae’n bwysig bod gennych popeth rydych ei angen cyn i chi ddechrau.",
+                "Efallai bydd arnoch angen uwchlwytho dogfennau ategol gyda'ch cais wedi'i gwblhau.",
+                "Gall rhai ceisiadau ofyn am ffi, felly gwnewch yn siwr bod gennych eich manylion talu wrth law.",
+                "Gofynnir i chi ateb ychydig o gwestiynau syml. Gallwch adolygu’r atebion i’r cwestiynau hyn cyn i chi gyflwyno’ch cais."
             ],
-            "button": "Start now(welsh)"
+            "button": "Dechrau nawr"
         }
     }
 }

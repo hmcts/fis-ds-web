@@ -7,10 +7,10 @@
             "title": "What's your home address?"
         },
         "cy": {
-            "continue": "Continue",
-            "section": "Applicant (in welsh)",
-            "serviceName": "Select Address (in welsh)",
-            "title": "What's your home address? (in welsh)"
+            "continue": "Parhau",
+            "section": "Ceisydd",
+            "serviceName": "Dewiswch gyfeiriad",
+            "title": "Beth yw eich cyfeiriad cartref?"
         }
     },
     "errors":{
@@ -21,7 +21,7 @@
         },
         "cy": {
             "applicantSelectAddress": {
-                "notSelected": "Select an address (in welsh)"
+                "notSelected": "Dewiswch gyfeiriad"
             }
         }
     }

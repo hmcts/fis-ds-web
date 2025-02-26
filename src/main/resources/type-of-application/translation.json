@@ -11,25 +11,25 @@
             "po":"Parental orders - form C51"
         },
         "cy": {
-            "continue": "Continue (in welsh)",
-            "serviceName": "Capture type of application (in welsh)",
-            "label": "What type of application do you want to submit? (in welsh)",
-            "fgm":"FGM - FGM001 and FGM006 if a third party is submitting this application (in welsh)",
-            "fmpo":"FMPO - FL401a and FL430 if a third party is submitting this application (in welsh)", 
-            "sg":"Special Guardianship - form C1/form C13A (in welsh)",
-            "dop":"Declaration of Parentege - form C63 (in welsh)",
-            "po":"Parental orders - form C51 (in welsh)"
+            "continue": "Parhau",
+            "serviceName": "Casglu gwybodaeth am y math o gais",
+            "label": "Pa fath o gais ydych chi eisiau cyflwyno?",
+            "fgm":"FGM - FGM001 a FGM006 os yw trydydd parti yn cyflwyno’r cais hwn",
+            "fmpo":"FMPO - FL401a a FL430 os yw trydydd parti yn cyflwyno’r cais hwn", 
+            "sg":"Gwarcheidiaeth Arbennig - ffurflen C1/ffurflen C13A",
+            "dop":"Datganiad Ynghylch Pwy yw’r Rhiant/Rhieni - Ffurflen C63",
+            "po":"Gorchmynion Rhiant - ffurflen C51"
         }
     },
     "errors":{
         "en": {
             "edgeCaseTypeOfApplication": {
-                "required": "Please select a type of application"
+                "required": "Dewiswch y math o gais"
             }
         },
         "cy": {
             "edgeCaseTypeOfApplication": {
-                "required": "Please select a type of application (in welsh)"
+                "required": "Dewiswch y math o gais"
             }
         }
     }

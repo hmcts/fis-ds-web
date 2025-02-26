@@ -7,10 +7,10 @@
             "title": "What's your home address?"
         },
         "cy": {
-            "continue": "Continue",
-            "section": "Applicant (in welsh)",
-            "serviceName": "Enter Address (in welsh)",
-            "title": "What's your home address? (in welsh)"
+            "continue": "Parhau",
+            "section": "Ceisydd",
+            "serviceName": "Nodwch gyfeiriad",
+            "title": "Beth yw eich cyfeiriad cartref?"
         }
     },
     "errors":{
@@ -28,14 +28,14 @@
         },
         "cy": {
             "applicantAddress1": {
-                "required": "Enter the first line of the address (in welsh)"
+                "required": "Nodwch linell gyntaf y cyfeiriad"
             },
             "applicantAddressTown": {
-                "required": "Enter the town or city (in welsh)"
+                "required": "Nodwch y dref neu ddinas"
             },
             "applicantAddressPostcode": {
-                "required": "Enter a real postcode (in welsh)",
-                "invalid": "Enter a real postcode (in welsh)"
+                "required": "Nodwch god post dilys",
+                "invalid": "Nodwch god post dilys"
             }
         }
     }

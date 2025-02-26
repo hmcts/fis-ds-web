@@ -23,13 +23,13 @@ const enContent = {
 const cyContent = {
   line1:
     "We'll send all court papers to this address unless you advise us that you are happy to be served court orders by email.",
-  postcode: 'Postcode (in welsh)',
+  postcode: 'god post',
   findAddress: 'Find address (in welsh)',
   enterAddressManually: 'Or enter address manually (in welsh)',
   errors: {
     addressPostcode: {
-      required: 'Enter a real postcode (in welsh)',
-      invalid: 'Enter a real postcode (in welsh)',
+      required: 'Nodwch god post dilys',
+      invalid: 'Nodwch god post dilys',
     },
   },
 };

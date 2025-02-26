@@ -10,24 +10,24 @@
             "selectCourtDropdownDefaultLabel": "-- Select a value --"
         },
         "cy": {
-            "selectACourt": "-- Select a value -- (in welsh)",
-            "continue": "Continue (in welsh)",
-            "serviceName": "Capture court details for application (in welsh)",
-            "title": "Capture court details for application (in welsh)",
-            "line1":"If you decide to submit the application to high court, please use the paper form (in welsh)",
-            "label": "Please select court from the list (in welsh)",
+            "selectACourt": "-- Dewiswch y gwerth --",
+            "continue": "Parhau",
+            "serviceName": "Casglu manylion llys ar gyfer y cais",
+            "title": "Casglu manylion llys ar gyfer y cais",
+            "line1":"Os byddwch yn penderfynu cyflwyno cais i’r uchel lys, defnyddiwch y ffurflen bapur",
+            "label": "Dewiswch lys o’r rhestr",
             "selectCourtDropdownDefaultLabel": "-- Dewiswch y gwerth --"
         }
     },
     "errors":{
         "en": {
             "selectedCourtId": {
-                "notSelected": "Please select court"
+                "notSelected": "Dewiswch lys"
             }
         },
         "cy": {
             "selectedCourtId": {
-                "notSelected": "Please select court (in welsh)"
+                "notSelected": "Dewiswch lys o’r rhestr"
             }
         } 
     }

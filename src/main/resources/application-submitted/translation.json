@@ -10,13 +10,13 @@
             "line4": "(takes 30 seconds)"
         },
         "cy": {
-            "title": "Application submitted (in welsh)",
-            "serviceName": "Thank you (in welsh)",
-            "emailSentConfirmation": "<font size=4><strong>You have been sent a confirmation by email. (in welsh) </strong></font>",
-            "line1": "An email has been sent to the applicant, that explains what happens next. (in welsh)",
-            "line2": "Please contact online_application@justice.gov.uk if you do not receive the email. (in welsh)",
-            "line3": "What did you think of this service? (in welsh)",
-            "line4": "(takes 30 seconds) (in welsh)"
+            "title": "Cais wedi'i gyflwyno",
+            "serviceName": "Diolch",
+            "emailSentConfirmation": "<font size=4><strong>Mae cadarnhad wedi’i anfon atoch drwy e-bost.</strong></font>",
+            "line1": "Mae neges e-bost wedi’i hanfon at y ceisydd, i esbonio beth fydd yn digwydd nesaf.",
+            "line2": "Cysylltwch â online_application@justice.gov.uk os nad ydych yn cael y neges e-bost.",
+            "line3": "Beth oedd eich barn am y gwasanaeth hwn?",
+            "line4": "(bydd yn cymryd 30 eiliad o’ch amser)"
         }
     }
 } 

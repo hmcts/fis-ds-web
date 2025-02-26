@@ -7,10 +7,10 @@
             "hint": "For example, 27 3 2007"
         },
         "cy": {
-            "continue": "Continue",
-            "serviceName": "Enter subject's DOB (in welsh)",
-            "title": "What is the date of birth of the person named on this application? (in welsh)",
-            "hint": "For example, 27 3 2007 (in welsh)"
+            "continue": "Parhau",
+            "serviceName": "Nodwch ddyddiad geni yr unigolyn sy’n destun y cais",
+            "title": "Beth yw dyddiad geni yr unigolyn a enwir yn y cais hwn?",
+            "hint": "Er enghraifft, 27 3 2007"
         }
     },
     "errors":{
@@ -26,12 +26,12 @@
         },
         "cy": {
             "applicantDateOfBirth": {
-                "required": "Enter your date of birth (in welsh)",
-                "invalidDate": "Date of birth must be a real date (in welsh)",
-                "incompleteDay": "Your date of birth must include a day (in welsh)",
-                "incompleteMonth": "Your date of birth must include a month (in welsh)",
-                "incompleteYear": "Your date of birth must include a year (in welsh)",
-                "invalidDateInFuture": "Your date of birth must be in the past (in welsh)"
+                "required": "Nodwch eich dyddiad geni",
+                "invalidDate": "Rhaid i’r dyddiad geni fod yn ddyddiad dilys",
+                "incompleteDay": "Rhaid i’ch dyddiad geni gynnwys diwrnod",
+                "incompleteMonth": "Rhaid i’ch dyddiad geni gynnwys mis",
+                "incompleteYear": "Rhaid i’ch dyddiad geni gynnwys blwyddyn",
+                "invalidDateInFuture": "Rhaid i’ch dyddiad geni fod yn y gorffennol"
             }
         }
     }

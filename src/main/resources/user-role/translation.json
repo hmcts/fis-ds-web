@@ -9,12 +9,12 @@
             "forCourtStaff": "I am a member of court staff"
         },
         "cy": {
-            "continue": "Continue",
-            "serviceName": "Determine user's role (in welsh)",
-            "label": "Are you applying for yourself or someone else? (in welsh)",
-            "self": "I am applying for myself (in welsh)",
-            "forSomeone": "I am applying for someone else (in welsh)",
-            "forCourtStaff": "I am a member of court staff (in welsh)"
+            "continue": "Parhau",
+            "serviceName": "Pennu rôl y defnyddiwr",
+            "label": "A ydych yn gwneud cais dros eich hun neu ar ran rywun arall?",
+            "self": "Rwy’n gwneud cais dros fy hun",
+            "forSomeone": "Rwy’n gwneud cais ar ran rhywun arall",
+            "forCourtStaff": "Rwy’n aelod o staff y llys"
         }
     },
     "errors":{
@@ -25,7 +25,7 @@
         },
         "cy": {
             "whomYouAreApplying": {
-                "required": "Please select an answer before you can proceed further (in welsh)"
+                "required": "Rhaid i chi ddewis ateb cyn y gallwch symud ymlaen"
             }
         }
     }

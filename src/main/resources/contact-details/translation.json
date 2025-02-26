@@ -11,14 +11,14 @@
             "mobilePhone": "Enter mobile phone number"
         },
         "cy": {
-            "continue": "Continue (Welsh)",
-            "serviceName": "Contact Number (Welsh)",
-            "title":"What is the contact number of the named applicant? (Welsh)",
-            "line1":"This can be the number of a trusted friend if the applicant does not have a private number. (Welsh)",
-            "homePhoneLabel": "Home Phone (Welsh)",
-            "mobilePhoneLabel": "Mobile Phone (Welsh)",
-            "homePhone": "Enter home phone number (Welsh)",
-            "mobilePhone": "Enter mobile phone number (Welsh)"
+            "continue": "Parhau",
+            "serviceName": "Rhif Cyswllt",
+            "title":"Beth yw rhif ffôn cyswllt y ceisydd a enwir?",
+            "line1":"Gall hwn fod yn rhif ffôn ffrind maen nhw’n ymddiried ynddynt os nad oes gan y ceisydd rif ffôn preifat",
+            "homePhoneLabel": "Rhif Ffôn Cartref",
+            "mobilePhoneLabel": "Rhif Ffôn Symudol",
+            "homePhone": "Nodwch eich rhif ffôn cartref",
+            "mobilePhone": "Nodwch eich rhif ffôn symudol"
         }
     },
     "errors":{
@@ -36,14 +36,14 @@
         },
         "cy": {
             "applicantPhoneNumber": {
-                "required": "Please enter correct mobile phone number (Welsh)",
-                "invalid": "Please enter correct mobile phone number (Welsh)",
-                "atleastOneRequired": "Mobile phone number is empty, please fill up at least one contact (Welsh)"
+                "required": "Nodwch rif ffôn symudol dilys os gwelwch yn dda",
+                "invalid": "Nodwch rif ffôn symudol dilys os gwelwch yn dda",
+                "atleastOneRequired": "Mae’r maes rhif ffôn symudol yn wag, nodwch o leiaf un rhif ffon cyswllt os gwelwch yn dda"
             },
             "applicantHomeNumber": {
-                "required": "Please enter correct home phone number (Welsh)",
-                "invalid": "Please enter correct home phone number (Welsh)",
-                "atleastOneRequired": "Home phone number is empty, please fill up at least one contact (Welsh)"
+                "required": "Nodwch rif ffôn symudol dilys os gwelwch yn dda",
+                "invalid": "Nodwch rif ffôn symudol dilys os gwelwch yn dda",
+                "atleastOneRequired": "Mae’r maes rhif ffôn cartref yn wag, nodwch o leiaf un rhif ffon cyswllt os gwelwch yn dda"
             }
         }
     }
