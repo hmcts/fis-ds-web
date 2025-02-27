@@ -59,15 +59,15 @@ describe('help with fess > fees applied', () => {
     const noHwfLabelField = feesAppliedDetailsField.values[1].subFields!.noHwfLabel;
     expect(noHwfLabelField.type).toBe('label');
     expect((noHwfLabelField.label as LanguageLookup)(generatedContent)).toBe(en.noHwfLabel);
-
-    const cancelApplicationButtonField = feesAppliedDetailsField.values[1].subFields!.cancelApplicationButton;
-    expect(cancelApplicationButtonField.type).toBe('button');
-    expect((cancelApplicationButtonField.label as LanguageLookup)(generatedContent)).toBe(en.cancelApplication);
   });
 
   test('should contain onlycontinue button', () => {
     expect(
       (form?.submit?.text as LanguageLookup)(generatePageContent({ language: 'en' }) as Record<string, never>)
     ).toBe('Continue');
+  });
+
+  test('should contain cancel button', () => {
+    expect((form.cancel.text as Function)(generatedContent)).toBe(en.cancelApplication);
   });
 });

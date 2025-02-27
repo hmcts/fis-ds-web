@@ -3,7 +3,8 @@ import { TranslationFn } from '../../../../app/controller/GetController';
 import { FormContent } from '../../../../app/form/Form';
 import { isFieldFilledIn, isTextAreaValid } from '../../../../app/form/validation';
 import { loadResources } from '../../../../steps/edge-case/util';
-import { SIGN_OUT_URL } from '../../../../steps/urls';
+
+export * from './routeGuard';
 
 const FEES_APPLIED_FILE = '/fees-applied';
 
@@ -38,12 +39,6 @@ export const form: FormContent = {
               type: 'label',
               label: l => l.noHwfLabel,
             },
-            cancelApplicationButton: {
-              type: 'button',
-              label: l => l.cancelApplication,
-              classes: 'govuk-button--warning',
-              href: SIGN_OUT_URL,
-            },
           },
         },
       ],
@@ -52,7 +47,10 @@ export const form: FormContent = {
   },
   submit: {
     text: l => l.continue,
-    disabled: false,
+  },
+  cancel: {
+    text: l => l.cancelApplication,
+    classes: 'govuk-button--warning',
   },
 };
 
