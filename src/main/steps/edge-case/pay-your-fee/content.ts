@@ -1,7 +1,6 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { interpolate } from '../../../steps/common/string-parser';
-import { PAYMENT_GATEWAY_ENTRY_URL } from '../../../steps/urls';
 import { loadResources } from '../util';
 export * from './routeGuard';
 
@@ -31,6 +30,5 @@ export const generateContent: TranslationFn = content => {
       },
     },
     form,
-    paymentUrl: PAYMENT_GATEWAY_ENTRY_URL,
   };
 };
