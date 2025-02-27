@@ -2,7 +2,7 @@ import { CaseDate } from '../../../app/case/case';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent, FormFieldsFn } from '../../../app/form/Form';
 import { covertToDateObject } from '../../../app/form/parser';
-import { areDateFieldsFilledIn, isDateInputInvalid, isFutureDate } from '../../../app/form/validation';
+import { isDateInputInvalid, isFutureDate } from '../../../app/form/validation';
 import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 
 const DATE_OF_BIRTH = 'date-of-birth';
@@ -37,10 +37,7 @@ export const form: FormContent = {
           },
         ],
         parser: body => covertToDateObject('applicantDateOfBirth', body as Record<string, unknown>),
-        validator: value =>
-          areDateFieldsFilledIn(value as CaseDate) ||
-          isDateInputInvalid(value as CaseDate) ||
-          isFutureDate(value as CaseDate),
+        validator: value => isDateInputInvalid(value as CaseDate) || isFutureDate(value as CaseDate),
       },
     };
   },

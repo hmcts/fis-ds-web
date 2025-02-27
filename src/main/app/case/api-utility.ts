@@ -1,14 +1,8 @@
+import { isFGMOrFMPOCase } from '../../steps/edge-case/util';
+
 import { State } from './CaseApi';
 import { Case, CaseDate, CaseWithId } from './case';
-import {
-  CASE_TYPE_OF_APPLICATION,
-  CaseData,
-  ContactPreference,
-  Document,
-  TYPE_OF_APPLICATION,
-  UserRole,
-  YesOrNo,
-} from './definition';
+import { CASE_TYPE_OF_APPLICATION, CaseData, Document, TYPE_OF_APPLICATION, UserRole, YesOrNo } from './definition';
 
 export const prepareCaseRequestData = (userCase: CaseWithId): CreateCaseRequest => {
   return {
@@ -40,10 +34,8 @@ export const prepareUpdateCaseRequestData = (userCase: CaseWithId): UpdateCaseRe
       applicantFirstName: userCase?.applicantFirstName,
       applicantLastName: userCase?.applicantLastName,
       applicantDateOfBirth: userCase?.applicantDateOfBirth,
-      contactPreference: userCase?.contactPreferenceType,
       applicantEmailAddress: userCase?.applicantEmailAddress,
       applicantPhoneNumber: userCase?.applicantPhoneNumber,
-      applicantHomeNumber: userCase?.applicantHomeNumber,
       applicantAddress1: userCase?.applicantAddress1,
       applicantAddress2: userCase?.applicantAddress2,
       applicantAddressTown: userCase?.applicantAddressTown,
@@ -70,7 +62,6 @@ export const mapUpdateCaseResponseData = (response: CaseData): UpdateCaseRespons
     applicantDateOfBirth: applicationData?.applicantDateOfBirth,
     applicantEmailAddress: applicationData?.applicantEmailAddress,
     applicantPhoneNumber: applicationData?.applicantPhoneNumber,
-    applicantHomeNumber: applicationData.applicantHomeNumber,
     applicantAddress1: applicationData?.applicantAddress1,
     applicantAddress2: applicationData?.applicantAddress2,
     applicantAddressTown: applicationData?.applicantAddressTown,
@@ -78,7 +69,6 @@ export const mapUpdateCaseResponseData = (response: CaseData): UpdateCaseRespons
     applicantAddressPostcode: applicationData?.applicantAddressPostcode,
     whomYouAreApplying: applicationData.whomYouAreApplying,
     namedApplicant: applicationData.namedApplicant,
-    contactPreferenceType: applicationData.contactPreferenceType,
     applicantApplicationFormDocuments: applicationData.applicantApplicationFormDocuments,
     applicantAdditionalDocuments: applicationData.applicantAdditionalDocuments,
     selectedCourtId: applicationData.selectedCourtId,
@@ -91,9 +81,7 @@ export const mapUpdateCaseResponseData = (response: CaseData): UpdateCaseRespons
 };
 
 const getCaseType = (edgeCaseTypeOfApplication: TYPE_OF_APPLICATION): CASE_TYPE_OF_APPLICATION => {
-  return [TYPE_OF_APPLICATION.FGM, TYPE_OF_APPLICATION.FMPO].includes(edgeCaseTypeOfApplication)
-    ? CASE_TYPE_OF_APPLICATION.FL401
-    : CASE_TYPE_OF_APPLICATION.C100;
+  return isFGMOrFMPOCase(edgeCaseTypeOfApplication) ? CASE_TYPE_OF_APPLICATION.FL401 : CASE_TYPE_OF_APPLICATION.C100;
 };
 
 export type CreateCaseRequest = {
@@ -121,10 +109,8 @@ export interface UpdateCaseResponse extends CreateCaseResponse {
   applicantFirstName: string;
   applicantLastName: string;
   applicantDateOfBirth: CaseDate;
-  contactPreferenceType: ContactPreference;
   applicantEmailAddress: string;
   applicantPhoneNumber: string;
-  applicantHomeNumber: string;
   applicantAddress1: string;
   applicantAddress2: string;
   applicantAddressTown: string;
