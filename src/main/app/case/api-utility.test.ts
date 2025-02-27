@@ -26,6 +26,7 @@ describe('api-utility', () => {
       month: '01',
       year: '2000',
     },
+    contactPreferenceType: '',
     applicantEmailAddress: '',
     applicantPhoneNumber: '',
     applicantHomeNumber: '',
@@ -103,7 +104,7 @@ describe('api-utility', () => {
   test('prepareUpdateCaseRequestData', () => {
     expect(prepareUpdateCaseRequestData(data)).toStrictEqual({
       dssCaseData:
-        '{"edgeCaseTypeOfApplication":"FMPO","namedApplicant":"No","caseTypeOfApplication":"FL401","applicantFirstName":"y","applicantLastName":"z","applicantDateOfBirth":{"day":"01","month":"01","year":"2000"},"applicantEmailAddress":"","applicantPhoneNumber":"","applicantAddress1":"","applicantAddress2":"","applicantAddressTown":"","applicantAddressCountry":"United Kingdom","selectedCourtId":"","applicantAddressPostcode":"","applicantApplicationFormDocuments":[],"applicantAdditionalDocuments":[],"applicantStatementOfTruth":"","paymentServiceRequestReferenceNumber":"","paymentReferenceNumber":""}',
+        '{"edgeCaseTypeOfApplication":"FMPO","namedApplicant":"No","caseTypeOfApplication":"FL401","applicantFirstName":"y","applicantLastName":"z","applicantDateOfBirth":{"day":"01","month":"01","year":"2000"},"contactPreference":"","applicantEmailAddress":"","applicantPhoneNumber":"","applicantHomeNumber":"","applicantAddress1":"","applicantAddress2":"","applicantAddressTown":"","applicantAddressCountry":"United Kingdom","selectedCourtId":"","applicantAddressPostcode":"","applicantApplicationFormDocuments":[],"applicantAdditionalDocuments":[],"applicantStatementOfTruth":"","paymentServiceRequestReferenceNumber":"","paymentReferenceNumber":""}',
     });
   });
   test('mapUpdateCaseResponseData', () => {
@@ -127,7 +128,9 @@ describe('api-utility', () => {
       applicantDateOfBirth: undefined,
       applicantEmailAddress: undefined,
       caseCreatedBy: '',
+      applicantHomeNumber: undefined,
       applicantStatementOfTruth: undefined,
+      contactPreferenceType: undefined,
       helpWithFeesReferenceNumber: undefined,
       hwfPaymentSelection: undefined,
       namedApplicant: undefined,

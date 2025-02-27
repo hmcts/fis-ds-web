@@ -1,6 +1,5 @@
 import _ from 'lodash';
 
-import { TYPE_OF_APPLICATION } from '../../../../app/case/definition';
 import { TranslationFn } from '../../../../app/controller/GetController';
 import { FormContent } from '../../../../app/form/Form';
 import { applyParms } from '../../../../steps/common/url-parser';
@@ -31,9 +30,6 @@ export const generateContent: TranslationFn = content => {
   return {
     ...translations,
     edgeCaseTypeOfApplication: content.userCase?.edgeCaseTypeOfApplication,
-    isDaCase:
-      content.userCase?.edgeCaseTypeOfApplication === TYPE_OF_APPLICATION.FGM ||
-      content.userCase?.edgeCaseTypeOfApplication === TYPE_OF_APPLICATION.FMPO,
     form,
     fileUploadConfig: {
       labelText: translations.uploadFileHeading,

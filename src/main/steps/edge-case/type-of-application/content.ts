@@ -14,8 +14,8 @@ export const form: FormContent = {
         label: l => l.label,
         selected: false,
         values: [
-          { label: l => l.fgm, value: TYPE_OF_APPLICATION.FGM, hint: l => l.fgmHint },
-          { label: l => l.fmpo, value: TYPE_OF_APPLICATION.FMPO, hint: l => l.fmpoHint },
+          { label: l => l.fgm, value: TYPE_OF_APPLICATION.FGM },
+          { label: l => l.fmpo, value: TYPE_OF_APPLICATION.FMPO },
           { label: l => l.sg, value: TYPE_OF_APPLICATION.SPECIAL_GUARDIANSHIP_ORDER },
           { label: l => l.dop, value: TYPE_OF_APPLICATION.DECLARATION_OF_PARENTAGE },
           { label: l => l.po, value: TYPE_OF_APPLICATION.PARENTAL_ORDER },

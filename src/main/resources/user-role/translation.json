@@ -5,7 +5,8 @@
             "serviceName": "Determine user's role",
             "label": "Are you applying for yourself or someone else?",
             "self": " I am applying for myself",
-            "forSomeone": " I am applying for someone else"
+            "forSomeone": " I am applying for someone else",
+            "forCourtStaff": "I am a member of court staff"
         },
         "cy": {
             "continue": "Parhau",
@@ -14,7 +15,6 @@
             "self": "Rwy’n gwneud cais dros fy hun",
             "forSomeone": "Rwy’n gwneud cais ar ran rhywun arall",
             "forCourtStaff": "Rwy’n aelod o staff y llys"
-
         }
     },
     "errors":{

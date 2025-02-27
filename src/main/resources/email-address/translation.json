@@ -3,7 +3,7 @@
         "en": {
             "continue": "Continue",
             "serviceName": "Email Address",
-            "label": "What is the email address of the applicant?",
+            "label": "What is the email address of the named applicant?",
             "hint": "This should be a secure and private email.</br>This is where notifications about the application will be sent to.",
             "emailAddress": "Insert email address"
         },

@@ -79,6 +79,7 @@ describe('UserRolePostController', () => {
           values: [
             { label: l => l.self, value: UserRole.SELF },
             { label: l => l.forSomeone, value: UserRole.FOR_SOMEONE },
+            { label: l => l.forCourtStaff, value: UserRole.COURT_STAFF },
           ],
           validator: isFieldFilledIn,
         },

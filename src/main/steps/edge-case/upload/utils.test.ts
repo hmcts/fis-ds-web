@@ -106,6 +106,7 @@ describe('document upload > utils', () => {
 
     test('should add error to session when file is too large', async () => {
       req.files = { applicationUpload: { name: 'test.jpg', data: '', mimetype: 'image/jpeg', size: '12345678910' } };
+      req.session.userCase.applicantApplicationFormDocuments = [{ document_url: 'test2/1234' }];
       await handleDocumentUpload(req, res, UploadDocumentContext.UPLOAD_YOUR_DOCUMENTS);
       expect(req.session.save).toHaveBeenCalled();
       expect(res.redirect).toHaveBeenCalledWith('/upload/upload-your-documents');
@@ -122,6 +123,9 @@ describe('document upload > utils', () => {
       req.session.userCase.applicantApplicationFormDocuments = [
         { document_url: 'test1/1234' },
         { document_url: 'test2/1234' },
+        { document_url: 'test3/1234' },
+        { document_url: 'test4/1234' },
+        { document_url: 'test5/1234' },
       ];
       await handleDocumentUpload(req, res, UploadDocumentContext.UPLOAD_YOUR_DOCUMENTS);
       expect(req.session.save).toHaveBeenCalled();
@@ -135,6 +139,7 @@ describe('document upload > utils', () => {
     });
 
     test('should add error to session when error uploading document', async () => {
+      req.session.userCase.applicantApplicationFormDocuments = [{ document_url: 'test2/1234' }];
       req.files = { applicationUpload: { name: 'test.jpg', data: '', mimetype: 'image/jpeg', size: '123' } };
       uploadDocumentMock.mockRejectedValue({ status: 'Failure' });
       await handleDocumentUpload(req, res, UploadDocumentContext.UPLOAD_YOUR_DOCUMENTS);

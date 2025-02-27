@@ -1,3 +1,4 @@
+import { TYPE_OF_APPLICATION } from '../../app/case/definition';
 import { parseUrl } from '../../steps/common/url-parser';
 import { Sections, Step } from '../constants';
 import {
@@ -5,6 +6,7 @@ import {
   APPLICATION_SUBMITTED,
   CHECK_YOUR_ANSWERS,
   CONTACT_DETAILS,
+  CONTACT_PREFERENCES,
   COOKIES,
   DATE_OF_BIRTH,
   EMAIL_ADDRESS,
@@ -22,13 +24,11 @@ import {
   UPLOAD_YOUR_DOCUMENTS,
   USER_ROLE,
 } from '../urls';
-
-import { isFGMOrFMPOCase } from './util';
 export const edgecaseSequence: Step[] = [
   {
     url: TYPE_OF_APPLICATION_URL,
     showInSection: Sections.AboutEdgeCase,
-    getNextStep: data => (isFGMOrFMPOCase(data.edgeCaseTypeOfApplication!) ? USER_ROLE : DATE_OF_BIRTH),
+    getNextStep: () => USER_ROLE,
   },
   {
     url: USER_ROLE,
@@ -54,10 +54,15 @@ export const edgecaseSequence: Step[] = [
   {
     url: SELECT_ADDRESS,
     showInSection: Sections.AboutEdgeCase,
-    getNextStep: () => EMAIL_ADDRESS,
+    getNextStep: () => CONTACT_PREFERENCES,
   },
   {
     url: MANUAL_ADDRESS,
+    showInSection: Sections.AboutEdgeCase,
+    getNextStep: () => CONTACT_PREFERENCES,
+  },
+  {
+    url: CONTACT_PREFERENCES,
     showInSection: Sections.AboutEdgeCase,
     getNextStep: () => EMAIL_ADDRESS,
   },
@@ -70,7 +75,7 @@ export const edgecaseSequence: Step[] = [
     url: CONTACT_DETAILS,
     showInSection: Sections.AboutEdgeCase,
     getNextStep: data =>
-      isFGMOrFMPOCase(data.edgeCaseTypeOfApplication!)
+      [TYPE_OF_APPLICATION.FGM, TYPE_OF_APPLICATION.FMPO].includes(data.edgeCaseTypeOfApplication!)
         ? SELECT_COURT
         : (parseUrl(UPLOAD_YOUR_DOCUMENTS).url as PageLink),
   },
@@ -97,7 +102,10 @@ export const edgecaseSequence: Step[] = [
   {
     url: STATEMENT_OF_TRUTH,
     showInSection: Sections.AboutEdgeCase,
-    getNextStep: data => (isFGMOrFMPOCase(data.edgeCaseTypeOfApplication!) ? APPLICATION_SUBMITTED : PAY_YOUR_FEE),
+    getNextStep: data =>
+      [TYPE_OF_APPLICATION.FGM, TYPE_OF_APPLICATION.FMPO].includes(data.edgeCaseTypeOfApplication!)
+        ? APPLICATION_SUBMITTED
+        : PAY_YOUR_FEE,
   },
   {
     url: PAY_YOUR_FEE,

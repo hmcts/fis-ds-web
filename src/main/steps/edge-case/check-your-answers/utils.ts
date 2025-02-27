@@ -1,5 +1,6 @@
 import { getFormattedDate } from '../../../app/case/answers/formatDate';
 import { CaseWithId } from '../../../app/case/case';
+import { ContactPreference } from '../../../app/case/definition';
 import { getFormattedAddress } from '../../../app/case/formatter/address';
 import { AppSession } from '../../../app/controller/AppRequest';
 import { PageContent } from '../../../app/controller/GetController';
@@ -101,9 +102,22 @@ export const ApplicantSummaryList = (
       changeUrl: Urls.FIND_ADDRESS,
     },
     {
+      key: keys.recievingEmail,
+      value:
+        caseData.contactPreferenceType === ContactPreference.ACCOUNT_OWNER
+          ? keys['emailToAccountOwner']
+          : keys['emailToNamedPerson'],
+      changeUrl: Urls.CONTACT_PREFERENCES,
+    },
+    {
       key: keys.namedPersonEmail,
       value: caseData.applicantEmailAddress,
       changeUrl: Urls.EMAIL_ADDRESS,
+    },
+    {
+      key: keys.namedPersonTel,
+      value: caseData.applicantHomeNumber,
+      changeUrl: Urls.CONTACT_DETAILS,
     },
     {
       key: keys.namedPersonMob,

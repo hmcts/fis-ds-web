@@ -1,16 +1,28 @@
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
-import { isFieldFilledIn, isPhoneNoValid } from '../../../app/form/validation';
+import { isPhoneNoValid } from '../../../app/form/validation';
 import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 
 export const form: FormContent = {
   fields: {
+    applicantHomeNumber: {
+      type: 'text',
+      classes: 'govuk-input',
+      label: l2 => l2.homePhoneLabel,
+      validator: (value, formData) => {
+        return !(value as string)?.length && !formData?.applicantPhoneNumber?.length
+          ? 'atleastOneRequired'
+          : isPhoneNoValid(value);
+      },
+    },
     applicantPhoneNumber: {
       type: 'text',
       classes: 'govuk-input',
       label: ml => ml.mobilePhoneLabel,
-      validator: value => {
-        return isFieldFilledIn(value) || isPhoneNoValid(value);
+      validator: (value, formData) => {
+        return !(value as string)?.length && !formData?.applicantHomeNumber?.length
+          ? 'atleastOneRequired'
+          : isPhoneNoValid(value);
       },
     },
   },

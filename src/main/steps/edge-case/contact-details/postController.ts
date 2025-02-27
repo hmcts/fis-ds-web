@@ -23,6 +23,7 @@ export default class ContactDetailsPostController extends PostController<AnyObje
 
     if (saveAndContinue) {
       Object.assign(req.session.userCase, {
+        applicantHomeNumber: formData.applicantHomeNumber,
         applicantPhoneNumber: formData.applicantPhoneNumber,
       });
       req.session.errors = form.getErrors(formData);
@@ -34,10 +35,6 @@ export default class ContactDetailsPostController extends PostController<AnyObje
       try {
         if (!req.session?.userCase?.id) {
           Object.assign(req.session.userCase, await req.locals.api.createCase(req.session.userCase));
-          req.session.applicationSettings = { ...req.session.applicationSettings, isCaseCreated: true };
-        }
-
-        if (req.session.applicationSettings.isCaseCreated) {
           req.session.userCase = (await req.locals.api.updateCase(
             req.session.userCase,
             CASE_EVENT.UPDATE_CASE

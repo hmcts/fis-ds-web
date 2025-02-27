@@ -121,8 +121,7 @@ describe('check-your-answer > content', () => {
               {
                 href: '/user-role',
                 text: 'newid',
-                visuallyHiddenText:
-                  'A ydych chi wedi’ch enwi fel y ceisydd ar y ffurflen gais rydych yn ei chyflwyno?',
+                visuallyHiddenText: 'A ydych chi wedi’ch enwi fel y ceisydd ar y ffurflen gais rydych yn ei chyflwyno?',
               },
             ],
           },

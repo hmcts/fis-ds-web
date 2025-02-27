@@ -10,9 +10,15 @@ export interface Address {
   Country: string;
 }
 
+export enum ContactPreference {
+  ACCOUNT_OWNER = 'ACCOUNT_OWNER',
+  NAMED_PERSON = 'NAMED_PERSON',
+}
+
 export enum UserRole {
   SELF = 'self',
   FOR_SOMEONE = 'forSomeone',
+  COURT_STAFF = 'forCourtStaff',
 }
 export type AddressUK = Address;
 
@@ -150,6 +156,7 @@ export interface PartyDetails {
   isAtAddressLessThan5YearsWithDontKnow: string;
   response: Response;
   user: User;
+  contactPreferences?: ContactPreference | null;
   isRemoveLegalRepresentativeRequested?: YesOrNo;
   partyId: string;
   liveInRefuge: YesOrNo;

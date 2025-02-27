@@ -3,10 +3,21 @@
 
 
 {% block page_content %}
+  {% if section %}
+    <span class="govuk-caption-l">{{ section }}</span>
+  {% endif %}
+  {% if line1 %}
+    <div class="govuk-hint">{{ line1 }}</div>
+  {% endif %}
   {% if title %}
     <h1 class="govuk-heading-l govuk-!-margin-bottom-2">{{ title }}</h1>
   {% endif %}
-  <p class="govuk-hint govuk-!-margin-bottom-1">{{ under18 }}</p>
+  {% if line2 %}
+    <p class="govuk-body">{{ line2 }}</p>
+  {% endif %}
+
+
+
 
 {% endblock %}
 
