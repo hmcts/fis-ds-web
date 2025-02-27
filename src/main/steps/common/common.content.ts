@@ -122,7 +122,7 @@ const cy: typeof en = {
   applyForAdoption: 'Apply for a service" (in welsh)',
   applyForDissolution: 'Apply for a service"(in welsh)',
   feedback:
-    'Mae hwn yn wasanaeth newydd - bydd <a class="govuk-link" aria-label="Feedback link, This will open a new tab. You’ll need to return to this tab and continue with your application within 60 mins so you don’t lose your progress." href="#" target="_blank">feedback</a> will help us to improve it.(in welsh)',
+    'Mae hwn yn wasanaeth newydd - bydd <a class="govuk-link" aria-label="Feedback link, This will open a new tab. You’ll need to return to this tab and continue with your application within 60 mins so you don’t lose your progress." href="#" target="_blank">feedback</a> eich adborth yn ein helpu ni i\'w wella',
   languageToggle: '<a href="?lng=en" class="govuk-link language">English</a>',
   govUk: 'GOV.UK',
   back: 'Back (in welsh)',
