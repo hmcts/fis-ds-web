@@ -8,11 +8,11 @@
             "emailAddress": "Insert email address"
         },
         "cy": {
-            "continue": "Continue (Welsh)",
-            "serviceName": "Email Address (Welsh)",
+            "continue": "Parhau",
+            "serviceName": "Cyfeiriad e-bost",
             "label": "What is the email address of the applicant? (Welsh)",
-            "hint": "This should be a secure and private email.</br>This is where notifications about the application will be sent to. (welsh)",
-            "emailAddress": "Insert email address (Welsh)"
+            "hint": "This should be a secure and private email.</br>This is where notifications about the application will be sent to. (Welsh)",
+            "emailAddress": "Nodwch gyfeiriad e-bost"
         }
     },
     "errors":{
@@ -23,7 +23,7 @@
         },
         "cy": {
             "applicantEmailAddress": {
-                "invalid": "Every email address consists of 3 elements: local-part, @ symbol (pronounced as “at”), and a domain name (Welsh)"
+                "invalid": "Mae pob cyfeiriad e-bost yn cynnwys tair elfen: rhan lleol, symbol @ (a ynganir fel “at”), ac enw parth"
             }
         }
     }

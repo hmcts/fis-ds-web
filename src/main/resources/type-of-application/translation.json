@@ -13,27 +13,27 @@
             "po":"Parental orders - form C51"
         },
         "cy": {
-            "continue": "Continue (in welsh)",
-            "serviceName": "Capture type of application (in welsh)",
+            "continue": "Parhau",
+            "serviceName": "Casglu gwybodaeth am y math o gais",
             "label": "What type of application do you want to submit? (in welsh)",
             "fgm":"Female Genital Mutilation - form FGM001 (in welsh)",
             "fgmHint": "FGM006 if a third party is submitting this application (welsh)",
-            "fmpo":"Forced Marriage Protection Order - form FL401A (welsh)", 
-            "fmpoHint": "FL430 if a third party is submitting this application (welsh)",
-            "sg":"Special Guardianship - form C1/form C13A (in welsh)",
-            "dop":"Declaration of Parentage - form C63 (in welsh)",
+            "fmpo":"Forced Marriage Protection Order - form FL401A (welsh)",
+            "fmpoHint": "FL430 if a third party is submitting this application (welsh)",  
+            "sg":"Gwarcheidiaeth Arbennig - ffurflen C1/ffurflen C13A",
+            "dop":"Datganiad Ynghylch Pwy yw’r Rhiant/Rhieni - Ffurflen C63",
             "po":"Parental orders - form C51 (in welsh)"
         }
     },
     "errors":{
         "en": {
             "edgeCaseTypeOfApplication": {
-                "required": "Please select a type of application"
+                "required": "Dewiswch y math o gais"
             }
         },
         "cy": {
             "edgeCaseTypeOfApplication": {
-                "required": "Please select a type of application (in welsh)"
+                "required": "Dewiswch y math o gais"
             }
         }
     }

@@ -9,10 +9,10 @@
             "mobilePhone": "Enter phone number"
         },
         "cy": {
-            "continue": "Continue (Welsh)",
-            "serviceName": "Contact Number (Welsh)",
+            "continue": "Parhau",
+            "serviceName": "Rhif Cyswllt",
             "title":"What is the contact number of the applicant? (Welsh)",
-            "line1":"This can be the number of a trusted friend if the applicant does not have a private number. (Welsh)",
+            "line1":"Gall hwn fod yn rhif ffôn ffrind maen nhw’n ymddiried ynddynt os nad oes gan y ceisydd rif ffôn preifat",
             "mobilePhoneLabel": "Phone number (Welsh)",
             "mobilePhone": "Enter phone number (Welsh)"
         }

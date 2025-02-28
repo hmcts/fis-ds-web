@@ -7,9 +7,9 @@
             "title": "What's your address?"
         },
         "cy": {
-            "continue": "Continue",
-            "section": "Applicant (in welsh)",
-            "serviceName": "Select Address (in welsh)",
+            "continue": "Parhau",
+            "section": "Ceisydd",
+            "serviceName": "Dewiswch gyfeiriad",
             "title": "What's your address? (in welsh)"
         }
     },
@@ -21,7 +21,7 @@
         },
         "cy": {
             "applicantSelectAddress": {
-                "notSelected": "Select an address (in welsh)"
+                "notSelected": "Dewiswch gyfeiriad"
             }
         }
     }

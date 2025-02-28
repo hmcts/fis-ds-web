@@ -34,36 +34,36 @@
             }
         },
         "cy": {
-          "serviceName": "Check your answers - welsh ",
+          "serviceName": "Gwirio eich atebion",
             "section": "",
-            "title": "Check your Answers -welsh",
-            "change": "change - welsh",
-            "continue": "Accept and continue - welsh",
+            "title": "Gwirio eich atebion",
+            "change": "newid",
+            "continue": "Derbyn a pharhau",
             "sectionTitles": {
-              "applicantDetails": "Applicant details -welsh"
+              "applicantDetails": "Manylion y ceisydd"
             },
             "keys": {
-              "phoneNumber": "Phone number -welsh",
-              "emailAddress": "Contact number of the person named on the application - welsh",
-              "user-role": "Are you named as the applicant on the application form you are submitting? - welsh ",
-              "fullName": "Subject’s name - welsh",
-              "dateOfBirth": "Subject’s DoB welsh",
-              "address": "Address - welsh",
-              "namedPersonEmail": "Email address of the person named on the application -welsh",
+              "phoneNumber": "Rhif ffôn",
+              "emailAddress": "Rhif cyswllt yr unigolyn a enwir yn y cais",
+              "user-role": "A ydych chi wedi’ch enwi fel y ceisydd ar y ffurflen gais rydych yn ei chyflwyno?",
+              "fullName": "Enw’r unigolyn sy’n destun y cais",
+              "dateOfBirth": "Dyddiad geni’r unigolyn sy’n destun y cais",
+              "address": "Cyfeiriad",
+              "namedPersonEmail": "Cyfeiriad e-bost yr unigolyn a enwir ar y cais",
               "namedPersonMob": "Enter your phone number - welsh",
-              "uploadDocuments": "List of forms uploaded (Application form) - welsh",
-              "additionalDocuments": "List of Documents uploaded (supporting documents) - welsh",
-              "typeOfApplication": "Type of application - welsh",
-              "selectedCourt": "Court details for application - welsh",
+              "uploadDocuments": "Rhestr o ffurflenni sydd wedi’u uwchlwytho (Ffurflen gais)",
+              "additionalDocuments": "Rhestr o ddogfennau sydd wedi’u uwchlwytho (dogfennau ategol)",
+              "typeOfApplication": "Math o gais",
+              "selectedCourt": "Manylion llys ar gyfer y cais",
               "FGM": "Female Genital Mutilation - form FGM001 (in welsh)",
               "FMPO": "Forced Marriage Protection Order - form FL401A (welsh)", 
-              "SG": "Special Guardianship - form C1/form C13A -welsh",
-              "DOP": "Declaration of Parentage - form C63 -welsh",
-              "PO": "Parental orders - form C51 -welsh",
-              "self": "I am applying for myself -welsh",
-              "forSomeone": "I am applying for someone else -welsh",
-              "emailToAccountOwner": "The account owner -welsh",
-              "emailToNamedPerson": "The person named on this application -welsh"
+              "SG": "Gwarcheidiaeth Arbennig - ffurflen C1/ffurflen C13A",
+              "DOP": "Datganiad Ynghylch Pwy yw’r Rhiant/Rhieni - Ffurflen C63",
+              "PO": "Gorchmynion Rhiant - ffurflen C51",
+              "self": "Rwy’n gwneud cais dros fy hun",
+              "forSomeone": "Rwy’n gwneud cais ar ran rhywun arall",
+              "emailToAccountOwner": "Perchennog y cyfrif",
+              "emailToNamedPerson": "Yr unigolyn a enwir ar y cais hwn"
             }
         }
     }
