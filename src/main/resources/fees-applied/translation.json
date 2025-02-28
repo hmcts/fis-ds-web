@@ -1,0 +1,48 @@
+{
+  "translations": {
+    "en": {
+      "feesAppliedDetailsTitle": "Have you already applied for help with your application fee?",
+      "hwfReferenceNumberLabel": "Enter your help with fees reference number",
+      "hwfReferenceNumberBody": "You received this number when you applied for help with fees.",
+      "hwfReferenceNumberHint": "For example, HWF-A1B-23C",
+      "noHwfLabel": "You need to<a class='govuk-link' href='https://www.gov.uk/get-help-with-court-fees' target='_blank'> apply for help with fee (opens in a new tab)</a> before you continue with this application.",
+      "cancelApplication": "Cancel application",
+      "yes": "Yes",
+      "no": "No",
+      "errors": {
+        "feesAppliedDetails": {
+          "required": "Select yes if you already applied for help with your application fee"
+        },
+        "helpWithFeesReferenceNumber": {
+          "required": "Enter the help with fees reference number you received when you applied for help with fees",
+          "invalid": "The help with fees reference number is not valid"
+        },
+        "main-form-submit": {
+          "invalid": "Please select continue to proceed with your help with fees application"
+        }
+      }
+    },
+    "cy": {
+      "feesAppliedDetailsTitle": "A ydych chi eisoes wedi gwneud cais am help i dalu ffi’r cais?",
+      "hwfReferenceNumberLabel": "Rhowch eich cyfeirnod help i dalu ffioedd",
+      "hwfReferenceNumberBody": "Cawsoch y rhif hwn pan wnaethoch gais am help i dalu ffioedd.",
+      "hwfReferenceNumberHint": "Er enghraifft, HWF-A1B-23C",
+      "noHwfLabel": "You need to<a class='govuk-link' href='https://www.gov.uk/get-help-with-court-fees' target='_blank'> apply for help with fee (opens in a new tab)</a> before you continue with this application. (welsh)",
+      "cancelApplication": "Cancel application (welsh)",
+      "yes": "Do",
+      "no": "Naddo",
+      "errors": {
+        "feesAppliedDetails": {
+          "required": "Dewiswch do os ydych eisoes wedi gwneud cais am help i dalu ffi eich cais"
+        },
+        "helpWithFeesReferenceNumber": {
+          "required": "Nodwch y cyfeirnod Help i dalu Ffioedd a gawsoch pan wnaethoch chi wneud cais am Help i dalu Ffioedd",
+          "invalid": "The help with fees reference number is not valid"
+        },
+        "main-form-submit": {
+          "invalid": "Please select continue to proceed with your help with fees application (welsh)"
+        }
+      }
+    }
+  }
+}

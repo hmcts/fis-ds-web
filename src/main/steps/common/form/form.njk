@@ -47,7 +47,7 @@
         {{
           govukButton({
             text: getContent(form.cancel.text),
-            classes: "govuk-button--secondary",
+            classes: form.cancel.classes if form.cancel.classes else "govuk-button--secondary",
             preventDoubleClick: true,
             type: "submit",
             name: "cancel",

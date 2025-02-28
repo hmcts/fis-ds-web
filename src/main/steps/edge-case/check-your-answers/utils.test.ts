@@ -1,11 +1,12 @@
 import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockUserCase1, mockUserCase2, mockUserCase3 } from '../../../../test/unit/utils/mockUserCase';
+import { CaseWithId } from '../../../app/case/case';
 import { AppSession } from '../../../app/controller/AppRequest';
 
 //mockUserCase2, mockUserCase3
 
 import { enContent } from './content';
-import { AdditonalFormSummary, ApplicantSummaryList, UploadFormSummary, UserRole } from './utils';
+import { AdditonalFormSummary, ApplicantSummaryList, UploadFormSummary, UserRole, hwfSection } from './utils';
 /**AdditonalFormSummary UploadFormSummary   */
 
 describe('upload-addition-documents > check-your-answers', () => {
@@ -419,6 +420,65 @@ describe('Form Summary-user-role > check-your-answers', () => {
       },
     ])('return correct summary list items when %#', ({ userCase, expected }) => {
       expect(UserRole(enContent, userCase)).not.toBe(expected);
+    });
+  });
+
+  describe('hwfSection', () => {
+    test('should return correct summary list for no hwf', () => {
+      expect(hwfSection(enContent, { hwfPaymentSelection: 'No' } as CaseWithId)).toStrictEqual({
+        rows: [
+          {
+            actions: {
+              items: [
+                {
+                  href: '/help-with-fees/need-help-with-fees',
+                  text: 'change',
+                  visuallyHiddenText: 'Do you need help with paying the fee for this application?',
+                },
+              ],
+            },
+            key: { text: 'Do you need help with paying the fee for this application?' },
+            value: { text: 'No' },
+          },
+        ],
+        title: 'Help with Fees',
+      });
+    });
+
+    test('should return correct summary list for hwf', () => {
+      expect(
+        hwfSection(enContent, { hwfPaymentSelection: 'Yes', helpWithFeesReferenceNumber: '1234' } as CaseWithId)
+      ).toStrictEqual({
+        rows: [
+          {
+            actions: {
+              items: [
+                {
+                  href: '/help-with-fees/need-help-with-fees',
+                  text: 'change',
+                  visuallyHiddenText: 'Do you need help with paying the fee for this application?',
+                },
+              ],
+            },
+            key: { text: 'Do you need help with paying the fee for this application?' },
+            value: { text: 'Yes' },
+          },
+          {
+            actions: {
+              items: [
+                {
+                  href: '/help-with-fees/fees-applied',
+                  text: 'change',
+                  visuallyHiddenText: 'Enter your help with fees reference number',
+                },
+              ],
+            },
+            key: { text: 'Enter your help with fees reference number' },
+            value: { text: '1234' },
+          },
+        ],
+        title: 'Help with Fees',
+      });
     });
   });
 });
