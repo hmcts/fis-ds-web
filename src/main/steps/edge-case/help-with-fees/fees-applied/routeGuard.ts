@@ -17,12 +17,12 @@ export const routeGuard = {
     }
 
     if (cancel) {
-      if (feesAppliedDetails === YesOrNo.YES) {
-        req.session.errors = [{ errorType: 'invalid', propertyName: 'main-form-submit' }];
-        return req.session.save(() => res.redirect(HELP_WITH_FEES_APPLIED));
+      if (feesAppliedDetails === YesOrNo.NO) {
+        return res.redirect(SIGN_OUT_URL);
       }
 
-      return res.redirect(SIGN_OUT_URL);
+      req.session.errors = [{ errorType: 'invalid', propertyName: 'main-form-submit' }];
+      return req.session.save(() => res.redirect(HELP_WITH_FEES_APPLIED));
     }
     req.session.save(next);
   },

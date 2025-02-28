@@ -36,8 +36,8 @@ export const form: FormContent = {
           value: YesOrNo.NO,
           subFields: {
             noHwfLabel: {
-              type: 'label',
-              label: l => l.noHwfLabel,
+              type: 'textAndHtml',
+              textAndHtml: l => l.noHwfLabel,
             },
           },
         },

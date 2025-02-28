@@ -56,9 +56,9 @@ describe('help with fess > fees applied', () => {
     expect(isFieldFilledIn).toHaveBeenCalledWith('test text');
     expect(isTextAreaValid).toHaveBeenCalledWith('test text');
 
-    const noHwfLabelField = feesAppliedDetailsField.values[1].subFields!.noHwfLabel;
-    expect(noHwfLabelField.type).toBe('label');
-    expect((noHwfLabelField.label as LanguageLookup)(generatedContent)).toBe(en.noHwfLabel);
+    const noHwfLabelField = feesAppliedDetailsField.values[1].subFields!.noHwfLabel as FormInput;
+    expect(noHwfLabelField.type).toBe('textAndHtml');
+    expect((noHwfLabelField.textAndHtml as LanguageLookup)(generatedContent)).toBe(en.noHwfLabel);
   });
 
   test('should contain onlycontinue button', () => {

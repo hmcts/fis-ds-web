@@ -17,17 +17,15 @@
             <div class="govuk-grid-column-two-thirds">
                 {{  govukPanel({
                             titleText: title,
-                            html: referenceNumber +"<br>"+ emailSentConfirmation
+                            html: "<font size=5>"+referenceNumber+"</font>" + "<br><strong>" + caseId + "</strong>"
                         })
                     }}
-                <p class="govuk-body">{{ line1 }}</p>
-                <p class="govuk-body">{{ line2 }}</p>
-                <p class="govuk-body">
-                    <a href="https://www.gov.uk" class="govuk-link">{{line3 }}</a>
-                    <a>
-                        {{line4}}
-                    </a>
-                </p>
+                <h2 class="govuk-heading-m">{{subTitle}}</h2>
+                <ul class="govuk-list govuk-list--bullet govuk-list--spaced govuk-!-margin-bottom-6">
+                    {% for item in list %}
+                        <li>{{item | safe}}</li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
     </div>
