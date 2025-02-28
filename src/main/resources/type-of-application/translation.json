@@ -10,7 +10,11 @@
             "fmpoHint": "FL430 if a third party is submitting this application",
             "sg":"Special Guardianship - form C1/form C13A",
             "dop":"Declaration of Parentage - form C63",
-            "po":"Parental orders - form C51"
+            "po":"Parental orders - form C51",
+            "pr":"Parental responsibility - form C1",
+            "prsfp":"Parental responsibility (second female parent) - form C1",
+            "acg":"Appointing a child’s guardian - form C1",
+            "ccs":"Change of child’s surname or removal from jurisdiction - form C1"
         },
         "cy": {
             "continue": "Continue (in welsh)",
@@ -22,7 +26,11 @@
             "fmpoHint": "FL430 if a third party is submitting this application (welsh)",
             "sg":"Special Guardianship - form C1/form C13A (in welsh)",
             "dop":"Declaration of Parentage - form C63 (in welsh)",
-            "po":"Parental orders - form C51 (in welsh)"
+            "po":"Parental orders - form C51 (in welsh)",
+            "pr":"Parental responsibility - form C1 (in welsh)",
+            "prsfp":"Parental responsibility (second female parent) - form C1 (in welsh)",
+            "acg":"Appointing a child’s guardian - form C1 (in welsh)",
+            "ccs":"Change of child’s surname or removal from jurisdiction - form C1 (in welsh)"
         }
     },
     "errors":{
