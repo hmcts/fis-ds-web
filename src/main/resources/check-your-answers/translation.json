@@ -6,6 +6,8 @@
             "title": "Check your Answers",
             "change": "change",
             "continue": "Accept and continue",
+            "submitApplication": "Now submit your Application",
+            "checkInformation": "Check all the information provided and documents uploaded carefully. By Submitting this application you are confirming that you have submitted all the documents required to process the application and the details you have provided is correct.",
             "sectionTitles": {
               "applicantDetails": "Applicant details"
             },
@@ -27,6 +29,10 @@
               "SG": "Special Guardianship - form C1/form C13A",
               "DOP": "Declaration of Parentage - form C63",
               "PO": "Parental orders - form C51",
+              "PR":"Parental responsibility - form C1",
+              "PRSFP":"Parental responsibility (second female parent) - form C1",
+              "ACG":"Appointing a child’s guardian - form C1",
+              "CCS":"Change of child’s surname or removal from jurisdiction - form C1",
               "self": "I am applying for myself",
               "forSomeone": "I am applying for someone else",
                "emailToAccountOwner": "The account owner",
@@ -42,6 +48,8 @@
             "title": "Check your Answers -welsh",
             "change": "change - welsh",
             "continue": "Accept and continue - welsh",
+            "submitApplication": "Now submit your Application (welsh)",
+            "checkInformation": "Check all the information provided and documents uploaded carefully. By Submitting this application you are confirming that you have submitted all the documents required to process the application and the details you have provided is correct. (welsh)",
             "sectionTitles": {
               "applicantDetails": "Applicant details -welsh"
             },
@@ -63,6 +71,10 @@
               "SG": "Special Guardianship - form C1/form C13A -welsh",
               "DOP": "Declaration of Parentage - form C63 -welsh",
               "PO": "Parental orders - form C51 -welsh",
+              "PR":"Parental responsibility - form C1 (welsh)",
+              "PRSFP":"Parental responsibility (second female parent) - form C1 (welsh)",
+              "ACG":"Appointing a child’s guardian - form C1 (welsh)",
+              "CCS":"Change of child’s surname or removal from jurisdiction - form C1 (welsh)",
               "self": "I am applying for myself -welsh",
               "forSomeone": "I am applying for someone else -welsh",
               "emailToAccountOwner": "The account owner -welsh",
