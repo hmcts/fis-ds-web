@@ -15,14 +15,14 @@
         "cy": {
             "continue": "Parhau",
             "serviceName": "Casglu gwybodaeth am y math o gais",
-            "label": "What type of application do you want to submit? (in welsh)",
+            "label": "Pa fath o gais ydych chi eisiau cyflwyno?",
             "fgm":"Female Genital Mutilation - form FGM001 (in welsh)",
-            "fgmHint": "FGM006 if a third party is submitting this application (welsh)",
+            "fgmHint": "FGM006 os yw trydydd parti yn cyflwyno’r cais hwn",
             "fmpo":"Forced Marriage Protection Order - form FL401A (welsh)",
-            "fmpoHint": "FL430 if a third party is submitting this application (welsh)",  
+            "fmpoHint": "FL430 os yw trydydd parti yn cyflwyno’r cais hwn",  
             "sg":"Gwarcheidiaeth Arbennig - ffurflen C1/ffurflen C13A",
             "dop":"Datganiad Ynghylch Pwy yw’r Rhiant/Rhieni - Ffurflen C63",
-            "po":"Parental orders - form C51 (in welsh)"
+            "po":"Gorchmynion Rhiant - ffurflen C51"
         }
     },
     "errors":{
