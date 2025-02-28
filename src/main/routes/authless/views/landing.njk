@@ -46,10 +46,10 @@
 
 
 <h1 class="govuk-heading-l">{{content['heading']}}</h1>
-<p class="govuk-body-l">{{content['body']}}</p>
+<p class="govuk-body">{{content['body']}}</p>
 <h2 class="govuk-heading-m">{{content['subHeading']}}</h1>
 {% for item in content.subBody %}
-      <p class="govuk-body-l"> {{item | safe}} </p>
+      <p class="govuk-body"> {{item | safe}} </p>
 {% endfor %}
 
 <br/>
