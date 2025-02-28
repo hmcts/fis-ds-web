@@ -6,7 +6,8 @@ import { UploadDocumentContext } from '../../../../app/case/definition';
 import { AppRequest } from '../../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../../app/controller/PostController';
 import { FormFields, FormFieldsFn } from '../../../../app/form/Form';
-import { CHECK_YOUR_ANSWERS, GENERIC_ERROR_PAGE } from '../../../urls';
+import { isFGMOrFMPOCase } from '../../../../steps/edge-case/util';
+import { CHECK_YOUR_ANSWERS, GENERIC_ERROR_PAGE, NEED_HELP_WITH_FEES } from '../../../urls';
 import { handleDocumentUpload } from '../utils';
 
 @autobind
@@ -24,7 +25,10 @@ export default class UploadAdditionalDocumentPostController extends PostControll
     }
 
     if (saveAndContinue) {
-      return this.redirect(req, res, CHECK_YOUR_ANSWERS);
+      const redirectUrl = isFGMOrFMPOCase(req.session.userCase.edgeCaseTypeOfApplication)
+        ? CHECK_YOUR_ANSWERS
+        : NEED_HELP_WITH_FEES;
+      return this.redirect(req, res, redirectUrl);
     }
 
     res.redirect(GENERIC_ERROR_PAGE);

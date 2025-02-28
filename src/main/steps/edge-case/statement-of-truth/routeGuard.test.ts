@@ -28,7 +28,7 @@ describe('statement of truth > routeGuard', () => {
     expect(next).toHaveBeenCalled();
   });
 
-  test('should call save and next if type of application is FGM/FMPO', async () => {
+  test('should call save and redirect to application submitted if type of application is FGM/FMPO', async () => {
     const req = mockRequest({
       session: { userCase: { edgeCaseTypeOfApplication: 'FGM' } },
       body: { applicantStatementOfTruth: 'Yes' },
@@ -38,7 +38,24 @@ describe('statement of truth > routeGuard', () => {
     updateCaserMock.mockResolvedValueOnce(req.session.userCase as unknown as UpdateCaseResponse);
 
     await routeGuard.post(req, res, next);
-    expect(next).toHaveBeenCalled();
+    expect(req.session.save).toHaveBeenCalled();
+    expect(res.redirect).toHaveBeenCalledWith('/application-submitted');
+  });
+
+  test('should call save and redirect to application submitted if hwf yes', async () => {
+    const req = mockRequest({
+      session: {
+        userCase: { hwfPaymentSelection: 'Yes', helpWithFeesReferenceNumber: '123', edgeCaseTypeOfApplication: 'PO' },
+      },
+      body: { applicantStatementOfTruth: 'Yes' },
+    });
+    const res = mockResponse();
+    const next = jest.fn();
+    updateCaserMock.mockResolvedValueOnce(req.session.userCase as unknown as UpdateCaseResponse);
+
+    await routeGuard.post(req, res, next);
+    expect(req.session.save).toHaveBeenCalled();
+    expect(res.redirect).toHaveBeenCalledWith('/application-submitted');
   });
 
   test('should catch and add error if update case fails', async () => {
