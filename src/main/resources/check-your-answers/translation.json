@@ -12,7 +12,7 @@
             "keys": {
               "phoneNumber": "Phone number",
               "emailAddress": "Contact number of the person named on the application",
-              "user-role": "Are you named as the applicant on the application form you are submitting? ",
+              "user-role": "Are you named as the applicant on the application form you are submitting?",
               "fullName": "Subject’s name",
               "dateOfBirth": "Subject’s DoB",
               "address": "Address",
