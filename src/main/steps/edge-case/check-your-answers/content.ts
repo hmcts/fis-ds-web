@@ -6,7 +6,14 @@ import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 import { CommonContent } from '../../../steps/common/common.content';
 import { isFGMOrFMPOCase } from '../util';
 
-import { AdditonalFormSummary, ApplicantSummaryList, TypeOfApplication, UploadFormSummary, UserRole } from './utils';
+import {
+  AdditonalFormSummary,
+  ApplicantSummaryList,
+  TypeOfApplication,
+  UploadFormSummary,
+  UserRole,
+  hwfSection,
+} from './utils';
 const resourceLoader = new ResourceReader();
 resourceLoader.Loader('check-your-answers');
 const Translations = resourceLoader.getFileContents().translations;
@@ -32,6 +39,10 @@ const en = (content: CommonContent) => {
 
   if (additionalDocuments?.length) {
     sections.push(AdditonalFormSummary(enContent, additionalDocuments));
+  }
+
+  if (!isFGMOrFMPOCase(userCase.edgeCaseTypeOfApplication!)) {
+    sections.push(hwfSection(enContent, userCase));
   }
 
   return {
@@ -63,6 +74,10 @@ const cy: typeof en = (content: CommonContent) => {
 
   if (additionalDocuments?.length) {
     sections.push(AdditonalFormSummary(cyContent, additionalDocuments));
+  }
+
+  if (!isFGMOrFMPOCase(userCase.edgeCaseTypeOfApplication!)) {
+    sections.push(hwfSection(cyContent, userCase));
   }
 
   return {

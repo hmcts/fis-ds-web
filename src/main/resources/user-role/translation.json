@@ -5,7 +5,7 @@
             "serviceName": "Determine user's role",
             "label": "Are you applying for yourself or someone else?",
             "self": "I am applying for myself",
-            "forSomeone": " I am applying for someone else"
+            "forSomeone": "I am applying for someone else"
         },
         "cy": {
             "continue": "Parhau",

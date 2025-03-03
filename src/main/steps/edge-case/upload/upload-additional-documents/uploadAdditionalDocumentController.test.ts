@@ -51,7 +51,7 @@ describe('document upload > upload additional documents > post controller', () =
     ]);
   });
 
-  test('post should redirect to check your answers page if saveAndContinue is true and documents uploaded', async () => {
+  test('post should redirect to check your answers page if saveAndContinue is true and documents uploaded and FGM case', async () => {
     req.body.saveAndContinue = true;
     req.session.userCase.applicantAdditionalDocuments = [
       {
@@ -62,6 +62,7 @@ describe('document upload > upload additional documents > post controller', () =
         document_creation_date: '1/1/2024',
       },
     ];
+    req.session.userCase.edgeCaseTypeOfApplication = 'FGM';
     updateCaseMock.mockResolvedValue(req.session.userCase);
 
     await postController.post(req, res);
@@ -69,5 +70,26 @@ describe('document upload > upload additional documents > post controller', () =
 
     expect(req.session.save).toHaveBeenCalled();
     expect(res.redirect).toHaveBeenCalledWith('/check-your-answers');
+  });
+
+  test('post should redirect to help with fees if saveAndContinue is true and documents uploaded and non FGM/FMPO case', async () => {
+    req.body.saveAndContinue = true;
+    req.session.userCase.applicantAdditionalDocuments = [
+      {
+        document_url: 'test2/1234',
+        document_binary_url: 'binary/test2/1234',
+        document_filename: 'test_document_2',
+        document_hash: '1234',
+        document_creation_date: '1/1/2024',
+      },
+    ];
+    req.session.userCase.edgeCaseTypeOfApplication = 'PO';
+    updateCaseMock.mockResolvedValue(req.session.userCase);
+
+    await postController.post(req, res);
+    await new Promise(process.nextTick);
+
+    expect(req.session.save).toHaveBeenCalled();
+    expect(res.redirect).toHaveBeenCalledWith('/help-with-fees/need-help-with-fees');
   });
 });

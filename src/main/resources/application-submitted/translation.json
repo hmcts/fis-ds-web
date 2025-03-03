@@ -1,22 +1,24 @@
 {
     "translations": {
         "en": {
-            "title": "Application submitted",
-            "serviceName": "Thank you",
-            "emailSentConfirmation": "<font size=4><strong>You have been sent a confirmation by email.</strong></font>",
-            "line1": "An email has been sent to the applicant, that explains what happens next.",
-            "line2": "Please contact online_application@justice.gov.uk if you do not receive the email.",
-            "line3": "What did you think of this service?",
-            "line4": "(takes 30 seconds)"
+          "title": "Application submitted",
+          "serviceName": "Thank you",
+          "subTitle": "Now that you have submitted your application:",
+          "list": [
+            "the court will be in touch with you to explain what will happen next and what you will need to do",
+            "if you have informed the court that you need specific adjustments in order to take part in the case, the court will contact you to confirm what has been arranged. If you have not heard from the court within 3 days of the hearing, contact the court directly. You can <a href='https://www.gov.uk/find-court-tribunal' class='govuk-link' rel='external' target='_blank'>find a court or tribunal's contact details</a> on GOV.UK"
+          ],
+      "referenceNumber": "Your reference number is:"
         },
         "cy": {
             "title": "Cais wedi'i gyflwyno",
             "serviceName": "Diolch",
-            "emailSentConfirmation": "<font size=4><strong>Mae cadarnhad wedi’i anfon atoch drwy e-bost.</strong></font>",
-            "line1": "Mae neges e-bost wedi’i hanfon at y ceisydd, i esbonio beth fydd yn digwydd nesaf.",
-            "line2": "Cysylltwch â online_application@justice.gov.uk os nad ydych yn cael y neges e-bost.",
-            "line3": "Beth oedd eich barn am y gwasanaeth hwn?",
-            "line4": "(bydd yn cymryd 30 eiliad o’ch amser)"
+            "subTitle": "Gan eich bod wedi cyflwyno eich cais:",
+            "list": [
+              "bydd y llys yn cysylltu â chi i egluro beth fydd yn digwydd nesaf a beth fydd angen ichi ei wneud",
+              "if you have informed the court that you need specific adjustments in order to take part in the case, the court will contact you to confirm what has been arranged. If you have not heard from the court within 3 days of the hearing, contact the court directly. You can <a href='https://www.gov.uk/find-court-tribunal' class='govuk-link' rel='external' target='_blank'>find a court or tribunal's contact details</a> on GOV.UK (welsh)"
+          ],
+          "referenceNumber": "Your reference number is:(in welsh)"
         }
     }
 } 

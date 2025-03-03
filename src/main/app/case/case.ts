@@ -105,6 +105,7 @@ export interface Case {
   paymentReferenceNumber?: string;
   helpWithFeesReferenceNumber?: string;
   hwfPaymentSelection?: YesOrNo;
+  feesAppliedDetails?: YesOrNo;
   applicantStatementOfTruth: YesOrNo;
   applicantCaseName: string;
   lastModifiedDate: string;

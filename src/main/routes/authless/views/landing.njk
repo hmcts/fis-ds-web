@@ -8,14 +8,14 @@
 {% endblock %}
 
 
-{%set language = "Cyramaeg"%}
+{%set language = "Cymraeg"%}
 
 {%if ToggleLanguage == "cy" %}
-{%set language = "Cyramaeg"%}
+{%set language = "Cymraeg"%}
 {%elif ToggleLanguage == "en"%}
 {%set language = "English"%}
 {%else%}
-{%set language = "Cyramaeg"%}
+{%set language = "Cymraeg"%}
 {%endif%}
 
 {% set html %}
@@ -46,10 +46,10 @@
 
 
 <h1 class="govuk-heading-l">{{content['heading']}}</h1>
-<p class="govuk-body-l">{{content['body']}}</p>
+<p class="govuk-body">{{content['body']}}</p>
 <h2 class="govuk-heading-m">{{content['subHeading']}}</h1>
 {% for item in content.subBody %}
-      <p class="govuk-body-l"> {{item}} </p>
+      <p class="govuk-body"> {{item | safe}} </p>
 {% endfor %}
 
 <br/>

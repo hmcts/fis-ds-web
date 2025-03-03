@@ -11,7 +11,7 @@
             "subHeading":"Before you start",
             "subBody":[
                 "You might need to upload supporting documents with your completed application.",
-                "Some applications may ask for a fee, so make sure you have your payment details ready.",
+                "Some applications may ask for a fee, so make sure you have your payment details ready. You can apply for money off a <a class='govuk-link' href='https://www.gov.uk/court-fees-what-they-are' target='_blank'> court or tribunal fee (opens in a new tab)</a>. You should do this before you submit this application as you will need to provide the HWF number before you can send your application to the court. You need to<a class='govuk-link' href='https://www.gov.uk/get-help-with-court-fees' target='_blank'> apply for help with fee (opens in a new tab)</a> before you continue with this application.",
                 "You will be asked a few simple questions. You can review the answers to these questions before you submit them with your application."
             ],
             "button": "Start now"
@@ -27,7 +27,7 @@
             "subHeading":"Cyn i chi ddechrau",
             "subBody":[
                 "Efallai bydd arnoch angen uwchlwytho dogfennau ategol gyda'ch cais wedi'i gwblhau.",
-                "Gall rhai ceisiadau ofyn am ffi, felly gwnewch yn siwr bod gennych eich manylion talu wrth law.",
+                "Gall rhai ceisiadau ofyn am ffi, felly gwnewch yn siwr bod gennych eich manylion talu wrth law. You can apply for money off a <a class='govuk-link' href='https://www.gov.uk/court-fees-what-they-are' target='_blank'> court or tribunal fee (opens in a new tab)</a>. You should do this before you submit this application as you will need to provide the HWF number before you can send your application to the court. You need to<a class='govuk-link' href='https://www.gov.uk/get-help-with-court-fees' target='_blank'> apply for help with fee (opens in a new tab)</a> before you continue with this application. (welsh)",
                 "Gofynnir i chi ateb ychydig o gwestiynau syml. Gallwch adolygu’r atebion i’r cwestiynau hyn cyn i chi gyflwyno’ch cais."
             ],
             "button": "Dechrau nawr"

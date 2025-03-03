@@ -47,6 +47,7 @@ export const prepareUpdateCaseRequestData = (userCase: CaseWithId): UpdateCaseRe
       applicantStatementOfTruth: userCase?.applicantStatementOfTruth,
       paymentServiceRequestReferenceNumber: userCase?.paymentDetails?.serviceRequestReference,
       paymentReferenceNumber: userCase?.paymentDetails?.payment_reference,
+      hwfPaymentSelection: userCase?.hwfPaymentSelection,
       helpWithFeesReferenceNumber: userCase?.helpWithFeesReferenceNumber,
     }),
   };
@@ -76,6 +77,7 @@ export const mapUpdateCaseResponseData = (response: CaseData): UpdateCaseRespons
     paymentReferenceNumber: applicationData.paymentReferenceNumber,
     helpWithFeesReferenceNumber: applicationData.helpWithFeesReferenceNumber,
     hwfPaymentSelection: applicationData.hwfPaymentSelection,
+    feesAppliedDetails: applicationData.feesAppliedDetails,
     applicantStatementOfTruth: applicationData.applicantStatementOfTruth,
   };
 };
@@ -123,5 +125,6 @@ export interface UpdateCaseResponse extends CreateCaseResponse {
   paymentReferenceNumber?: string;
   helpWithFeesReferenceNumber?: string;
   hwfPaymentSelection?: YesOrNo;
+  feesAppliedDetails?: YesOrNo;
   applicantStatementOfTruth?: YesOrNo;
 }

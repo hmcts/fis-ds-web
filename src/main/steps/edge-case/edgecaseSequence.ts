@@ -1,3 +1,4 @@
+import { YesOrNo } from '../../app/case/definition';
 import { parseUrl } from '../../steps/common/url-parser';
 import { Sections, Step } from '../constants';
 import {
@@ -10,13 +11,13 @@ import {
   EMAIL_ADDRESS,
   FIND_ADDRESS,
   FULL_NAME,
-  HELP_WITH_FEE,
+  HELP_WITH_FEES_APPLIED,
   MANUAL_ADDRESS,
+  NEED_HELP_WITH_FEES,
   PAY_YOUR_FEE,
   PageLink,
   SELECT_ADDRESS,
   SELECT_COURT,
-  SIGN_OUT_URL,
   STATEMENT_OF_TRUTH,
   TYPE_OF_APPLICATION_URL,
   UPLOAD_YOUR_DOCUMENTS,
@@ -90,6 +91,17 @@ export const edgecaseSequence: Step[] = [
     getNextStep: () => CHECK_YOUR_ANSWERS,
   },
   {
+    url: NEED_HELP_WITH_FEES,
+    showInSection: Sections.AboutEdgeCase,
+    getNextStep: userCase =>
+      userCase.hwfPaymentSelection === YesOrNo.YES ? HELP_WITH_FEES_APPLIED : CHECK_YOUR_ANSWERS,
+  },
+  {
+    url: HELP_WITH_FEES_APPLIED,
+    showInSection: Sections.AboutEdgeCase,
+    getNextStep: userCase => (userCase.feesAppliedDetails === YesOrNo.NO ? NEED_HELP_WITH_FEES : CHECK_YOUR_ANSWERS),
+  },
+  {
     url: CHECK_YOUR_ANSWERS,
     showInSection: Sections.AboutEdgeCase,
     getNextStep: () => STATEMENT_OF_TRUTH,
@@ -102,12 +114,7 @@ export const edgecaseSequence: Step[] = [
   {
     url: PAY_YOUR_FEE,
     showInSection: Sections.AboutEdgeCase,
-    getNextStep: () => HELP_WITH_FEE,
-  },
-  {
-    url: HELP_WITH_FEE,
-    showInSection: Sections.AboutEdgeCase,
-    getNextStep: () => SIGN_OUT_URL,
+    getNextStep: () => PAY_YOUR_FEE,
   },
   {
     url: APPLICATION_SUBMITTED,
