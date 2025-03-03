@@ -6850,7 +6850,7 @@ __metadata:
     express-session: "npm:^1.17.2"
     form-data: "npm:^4.0.0"
     glob: "npm:^7.2.0"
-    govuk-frontend: "npm:^4.7.0"
+    govuk-frontend: "npm:^5.8.0"
     helmet: "npm:^4.6.0"
     html-webpack-plugin: "npm:^5.5.0"
     html_codesniffer: "npm:~2.5.1"
@@ -8729,10 +8729,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"govuk-frontend@npm:^4.7.0":
-  version: 4.8.0
-  resolution: "govuk-frontend@npm:4.8.0"
-  checksum: 10/be938670a923d1edfc9a87521bbe070c99e5c5182d32dabfb61d75b630111ebfb90da0f015ae94afbe16458ce350a0863428209afb85e8f7af191bad7d444e26
+"govuk-frontend@npm:^5.8.0":
+  version: 5.8.0
+  resolution: "govuk-frontend@npm:5.8.0"
+  checksum: 10/86fb7a09f8e53a739799b4c4d93f3c2bd2d7efe481660d3c32087982271ddbb90fb8fcf5585babef6fd184295979078248b5ff42505d4826e4c0911951f33ab9
   languageName: node
   linkType: hard
 
