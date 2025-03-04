@@ -22,7 +22,7 @@
     "errors":{
         "en": {
             "selectedCourtId": {
-                "notSelected": "Dewiswch lys"
+                "notSelected": "Please select court"
             }
         },
         "cy": {

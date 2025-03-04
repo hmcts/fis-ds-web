@@ -36,7 +36,7 @@
     "errors":{
         "en": {
             "edgeCaseTypeOfApplication": {
-                "required": "Dewiswch y math o gais"
+                "required": "Please select a type of application"
             }
         },
         "cy": {
