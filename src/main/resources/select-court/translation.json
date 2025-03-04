@@ -5,7 +5,7 @@
             "continue": "Continue",
             "serviceName": "Capture court details for application",
             "title": "Capture court details for application",
-            "line1":"If you decide to submit the application to high court, please use the paper form",
+            "line1":"If you decide to submit the application to High Court, please use the paper form.",
             "label": "Please select court from the list",
             "selectCourtDropdownDefaultLabel": "-- Select a value --"
         },
