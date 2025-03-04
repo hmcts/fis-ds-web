@@ -20,7 +20,7 @@ const en = () => ({
 const cy = () => ({
   line1:
     "We'll send all court papers to this address unless you advise us that you are happy to be served court orders by email.",
-  postcode: 'god post',
+  postcode: 'God post',
   findAddress: 'Find address (in welsh)',
   enterAddressManually: 'Or enter address manually (in welsh)',
   errors: {

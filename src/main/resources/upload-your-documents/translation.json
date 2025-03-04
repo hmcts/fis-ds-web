@@ -16,7 +16,7 @@
       ],
       "uploadButton": "Upload",
       "summaryText": "File uploads requirements",
-      "delete": "Dileu",
+      "delete": "Delete",
       "errors": {
         "applicationUpload": {
           "sizeError": "File size exceeds 20Mb. Please upload a file that is less than 20Mb",
