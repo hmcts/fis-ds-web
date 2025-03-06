@@ -22,10 +22,10 @@ const enContent = {
 
 const cyContent = {
   line1:
-    "We'll send all court papers to this address unless you advise us that you are happy to be served court orders by email.",
+    "Byddwn yn anfon holl bapurau’r llys i’r cyfeiriad hwn oni bai eich bod yn dweud wrthym eich bod yn hapus i orchmynion llys gael eu cyflwyno arnoch trwy e-bost.",
   postcode: 'God post',
-  findAddress: 'Find address (in welsh)',
-  enterAddressManually: 'Or enter address manually (in welsh)',
+  findAddress: 'Dod o hyd i gyfeiriad',
+  enterAddressManually: 'neu nodwch y cyfeiriad gyda llaw',
   errors: {
     addressPostcode: {
       required: 'Nodwch god post dilys',

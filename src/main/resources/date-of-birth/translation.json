@@ -10,7 +10,7 @@
         "cy": {
             "continue": "Parhau",
             "serviceName": "Nodwch ddyddiad geni yr unigolyn sy’n destun y cais",
-            "title": "What is the applicant's date of birth? (in welsh)",
+            "title": "Beth yw dyddiad geni ceisydd?",
             "hint": "Er enghraifft, 27 3 2007",
             "under18": "Enter this only if you are under 18 years old. (welsh)"
         }

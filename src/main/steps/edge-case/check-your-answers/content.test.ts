@@ -129,7 +129,7 @@ describe('check-your-answer > content', () => {
           value: { text: 'Rwy’n gwneud cais dros fy hun' },
         },
       ],
-      title: 'Determine User’s Role',
+      title: "Pennu rôl y defnyddiwr",
     });
   });
 

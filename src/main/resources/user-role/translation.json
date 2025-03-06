@@ -2,7 +2,7 @@
     "translations": {
         "en": {
             "continue": "Continue",
-            "serviceName": "Determine user's role",
+            "serviceName": "Determine User's role",
             "label": "Are you applying for yourself or someone else?",
             "self": "I am applying for myself",
             "forSomeone": "I am applying for someone else"

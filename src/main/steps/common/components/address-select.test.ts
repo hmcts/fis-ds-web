@@ -23,10 +23,10 @@ const enContent = {
 
 const cyContent = {
   line1:
-    "We'll send all court papers to this address unless you advise us that you are happy to be served court orders by email. (in welsh)",
+    "Byddwn yn anfon holl bapurau’r llys i’r cyfeiriad hwn oni bai eich bod yn dweud wrthym eich bod yn hapus i orchmynion llys gael eu cyflwyno arnoch trwy e-bost.",
   postcode: 'God post',
   selectAddress: 'Dewiswch gyfeiriad',
-  cannotFindAddress: 'I cannot find the address in the list (in welsh)',
+  cannotFindAddress: 'Ni allaf ddod o hyd i’r cyfeiriad yn y rhestr',
   errors: {
     selectAddress: {
       notSelected: 'Dewiswch gyfeiriad',

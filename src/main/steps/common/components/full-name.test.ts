@@ -14,10 +14,10 @@ const enContent = {
 };
 
 const cyContent = {
-  firstNames: 'First names (in Welsh)',
-  firstNamesHint: '(Include any given or middle names) (in Welsh)',
-  lastNames: 'Last names (in Welsh)',
-  lastNamesHint: '(Include surname or family names) (in Welsh)',
+  firstNames: 'Enwau cyntaf',
+  firstNamesHint: '(Cofiwch gynnwys unrhyw enwau bedydd neu enwau canol)',
+  lastNames: 'Cyfenwau',
+  lastNamesHint: '(Cofiwch gynnwys cyfenw neu enwau teuluol)',
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */

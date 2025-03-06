@@ -21,11 +21,11 @@ const cyContent = {
   section: 'Section (in Welsh)',
   label: "Is the birth father's name on the birth certificate? (in Welsh)",
   hint: "Ask the adoption agency or social worker if you're not sure. (in Welsh)",
-  yes: 'Yes (in Welsh)',
-  no: 'No (in Welsh)',
-  unsure: 'Not sure (in Welsh)',
+  yes: 'Ydw',
+  no: 'Nac ydw',
+  unsure: 'Ddim yn siŵr',
   continue: 'Save and continue (in Welsh)',
-  saveAsDraft: 'Save as draft (in Welsh)',
+  saveAsDraft: 'Cadw fel drafft',
 };
 
 const values = [
