@@ -1,23 +1,31 @@
 {% from "govuk/components/panel/macro.njk" import govukPanel %}
 
 {% extends "common/page.njk" %}
+
+{% block beforeContent %}
+    {{ govukPhaseBanner({
+    tag: {
+      text: phase
+    },
+    html: feedback + languageToggle
+  }) }}
+{% endblock %}
+
 {% block content %}
     <div class="govuk-width-container">
         <div class="govuk-grid-row">
             <div class="govuk-grid-column-two-thirds">
-                <form action="/version-1/check-pay-and-submit/confirmation" method="post" class="form">
-                    {{  govukPanel({
+                {{  govukPanel({
                             titleText: title,
-                            html: referenceNumber +"<br>"+ emailSentConfirmation
+                            html: "<font size=5>"+referenceNumber+"</font>" + "<br><strong>" + caseId + "</strong>"
                         })
                     }}
-                    <p class="govuk-body">{{ line1 }}</p>
-                    <p class="govuk-body">{{ line2 }}</p>
-                    <p class="govuk-body">
-                        <a href="https://www.gov.uk" class="govuk-link">{{line3 }}</a>
-                        <a> {{line4}} </a>
-                    </p>
-                </form>
+                <h2 class="govuk-heading-m">{{subTitle}}</h2>
+                <ul class="govuk-list govuk-list--bullet govuk-list--spaced govuk-!-margin-bottom-6">
+                    {% for item in list %}
+                        <li>{{item | safe}}</li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
     </div>

@@ -106,6 +106,7 @@ export class Nunjucks {
       res.locals.host = req.headers['x-forwarded-host'] || req.hostname;
       res.locals.pagePath = req.path;
       res.locals.serviceType = '';
+      env.addGlobal('currentHost', req.headers?.host?.toLowerCase());
       next();
     });
   }

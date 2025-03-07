@@ -40,6 +40,10 @@ describe('role-type content', () => {
     expect(generatedContent.fgm).toEqual(enContent.fgm);
     expect(generatedContent.fmpo).toEqual(enContent.fmpo);
     expect(generatedContent.sg).toEqual(enContent.sg);
+    expect(generatedContent.pr).toEqual(enContent.pr);
+    expect(generatedContent.prsfp).toEqual(enContent.prsfp);
+    expect(generatedContent.acg).toEqual(enContent.acg);
+    expect(generatedContent.ccs).toEqual(enContent.ccs);
     expect(generatedContent.errors).toEqual(enContent.errors);
   });
 
@@ -51,6 +55,10 @@ describe('role-type content', () => {
     expect(generatedContent.fgm).toEqual(cyContent.fgm);
     expect(generatedContent.fmpo).toEqual(cyContent.fmpo);
     expect(generatedContent.sg).toEqual(cyContent.sg);
+    expect(generatedContent.pr).toEqual(cyContent.pr);
+    expect(generatedContent.prsfp).toEqual(cyContent.prsfp);
+    expect(generatedContent.acg).toEqual(cyContent.acg);
+    expect(generatedContent.ccs).toEqual(cyContent.ccs);
     expect(generatedContent.errors).toEqual(cyContent.errors);
   });
 
@@ -58,18 +66,28 @@ describe('role-type content', () => {
     const generatedContent = generateContent(commonContent);
     const form = generatedContent.form as FormContent;
     const fields = form.fields as FormFields;
-    const typeOfApplication = fields.typeOfApplication as FormOptions;
+    const typeOfApplication = fields.edgeCaseTypeOfApplication as FormOptions;
     expect(typeOfApplication.type).toBe('radios');
     expect(typeOfApplication.classes).toBe('govuk-radios');
     expect((typeOfApplication.label as Function)(generatedContent)).toBe(enContent.label);
     expect((typeOfApplication.values[0].label as Function)(generatedContent)).toBe(enContent.fgm);
+    expect((typeOfApplication.values[0].hint as Function)(generatedContent)).toBe(enContent.fgmHint);
     expect((typeOfApplication.values[1].label as Function)(generatedContent)).toBe(enContent.fmpo);
+    expect((typeOfApplication.values[1].hint as Function)(generatedContent)).toBe(enContent.fmpoHint);
     expect((typeOfApplication.values[2].label as Function)(generatedContent)).toBe(enContent.sg);
+    expect((typeOfApplication.values[3].label as Function)(generatedContent)).toBe(enContent.dop);
+    expect((typeOfApplication.values[4].label as Function)(generatedContent)).toBe(enContent.po);
+    expect((typeOfApplication.values[5].label as Function)(generatedContent)).toBe(enContent.pr);
+    expect((typeOfApplication.values[6].label as Function)(generatedContent)).toBe(enContent.prsfp);
+    expect((typeOfApplication.values[7].label as Function)(generatedContent)).toBe(enContent.acg);
+    expect((typeOfApplication.values[8].label as Function)(generatedContent)).toBe(enContent.ccs);
   });
 
-  test('should contain continue button', () => {
+  test('should contain submit button', () => {
     const generatedContent = generateContent(commonContent);
-    expect(generatedContent.continue).toEqual(enContent.continue);
+    const form = generatedContent.form as FormContent;
+
+    expect((form.submit.text as Function)(generateContent({ ...commonContent, language: EN }))).toBe('Continue');
   });
 });
 /* eslint-enable @typescript-eslint/ban-types */
