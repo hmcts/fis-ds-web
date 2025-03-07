@@ -1,9 +1,9 @@
 import languageAssertions from '../../../../test/unit/utils/languageAssertions';
 import { mockUserCase1 } from '../../../../test/unit/utils/mockUserCase';
+import { CaseWithId } from '../../../app/case/case';
 import { FormContent } from '../../../app/form/Form';
 import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 import { CommonContent, generatePageContent } from '../../common/common.content';
-import { CaseWithId } from '../../../app/case/case';
 import { generateContent } from './content';
 const resourceLoader = new ResourceReader();
 resourceLoader.Loader('check-your-answers');
