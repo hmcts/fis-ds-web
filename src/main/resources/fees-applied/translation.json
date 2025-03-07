@@ -16,9 +16,6 @@
         "helpWithFeesReferenceNumber": {
           "required": "Enter the help with fees reference number you received when you applied for help with fees",
           "invalid": "The help with fees reference number is not valid"
-        },
-        "main-form-submit": {
-          "invalid": "Please select continue to proceed with your help with fees application"
         }
       }
     },

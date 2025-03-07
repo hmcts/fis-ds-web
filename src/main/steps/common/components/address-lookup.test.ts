@@ -8,7 +8,7 @@ jest.mock('../../../app/form/validation');
 
 const enContent = {
   line1:
-    "We'll send all court papers to this address unless you advise us that you are happy to be served court orders by email.",
+    "We'll send all court papers to this address unless you advise us that you are happy to be served with court orders by email.",
   postcode: 'Postcode',
   findAddress: 'Find address',
   enterAddressManually: 'Or enter address manually',
