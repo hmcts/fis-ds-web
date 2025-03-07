@@ -23,9 +23,8 @@
         "confirmStatement": "Mae hyn yn cadarnhau bod yr wybodaeth yr ydych yn ei chyflwyno yn wir ac yn gywir hyd eithaf eich gwybodaeth. Gelwir hwn yn eich ‘datganiad gwirionedd’.",
         "proceedingsForContempt": "Gellir dwyn achos o ddirmyg llys yn erbyn unrhyw un sy’n gwneud datganiad anwir, neu sy’n achosi i ddatganiad anwir gael ei wneud mewn dogfen a ddilysir gan ddatganiad o wirionedd heb gredu’n onest ei fod yn wir.",
         "submitApplication": "Cyflwyno’r cais",
-        "continue": "Parhau i dalu"
-      },
-      "errors": {
+        "continue": "Parhau i dalu",
+        "errors": {
         "applicantStatementOfTruth": {
           "required" : "Dylech dderbyn y Datganiad Gwirionedd i barhau"
         },
@@ -36,4 +35,5 @@
       }
     }
   }
+}
   

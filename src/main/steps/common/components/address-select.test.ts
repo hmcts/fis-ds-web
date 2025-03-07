@@ -23,7 +23,7 @@ const enContent = {
 
 const cyContent = {
   line1:
-    "Byddwn yn anfon holl bapurau’r llys i’r cyfeiriad hwn oni bai eich bod yn dweud wrthym eich bod yn hapus i orchmynion llys gael eu cyflwyno arnoch trwy e-bost.",
+    'Byddwn yn anfon holl bapurau’r llys i’r cyfeiriad hwn oni bai eich bod yn dweud wrthym eich bod yn hapus i orchmynion llys gael eu cyflwyno arnoch trwy e-bost.',
   postcode: 'God post',
   selectAddress: 'Dewiswch gyfeiriad',
   cannotFindAddress: 'Ni allaf ddod o hyd i’r cyfeiriad yn y rhestr',

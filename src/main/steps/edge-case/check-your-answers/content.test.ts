@@ -129,7 +129,7 @@ describe('check-your-answer > content', () => {
           value: { text: 'Rwy’n gwneud cais dros fy hun' },
         },
       ],
-      title: "Pennu rôl y defnyddiwr",
+      title: 'Pennu rôl y defnyddiwr',
     });
   });
 

@@ -122,7 +122,7 @@ const cy: typeof en = {
   applyForAdoption: 'Gwneud cais am wasanaeth',
   applyForDissolution: 'Gwneud cais am wasanaeth',
   feedback:
-    'Mae hwn yn wasanaeth newydd - bydd <a class="govuk-link" aria-label="Dolen i roi adborth. Bydd yn agor mewn tab newydd. Bydd arnoch angen dychwelyd i’r tab hwn a pharhau â’ch cais o fewn 60 munud fel na fyddwch yn colli’r hyn rydych wedi’i wneud yn barod." href="#" target="_blank">feedback</a> eich adborth yn ein helpu ni i\'w wella',
+    'Mae hwn yn wasanaeth newydd - bydd <a class="govuk-link" aria-label="Dolen i roi adborth. Bydd yn agor mewn tab newydd. Bydd arnoch angen dychwelyd i’r tab hwn a pharhau â’ch cais o fewn 60 munud fel na fyddwch yn colli’r hyn rydych wedi’i wneud yn barod." href="#" target="_blank">adborth</a> eich adborth yn ein helpu ni i\'w wella',
   languageToggle: '<a href="?lng=en" class="govuk-link language">English</a>',
   govUk: 'GOV.UK',
   back: 'Yn ôl',
@@ -194,13 +194,29 @@ const cy: typeof en = {
   telephoneNumber: '0300 303 5171',
   telephoneDetails: 'Dydd Llun i Ddydd Gwener, 8.30am - 5pm.',
   changeCookiesHeading: 'Newid eich gosodiadau cwcis',
+  allowAnalyticsCookies: 'Allow cookies that measure website use? (welsh)',
   useAnalyticsCookies: 'Defnyddio cwcis sy’n mesur fy nefnydd i o’r wefan',
   doNotUseAnalyticsCookies: 'Peidio â defnyddio cwcis sy’n mesur fy nefnydd i o’r wefan',
   save: 'Cadw',
-  apmCookiesHeadings: 'Caniatáu cwcis sy\'n mesur y broses o fonitro perfformiad gwefannau?',
-  useApmCookies: 'Defnyddio cwcis sy\'n mesur monitro perfformiad ceisiadau gwefan',
-  doNotUseApmCookies: 'Peidiwch â defnyddio cwcis sy\'n mesur monitro perfformiad ceisiadau gwefannau',
+  cookiesSaved: 'Your cookie settings were saved (welsh)',
+  additionalCookies:
+    'Government services may set additional cookies and, if so, will have their own cookie policy and banner. (welsh)',
+  goToHomepage: 'Go to homepage (welsh)',
+  apmCookiesHeadings: "Caniatáu cwcis sy'n mesur y broses o fonitro perfformiad gwefannau?",
+  useApmCookies: "Defnyddio cwcis sy'n mesur monitro perfformiad ceisiadau gwefan",
+  doNotUseApmCookies: "Peidiwch â defnyddio cwcis sy'n mesur monitro perfformiad ceisiadau gwefannau",
+  cookiesAcceptedPart1: 'You’ve accepted additional cookies. You can (welsh)',
   cookiesAcceptorRejectPart2: 'newid eich gosodiadau cwcis',
+  cookiesAcceptorRejectPart3: 'at any time. (welsh)',
+  cookiesHeading: 'Cookies on (welsh)',
+  cookiesLine1: 'We use some essential cookies to make this service work. (welsh)',
+  cookiesLine2:
+    'We’d also like to use analytics cookies so we can understand how you use the service and make improvements. (welsh)',
+  acceptAnalyticsCookies: 'Accept analytics cookies (welsh)',
+  rejectAnalyticsCookies: 'Reject analytics cookies (welsh)',
+  viewCookies: 'View cookies (welsh)',
+  hideMessage: 'Hide this message (welsh)',
+  cookiesRejectedPart1: 'You’ve rejected additional cookies. You can (welsh)',
 };
 
 export const generatePageContent = ({
