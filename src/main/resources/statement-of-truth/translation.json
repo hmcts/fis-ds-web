@@ -32,6 +32,7 @@
         "paymentError": {
           "title": "Mae yna broblem",
           "applicationNotSubmitted": "Nid yw eich cais wedi’i gyflwyno. Rhowch gynnig arall arni"
+          }
         }
       }
     }
