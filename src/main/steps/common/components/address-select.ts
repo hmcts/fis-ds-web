@@ -19,7 +19,7 @@ const en = content => {
 
   return {
     line1:
-      "We'll send all court papers to this address unless you advise us that you are happy to be served court orders by email.",
+      "We'll send all court papers to this address unless you advise us that you are happy to be served with court orders by email.",
     postcode: 'Postcode',
     selectAddress: 'Select an address',
     cannotFindAddress: 'I cannot find the address in the list',
