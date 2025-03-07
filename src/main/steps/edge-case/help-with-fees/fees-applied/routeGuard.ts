@@ -4,7 +4,7 @@ import { NextFunction, Response } from 'express';
 import { YesOrNo } from '../../../../app/case/definition';
 import { AppRequest } from '../../../../app/controller/AppRequest';
 import { AnyObject } from '../../../../app/controller/PostController';
-import { HELP_WITH_FEES_APPLIED, SIGN_OUT_URL } from '../../../../steps/urls';
+import { SIGN_OUT_URL } from '../../../../steps/urls';
 
 export const routeGuard = {
   post: async (req: AppRequest<AnyObject>, res: Response, next: NextFunction) => {
@@ -17,13 +17,9 @@ export const routeGuard = {
     }
 
     if (cancel) {
-      if (feesAppliedDetails === YesOrNo.NO) {
-        return res.redirect(SIGN_OUT_URL);
-      }
-
-      req.session.errors = [{ errorType: 'invalid', propertyName: 'main-form-submit' }];
-      return req.session.save(() => res.redirect(HELP_WITH_FEES_APPLIED));
+      return res.redirect(SIGN_OUT_URL);
     }
+
     req.session.save(next);
   },
 };

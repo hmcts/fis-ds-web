@@ -30,24 +30,10 @@ describe('pay your fee > routeGuard', () => {
     });
   });
 
-  test('post should redirect to sign out url if cancel present and fees applied details is no', async () => {
-    req.body.cancel = 'cancel';
-    req.body.feesAppliedDetails = 'No';
+  test('post should redirect to sign out url if cancel present', async () => {
+    req.body.cancel = true;
     await routeGuard.post(req, res, next);
     expect(res.redirect).toHaveBeenCalledWith('/logout');
     expect(req.session.errors).toEqual([]);
-  });
-
-  test('post should add error and redirect to same page if cancel and fees applied details is yes', async () => {
-    req.body.cancel = 'cancel';
-    req.body.feesAppliedDetails = 'Yes';
-    await routeGuard.post(req, res, next);
-    expect(res.redirect).toHaveBeenCalledWith('/help-with-fees/fees-applied');
-    expect(req.session.errors).toEqual([
-      {
-        errorType: 'invalid',
-        propertyName: 'main-form-submit',
-      },
-    ]);
   });
 });
