@@ -4,6 +4,7 @@ import { CaseWithId } from '../../../app/case/case';
 import { FormContent } from '../../../app/form/Form';
 import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 import { CommonContent, generatePageContent } from '../../common/common.content';
+
 import { generateContent } from './content';
 const resourceLoader = new ResourceReader();
 resourceLoader.Loader('check-your-answers');
