@@ -27,11 +27,11 @@ const enContent = {
 };
 
 const cyContent = {
-  addressLine1: 'Building and street (in welsh)',
-  town: 'Town or city (in welsh)',
-  county: 'County (in welsh)',
+  addressLine1: 'Adeilad a stryd',
+  town: 'Tref neu ddinas',
+  county: 'Sir',
   postcode: 'God post',
-  enterInternationalAddress: 'Enter an international address (in welsh)',
+  enterInternationalAddress: 'Nodwch gyfeiriad rhyngwladol',
   errors: {
     address1: {
       required: 'Nodwch linell gyntaf y cyfeiriad',
