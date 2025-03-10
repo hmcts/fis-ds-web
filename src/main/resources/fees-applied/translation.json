@@ -35,9 +35,6 @@
         "helpWithFeesReferenceNumber": {
           "required": "Nodwch y cyfeirnod Help i dalu Ffioedd a gawsoch pan wnaethoch chi wneud cais am Help i dalu Ffioedd",
           "invalid": "The help with fees reference number is not valid (welsh)"
-        },
-        "main-form-submit": {
-          "invalid": "Please select continue to proceed with your help with fees application (welsh)"
         }
       }
     }
