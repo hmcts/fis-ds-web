@@ -65,7 +65,7 @@ describe('role-type content', () => {
               availableCourts: [
                 {
                   epimms_id: '',
-                  court_name: '',
+                  site_name: '',
                 },
               ],
             },

@@ -5,7 +5,7 @@
       "title": "Upload application form",
       "submitAdditionalForm": "Submit additional form if you are not the applicant",
       "youNeed": "Please upload the application form that you have already completed.",
-      "youNeed2": "If you are applying on behalf of someone else you will need to complete an additional form, unless you are a local authority",
+      "youNeed2": "If you are applying on behalf of someone else you will need to complete an additional form, unless you are a local authority.",
       "youNeed3": "You may also need to upload form <a class='govuk-link' href='https://www.gov.uk/government/publications/form-c8-confidential-contact-details-family-procedure-rules-2010-rule-291' target='_blank'>C8 Confidential Contact Details (opens in a new tab)</a> if you want to keep your contact details or the person to be protected's contact details confidential.",
       "uploadDescription": "Please upload all required forms below.",
       "uploadRequirement": [
