@@ -116,7 +116,7 @@ export const ApplicantSummaryList = (
   if (courtDetails) {
     SummaryData.push({
       key: keys.selectedCourt,
-      value: courtDetails.court_name,
+      value: courtDetails.site_name,
       changeUrl: Urls.SELECT_COURT,
     });
   }
