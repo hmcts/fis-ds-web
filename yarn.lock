@@ -1756,10 +1756,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hmcts/cookie-manager@npm:^0.0.4":
-  version: 0.0.4
-  resolution: "@hmcts/cookie-manager@npm:0.0.4"
-  checksum: 10/c76a89cee39c4741bfd6fea53eeb421322bb56e504ddcd55de68bfea75d187cfe23fc8bc29a458772c9ba8f2da36b1a97470ec1e6bcb26573750b2bb3fe2c7e3
+"@hmcts/cookie-manager@npm:^0.0.5":
+  version: 0.0.5
+  resolution: "@hmcts/cookie-manager@npm:0.0.5"
+  checksum: 10/724bd1d202f4746bb7c6de2ed5459ba080ac164a99ae0741238a988b531be1bc7ffc31c6e09bf2a20235932e5db0d7e795f4982ae8a622e99d3e08767522f472
   languageName: node
   linkType: hard
 
@@ -6792,7 +6792,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "ds-ui@workspace:."
   dependencies:
-    "@hmcts/cookie-manager": "npm:^0.0.4"
+    "@hmcts/cookie-manager": "npm:^0.0.5"
     "@hmcts/frontend": "npm:^0.0.50-alpha"
     "@hmcts/nodejs-healthcheck": "npm:^1.8.5"
     "@hmcts/properties-volume": "npm:^0.0.13"
