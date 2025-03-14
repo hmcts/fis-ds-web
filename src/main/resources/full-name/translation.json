@@ -9,8 +9,8 @@
         "cy": {
             "continue": "Parhau",
             "serviceName": "Nodwch enw’r unigolyn perthnasol yma",
-            "title": "Enter your name (in welsh)",
-            "line1":"Enter applicant's full name as it appears on this application. (in welsh)"
+            "title": "Nodwch eich enw",
+            "line1":"Nodwch ceisydd eu henw llawn fel y mae’n ymddangos ar y cais."
         }
     },
     "errors":{

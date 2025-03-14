@@ -8,7 +8,7 @@
         },
         "cy": {
             "continue": "Parhau",
-            "serviceName": "Nodwch ddyddiad geni yr unigolyn sy’n destun y cais",
+            "serviceName": "Nodwch ddyddiad geni’r cyfryw unigolyn",
             "title": "Beth yw dyddiad geni yr unigolyn a enwir yn y cais hwn?",
             "hint": "Er enghraifft, 27 3 2007"
         }

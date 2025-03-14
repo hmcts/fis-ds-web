@@ -18,13 +18,13 @@ const enContent = {
 };
 
 const cyContent = {
-  addressLine1: 'Address line 1 (in welsh)',
-  addressLine2: 'Address line 2 (Optional) (in welsh)',
-  addressLine3: 'Address line 3 (Optional) (in welsh)',
-  town: 'Town or city (Optional) (in welsh)',
-  county: 'County, district, state or province (Optional) (in welsh)',
-  postcode: 'Postcode, zip code or area code (Optional) (in welsh)',
-  country: 'Country (in Welsh)',
+  addressLine1: 'Llinell cyfeiriad 1',
+  addressLine2: 'Llinell cyfeiriad 2 (Dewisol)',
+  addressLine3: 'Llinell cyfeiriad 3 (Dewisol)',
+  town: 'Tref neu ddinas (Dewisol)',
+  county: 'Sir, rhanbarth, gwladwriaeth neu dalaith (Dewisol)',
+  postcode: 'Cod post, cod zip neu god rhanbarth',
+  country: 'Wlad',
 };
 
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
@@ -68,7 +68,7 @@ describe('common > components > address-international > content', () => {
     expect(generatedContent.country).toEqual(cyContent.country);
     expect(generatedContent.errors).toEqual({
       address1: (manualAddressContent.errors as any).address1,
-      addressCountry: { required: 'Enter the country (in welsh)' },
+      addressCountry: { required: 'Nodwch y wlad' },
     });
   });
 
