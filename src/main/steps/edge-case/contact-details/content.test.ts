@@ -9,6 +9,7 @@ jest.mock('../../../app/form/validation', () => ({
 }));
 
 import { FormContent, FormFields, FormOptions } from '../../../app/form/Form';
+import { isFieldFilledIn, isPhoneNoValid } from '../../../app/form/validation';
 import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
 import { CommonContent } from '../../common/common.content';
 
@@ -84,9 +85,8 @@ describe('contact-number-content', () => {
     const fields = form.fields as FormFields;
     const mobilePhoneNumberOption = fields.applicantPhoneNumber as FormOptions;
     expect((mobilePhoneNumberOption.label as Function)(generatedContent)).toBe(enContent.mobilePhoneLabel);
-    expect((mobilePhoneNumberOption.validator as Function)(null, mobilePhoneNumberOption)).toBe('atleastOneRequired');
-    const homePhoneNumberOption = fields.applicantHomeNumber as FormOptions;
-    expect((homePhoneNumberOption.label as Function)(generatedContent)).toBe(enContent.homePhoneLabel);
-    expect((homePhoneNumberOption.validator as Function)(null, homePhoneNumberOption)).toBe('atleastOneRequired');
+    (mobilePhoneNumberOption.validator as Function)('test');
+    expect(isFieldFilledIn).toHaveBeenCalledWith('test');
+    expect(isPhoneNoValid).toHaveBeenCalledWith('test');
   });
 });

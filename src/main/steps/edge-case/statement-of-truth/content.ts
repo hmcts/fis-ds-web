@@ -1,7 +1,12 @@
+import _ from 'lodash';
+
+import { YesOrNo } from '../../../app/case/definition';
 import { TranslationFn } from '../../../app/controller/GetController';
 import { FormContent } from '../../../app/form/Form';
 import { isFieldFilledIn } from '../../../app/form/validation';
-import { ResourceReader } from '../../../modules/resourcereader/ResourceReader';
+import { isFGMOrFMPOCase, loadResources } from '../util';
+
+export * from './routeGuard';
 
 const STATEMENT_OF_TRUTH_TRANSLATION_FILE = 'statement-of-truth';
 
@@ -21,40 +26,23 @@ export const form: FormContent = {
   },
   submit: {
     classes: 'govuk-!-margin-top-5',
-    text: s => s.continue,
+    text: s => s.submit,
   },
 };
 
 export const generateContent: TranslationFn = content => {
-  const resourceLoader = new ResourceReader();
-  resourceLoader.Loader(STATEMENT_OF_TRUTH_TRANSLATION_FILE);
-  const Translations = resourceLoader.getFileContents().translations;
-  const errors = resourceLoader.getFileContents().errors;
+  const resourceLoader = loadResources(STATEMENT_OF_TRUTH_TRANSLATION_FILE);
+  const translations = resourceLoader.getFileContents().translations[content.language];
+  const userCase = content.userCase;
+  const typeOfApplication = userCase?.edgeCaseTypeOfApplication;
 
-  const en = () => {
-    return {
-      ...Translations.en,
-      errors: {
-        ...errors.en,
-      },
-    };
-  };
-  const cy = () => {
-    return {
-      ...Translations.cy,
-      errors: {
-        ...errors.cy,
-      },
-    };
-  };
-
-  const languages = {
-    en,
-    cy,
-  };
-  const translations = languages[content.language]();
   return {
     ...translations,
-    form: { ...form },
+    submit:
+      isFGMOrFMPOCase(typeOfApplication!) ||
+      (userCase?.hwfPaymentSelection === YesOrNo.YES && !_.isEmpty(userCase?.helpWithFeesReferenceNumber))
+        ? translations.submitApplication
+        : translations.continue ?? translations.continue,
+    form,
   };
 };

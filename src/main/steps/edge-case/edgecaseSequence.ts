@@ -1,28 +1,35 @@
+import { YesOrNo } from '../../app/case/definition';
+import { parseUrl } from '../../steps/common/url-parser';
 import { Sections, Step } from '../constants';
 import {
   ADDITIONAL_DOCUMENTS_UPLOAD,
   APPLICATION_SUBMITTED,
   CHECK_YOUR_ANSWERS,
   CONTACT_DETAILS,
-  CONTACT_PREFERENCES,
   COOKIES,
   DATE_OF_BIRTH,
   EMAIL_ADDRESS,
   FIND_ADDRESS,
   FULL_NAME,
+  HELP_WITH_FEES_APPLIED,
   MANUAL_ADDRESS,
+  NEED_HELP_WITH_FEES,
+  PAY_YOUR_FEE,
+  PageLink,
   SELECT_ADDRESS,
+  SELECT_COURT,
   STATEMENT_OF_TRUTH,
   TYPE_OF_APPLICATION_URL,
   UPLOAD_YOUR_DOCUMENTS,
   USER_ROLE,
 } from '../urls';
 
+import { isFGMOrFMPOCase } from './util';
 export const edgecaseSequence: Step[] = [
   {
     url: TYPE_OF_APPLICATION_URL,
     showInSection: Sections.AboutEdgeCase,
-    getNextStep: () => USER_ROLE,
+    getNextStep: data => (isFGMOrFMPOCase(data.edgeCaseTypeOfApplication!) ? USER_ROLE : DATE_OF_BIRTH),
   },
   {
     url: USER_ROLE,
@@ -48,15 +55,10 @@ export const edgecaseSequence: Step[] = [
   {
     url: SELECT_ADDRESS,
     showInSection: Sections.AboutEdgeCase,
-    getNextStep: () => CONTACT_PREFERENCES,
+    getNextStep: () => EMAIL_ADDRESS,
   },
   {
     url: MANUAL_ADDRESS,
-    showInSection: Sections.AboutEdgeCase,
-    getNextStep: () => CONTACT_PREFERENCES,
-  },
-  {
-    url: CONTACT_PREFERENCES,
     showInSection: Sections.AboutEdgeCase,
     getNextStep: () => EMAIL_ADDRESS,
   },
@@ -68,17 +70,36 @@ export const edgecaseSequence: Step[] = [
   {
     url: CONTACT_DETAILS,
     showInSection: Sections.AboutEdgeCase,
-    getNextStep: () => UPLOAD_YOUR_DOCUMENTS,
+    getNextStep: data =>
+      isFGMOrFMPOCase(data.edgeCaseTypeOfApplication!)
+        ? SELECT_COURT
+        : (parseUrl(UPLOAD_YOUR_DOCUMENTS).url as PageLink),
+  },
+  {
+    url: SELECT_COURT,
+    showInSection: Sections.AboutEdgeCase,
+    getNextStep: () => parseUrl(UPLOAD_YOUR_DOCUMENTS).url as PageLink,
   },
   {
     url: UPLOAD_YOUR_DOCUMENTS,
     showInSection: Sections.AboutEdgeCase,
-    getNextStep: () => ADDITIONAL_DOCUMENTS_UPLOAD,
+    getNextStep: () => parseUrl(ADDITIONAL_DOCUMENTS_UPLOAD).url as PageLink,
   },
   {
     url: ADDITIONAL_DOCUMENTS_UPLOAD,
     showInSection: Sections.AboutEdgeCase,
     getNextStep: () => CHECK_YOUR_ANSWERS,
+  },
+  {
+    url: NEED_HELP_WITH_FEES,
+    showInSection: Sections.AboutEdgeCase,
+    getNextStep: userCase =>
+      userCase.hwfPaymentSelection === YesOrNo.YES ? HELP_WITH_FEES_APPLIED : CHECK_YOUR_ANSWERS,
+  },
+  {
+    url: HELP_WITH_FEES_APPLIED,
+    showInSection: Sections.AboutEdgeCase,
+    getNextStep: userCase => (userCase.feesAppliedDetails === YesOrNo.NO ? NEED_HELP_WITH_FEES : CHECK_YOUR_ANSWERS),
   },
   {
     url: CHECK_YOUR_ANSWERS,
@@ -88,7 +109,12 @@ export const edgecaseSequence: Step[] = [
   {
     url: STATEMENT_OF_TRUTH,
     showInSection: Sections.AboutEdgeCase,
-    getNextStep: () => APPLICATION_SUBMITTED,
+    getNextStep: data => (isFGMOrFMPOCase(data.edgeCaseTypeOfApplication!) ? APPLICATION_SUBMITTED : PAY_YOUR_FEE),
+  },
+  {
+    url: PAY_YOUR_FEE,
+    showInSection: Sections.AboutEdgeCase,
+    getNextStep: () => PAY_YOUR_FEE,
   },
   {
     url: APPLICATION_SUBMITTED,
