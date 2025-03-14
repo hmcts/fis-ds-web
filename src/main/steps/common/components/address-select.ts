@@ -38,11 +38,15 @@ const en = content => {
 
 const cy = content => {
   const addresses = content.addresses || [];
+  const language = content.language;
   const options = [
     {
       attributes: { id: 'totalAddressesFound' },
       value: -1,
-      text: `${addresses.length} address${addresses?.length !== 1 ? 'es' : ''} found (in welsh)`,
+      text:
+        language === 'cy'
+          ? `${addresses.length} daethpwyd o hyd i gyfeiriad${addresses?.length !== 1 ? 'au' : ''}`
+          : `${addresses.length} address${addresses.length !== 1 ? 'es' : ''} found`,
       selected: true,
     },
   ];

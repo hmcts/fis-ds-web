@@ -18,13 +18,13 @@ const enContent = {
 };
 
 const cyContent = {
-  section: 'Section (in Welsh)',
-  label: "Is the birth father's name on the birth certificate? (in Welsh)",
-  hint: "Ask the adoption agency or social worker if you're not sure. (in Welsh)",
+  section: 'Adran',
+  label: 'A yw enw’r tad biolegol ar y dystysgrif geni?',
+  hint: 'Gofynnwch i’r asiantaeth fabwysiadu neu’r gweithiwr cymdeithasol os nad ydych yn siŵr.',
   yes: 'Ydw',
   no: 'Nac ydw',
   unsure: 'Ddim yn siŵr',
-  continue: 'Save and continue (in Welsh)',
+  continue: 'Cadw ac Parhau',
   saveAsDraft: 'Cadw fel drafft',
 };
 

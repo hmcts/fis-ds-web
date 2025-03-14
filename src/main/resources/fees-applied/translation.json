@@ -24,8 +24,8 @@
       "hwfReferenceNumberLabel": "Rhowch eich cyfeirnod help i dalu ffioedd",
       "hwfReferenceNumberBody": "Cawsoch y rhif hwn pan wnaethoch gais am help i dalu ffioedd.",
       "hwfReferenceNumberHint": "Er enghraifft, HWF-A1B-23C",
-      "noHwfLabel": "Mae arnoch angen<a class='govuk-link' href='https://www.gov.uk/get-help-with-court-fees' target='_blank'>  help i dalu eich ffioedd (yn agor mewn tab newydd)</a> cyn i chi barhau gyda’r cais hwn.",
-      "cancelApplication": "Cancel application (welsh)",
+      "noHwfLabel": "Mae arnoch angen<a class='govuk-link' href='https://www.gov.uk/get-help-with-court-fees' target='_blank'> gwneud cais am help i dalu ffioedd (yn agor mewn tab newydd)</a> cyn i chi barhau gyda’r cais hwn.",
+      "cancelApplication": "Canslo’r cais",
       "yes": "Do",
       "no": "Naddo",
       "errors": {
@@ -34,7 +34,7 @@
         },
         "helpWithFeesReferenceNumber": {
           "required": "Nodwch y cyfeirnod Help i dalu Ffioedd a gawsoch pan wnaethoch chi wneud cais am Help i dalu Ffioedd",
-          "invalid": "The help with fees reference number is not valid (welsh)"
+          "invalid": "Nid yw’r cyfeirnod Help i Dalu Ffioedd yn ddilys"
         }
       }
     }
