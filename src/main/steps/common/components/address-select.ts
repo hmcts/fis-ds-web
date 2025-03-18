@@ -6,16 +6,6 @@ const getAddressItems = addresses => addresses.map((item, index) => ({ text: ite
 
 const en = content => {
   const addresses = content.addresses || [];
-  const options = [
-    {
-      attributes: { id: 'totalAddressesFound' },
-      value: -1,
-      text: `${addresses?.length} address${addresses?.length !== 1 ? 'es' : ''} found`,
-      selected: true,
-    },
-  ];
-
-  options.push(...getAddressItems(addresses));
 
   return {
     line1:
@@ -30,7 +20,15 @@ const en = content => {
         notSelected: 'Select an address',
       },
     },
-    options,
+    options: [
+      {
+        attributes: { id: 'totalAddressesFound' },
+        value: -1,
+        text: `${addresses?.length} address${addresses?.length !== 1 ? 'es' : ''} found`,
+        selected: true,
+      },
+      ...getAddressItems(addresses),
+    ],
     changePostCodeUrl: '#',
     cantFindAddressUrl: '#',
   };
@@ -38,29 +36,27 @@ const en = content => {
 
 const cy = content => {
   const addresses = content.addresses || [];
-  const options = [
-    {
-      attributes: { id: 'totalAddressesFound' },
-      value: -1,
-      text: `${addresses.length} address${addresses?.length !== 1 ? 'es' : ''} found (in welsh)`,
-      selected: true,
-    },
-  ];
-
-  options.push(...getAddressItems(addresses));
 
   return {
     line1:
-      "We'll send all court papers to this address unless you advise us that you are happy to be served court orders by email. (in welsh)",
+      'Byddwn yn anfon holl bapurau’r llys i’r cyfeiriad hwn oni bai eich bod yn dweud wrthym eich bod yn hapus i orchmynion llys gael eu cyflwyno arnoch trwy e-bost.',
     postcode: 'God post',
     selectAddress: 'Dewiswch gyfeiriad',
-    cannotFindAddress: 'I cannot find the address in the list (in welsh)',
+    cannotFindAddress: 'Ni allaf ddod o hyd i’r cyfeiriad yn y rhestr',
     errors: {
       selectAddress: {
         notSelected: 'Dewiswch gyfeiriad',
       },
     },
-    options,
+    options: [
+      {
+        attributes: { id: 'totalAddressesFound' },
+        value: -1,
+        text: `${addresses.length} daethpwyd o hyd i gyfeiriad${addresses?.length !== 1 ? 'au' : ''}`,
+        selected: true,
+      },
+      ...getAddressItems(addresses),
+    ],
     changePostCodeUrl: '#',
     cantFindAddressUrl: '#',
   };

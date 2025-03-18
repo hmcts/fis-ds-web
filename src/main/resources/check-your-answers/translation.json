@@ -39,17 +39,20 @@
               "emailToNamedPerson": "The person named on this application",
               "needHelpWithFees": "Do you need help with paying the fee for this application?",
               "hwfReferenceNumber": "Enter your help with fees reference number",
-              "helpWithFees": "Help with Fees"
+              "helpWithFees": "Help with Fees",
+              "userRole": "Determine User’s Role",
+              "documentsUploaded": "List of Documents uploaded",
+              "formsUploaded": "List of forms uploaded"
             }
         },
         "cy": {
           "serviceName": "Gwirio eich atebion",
             "section": "",
-            "title": "Check your Answers -welsh",
+            "title": "Gwirio eich atebion",
             "change": "newid",
-            "continue": "Accept and continue - welsh",
-            "submitApplication": "Now submit your Application (welsh)",
-            "checkInformation": "Check all the information provided and documents uploaded carefully. By Submitting this application you are confirming that you have submitted all the documents required to process the application and the details you have provided is correct. (welsh)",
+            "continue": "Derbyn a pharhau",
+            "submitApplication": "Cyflwynwch eich cais nawr",
+            "checkInformation": "Gwiriwch yn ofalus yr holl wybodaeth a ddarparwyd a’r dogfennau sydd wedi’u huwchlwytho. Trwy gyflwyno’r cais hwn, rydych yn cadarnhau eich bod wedi cyflwyno’r holl ddogfennau sydd eu hangen i brosesu’r cais a bod y manylion rydych wedi’u darparu yn gywir.",
             "sectionTitles": {
               "applicantDetails": "Manylion y ceisydd"
             },
@@ -61,27 +64,30 @@
               "dateOfBirth": "Dyddiad geni’r unigolyn sy’n destun y cais",
               "address": "Cyfeiriad",
               "namedPersonEmail": "Cyfeiriad e-bost yr unigolyn a enwir ar y cais",
-              "namedPersonMob": "Enter your phone number - welsh",
-              "uploadDocuments": "Rhestr o ffurflenni sydd wedi’u uwchlwytho (Ffurflen gais)",
+              "namedPersonMob": "Nodwch eich Rhif ffôn",
+              "uploadDocuments": "Rhestr o’r ffurflenni a uwchlwythwyd (Ffurflen gais)",
               "additionalDocuments": "Rhestr o ddogfennau sydd wedi’u uwchlwytho (dogfennau ategol)",
               "typeOfApplication": "Math o gais",
               "selectedCourt": "Manylion llys ar gyfer y cais",
-              "FGM": "Female Genital Mutilation - form FGM001 (in welsh)",
-              "FMPO": "Forced Marriage Protection Order - form FL401A (welsh)", 
+              "FGM": "Anffurfio Organau Cenhedlu Benywod - ffurflen FGM001",
+              "FMPO": "Gorchymyn Amddiffyn rhag Priodas dan Orfod - ffurflen FL401A", 
               "SG": "Gwarcheidiaeth Arbennig - ffurflen C1/ffurflen C13A",
               "DOP": "Datganiad Ynghylch Pwy yw’r Rhiant/Rhieni - Ffurflen C63",
               "PO": "Gorchmynion Rhiant - ffurflen C51",
-              "PR":"Parental responsibility - form C1 (welsh)",
-              "PRSFP":"Parental responsibility (second female parent) - form C1 (welsh)",
-              "ACG":"Appointing a child’s guardian - form C1 (welsh)",
-              "CCS":"Change of child’s surname or removal from jurisdiction - form C1 (welsh)",
+              "PR":"Cyfrifoldeb rhiant - ffurflen C1",
+              "PRSFP":"Cyfrifoldeb rhiant (ail riant benywaidd) - ffurflen C1",
+              "ACG":"Penodi gwarcheidwad plentyn - ffurflen C1",
+              "CCS":"Newid cyfenw plentyn neu ei dynnu o awdurdodaeth - ffurflen C1",
               "self": "Rwy’n gwneud cais dros fy hun",
               "forSomeone": "Rwy’n gwneud cais ar ran rhywun arall",
               "emailToAccountOwner": "Perchennog y cyfrif",
               "emailToNamedPerson": "Yr unigolyn a enwir ar y cais hwn",
               "needHelpWithFees": "A ydych angen help i dalu’r ffi am wneud y cais hwn?",
               "hwfReferenceNumber": "Rhowch eich cyfeirnod help i dalu ffioedd",
-              "helpWithFees": "Help i dalu ffioedd"
+              "helpWithFees": "Help i dalu ffioedd",
+              "userRole": "Pennu rôl y defnyddiwr",
+              "documentsUploaded": "Rhestr o ddogfennau sydd wedi’u uwchlwytho",
+              "formsUploaded": "Rhestr o’r ffurflenni a uwchlwythwyd"
             }
         }
     }

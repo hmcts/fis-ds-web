@@ -10,8 +10,8 @@
         "cy": {
             "continue": "Parhau",
             "serviceName": "Cyfeiriad e-bost",
-            "label": "What is the email address of the applicant? (Welsh)",
-            "hint": "This should be a secure and private email.</br>This is where notifications about the application will be sent to. (Welsh)",
+            "label": "Beth yw cyfeiriad e-bost y ceisydd?",
+            "hint": "Dylai hwn fod yn gyfeiriad e-bost diogel a phreifat.</br>Dyma lle fydd unrhyw hysbysiadau am y cais yn cael eu hanfon.",
             "emailAddress": "Nodwch gyfeiriad e-bost"
         }
     },
