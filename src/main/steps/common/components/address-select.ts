@@ -6,16 +6,6 @@ const getAddressItems = addresses => addresses.map((item, index) => ({ text: ite
 
 const en = content => {
   const addresses = content.addresses || [];
-  const options = [
-    {
-      attributes: { id: 'totalAddressesFound' },
-      value: -1,
-      text: `${addresses?.length} address${addresses?.length !== 1 ? 'es' : ''} found`,
-      selected: true,
-    },
-  ];
-
-  options.push(...getAddressItems(addresses));
 
   return {
     line1:
@@ -30,7 +20,15 @@ const en = content => {
         notSelected: 'Select an address',
       },
     },
-    options,
+    options: [
+      {
+        attributes: { id: 'totalAddressesFound' },
+        value: -1,
+        text: `${addresses?.length} address${addresses?.length !== 1 ? 'es' : ''} found`,
+        selected: true,
+      },
+      ...getAddressItems(addresses),
+    ],
     changePostCodeUrl: '#',
     cantFindAddressUrl: '#',
   };
@@ -38,20 +36,6 @@ const en = content => {
 
 const cy = content => {
   const addresses = content.addresses || [];
-  const language = content.language;
-  const options = [
-    {
-      attributes: { id: 'totalAddressesFound' },
-      value: -1,
-      text:
-        language === 'cy'
-          ? `${addresses.length} daethpwyd o hyd i gyfeiriad${addresses?.length !== 1 ? 'au' : ''}`
-          : `${addresses.length} address${addresses.length !== 1 ? 'es' : ''} found`,
-      selected: true,
-    },
-  ];
-
-  options.push(...getAddressItems(addresses));
 
   return {
     line1:
@@ -64,7 +48,15 @@ const cy = content => {
         notSelected: 'Dewiswch gyfeiriad',
       },
     },
-    options,
+    options: [
+      {
+        attributes: { id: 'totalAddressesFound' },
+        value: -1,
+        text: `${addresses.length} daethpwyd o hyd i gyfeiriad${addresses?.length !== 1 ? 'au' : ''}`,
+        selected: true,
+      },
+      ...getAddressItems(addresses),
+    ],
     changePostCodeUrl: '#',
     cantFindAddressUrl: '#',
   };
