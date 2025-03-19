@@ -7,6 +7,7 @@ import { CaseWithId } from '../../../app/case/case';
 import { CASE_EVENT, PaymentErrorContext, YesOrNo } from '../../../app/case/definition';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { APPLICATION_SUBMITTED, STATEMENT_OF_TRUTH, TYPE_OF_APPLICATION_URL } from '../../../steps/urls';
+import { PaymentHandler } from '../payments/paymentController';
 import { isFGMOrFMPOCase } from '../util';
 
 export const routeGuard = {
@@ -19,25 +20,28 @@ export const routeGuard = {
       ? CASE_EVENT.SUBMIT_DA_CASE
       : CASE_EVENT.SUBMIT_CA_CASE_WITH_HWF;
 
-    if (
-      req.body['applicantStatementOfTruth'] &&
-      (isFGMOrFMPOCase(typeOfApplication) ||
-        (caseData.hwfPaymentSelection === YesOrNo.YES && !_.isEmpty(caseData.helpWithFeesReferenceNumber)))
-    ) {
-      try {
-        req.session.userCase = (await req.locals.api.updateCase(caseData, caseEvent)) as CaseWithId;
-        return req.session.save(() => {
-          res.redirect(APPLICATION_SUBMITTED);
-        });
-      } catch (e) {
-        req.locals.logger.error(e);
-        req.session.paymentError = { hasError: true, errorContext: PaymentErrorContext.APPLICATION_NOT_SUBMITTED };
-        return req.session.save(() => {
-          res.redirect(STATEMENT_OF_TRUTH);
-        });
+    if (req.body['applicantStatementOfTruth']) {
+      if (isFGMOrFMPOCase(typeOfApplication)) {
+        try {
+          req.session.userCase = (await req.locals.api.updateCase(caseData, caseEvent)) as CaseWithId;
+          return req.session.save(() => {
+            res.redirect(APPLICATION_SUBMITTED);
+          });
+        } catch (e) {
+          req.locals.logger.error(e);
+          req.session.paymentError = { hasError: true, errorContext: PaymentErrorContext.APPLICATION_NOT_SUBMITTED };
+          return req.session.save(() => {
+            res.redirect(STATEMENT_OF_TRUTH);
+          });
+        }
+      } else if (caseData.hwfPaymentSelection === YesOrNo.YES && !_.isEmpty(caseData.helpWithFeesReferenceNumber)) {
+        await PaymentHandler(req, res);
+      } else {
+        next();
       }
+    } else {
+      next();
     }
-    next();
   },
   get: async (req: AppRequest, res: Response, next: NextFunction) => {
     if (

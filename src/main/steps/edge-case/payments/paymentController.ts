@@ -5,7 +5,13 @@ import { CaseWithId } from '../../../app/case/case';
 import { CASE_EVENT, PaymentErrorContext, TYPE_OF_APPLICATION } from '../../../app/case/definition';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { applyParms } from '../../../steps/common/url-parser';
-import { APPLICATION_SUBMITTED, CREATE_PAYMENT, GET_PAYMENT_STATUS, PAY_YOUR_FEE } from '../../../steps/urls';
+import {
+  APPLICATION_SUBMITTED,
+  CREATE_PAYMENT,
+  GET_PAYMENT_STATUS,
+  PAY_YOUR_FEE,
+  STATEMENT_OF_TRUTH,
+} from '../../../steps/urls';
 import { getEnumKeyByValue } from '../util';
 
 import { CheckPaymentStatusApi, PaymentTaskResolver } from './paymentApi';
@@ -111,14 +117,20 @@ export async function submitCase(req: AppRequest, res: Response, eventName: CASE
     });
   } catch (e) {
     req.locals.logger.error(e);
-    populateError(req, res, 'Error in submit case', PaymentErrorContext.APPLICATION_NOT_SUBMITTED);
+    populateError(req, res, 'Error in submit case', PaymentErrorContext.APPLICATION_NOT_SUBMITTED, eventName);
   }
 }
 
-const populateError = (req: AppRequest, res: Response, errorMsg: string, errorContext: PaymentErrorContext) => {
+const populateError = (
+  req: AppRequest,
+  res: Response,
+  errorMsg: string,
+  errorContext: PaymentErrorContext,
+  eventName?: CASE_EVENT
+) => {
   req.locals.logger.error(errorMsg);
   req.session.paymentError = { hasError: true, errorContext };
   req.session.save(() => {
-    res.redirect(PAY_YOUR_FEE);
+    res.redirect(eventName === CASE_EVENT.SUBMIT_CA_CASE_WITH_HWF ? STATEMENT_OF_TRUTH : PAY_YOUR_FEE);
   });
 };

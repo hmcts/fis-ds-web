@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
 import { CaseApi } from '../../../app/case/CaseApi';
@@ -6,6 +8,9 @@ import { UpdateCaseResponse } from '../../../app/case/api-utility';
 import { routeGuard } from './routeGuard';
 
 const updateCaserMock = jest.spyOn(CaseApi.prototype, 'updateCase');
+jest.mock('axios');
+const mockedAxios = axios as jest.Mocked<typeof axios>;
+mockedAxios.create = jest.fn(() => mockedAxios);
 
 describe('statement of truth > routeGuard', () => {
   test('should call next if applicant statement of truth not present', async () => {
@@ -42,18 +47,32 @@ describe('statement of truth > routeGuard', () => {
     expect(res.redirect).toHaveBeenCalledWith('/application-submitted');
   });
 
-  test('should call save and redirect to application submitted if hwf yes', async () => {
+  test('should call payment handler if hwf yes', async () => {
     const req = mockRequest({
       session: {
         userCase: { hwfPaymentSelection: 'Yes', helpWithFeesReferenceNumber: '123', edgeCaseTypeOfApplication: 'PO' },
       },
-      body: { applicantStatementOfTruth: 'Yes' },
+      body: { applicantStatementOfTruth: 'Yes', saveAndContinue: true },
+    });
+    const paymentDetailsRequestBody = {
+      payment_reference: 'a',
+      date_created: 'b',
+      external_reference: 'c',
+      next_url: 'd',
+      status: 'Success',
+      serviceRequestReference: 'e',
+    };
+    mockedAxios.post.mockResolvedValue({
+      data: {
+        ...paymentDetailsRequestBody,
+      },
     });
     const res = mockResponse();
     const next = jest.fn();
     updateCaserMock.mockResolvedValueOnce(req.session.userCase as unknown as UpdateCaseResponse);
 
     await routeGuard.post(req, res, next);
+    await new Promise(process.nextTick);
     expect(req.session.save).toHaveBeenCalled();
     expect(res.redirect).toHaveBeenCalledWith('/application-submitted');
   });
