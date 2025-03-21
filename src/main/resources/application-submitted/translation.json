@@ -11,14 +11,14 @@
       "referenceNumber": "Your reference number is:"
     },
     "cy": {
-      "title": "Application submitted (in welsh)",
-      "serviceName": "Thank you (in welsh)",
+      "title": "Cais wedi'i gyflwyno",
+      "serviceName": "Diolch",
       "subTitle": "Gan eich bod wedi cyflwyno eich cais:",
       "list": [
         "bydd y llys yn cysylltu â chi i egluro beth fydd yn digwydd nesaf a beth fydd angen ichi ei wneud",
-        "if you have informed the court that you need specific adjustments in order to take part in the case, the court will contact you to confirm what has been arranged. If you have not heard from the court within 3 days of the hearing, contact the court directly. You can <a href='https://www.gov.uk/find-court-tribunal' class='govuk-link' rel='external' target='_blank'>find a court or tribunal's contact details</a> on GOV.UK. (welsh)"
+        "Os ydych wedi hysbysu’r llys bod arnoch angen addasiadau penodol er mwyn cymryd rhan yn yr achos,bydd y llys yn cysylltu gyda chi i gadarnhau beth sydd wedi’i drefnu. Os na fyddwch wedi clywed gan y llys o fewn 3 diwrnod i’r gwrandawiad, cysylltwch â’r llys yn uniongyrchol. Gallwch <a href='https://www.gov.uk/find-court-tribunal' class='govuk-link' rel='external' target='_blank'>ddod o hyd i fanylion cyswllt y llys neu dribiwnlys</a> yn GOV.UK."
       ],
-      "referenceNumber": "Your reference number is:(in welsh)"
+      "referenceNumber": "Eich cyfeirnod yw:"
     }
   }
 }

@@ -17,18 +17,27 @@
       }
     },
     "cy": {
-      "serviceName": "Summary of fees (in welsh)",
-      "title": "Pay your application fee (in welsh)",
-      "paragraph1": "The divorce application fee is £, (in welsh)",
-      "paragraph2": ".Your application will not be submitted until you have paid. (in Welsh)",
-      "line2": "You will need a valid debit or credit card. If you cannot pay now, you will have to start the application again. (in welsh)",
-      "payAndSubmitButton": "Pay and submit application (welsh)",
+      "serviceName": "Crynodeb o’r ffioedd",
+      "title": "Talu’r ffi gwneud cais",
+      "paragraph1": "Y ffi am gais am ysgariad yw £",
+      "paragraph2": ". Ni fydd eich cais yn cael ei gyflwyno hyd nes y byddwch wedi talu amdano.",
+      "line2": "Bydd arnoch angen cerdyn debyd neu gerdyn credyd dilys. Os na allwch dalu nawr, bydd arnoch angen cychwyn y cais eto.",
+      "paragraph3": "Cost y cais hwn yw £",
+      "paragraph4": ". Mae’n bosibl y gallwch gael help i dalu’r ffi os ydych:",
+      "payAndSubmitButton": "yn talu ac yn cyflwyno eich cais",
+      "reason1": "yn derbyn budd-daliadau penodol",
+      "reason2": "heb lawer o gynilion neu ddim o gwbl neu",
+      "reason3": "ar incwm  isel",
+      "continue": "Cadw a chyflwyno eich cais",
+      "hwfTextOption": "Rwyf angen help i dalu’r ffi",
+      "hwfReferenceNumberText": "Mae gennyf gyfeirnod Help i Dalu Ffioedd eisoes",
+      "hwfReferenceInputText": "Cyfeirnod Help i Dalu Ffioedd",
       "errors": {
         "paymentError": {
-          "title": "There is a problem (welsh)",
-          "defaultPaymentError": "Your application is not submitted. Please try again (welsh)",
-          "applicationNotSubmitted": "Your payment was successful but you need to resubmit your application. If you are unable to submit the application, please contact the court with the case reference number {caseId} (welsh)",
-          "paymentUnsuccessful": "Your payment was unsuccessful. Make the payment again and resubmit your application (welsh)"
+          "title": "Mae yna broblem",
+          "defaultPaymentError": "Nid yw eich cais wedi’i gyflwyno. Rhowch gynnig arall arni",
+          "applicationNotSubmitted": "Roedd eich taliad yn llwyddiannus ond mae angen i chi ailgyflwyno'ch cais. Os nad ydych yn gallu cyflwyno’r cais, cysylltwch â’r llys gan ddyfynnu cyfeirnod yr achos {caseId}",
+          "paymentUnsuccessful": "Roedd eich taliad yn aflwyddiannus. Gwnewch y taliad eto ac ailgyflwynwch eich cais"
         }
       }
     }

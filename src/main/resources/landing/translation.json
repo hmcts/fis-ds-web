@@ -17,20 +17,20 @@
             "button": "Start now"
         },
         "cy": {
-            "serviceTitle": "Getting Started(welsh)",
-            "bannerStart": "This is a new service – your(welsh)",
-            "bannerLink": "feedback(welsh)",
-            "bannerEnd": "will help us to improve it.(welsh)",
-            "warning": "You cannot save the progress for the application so it is important you have everything you need before you get started (welsh)",
-            "heading": "Submit an application to HM Courts and Tribunals Services(welsh)",
-            "body": "Use this service to upload and submit a completed application.(welsh)",
-            "subHeading":"Before you start(welsh)",
+            "serviceTitle": "Cychwyn arni",
+            "bannerStart": "Mae hwn yn wasanaeth newydd - bydd",
+            "bannerLink": "adborth",
+            "bannerEnd": "eich adborth yn ein helpu ni i'w wella",
+            "warning":"Ni allwch gadw eich cynnydd felly mae’n bwysig bod gennych popeth rydych ei angen cyn i chi ddechrau.",
+            "heading": "Cyflwyno cais i Wasanaeth Llysoedd a Thribiwnlysoedd EF",
+            "body": "Defnyddiwch y gwasanaeth hwn i uwchlwytho a chyflwyno cais wedi’i gwblhau.",
+            "subHeading":"Cyn i chi ddechrau",
             "subBody":[
-                "You might need to upload supporting documents with your completed application.(welsh)",
-                "Some applications may ask for a fee, so make sure you have your payment details ready. You can apply for money off a <a class='govuk-link' href='https://www.gov.uk/court-fees-what-they-are' target='_blank'> court or tribunal fee (opens in a new tab)</a>. You should do this before you submit this application as you will need to provide the HWF number before you can send your application to the court. You need to<a class='govuk-link' href='https://www.gov.uk/get-help-with-court-fees' target='_blank'> apply for help with fee (opens in a new tab)</a> before you continue with this application. (welsh)",
-                "You will be asked a few simple questions. You can review the answers to these questions before you submit them with your application.(welsh)"
+                "Efallai bydd arnoch angen uwchlwytho dogfennau ategol gyda'ch cais wedi'i gwblhau.",
+                "Gall rhai ceisiadau ofyn am ffi, felly gwnewch yn siwr bod gennych eich manylion talu wrth law. Gallwch wneud cais am ostyngiad o ffi <a class='govuk-link' href='https://www.gov.uk/court-fees-what-they-are' target='_blank'> llys neu dribiwnlys (yn agor mewn tab newydd)</a>. Dylech wneud hyn cyn i chi gyflwyno cais oherwydd bydd arnoch angen darparu’r rhif HWF cyn gallwch anfon eich cais i’r llys. Mae arnoch angen<a class='govuk-link' href='https://www.gov.uk/get-help-with-court-fees' target='_blank'> gwneud cais am help i dalu ffioedd (yn agor mewn tab newydd)</a> cyn i chi barhau gyda’r cais hwn.",
+                "Gofynnir i chi ateb ychydig o gwestiynau syml. Gallwch adolygu’r atebion i’r cwestiynau hyn cyn i chi gyflwyno’ch cais."
             ],
-            "button": "Start now(welsh)"
+            "button": "Dechrau nawr"
         }
     }
 }

@@ -152,7 +152,7 @@ export const UploadFormSummary = (
   /** Removes entry in @summarydata if user is not a named user */
 
   return {
-    title: 'List of forms uploaded ',
+    title: keys.formsUploaded,
     rows: getSectionSummaryList(SummaryData, content),
   };
 };
@@ -173,7 +173,7 @@ export const UserRole = (
   /** Removes entry in @summarydata if user is not a named user */
 
   return {
-    title: 'Determine User’s Role',
+    title: keys.userDeterminedRole,
     rows: getSectionSummaryList(SummaryData, content),
   };
 };
@@ -228,7 +228,7 @@ export const AdditonalFormSummary = (
   /** Removes entry in @summarydata if user is not a named user */
 
   return {
-    title: 'List of Documents uploaded  ',
+    title: keys.documentsUploaded,
     rows: getSectionSummaryList(SummaryData, content),
   };
 };

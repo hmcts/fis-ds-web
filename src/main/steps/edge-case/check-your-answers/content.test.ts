@@ -95,11 +95,11 @@ describe('check-your-answer > content', () => {
               {
                 href: '/user-role',
                 text: 'change',
-                visuallyHiddenText: 'Are you named as the applicant on the application form you are submitting? ',
+                visuallyHiddenText: 'Are you named as the applicant on the application form you are submitting?',
               },
             ],
           },
-          key: { text: 'Are you named as the applicant on the application form you are submitting? ' },
+          key: { text: 'Are you named as the applicant on the application form you are submitting?' },
           value: { text: 'I am applying for myself' },
         },
       ],
@@ -120,17 +120,16 @@ describe('check-your-answer > content', () => {
             items: [
               {
                 href: '/user-role',
-                text: 'change - welsh',
-                visuallyHiddenText:
-                  'Are you named as the applicant on the application form you are submitting? - welsh ',
+                text: 'newid',
+                visuallyHiddenText: 'A ydych chi wedi’ch enwi fel y ceisydd ar y ffurflen gais rydych yn ei chyflwyno?',
               },
             ],
           },
-          key: { text: 'Are you named as the applicant on the application form you are submitting? - welsh ' },
-          value: { text: 'I am applying for myself -welsh' },
+          key: { text: 'A ydych chi wedi’ch enwi fel y ceisydd ar y ffurflen gais rydych yn ei chyflwyno?' },
+          value: { text: 'Rwy’n gwneud cais dros fy hun' },
         },
       ],
-      title: 'Determine User’s Role',
+      title: 'Pennu rôl y defnyddiwr',
     });
   });
 

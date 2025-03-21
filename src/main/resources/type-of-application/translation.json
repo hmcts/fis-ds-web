@@ -17,20 +17,20 @@
             "ccs":"Change of child’s surname or removal from jurisdiction - form C1"
         },
         "cy": {
-            "continue": "Continue (in welsh)",
-            "serviceName": "Capture type of application (in welsh)",
-            "label": "What type of application do you want to submit? (in welsh)",
-            "fgm":"Female Genital Mutilation - form FGM001 (in welsh)",
-            "fgmHint": "FGM006 if a third party is submitting this application (welsh)",
-            "fmpo":"Forced Marriage Protection Order - form FL401A (welsh)", 
-            "fmpoHint": "FL430 if a third party is submitting this application (welsh)",
-            "sg":"Special Guardianship - form C1/form C13A (in welsh)",
-            "dop":"Declaration of Parentage - form C63 (in welsh)",
-            "po":"Parental order - form C51 (in welsh)",
-            "pr":"Parental responsibility - form C1 (in welsh)",
-            "prsfp":"Parental responsibility (second female parent) - form C1 (in welsh)",
-            "acg":"Appointing a child’s guardian - form C1 (in welsh)",
-            "ccs":"Change of child’s surname or removal from jurisdiction - form C1 (in welsh)"
+            "continue": "Parhau",
+            "serviceName": "Casglu gwybodaeth am y math o gais",
+            "label": "Pa fath o gais ydych chi eisiau cyflwyno?",
+            "fgm":"Anffurfio Organau Cenhedlu Benywod - ffurflen FGM001",
+            "fgmHint": "FGM006 os yw trydydd parti yn cyflwyno’r cais hwn",
+            "fmpo":"Gorchymyn Amddiffyn rhag Priodas dan Orfod - ffurflen FL401A",
+            "fmpoHint": "FL430 os yw trydydd parti yn cyflwyno’r cais hwn",  
+            "sg":"Gwarcheidiaeth Arbennig - ffurflen C1/ffurflen C13A",
+            "dop":"Datganiad Ynghylch Pwy yw’r Rhiant/Rhieni - Ffurflen C63",
+            "po":"Gorchmynion Rhiant - ffurflen C1",
+            "pr":"Cyfrifoldeb rhiant - form C1",
+            "prsfp":"Cyfrifoldeb rhiant (ail riant benywaidd) - ffurflen C1",
+            "acg":"Penodi gwarcheidwad plentyn - ffurflen C1",
+            "ccs":"Newid cyfenw plentyn neu ei dynnu o awdurdodaeth - ffurflen C1"
         }
     },
     "errors":{
@@ -41,7 +41,7 @@
         },
         "cy": {
             "edgeCaseTypeOfApplication": {
-                "required": "Please select a type of application (in welsh)"
+                "required": "Dewiswch y math o gais"
             }
         }
     }
