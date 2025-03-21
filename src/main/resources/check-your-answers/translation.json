@@ -40,7 +40,7 @@
               "needHelpWithFees": "Do you need help with paying the fee for this application?",
               "hwfReferenceNumber": "Enter your help with fees reference number",
               "helpWithFees": "Help with Fees",
-              "userRole": "Determine User’s Role",
+              "userDeterminedRole": "Determine User’s Role",
               "documentsUploaded": "List of Documents uploaded",
               "formsUploaded": "List of forms uploaded"
             }
@@ -85,7 +85,7 @@
               "needHelpWithFees": "A ydych angen help i dalu’r ffi am wneud y cais hwn?",
               "hwfReferenceNumber": "Rhowch eich cyfeirnod help i dalu ffioedd",
               "helpWithFees": "Help i dalu ffioedd",
-              "userRole": "Pennu rôl y defnyddiwr",
+              "userDeterminedRole": "Pennu rôl y defnyddiwr",
               "documentsUploaded": "Rhestr o ddogfennau sydd wedi’u uwchlwytho",
               "formsUploaded": "Rhestr o’r ffurflenni a uwchlwythwyd"
             }

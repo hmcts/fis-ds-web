@@ -28,8 +28,6 @@ const en = {
     'Sorry, we’re having technical problems getting the fee information for your application. Please try again in a few minutes.',
   errorPaymentRedirect:
     'Sorry, we’re having technical problems redirecting you to payment. Please try again in a few minutes.',
-  errorSendingInvite:
-    'Sorry, we’re having technical problems sending your application for review. Please try again in a few minutes.',
   ogl: 'All content is available under the <a class="govuk-link" href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence v3.0</a>, except where otherwise stated',
   errorSummaryHeading: 'There is a problem',
   saveAsDraft: 'Save as draft',
@@ -84,10 +82,6 @@ const en = {
   telephone: 'Telephone',
   telephoneNumber: '0300 303 0642',
   telephoneDetails: 'Monday to Friday, 8am to 8pm, Saturday 8am to 2pm.',
-  habitualResidentHelpText1:
-    'This may include working, owning property, having children in school, and your main family life taking place in England or Wales.',
-  habitualResidentHelpText2:
-    'The examples above aren’t a complete list of what makes up habitual residence, and just because some of them apply to you doesn’t mean you’re habitually resident. If you’re not sure, you should get legal advice.',
   cookiesHeading: 'Cookies on',
   cookiesLine1: 'We use some essential cookies to make this service work.',
   cookiesLine2:
@@ -96,8 +90,6 @@ const en = {
   rejectAnalyticsCookies: 'Reject analytics cookies',
   viewCookies: 'View cookies',
   hideMessage: 'Hide this message',
-  cookiesConfirmationMessage:
-    '<p>You can <a class="govuk-link" href="/cookies">change your cookie settings</a> at any time.</p>',
   changeCookiesHeading: 'Change your cookie settings',
   allowAnalyticsCookies: 'Allow cookies that measure website use?',
   useAnalyticsCookies: 'Use cookies that measure my website use',
@@ -117,7 +109,7 @@ const en = {
 };
 
 const cy: typeof en = {
-  ...en, // @TODO delete me to get a list of missing translations
+  //...en, // @TODO delete me to get a list of missing translations
   phase: 'Beta',
   applyForAdoption: 'Gwneud cais am wasanaeth',
   applyForDissolution: 'Gwneud cais am wasanaeth',
@@ -217,6 +209,8 @@ const cy: typeof en = {
   viewCookies: 'Gweld cwcis',
   hideMessage: 'Cuddio’r neges hon',
   cookiesRejectedPart1: 'Rydych wedi gwrthod cwcis ychwanegol. Gallwch',
+  next: 'Nesaf',
+  cancel: 'Canslo',
 };
 
 export const generatePageContent = ({
