@@ -109,7 +109,6 @@ const en = {
 };
 
 const cy: typeof en = {
-  //...en, // @TODO delete me to get a list of missing translations
   phase: 'Beta',
   applyForAdoption: 'Gwneud cais am wasanaeth',
   applyForDissolution: 'Gwneud cais am wasanaeth',
