@@ -173,7 +173,7 @@ export const UserRole = (
   /** Removes entry in @summarydata if user is not a named user */
 
   return {
-    title: keys.userRole,
+    title: keys.userDeterminedRole,
     rows: getSectionSummaryList(SummaryData, content),
   };
 };
