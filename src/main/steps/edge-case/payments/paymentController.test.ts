@@ -36,8 +36,9 @@ describe('PaymentHandler', () => {
     jest.clearAllMocks();
   });
 
-  test.skip('Should submit case with hwfRefNumber', async () => {
+  test('Should submit case with hwfRefNumber', async () => {
     req.session.userCase.helpWithFeesReferenceNumber = 'HWF-123';
+    req.session.userCase.applicantPcqId = '123';
     req.session.userCase.edgeCaseTypeOfApplication = 'PO' as TYPE_OF_APPLICATION;
     req.body.saveAndContinue = true;
     const paymentDetailsRequestBody = {
@@ -65,8 +66,9 @@ describe('PaymentHandler', () => {
     expect(res.redirect).toHaveBeenCalledWith('/application-submitted');
   });
 
-  test.skip('Should submit case for previous successful payment', async () => {
+  test('Should submit case for previous successful payment', async () => {
     req.session.userCase.edgeCaseTypeOfApplication = 'PO' as TYPE_OF_APPLICATION;
+    req.session.userCase.applicantPcqId = '123';
     req.session.userCase.helpWithFeesReferenceNumber = 'HWF-123';
     req.session.userCase.hwfPaymentSelection = 'No';
     const paymentDetailsRequestBody = {
@@ -175,8 +177,9 @@ describe('PaymentValidationHandler', () => {
     serviceRequestReference: 'serviceRequestReference',
   };
 
-  test.skip('expecting PaymentValidationHandler Controller', async () => {
+  test('expecting PaymentValidationHandler Controller', async () => {
     req.params = { status: 'Success', paymentId: 'DUMMY_X100' };
+    req.session.userCase.applicantPcqId = '123';
     mockedAxios.post.mockResolvedValue({
       data: {
         ...paymentDetails,
@@ -258,8 +261,10 @@ describe('PaymentValidationHandler', () => {
     expect(res.status).toHaveBeenCalledTimes(1);
   });
 
-  test.skip('expecting submitCase Controller', async () => {
+  test('expecting submitCase Controller', async () => {
+    req.session.userCase.applicantPcqId = '123';
     await submitCase(req, res, CASE_EVENT.SUBMIT_CA_CASE);
+
     expect(res.send).toHaveBeenCalledTimes(0);
     expect(res.render).toHaveBeenCalledTimes(0);
     expect(res.redirect).toHaveBeenCalledWith('/application-submitted');
