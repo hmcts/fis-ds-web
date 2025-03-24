@@ -52,7 +52,7 @@ export class PcqProvider {
     });
   }
 
-  getPcqId(req: AppRequest): string | null {
+  getPcqId(req: AppRequest): boolean {
     return req.session?.applicationSettings?.pcqId;
   }
 

@@ -46,4 +46,4 @@ queryParamsforApp:
 cookies:
   expiryTime: 365
 
-pcqEnable: false
+pcqEnable: true
