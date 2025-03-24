@@ -23,6 +23,7 @@ import {
   KEEP_ALIVE_URL,
   PAYMENT_GATEWAY_ENTRY_URL,
   PAYMENT_RETURN_URL_CALLBACK,
+  PCQ_CALLBACK_URL,
   PRIVACY_POLICY,
   SAVE_AND_SIGN_OUT,
   SESSION,
@@ -30,6 +31,7 @@ import {
   TERMS_AND_CONDITIONS,
   TIMED_OUT_URL,
 } from './steps/urls';
+import { PcqController } from './modules/pcq/controller';
 
 export class Routes {
   /**
@@ -48,6 +50,7 @@ export class Routes {
     app.get(TERMS_AND_CONDITIONS, errorHandler(new TermsAndConditionsGetController().get));
     app.get(ACCESSIBILITY_STATEMENT, errorHandler(new AccessibilityStatementGetController().get));
     app.get(CONTACT_US, errorHandler(new ContactUsGetController().get));
+    app.get(PCQ_CALLBACK_URL, errorHandler( new PcqController().onPcqCompletion));
     app.get(SESSION, (req, res) => {
       res.json(req.session);
     });

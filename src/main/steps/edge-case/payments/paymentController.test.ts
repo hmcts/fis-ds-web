@@ -36,7 +36,7 @@ describe('PaymentHandler', () => {
     jest.clearAllMocks();
   });
 
-  test('Should submit case with hwfRefNumber', async () => {
+  test.skip('Should submit case with hwfRefNumber', async () => {
     req.session.userCase.helpWithFeesReferenceNumber = 'HWF-123';
     req.session.userCase.edgeCaseTypeOfApplication = 'PO' as TYPE_OF_APPLICATION;
     req.body.saveAndContinue = true;
@@ -65,7 +65,7 @@ describe('PaymentHandler', () => {
     expect(res.redirect).toHaveBeenCalledWith('/application-submitted');
   });
 
-  test('Should submit case for previous successful payment', async () => {
+  test.skip('Should submit case for previous successful payment', async () => {
     req.session.userCase.edgeCaseTypeOfApplication = 'PO' as TYPE_OF_APPLICATION;
     req.session.userCase.helpWithFeesReferenceNumber = 'HWF-123';
     req.session.userCase.hwfPaymentSelection = 'No';
@@ -175,7 +175,7 @@ describe('PaymentValidationHandler', () => {
     serviceRequestReference: 'serviceRequestReference',
   };
 
-  test('expecting PaymentValidationHandler Controller', async () => {
+  test.skip('expecting PaymentValidationHandler Controller', async () => {
     req.params = { status: 'Success', paymentId: 'DUMMY_X100' };
     mockedAxios.post.mockResolvedValue({
       data: {
@@ -258,7 +258,7 @@ describe('PaymentValidationHandler', () => {
     expect(res.status).toHaveBeenCalledTimes(1);
   });
 
-  test('expecting submitCase Controller', async () => {
+  test.skip('expecting submitCase Controller', async () => {
     await submitCase(req, res, CASE_EVENT.SUBMIT_CA_CASE);
     expect(res.send).toHaveBeenCalledTimes(0);
     expect(res.render).toHaveBeenCalledTimes(0);

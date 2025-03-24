@@ -111,4 +111,5 @@ export interface Case {
   lastModifiedDate: string;
   caseCreatedBy: string;
   applicationFee?: string;
+  applicantPcqId?: string;
 }

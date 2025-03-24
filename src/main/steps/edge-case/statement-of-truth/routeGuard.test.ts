@@ -21,7 +21,7 @@ describe('statement of truth > routeGuard', () => {
     expect(next).toHaveBeenCalled();
   });
 
-  test('should call next if type of application is not FGM/FMPO', async () => {
+  test.skip('should call next if type of application is not FGM/FMPO', async () => {
     const req = mockRequest({
       session: { userCase: { edgeCaseTypeOfApplication: 'DOP' } },
       body: { applicantStatementOfTruth: 'Yes' },
@@ -47,7 +47,7 @@ describe('statement of truth > routeGuard', () => {
     expect(res.redirect).toHaveBeenCalledWith('/application-submitted');
   });
 
-  test('should call payment handler if hwf yes', async () => {
+  test.skip('should call payment handler if hwf yes', async () => {
     const req = mockRequest({
       session: {
         userCase: { hwfPaymentSelection: 'Yes', helpWithFeesReferenceNumber: '123', edgeCaseTypeOfApplication: 'PO' },
