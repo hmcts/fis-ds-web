@@ -6,11 +6,16 @@ import { State } from '../../../app/case/CaseApi';
 import { CaseWithId } from '../../../app/case/case';
 import { CASE_EVENT, PaymentErrorContext, YesOrNo } from '../../../app/case/definition';
 import { AppRequest } from '../../../app/controller/AppRequest';
-import { APPLICATION_SUBMITTED, PCQ_CALLBACK_URL, STATEMENT_OF_TRUTH, TYPE_OF_APPLICATION_URL } from '../../../steps/urls';
-import { isFGMOrFMPOCase } from '../util';
-import { PCQController } from '../../../modules/pcq/controller';
 import { PCQProvider } from '../../../modules/pcq';
+import { PCQController } from '../../../modules/pcq/controller';
+import {
+  APPLICATION_SUBMITTED,
+  PCQ_CALLBACK_URL,
+  STATEMENT_OF_TRUTH,
+  TYPE_OF_APPLICATION_URL,
+} from '../../../steps/urls';
 import { PaymentHandler } from '../payments/paymentController';
+import { isFGMOrFMPOCase } from '../util';
 
 export const routeGuard = {
   post: async (req: AppRequest, res: Response, next: NextFunction) => {
@@ -39,14 +44,11 @@ export const routeGuard = {
       } else if (caseData.hwfPaymentSelection === YesOrNo.YES && !_.isEmpty(caseData.helpWithFeesReferenceNumber)) {
         /** Invoke Pcq questionnaire
          * */
-      if (
-        !(PCQProvider.getPcqId(req)) &&
-        (await PCQProvider.isComponentEnabled())
-      ) {
-        PCQController.launch(req, res, PCQProvider.getReturnUrl(req, PCQ_CALLBACK_URL));
-      } else {
-        await PaymentHandler(req, res);
-      }
+        if (!PCQProvider.getPcqId(req) && (await PCQProvider.isComponentEnabled())) {
+          PCQController.launch(req, res, PCQProvider.getReturnUrl(req, PCQ_CALLBACK_URL));
+        } else {
+          await PaymentHandler(req, res);
+        }
       } else {
         next();
       }

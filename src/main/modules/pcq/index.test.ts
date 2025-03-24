@@ -85,7 +85,6 @@ describe('PcqProvider', () => {
     expect(params.actor).toEqual('APPLICANT');
   });
 
-
   test('build pcq service url', async () => {
     appRequest.session = {
       ...appRequest.session,

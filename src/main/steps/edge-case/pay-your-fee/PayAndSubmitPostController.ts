@@ -4,11 +4,10 @@ import { Response } from 'express';
 import { AppRequest } from '../../../app/controller/AppRequest';
 import { AnyObject, PostController } from '../../../app/controller/PostController';
 import { Form, FormFields, FormFieldsFn } from '../../../app/form/Form';
-import {  PAY_YOUR_FEE,PCQ_CALLBACK_URL } from '../../../steps/urls';
-import { PaymentHandler } from '../payments/paymentController';
 import { PCQProvider } from '../../../modules/pcq';
 import { PCQController } from '../../../modules/pcq/controller';
-
+import { PAY_YOUR_FEE, PCQ_CALLBACK_URL } from '../../../steps/urls';
+import { PaymentHandler } from '../payments/paymentController';
 
 @autobind
 export default class PayAndSubmitPostController extends PostController<AnyObject> {
@@ -27,11 +26,8 @@ export default class PayAndSubmitPostController extends PostController<AnyObject
         return super.redirect(req, res, PAY_YOUR_FEE);
       }
       /** Invoke Pcq questionnaire
-         * */
-      if (
-        !(PCQProvider.getPcqId(req)) &&
-        (await PCQProvider.isComponentEnabled())
-      ) {
+       * */
+      if (!PCQProvider.getPcqId(req) && (await PCQProvider.isComponentEnabled())) {
         PCQController.launch(req, res, PCQProvider.getReturnUrl(req, PCQ_CALLBACK_URL));
       } else {
         this.handlePayment(req, res);

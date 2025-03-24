@@ -1,19 +1,16 @@
 //import config from 'config';
-import { AppRequest } from "../../app/controller/AppRequest";
-import { Response } from 'express';
-import { PCQProvider } from '.';
 import { AxiosError } from 'axios';
 import config from 'config';
+import { Response } from 'express';
 
-import {  YesOrNo } from "../../app/case/definition";
-import { PAY_YOUR_FEE, STATEMENT_OF_TRUTH } from "../../steps/urls";
+import { YesOrNo } from '../../app/case/definition';
+import { AppRequest } from '../../app/controller/AppRequest';
+import { PaymentHandler } from '../../steps/edge-case/payments/paymentController';
+import { PAY_YOUR_FEE, STATEMENT_OF_TRUTH } from '../../steps/urls';
 
-import { PaymentHandler } from "../../steps/edge-case/payments/paymentController";
+import { PCQProvider } from '.';
 
-
-
-export class PcqController{
-
+export class PcqController {
   async launch(req: AppRequest, res: Response, returnUrl: string): Promise<void> {
     try {
       PCQProvider.initialiseLogger(req);
@@ -29,7 +26,7 @@ export class PcqController{
         return res.redirect(pcqServiceUrl);
       });
     } catch (error) {
-     if (!res.headersSent) {
+      if (!res.headersSent) {
         PcqController.handleError(error, res, returnUrl);
       }
     }
@@ -46,9 +43,9 @@ export class PcqController{
     // submit the case in case of non-payment scenario
     // or-else redirect to payment screen
     try {
-      return PaymentHandler(req,res)
+      return PaymentHandler(req, res);
     } catch (error) {
-      const url = req.session.userCase.hwfPaymentSelection===YesOrNo.NO?PAY_YOUR_FEE:STATEMENT_OF_TRUTH
+      const url = req.session.userCase.hwfPaymentSelection === YesOrNo.NO ? PAY_YOUR_FEE : STATEMENT_OF_TRUTH;
       PcqController.handleError(error, res, url);
     }
     console.log('PCQ completed');

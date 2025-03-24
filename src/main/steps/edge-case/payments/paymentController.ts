@@ -21,7 +21,6 @@ const SUCCESS = 'Success';
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const PaymentHandler = async (req: AppRequest, res: Response) => {
   try {
-
     const paymentHelperTranspiler = await new PaymentHelper().SystemCredentailsToApiData(req);
     const { Authorization, ServiceAuthorization, returnUrL, id, hwfRefNumber } = paymentHelperTranspiler;
     const paymentApiEndpoint = config.get('services.cos.url');
@@ -106,7 +105,7 @@ export const PaymentValidationHandler = async (req: AppRequest, res: Response) =
 export async function submitCase(req: AppRequest, res: Response, eventName: CASE_EVENT): Promise<void> {
   try {
     req.session.paymentError = { hasError: false, errorContext: null };
-    req.session.userCase.applicantPcqId=req.session.userCase.applicantPcqId??req.session.applicationSettings.pcqId
+    req.session.userCase.applicantPcqId = req.session.userCase.applicantPcqId ?? req.session.applicationSettings.pcqId;
     req.session.userCase = (await req.locals.api.updateCase(req.session.userCase, eventName)) as CaseWithId;
     //save & redirect to confirmation page
     req.session.save(() => {

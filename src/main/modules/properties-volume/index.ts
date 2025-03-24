@@ -27,7 +27,6 @@ export class PropertiesVolume {
       // this.setLocalSecret('idam-systemupdate-username', 'services.idam.systemUsername');
       // this.setLocalSecret('idam-systemupdate-password', 'services.idam.systemPassword');
       // this.setLocalSecret('e2e-test-user-password', 'e2e.userTestPassword');
-
     }
   }
 
@@ -41,7 +40,6 @@ export class PropertiesVolume {
    * Load a secret from the AAT vault using azure cli
    */
   private setLocalSecret(secret: string, toPath: string): void {
-
     const result = execSync(`az keyvault secret show --vault-name fis-kv-aat -o tsv --query value --name ${secret}`);
     set(config, toPath, result.toString().replace('\n', ''));
   }

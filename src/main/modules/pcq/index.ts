@@ -75,7 +75,6 @@ export class PcqProvider {
   }
 
   async isComponentEnabled(): Promise<boolean> {
-    
     const isEnabled = config.get<boolean>('pcqEnable') ?? false;
     return new Promise(resolve => {
       resolve(isEnabled);
@@ -113,8 +112,8 @@ export class PcqProvider {
   async buildRequestParams(req: AppRequest, returnUrl: string): Promise<PcqParameters> {
     const pcqId = uuid();
     const caseData = req.session.userCase;
-    let tokenKey: string = config.get('services.equalityAndDiversity.tokenKey');
-    
+    const tokenKey: string = config.get('services.equalityAndDiversity.tokenKey');
+
     const params = {
       serviceId: 'prl_ca',
       actor: 'APPLICANT',
@@ -138,7 +137,6 @@ export class PcqProvider {
   }
 
   getReturnUrl(req: AppRequest, url: string): string {
-   
     const protocol = req.hostname.includes('localhost') ? 'http://' : '';
     return `${protocol}${req.get('host')}${url}`;
   }
