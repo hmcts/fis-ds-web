@@ -1,4 +1,3 @@
-//import config from 'config';
 import { AxiosError } from 'axios';
 import config from 'config';
 import { Response } from 'express';
