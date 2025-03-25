@@ -1,7 +1,6 @@
 import { mockRequest } from '../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../test/unit/utils/mockResponse';
 
-
 import { PcqController } from './controller';
 
 describe('PcqController', () => {
