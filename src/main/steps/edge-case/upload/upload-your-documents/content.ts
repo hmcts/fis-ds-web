@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { TYPE_OF_APPLICATION } from '../../../../app/case/definition';
 import { TranslationFn } from '../../../../app/controller/GetController';
 import { FormContent } from '../../../../app/form/Form';
+import { interpolate } from '../../../../steps/common/string-parser';
 import { applyParms } from '../../../../steps/common/url-parser';
 import { loadResources } from '../../../../steps/edge-case/util';
 import { UPLOAD_YOUR_DOCUMENTS } from '../../../../steps/urls';
@@ -28,8 +29,17 @@ export const generateContent: TranslationFn = content => {
     };
   });
 
+  const yourConfidentility = interpolate(translations.youNeed3, {
+    protected:
+      content.userCase?.edgeCaseTypeOfApplication === TYPE_OF_APPLICATION.FGM ||
+      content.userCase?.edgeCaseTypeOfApplication === TYPE_OF_APPLICATION.FMPO
+        ? translations.youNeed4
+        : '',
+  });
+
   return {
     ...translations,
+    yourConfidentility,
     edgeCaseTypeOfApplication: content.userCase?.edgeCaseTypeOfApplication,
     isDaCase:
       content.userCase?.edgeCaseTypeOfApplication === TYPE_OF_APPLICATION.FGM ||

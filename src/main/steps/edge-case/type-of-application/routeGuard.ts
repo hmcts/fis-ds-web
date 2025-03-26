@@ -12,6 +12,7 @@ export const routeGuard = {
       req.session.userCase = {
         edgeCaseTypeOfApplication: req.body.edgeCaseTypeOfApplication,
       } as CaseWithId;
+      delete req.session?.applicationSettings?.pcqId;
 
       if (!isFGMOrFMPOCase(req.body.edgeCaseTypeOfApplication!)) {
         req.session.userCase = {

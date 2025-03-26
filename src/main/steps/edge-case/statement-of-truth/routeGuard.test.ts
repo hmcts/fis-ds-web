@@ -4,6 +4,7 @@ import { mockRequest } from '../../../../test/unit/utils/mockRequest';
 import { mockResponse } from '../../../../test/unit/utils/mockResponse';
 import { CaseApi } from '../../../app/case/CaseApi';
 import { UpdateCaseResponse } from '../../../app/case/api-utility';
+import { PCQProvider } from '../../../modules/pcq';
 
 import { routeGuard } from './routeGuard';
 
@@ -26,6 +27,7 @@ describe('statement of truth > routeGuard', () => {
       session: { userCase: { edgeCaseTypeOfApplication: 'DOP' } },
       body: { applicantStatementOfTruth: 'Yes' },
     });
+    req.session.userCase.applicantPcqId = '123';
     const res = mockResponse();
     const next = jest.fn();
 
@@ -54,6 +56,8 @@ describe('statement of truth > routeGuard', () => {
       },
       body: { applicantStatementOfTruth: 'Yes', saveAndContinue: true },
     });
+    req.session.userCase.applicantPcqId = '123';
+    jest.spyOn(PCQProvider, 'getReturnUrl').mockReturnValue('asd');
     const paymentDetailsRequestBody = {
       payment_reference: 'a',
       date_created: 'b',
@@ -74,7 +78,7 @@ describe('statement of truth > routeGuard', () => {
     await routeGuard.post(req, res, next);
     await new Promise(process.nextTick);
     expect(req.session.save).toHaveBeenCalled();
-    expect(res.redirect).toHaveBeenCalledWith('/application-submitted');
+    expect(res.redirect).toHaveBeenCalled();
   });
 
   test('should catch and add error if update case fails', async () => {

@@ -18,7 +18,8 @@ nodejs:
     IDAM_API_URL: 'https://idam-api.{{ .Values.global.environment }}.platform.hmcts.net/o/token'
     REDIS_HOST: 'fis-dss-create-case-redis-{{ .Values.global.environment }}.redis.cache.windows.net'
     FIS_COS_API: 'https://prl-cos-pr-1485.preview.platform.hmcts.net'
-
+    EQUALITY_URL: 'https://pcq.{{ .Values.global.environment }}.platform.hmcts.net'
+    PCQ_ENABLE: true
   keyVaults:
     fis-kv:
       secrets:
@@ -29,5 +30,6 @@ nodejs:
         - s2s-secret
         - AppInsightsInstrumentationKey
         - postcode-lookup-token
+        - prl-pcq-token-key
 idam-pr:
   enabled: false

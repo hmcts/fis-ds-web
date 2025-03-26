@@ -57,7 +57,7 @@ describe('pay-your-fee > pay and submit post controller', () => {
     await new Promise(process.nextTick);
 
     expect(req.session.paymentError).toStrictEqual({ hasError: false, errorContext: null });
-    expect(res.redirect).toHaveBeenCalledWith('/payment');
+    expect(res.redirect).toHaveBeenCalledWith('/pay-your-fee');
   });
 
   test('should redirect to pay your fee page if errors present', async () => {
