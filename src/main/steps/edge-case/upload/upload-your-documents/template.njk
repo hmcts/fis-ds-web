@@ -20,11 +20,9 @@
   <p class="govuk-body">{{ youNeed }}</p>
   {% if isDaCase %}
     <p class="govuk-body">{{ youNeed2 }}</p>
-  
-  <p class="govuk-body">{{ youNeed3 | safe }}{{ youNeed4 }}{{ youNeed5 }}</p>
-  {% else %}
-  <p class="govuk-body">{{ youNeed3 | safe }}{{ youNeed5 }}</p>
   {% endif %}
+  <p class="govuk-body">{{ yourConfidentility | safe }}</p>
+  
   <p class="govuk-body">{{ downloadC8Form | safe }}</p>
 
   <p class="govuk-body">{{ uploadDescription }}</p>

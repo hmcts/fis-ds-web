@@ -6,9 +6,8 @@
       "submitAdditionalForm": "Submit additional form if you are not the applicant",
       "youNeed": "Please upload the application form that you have already completed.",
       "youNeed2": "If you are applying on behalf of someone else you will need to complete an additional form, unless you are a local authority.",
-      "youNeed3": "You may also need to upload form <a class='govuk-link' href='https://www.gov.uk/government/publications/form-c8-confidential-contact-details-family-procedure-rules-2010-rule-291' target='_blank'>C8 Confidential Contact Details (opens in a new tab)</a> if you want to keep your contact details ",
+      "youNeed3": "You may also need to upload form <a class='govuk-link' href='https://www.gov.uk/government/publications/form-c8-confidential-contact-details-family-procedure-rules-2010-rule-291' target='_blank'>C8 Confidential Contact Details (opens in a new tab)</a> if you want to keep your contact details {protected}confidential.",
       "youNeed4": "or the person to be protected's contact details ",
-      "youNeed5": "confidential.",
       "uploadDescription": "Please upload all required forms below.",
       "uploadRequirement": [
         "File formats: MS Word, MS Excel, PDF, JPG, GIF, PNG, TXT, RTF",
@@ -37,9 +36,8 @@
       "submitAdditionalForm": "Cylfwynwch ffurflen ychwanegol os nid chi yw’r ceisydd",
       "youNeed": "Uwchlwythwch y ffurflen gais yr ydych eisoes wedi’i llenwi.",
       "youNeed2": "Os nad chi yw’r unigolyn a enwir ar y cais, efallai bydd rhaid i chi lenwi ffurflen ychwanegol i ofyn am ganiatâd i wneud cais ar ran rhywun arall.",
-      "youNeed3": "Efallai bydd arnoch angen uwchlytho ffurflen <a class='govuk-link' href='https://www.gov.uk/government/publications/form-c8-confidential-contact-details-family-procedure-rules-2010-rule-291' target='_blank'>C8 Manylion cyswllt cyfrinachol (yn agor mewn tab newydd)</a> os ydych eisiau cadw eich manylion cyswllt yn gyfrinachol ",
-      "youNeed4": "neu gadw manylion cyswllt yr unigolyn sydd i’w ddiogelu yn ",
-      "youNeed5": "gyfrinachol.",
+      "youNeed3": "Efallai bydd arnoch angen uwchlytho ffurflen <a class='govuk-link' href='https://www.gov.uk/government/publications/form-c8-confidential-contact-details-family-procedure-rules-2010-rule-291' target='_blank'>C8 Manylion cyswllt cyfrinachol (yn agor mewn tab newydd)</a> os ydych eisiau cadw eich manylion cyswllt yn gyfrinachol {protected}.",
+      "youNeed4": "neu gadw manylion cyswllt yr unigolyn sydd i’w ddiogelu yn gyfrinachol",
       "uploadDescription": "Uwchlwythwch yr holl ffurflenni gofynnol isod.",
       "uploadRequirement": [
         "Fformatau ffeiliau: MS Word, MS Excel, PDF, JPG, GIF, PNG, TXT, RTF",
