@@ -5,6 +5,7 @@ import { Application, RequestHandler } from 'express';
 import { GetController } from './app/controller/GetController';
 import { PostController } from './app/controller/PostController';
 import { KeepAliveController } from './app/keepalive/KeepAliveController';
+import { PcqController } from './modules/pcq/controller';
 import { StepWithContent, stepsWithContent } from './steps';
 import { AccessibilityStatementGetController } from './steps/accessibility-statement/get';
 import { ContactUsGetController } from './steps/contact-us/get';
@@ -23,6 +24,7 @@ import {
   KEEP_ALIVE_URL,
   PAYMENT_GATEWAY_ENTRY_URL,
   PAYMENT_RETURN_URL_CALLBACK,
+  PCQ_CALLBACK_URL,
   PRIVACY_POLICY,
   SAVE_AND_SIGN_OUT,
   SESSION,
@@ -48,6 +50,7 @@ export class Routes {
     app.get(TERMS_AND_CONDITIONS, errorHandler(new TermsAndConditionsGetController().get));
     app.get(ACCESSIBILITY_STATEMENT, errorHandler(new AccessibilityStatementGetController().get));
     app.get(CONTACT_US, errorHandler(new ContactUsGetController().get));
+    app.get(PCQ_CALLBACK_URL, errorHandler(new PcqController().onPcqCompletion));
     app.get(SESSION, (req, res) => {
       res.json(req.session);
     });

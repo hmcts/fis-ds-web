@@ -19,7 +19,7 @@ import { Helmet } from './modules/helmet';
 import { LanguageToggle } from './modules/i18n';
 import { Nunjucks } from './modules/nunjucks';
 import { OidcMiddleware } from './modules/oidc';
-//import { StateRedirectMiddleware } from './modules/state-redirect';
+import { PCQProvider } from './modules/pcq';
 import { PropertiesVolume } from './modules/properties-volume';
 import { SessionStorage } from './modules/session';
 import { TooBusy } from './modules/too-busy';
@@ -68,6 +68,7 @@ new HealthCheck().enableFor(app);
 new LanguageToggle().enableFor(app);
 new Routes().enableFor(app);
 new ErrorHandler().handleNextErrorsFor(app);
+PCQProvider.enable(app);
 
 setupDev(app, developmentMode);
 const port: number = parseInt(process.env.PORT || '3001', 10);

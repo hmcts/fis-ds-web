@@ -20,6 +20,11 @@ services:
     uploadSizeinMB: 30
   RPE_TOKEN:
     url: 'http://rpe-service-auth-provider-aat.service.core-compute-aat.internal'
+  equalityAndDiversity:
+    name: 'Equality and Diversity Service'
+    url: 'https://pcq.aat.platform.hmcts.net'
+    path: '/service-endpoint'
+    tokenKey: PCQ_TOKEN
     
 health:
   timeout: 5000
@@ -40,3 +45,5 @@ queryParamsforApp:
     FGM: 'FGM'
 cookies:
   expiryTime: 365
+
+pcqEnable: true

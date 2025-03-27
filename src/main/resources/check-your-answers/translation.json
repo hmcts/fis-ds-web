@@ -7,7 +7,7 @@
             "change": "change",
             "continue": "Accept and continue",
             "submitApplication": "Now submit your Application",
-            "checkInformation": "Check all the information provided and documents uploaded carefully. By Submitting this application you are confirming that you have submitted all the documents required to process the application and the details you have provided is correct.",
+            "checkInformation": "Check all the information provided and documents uploaded carefully. By submitting this application you are confirming that you have submitted all the documents required to process the application and the details you have provided are correct.",
             "sectionTitles": {
               "applicantDetails": "Applicant details"
             },
@@ -52,7 +52,7 @@
             "change": "newid",
             "continue": "Derbyn a pharhau",
             "submitApplication": "Cyflwynwch eich cais nawr",
-            "checkInformation": "Gwiriwch yn ofalus yr holl wybodaeth a ddarparwyd a’r dogfennau sydd wedi’u huwchlwytho. Trwy gyflwyno’r cais hwn, rydych yn cadarnhau eich bod wedi cyflwyno’r holl ddogfennau sydd eu hangen i brosesu’r cais a bod y manylion rydych wedi’u darparu yn gywir.",
+            "checkInformation": "Gwiriwch yr holl wybodaeth a ddarparwyd a'r dogfennau a lanlwythwyd yn ofalus. Drwy gyflwyno’r cais hwn rydych yn cadarnhau eich bod wedi cyflwyno’r holl ddogfennau sydd eu hangen i brosesu’r cais a bod y manylion a ddarparwyd gennych yn gywir.",
             "sectionTitles": {
               "applicantDetails": "Manylion y ceisydd"
             },
