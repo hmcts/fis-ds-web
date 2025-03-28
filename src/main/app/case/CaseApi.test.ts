@@ -14,7 +14,7 @@ const mockLogger = {
 
 test('Should throw error when case is not created', async () => {
   const mockedAxios = axios as jest.Mocked<typeof axios>;
-  mockedAxios.get.mockResolvedValue({
+  mockedAxios.post.mockRejectedValue({
     status: '200',
     data: {
       case_users: [
@@ -37,7 +37,7 @@ test('Should return mapped response when case is created successfully', async ()
   const mockedAxios = axios as jest.Mocked<typeof axios>;
   const userCase = { ...mockUserCase1, edgeCaseTypeOfApplication: 'FMPO' };
 
-  mockedAxios.post.mockResolvedValue({
+  mockedAxios.post.mockResolvedValueOnce({
     status: 200,
     data: {
       case_users: [
@@ -58,7 +58,7 @@ test('Should return mapped response when case is updated successfully', async ()
   const mockedAxios = axios as jest.Mocked<typeof axios>;
   const userCase = { ...mockUserCase1, id: '1' };
 
-  mockedAxios.post.mockResolvedValue({
+  mockedAxios.post.mockResolvedValueOnce({
     status: 200,
     data: {
       case_users: [
@@ -161,11 +161,19 @@ test('Should upload document and return response', async () => {
     },
   };
 
-  mockedAxios.post.mockResolvedValue(mockResponse);
+  mockedAxios.post.mockResolvedValueOnce(mockResponse);
   const api = new CaseApi(axios, mockLogger);
   const result = await api.uploadDocument(formData);
 
   expect(result).toEqual(mockResponse.data);
+});
+
+test('Fails to upload document', async () => {
+  const formData = new FormData();
+  const mockedAxios = axios as jest.Mocked<typeof axios>;
+  mockedAxios.post.mockRejectedValueOnce;
+  const api = new CaseApi(axios, mockLogger);
+  await expect(api.uploadDocument(formData)).rejects.toThrowError('Document could not be uploaded.');
 });
 
 test('Should delete document successfully', async () => {
