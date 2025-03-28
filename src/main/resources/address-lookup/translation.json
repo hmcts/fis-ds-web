@@ -3,12 +3,12 @@
         "en": {
             "section": "Applicant",
             "serviceName": "Address/postcode lookup",
-            "title": "What is the address of the person named on the application ?"
+            "title": "What is the address of the person named on the application?"
         },
         "cy": {
-            "section": "Applicant (in welsh)",
-            "serviceName": "Address/postcode lookup (in welsh)",
-            "title": "What is the address of the person named on the application ? (in welsh)"
+            "section": "Ceisydd",
+            "serviceName": "Chwilio am gyfeiriad/god post",
+            "title": "Beth yw cyfeiriad yr unigolyn a enwir yn y cais?"
         }
     },
     "errors":{
@@ -20,8 +20,8 @@
         },
         "cy": {
             "applicantAddressPostcode": {
-                "required": "Enter a real postcode (in welsh)",
-                "invalid": "Enter a real postcode (in welsh)"
+                "required": "Nodwch god post dilys",
+                "invalid": "Nodwch god post dilys"
             }
         }
     }

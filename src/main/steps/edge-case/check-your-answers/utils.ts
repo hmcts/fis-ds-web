@@ -2,7 +2,9 @@ import { getFormattedDate } from '../../../app/case/answers/formatDate';
 import { CaseWithId } from '../../../app/case/case';
 import { YesOrNo } from '../../../app/case/definition';
 import { getFormattedAddress } from '../../../app/case/formatter/address';
+import { AppSession } from '../../../app/controller/AppRequest';
 import { PageContent } from '../../../app/controller/GetController';
+import { parseUrl } from '../../../steps/common/url-parser';
 import * as Urls from '../../../steps/urls';
 
 interface GovUkNunjucksSummary {
@@ -74,64 +76,50 @@ const getSectionSummaryList = (rows: SummaryListRow[], content: PageContent): Go
 /* eslint-disable import/namespace */
 export const ApplicantSummaryList = (
   { sectionTitles, keys, ...content }: SummaryListContent,
-  userCase: Partial<CaseWithId>
+  session: AppSession,
+  language: string
 ): SummaryList | undefined => {
-  console.log('usercase in check your answer -->', userCase);
+  const caseData = session.userCase;
   const sectionTitle = sectionTitles.applicantDetails;
-  console.log('Address in util userCase --->', userCase);
-
-  const UserContactPreferences = function () {
-    let perference = '';
-    if (userCase['contactPreferenceType'] === 'NAMED_PERSON') {
-      perference = 'The person named on this application';
-    } else if (userCase['contactPreferenceType'] === 'ACCOUNT_OWNER') {
-      perference = 'The account owner';
-    } else if (userCase['contactPreferenceType'] === 'BOTH_RECEIVE') {
-      perference = 'Both the account owner and the person named on this application';
-    } else {
-      perference = '';
-    }
-    return perference;
-  };
+  const courtDetails = caseData.selectedCourtId
+    ? session.applicationSettings?.availableCourts?.find(court => court.epimms_id === caseData.selectedCourtId)
+    : null;
 
   const SummaryData = [
     {
       key: keys.fullName,
-      value: userCase['applicantFirstName'] + ' ' + userCase['applicantLastName'],
-      changeUrl: Urls['FULL_NAME'],
+      value: `${caseData.applicantFirstName} ${caseData.applicantLastName}`,
+      changeUrl: Urls.FULL_NAME,
     },
     {
       key: keys.dateOfBirth,
-      value: getFormattedDate(userCase['applicantDateOfBirth'], content.language),
-      changeUrl: Urls['DATE_OF_BIRTH'],
+      value: getFormattedDate(caseData.applicantDateOfBirth, language),
+      changeUrl: Urls.DATE_OF_BIRTH,
     },
     {
       key: keys.address,
-      valueHtml: getFormattedAddress(userCase),
-      changeUrl: Urls['MANUAL_ADDRESS'],
-    },
-    {
-      key: keys.recievingEmail,
-      value: UserContactPreferences(),
-      changeUrl: Urls['CONTACT_PREFERENCES'],
+      valueHtml: getFormattedAddress(caseData),
+      changeUrl: Urls.FIND_ADDRESS,
     },
     {
       key: keys.namedPersonEmail,
-      value: userCase['applicantEmailAddress'],
-      changeUrl: Urls['EMAIL_ADDRESS'],
-    },
-    {
-      key: keys.namedPersonTel,
-      value: userCase['applicantHomeNumber'],
-      changeUrl: Urls['CONTACT_DETAILS'],
+      value: caseData.applicantEmailAddress,
+      changeUrl: Urls.EMAIL_ADDRESS,
     },
     {
       key: keys.namedPersonMob,
-      value: userCase['applicantPhoneNumber'],
-      changeUrl: Urls['CONTACT_DETAILS'],
+      value: caseData.applicantPhoneNumber,
+      changeUrl: Urls.CONTACT_DETAILS,
     },
   ];
 
+  if (courtDetails) {
+    SummaryData.push({
+      key: keys.selectedCourt,
+      value: courtDetails.site_name,
+      changeUrl: Urls.SELECT_COURT,
+    });
+  }
   /** Removes entry in @summarydata if user is not a named user */
 
   return {
@@ -145,7 +133,6 @@ export const UploadFormSummary = (
   { sectionTitles, keys, ...content }: SummaryListContent,
   uploadedDocuments: Partial<any>
 ): SummaryList | undefined => {
-  console.log(uploadedDocuments);
   const ListOfUploadedDocuments = uploadedDocuments
     .map((document): string => {
       return document.document_filename + '';
@@ -157,15 +144,15 @@ export const UploadFormSummary = (
   const SummaryData = [
     {
       key: keys.uploadDocuments,
-      value: ListOfUploadedDocuments,
-      changeUrl: Urls['UPLOAD_YOUR_DOCUMENTS'],
+      valueHtml: ListOfUploadedDocuments,
+      changeUrl: parseUrl(Urls['UPLOAD_YOUR_DOCUMENTS']).url,
     },
   ];
 
   /** Removes entry in @summarydata if user is not a named user */
 
   return {
-    title: 'List of forms uploaded ',
+    title: keys.formsUploaded,
     rows: getSectionSummaryList(SummaryData, content),
   };
 };
@@ -175,33 +162,57 @@ export const UserRole = (
   { sectionTitles, keys, ...content }: SummaryListContent,
   userCase: Partial<CaseWithId>
 ): SummaryList | undefined => {
-  const isNamedApplicant =
-    userCase['namedApplicant'] === YesOrNo.YES ? 'Yes' : 'No - I am sending an application for someone else.';
-
   const SummaryData = [
     {
       key: keys['user-role'],
-      value: isNamedApplicant,
-      changeUrl: Urls['USER_ROLE'],
+      value: userCase.whomYouAreApplying ? keys[userCase.whomYouAreApplying] : '',
+      changeUrl: Urls.USER_ROLE,
     },
   ];
 
   /** Removes entry in @summarydata if user is not a named user */
 
   return {
-    title: 'Determine User’s Role',
+    title: keys.userDeterminedRole,
     rows: getSectionSummaryList(SummaryData, content),
+  };
+};
+
+export const hwfSection = (
+  { sectionTitles, keys, ...content }: SummaryListContent,
+  userCase: Partial<CaseWithId>
+): SummaryList | undefined => {
+  const summaryData: SummaryListRow[] = [];
+
+  summaryData.push({
+    key: keys['needHelpWithFees'],
+    value: userCase.hwfPaymentSelection,
+    changeUrl: Urls.NEED_HELP_WITH_FEES,
+  });
+
+  if (userCase.hwfPaymentSelection === YesOrNo.YES) {
+    summaryData.push({
+      key: keys['hwfReferenceNumber'],
+      value: userCase.helpWithFeesReferenceNumber,
+      changeUrl: Urls.HELP_WITH_FEES_APPLIED,
+    });
+  }
+
+  return {
+    title: keys.helpWithFees,
+    rows: getSectionSummaryList(summaryData, content),
   };
 };
 
 /* eslint-disable import/namespace */
 export const AdditonalFormSummary = (
   { sectionTitles, keys, ...content }: SummaryListContent,
-  AddDocuments: Partial<any>
+  addDocuments: Partial<any>
 ): SummaryList | undefined => {
-  const ListOfAdditionalDocuments = AddDocuments.map((document): string => {
-    return document.document_filename + '';
-  })
+  const ListOfAdditionalDocuments = addDocuments
+    .map((document): string => {
+      return document.document_filename + '';
+    })
     .toString()
     .split(',')
     .join('<div class="govuk-!-margin-top-3"></div>');
@@ -209,15 +220,15 @@ export const AdditonalFormSummary = (
   const SummaryData = [
     {
       key: keys.additionalDocuments,
-      value: ListOfAdditionalDocuments,
-      changeUrl: Urls['ADDITIONAL_DOCUMENTS_UPLOAD'],
+      valueHtml: ListOfAdditionalDocuments,
+      changeUrl: parseUrl(Urls['ADDITIONAL_DOCUMENTS_UPLOAD']).url,
     },
   ];
 
   /** Removes entry in @summarydata if user is not a named user */
 
   return {
-    title: 'List of Documents uploaded  ',
+    title: keys.documentsUploaded,
     rows: getSectionSummaryList(SummaryData, content),
   };
 };
@@ -227,7 +238,7 @@ export const TypeOfApplication = (
   { sectionTitles, keys, ...content }: SummaryListContent,
   userCase: Partial<CaseWithId>
 ): SummaryList | undefined => {
-  const typeOfApplication = userCase['typeOfApplication'] as string;
+  const typeOfApplication = userCase?.edgeCaseTypeOfApplication as string;
   const typeOfApplicationValue = keys[typeOfApplication];
 
   const SummaryData = [

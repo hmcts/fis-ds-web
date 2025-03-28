@@ -24,11 +24,12 @@ const en = {
   required: 'You have not answered the question. You need to select an answer before continuing.',
   notAnswered: 'You have not answered the question.',
   errorSaving: 'Sorry, we’re having technical problems saving your application. Please try again in a few minutes.',
-  errorSendingInvite:
-    'Sorry, we’re having technical problems sending your application for review. Please try again in a few minutes.',
+  errorFetchingFee:
+    'Sorry, we’re having technical problems getting the fee information for your application. Please try again in a few minutes.',
+  errorPaymentRedirect:
+    'Sorry, we’re having technical problems redirecting you to payment. Please try again in a few minutes.',
   ogl: 'All content is available under the <a class="govuk-link" href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence v3.0</a>, except where otherwise stated',
   errorSummaryHeading: 'There is a problem',
-  saveAndSignOut: 'Save and sign out',
   saveAsDraft: 'Save as draft',
   cancel: 'Cancel',
   signOut: 'Sign out',
@@ -81,10 +82,6 @@ const en = {
   telephone: 'Telephone',
   telephoneNumber: '0300 303 0642',
   telephoneDetails: 'Monday to Friday, 8am to 8pm, Saturday 8am to 2pm.',
-  habitualResidentHelpText1:
-    'This may include working, owning property, having children in school, and your main family life taking place in England or Wales.',
-  habitualResidentHelpText2:
-    'The examples above aren’t a complete list of what makes up habitual residence, and just because some of them apply to you doesn’t mean you’re habitually resident. If you’re not sure, you should get legal advice.',
   cookiesHeading: 'Cookies on',
   cookiesLine1: 'We use some essential cookies to make this service work.',
   cookiesLine2:
@@ -93,8 +90,6 @@ const en = {
   rejectAnalyticsCookies: 'Reject analytics cookies',
   viewCookies: 'View cookies',
   hideMessage: 'Hide this message',
-  cookiesConfirmationMessage:
-    '<p>You can <a class="govuk-link" href="/cookies">change your cookie settings</a> at any time.</p>',
   changeCookiesHeading: 'Change your cookie settings',
   allowAnalyticsCookies: 'Allow cookies that measure website use?',
   useAnalyticsCookies: 'Use cookies that measure my website use',
@@ -107,20 +102,23 @@ const en = {
   apmCookiesHeadings: 'Allow cookies that measure website application performance monitoring?',
   useApmCookies: 'Use cookies that measure website application performance monitoring',
   doNotUseApmCookies: 'Do not use cookies that measure website application performance monitoring',
+  cookiesAcceptedPart1: 'You’ve accepted additional cookies. You can',
+  cookiesAcceptorRejectPart2: 'change your cookie settings',
+  cookiesAcceptorRejectPart3: 'at any time.',
+  cookiesRejectedPart1: 'You’ve rejected additional cookies. You can',
 };
 
 const cy: typeof en = {
-  ...en, // @TODO delete me to get a list of missing translations
   phase: 'Beta',
-  applyForAdoption: 'Apply for a service" (in welsh)',
-  applyForDissolution: 'Apply for a service"(in welsh)',
+  applyForAdoption: 'Gwneud cais am wasanaeth',
+  applyForDissolution: 'Gwneud cais am wasanaeth',
   feedback:
-    'This is a new service – your <a class="govuk-link" aria-label="Feedback link, This will open a new tab. You’ll need to return to this tab and continue with your application within 60 mins so you don’t lose your progress." href="#" target="_blank">feedback</a> will help us to improve it.(in welsh)',
+    'Mae hwn yn wasanaeth newydd - bydd <a class="govuk-link" aria-label="Dolen i roi adborth. Bydd yn agor mewn tab newydd. Bydd arnoch angen dychwelyd i’r tab hwn a pharhau â’ch cais o fewn 60 munud fel na fyddwch yn colli’r hyn rydych wedi’i wneud yn barod." href="#" target="_blank">adborth</a> eich adborth yn ein helpu ni i\'w wella',
   languageToggle: '<a href="?lng=en" class="govuk-link language">English</a>',
   govUk: 'GOV.UK',
-  back: 'Back (in welsh)',
-  continue: 'Continue (in welsh)',
-  change: 'Change  (in welsh)',
+  back: 'Yn ôl',
+  continue: 'Parhau',
+  change: 'Newid',
   upload: 'Uwchlwytho',
   download: 'Llwytho i lawr',
   delete: 'Dileu',
@@ -129,16 +127,20 @@ const cy: typeof en = {
   notAnswered: 'Nid ydych wedi ateb y cwestiwn.',
   errorSaving:
     "Mae'n ddrwg gennym, rydym yn cael problemau technegol wrth geisio cadw eich cais. Rhowch gynnig arall arni mewn ychydig funudau.",
+  errorPaymentRedirect:
+    'Mae’n ddrwg gennym, rydym yn cael problemau technegol wrth geisio eich ailgyfeirio i’r dudalen dalu. Rhowch gynnig arall arni ymhen ychydig o funudau.',
+  errorFetchingFee:
+    'Mae’n ddrwg gennym, rydym yn cael problemau technegol yn cael gafael ar wybodaeth y ffi ar gyfer eich cais. Rhowch gynnig arall arni ymhen ychydig o funudau.',
   ogl: 'Mae’r holl gynnwys ar gael o dan <a class="govuk-link" href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license" >Drwydded Agored y Llywodraeth f3.0</a>, oni nodir fel arall',
-  errorSummaryHeading: 'There is a problem (in welsh)',
-  saveAndSignOut: 'Cadw ac allgofnodi',
-  saveAsDraft: 'Save as draft (in welsh)',
-  signOut: 'Sign out (in welsh)',
-  signIn: 'Sign in (in welsh)',
-  accessibility: 'Accessibility statement(in welsh)',
-  cookies: 'Cookies (in welsh)',
-  privacyPolicy: 'Privacy policy (in welsh)',
-  termsAndConditions: 'Terms and conditions (in welsh)',
+  errorSummaryHeading: 'Mae yna broblem',
+  saveAsDraft: 'Cadw fel drafft',
+  signOut: 'Allgofnodi',
+  signIn: 'Mewngofnodi',
+  accessibility: 'Datganiad hygyrchedd',
+  cookies: 'Cwcis',
+  privacyPolicy: 'Polisi preifatrwydd',
+  termsAndConditions: 'Telerau ac amodau',
+  contactUs: 'Cysylltwch â ni',
   marriage: 'priodas',
   divorce: 'ysgariad',
   endingCivilPartnership: 'dod â phartneriaeth sifil i ben',
@@ -168,9 +170,9 @@ const cy: typeof en = {
     month: 'Mis',
     year: 'Blwyddyn',
   },
-  yes: 'Yes (in welsh)',
-  no: 'No (in welsh)',
-  notSure: 'Not sure (in welsh)',
+  yes: 'Ydw',
+  no: 'Nac ydw',
+  notSure: 'Ddim yn siŵr',
   english: 'Saesneg',
   welsh: 'Cymraeg',
   contactUsForHelp: 'Cysylltwch â ni am gymorth',
@@ -181,7 +183,33 @@ const cy: typeof en = {
   sendUsAMessageDetails: 'Byddwn yn ymdrechu i ymateb o fewn 5 diwrnod.',
   telephone: 'Ffoniwch',
   telephoneNumber: '0300 303 5171',
-  telephoneDetails: 'Dydd Llun i Ddydd Gwener, 8.30am - 5pm.',
+  telephoneDetails: 'Dydd Llun i ddydd Gwener, 8am i 8pm, Dydd Sadwrn 8am i 2pm.',
+  changeCookiesHeading: 'Newid eich gosodiadau cwcis',
+  allowAnalyticsCookies: 'Caniatáu cwcis sy’n mesur y defnydd o’r wefan?',
+  useAnalyticsCookies: 'Defnyddio cwcis sy’n mesur fy nefnydd i o’r wefan',
+  doNotUseAnalyticsCookies: 'Peidio â defnyddio cwcis sy’n mesur fy nefnydd i o’r wefan',
+  save: 'Cadw',
+  cookiesSaved: 'Arbedwyd eich gosodiadau cwcis',
+  additionalCookies:
+    "Gall gwasanaethau'r llywodraeth osod cwcis ychwanegol ac, os felly, bydd ganddyn nhw eu polisi a'u baner cwcis eu hunain.",
+  goToHomepage: 'Ewch i’r dudalen hafan',
+  apmCookiesHeadings: "Caniatáu cwcis sy'n mesur y broses o fonitro perfformiad gwefannau?",
+  useApmCookies: "Defnyddio cwcis sy'n mesur monitro perfformiad ceisiadau gwefan",
+  doNotUseApmCookies: "Peidiwch â defnyddio cwcis sy'n mesur monitro perfformiad ceisiadau gwefannau",
+  cookiesAcceptedPart1: 'Rydych wedi derbyn cwcis ychwanegol. Gallwch',
+  cookiesAcceptorRejectPart2: 'newid eich gosodiadau cwcis',
+  cookiesAcceptorRejectPart3: 'ar unrhyw bryd.',
+  cookiesHeading: 'Cwcis ar',
+  cookiesLine1: 'Rydym yn defnyddio rhai cwcis hanfodol i wneud i’r gwasanaeth hwn weithio.',
+  cookiesLine2:
+    'Hoffwn hefyd ddefnyddio cwcis dadansoddol fel y gallwn ddeall sut rydych chi’n defnyddio’r gwasanaeth ac i wneud gwelliannau.',
+  acceptAnalyticsCookies: 'Derbyn cwcis dadansoddol',
+  rejectAnalyticsCookies: 'Gwrthod cwcis dadansoddol',
+  viewCookies: 'Gweld cwcis',
+  hideMessage: 'Cuddio’r neges hon',
+  cookiesRejectedPart1: 'Rydych wedi gwrthod cwcis ychwanegol. Gallwch',
+  next: 'Nesaf',
+  cancel: 'Canslo',
 };
 
 export const generatePageContent = ({
@@ -189,18 +217,20 @@ export const generatePageContent = ({
   pageContent,
   userCase,
   uploadedDocuments,
-  AddDocuments,
+  addDocuments,
   userEmail,
   addresses = [],
+  additionalData,
   fee,
 }: {
   language: Language;
   pageContent?: TranslationFn;
   userCase?: Partial<CaseWithId>;
   uploadedDocuments?: any;
-  AddDocuments?: any;
+  addDocuments?: any;
   userEmail?: string;
   addresses?: [];
+  additionalData?: CommonContentAdditionalData;
   fee?: Fee;
 }): PageContent => {
   const commonTranslations: typeof en = language === 'en' ? en : cy;
@@ -213,10 +243,11 @@ export const generatePageContent = ({
     language,
     userCase,
     uploadedDocuments,
-    AddDocuments,
+    addDocuments,
     userEmail,
     contactEmail,
     addresses,
+    additionalData,
     // eligibility,
     fee,
   };
@@ -238,14 +269,20 @@ export type CommonContent = typeof en & {
   pageContent?: TranslationFn;
   userCase?: Partial<CaseWithId>;
   uploadedDocuments?: any;
-  AddDocuments?: any;
+  addDocuments?: any;
   userEmail?: string;
   contactEmail?: string;
   referenceNumber?: string;
   //eslint-disable-next-line @typescript-eslint/no-explicit-any
   addresses?: any[];
   eligibility?: Eligibility;
+  additionalData?: CommonContentAdditionalData;
   fee?: Fee;
+};
+
+export type CommonContentAdditionalData = {
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
+  [key: string]: any;
 };
 
 export type Language = 'en' | 'cy';

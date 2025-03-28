@@ -5,7 +5,7 @@ export const enum ErrorMessages {
 }
 
 export const enum ErrorMessagesWelsh {
-  ENTER_FIRST_NAME = 'Enter your first names (in Welsh)',
-  ENTER_LAST_NAME = 'Enter your last names (in Welsh)',
-  APPLYINGFORSELF_ERROR_MESSAGE = 'Please select an answer before you can proceed further (in welsh)',
+  ENTER_FIRST_NAME = 'Nodwch eich enw(au) cyntaf',
+  ENTER_LAST_NAME = 'Nodwch eich cyfenw(au)',
+  APPLYINGFORSELF_ERROR_MESSAGE = 'Rhaid i chi ddewis ateb cyn y gallwch symud ymlaen',
 }

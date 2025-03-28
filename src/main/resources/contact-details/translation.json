@@ -3,47 +3,33 @@
         "en": {
             "continue": "Continue",
             "serviceName": "Contact Number",
-            "title":"What is the contact number of the named applicant?",
+            "title":"What is the contact number of the applicant?",
             "line1":"This can be the number of a trusted friend if the applicant does not have a private number.",
-            "homePhoneLabel": "Home Phone",
-            "mobilePhoneLabel": "Mobile Phone",
-            "homePhone": "Enter home phone number",
-            "mobilePhone": "Enter mobile phone number"
+            "mobilePhoneLabel": "Phone number",
+            "mobilePhone": "Enter phone number"
         },
         "cy": {
-            "continue": "Continue (Welsh)",
-            "serviceName": "Contact Number (Welsh)",
-            "title":"What is the contact number of the named applicant? (Welsh)",
-            "line1":"This can be the number of a trusted friend if the applicant does not have a private number. (Welsh)",
-            "homePhoneLabel": "Home Phone (Welsh)",
-            "mobilePhoneLabel": "Mobile Phone (Welsh)",
-            "homePhone": "Enter home phone number (Welsh)",
-            "mobilePhone": "Enter mobile phone number (Welsh)"
+            "continue": "Parhau",
+            "serviceName": "Rhif Cyswllt",
+            "title":"Beth yw rhif ffôn cyswllt y ceisydd?",
+            "line1":"Gall hwn fod yn rhif ffôn ffrind maen nhw’n ymddiried ynddynt os nad oes gan y ceisydd rif ffôn preifat",
+            "mobilePhoneLabel": "Rhif ffôn",
+            "mobilePhone": "Nodwch rhif ffôn"
         }
     },
     "errors":{
         "en": {
             "applicantPhoneNumber": {
-                "required": "Please enter correct mobile phone number",
-                "invalid": "Please enter correct mobile phone number",
-                "atleastOneRequired": "Mobile phone number is empty, please fill up at least one contact"
-            },
-            "applicantHomeNumber": {
-                "required": "Please enter correct home phone number",
-                "invalid": "Please enter correct home phone number",
-                "atleastOneRequired": "Home phone number is empty, please fill up at least one contact"
+                "required": "Please enter correct phone number",
+                "invalid": "Please enter correct phone number",
+                "atleastOneRequired": "Phone number is empty, please fill up at least one contact"
             }
         },
         "cy": {
             "applicantPhoneNumber": {
-                "required": "Please enter correct mobile phone number (Welsh)",
-                "invalid": "Please enter correct mobile phone number (Welsh)",
-                "atleastOneRequired": "Mobile phone number is empty, please fill up at least one contact (Welsh)"
-            },
-            "applicantHomeNumber": {
-                "required": "Please enter correct home phone number (Welsh)",
-                "invalid": "Please enter correct home phone number (Welsh)",
-                "atleastOneRequired": "Home phone number is empty, please fill up at least one contact (Welsh)"
+                "required": "Nodwch rif ffôn dilys os gwelwch yn dda",
+                "invalid": "Nodwch rif ffôn dilys os gwelwch yn dda",
+                "atleastOneRequired": "Rhif ffôn yn wag, atgoffa o un rhif ffôn cyswllt os gwelwch yn dda"
             }
         }
     }

@@ -1,0 +1,56 @@
+{
+  "translations": {
+    "en": {
+      "serviceName": "Document upload",
+      "title": "Additional Documents",
+      "youNeed": "Please upload any additional documents needed in support of your application.",
+      "youNeed2": "Examples of additional documents can be found on the application form.",
+      "youNeed3": "Please upload each document separately by using the “upload” button.",
+      "youNeed4": "You can post or email your documents to the court. If birth or marriage certificates are needed in support of your application, a certified copy must be provided.",
+      "uploadButton": "Upload",
+      "summaryText": "File uploads requirements",
+      "delete": "Delete",
+      "uploadRequirement": [
+        "File formats: MS Word, MS Excel, PDF, JPG, GIF, PNG, TXT, RTF",
+        "File size per document: up to 20 megabytes (MB)",
+        "Files cannot be password protected",
+        "You can’t upload executable(.exe) .zip or other archive files due to virus risks."
+      ],
+      "errors": {
+        "additionalApplicationUpload": {
+          "sizeError": "File size exceeds 20Mb. Please upload a file that is less than 20Mb",
+          "formatError": "This service only accepts files in the formats - Ms Word, Ms Excel, PDF, JPG, GIF, PNG, TXT, RTF",
+          "totalFilesExceededError": "You can upload 20 files only. Please delete one of the uploaded files and retry",
+          "noFileUploadError": "Please choose a file to upload",
+          "uploadError": "Document could not be uploaded"
+        }
+      }
+    },
+    "cy": {
+      "serviceName": "Uwchlwytho Dogfen",
+      "title": "Dogfennau ychwanegol",
+      "youNeed": "Uwchlwythwch unrhyw ddogfennau ychwanegol y dylid eu cynnwys gyda’r ffurflen gais hon/ffurflenni cais hyn.",
+      "youNeed2": "Gellir dod o hyd i enghreifftiau o ddogfennau ychwanegol ar y ffurflen gais",
+      "youNeed3": "Uwchlwythwch pob dogfen ar wahân trwy ddefnyddio’r botwm “uwchlwytho”",
+      "youNeed4": "Gallwch bostio neu anfon eich dogfennau i’r llys drwy e-bost. Rhaid bod copïau o dystygrifau wedi’u hardystio, sy’n golygu bod rhaid iddynt fod wedi’u llofnodi a’i dyddio gan unigolyn proffesiynol fel cyfreithiwr neu feddyg.",
+      "uploadButton": "Uwchlwytho",
+      "summaryText": "Gofynion llwytho ffeil",
+      "delete": "Dileu",
+      "uploadRequirement": [
+        "Fformatau ffeiliau: MS Word, MS Excel, PDF, JPG, GIF, PNG, TXT, RTF",
+        "Maint ffeil pob dogfen: hyd at 20 megabyte (MB)",
+        "Ni ellir uwchlwytho ffeiliau sydd wedi’u diogelu gan gyfrinai",
+        "Ni ellir uwchlwytho ffeiliau (.exe) .zip neu ffeiliau archif eraill oherwydd y risg o feirws."
+      ],
+      "errors": {
+        "additionalApplicationUpload": {
+          "sizeError": "Mae’r ffeil yn fwy na 20Mb. Uwchlwythwch ffeil sy’n llai na 20Mb",
+          "formatError": "Mae’r gwasanaeth hwn yn derbyn ffeiliau yn y fformatau canlynol yn unig - Ms Word, Ms Excel, PDF, JPG, GIF, PNG, TXT, RTF",
+          "totalFilesExceededError": "Gallwch uwchlwytho hyd at 20 ffeil yn unig. Dylech ddileu un o’r ffeiliau a uwchlwythwyd a rhoi cynnig arall arni",
+          "noFileUploadError": "Dewiswch ffeil i’w uwchlwytho",
+          "uploadError": "Nid oedd modd uwchlwytho'r ddogfen"
+        }
+      }
+    }
+  }
+}

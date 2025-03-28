@@ -4,7 +4,7 @@ import { isInvalidPostcode } from '../../../app/form/validation';
 
 const en = () => ({
   line1:
-    "We'll send all court papers to this address unless you advise us that you are happy to be served court orders by email.",
+    "We'll send all court papers to this address unless you advise us that you are happy to be served with court orders by email.",
   postcode: 'Postcode',
   findAddress: 'Find address',
   enterAddressManually: 'Or enter address manually',
@@ -19,14 +19,14 @@ const en = () => ({
 
 const cy = () => ({
   line1:
-    "We'll send all court papers to this address unless you advise us that you are happy to be served court orders by email.",
-  postcode: 'Postcode (in welsh)',
-  findAddress: 'Find address (in welsh)',
-  enterAddressManually: 'Or enter address manually (in welsh)',
+    'Byddwn yn anfon holl bapurau’r llys i’r cyfeiriad hwn oni bai eich bod yn dweud wrthym eich bod yn hapus i orchmynion llys gael eu cyflwyno arnoch trwy e-bost.',
+  postcode: 'God post',
+  findAddress: 'Dod o hyd i gyfeiriad',
+  enterAddressManually: 'neu nodwch y cyfeiriad gyda llaw',
   errors: {
     addressPostcode: {
-      required: 'Enter a real postcode (in welsh)',
-      invalid: 'Enter a real postcode (in welsh)',
+      required: 'Nodwch god post dilys',
+      invalid: 'Nodwch god post dilys',
     },
   },
   manualAddressUrl: '#',

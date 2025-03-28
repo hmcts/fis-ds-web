@@ -3,14 +3,14 @@
         "en": {
             "continue": "Continue",
             "serviceName": "Enter subject's name",
-            "title": "Who is the person named on this application?",
-            "line1":"Enter their full name as it appears on the application."
+            "title": "Enter your name",
+            "line1":"Enter applicant's full name as it appears on this application."
         },
         "cy": {
-            "continue": "Continue",
-            "serviceName": "Enter subject's name (in welsh)",
-            "title": "Who is the person named on this application? (in welsh)",
-            "line1":"Enter their full name as it appears on the application. (in welsh)"
+            "continue": "Parhau",
+            "serviceName": "Nodwch enw’r unigolyn perthnasol yma",
+            "title": "Nodwch eich enw",
+            "line1":"Nodwch ceisydd eu henw llawn fel y mae’n ymddangos ar y cais."
         }
     },
     "errors":{
@@ -24,10 +24,10 @@
         },
         "cy": {
             "applicantFirstName": {
-                "required": "Enter your first names (in welsh)"
+                "required": "Nodwch eich enw(au) cyntaf"
             },
             "applicantLastName": {
-                "required": "Enter your last names (in welsh)"
+                "required": "Nodwch eich cyfenw(au)"
             }
         }
     }

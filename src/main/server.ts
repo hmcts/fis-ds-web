@@ -19,12 +19,13 @@ import { Helmet } from './modules/helmet';
 import { LanguageToggle } from './modules/i18n';
 import { Nunjucks } from './modules/nunjucks';
 import { OidcMiddleware } from './modules/oidc';
-//import { StateRedirectMiddleware } from './modules/state-redirect';
+import { PCQProvider } from './modules/pcq';
 import { PropertiesVolume } from './modules/properties-volume';
 import { SessionStorage } from './modules/session';
 import { TooBusy } from './modules/too-busy';
 import { Webpack } from './modules/webpack';
 import { Routes } from './routes';
+import { PublicRoutes } from './routes/authless/routes';
 
 const { Logger } = require('@hmcts/nodejs-logging');
 
@@ -56,6 +57,7 @@ new Helmet(config.get('security')).enableFor(app);
 new AppInsights().enable();
 new FileUpload().enableFor(app);
 new SessionStorage().enableFor(app);
+new PublicRoutes().enableFor(app);
 new Nunjucks().enableFor(app);
 new CSRFToken().enableFor(app);
 new AuthProvider().enable();
@@ -66,6 +68,7 @@ new HealthCheck().enableFor(app);
 new LanguageToggle().enableFor(app);
 new Routes().enableFor(app);
 new ErrorHandler().handleNextErrorsFor(app);
+PCQProvider.enable(app);
 
 setupDev(app, developmentMode);
 const port: number = parseInt(process.env.PORT || '3001', 10);

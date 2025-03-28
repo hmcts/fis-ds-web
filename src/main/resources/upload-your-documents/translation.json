@@ -1,42 +1,64 @@
 {
-    "translations": {
+  "translations": {
     "en": {
-    "serviceName": "Application upload",
-    "title": "Upload application form",
-    "youNeed": "Please upload the application form that you have already completed.",
-    "youNeed2": "If you are not the person name on the application, you must need to complete an additional form to ask for permission to apply on behalf of someone else.",
-    "youNeed3": "You may also need to upload a confidentiality form if you need the details of the person named on the application to be kept confidential.",
-    "youNeed4":"You can post or email your documents to the court. Copies of certificates must be certified, which means they must be signed and dated by a professional person such as a solicitor or doctor.",
-    "uploadDescription": "Please upload all required forms below.",
-    "uploadRequirement": "<div class='govuk-body-s'><ul class=‘govuk-list govuk-list--bullet’><li>File formats: MS Word, MS Excel, PDF, JPG, GIF, PNG, TXT, RTF</li><li>File size per document: up to 20 megabytes (MB)</li><li>Files cannot be password protected</li></ul><p> You can’t upload executable(.exe) .zip or other archive files due to virus risks.</div>",
-    "uploadButton": "Upload"
+      "serviceName": "Application upload",
+      "title": "Upload application form",
+      "submitAdditionalForm": "Submit additional form if you are not the applicant",
+      "youNeed": "Please upload the application form that you have already completed.",
+      "youNeed2": "If you are applying on behalf of someone else you will need to complete an additional form, unless you are a local authority.",
+      "youNeed3": "You may also need to upload form <a class='govuk-link' href='https://www.gov.uk/government/publications/form-c8-confidential-contact-details-family-procedure-rules-2010-rule-291' target='_blank'>C8 Confidential Contact Details (opens in a new tab)</a> if you want to keep your contact details {protected}confidential.",
+      "youNeed4": "or the person to be protected's contact details ",
+      "uploadDescription": "Please upload all required forms below.",
+      "uploadRequirement": [
+        "File formats: MS Word, MS Excel, PDF, JPG, GIF, PNG, TXT, RTF",
+        "File size per document: up to 20 megabytes (MB)",
+        "Files cannot be password protected",
+        "You can’t upload executable(.exe) .zip or other archive files due to virus risks."
+      ],
+      "uploadButton": "Upload",
+      "summaryText": "File uploads requirements",
+      "delete": "Delete",
+      "errors": {
+        "applicationUpload": {
+          "sizeError": "File size exceeds 20Mb. Please upload a file that is less than 20Mb",
+          "formatError": "This service only accepts files in the formats - Ms Word, Ms Excel, PDF, JPG, GIF, PNG, TXT, RTF",
+          "totalFilesExceededError": "You can upload only one file. If you wish to upload a new file, delete the existing file and upload a new one",
+          "continueWithoutUploadError": "You cannot continue without uploading the application",
+          "noFileUploadError": "Please choose a file to upload",
+          "deleteError": "Document could not be deleted",
+          "uploadError": "Document could not be uploaded"
+        }
+      }
     },
     "cy": {
-    "serviceName": "Application upload - (Whelsh)",
-    "title": "Upload application form - (Whelsh)",
-    "youNeed": "Please upload the application form that you have already completed. - (Whelsh)",
-    "youNeed2": "If you are not the person name on the application, you must need to complete an additional form to ask for permission to apply on behalf of someone else. - (Whelsh)",
-    "youNeed3": "You may also need to upload a confidentiality form if you need the details of the person named on the application to be kept confidential. - (Whelsh)",
-    "youNeed4":"You can post or email your documents to the court. Copies of certificates must be certified, which means they must be signed and dated by a professional person such as a solicitor or doctor. - (Whelsh)",
-    "uploadDescription": "Please upload all required forms below. - (Whelsh)",
-    "uploadRequirement": "<div class='govuk-body-s'><ul class=‘govuk-list govuk-list--bullet’><li>File formats: MS Word, MS Excel, PDF, JPG, GIF, PNG, TXT, RTF</li><li>File size per document: up to 20 megabytes (MB)</li><li>Files cannot be password protected</li></ul><p> You can’t upload executable(.exe) .zip or other archive files due to virus risks.</div> (Whelsh)",
-    "uploadButton": "Upload (Whelsh)"
+      "serviceName": "Uwchlwytho cais",
+      "title": "Uwchlwytho ffurflen gais",
+      "submitAdditionalForm": "Cylfwynwch ffurflen ychwanegol os nid chi yw’r ceisydd",
+      "youNeed": "Uwchlwythwch y ffurflen gais yr ydych eisoes wedi’i llenwi.",
+      "youNeed2": "Os nad chi yw’r unigolyn a enwir ar y cais, efallai bydd rhaid i chi lenwi ffurflen ychwanegol i ofyn am ganiatâd i wneud cais ar ran rhywun arall.",
+      "youNeed3": "Efallai bydd arnoch angen uwchlytho ffurflen <a class='govuk-link' href='https://www.gov.uk/government/publications/form-c8-confidential-contact-details-family-procedure-rules-2010-rule-291' target='_blank'>C8 Manylion cyswllt cyfrinachol (yn agor mewn tab newydd)</a> os ydych eisiau cadw eich manylion cyswllt yn gyfrinachol {protected}.",
+      "youNeed4": "neu gadw manylion cyswllt yr unigolyn sydd i’w ddiogelu yn gyfrinachol",
+      "uploadDescription": "Uwchlwythwch yr holl ffurflenni gofynnol isod.",
+      "uploadRequirement": [
+        "Fformatau ffeiliau: MS Word, MS Excel, PDF, JPG, GIF, PNG, TXT, RTF",
+        "Maint ffeil pob dogfen: hyd at 20 megabyte (MB)",
+        "Ni ellir uwchlwytho ffeiliau sydd wedi’u diogelu gan gyfrinair",
+        "Ni ellir uwchlwytho ffeiliau (.exe) .zip neu ffeiliau archif eraill oherwydd y risg o feirws."
+      ],
+      "uploadButton": "Uwchlwytho",
+      "summaryText": "Gofynion llwytho ffeil",
+      "delete": "Dileu",
+      "errors": {
+        "applicationUpload": {
+          "sizeError": "Mae’r ffeil yn fwy na 20Mb. Uwchlwythwch ffeil sy’n llai na 20Mb",
+          "formatError": "Mae’r gwasanaeth hwn yn derbyn ffeiliau yn y fformatau canlynol yn unig - Ms Word, Ms Excel, PDF, JPG, GIF, PNG, TXT, RTF",
+          "totalFilesExceededError": "Dim ond un ffeil y gallwch ei llwytho. Os ydych yn dymuno llwytho ffeil newydd, dylech ddileu'r ffeil bresennol a llwytho un newydd.",
+          "continueWithoutUploadError": "Ni allwch barhau heb uwchlwytho’r cais",
+          "noFileUploadError": "Dewiswch ffeil i’w uwchlwytho",
+          "deleteError": "Nid oedd modd dileu'r ddogfen",
+          "uploadError": "Nid oedd modd uwchlwytho'r ddogfen"
+        }
+      }
     }
-    },
-    "errors": {
-    "en": {
-    "SIZE_ERROR": "File size exceeds 20Mb. Please upload a file that is less than 20Mb",
-    "FORMAT_ERROR": "This service only accepts files in the formats - Ms Word, Ms Excel, PDF, JPG, GIF, PNG, TXT, RTF",
-    "TOTAL_FILES_EXCEED_ERROR": "You can upload 5 files only. Please delete one of the uploaded files and retry",
-    "CONTINUE_WITHOUT_UPLOAD_ERROR": "You cannot continue without uploading the application",
-    "NO_FILE_UPLOAD_ERROR": "Please choose a file to upload"
-    },
-    "cy": {
-    "SIZE_ERROR": "File size exceeds 20Mb. Please upload a file that is less than 20Mb - welsh",
-    "FORMAT_ERROR": "This service only accepts files in the formats - Ms Word, Ms Excel, PDF, JPG, GIF, PNG, TXT, RTF - welsh",
-    "TOTAL_FILES_EXCEED_ERROR": "You can upload 5 files only. Please delete one of the uploaded files and retry - welsh",
-    "CONTINUE_WITHOUT_UPLOAD_ERROR": "You cannot continue without uploading the application (in welsh)",
-    "NO_FILE_UPLOAD_ERROR": "Please choose a file to upload (in welsh)"
-    }
-    }
-    }
+  }
+}
