@@ -44,11 +44,7 @@ export const routeGuard = {
       } else if (caseData.hwfPaymentSelection === YesOrNo.YES && !_.isEmpty(caseData.helpWithFeesReferenceNumber)) {
         /** Invoke Pcq questionnaire
          * */
-        if (!PCQProvider.getPcqId(req) && (await PCQProvider.isComponentEnabled())) {
-          PCQController.launch(req, res, PCQProvider.getReturnUrl(req, PCQ_CALLBACK_URL));
-        } else {
-          await PaymentHandler(req, res);
-        }
+        await invokePcq(req, res);
       } else {
         next();
       }
@@ -65,4 +61,12 @@ export const routeGuard = {
     }
     next();
   },
+};
+
+const invokePcq = async (req: AppRequest, res: Response) => {
+  if (!PCQProvider.getPcqId(req) && (await PCQProvider.isComponentEnabled())) {
+    PCQController.launch(req, res, PCQProvider.getReturnUrl(req, PCQ_CALLBACK_URL));
+  } else {
+    await PaymentHandler(req, res);
+  }
 };
