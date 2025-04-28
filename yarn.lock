@@ -3317,11 +3317,11 @@ __metadata:
   linkType: hard
 
 "@types/multer@npm:^1.4.7":
-  version: 1.4.11
-  resolution: "@types/multer@npm:1.4.11"
+  version: 1.4.12
+  resolution: "@types/multer@npm:1.4.12"
   dependencies:
     "@types/express": "npm:*"
-  checksum: 10/5abbc9a8b0d7bb817a52429c52f052152ebe2fb212e7138359c0c0b9207486ef7b1e54f65915c968300a0874cee546dbfc850415584fc9d14eff2b27bb926e7f
+  checksum: 10/3d2b32da58ddd67f972d4ef1021492f78d65f33f936b6fb25dd461bb6cc7b03bfd1de1a11562c4310680dac8054e4398038db51767a0ffbf1fe62457b3706e95
   languageName: node
   linkType: hard
 
