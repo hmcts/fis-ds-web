@@ -6097,13 +6097,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cookie@npm:0.6.0":
-  version: 0.6.0
-  resolution: "cookie@npm:0.6.0"
-  checksum: 10/c1f8f2ea7d443b9331680598b0ae4e6af18a618c37606d1bbdc75bec8361cce09fe93e727059a673f2ba24467131a9fb5a4eec76bb1b149c1b3e1ccb268dc583
-  languageName: node
-  linkType: hard
-
 "cookie@npm:0.7.1":
   version: 0.7.1
   resolution: "cookie@npm:0.7.1"
@@ -6967,7 +6960,7 @@ __metadata:
     express-session: "npm:^1.17.2"
     form-data: "npm:^4.0.0"
     glob: "npm:^7.2.0"
-    govuk-frontend: "npm:^4.7.0"
+    govuk-frontend: "npm:^5.10.0"
     helmet: "npm:^4.6.0"
     html-webpack-plugin: "npm:^5.5.0"
     html_codesniffer: "npm:~2.5.1"
@@ -8817,10 +8810,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"govuk-frontend@npm:^4.7.0":
-  version: 4.8.0
-  resolution: "govuk-frontend@npm:4.8.0"
-  checksum: 10/be938670a923d1edfc9a87521bbe070c99e5c5182d32dabfb61d75b630111ebfb90da0f015ae94afbe16458ce350a0863428209afb85e8f7af191bad7d444e26
+"govuk-frontend@npm:^5.10.0":
+  version: 5.10.0
+  resolution: "govuk-frontend@npm:5.10.0"
+  checksum: 10/6da3a76b807a8c5517e18f03c7eac5825b2e524aa6c7b26cb19b3b3934c9883bd9535c6f54e1856e5316d2fef0f00f7d89dded5745c7b54f293d3c4b3c25dcb2
   languageName: node
   linkType: hard
 
