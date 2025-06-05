@@ -6,8 +6,8 @@ home: https://github.com/hmcts/fis-ds-web
 version: 0.0.17
 dependencies:
   - name: nodejs
-    version: 3.1.1
-    repository: 'https://hmctspublic.azurecr.io/helm/v1/repo/'
+    version: 3.2.0
+    repository: 'oci://hmctspublic.azurecr.io/helm'
   - name: idam-pr
     version: 2.3.0
     repository: 'oci://hmctspublic.azurecr.io/helm'
