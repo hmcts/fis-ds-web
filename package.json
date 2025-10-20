@@ -99,7 +99,7 @@
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
     "axios-debug-log": "^0.8.4",
-    "codeceptjs": "^3.3.7",
+    "codeceptjs": "^3.7.5",
     "concurrently": "^7.0.0",
     "copy-webpack-plugin": "^10.2.1",
     "css-loader": "^6.5.1",
