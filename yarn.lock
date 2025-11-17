@@ -7063,7 +7063,6 @@ __metadata:
     jest-pact: "npm:^0.11.0"
     jest-puppeteer: "npm:^6.1.0"
     jest-when: "npm:^3.5.1"
-    js-yaml: "npm:^4.1.0"
     jwt-decode: "npm:^3.1.2"
     lodash: "npm:^4.17.21"
     mini-css-extract-plugin: "npm:^2.5.3"
