@@ -1,5 +1,5 @@
 nodejs:
-  image: 'hmctspublic.azurecr.io/fis/ds-web:latest'
+  image: 'hmctsprod.azurecr.io/fis/ds-web:latest'
   applicationPort: 3001
   readinessDelay: 130
   livenessDelay: 130
